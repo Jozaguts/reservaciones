@@ -10,7 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/tropical-adventures');
 });
+Route::get('/tropical-adventures',['middleware' => 'throttle:3,5', function () {
+    return view('auth.login');
+}]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
