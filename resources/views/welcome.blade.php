@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                  Cambio en local, repositorio en gitHub actualizado y cambios cargados desde GitHub a produccion. 
                 </div>
 
                 <div class="links">
