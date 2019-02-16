@@ -21,8 +21,13 @@ ul{
     border-radius: 4px;
 }
 .navbar{
-    padding-top:0 !important;
+    padding-top:3px !important;
+    a{
+        width: fit-content;
+        margin: auto auto;
+    }
 }
 a{
     text-decoration: none !important;
+    
 }

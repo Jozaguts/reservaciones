@@ -17,7 +17,14 @@ ul li {
 }
 
 .navbar {
-  padding-top: 0 !important;
+  padding-top: 3px !important;
+}
+
+.navbar a {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto auto;
 }
 
 a {
