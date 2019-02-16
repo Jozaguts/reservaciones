@@ -41,12 +41,10 @@
                             <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
                           
                             <div class="col-md-6">
-
-
                                 <select name="profile" id="profile" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
                                     <option  value=""></option>
                                     <option  value="operador">Operador</option>
-                                    <option value="supervisor">Supervisor</option>
+                                    <option value="supervisor" id="supervisor">Supervisor</option>
                                     <option value="administrador">Administrador</option>
                                 </select>
                                 @if ($errors->has('profile'))
@@ -55,6 +53,7 @@
                                     </span>
                                 @endif
                             </div>
+                            <input type="hidden" name="is_admin" id="is_admin" value="false">                           
                         </div>
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
@@ -100,7 +99,8 @@
                                 @endif
                             </div>
                         </div>
-
+                     
+                     
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
@@ -113,7 +113,9 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
+
                                 </button>
+                           
                             </div>
                         </div>
                     </form>
@@ -122,4 +124,5 @@
         </div>
     </div>
 </div>
+<script src="{{asset("js/all.js")}}"></script>
 @endsection

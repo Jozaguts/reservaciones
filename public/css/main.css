@@ -1,3 +1,9 @@
+body {
+  background: white;
+  background: radial-gradient(ellipse at center, white 0%, #f6f6f6 47%, #ededed 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#ededed", GradientType=1 );
+}
+
 .main-navbar {
   border-radius: 4px;
 }
