@@ -9,39 +9,22 @@
     <title>Inico</title>
 </head>
 <body>
-    <nav class="nav navbar bg-success">
+    <nav class="nav navbar bg-success nav-home">
         <div class="nav-title-container">
             <h2 class="nav-title-container__title">Tropical-Adventures</h2>
         </div>
         <div class="user-name-contanier">
                
-        <a href="#" class="user-name-contanier__link">{{Auth::user()->name}}</a>
-        <span class="arrow-down"></span> 
-            
+            <h4 class="user-name-contanier__user-name" id="userName">{{Auth::user()->name}} 
+                <span class="arrow-down"></span> 
+            </h4>
+         
         </div>
     </nav>
-            
-{{-- <div class="logout-contanier">
-
-<li class="nav-item dropdown">
-<a id="navbarDropdown" class="nav-link dropdown-toggle text-success bg-dark btn-logout" href="#" role="button"                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-{{ Auth::user()->name }} <span class="caret"></span>
-</a>
-<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-<a class="dropdown-item" href="{{ route('logout') }}"
-onclick="event.preventDefault();
-document.getElementById('logout-form').submit();">
-{{ __('Cerrar sesión') }}
-</a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-@csrf
-</form>
-</div>
-</li>
-
-</div> --}}
-       
-  
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <button type="submit" class="btn btn-success btn-log-out">Cerrar sesion</button>
+        @csrf
+    </form>
 
 @auth
 <ul class="nav justify-content-center">
@@ -73,7 +56,7 @@ document.getElementById('logout-form').submit();">
 </ul>
 @endauth
 
-
+<script src="{{asset('js/all.js')}}"></script>
     
 </body>
 </html>
