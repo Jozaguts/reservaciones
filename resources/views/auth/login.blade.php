@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+<link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
+@endsection
 
 @section('content')
 <div class="container">
@@ -52,14 +55,14 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                            <div class="col-md-8 offset-md-2">
+                                <button type="submit" class="btn btn btn-success text-dark font-weight-bold col-md-12">
+                                    {{ __('Iniciar Sesión') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                    <a class="btn btn-link mt-1" href="{{ route('password.request') }}">
+                                        {{ __('¿Olvidaste tu contraseña?') }}
                                     </a>
                                 @endif
                             </div>
