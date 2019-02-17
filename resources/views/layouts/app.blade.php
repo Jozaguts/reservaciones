@@ -31,29 +31,29 @@
   
 
             <ul class="nav justify-content-center">
-                <li class="nav-item bg-light mr-2" >
-                    <a class="nav-link text-dark font-weight-bold" href="#">Reservaciones</a>
+                <li class="nav-item bg-light col-sm-6 " >
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
                 </li>
-                <li class="nav-item bg-light mr-2">
-                    <a class="nav-link text-dark font-weight-bold " href="#">Actividades</a>
+                <li class="nav-item bg-light col-sm-6  ">
+                    <a class="nav-link text-dark font-weight-bold custom-link " href="#">Actividades</a>
                 </li>
-                <li class="nav-item bg-light mr-2" >
-                    <a class="nav-link text-dark font-weight-bold" href="#">Comisionistas</a>
+                <li class="nav-item bg-light col-sm-6  " >
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Comisionistas</a>
                 </li>
-                <li class="nav-item bg-light mr-2">
-                    <a class="nav-link text-dark font-weight-bold" href="#">Cortes</a>
+                <li class="nav-item bg-light col-sm-6  ">
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cortes</a>
                 </li>
-                <li class="nav-item bg-light mr-2" >
-                    <a class="nav-link text-dark font-weight-bold" href="#">Cobranza</a>
+                <li class="nav-item bg-light col-sm-6  " >
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cobranza</a>
                 </li>
-                <li class="nav-item bg-light mr-2">
-                    <a class="nav-link text-dark font-weight-bold" href="#">Cupones</a>
+                <li class="nav-item bg-light col-sm-6  ">
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cupones</a>
                 </li>
-                <li class="nav-item bg-light mr-2" >
-                    <a class="nav-link text-dark font-weight-bold" href="#">Reportes</a>
+                <li class="nav-item bg-light col-sm-6  " >
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reportes</a>
                 </li>
-                <li class="nav-item bg-light mr-2">
-                    <a class="nav-link text-dark font-weight-bold" href="#">Administración</a>
+                <li class="nav-item bg-light col-sm-6  ">
+                    <a class="nav-link text-dark font-weight-bold custom-link" href="#">Administración</a>
                 </li>  
                 <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-success bg-dark btn-logout" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

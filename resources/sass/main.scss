@@ -9,25 +9,11 @@ background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(246,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
 }
 
-.main-navbar{
-    border-radius: 4px;
-}
-ul{
-    li{
-        border-radius: 4px;
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    /* Styles */
+
+
     }
-}
-.btn-logout{
-    border-radius: 4px;
-}
-.navbar{
-    padding-top:3px !important;
-    a{
-        width: fit-content;
-        margin: auto auto;
-    }
-}
-a{
-    text-decoration: none !important;
-    
-}
