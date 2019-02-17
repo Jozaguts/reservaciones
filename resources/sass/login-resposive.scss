@@ -1,3 +1,6 @@
+@import 'variables';
+
+
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -7,6 +10,48 @@
         width: fit-content;
         margin: auto auto;
     }
+    .nav-title-container{
+        display: block;
+        width: 49%;
+        float: left;
+        text-align: center;
+     
+    }
+    .nav-title-container__title{
+        font-size: 100%;
+        font-weight: 900;
+        margin: 0;
+        line-height: 1rem;
+    }
+    .user-name-contanier{
+        display: block;
+        width: 49%;
+        float: right;
+        text-align: center;
+    }
+    .user-name-contanier__link{
+        font-size: 100%;
+        font-weight: 900;
+        line-height: 1rem;
+        color: black;
+    }
+    .arrow-down{
+        display: inline-block;
+        background-image: url(/svg/arrow-down.png);
+        background-size: contain;
+        background-position: 50% 50%;
+        width: 10px;
+        height: 10px;
+        margin: 0 .5rem;
+        line-height: .2rem;
+        text-align: center;
+
+    }
+
+
+
+
+
    
     }
 
