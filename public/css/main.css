@@ -4,30 +4,9 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#ededed", GradientType=1 );
 }
 
-.main-navbar {
-  border-radius: 4px;
-}
+/* Smartphones (portrait and landscape) ----------- */
 
-ul li {
-  border-radius: 4px;
-}
-
-.btn-logout {
-  border-radius: 4px;
-}
-
-.navbar {
-  padding-top: 3px !important;
-}
-
-.navbar a {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: auto auto;
-}
-
-a {
-  text-decoration: none !important;
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
 }
 
