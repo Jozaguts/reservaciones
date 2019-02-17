@@ -13,7 +13,7 @@
 Route::get('/', function () {
     return redirect('/tropical-adventures');
 });
-Route::get('/tropical-adventures',['middleware' => 'throttle:3,5', function () {
+Route::get('/tropical-adventures',['middleware' => 'throttle:60,5', function () {
     return view('auth.login');
 }]);
 
