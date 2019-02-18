@@ -56,6 +56,96 @@
       .nav-home{
           height: 3.5rem;
       }
+      .grid-container{
+          display: grid;
+          width: 100vw;
+          margin: 37px auto ;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(4, 3.5rem);
+          grid-gap: 10px;
+          position: absolute;  
+          padding: 5px;       
+         
+      }
+      .grid-item{
+          background-color: red;
+          border-radius: 5px;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          position: sticky;
+        
+         
+      }
+        .grid-item:nth-child(1){
+            background-color: $reservaciones;
+        }
+        .grid-item:nth-child(2){
+            background-color: $actividades;
+            position: relative;
+        }
+        .grid-item:nth-child(3){
+            background-color: $comisionistas;
+        }
+        .grid-item:nth-child(4){
+            background-color: $cortes;
+        }
+        .grid-item:nth-child(5){
+            background-color: $cobranza;
+        }
+        .grid-item:nth-child(6){
+            background-color: $cupones;
+        }
+        .grid-item:nth-child(7){
+            background-color: $reportes;
+        }
+        .grid-item:nth-child(8){
+            background-color: $administracion;
+        }
+      .custom-link{
+         padding: 1rem;  
+         color: $font !important;
+         font-weight: 700 !important;
+      }
+      .footer{
+          position: absolute;
+          bottom: 0;
+          padding: 8px;
+          background-color: $footer;
+          width: 100%;
+          border-radius: 5px;
+          margin-bottom: 0px;
+          color: $font;
+          text-align: center;
+      }
+      .actividades-list{
+          display: block;
+          position: absolute;
+          top:0;
+          right: 0;
+          margin: auto auto;
+          padding: 0;
+          z-index: 2;
+          
+    
+      }
+      .actividades-list__item{
+          list-style: none;
+          display: flex;
+          width: 100%;
+          margin: auto auto;
+          min-height: 3.5rem;
+          max-height: 3.5rem;
+          border-radius: 5px;
+          border: 1px solid $font;
+          padding: 10px;
+          background-color: $actividades;
+          color:$font;
+          justify-content: center;
+
+      }
+          
+      
 
 
 

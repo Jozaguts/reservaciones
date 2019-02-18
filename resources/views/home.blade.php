@@ -9,7 +9,7 @@
     <title>Inico</title>
 </head>
 <body>
-    <nav class="nav navbar bg-success nav-home">
+    <nav class="nav navbar nav-home main-navbar">
         <div class="nav-title-container">
             <h2 class="nav-title-container__title">Tropical-Adventures</h2>
         </div>
@@ -22,38 +22,54 @@
         </div>
     </nav>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        <button type="submit" class="btn btn-success btn-log-out">Cerrar sesion</button>
+        <button type="submit" class="btn main-navbar btn-log-out">Cerrar sesion</button>
         @csrf
     </form>
 
 @auth
-<ul class="nav justify-content-center">
-    <li class="nav-item bg-light col-sm-6 " >
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  ">
-        <a class="nav-link text-dark font-weight-bold custom-link " href="#">Actividades</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  " >
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Comisionistas</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  ">
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cortes</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  " >
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cobranza</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  ">
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cupones</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  " >
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reportes</a>
-    </li>
-    <li class="nav-item bg-light col-sm-6  ">
-        <a class="nav-link text-dark font-weight-bold custom-link" href="#">Administración</a>
-    </li>  
-  
-</ul>
+<main>
+    <div class="grid-container">
+        <div class="grid-item"> 
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
+        </div>
+        <div class="grid-item" >
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="linkActividades">Actividades</a>
+            <ul class="d-none" id="ulActividades">
+                    <li class="actividades-list__item">Tipo de actividades</li>
+                    <li class="actividades-list__item">Equipos para actividades</li>
+                    <li class="actividades-list__item">Pases y precios</li>
+                    <li class="actividades-list__item">Horarios</li>
+                </ul>
+        </div>
+       
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Comisionistas</a>
+        </div>
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cortes</a>
+        </div>
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cobranza</a>
+        </div>
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cupones</a>
+        </div>
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reportes</a>
+        </div>
+        <div class="grid-item">
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Administración</a>
+        </div>
+    </div>
+</main>
+<section>
+    <article>
+        {{-- contenido no essificado hasta el moneto --}}
+    </article>
+</section>
+<footer class="footer">
+    <span >&#169; <?php echo date("Y");?></span>
+</footer>
 @endauth
 
 <script src="{{asset('js/all.js')}}"></script>

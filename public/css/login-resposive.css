@@ -60,5 +60,102 @@
   .nav-home {
     height: 3.5rem;
   }
+
+  .grid-container {
+    display: grid;
+    width: 100vw;
+    margin: 37px auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 3.5rem);
+    grid-gap: 10px;
+    position: absolute;
+    padding: 5px;
+  }
+
+  .grid-item {
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  .grid-item:nth-child(1) {
+    background-color: #95B727;
+  }
+
+  .grid-item:nth-child(2) {
+    background-color: #27B2E1;
+    position: relative;
+  }
+
+  .grid-item:nth-child(3) {
+    background-color: #7030A0;
+  }
+
+  .grid-item:nth-child(4) {
+    background-color: #FF3300;
+  }
+
+  .grid-item:nth-child(5) {
+    background-color: #0B4060;
+  }
+
+  .grid-item:nth-child(6) {
+    background-color: #217C51;
+  }
+
+  .grid-item:nth-child(7) {
+    background-color: #803C09;
+  }
+
+  .grid-item:nth-child(8) {
+    background-color: #404040;
+  }
+
+  .custom-link {
+    padding: 1rem;
+    color: white !important;
+    font-weight: 700 !important;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    padding: 8px;
+    background-color: #0a0a0a;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    color: white;
+    text-align: center;
+  }
+
+  .actividades-list {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: auto auto;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .actividades-list__item {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    margin: auto auto;
+    min-height: 3.5rem;
+    max-height: 3.5rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 10px;
+    background-color: #27B2E1;
+    color: white;
+    justify-content: center;
+  }
 }
 

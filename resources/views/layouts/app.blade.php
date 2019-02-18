@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="container mt-3">
-        <nav class="navbar navbar-dark bg-success main-navbar d-block">
+        <nav class="navbar navbar-dark  main-navbar d-block">
             <a class="navbar text-dark font-weight-bold title title-link" href="{{ url('/home') }}">
                 {{ config('app.name', 'Tropical Adventures') }}
             </a>

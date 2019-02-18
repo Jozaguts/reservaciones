@@ -1,19 +1,35 @@
 
-let userName = document.getElementById('userName').addEventListener("click", ()=>{
-  let btnLogOut = document.getElementById('logout-form');
+ let btnLogOut = document.getElementById('logout-form');
+  let userName = document.getElementById('userName');userName.addEventListener("click", ()=>{
+  
   if(btnLogOut.classList.contains("d-none")){
-    btnLogOut.classList.remove("d-none");
-    btnLogOut.classList.toggle("show");
+      btnLogOut.classList.remove("d-none");
+      btnLogOut.classList.toggle("show");
   }else{
-    btnLogOut.classList.remove("show");
-    btnLogOut.classList.toggle("d-none");
+      btnLogOut.classList.remove("show");
+      btnLogOut.classList.toggle("d-none");
   }
- 
 });
 
+// let btnAct = document.getElementById("linkActividades");
+// let ulAct = document.getElementById("ulActividades");
+
+// btnAct.addEventListener("click",()=>{
+ 
+//     if(ulAct.classList.contains("d-none")){
+//       ulAct.classList.remove("d-none");
+//       ulAct.classList.toggle("actividades-list");
+//     }
+// })
 
 
 
+// window.addEventListener("click", e =>{
+//   if(e.target != ulAct || e.target.parentNode != ulAct ){
+//     // ulAct.classList.remove("actividades-list");
+//     ulAct.classList.toggle("d-none");
+//   }
+// })
 
 
 
