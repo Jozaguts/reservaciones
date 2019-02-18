@@ -21,3 +21,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 nav{
     border-radius: 0.25rem !important;
 }
+.main-navbar{
+    background-color: $main-navbar !important;
+    border-color: 1px solid $main-navbar !important
+}

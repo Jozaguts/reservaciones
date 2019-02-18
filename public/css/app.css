@@ -10665,3 +10665,8 @@ nav {
   border-radius: 0.25rem !important;
 }
 
+.main-navbar {
+  background-color: #99DB2E !important;
+  border-color: 1px solid #99DB2E !important;
+}
+
