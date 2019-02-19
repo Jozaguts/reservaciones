@@ -127,6 +127,7 @@
           padding: 0;
           z-index: 2;
           
+          
     
       }
       .actividades-list__item{
@@ -142,9 +143,43 @@
           background-color: $actividades;
           color:$font;
           justify-content: center;
+          animation-name: show;
+          animation-duration: .5s;
 
       }
-          
+            @keyframes show {
+            0%{
+                opacity: 0;
+            }
+            20%{
+                opacity: 0.2;
+            }
+            30%{
+                opacity: 0.3;
+            }
+            40%{
+                opacity: 0.4;
+            }
+            50%{
+                opacity: .5;
+            }
+            60%{
+                opacity: .6;
+            }
+            70%{
+                opacity: .7;
+            }
+            80%{
+                opacity: .8;
+            }
+            90%{
+                opacity: .9;
+            }
+            100%{
+                opacity: 1;
+            }
+
+            }
       
 
 

@@ -33,13 +33,15 @@
             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
         </div>
         <div class="grid-item" >
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="linkActividades">Actividades</a>
-            <ul class="d-none" id="ulActividades">
-                    <li class="actividades-list__item">Tipo de actividades</li>
-                    <li class="actividades-list__item">Equipos para actividades</li>
-                    <li class="actividades-list__item">Pases y precios</li>
-                    <li class="actividades-list__item">Horarios</li>
-                </ul>
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="linkActividades">Actividades
+                    <ul class="d-none" id="ulActividades">
+                            <li class="actividades-list__item">Tipo de Actividades</li>
+                            <li class="actividades-list__item">Equipos para Actividades</li>
+                            <li class="actividades-list__item">Pases y Precios</li>
+                            <li class="actividades-list__item">Horarios</li>
+                        </ul>
+            </a>
+          
         </div>
        
         <div class="grid-item">
