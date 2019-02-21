@@ -86,6 +86,7 @@
         }
         .grid-item:nth-child(3){
             background-color: $comisionistas;
+            position: relative;
         }
         .grid-item:nth-child(4){
             background-color: $cortes;
@@ -118,19 +119,20 @@
           color: $font;
           text-align: center;
       }
-      .actividades-list{
-          display: block;
+      .ul-content{
+          display: none;
           position: absolute;
           top:0;
           right: 0;
           margin: auto auto;
           padding: 0;
-          z-index: 2;
-          
-          
+          z-index: 2;  
     
       }
-      .actividades-list__item{
+      .show{
+          display: block;
+      }
+      .list__item{
           list-style: none;
           display: flex;
           width: 100%;
@@ -139,13 +141,24 @@
           max-height: 3.5rem;
           border-radius: 5px;
           border: 1px solid $font;
-          padding: 10px;
-          background-color: $actividades;
+          padding: 10px;        
           color:$font;
           justify-content: center;
           animation-name: show;
           animation-duration: .5s;
 
+      }
+      .li-actividadaes{
+        background-color: $actividades;
+      }
+      .li-comisionistas{
+        background-color: $comisionistas;
+      }
+      .li-cupones{
+        background-color: $cupones;
+      }
+      .li-administracion{
+        background-color: $administracion;
       }
             @keyframes show {
             0%{
@@ -186,4 +199,390 @@
 
    
     }
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+        .title-link{
+            width: fit-content;
+            margin: auto auto;
+        }
+        .nav-title-container{
+            display: block;
+            width: 49%;
+            float: left;
+            text-align: center;
+         
+        }
+        .nav-title-container__title{
+            font-size: 100%;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1rem;
+        }
+        .user-name-contanier{
+            display: block;
+            width: 49%;
+            float: right;
+            text-align: center;
+        }
+        .user-name-contanier__user-name{
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1rem;
+            color: black;
+            float: right;
+            margin: 0;
+        }
+        .arrow-down{
+            display: inline-block;
+            background-image: url(/svg/arrow-down.png);
+            background-size: contain;
+            background-position: 50% 50%;
+            width: 10px;
+            height: 10px;
+            margin: 0 .5rem;
+            line-height: .2rem;
+            text-align: center;
+    
+        }
+        .show{
+            display: block;
+            float: right;
+          }
+          .nav-home{
+              height: 3.5rem;
+          }
+          .grid-container{
+              display: grid;
+              width: 100vw;
+              margin: 17px auto ;
+              grid-template-columns: repeat(3, 1fr);
+              grid-template-rows: repeat(4, 3.5rem);
+              grid-gap: 10px;
+              position: absolute;  
+              padding: 5px;       
+             
+          }
+          .grid-item{
+              background-color: red;
+              border-radius: 5px;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              position: sticky;
+            
+             
+          }
+            .grid-item:nth-child(1){
+                background-color: $reservaciones;
+            }
+            .grid-item:nth-child(2){
+                background-color: $actividades;
+                position: relative;
+            }
+            .grid-item:nth-child(3){
+                background-color: $comisionistas;
+                position: relative;
+            }
+            .grid-item:nth-child(4){
+                background-color: $cortes;
+            }
+            .grid-item:nth-child(5){
+                background-color: $cobranza;
+            }
+            .grid-item:nth-child(6){
+                background-color: $cupones;
+            }
+            .grid-item:nth-child(7){
+                background-color: $reportes;
+            }
+            .grid-item:nth-child(8){
+                background-color: $administracion;
+                position: relative;
+            }
+          .custom-link{
+             padding: 1rem;  
+             color: $font !important;
+             font-weight: 700 !important;
+          }
+          .footer{
+              position: absolute;
+              bottom: 0;
+              padding: 8px;
+              background-color: $footer;
+              width: 100%;
+              border-radius: 5px;
+              margin-bottom: 0px;
+              color: $font;
+              text-align: center;
+          }
+          .ul-content{
+              display: none;
+              position: absolute;
+              top:0;
+              right: 0;
+              margin: auto auto;
+              padding: 0;
+              z-index: 2;  
+        
+          }
+          .show{
+              display: block;
+          }
+          .list__item{
+              list-style: none;
+              display: flex;
+              width: 100%;
+              margin: auto auto;
+              min-height: 3.5rem;
+              max-height: 3.5rem;
+              border-radius: 5px;
+              border: 1px solid $font;
+              padding: 10px;        
+              color:$font;
+              justify-content: center;
+              animation-name: show;
+              animation-duration: .5s;
+    
+          }
+          .li-actividadaes{
+            background-color: $actividades;
+          }
+          .li-comisionistas{
+            background-color: $comisionistas;
+          }
+          .li-cupones{
+            background-color: $cupones;
+          }
+          .li-administracion{
+            background-color: $administracion;
+          }
+                @keyframes show {
+                0%{
+                    opacity: 0;
+                }
+                20%{
+                    opacity: 0.2;
+                }
+                30%{
+                    opacity: 0.3;
+                }
+                40%{
+                    opacity: 0.4;
+                }
+                50%{
+                    opacity: .5;
+                }
+                60%{
+                    opacity: .6;
+                }
+                70%{
+                    opacity: .7;
+                }
+                80%{
+                    opacity: .8;
+                }
+                90%{
+                    opacity: .9;
+                }
+                100%{
+                    opacity: 1;
+                }
+    
+                }
+          
+    }
+    @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
 
+        .title-link{
+            width: fit-content;
+            margin: auto auto;
+        }
+        .nav-title-container{
+            display: block;
+            width: 49%;
+            float: left;
+            text-align: center;
+         
+        }
+        .nav-title-container__title{
+            font-size: 100%;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1rem;
+        }
+        .user-name-contanier{
+            display: block;
+            width: 49%;
+            float: right;
+            text-align: center;
+        }
+        .user-name-contanier__user-name{
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1rem;
+            color: black;
+            float: right;
+            margin: 0;
+        }
+        .arrow-down{
+            display: inline-block;
+            background-image: url(/svg/arrow-down.png);
+            background-size: contain;
+            background-position: 50% 50%;
+            width: 10px;
+            height: 10px;
+            margin: 0 .5rem;
+            line-height: .2rem;
+            text-align: center;
+    
+        }
+        .show{
+            display: block;
+            float: right;
+          }
+          .nav-home{
+              height: 3.5rem;
+          }
+          .grid-container{
+              display: grid;
+              width: 100vw;
+              margin: 7px auto ;
+              grid-template-columns: repeat(8, 1fr);
+              grid-template-rows: repeat(4, 3.5rem);
+              grid-gap: 10px;
+              position: absolute;  
+              padding: 5px;       
+             
+          }
+          .grid-item{
+              background-color: red;
+              border-radius: 5px;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              position: sticky;
+            
+             
+          }
+            .grid-item:nth-child(1){
+                background-color: $reservaciones;
+            }
+            .grid-item:nth-child(2){
+                background-color: $actividades;
+                position: relative;
+            }
+            .grid-item:nth-child(3){
+                background-color: $comisionistas;
+                position: relative;
+            }
+            .grid-item:nth-child(4){
+                background-color: $cortes;
+            }
+            .grid-item:nth-child(5){
+                background-color: $cobranza;
+            }
+            .grid-item:nth-child(6){
+                background-color: $cupones;
+            }
+            .grid-item:nth-child(7){
+                background-color: $reportes;
+            }
+            .grid-item:nth-child(8){
+                background-color: $administracion;
+            }
+          .custom-link{
+             padding: 1rem;  
+             color: $font !important;
+             font-weight: 700 !important;
+          }
+          .footer{
+              position: absolute;
+              bottom: 0;
+              padding: 8px;
+              background-color: $footer;
+              width: 100%;
+              border-radius: 5px;
+              margin-bottom: 0px;
+              color: $font;
+              text-align: center;
+          }
+          .ul-content{
+              display: none;
+              position: absolute;
+              top:0;
+              right: 0;
+              margin: auto auto;
+              padding: 0;
+              z-index: 2;  
+        
+          }
+          .show{
+              display: block;
+          }
+          .list__item{
+              list-style: none;
+              display: flex;
+              width: 100%;
+              margin: auto auto;
+              min-height: 3.5rem;
+              max-height: 3.5rem;
+              border-radius: 5px;
+              border: 1px solid $font;
+              padding: 10px;        
+              color:$font;
+              justify-content: center;
+              animation-name: show;
+              animation-duration: .5s;
+    
+          }
+          .li-actividadaes{
+            background-color: $actividades;
+          }
+          .li-comisionistas{
+            background-color: $comisionistas;
+          }
+          .li-cupones{
+            background-color: $cupones;
+          }
+          .li-administracion{
+            background-color: $administracion;
+          }
+                @keyframes show {
+                0%{
+                    opacity: 0;
+                }
+                20%{
+                    opacity: 0.2;
+                }
+                30%{
+                    opacity: 0.3;
+                }
+                40%{
+                    opacity: 0.4;
+                }
+                50%{
+                    opacity: .5;
+                }
+                60%{
+                    opacity: .6;
+                }
+                70%{
+                    opacity: .7;
+                }
+                80%{
+                    opacity: .8;
+                }
+                90%{
+                    opacity: .9;
+                }
+                100%{
+                    opacity: 1;
+                }
+    
+                }
+                .btn-log-out{
+                    z-index: 10 !important;
+                }
+                #btnLogOut{
+                    z-index: 10 !important;
+                }
+    }

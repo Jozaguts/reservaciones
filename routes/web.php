@@ -17,6 +17,10 @@ Route::get('/tropical-adventures',['middleware' => 'throttle:60,5', function () 
     return view('auth.login');
 }]);
 
+Route::get('/reservaciones', function () {
+    return view('desktop.reservaciones');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

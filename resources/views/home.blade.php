@@ -15,16 +15,16 @@
         </div>
         <div class="user-name-contanier">
                
-            <h4 class="user-name-contanier__user-name" id="userName">{{Auth::user()->name}} 
+            <h4 class="user-name-contanier__user-name" id="btnUserName" >{{Auth::user()->name}} 
                 <span class="arrow-down"></span> 
             </h4>
          
         </div>
     </nav>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    <form  action="{{ route('logout') }}" method="POST" class="d-none" id="btnLogOut">
         <button type="submit" class="btn main-navbar btn-log-out">Cerrar sesion</button>
         @csrf
-    </form>
+    </form>  
 
 @auth
 <main>
@@ -33,19 +33,25 @@
             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
         </div>
         <div class="grid-item" >
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="linkActividades">Actividades
-                    <ul class="d-none" id="ulActividades">
-                            <li class="actividades-list__item">Tipo de Actividades</li>
-                            <li class="actividades-list__item">Equipos para Actividades</li>
-                            <li class="actividades-list__item">Pases y Precios</li>
-                            <li class="actividades-list__item">Horarios</li>
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAct">Actividades
+                    <ul class="ul-content" id="ulAct">
+                            <li class="list__item li-actividadaes">Tipo de Actividades</li>
+                            <li class="list__item li-actividadaes">Equipos para Actividades</li>
+                            <li class="list__item li-actividadaes">Pases y Precios</li>
+                            <li class="list__item li-actividadaes">Horarios</li>
                         </ul>
-            </a>
+            </a>  
           
         </div>
        
         <div class="grid-item">
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Comisionistas</a>
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnCom">Comisionistas
+                <ul class="ul-content" id="ulCom">
+                    <li class="list__item li-comisionistas ">Pago a Comisionistas</li>
+                    <li class="list__item li-comisionistas">Catálogo de Comisionistas</li>  
+                </ul>
+            </a>
+            
         </div>
         <div class="grid-item">
             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cortes</a>
@@ -54,13 +60,25 @@
             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cobranza</a>
         </div>
         <div class="grid-item">
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cupones</a>
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnCup">Cupones
+                <ul class="ul-content" id="ulCup">
+                    <li class="list__item li-cupones">Inventario de Cupones</li>
+                    <li class="list__item li-cupones">Autorización de Cupones</li>
+                    <li class="list__item li-cupones">Generacón Manual</li>
+                   
+                </ul>
+            </a>
         </div>
         <div class="grid-item">
             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reportes</a>
         </div>
         <div class="grid-item">
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Administración</a>
+            <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAdm">Administración
+                <ul class="ul-content" id="ulAdm">
+                    <li class="list__item li-administracion">Usuarios</li>
+                    <li class="list__item li-administracion">Formas de Pago y Tipos de Cambio</li>
+                </ul>      
+            </a>
         </div>
     </div>
 </main>
