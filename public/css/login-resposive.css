@@ -93,6 +93,7 @@
 
   .grid-item:nth-child(3) {
     background-color: #7030A0;
+    position: relative;
   }
 
   .grid-item:nth-child(4) {
@@ -133,8 +134,8 @@
     text-align: center;
   }
 
-  .actividades-list {
-    display: block;
+  .ul-content {
+    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -143,7 +144,11 @@
     z-index: 2;
   }
 
-  .actividades-list__item {
+  .show {
+    display: block;
+  }
+
+  .list__item {
     list-style: none;
     display: flex;
     width: 100%;
@@ -153,13 +158,28 @@
     border-radius: 5px;
     border: 1px solid white;
     padding: 10px;
-    background-color: #27B2E1;
     color: white;
     justify-content: center;
     -webkit-animation-name: show;
             animation-name: show;
     -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
+  }
+
+  .li-actividadaes {
+    background-color: #27B2E1;
+  }
+
+  .li-comisionistas {
+    background-color: #7030A0;
+  }
+
+  .li-cupones {
+    background-color: #217C51;
+  }
+
+  .li-administracion {
+    background-color: #404040;
   }
 
 @-webkit-keyframes show {
@@ -245,5 +265,544 @@
       opacity: 1;
     }
 }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .title-link {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto auto;
+  }
+
+  .nav-title-container {
+    display: block;
+    width: 49%;
+    float: left;
+    text-align: center;
+  }
+
+  .nav-title-container__title {
+    font-size: 100%;
+    font-weight: 900;
+    margin: 0;
+    line-height: 1rem;
+  }
+
+  .user-name-contanier {
+    display: block;
+    width: 49%;
+    float: right;
+    text-align: center;
+  }
+
+  .user-name-contanier__user-name {
+    font-size: 100%;
+    font-weight: 900;
+    line-height: 1rem;
+    color: black;
+    float: right;
+    margin: 0;
+  }
+
+  .arrow-down {
+    display: inline-block;
+    background-image: url(/svg/arrow-down.png);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 10px;
+    height: 10px;
+    margin: 0 0.5rem;
+    line-height: 0.2rem;
+    text-align: center;
+  }
+
+  .show {
+    display: block;
+    float: right;
+  }
+
+  .nav-home {
+    height: 3.5rem;
+  }
+
+  .grid-container {
+    display: grid;
+    width: 100vw;
+    margin: 17px auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 3.5rem);
+    grid-gap: 10px;
+    position: absolute;
+    padding: 5px;
+  }
+
+  .grid-item {
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  .grid-item:nth-child(1) {
+    background-color: #95B727;
+  }
+
+  .grid-item:nth-child(2) {
+    background-color: #27B2E1;
+    position: relative;
+  }
+
+  .grid-item:nth-child(3) {
+    background-color: #7030A0;
+    position: relative;
+  }
+
+  .grid-item:nth-child(4) {
+    background-color: #FF3300;
+  }
+
+  .grid-item:nth-child(5) {
+    background-color: #0B4060;
+  }
+
+  .grid-item:nth-child(6) {
+    background-color: #217C51;
+  }
+
+  .grid-item:nth-child(7) {
+    background-color: #803C09;
+  }
+
+  .grid-item:nth-child(8) {
+    background-color: #404040;
+    position: relative;
+  }
+
+  .custom-link {
+    padding: 1rem;
+    color: white !important;
+    font-weight: 700 !important;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    padding: 8px;
+    background-color: #0a0a0a;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    color: white;
+    text-align: center;
+  }
+
+  .ul-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: auto auto;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .list__item {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    margin: auto auto;
+    min-height: 3.5rem;
+    max-height: 3.5rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 10px;
+    color: white;
+    justify-content: center;
+    -webkit-animation-name: show;
+            animation-name: show;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+  }
+
+  .li-actividadaes {
+    background-color: #27B2E1;
+  }
+
+  .li-comisionistas {
+    background-color: #7030A0;
+  }
+
+  .li-cupones {
+    background-color: #217C51;
+  }
+
+  .li-administracion {
+    background-color: #404040;
+  }
+
+@-webkit-keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.2;
+    }
+
+    30% {
+      opacity: 0.3;
+    }
+
+    40% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    60% {
+      opacity: 0.6;
+    }
+
+    70% {
+      opacity: 0.7;
+    }
+
+    80% {
+      opacity: 0.8;
+    }
+
+    90% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.2;
+    }
+
+    30% {
+      opacity: 0.3;
+    }
+
+    40% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    60% {
+      opacity: 0.6;
+    }
+
+    70% {
+      opacity: 0.7;
+    }
+
+    80% {
+      opacity: 0.8;
+    }
+
+    90% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+}
+
+@media only screen and (min-device-width: 900px) and (max-device-width: 1440px) {
+  .title-link {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto auto;
+  }
+
+  .nav-title-container {
+    display: block;
+    width: 49%;
+    float: left;
+    text-align: center;
+  }
+
+  .nav-title-container__title {
+    font-size: 100%;
+    font-weight: 900;
+    margin: 0;
+    line-height: 1rem;
+  }
+
+  .user-name-contanier {
+    display: block;
+    width: 49%;
+    float: right;
+    text-align: center;
+  }
+
+  .user-name-contanier__user-name {
+    font-size: 100%;
+    font-weight: 900;
+    line-height: 1rem;
+    color: black;
+    float: right;
+    margin: 0;
+  }
+
+  .arrow-down {
+    display: inline-block;
+    background-image: url(/svg/arrow-down.png);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 10px;
+    height: 10px;
+    margin: 0 0.5rem;
+    line-height: 0.2rem;
+    text-align: center;
+  }
+
+  .show {
+    display: block;
+    float: right;
+  }
+
+  .nav-home {
+    height: 3.5rem;
+  }
+
+  .grid-container {
+    display: grid;
+    width: 100vw;
+    margin: 7px auto;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 3.5rem);
+    grid-gap: 10px;
+    position: absolute;
+    padding: 5px;
+  }
+
+  .grid-item {
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  .grid-item:nth-child(1) {
+    background-color: #95B727;
+  }
+
+  .grid-item:nth-child(2) {
+    background-color: #27B2E1;
+    position: relative;
+  }
+
+  .grid-item:nth-child(3) {
+    background-color: #7030A0;
+    position: relative;
+  }
+
+  .grid-item:nth-child(4) {
+    background-color: #FF3300;
+  }
+
+  .grid-item:nth-child(5) {
+    background-color: #0B4060;
+  }
+
+  .grid-item:nth-child(6) {
+    background-color: #217C51;
+  }
+
+  .grid-item:nth-child(7) {
+    background-color: #803C09;
+  }
+
+  .grid-item:nth-child(8) {
+    background-color: #404040;
+  }
+
+  .custom-link {
+    padding: 1rem;
+    color: white !important;
+    font-weight: 700 !important;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    padding: 8px;
+    background-color: #0a0a0a;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    color: white;
+    text-align: center;
+  }
+
+  .ul-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: auto auto;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .list__item {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    margin: auto auto;
+    min-height: 3.5rem;
+    max-height: 3.5rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 10px;
+    color: white;
+    justify-content: center;
+    -webkit-animation-name: show;
+            animation-name: show;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+  }
+
+  .li-actividadaes {
+    background-color: #27B2E1;
+  }
+
+  .li-comisionistas {
+    background-color: #7030A0;
+  }
+
+  .li-cupones {
+    background-color: #217C51;
+  }
+
+  .li-administracion {
+    background-color: #404040;
+  }
+
+@-webkit-keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.2;
+    }
+
+    30% {
+      opacity: 0.3;
+    }
+
+    40% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    60% {
+      opacity: 0.6;
+    }
+
+    70% {
+      opacity: 0.7;
+    }
+
+    80% {
+      opacity: 0.8;
+    }
+
+    90% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.2;
+    }
+
+    30% {
+      opacity: 0.3;
+    }
+
+    40% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    60% {
+      opacity: 0.6;
+    }
+
+    70% {
+      opacity: 0.7;
+    }
+
+    80% {
+      opacity: 0.8;
+    }
+
+    90% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+  .btn-log-out {
+    z-index: 10 !important;
+  }
+
+  #btnLogOut {
+    z-index: 10 !important;
+  }
 }
 
