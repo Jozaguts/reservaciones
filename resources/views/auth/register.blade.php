@@ -93,18 +93,18 @@
                             </div>
                         </div> --}}
                         <div class="form-group row">
-                            <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
                           
                             <div class="col-md-6">
-                                <select name="profile" id="profile" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
                                     <option  value=""></option>
                                     <option  value="operador">Operador</option>
                                     <option value="supervisor" id="supervisor">Supervisor</option>
                                     <option value="administrador">Administrador</option>
                                 </select>
-                                @if ($errors->has('profile'))
+                                @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('profile') }}</strong>
+                                        <strong>{{ $errors->first('role') }}</strong>
                                     </span>
                                 @endif
                             </div>
