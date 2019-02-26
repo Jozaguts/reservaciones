@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cc7a6f0-1029-4ab9-8d15-4972a323d4f2" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +71,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+<<<<<<< HEAD
           <entry key="Blade" value="5" />
+=======
+          <entry key="Blade" value="4" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
           <entry key="JavaScript" value="1" />
           <entry key="PHP" value="4" />
           <entry key="PLAIN_TEXT" value="3" />
@@ -76,7 +85,11 @@
         <counts>
           <entry key="Blade" value="26" />
           <entry key="JavaScript" value="1" />
+<<<<<<< HEAD
           <entry key="PHP" value="28" />
+=======
+          <entry key="PHP" value="24" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
           <entry key="PLAIN_TEXT" value="24" />
         </counts>
       </usages-collector>
@@ -129,6 +142,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -143,6 +157,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
               <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="83">
+              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
             </state>
           </provider>
         </entry>
@@ -185,7 +206,10 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/config/app.php" />
+=======
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
       </list>
     </option>
   </component>
@@ -318,7 +342,24 @@
             <path>
               <item name="reservaciones2" type="b2602c69:ProjectViewProjectNode" />
               <item name="reservaciones2" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="config" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="reservaciones2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservaciones2" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="reservaciones2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservaciones2" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
             </path>
           </expand>
           <select />
@@ -366,12 +407,20 @@
       <workItem from="1550352402618" duration="3110000" />
       <workItem from="1550539157309" duration="560000" />
       <workItem from="1551206417723" duration="1021000" />
+<<<<<<< HEAD
       <workItem from="1551207841982" duration="2400000" />
+=======
+      <workItem from="1551207841982" duration="2026000" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="7091000" />
+=======
+    <option name="totallyTimeSpent" value="6717000" />
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
@@ -393,7 +442,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="CSS-X-Fire" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50037795" side_tool="true" weight="0.28514588" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49962208" weight="0.5636605" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49962208" visible="true" weight="0.5636605" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -450,10 +499,18 @@
     <entry file="file://$PROJECT_DIR$/resources/views/components/register.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/auth/register.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+<<<<<<< HEAD
         </state>
       </provider>
     </entry>
@@ -482,13 +539,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+=======
+>>>>>>> 67ec2e8d1cac2ff22ee87a613693b1f265fc0499
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="135">
+          <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
         </state>
       </provider>
     </entry>
