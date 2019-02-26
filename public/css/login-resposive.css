@@ -124,11 +124,11 @@
 
   .footer {
     position: absolute;
-    bottom: 0;
+    bottom: 0%;
     padding: 8px;
     background-color: #0a0a0a;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 1px;
     margin-bottom: 0px;
     color: white;
     text-align: center;
@@ -265,6 +265,56 @@
       opacity: 1;
     }
 }
+
+  .main-container {
+    position: relative;
+  }
+
+  .btn-log-out {
+    z-index: 10 !important;
+  }
+
+  #btnLogOut {
+    z-index: 10 !important;
+  }
+
+  .registerModal {
+    background-color: rgba(0, 0, 0, 0.438) !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    margin: auto auto;
+    justify-content: center;
+    -webkit-animation-name: show;
+            animation-name: show;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    padding: 0.2rem 1rem 1rem 1rem;
+  }
+
+  .modal-content {
+    background-color: transparent;
+  }
+
+  .header-modal-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #card-header {
+    display: inline-block;
+    font-weight: bold !important;
+  }
+
+  .close-modal {
+    display: inline-block;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-position: 50% 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -394,7 +444,7 @@
     padding: 8px;
     background-color: #0a0a0a;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 1px;
     margin-bottom: 0px;
     color: white;
     text-align: center;
@@ -531,6 +581,56 @@
       opacity: 1;
     }
 }
+
+  .main-container {
+    position: relative;
+  }
+
+  .btn-log-out {
+    z-index: 10 !important;
+  }
+
+  #btnLogOut {
+    z-index: 10 !important;
+  }
+
+  .registerModal {
+    background-color: rgba(0, 0, 0, 0.438) !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    margin: auto auto;
+    justify-content: center;
+    -webkit-animation-name: show;
+            animation-name: show;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    padding: 0.2rem 1rem 1rem 1rem;
+  }
+
+  .modal-content {
+    background-color: transparent;
+  }
+
+  .header-modal-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #card-header {
+    display: inline-block;
+    font-weight: bold !important;
+  }
+
+  .close-modal {
+    display: inline-block;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-position: 50% 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+  }
 }
 
 @media only screen and (min-device-width: 900px) and (max-device-width: 1440px) {
@@ -659,7 +759,7 @@
     padding: 8px;
     background-color: #0a0a0a;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 1px;
     margin-bottom: 0px;
     color: white;
     text-align: center;
@@ -797,12 +897,54 @@
     }
 }
 
+  .main-container {
+    position: relative;
+  }
+
   .btn-log-out {
     z-index: 10 !important;
   }
 
   #btnLogOut {
     z-index: 10 !important;
+  }
+
+  .registerModal {
+    background-color: rgba(0, 0, 0, 0.438) !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    margin: auto auto;
+    justify-content: center;
+    -webkit-animation-name: show;
+            animation-name: show;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    padding: 0.2rem 1rem 1rem 1rem;
+  }
+
+  .modal-content {
+    background-color: transparent;
+  }
+
+  .header-modal-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #card-header {
+    display: inline-block;
+    font-weight: bold !important;
+  }
+
+  .close-modal {
+    display: inline-block;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-position: 50% 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
   }
 }
 
