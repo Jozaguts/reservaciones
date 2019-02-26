@@ -11,9 +11,9 @@
 |
 */
 Route::get('/', function () {
-    return redirect('/tropical-adventures');
+    return redirect('/demo');
 });
-Route::get('/tropical-adventures',['middleware' => 'throttle:60,5', function () {
+Route::get('/demo',['middleware' => 'throttle:60,5', function () {
     return view('auth.login');
 }]);
 
