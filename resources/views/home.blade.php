@@ -11,7 +11,7 @@
 <body>
     <nav class="nav navbar nav-home main-navbar">
         <div class="nav-title-container">
-            <h2 class="nav-title-container__title">Tropical-Adventures</h2>
+            <h2 class="nav-title-container__title">Demo</h2>
         </div>
         <div class="user-name-contanier">
                
