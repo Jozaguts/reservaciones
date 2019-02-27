@@ -2,6 +2,9 @@
 @section('title')
     Adminstración de Usuarios
 @endsection
+@section('css')
+<link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
+@endsection
 
 @section('content')
 <div class="container">
@@ -11,7 +14,7 @@
                 <div class="card-header">Lista de Usuarios</div>
                 <div class="card-body">
                     <div class="row justify-content-end">
-                        <a href="#" class="btn btn-success" id="addUser">Agregar Usuario</a>
+                        <a href="" class="btn btn-success" id="addUser">Agregar Usuario</a>
                     </div>
                         <div class="row">
                             <table class="table">
@@ -28,8 +31,8 @@
                                         @foreach ($users as $user)
                                     <tr>
                                        
-                                        <th>{{$user->idusuario}}</th>
-                                        <td>{{$user->firts_name}} </td>
+                                        <th>{{$user->id}}</th>
+                                        <td>{{$user->first_name}} </td>
                                         <td>{{$user->last_name}}</td>
                                         <td>
                                             <a href="#" class="btn btn-primary">Editar</a>
@@ -44,7 +47,7 @@
             </div>
         </div>
     </div>
-    @include('componets.register-form')
+    @include('components.register-form')
 </div>
 
 @section('scripts')

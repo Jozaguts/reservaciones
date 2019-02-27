@@ -49095,28 +49095,28 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/main.scss":
-/*!**********************************!*\
-  !*** ./resources/sass/main.scss ***!
-  \**********************************/
+/***/ "./resources/sass/users.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/users.scss ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\nError: ENOENT: no such file or directory, open 'C:\\laragon\\www\\reservaciones\\resources\\sass\\users.scss'\n    at runLoaders (C:\\laragon\\www\\reservaciones\\node_modules\\webpack\\lib\\NormalModule.js:301:20)\n    at C:\\laragon\\www\\reservaciones\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\laragon\\www\\reservaciones\\node_modules\\loader-runner\\lib\\LoaderRunner.js:203:19\n    at process.nextTick (C:\\laragon\\www\\reservaciones\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:73:15)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
 
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/main.scss ./resources/sass/login-resposive.scss ***!
-  \******************************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/users.scss ./resources/sass/login-resposive.scss ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\reservaciones2\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\reservaciones2\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\laragon\www\reservaciones2\resources\sass\main.scss */"./resources/sass/main.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones2\resources\sass\login-resposive.scss */"./resources/sass/login-resposive.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\users.scss */"./resources/sass/users.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\login-resposive.scss */"./resources/sass/login-resposive.scss");
 
 
 /***/ })

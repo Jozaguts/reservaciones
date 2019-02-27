@@ -19,3 +19,4 @@ closeModal.addEventListener('click',(e)=>{
      
 })
 
+
