@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
 <link rel="stylesheet" href="{{asset('css/users.css')}}">
 @endsection
-
 @section('content')
 @include('components.menu')  
 <div class="container">
@@ -54,8 +53,8 @@
 </div>
 
 @section('scripts')
-{{-- <script src="{{asset('js/admin.js')}}"></script> --}}
-<script src="{{asset('js/all.js')}}"></script>
+<script src="{{asset('js/admin.js')}}"></script>
+{{-- <script src="{{asset('js/all.js')}}"></script> --}}
 @endsection
 
 @endsection
