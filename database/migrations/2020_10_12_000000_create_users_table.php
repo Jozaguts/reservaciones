@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name',45);
             $table->string('last_name',45);
-            $table->string('role',15);
+            // $table->string('role',15);
             $table->boolean('removed')->default(0)->change();
             $table->boolean('active')->default(1)->change();
             $table->string('department',45);

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -19,9 +20,9 @@ class User extends Authenticatable
     protected $table = 'usuarios';
    
     protected $fillable = [
-        'first_name','last_name','active','status','role',
+        'first_name','last_name','active','status',
         'department','email','password'];
-
+        // falta el campo role
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -30,5 +31,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    
 
 }

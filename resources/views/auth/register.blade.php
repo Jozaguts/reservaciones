@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('css')
+
+@hasrole('administrador')
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
 @endsection
 @section('content')
+
     <div class="card-body col-md-8 my-auto mx-auto" >
         <form method="POST" action="{{ url('register') }}" >{{-- @method('PUT'); --}}  @csrf
             <div class="form-group row">
@@ -98,4 +101,7 @@
         </form>
 </div>
 <script src="{{asset("js/all.js")}}"></script>
+@else
+    <h5>Solo administradores tiene acceso</h5>
+@endhasrole
 @endsection
