@@ -1,0 +1,49 @@
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+
+  table td {
+    padding: 0.15rem !important;
+  }
+
+  .table-head {
+    text-align: center;
+  }
+
+  .table-head__id {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.8rem;
+  }
+
+  .table-head__name {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.8rem;
+  }
+
+  .table-head__surname {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.8rem;
+  }
+
+  .table-head__actions {
+    display: flex;
+    font-size: 0.8rem;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+
+  .table-head__btn {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 5px !important;
+    margin: 0 5px;
+  }
+}
+

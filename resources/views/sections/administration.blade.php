@@ -4,12 +4,15 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
+<link rel="stylesheet" href="{{asset('css/users.css')}}">
 @endsection
 
 @section('content')
+@include('components.menu')  
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+     
+      <div class="row justify-content-center">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Lista de Usuarios</div>
                 <div class="card-body">
@@ -20,10 +23,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th >Id</th>
-                                        <th >Nombre</th>
-                                        <th >Apellido</th>
-                                        <th >Acciones</th>
+                                        <th class="table-head" >Id</th>
+                                        <th class="table-head" >Nombre</th>
+                                        <th class="table-head" >Apellido</th>
+                                        <th  class="table-head">Acciones</th>
                                    
                                     </tr>
                                 </thead>
@@ -31,12 +34,12 @@
                                         @foreach ($users as $user)
                                     <tr>
                                        
-                                        <th>{{$user->id}}</th>
-                                        <td>{{$user->first_name}} </td>
-                                        <td>{{$user->last_name}}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary">Editar</a>
-                                            <a href="#" class="btn btn-danger">Eliminar</a>
+                                        <th class="table-head table-head__id">{{$user->id}}</th>
+                                        <td class=" table-head table-head__name">{{$user->first_name}} </td>
+                                        <td class="table-head table-head__surname">{{$user->last_name}}</td>
+                                        <td class="table-head table-head__actions">
+                                            <a href="#" class="table-head table-head__btn btn btn-primary">Editar</a>
+                                            <a href="#" class="table-head table-head__btn btn btn-danger">Eliminar</a>
                                         </td>
                                         @endforeach
                                     </tr>
@@ -51,7 +54,8 @@
 </div>
 
 @section('scripts')
-<script src="{{asset('js/admin.js')}}"></script>
+{{-- <script src="{{asset('js/admin.js')}}"></script> --}}
+<script src="{{asset('js/all.js')}}"></script>
 @endsection
 
 @endsection
