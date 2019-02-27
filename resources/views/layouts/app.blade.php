@@ -12,31 +12,39 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <link href="{{ asset('css/login-resposive.css') }}" rel="stylesheet">
+    @yield('css')
+     {{-- <link href="{{ asset('css/login-resposive.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
-        <nav class="nav navbar nav-home main-navbar">
+        <header class="nav navbar nav-home main-navbar">
                 <div class="nav-title-container">
                     <h2 class="nav-title-container__title">Tropical-Adventures</h2>
                 </div>
                 @auth
                 <div class="user-name-contanier">
-                    <h4 class="user-name-contanier__user-name" id="btnUserName" >{{Auth::user()->name}} 
+                    <h4 class="user-name-contanier__user-name" id="btnUserName" >{{Auth::user()->first_name}} 
                             <span class="arrow-down"></span> 
                         </h4>
                 </div>
                 @endauth
-            </nav>
+           
+            </header>
+            <form  action="{{ route('logout') }}" method="POST" class="d-none" id="btnLogOut">
+                <button type="submit" class="btn main-navbar btn-log-out">Cerrar sesion</button>
+                @csrf
+               
+        </form>  
+            
         
         
     </div>
-        <main class="py-4 main-container">
+        <main class="main-container">
             @yield('content')
             @yield('footer')
         </main>
     </div>
     <!-- Scripts -->
     @yield('scripts')
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 </body>
 </html>

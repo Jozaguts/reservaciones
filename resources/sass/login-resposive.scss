@@ -59,12 +59,13 @@
       .grid-container{
           display: grid;
           width: 100vw;
-          margin: 37px auto ;
+          margin: 1.5rem auto auto auto ;
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(4, 3.5rem);
           grid-gap: 10px;
           position: absolute;  
-          padding: 5px;       
+          padding: 15px;    
+          z-index: -1;   
          
       }
       .grid-item{
@@ -95,10 +96,10 @@
             background-color: $cobranza;
         }
         .grid-item:nth-child(6){
-            background-color: $cupones;
+            background-color: $reportes;
         }
         .grid-item:nth-child(7){
-            background-color: $reportes;
+            background-color: $cupones;
         }
         .grid-item:nth-child(8){
             background-color: $administracion;
@@ -195,12 +196,13 @@
             }
             .main-container{
                 position: relative;
+                z-index: 100 !important;
             }
             .btn-log-out{
-                z-index: 10 !important;
+                z-index: 100 !important;
             }
             #btnLogOut{
-                z-index: 10 !important;
+                z-index: 100 !important;
             }
             .registerModal{
                 background-color:rgba(0, 0, 0, 0.438) !important;
@@ -304,12 +306,13 @@
           .grid-container{
               display: grid;
               width: 100vw;
-              margin: 17px auto ;
+              margin: 1rem auto auto auto;
               grid-template-columns: repeat(3, 1fr);
               grid-template-rows: repeat(4, 3.5rem);
               grid-gap: 10px;
               position: absolute;  
-              padding: 5px;       
+              padding: 15px;    
+              z-index: -1;   
              
           }
           .grid-item{
@@ -340,10 +343,10 @@
                 background-color: $cobranza;
             }
             .grid-item:nth-child(6){
-                background-color: $cupones;
+                background-color: $reportes;
             }
             .grid-item:nth-child(7){
-                background-color: $reportes;
+                background-color: $cupones;
             }
             .grid-item:nth-child(8){
                 background-color: $administracion;
@@ -446,7 +449,7 @@
                     z-index: 10 !important;
                 }
                 #btnLogOut{
-                    z-index: 10 !important;
+                    z-index: 100 !important;
                 }
                 .registerModal{
                     background-color:rgba(0, 0, 0, 0.438) !important;
@@ -538,8 +541,7 @@
     
         }
         .show{
-            display: block;
-            float: right;
+            display: inline;
           }
           .nav-home{
               height: 3.5rem;
@@ -547,12 +549,13 @@
           .grid-container{
               display: grid;
               width: 100vw;
-              margin: 7px auto ;
+              margin: 1rem auto auto auto;
               grid-template-columns: repeat(8, 1fr);
               grid-template-rows: repeat(4, 3.5rem);
               grid-gap: 10px;
               position: absolute;  
-              padding: 5px;       
+              padding: 15px;      
+              z-index: -1; 
              
           }
           .grid-item{
@@ -583,10 +586,10 @@
                 background-color: $cobranza;
             }
             .grid-item:nth-child(6){
-                background-color: $cupones;
+                background-color: $reportes;
             }
             .grid-item:nth-child(7){
-                background-color: $reportes;
+                background-color: $cupones;
             }
             .grid-item:nth-child(8){
                 background-color: $administracion;
@@ -688,7 +691,8 @@
                     z-index: 10 !important;
                 }
                 #btnLogOut{
-                    z-index: 10 !important;
+                    z-index: 100 !important;
+                    float:right;
                 }
                 .registerModal{
                     background-color:rgba(0, 0, 0, 0.438) !important;

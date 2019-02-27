@@ -64,12 +64,13 @@
   .grid-container {
     display: grid;
     width: 100vw;
-    margin: 37px auto;
+    margin: 1.5rem auto auto auto;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 3.5rem);
     grid-gap: 10px;
     position: absolute;
-    padding: 5px;
+    padding: 15px;
+    z-index: -1;
   }
 
   .grid-item {
@@ -105,11 +106,11 @@
   }
 
   .grid-item:nth-child(6) {
-    background-color: #217C51;
+    background-color: #803C09;
   }
 
   .grid-item:nth-child(7) {
-    background-color: #803C09;
+    background-color: #217C51;
   }
 
   .grid-item:nth-child(8) {
@@ -268,14 +269,15 @@
 
   .main-container {
     position: relative;
+    z-index: 100 !important;
   }
 
   .btn-log-out {
-    z-index: 10 !important;
+    z-index: 100 !important;
   }
 
   #btnLogOut {
-    z-index: 10 !important;
+    z-index: 100 !important;
   }
 
   .registerModal {
@@ -379,12 +381,13 @@
   .grid-container {
     display: grid;
     width: 100vw;
-    margin: 17px auto;
+    margin: 1rem auto auto auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 3.5rem);
     grid-gap: 10px;
     position: absolute;
-    padding: 5px;
+    padding: 15px;
+    z-index: -1;
   }
 
   .grid-item {
@@ -420,11 +423,11 @@
   }
 
   .grid-item:nth-child(6) {
-    background-color: #217C51;
+    background-color: #803C09;
   }
 
   .grid-item:nth-child(7) {
-    background-color: #803C09;
+    background-color: #217C51;
   }
 
   .grid-item:nth-child(8) {
@@ -591,7 +594,7 @@
   }
 
   #btnLogOut {
-    z-index: 10 !important;
+    z-index: 100 !important;
   }
 
   .registerModal {
@@ -684,8 +687,7 @@
   }
 
   .show {
-    display: block;
-    float: right;
+    display: inline;
   }
 
   .nav-home {
@@ -695,12 +697,13 @@
   .grid-container {
     display: grid;
     width: 100vw;
-    margin: 7px auto;
+    margin: 1rem auto auto auto;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4, 3.5rem);
     grid-gap: 10px;
     position: absolute;
-    padding: 5px;
+    padding: 15px;
+    z-index: -1;
   }
 
   .grid-item {
@@ -736,11 +739,11 @@
   }
 
   .grid-item:nth-child(6) {
-    background-color: #217C51;
+    background-color: #803C09;
   }
 
   .grid-item:nth-child(7) {
-    background-color: #803C09;
+    background-color: #217C51;
   }
 
   .grid-item:nth-child(8) {
@@ -906,7 +909,8 @@
   }
 
   #btnLogOut {
-    z-index: 10 !important;
+    z-index: 100 !important;
+    float: right;
   }
 
   .registerModal {

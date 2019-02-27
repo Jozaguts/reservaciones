@@ -8,12 +8,12 @@
                 <div class="card-header">{{ __('Registrar') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/admin') }}">
+                    <form method="POST" action="{{ url('register') }}">
                         @csrf
-                        @method('PUT');
+                        {{-- @method('PUT'); --}}
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usiario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usuario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
                             </label>
 
                             <div class="col-md-6">
@@ -26,15 +26,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }} <br>    
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }} <br>    
                                 </label>
                             
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('first_name'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -76,15 +76,15 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
                           
                             <div class="col-md-6">
-                                <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                <select name="role" id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" required autofocus>
 
-                                    @foreach ($roles as $key =>$value)
+                                    {{-- @foreach ($roles as $key =>$value)
                                 <option  value="{{$key}}">{{$value}}</option>
-                                    @endforeach
-                                    {{-- <option  value=""></option>
+                                    @endforeach --}}
+                                    <option  value=""></option>
                                     <option  value="opera">Operador</option>
-                                    <option value="super" id="supervisor">Supervisor</option>
-                                    <option value="admin">Administrador</option> --}}
+                                    <option value="super" >Supervisor</option>
+                                    <option value="admin">Administrador</option>
                                 </select>
                                 @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
@@ -92,10 +92,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <input type="hidden" name="active" id="active" value="1">    
-
-                            <input type="hidden" name="status" id="status" value="1">      
-                                                    
+                        
                         </div>
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
