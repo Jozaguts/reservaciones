@@ -13,11 +13,11 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/main.scss', 'public/css')
+    .sass('resources/sass/users.scss', 'public/css')
    .sass('resources/sass/login-resposive.scss', 'public/css')
 
    mix.browserSync({
-      proxy:'reservaciones2-dev.com'
+      proxy:'reservaciones-dev.com'
    });
    
    mix.scripts([
