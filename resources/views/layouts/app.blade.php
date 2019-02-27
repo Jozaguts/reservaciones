@@ -39,7 +39,7 @@
         
         
     </div>
-        <main class="py-2 main-container">
+        <main class=" main-container">
             @yield('content')
             @yield('footer')
         </main>
