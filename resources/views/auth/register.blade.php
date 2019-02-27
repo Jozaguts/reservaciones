@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
 @endsection
 @section('content')
-    <div class="card-body">
-        <form method="POST" action="{{ url('register') }}">{{-- @method('PUT'); --}}  @csrf
+    <div class="card-body col-md-8 my-auto mx-auto" >
+        <form method="POST" action="{{ url('register') }}" >{{-- @method('PUT'); --}}  @csrf
             <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usuario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
                 </label>
@@ -91,8 +91,8 @@
             </div>
             
             <div class="form-group row">
-                <div class="col-md-6 offset-md-4 main-nav">
-                    <button type="submit" class="btn main-navbar">{{ __('Registrar') }}</button>
+                <div class="col-md-3 offset-md-4 main-nav">
+                    <button type="submit" class="btn main-navbar btn-block">{{ __('Registrar') }}</button>
                 </div>
             </div>
         </form>
