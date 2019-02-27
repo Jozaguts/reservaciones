@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Registrar') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ url('register') }}">
@@ -22,7 +17,8 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -36,7 +32,8 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -53,24 +50,23 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-        
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
-                                <div class="form-group row">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirma contraseña') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirma contraseña') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
@@ -90,21 +86,27 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('role') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
+                                <input type="hidden" name="active" id="active" value="1">
+
+                                <input type="hidden" name="status" id="status" value="1">
+
                             </div>
                         
                         </div>
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="department" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="department" value="{{ old('department') }}" required autofocus>
+                                <div class="col-md-6">
+                                    <input id="department" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="department" value="{{ old('department') }}" required autofocus>
 
-                                @if ($errors->has('department'))
-                                    <span class="invalid-feedback" role="alert">
+                                    @if ($errors->has('department'))
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('department') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         
@@ -114,12 +116,11 @@
                                     {{ __('Registrar') }}
                                 </button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <script src="{{asset("js/all.js")}}"></script>
 @endsection

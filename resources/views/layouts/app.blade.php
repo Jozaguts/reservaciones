@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title> Demo</title>
 
     <title>@yield('title') {{ config('app.name', 'Tripical Adventures') }}</title>
   

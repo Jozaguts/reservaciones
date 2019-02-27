@@ -17,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/login-resposive.scss', 'public/css')
 
    mix.browserSync({
-      proxy:'reservaciones-dev.com'
+      proxy:'reservaciones2-dev.com'
    });
    
    mix.scripts([
