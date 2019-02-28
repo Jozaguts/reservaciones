@@ -45,6 +45,8 @@ class UsersController extends Controller
         $usuario->last_name = $request->last_name;
         $usuario->department = $request->department;       
         $usuario->email = $request->email;
+        $usuario->active=1;
+        $usuario->removed=0;
         $usuario->password = Hash::make($request->password);
 
         if($usuario->save()){
