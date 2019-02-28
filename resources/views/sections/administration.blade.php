@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{asset('css/users.css')}}">
 @endsection
 @section('content')
-@include('components.menu')  
+{{--@include('components.menu')  --}}
 <div class="container">
      
       <div class="row justify-content-center">
@@ -31,15 +31,17 @@
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
+                                          @if($user->active ==1)
                                     <tr>
                                        
                                         <th class="table-head table-head__id">{{$user->id}}</th>
                                         <td class=" table-head table-head__name">{{$user->first_name}} </td>
                                         <td class="table-head table-head__surname">{{$user->last_name}}</td>
                                         <td class="table-head table-head__actions">
-                                            <a href="#" class="table-head table-head__btn btn btn-primary">Editar</a>
-                                            <a href="#" class="table-head table-head__btn btn btn-danger">Eliminar</a>
+                                            <a href="#" class="table-head table-head__btn btn-edit btn btn-primary"></a>
+                                            <a href="#" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                         </td>
+                                        @endif
                                         @endforeach
                                     </tr>
                                 </tbody>

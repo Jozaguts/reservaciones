@@ -47,7 +47,7 @@
         <div class="grid-item">
             <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAdm">Administración
                 <ul class="ul-content" id="ulAdm">
-                <a href="{{url ('usuarios')}}"> <li class="list__item li-administracion">Usuarios</li></a>
+                    <a href="{{url ('usuarios')}}" class="ul-link"> <li class="list__item li-administracion">Usuarios</li></a>
                     <li class="list__item li-administracion">Formas de Pago y Tipos de Cambio</li>
                 </ul>      
             </a>
