@@ -18,7 +18,7 @@
                                 </label>
     
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -31,7 +31,7 @@
                                     </label>
                                 
                                 <div class="col-md-6">
-                                    <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                                    <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required >
     
                                     @if ($errors->has('first_name'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                     <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autofocus>
+                                        <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required >
         
                                         @if ($errors->has('last_name'))
                                             <span class="invalid-feedback" role="alert">
