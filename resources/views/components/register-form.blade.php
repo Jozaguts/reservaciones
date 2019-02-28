@@ -107,6 +107,8 @@
                                     @endif
                                 </div>
                             </div>
+                            <input type="hidden" name="active" value="1">
+                            <input type="hidden" name="removed" value="0">
                  
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4 main-nav">

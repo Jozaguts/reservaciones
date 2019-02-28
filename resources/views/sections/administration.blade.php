@@ -8,12 +8,12 @@
 @endsection
 @section('content')
 {{--@include('components.menu')  --}}
-<div class="container">
+<div class="container mt-3">
      
       <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Lista de Usuarios</div>
+                <div class="card-header text-dark font-weight-bold">Lista de Usuarios</div>
                 <div class="card-body">
                     <div class="row justify-content-end">
                         <a href="" class="btn btn-success" id="addUser">Agregar Usuario</a>
