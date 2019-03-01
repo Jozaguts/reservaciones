@@ -1,22 +1,50 @@
 const registerModal = document.getElementById("registerModal");
+const userEditModal = document.getElementById("userEditModal");
 const addUser = document.getElementById("addUser");
+const editUser = document.getElementById("editUser");
 const closeModal =document.getElementById("closeModal");
-
+const closeModalEdit =document.getElementById("closeModalEdit");
+//btn add user
 addUser.addEventListener('click',(e)=>{
     e.preventDefault();
     if(registerModal.classList.contains("d-none")){
         registerModal.classList.remove("d-none")
-        registerModal.classList.toggle("registerModal");
+        registerModal.classList.toggle("showModal");
     }
      
 })
-closeModal.addEventListener('click',(e)=>{
-   
-    if(registerModal.classList.contains("registerModal")){
-        registerModal.classList.remove("registerModal")
-        registerModal.classList.add("d-none");
+//btn edit user
+function showEditModal(e){
+    if(userEditModal.classList.contains("d-none")){
+        userEditModal.classList.remove("d-none")
+        userEditModal.classList.toggle("showModal");
     }
+
+}
+
+closeModal.addEventListener('click',(e)=>{
+  e.preventDefault();
+  if(closeModal.parentNode.classList.contains("showModal")){
+    closeModal.parentNode.classList.remove("showModal")
+    closeModal.parentNode.classList.toggle("d-none");
+  }
      
+})
+//close modal edit user
+closeModalEdit.addEventListener('click',(e)=>{
+  e.preventDefault();
+  if(closeModalEdit.parentNode.classList.contains("showModal")){
+    closeModalEdit.parentNode.classList.remove("showModal")
+    closeModalEdit.parentNode.classList.toggle("d-none");
+  }
+     
+})
+closeModal.addEventListener('click',(e)=>{
+  if(userEditModal.classList.contains("userEditModal")){
+      userEditModal.classList.remove("userEditModal")
+      userEditModal.classList.add("d-none");
+  }
+   
 })
 
 

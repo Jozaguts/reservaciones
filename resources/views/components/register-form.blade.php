@@ -1,12 +1,13 @@
 
-<div class="container-fluid d-none" id="registerModal">
 
+<div class="container-fluid d-none" id="registerModal">
+    <span class="close-modal" id="closeModal"></span>
         <div class="row justify-content-center row-modal">
             <div class="col-md-6 modal-content">
                 <div class="card">
                     <div class="header-modal-container">
                             <div class="card-header" id="card-header">{{ __('Registrar') }} </div>
-                            <span class="close-modal" id="closeModal"></span>
+                           
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ url('usuarios') }}">
@@ -77,15 +78,11 @@
                                 <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
                               
                                 <div class="col-md-6">
-                                    <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                    <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} text-capitalize" required autofocus>
     
                                         @foreach ($roles as $key =>$value)
                                     <option  value="{{$value}}">{{$value}}</option>
                                         @endforeach
-                                        {{-- <option  value=""></option>
-                                        <option  value="opera">Operador</option>
-                                        <option value="super" id="supervisor">Supervisor</option>
-                                        <option value="admin">Administrador</option> --}}
                                     </select>
                                     @if ($errors->has('role'))
                                         <span class="invalid-feedback" role="alert">
@@ -107,6 +104,8 @@
                                     @endif
                                 </div>
                             </div>
+                            <input type="hidden" name="active" value="1">
+                            <input type="hidden" name="removed" value="0">
                  
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4 main-nav">
