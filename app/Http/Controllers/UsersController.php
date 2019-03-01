@@ -77,7 +77,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view ('components.user-edit', conpact('user'));
     }
 
     /**
@@ -98,8 +99,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $requeste)
     {
-        //
+         
+         User::find($id)->delete();
+        dd($this->user->first_name . ' Fue eliminado');
+        
+
+         if($request->ajax()){
+             return $message;
+         }
+       
+       
     }
 }
