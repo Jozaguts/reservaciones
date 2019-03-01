@@ -23,24 +23,30 @@
                                 <thead>
                                     <tr>
                                     
-                                        <th class="table-head" >Id</th>
+                                        
                                         <th class="table-head" >Nombre</th>
                                         <th class="table-head" >Apellidos</th>
+                                        <th class="table-head" >Rol</th>
                                         <th  class="table-head">Acciones</th>
+                                        
                                    
                                     </tr>
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
-                                        {{-- {{dd($user)}} --}}
+                                  
                                           @if($user->detele_at ==null)
+                                         
                                     <tr data-id="{{$user->id}}">
-                                        <th class="table-head table-head__id">{{$user->id}}</th>
                                         <td class=" table-head table-head__name">{{$user->first_name}} </td>
                                         <td class="table-head table-head__surname">{{$user->last_name}}</td>
+                                        <td class="table-head table-head__surname">{{$user->roles->implode('name','')}}</td>
                                         <td class="table-head table-head__actions"> 
                                             <a href="#" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal(this)"></a>
+                                            @if ($user->id != (Auth::user()->id))
                                             <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+                                            @endif
+                                            
                                         </td>
                                         @endif
                                         @endforeach
