@@ -1,9 +1,10 @@
 
 
 <div class="container-fluid d-none" id="registerModal">
-    <span class="close-modal" id="closeModal"></span>
+    <span class="close-modal col-md-6 offset-6" id="closeModal"></span>
+   
         <div class="row justify-content-center row-modal">
-            <div class="col-md-6 modal-content">
+            <div class="col-sm-8 col-md-6 modal-content">
                 <div class="card">
                     <div class="header-modal-container">
                             <div class="card-header" id="card-header">{{ __('Registrar') }} </div>
@@ -19,7 +20,7 @@
                                 </label>
     
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"  required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>

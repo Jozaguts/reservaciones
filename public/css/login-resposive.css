@@ -298,7 +298,10 @@
   }
 
   .modal-content {
+    min-width: 80vw !important;
+    border: none;
     background-color: transparent;
+    padding: 1rem;
   }
 
   .header-modal-container {
@@ -320,8 +323,8 @@
     background-repeat: no-repeat;
     position: absolute;
     z-index: 1000;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: -8rem;
   }
 
   .ul-content a {
@@ -623,13 +626,16 @@
     justify-content: center;
     -webkit-animation-name: show;
             animation-name: show;
-    -webkit-animation-duration: 1s;
-            animation-duration: 1s;
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
     padding: 0.2rem 1rem 1rem 1rem;
   }
 
   .modal-content {
+    min-width: 80vw !important;
+    border: none;
     background-color: transparent;
+    padding: 1rem;
   }
 
   .header-modal-container {
@@ -643,13 +649,16 @@
   }
 
   .close-modal {
-    display: block;
+    display: flex;
     padding: 1rem 1.25rem;
     background-image: url(/svg/cancel.svg);
     background-position: 50% 50%;
     background-size: 20px 20px;
     background-repeat: no-repeat;
-    float: right;
+    position: absolute;
+    z-index: 1000;
+    top: 2rem;
+    right: -3.5rem;
   }
 }
 
@@ -951,7 +960,10 @@
   }
 
   .modal-content {
+    min-width: 80vw !important;
+    border: none;
     background-color: transparent;
+    padding: 1rem;
   }
 
   .header-modal-container {
@@ -965,13 +977,16 @@
   }
 
   .close-modal {
-    display: block;
+    display: flex;
     padding: 1rem 1.25rem;
     background-image: url(/svg/cancel.svg);
     background-position: 50% 50%;
     background-size: 20px 20px;
     background-repeat: no-repeat;
-    float: right;
+    position: absolute;
+    z-index: 1000;
+    top: 2rem;
+    right: -9rem;
   }
 }
 
