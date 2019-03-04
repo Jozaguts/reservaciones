@@ -27,20 +27,66 @@ let inputActive = document.getElementById('editActive')
 
 function showEditModal(id){
 
-  let route = "'usuarios'/"+id+"/edit";
+  let route = "usuarios/"+id+"/edit";
 
   $.get(route,function(data){
-    console.log(data.email, data.first_name)
-    // $('#editEmail').val(data.email);
-    
+    $('#editEmail').val(data.email);
+    $('#editFirst_name').val(data.first_name);
+    $('#editLast_name').val(data.last_name);
+    $('#editDepartment').val(data.department);
+    $('#userId').val(data.id);
+    if(data.active==1){
+      $('#editActive').val(1);
+    }else{
+      $('#editActive').val(0);
+    } 
 
   });
     if(userEditModal.classList.contains("d-none")){
         userEditModal.classList.remove("d-none")
         userEditModal.classList.toggle("showModal");
     }
-  
 }
+
+//btn actualizar
+$('#btnEdit').click(function(){
+  let email = $('#editEmail').val();
+  let first_name = $('#editFirst_name').val();
+  let last_name = $('#editLast_name').val();
+  let department =$('#editDepartment').val();
+  let password = $('#editPassword').val();
+  let role = $('#editRole').val();
+  let id =$('#userId').val();
+  let active;
+  if($('#editActive').is(':checked')){
+    active = 0;
+  }else{
+    active = 1;
+  }
+  let route =`usuarios/${id}`
+  let token = $('#token').val();
+
+  $.ajax({
+    url: route,
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    type: 'PUT',
+    dataType: 'json',
+    data: {email: email, first_name: first_name, last_name: last_name, department: department, password: password, role:role, active: active },
+    success: function (data) {
+      console.log(data);
+      if(data.success == 'true'){
+        alert('funciona');
+      }
+    },
+    error:function(data)
+    {
+      alert('hubo un error')
+      if(data.status==422){
+        console.clear();
+      }
+    }
+  })
+})
 
 
 closeModal.addEventListener('click',(e)=>{

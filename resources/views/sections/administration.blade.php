@@ -29,8 +29,8 @@
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
-                                  
-                                          @if($user->detele_at ==null)
+                                   {{var_dump($user->active)}}
+                                          @if($user->detele_at ==null && $user->active ==1)
                                   
                                     <tr data-id="{{$user->id}}"data-name="{{$user->first_name}}">
                                         
