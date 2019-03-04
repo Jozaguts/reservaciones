@@ -9,10 +9,10 @@
                     
                 </div>
                 <div class="card-body">
-                    <form method="PUT" action="{{url ('usuarios', $user) }}">
-                         @csrf
+                    <form method="PUT" action="{{url ('usuarios') }}">
+                         {{-- @csrf --}}
                         @method('PUT')
-                        {{var_dump($user->id)}}
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usuario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
                             </label>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Activo') }}</label>
+                            <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Desactivar') }}</label>
 
                             <div class="col-md-6 ">
                                 <input id="editActive" type="checkbox" class="align-self-start form-control{{ $errors->has('active') ? ' is-invalid' : '' }}" name="active" value="">
@@ -117,8 +117,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4 main-nav">
-                            <button type="submit" class="btn main-navbar" id="btnEdit">
-                                    {{ __('Actualizar Usuario') }}
+                                <a href="#!" class="btn main-navbar" id="btnEdit"> {{ __('Actualizar Usuario') }}</a>
+                            {{-- <button type="submit" class="btn main-navbar" id="btnEdit"> --}}
+                                   
                                 </button>
                             </div>
                         </div>

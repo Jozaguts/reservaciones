@@ -29,8 +29,8 @@
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
-                                  
-                                          @if($user->detele_at ==null)
+                                   {{var_dump($user->active)}}
+                                          @if($user->detele_at ==null && $user->active ==1)
                                   
                                     <tr data-id="{{$user->id}}"data-name="{{$user->first_name}}">
                                         
@@ -59,14 +59,6 @@
 </div>
 {!! Form::open(['route' => ['usuarios.destroy', ':USER_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
 {!!Form::close() !!}
-
-
-{{-- {!! Form::open(['route' => ['usuarios.update', ':USER_ID'],'method'=>'PUT','id'=>'form-edit'])!!}
-{!!Form::close() !!}
-{!! Form::open(['route' => ['usuarios.', ':USER_ID'],'method'=>'POST','id'=>'show-form'])!!}
-{!!Form::close() !!} --}}
-
-
 @section('scripts')
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{asset('js/admin.js')}}"></script>

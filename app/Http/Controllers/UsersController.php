@@ -77,7 +77,8 @@ class UsersController extends Controller
      */
     public function edit(Request $request, $id)
     {
-
+        $user = User::find($id);
+        return response()->json($user);
       
     }
      
@@ -91,13 +92,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {   
-      if($request->ajax()){
+      if($request->ajax())
+      {
           $user = User::findOrfail($id);
           $input = $request->all();
-          $result = $user->fill($input)->save();
-          if($result){
+          if($result = $user->fill($input)->save()){
+            //asignamos rol
+            $user->assignRole($request->role);
+        }
+
+          if($result)
+          {
               return response()->json(['success'=>'true']);
-          }else{
+          }else
+          {
               return response()->json(['success'=>'false']);
           }
       }
