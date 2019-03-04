@@ -75,11 +75,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        return view ('components.user-edit', conpact('user'));
+
+      
     }
+     
 
     /**
      * Update the specified resource in storage.
@@ -89,8 +90,17 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+      if($request->ajax()){
+          $user = User::findOrfail($id);
+          $input = $request->all();
+          $result = $user->fill($input)->save();
+          if($result){
+              return response()->json(['success'=>'true']);
+          }else{
+              return response()->json(['success'=>'false']);
+          }
+      }
     }
 
     /**
@@ -103,9 +113,7 @@ class UsersController extends Controller
     {
          
          User::find($id)->delete();
-        dd($this->user->first_name . ' Fue eliminado');
-        
-
+         $message = "Usuario Eliminado exitosamente";
          if($request->ajax()){
              return $message;
          }

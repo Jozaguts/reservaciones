@@ -15,34 +15,30 @@
             <div class="card">
                 <div class="card-header text-dark font-weight-bold">Lista de Usuarios</div>
                 <div class="card-body">
-                    <div class="row justify-content-end">
-                        <a href="" class="btn btn-success" id="addUser">Agregar Usuario</a>
+                    <div class="row justify-content-end my-2">
+                        <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Usuario</a>
                     </div>
                         <div class="row">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    
-                                        
                                         <th class="table-head" >Nombre</th>
                                         <th class="table-head" >Apellidos</th>
                                         <th class="table-head" >Rol</th>
-                                        <th  class="table-head">Acciones</th>
-                                        
-                                   
                                     </tr>
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
                                   
                                           @if($user->detele_at ==null)
-                                         
-                                    <tr data-id="{{$user->id}}">
+                                  
+                                    <tr data-id="{{$user->id}}"data-name="{{$user->first_name}}">
+                                        
                                         <td class=" table-head table-head__name">{{$user->first_name}} </td>
                                         <td class="table-head table-head__surname">{{$user->last_name}}</td>
-                                        <td class="table-head table-head__surname">{{$user->roles->implode('name','')}}</td>
+                                        <td class="table-head table-head__surname text-capitalize">{{$user->roles->implode('name','')}}</td>
                                         <td class="table-head table-head__actions"> 
-                                            <a href="#" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal(this)"></a>
+                                        <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$user->id}});" data-id="{{$user->id}}"></a>
                                             @if ($user->id != (Auth::user()->id))
                                             <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                             @endif
@@ -63,35 +59,21 @@
 </div>
 {!! Form::open(['route' => ['usuarios.destroy', ':USER_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
 {!!Form::close() !!}
+
+
+{{-- {!! Form::open(['route' => ['usuarios.update', ':USER_ID'],'method'=>'PUT','id'=>'form-edit'])!!}
+{!!Form::close() !!}
+{!! Form::open(['route' => ['usuarios.', ':USER_ID'],'method'=>'POST','id'=>'show-form'])!!}
+{!!Form::close() !!} --}}
+
+
 @section('scripts')
-<script src="{{asset('js/admin.js')}}"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
-
-<script>
-
-
-$(document).ready(function() {
-  
-    $('.btn-delete').click(function(){
-      
-       var row = $(this).parents('tr');
-       var id = row.data('id');
-       var form = $('#form-delete');
-       var url = form.attr('action').replace(':USER_ID', id);
-       var data = form.serialize();
-
-       row.fadeOut();
-
-       $.post(url,data, function(result){
-            alert(result);
-       });
-    });
- });
-</script>
+<script src="{{asset('js/admin.js')}}"></script>
 
 
 
-{{-- <script src="{{asset('js/all.js')}}"></script> --}}
+
 @endsection
 
 @endsection

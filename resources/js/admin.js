@@ -14,13 +14,34 @@ addUser.addEventListener('click',(e)=>{
      
 })
 //btn edit user
-function showEditModal(e){
+//obtengo los valores
+let userNametitle = document.getElementById('userNameTitle')
+let inputEmail = document.getElementById('editEmail')
+let inputLastName =document.getElementById('editLast_name')
+let inputName = document.getElementById('editFirst_name');
+let inputDeparment = document.getElementById('editDepartment')
+let inputRole = document.getElementById('editRole')
+let inputId= document.getElementById('userId')
+let inputPassword = document.getElementById('editPassword')
+let inputActive = document.getElementById('editActive')
+
+function showEditModal(id){
+
+  let route = "'usuarios'/"+id+"/edit";
+
+  $.get(route,function(data){
+    console.log(data.email, data.first_name)
+    // $('#editEmail').val(data.email);
+    
+
+  });
     if(userEditModal.classList.contains("d-none")){
         userEditModal.classList.remove("d-none")
         userEditModal.classList.toggle("showModal");
     }
-
+  
 }
+
 
 closeModal.addEventListener('click',(e)=>{
   e.preventDefault();
@@ -75,3 +96,98 @@ window.addEventListener('click', function(e){
       } 
     }
   });
+
+  //delete user
+  $(document).ready(function() {
+  
+    $('.btn-delete').click(function(){
+
+      
+       var row = $(this).parents('tr');
+       var id = row.data('id');
+       var form = $('#form-delete');
+       var url = form.attr('action').replace(':USER_ID', id);
+       var data = form.serialize();
+       var name = row.data('name');
+
+       let alert = confirm('¿Desea eiliminara a: ' + name);
+
+       if(alert == true){
+        row.fadeOut();
+
+        $.post(url,data, function(result){
+             alert(result);
+        });
+       }
+
+       
+    });
+ });
+
+
+//   //edit user
+//   $(document).ready(function() {
+  
+//     $('.btnEdit').click(function(){
+
+      
+//        var row = $(this).parents('tr');
+//        let first_name = $('#editFirst_name')
+//        var id = row.data('id');
+//        var form = $('#form-edit');
+//        var url = form.attr('action').replace(':USER_ID', id);
+//        let token = $('#token').val();
+//        console.log(id);
+
+//         // $.post(url,data, function(result){
+//         //      alert(result);
+//         // });
+//        $.ajax({
+//          url:url,
+//          headers:{'X-CSRF-TOKEN': token},
+//          type: 'PUT',
+//          dataType: 'json',
+//          data:{first_name: first_name},
+//          success: function (data) {
+          
+//           if(data.success == 'true'){
+//             alert('correcto')
+//           }
+//          },
+//          error: function (data) {
+//            $('#error').html(data.responseJSON.name);
+//           if(data.status == 422){
+//             console.clear();
+//           }
+//          }
+//        })
+
+       
+//     });
+//  });
+
+
+
+
+// //btn edit
+// $(document).ready(function() {
+  
+//   $('.btn-edit').click(function(){
+
+    
+//      var row = $(this).parents('tr');
+//      var id = row.data('id');
+//      var form = $('#show-form');
+//      var url = form.attr('action').replace(':USER_ID',id);
+//      let token = $('#token').val();
+//      console.log(url);
+
+//       // $.post(url,data, function(result){
+//       //      alert(result);
+//       // });
+//       $.post(url,data, function(result){
+//         alert(result);
+
+     
+//   });
+// });

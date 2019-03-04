@@ -1,38 +1,43 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */
 
+  .col-md-12 {
+    padding: 0.2rem !important;
+  }
+
   table td {
     padding: 0.15rem !important;
   }
 
   .table-head {
     text-align: center;
+    font-size: 0.7rem;
   }
 
   .table-head__id {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    font-size: 0.8rem;
+    font-size: auto;
   }
 
   .table-head__name {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    font-size: 0.8rem;
+    font-size: auto;
   }
 
   .table-head__surname {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    font-size: 0.8rem;
+    font-size: auto;
   }
 
   .table-head__actions {
     display: flex;
-    font-size: 0.8rem;
+    font-size: auto;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -43,17 +48,17 @@
     width: -moz-fit-content;
     width: fit-content;
     padding: 5px !important;
-    margin: 0 5px;
+    margin: 0 2.5px;
   }
 
   .btn-delete {
     background-image: url(/svg/delete.png);
-    background-size: 1.5rem 1.5rem;
+    background-size: 1.1rem 1.1rem;
     background-size: cover;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .btn-delete:hover {
@@ -62,12 +67,12 @@
 
   .btn-edit {
     background-image: url(/svg/edit.png);
-    background-position: 50% 50%;
-    background-size: 1.5rem 1.5rem;
+    background-size: 1.1rem 1.1rem;
+    background-size: cover;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .btn-delete:hover {
@@ -87,6 +92,20 @@
     -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
     padding: 0.2rem 1rem 1rem 1rem;
+  }
+
+  .close-modal-edit {
+    display: flex;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 3000;
+    top: 4rem;
+    left: 80vw;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -118,6 +137,20 @@
   .btn-delete:hover {
     cursor: pointer;
   }
+
+  .close-modal-edit {
+    display: flex;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 3000;
+    top: 4rem;
+    left: 80vw;
+    width: 2rem;
+    height: 2rem;
+  }
 }
 
 @media only screen and (min-device-width: 900px) and (max-device-width: 1440px) {
@@ -147,6 +180,20 @@
 
   .btn-delete:hover {
     cursor: pointer;
+  }
+
+  .close-modal-edit {
+    display: flex;
+    padding: 1rem 1.25rem;
+    background-image: url(/svg/cancel.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 3000;
+    top: 4rem;
+    left: 83vw;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
