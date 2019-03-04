@@ -27,3 +27,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('usuarios', 'UsersController');
 
+Route::get('register', function(){
+    return view('auth.login');
+});
