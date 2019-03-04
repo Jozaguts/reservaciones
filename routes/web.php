@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('usuarios', 'UsersController');
+Route::resource('usuarios', 'UsersController')->middleware('auth');
 
 Route::get('register', function(){
     return view('auth.login');
