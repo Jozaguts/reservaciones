@@ -1,60 +1,64 @@
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     /* Styles */
+    .col-md-12{
+        padding: .2rem !important;
+    }
     table td{
         padding: .15rem !important;
     }
     .table-head{
         text-align: center;
+        font-size: .7rem;
         // padding: auto 0 !important;
     }
     .table-head__id{
        
         width: fit-content;
-        font-size: .8rem;
+        font-size: auto;
         
     }                                        
     .table-head__name{
     //    padding: auto 0 !important; 
         width: fit-content;
-        font-size: .8rem;
+        font-size: auto;
     }
     .table-head__surname{
       
         width: fit-content;
-        font-size: .8rem;
+        font-size: auto;
     
     }
                                             
     .table-head__actions{
         display: flex;
-        font-size: .8rem;
+        font-size: auto;
         width: fit-content;
     }
     .table-head__btn{
         width: fit-content;
         padding: 5px !important;
-        margin: 0 5px;
+        margin: 0 2.5px;
     }
     .btn-delete{
         background-image: url(/svg/delete.png);
-        background-size: 1.5rem 1.5rem;
+        background-size: 1.1rem 1.1rem;
         background-size: cover;
         background-repeat: no-repeat;
         display: inline-block;
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 1.2rem;
+        height: 1.2rem;
     }
     .btn-delete:hover {
     cursor: pointer;
     }
     .btn-edit{
         background-image: url(/svg/edit.png);
-        background-position: 50% 50%;
-        background-size: 1.5rem 1.5rem;
+        background-size: 1.1rem 1.1rem;
+        background-size: cover;
         background-repeat: no-repeat;
         display: inline-block;
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 1.2rem;
+        height: 1.2rem;
     }
     .btn-delete:hover {
         cursor: pointer;
@@ -71,6 +75,21 @@
         animation-name: show;
         animation-duration: .5s;
         padding: .2rem 1rem 1rem 1rem;
+    }
+    .close-modal-edit{
+        display: flex;
+        padding: 1rem 1.25rem;
+        background-image: url(/svg/cancel.svg);
+        // background-position: 50% 50%;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 3000;
+        top: 4rem;
+        left: 80vw;
+        // float: left;
+        width: 2rem;
+        height: 2rem;
     }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
@@ -98,6 +117,19 @@
     .btn-delete:hover {
         cursor: pointer;
     }
+    .close-modal-edit{
+        display: flex;
+        padding: 1rem 1.25rem;
+        background-image: url(/svg/cancel.svg);
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 3000;
+        top: 4rem;
+        left: 80vw;
+        width: 2rem;
+        height: 2rem;
+    }
 }
 @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
     .btn-delete{
@@ -123,5 +155,20 @@
     }
     .btn-delete:hover {
         cursor: pointer;
+    }
+    .close-modal-edit{
+        display: flex;
+        padding: 1rem 1.25rem;
+        background-image: url(/svg/cancel.svg);
+        // background-position: 50% 50%;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 3000;
+        top: 4rem;
+        left: 83vw;
+        // float: left;
+        width: 2rem;
+        height: 2rem;
     }
 }
