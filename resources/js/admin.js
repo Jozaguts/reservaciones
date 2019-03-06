@@ -27,17 +27,9 @@ let inputActive = document.getElementById('editActive')
 
 function showEditModal(id){
 
-<<<<<<< HEAD
-  let route = "'usuarios'/"+id+"/edit";
-
-  $.get(route,function(data){
-    console.log(data.email, data.first_name)
-    // $('#editEmail').val(data.email);
-    
-=======
   let route = "usuarios/"+id+"/edit";
 
-  $.get(route,function(data){
+  $.get(route, function(data){
     $('#editEmail').val(data.email);
     $('#editFirst_name').val(data.first_name);
     $('#editLast_name').val(data.last_name);
@@ -48,18 +40,12 @@ function showEditModal(id){
     }else{
       $('#editActive').val(0);
     } 
->>>>>>> 258e5f274e3584bcd333662b25efd250274dc02b
 
   });
     if(userEditModal.classList.contains("d-none")){
         userEditModal.classList.remove("d-none")
         userEditModal.classList.toggle("showModal");
     }
-<<<<<<< HEAD
-  
-}
-
-=======
 }
 
 //btn actualizar
@@ -102,7 +88,6 @@ $('#btnEdit').click(function(){
   })
 })
 
->>>>>>> 258e5f274e3584bcd333662b25efd250274dc02b
 
 closeModal.addEventListener('click',(e)=>{
   e.preventDefault();
