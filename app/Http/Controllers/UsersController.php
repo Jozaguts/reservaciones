@@ -50,7 +50,7 @@ class UsersController extends Controller
      */
     public function store(R $request)
     {
-
+        //reglas de validacion
          $rules =[
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -60,31 +60,26 @@ class UsersController extends Controller
             'department'=> ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
             'password' => ['required', 'string', 'min:6', 'confirmed','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/']
-            // 'first_name' => 'required|string|max:255',
-            // 'last_name' => 'required|string|max:255',
-            // 'active' => 'required|string',
-            // 'removed' => 'nullable|boolean',
-            // 'role' => 'boolean',
-            // 'department' => 'required|string',
-            // 'email' => 'required|string|email|max:255|unique:usuarios',
-            // 'password' => 'required|string|min:8confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/'
+           
         ];
-        // $data = Request::all();
-
+      
+        //Se realiza la validación
         $validator = Validator::make($request->all(), $rules);
-        // dd($role = $request->role);
+        
+        //si falla se redirige con los errores a la vista
         if ($validator->fails()) {
             return redirect('usuarios')
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        // se recupera el role
         $role = $request->role;
+        //evalua el rol
         switch ($role) {
             case 'administrador':
-                $user = User::create($request->all());
-                $user->assignRole('administrador');
-                    return redirect()->back();
+                $user = User::create($request->all()); //se crea el usuario
+                $user->assignRole('administrador'); //se asigna el rol
+                    return redirect()->back(); //redireccion hacia atras 
                         break;        
             case 'supervisor':
                 $user = User::create($request->all());
@@ -118,9 +113,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(R $request, $id)
     {
-        $user = User::find($id);
+        $user = User::find($id); 
         return response()->json($user);
       
     }
@@ -133,12 +128,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(R $request, $id)
     {   
       if($request->ajax())
       {
           $user = User::findOrfail($id);
           $input = $request->all();
+
           if($result = $user->fill($input)->save()){
             //asignamos rol
             $user->assignRole($request->role);

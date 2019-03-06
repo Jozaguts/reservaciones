@@ -29,7 +29,7 @@ function showEditModal(id){
 
   let route = "usuarios/"+id+"/edit";
 
-  $.get(route,function(data){
+  $.get(route, function(data){
     $('#editEmail').val(data.email);
     $('#editFirst_name').val(data.first_name);
     $('#editLast_name').val(data.last_name);
