@@ -3,7 +3,7 @@
     Reservaciones
 @endsection
 @section('css')
-     <link href="{{ asset('css/login-resposive.css') }}" rel="stylesheet">
+     {{-- <link href="{{ asset('css/login-resposive.css') }}" rel="stylesheet"> --}}
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
 @endsection
 
@@ -14,7 +14,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/reservactions.js') }}" defer></script>
+<script src="{{ asset('js/reservations.js') }}" defer></script>
 
 @endsection
 

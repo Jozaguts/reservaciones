@@ -1,6 +1,6 @@
 //btn-Logout
 
-window.addEventListener('click', function(e){   
+ window.addEventListener('click', function(e){   
   if (document.getElementById('btnUserName').contains(e.target)){
 
     let toggleStatus = 1;

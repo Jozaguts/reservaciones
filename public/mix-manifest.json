@@ -5,5 +5,6 @@
     "/css/hamburger-menu.css": "/css/hamburger-menu.css",
     "/css/login-resposive.css": "/css/login-resposive.css",
     "/js/all.js": "/js/all.js",
-    "/js/admin.js": "/js/admin.js"
+    "/js/admin.js": "/js/admin.js",
+    "/js/reservations.js": "/js/reservations.js"
 }

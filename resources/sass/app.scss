@@ -25,3 +25,40 @@ nav{
     background-color: $main-navbar !important;
     border-color: 1px solid $main-navbar !important
 }
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .arrow-down{
+        display: inline-block;
+        background-image: url(/svg/arrow-down.png);
+        background-size: contain;
+        background-position: 50% 50%;
+        width: 10px;
+        height: 10px;
+        margin: 0 .5rem;
+        line-height: .2rem;
+        text-align: center;
+
+    }
+}
+@media only screen and (min-device-width : 360px) and (max-device-width : 667px) {
+
+}
+//iphone 6 7 y 8 
+@media only screen and (min-device-width : 375px) and (max-device-width : 736px) {
+
+}
+//ipad pro 
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
+
+}
+    //iphone 6 7 y 8 plus
+    @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
+
+    }
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+    }
+    @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
+
+    }
