@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+Use Illuminate\Http\Request as R;
+Use Request;
+
 
 class UsersController extends Controller
 {
@@ -16,10 +21,15 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $roles = Role::all()->pluck('name','id');
-
-        return view('sections.administration',compact('users','roles'));
+        if (Auth::guard('web')){
+            $users = User::all();
+            $roles = Role::all()->pluck('name','id');
+    
+            return view('sections.administration',compact('users','roles'));
+        }else{
+            return redirect()->back();
+        }
+     
     }
 
     /**
@@ -38,23 +48,56 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(R $request)
     {
-        $usuario = new User;
-        $usuario->first_name = $request->first_name;
-        $usuario->last_name = $request->last_name;
-        $usuario->department = $request->department;       
-        $usuario->email = $request->email;
-        $usuario->active=1;
-        $usuario->removed=0;
-        $usuario->password = Hash::make($request->password);
 
-        if($usuario->save()){
-            //asignamos rol
-            $usuario->assignRole($request->role);
-            
-            return redirect('/usuarios');
+         $rules =[
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'role'=> ['required', 'string'],
+            'removed' => ['nullable','boolean'],
+            'active' => ['nullable','boolean'],
+            'department'=> ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
+            'password' => ['required', 'string', 'min:6', 'confirmed','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/']
+            // 'first_name' => 'required|string|max:255',
+            // 'last_name' => 'required|string|max:255',
+            // 'active' => 'required|string',
+            // 'removed' => 'nullable|boolean',
+            // 'role' => 'boolean',
+            // 'department' => 'required|string',
+            // 'email' => 'required|string|email|max:255|unique:usuarios',
+            // 'password' => 'required|string|min:8confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/'
+        ];
+        // $data = Request::all();
+
+        $validator = Validator::make($request->all(), $rules);
+        // dd($role = $request->role);
+        if ($validator->fails()) {
+            return redirect('usuarios')
+                        ->withErrors($validator)
+                        ->withInput();
         }
+
+        $role = $request->role;
+        switch ($role) {
+            case 'administrador':
+                $user = User::create($request->all());
+                $user->assignRole('administrador');
+                    return redirect()->back();
+                        break;        
+            case 'supervisor':
+                $user = User::create($request->all());
+                $user->assignRole('supervisor');
+                    return redirect()->back();
+                        break;   
+            case 'operador':
+                $user = User::create($request->all());
+                $user->assignRole('operador');
+                    return redirect()->back();
+                        break;
+        }        
+      
         
     }
 
