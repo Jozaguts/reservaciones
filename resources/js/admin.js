@@ -35,6 +35,7 @@ function showEditModal(id){
     $('#editLast_name').val(data.last_name);
     $('#editDepartment').val(data.department);
     $('#editPassword').val(data.password);
+    
     $('#userId').val(data.id);
     if(data.active==1){
       $('#editActive').val(1);
@@ -170,6 +171,14 @@ window.addEventListener('click', function(e){
        
     });
  });
+
+
+ //color para el tr si esta desactivado
+ let elements = document.querySelectorAll('[data-active="0"]');
+ elements .forEach(element => {
+    element.classList.add('tr-bg');
+});
+  console.log(elements);
 
 
 //   //edit user

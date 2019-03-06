@@ -46,13 +46,13 @@
                                 <tbody>
                                         @foreach ($users as $user)
                               
-                                          @if($user->detele_at ==null && $user->active ==1)
-                                  
-                                    <tr data-id="{{$user->id}}"data-name="{{$user->first_name}}">
+                                          @if($user->detele_at ==null)
+                               
+                                    <tr id="trBg" class="" data-id="{{$user->id}}"data-name="{{$user->first_name}}" >
                                         
-                                        <td class=" table-head table-head__name">{{$user->first_name}} </td>
-                                        <td class="table-head table-head__surname">{{$user->last_name}}</td>
-                                        <td class="table-head table-head__surname text-capitalize">{{$user->roles->implode('name','')}}</td>
+                                        <td class=" table-head table-head__name"  data-active="{{$user->active}}">{{$user->first_name}}  </td>
+                                        <td class="table-head table-head__surname" data-active="{{$user->active}}">{{$user->last_name}}</td>
+                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$user->active}}">{{$user->roles->implode('name','')}}</td>
                                         <td class="table-head table-head__actions"> 
                                         <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$user->id}});" data-id="{{$user->id}}"></a>
                                             @if ($user->id != (Auth::user()->id))
