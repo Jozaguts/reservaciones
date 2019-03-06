@@ -17,6 +17,7 @@
      {{-- <link href="{{ asset('css/login-resposive.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
+        @include('components.flash-message')
         <header class="nav navbar nav-home main-navbar">
                 <div class="nav-title-container">
                     <h2 class="nav-title-container__title">Tropical-Adventures</h2>
@@ -46,6 +47,6 @@
     </div>
     <!-- Scripts -->
     @yield('scripts')
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

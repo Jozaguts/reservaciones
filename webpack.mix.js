@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/users.scss', 'public/css')
+    .sass('resources/sass/hamburger-menu.scss', 'public/css')
    .sass('resources/sass/login-resposive.scss', 'public/css')
 
    mix.browserSync({

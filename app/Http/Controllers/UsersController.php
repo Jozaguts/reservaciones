@@ -19,16 +19,22 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        if (Auth::guard('web')){
-            $users = User::all();
-            $roles = Role::all()->pluck('name','id');
-    
-            return view('sections.administration',compact('users','roles'));
-        }else{
-            return redirect()->back();
-        }
+    public function index(R $request)
+    {   
+        
+            // dd($role = Auth::user()->hasRole('administrador'));
+            if($role = Auth::user()->hasRole('administrador')){
+               
+                $users = User::all();
+                $roles = Role::all()->pluck('name','id');
+        
+                return view('sections.administration',compact('users','roles'));
+            }else{
+                return redirect('/home')->with('info','No Tienes Aceeso de Administrador');;
+            }
+      
+            
+       
      
     }
 
@@ -130,14 +136,39 @@ class UsersController extends Controller
      */
     public function update(R $request, $id)
     {   
+        //reglas de validacion
+        $rules =[
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'role'=> ['required', 'string'],
+            'removed' => ['nullable','boolean'],
+            'active' => ['nullable','boolean'],
+            'department'=> ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/']
+           
+        ];
+      
+      
+
       if($request->ajax())
       {
           $user = User::findOrfail($id);
+            //Se realiza la validación
+        $validator = Validator::make($request->all(), $rules);
+        
+        //si falla se redirige con los errores a la vista
+        if ($validator->fails()) {
+            return redirect('usuarios')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
           $input = $request->all();
 
           if($result = $user->fill($input)->save()){
-            //asignamos rol
-            $user->assignRole($request->role);
+            
+            //se retira el role actual y se asigna otro
+            $user->syncRoles($request->role);
         }
 
           if($result)

@@ -1,7 +1,7 @@
 <main>
     <div class="grid-container">
         <div class="grid-item"> 
-            <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
+        <a class="nav-link text-dark font-weight-bold custom-link" href="{{url('reservaciones')}}">Reservaciones</a>
         </div>
         <div class="grid-item" >
             <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAct">Actividades

@@ -94,7 +94,7 @@
                                 <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
                               
                                 <div class="col-md-6">
-                                    <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} text-capitalize" required autofocus>
+                                    <select name="role" id="role" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} text-capitalize" required>
     
                                         @foreach ($roles as $key =>$value)
                                     <option  value="{{$value}}">{{$value}}</option>
@@ -111,7 +111,7 @@
                                 <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
     
                                 <div class="col-md-6">
-                                    <input id="department" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="department" value="{{ old('department') }}" required autofocus>
+                                    <input id="department" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="department" value="{{ old('department') }}" required >
     
                                     @if ($errors->has('department'))
                                         <span class="invalid-feedback" role="alert">

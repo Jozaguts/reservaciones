@@ -18,7 +18,7 @@ Route::get('/demo',['middleware' => 'throttle:60,5', function () {
 }]);
 
 Route::get('/reservaciones', function () {
-    return view('desktop.reservaciones');
+    return view('sections.reservations');
 });
 
 Auth::routes();
