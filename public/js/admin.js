@@ -34,6 +34,7 @@ function showEditModal(id){
     $('#editFirst_name').val(data.first_name);
     $('#editLast_name').val(data.last_name);
     $('#editDepartment').val(data.department);
+    $('#editPassword').val(data.password);
     $('#userId').val(data.id);
     if(data.active==1){
       $('#editActive').val(1);

@@ -10670,17 +10670,3 @@ nav {
   border-color: 1px solid #99DB2E !important;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .arrow-down {
-    display: inline-block;
-    background-image: url(/svg/arrow-down.png);
-    background-size: contain;
-    background-position: 50% 50%;
-    width: 10px;
-    height: 10px;
-    margin: 0 0.5rem;
-    line-height: 0.2rem;
-    text-align: center;
-  }
-}
-
