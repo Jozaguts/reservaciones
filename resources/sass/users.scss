@@ -91,6 +91,7 @@
         width: 2rem;
         height: 2rem;
     }
+    
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
     .btn-delete{
@@ -129,6 +130,9 @@
         left: 80vw;
         width: 2rem;
         height: 2rem;
+    }
+    .tr-bg{
+        
     }
 }
 @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
@@ -171,4 +175,10 @@
         width: 2rem;
         height: 2rem;
     }
+    
+}
+.tr-bg{
+    background-color: rgba(212, 212, 212, 0.795) !important;
+    color: rgba(20, 20, 20, 0.705) !important;
+
 }

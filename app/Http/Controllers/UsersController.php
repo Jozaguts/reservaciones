@@ -21,21 +21,15 @@ class UsersController extends Controller
      */
     public function index(R $request)
     {   
-        
-            // dd($role = Auth::user()->hasRole('administrador'));
+          //acesso si es administrador
             if($role = Auth::user()->hasRole('administrador')){
-               
                 $users = User::all();
                 $roles = Role::all()->pluck('name','id');
-        
                 return view('sections.administration',compact('users','roles'));
             }else{
-                return redirect('/home')->with('info','No Tienes Aceeso de Administrador');;
+                return redirect('/home')->with('info','No Tienes Aceeso de Administrador');
             }
       
-            
-       
-     
     }
 
     /**
@@ -145,17 +139,27 @@ class UsersController extends Controller
             'active' => ['nullable','boolean'],
             'department'=> ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/']
+            'password' => [ 'string', 'min:6','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{6,}$/']
            
         ];
-      
+     
       
 
       if($request->ajax())
       {
           $user = User::findOrfail($id);
+
+          //verificar si la contraseña esta vacia
+            if($request['password']!= null){
+                $request['password'] = Hash::make($request['password']);
+            }else{
+                unset($request['password']);
+            }
             //Se realiza la validación
         $validator = Validator::make($request->all(), $rules);
+
+        
+       
         
         //si falla se redirige con los errores a la vista
         if ($validator->fails()) {
