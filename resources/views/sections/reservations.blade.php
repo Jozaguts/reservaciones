@@ -14,6 +14,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/all.js') }}" defer></script>
+<script src="{{ asset('js/reservactions.js') }}" defer></script>
+
 @endsection
 

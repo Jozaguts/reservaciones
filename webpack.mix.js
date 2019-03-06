@@ -27,3 +27,6 @@ mix.js('resources/js/app.js', 'public/js')
          mix.scripts([
             'resources/js/admin.js'],
                'public/js/admin.js');
+               mix.scripts([
+                  'resources/js/reservations.js'],
+                     'public/js/reservations.js');
