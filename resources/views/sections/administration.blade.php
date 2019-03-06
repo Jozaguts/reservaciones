@@ -18,6 +18,22 @@
                     <div class="row justify-content-end my-2">
                         <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Usuario</a>
                     </div>
+                    @if ($errors->any())
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 offset-md-2">
+                                <div class="alert alert-danger float-right">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    @endif
                         <div class="row">
                             <table class="table">
                                 <thead>
@@ -29,7 +45,7 @@
                                 </thead>
                                 <tbody>
                                         @foreach ($users as $user)
-                                   {{var_dump($user->active)}}
+                              
                                           @if($user->detele_at ==null && $user->active ==1)
                                   
                                     <tr data-id="{{$user->id}}"data-name="{{$user->first_name}}">

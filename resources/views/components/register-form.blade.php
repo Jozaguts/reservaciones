@@ -8,7 +8,22 @@
                 <div class="card">
                     <div class="header-modal-container">
                             <div class="card-header" id="card-header">{{ __('Registrar') }} </div>
-                           
+                    @if ($errors->any())
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 offset-md-2">
+                                <div class="alert alert-danger float-right">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    @endif
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ url('usuarios') }}">
@@ -18,7 +33,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usuario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
                                 </label>
-    
+                                   
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"  required autofocus>
                                     @if ($errors->has('email'))
@@ -105,8 +120,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <input type="hidden" name="active" value="1">
-                            <input type="hidden" name="removed" value="0">
+                            <input type="hidden" name="active" value=1>
+                            <input type="hidden" name="removed" value=0>
                  
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4 main-nav">
