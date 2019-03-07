@@ -75,7 +75,7 @@ $('#btnEdit').click(function(){
     dataType: 'json',
     data: {email: email, first_name: first_name, last_name: last_name, department: department, password: password, role:role, active: active },
     success: function (data) {
-      console.log(data);
+
       if(data.success == 'true'){
         alert('funciona');
       }
@@ -180,70 +180,3 @@ window.addEventListener('click', function(e){
 });
   console.log(elements);
 
-
-//   //edit user
-//   $(document).ready(function() {
-  
-//     $('.btnEdit').click(function(){
-
-      
-//        var row = $(this).parents('tr');
-//        let first_name = $('#editFirst_name')
-//        var id = row.data('id');
-//        var form = $('#form-edit');
-//        var url = form.attr('action').replace(':USER_ID', id);
-//        let token = $('#token').val();
-//        console.log(id);
-
-//         // $.post(url,data, function(result){
-//         //      alert(result);
-//         // });
-//        $.ajax({
-//          url:url,
-//          headers:{'X-CSRF-TOKEN': token},
-//          type: 'PUT',
-//          dataType: 'json',
-//          data:{first_name: first_name},
-//          success: function (data) {
-          
-//           if(data.success == 'true'){
-//             alert('correcto')
-//           }
-//          },
-//          error: function (data) {
-//            $('#error').html(data.responseJSON.name);
-//           if(data.status == 422){
-//             console.clear();
-//           }
-//          }
-//        })
-
-       
-//     });
-//  });
-
-
-
-
-// //btn edit
-// $(document).ready(function() {
-  
-//   $('.btn-edit').click(function(){
-
-    
-//      var row = $(this).parents('tr');
-//      var id = row.data('id');
-//      var form = $('#show-form');
-//      var url = form.attr('action').replace(':USER_ID',id);
-//      let token = $('#token').val();
-//      console.log(url);
-
-//       // $.post(url,data, function(result){
-//       //      alert(result);
-//       // });
-//       $.post(url,data, function(result){
-//         alert(result);
-
-     
-//   });
-// });

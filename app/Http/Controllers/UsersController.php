@@ -21,21 +21,15 @@ class UsersController extends Controller
      */
     public function index(R $request)
     {   
-        
-            // dd($role = Auth::user()->hasRole('administrador'));
+          //acesso si es administrador
             if($role = Auth::user()->hasRole('administrador')){
-               
                 $users = User::all();
                 $roles = Role::all()->pluck('name','id');
-        
                 return view('sections.administration',compact('users','roles'));
             }else{
-                return redirect('/home')->with('info','No Tienes Aceeso de Administrador');;
+                return redirect('/home')->with('info','No Tienes Aceeso de Administrador');
             }
       
-            
-       
-     
     }
 
     /**
