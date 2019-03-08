@@ -116,6 +116,7 @@ class UsersController extends Controller
     public function edit(R $request, $id)
     {
         $user = User::find($id); 
+     
         return response()->json($user);
       
     }

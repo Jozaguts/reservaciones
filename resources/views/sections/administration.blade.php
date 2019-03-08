@@ -48,21 +48,21 @@
                               
                                           @if($user->detele_at ==null)
                                
-                                    <tr id="trBg" class="" data-id="{{$user->id}}"data-name="{{$user->first_name}}" >
-                                        
-                                        <td class=" table-head table-head__name"  data-active="{{$user->active}}">{{$user->first_name}}  </td>
-                                        <td class="table-head table-head__surname" data-active="{{$user->active}}">{{$user->last_name}}</td>
-                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$user->active}}">{{$user->roles->implode('name','')}}</td>
-                                        <td class="table-head table-head__actions"> 
-                                        <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$user->id}});" data-id="{{$user->id}}"></a>
-                                            @if ($user->id != (Auth::user()->id))
-                                            <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
-                                            @endif
-                                            
-                                        </td>
-                                        @endif
-                                        @endforeach
-                                    </tr>
+                        <tr id="trBg" class="" data-id="{{$user->id}}"data-name="{{$user->first_name}}" >
+                            
+                            <td class=" table-head table-head__name"  data-active="{{$user->active}}">{{$user->first_name}}  </td>
+                            <td class="table-head table-head__surname" data-active="{{$user->active}}">{{$user->last_name}}</td>
+                            <td  class="table-head table-head__surname text-capitalize" data-active="{{$user->active}}" >{{$user->roles->implode('name','')}}</td>
+                            <td class="table-head table-head__actions"> 
+                            <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$user->id}});" data-id="{{$user->id}}"></a>
+                                @if ($user->id != (Auth::user()->id))
+                                <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+                                @endif
+                                
+                            </td>
+                            @endif
+                            @endforeach
+                        </tr>
                                 </tbody>
                             </table>
                         </div>

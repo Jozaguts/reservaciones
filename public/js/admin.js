@@ -15,15 +15,15 @@ addUser.addEventListener('click',(e)=>{
 })
 //btn edit user
 //obtengo los valores
-let userNametitle = document.getElementById('userNameTitle')
-let inputEmail = document.getElementById('editEmail')
-let inputLastName =document.getElementById('editLast_name')
-let inputName = document.getElementById('editFirst_name');
-let inputDeparment = document.getElementById('editDepartment')
-let inputRole = document.getElementById('editRole')
-let inputId= document.getElementById('userId')
-let inputPassword = document.getElementById('editPassword')
-let inputActive = document.getElementById('editActive')
+// let userNametitle = document.getElementById('userNameTitle')
+// let inputEmail = document.getElementById('editEmail')
+// let inputLastName =document.getElementById('editLast_name')
+// let inputName = document.getElementById('editFirst_name');
+// let inputDeparment = document.getElementById('editDepartment')
+// let inputRole = document.getElementById('editRole')
+// let inputId= document.getElementById('userId')
+// let inputPassword = document.getElementById('editPassword')
+// let inputActive = document.getElementById('editActive')
 
 function showEditModal(id){
 
@@ -35,6 +35,9 @@ function showEditModal(id){
     $('#editLast_name').val(data.last_name);
     $('#editDepartment').val(data.department);
     $('#editPassword').val(data.password);
+    console.log(data);
+
+    $('#editActive').val(data.active);
     
     $('#userId').val(data.id);
     if(data.active==1){
@@ -78,7 +81,7 @@ $('#btnEdit').click(function(){
 
       if(data.success == 'true'){
         alert('funciona');
-        console.log(data);
+       
       }
     },
     error:function(data)
@@ -179,5 +182,4 @@ window.addEventListener('click', function(e){
  elements .forEach(element => {
     element.classList.add('tr-bg');
 });
-  console.log(elements);
 

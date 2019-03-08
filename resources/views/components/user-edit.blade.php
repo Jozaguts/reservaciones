@@ -70,10 +70,10 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Perfil') }}</label>
 
                             <div class="col-md-6">
-                                <select name="role" id="editRole" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} text-capitalize" >
+                                <select name="role" id="editRole" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }} text-capitalize" value="" >
 
                                     @foreach ($roles as $key =>$value)
-                                        <option  value="{{$value}}" class="text-capitalize">{{$value}}</option>
+                                        <option  id="editOption" value="{{$value}}" class="text-capitalize">{{$value}}</option>
                                     @endforeach
                                     {{-- <option  value=""></option>
                                     <option  value="opera">Operador</option>
@@ -118,7 +118,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4 main-nav">
                                 <a href="#!" class="btn main-navbar" id="btnEdit"> {{ __('Actualizar Usuario') }}</a>
-                            {{-- <button type="submit" class="btn main-navbar" id="btnEdit"> --}}
+                          
                                    
                                 </button>
                             </div>
