@@ -29,6 +29,7 @@
                         </h4>
                 </div>
                 @endauth
+                
            
             </header>
             <form  action="{{ route('logout') }}" method="POST" class="d-none" id="btnLogOut">

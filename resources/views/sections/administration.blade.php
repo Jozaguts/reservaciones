@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="{{asset('css/users.css')}}">
 @endsection
 @section('content')
-{{--@include('components.menu')  --}}
 <div class="container mt-3">
      
       <div class="row justify-content-center">
