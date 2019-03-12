@@ -1,0 +1,248 @@
+.container-fluid {
+  padding: 0 !important;
+}
+
+.arrow-down {
+  display: inline-block;
+  background-image: url(/svg/arrow-down.png);
+  background-size: contain;
+  background-position: 50% 50%;
+  width: 10px;
+  height: 10px;
+  margin: 0 0.5rem;
+  line-height: 0.2rem;
+  text-align: center;
+}
+
+.card-header {
+  padding-left: 5rem !important;
+}
+
+.grid-contanier {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.btn-edit {
+  background-image: url(/svg/edit.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.btn-delete {
+  background-image: url(/svg/delete.png);
+  background-size: 1.5rem 1.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.btn-log-out {
+  float: right;
+  display: block;
+  right: 0;
+  z-index: 10000;
+}
+
+.hamburger-menu {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.hm-list__item {
+  padding: 15px;
+  color: white !important;
+  line-height: 2rem;
+}
+
+.hb-icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 5px 10px 0 10px;
+  line-height: 1rem;
+  text-align: center;
+}
+
+.hm-list__user-name {
+  display: block;
+}
+
+.user {
+  background-image: url(/svg/user.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logout {
+  background-image: url(/svg/logout.png);
+  background-position: 50% 50%;
+  background-size: 1rem 1rem;
+  width: 1rem;
+  height: 1rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0 !important;
+}
+
+.hm-btn-logout {
+  padding: 0 0.5rem 0 0 !important;
+  font-size: 0.8rem;
+  text-align: right;
+  display: block;
+  background-color: #404040;
+}
+
+.booking {
+  background-image: url(/svg/booking.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.activity {
+  background-image: url(/svg/activity.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.commission-agent {
+  background-image: url(/svg/commission-agent.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.balance {
+  background-image: url(/svg/balance.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+}
+
+.collection {
+  background-image: url(/svg/collection.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+}
+
+.reports {
+  background-image: url(/svg/reports.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+}
+
+.coupons {
+  background-image: url(/svg/coupons.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+}
+
+.administrator {
+  background-image: url(/svg/administrator.png);
+  background-position: 50% 50%;
+  background-size: 1.5rem 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+}
+
+.btn-menu {
+  display: block !important;
+  position: absolute;
+  z-index: 10000;
+}
+
+.menu {
+  background-image: url(/svg/menu.png);
+  background-position: 50% 50%;
+  background-size: 2rem 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+}
+
+.hm-list {
+  list-style: none;
+  display: block;
+  padding: 0;
+}
+
+.hm-list__link {
+  text-decoration: none !important;
+}
+
+.user-name {
+  background-color: #404040;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  cursor: default !important;
+}
+
+.reservaciones {
+  background-color: #95B727;
+}
+
+.actividades {
+  background-color: #27B2E1;
+  position: relative;
+}
+
+.comisionistas {
+  background-color: #7030A0;
+  position: relative;
+}
+
+.cortes {
+  background-color: #FF3300;
+}
+
+.cobranza {
+  background-color: #0B4060;
+}
+
+.reportes {
+  background-color: #803C09;
+}
+
+.cupones {
+  background-color: #217C51;
+}
+
+.administracion {
+  background-color: #404040;
+  position: relative;
+}
+
