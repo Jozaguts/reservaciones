@@ -53,6 +53,11 @@
     padding: 0;
 }
 .hm-list__item{
+    padding: 10px;
+    color: white !important;
+    line-height: 2rem;
+}
+.sub-ul__item{
     padding: 15px;
     color: white !important;
     line-height: 2rem;
@@ -222,4 +227,15 @@
 .administracion{
     background-color: $administracion;
     position: relative;
+}
+.sub-ul{
+    padding: 0;
+}
+.sub-li-actividadaes{
+    background-color: $actividades;
+}
+.sub-li__link{
+    text-decoration: none;
+    color: white;
+    padding: 
 }
