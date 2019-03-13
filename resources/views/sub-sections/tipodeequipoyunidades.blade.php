@@ -18,10 +18,10 @@
                 <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header text-dark font-weight-bold">Lista de Usuarios</div>
+                                <div class="card-header text-dark font-weight-bold">Equipos y Unidades</div>
                                 <div class="card-body">
                                     <div class="row justify-content-end my-2">
-                                        <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Usuario</a>
+                                        <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
                                     </div>
                                     @if ($errors->any())
                                     <div class="container">
