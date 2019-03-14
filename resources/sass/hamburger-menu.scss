@@ -53,15 +53,11 @@
     padding: 0;
 }
 .hm-list__item{
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     color: white !important;
     line-height: 2rem;
 }
-.sub-ul__item{
-    padding: 15px;
-    color: white !important;
-    line-height: 2rem;
-}
+
 .hb-icon{
     display: inline-block;
     width: 1.5rem;
@@ -231,11 +227,72 @@
 .sub-ul{
     padding: 0;
 }
+.sub-ul__item{
+    padding: .4rem 1rem 0 1rem;
+    color: white !important;
+    line-height: 2rem;
+    
+}
+.sub-li__link{
+    text-decoration: none !important;
+    color: white;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .sub-li-actividadaes{
     background-color: $actividades;
 }
-.sub-li__link{
-    text-decoration: none;
-    color: white;
-    padding: 
+.sub-li-comisionistas{
+    background-color: $comisionistas;
 }
+.sub-li-cupones{
+    background-color: $cupones;
+}
+.sub-li-administracion{
+    background-color: $administracion;
+}
+.show{
+    display: block;
+}
+
+///hover's
+
+/* Underline From Left */
+.hm-list__item::after{
+    content: "";
+    position: relative;
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: whitesmoke;
+    display: block;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+.hm-list__item:hover::after{
+    transform: scaleX(1);
+    transition: all .8s ease-in-out;
+
+}
+.sub-ul__item::after{
+    content: "";
+    position: relative;
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: whitesmoke;
+    // display: block;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+.sub-ul__item:hover:after{
+    transform: scaleX(1);
+    display: block;
+    transition: all .8s ease-in-out;
+      
+}
+
+

@@ -57,13 +57,7 @@
 }
 
 .hm-list__item {
-  padding: 10px;
-  color: white !important;
-  line-height: 2rem;
-}
-
-.sub-ul__item {
-  padding: 15px;
+  padding: 10px 10px 0 10px;
   color: white !important;
   line-height: 2rem;
 }
@@ -256,13 +250,81 @@
   padding: 0;
 }
 
+.sub-ul__item {
+  padding: 0.4rem 1rem 0 1rem;
+  color: white !important;
+  line-height: 2rem;
+}
+
+.sub-li__link {
+  text-decoration: none !important;
+  color: white;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .sub-li-actividadaes {
   background-color: #27B2E1;
 }
 
-.sub-li__link {
-  text-decoration: none;
-  color: white;
-  padding: 15px;
+.sub-li-comisionistas {
+  background-color: #7030A0;
+}
+
+.sub-li-cupones {
+  background-color: #217C51;
+}
+
+.sub-li-administracion {
+  background-color: #404040;
+}
+
+.show {
+  display: block;
+}
+
+/* Underline From Left */
+
+.hm-list__item::after {
+  content: "";
+  position: relative;
+  bottom: 0px;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background-color: whitesmoke;
+  display: block;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.hm-list__item:hover::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  transition: all 0.8s ease-in-out;
+}
+
+.sub-ul__item::after {
+  content: "";
+  position: relative;
+  bottom: 0px;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background-color: whitesmoke;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.sub-ul__item:hover:after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  display: block;
+  transition: all 0.8s ease-in-out;
 }
 
