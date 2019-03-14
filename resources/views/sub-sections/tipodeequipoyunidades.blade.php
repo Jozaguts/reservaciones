@@ -18,7 +18,7 @@
                 <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header text-dark font-weight-bold">Equipos y Unidades</div>
+                                <div class="card-header text-dark font-weight-bold">Tipo Equipos y Unidades</div>
                                 <div class="card-body">
                                     <div class="row justify-content-end my-2">
                                         <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>

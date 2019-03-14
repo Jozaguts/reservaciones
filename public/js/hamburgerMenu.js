@@ -2,42 +2,21 @@ const btnMenu = document.getElementById("btnMenu");
 const spanBtnMenu = document.getElementById('spanBtnMenu')
 const hmContanier = document.getElementById('hmContanier');
 
-// const hmitems = document.querySelectorAll('.')
-
-
-
-// btnMenu.addEventListener('click',(e)=>{
-//   let toggleStatus =1;
-//   if(toggleStatus==1){
-//     if(hmContanier.classList.contains('d-none')){
-//       hmContanier.classList.remove('d-none')
-//       hmContanier.classList.add('show')
-      
-//     }else
-//     toggleStatus = 0;
-//           if(toggleStatus==0){
-//             if(hmContanier.classList.contains('show'))
-//             {
-//               hmContanier.classList.remove('show')
-//               hmContanier.classList.add('d-none')
-//               toggleStatus = 1;
-//             }
-//           }
-//   }
-// })
-
 window.addEventListener('click',(e)=>{
 
 
   let toggleStatus =0; //cero es oculto
-  if(toggleStatus ==0 && e.target == btnMenu || e.target == spanBtnMenu){
-    if(hmContanier.classList.contains('d-none')){
+  if(toggleStatus ==0 && e.target == btnMenu || e.target == spanBtnMenu)
+  {
+    if(hmContanier.classList.contains('d-none'))
+    {
       hmContanier.classList.remove('d-none')
       hmContanier.classList.add('show')
       
     }else
     toggleStatus = 1; //uno es mostrar
-          if(toggleStatus==1){
+          if(toggleStatus==1)
+          {
             if(hmContanier.classList.contains('show'))
             {
               hmContanier.classList.remove('show')
@@ -46,7 +25,8 @@ window.addEventListener('click',(e)=>{
             }
           }
   }else{
-    if(!e.target.classList.contains('hm-list__item')){
+    if(!e.target.classList.contains('hm-list__item'))
+    {
       if(hmContanier.classList.contains('show'))
       {
         hmContanier.classList.remove('show')
@@ -59,28 +39,133 @@ window.addEventListener('click',(e)=>{
 })
 
 
-// window.addEventListener('click', function(e){   
-//     if (document.getElementById('btnMenu').contains(e.target)){
+//click para el sub menu actividades
+const actLink = document.getElementById('actLink')
 
-//       let toggleStatus = 1;
-//       function toggleMenu (){
-//         if(toggleStatus==1){
+let subUlAct = document.getElementById('subUlAct')
+
+actLink.addEventListener('click',(e)=>{
+  let toggleStatus = 0;
+  if(toggleStatus==0)
+  {
+    if(subUlAct.classList.contains('d-none'))
+    {
+      subUlAct.classList.remove('d-none')
+      subUlAct.classList.add('show')
       
-//           hmContanier.classList.remove("d-none");
-//           hmContanier.classList.add("show");
-//           toggleStatus = 0;
-//         }else if(toggleStatus==0){
-//           hmContanier.classList.remove("show");
-//           hmContanier.classList.add("d-none");
-//           toggleStatus=1;
-//         }
-//       }
-//       toggleMenu();
-//       // Clicked in box
-//     } else{
-//       if( hmContanier.classList.contains("show")){
-//         hmContanier.classList.remove("show");
-//         hmContanier.classList.toggle("d-none");
-//       } 
-//     }
-//   });
+ 
+    }else{
+      toggleStatus = 1;
+      if(toggleStatus ==1 ){
+        if(!subUlAct.classList.contains('d-none'))
+    {
+      subUlAct.classList.add('d-none')
+      toggleStatus=0;
+    }
+
+      }
+
+    }
+   
+  }
+  
+})
+//mostrar sub-menu comisionistas
+const comLink = document.getElementById('comLink')
+
+let subUlCom = document.getElementById('subUlCom')
+
+
+comLink.addEventListener('click',(e)=>{
+  let toggleStatus = 0;
+  if(toggleStatus==0)
+  {
+    if(subUlCom.classList.contains('d-none'))
+    {
+      subUlCom.classList.remove('d-none')
+      subUlCom.classList.add('show')
+      
+ 
+    }else{
+      toggleStatus = 1;
+      if(toggleStatus ==1 ){
+        if(!subUlCom.classList.contains('d-none'))
+    {
+      subUlCom.classList.add('d-none')
+      toggleStatus=0;
+    }
+
+      }
+
+    }
+   
+  }
+  
+})
+
+//mostrar sub-menu cupones
+const cupLink = document.getElementById('cupLink')
+
+let subUlCup = document.getElementById('subUlCup')
+
+
+cupLink.addEventListener('click',(e)=>{
+  let toggleStatus = 0;
+  if(toggleStatus==0)
+  {
+    if(subUlCup.classList.contains('d-none'))
+    {
+      subUlCup.classList.remove('d-none')
+      subUlCup.classList.add('show')
+      
+ 
+    }else{
+      toggleStatus = 1;
+      if(toggleStatus ==1 ){
+        if(!subUlCup.classList.contains('d-none'))
+    {
+      subUlCup.classList.add('d-none')
+      toggleStatus=0;
+    }
+
+      }
+
+    }
+   
+  }
+  
+})
+
+//mostrar sub-menu administracion
+const admLink = document.getElementById('admLink')
+
+let subUlAdm = document.getElementById('subUlAdm')
+
+
+admLink.addEventListener('click',(e)=>{
+  let toggleStatus = 0;
+  if(toggleStatus==0)
+  {
+    if(subUlAdm.classList.contains('d-none'))
+    {
+      subUlAdm.classList.remove('d-none')
+      subUlAdm.classList.add('show')
+      
+ 
+    }else{
+      toggleStatus = 1;
+      if(toggleStatus ==1 ){
+        if(!subUlAdm.classList.contains('d-none'))
+    {
+      subUlAdm.classList.add('d-none')
+      toggleStatus=0;
+    }
+
+      }
+
+    }
+   
+  }
+  
+})
+
