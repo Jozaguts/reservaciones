@@ -64,3 +64,62 @@ closeModal.addEventListener('click',(e)=>{
 
 //////////////////////////////////////// ajax ////////////////////////////////////////////////////
 
+let tipoEUForm = document.getElementById('tipoEUForm');
+
+tipoEUForm.addEventListener('submit',(e)=>{
+e.preventDefault();
+let datos = new FormData(tipoEUForm) 
+let nombre = datos.get('nombre')
+let combustible = datos.get('combustible')
+let medio = datos.get('medio')
+let token = $("input[name=_token]").val();
+let idusuario = datos.get('idusuario')
+let active;
+  if($('#active').is(':checked')){
+    active = 0;
+  }else{
+    active = 1;
+  }
+  let remove;
+  if($('#remove').is(':checked')){
+    remove = 0;
+  }else{
+    remove = 1;
+  }
+
+
+let route = 'tipounidades'
+
+$.ajax({
+  url:route,
+  headers:{'X-CSRF-TOKEN':token},
+  type:'POST',
+  dataType: 'json',
+  data: {nombre: nombre, combustible: combustible, medio: medio, idusuario: idusuario, active: active, remove: remove},
+  success:function(data)
+  {
+    if(data.success == 'true')
+    {
+      $('#tipoEUModal').fadeOut();
+      $('#success').html(data.correcto);
+      $('#message-success').fadeIn();
+      setTimeout(() => {
+        $('#message-success').fadeOut();
+      }, 3000);
+      console.log(data.correcto);
+    }  
+},
+  error:function(data){
+    $('#tipoEUModal').fadeOut();
+    $('#error').html(data.error);
+      $('#message-error').fadeIn();
+      setTimeout(() => {
+        $('#message-error').fadeOut();
+      }, 3000);
+
+    console.log(data.error);
+  }
+
+})
+
+})
