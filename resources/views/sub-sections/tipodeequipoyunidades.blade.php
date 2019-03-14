@@ -24,22 +24,11 @@
                                     <div class="row justify-content-end my-2">
                                         <a href="#" class="btn btn-success" id="btnAddTipoEU"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
                                     </div>
-                                    @if ($errors->any())
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm-6 offset-md-2">
-                                                <div class="alert alert-danger float-right">
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="aler alert-danger danger" id="message-error" role="alert" style="display:none">
+                                        <strong id="error"></strong>
                                     </div>
-                                        
-                                    @endif
+                                    <div class="aler alert-success success" id="message-success" role="alert" style="display:none">
+                                    <strong id="success"></strong></div>
                                         <div class="row">
                                             <table class="table">
                                                 <thead>

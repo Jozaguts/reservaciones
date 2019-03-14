@@ -26,8 +26,8 @@
                     @endif
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ url('tipounidades') }}">
-                            @csrf
+                        <form method="POST" action="{{ url('tipounidades') }}" id="tipoEUForm">
+                            <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                             {{-- @method('PUT') --}}
     
                             <div class="form-group row">
