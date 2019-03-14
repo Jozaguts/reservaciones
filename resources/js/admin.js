@@ -13,17 +13,7 @@ addUser.addEventListener('click',(e)=>{
     }
      
 })
-//btn edit user
-//obtengo los valores
-// let userNametitle = document.getElementById('userNameTitle')
-// let inputEmail = document.getElementById('editEmail')
-// let inputLastName =document.getElementById('editLast_name')
-// let inputName = document.getElementById('editFirst_name');
-// let inputDeparment = document.getElementById('editDepartment')
-// let inputRole = document.getElementById('editRole')
-// let inputId= document.getElementById('userId')
-// let inputPassword = document.getElementById('editPassword')
-// let inputActive = document.getElementById('editActive')
+
 
 function showEditModal(id){
 

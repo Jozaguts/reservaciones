@@ -5,6 +5,7 @@
 @section('css')
 
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/tipoequipounidad.css') }}" rel="stylesheet">
 @endsection
 
 {{-- Contenido --}}
@@ -21,7 +22,7 @@
                                 <div class="card-header text-dark font-weight-bold">Tipo Equipos y Unidades</div>
                                 <div class="card-body">
                                     <div class="row justify-content-end my-2">
-                                        <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
+                                        <a href="#" class="btn btn-success" id="btnAddTipoEU"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
                                     </div>
                                     @if ($errors->any())
                                     <div class="container">
@@ -45,7 +46,7 @@
                                                     <tr>
                                                         <th class="table-head" >Id</th>
                                                         <th class="table-head" >Nombre</th>
-                                                        <th class="table-head" >Combustible</th>
+                                                        <th class="table-head" >Medio</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -57,7 +58,7 @@
                                                         
                                                         <td class=" table-head table-head__name"  data-active="{{$tipounidad->active}}">{{$tipounidad->id}}  </td>
                                                         <td class="table-head table-head__surname" data-active="{{$tipounidad->active}}">{{$tipounidad->nombre}}</td>
-                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$tipounidad->active}}">{{$tipounidad->combustible}}</td>
+                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$tipounidad->active}}">{{$tipounidad->medio}}</td>
                                                         <td class="table-head table-head__actions"> 
                                                         <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$tipounidad->id}});" data-id="{{$tipounidad->id}}"></a>
                                                             @if ($tipounidad->id != (Auth::user()->id))
@@ -79,13 +80,12 @@
         
     </div>
 
-
+@include('modals.tipoequipounidad')
 {{-- finaliza el contenido --}}
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/reservations.js') }}" defer></script>
-
+<script src="{{ asset('js/tipounidad.js') }}" defer></script>
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
 
 @endsection

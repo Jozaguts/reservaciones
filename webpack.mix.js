@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/users.scss', 'public/css')
     .sass('resources/sass/hamburger-menu.scss', 'public/css')
    .sass('resources/sass/login-resposive.scss', 'public/css')
+   .sass('resources/sass/tipoequipounidad.scss', 'public/css')
 
    mix.browserSync({
       proxy:'reservaciones-dev.com'
@@ -33,3 +34,6 @@ mix.js('resources/js/app.js', 'public/js')
                      mix.scripts([
                         'resources/js/hamburgerMenu.js'],
                            'public/js/hamburgerMenu.js');
+                           mix.scripts([
+                              'resources/js/tipounidad.js'],
+                                 'public/js/tipounidad.js');

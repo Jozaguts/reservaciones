@@ -46,6 +46,7 @@
 .btn-log-out {
   float: right;
   display: block;
+  position: absolute;
   right: 0;
   z-index: 10000;
 }

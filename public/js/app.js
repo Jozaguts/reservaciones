@@ -36679,6 +36679,17 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/sass/tipoequipounidad.scss":
+/*!**********************************************!*\
+  !*** ./resources/sass/tipoequipounidad.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/users.scss":
 /*!***********************************!*\
   !*** ./resources/sass/users.scss ***!
@@ -36691,9 +36702,9 @@ if (token) {
 /***/ }),
 
 /***/ 0:
-/*!********************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/users.scss ./resources/sass/hamburger-menu.scss ./resources/sass/login-resposive.scss ***!
-  \********************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/users.scss ./resources/sass/hamburger-menu.scss ./resources/sass/login-resposive.scss ./resources/sass/tipoequipounidad.scss ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36701,7 +36712,8 @@ __webpack_require__(/*! C:\laragon\www\reservaciones\resources\js\app.js */"./re
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\users.scss */"./resources/sass/users.scss");
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\hamburger-menu.scss */"./resources/sass/hamburger-menu.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\login-resposive.scss */"./resources/sass/login-resposive.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\login-resposive.scss */"./resources/sass/login-resposive.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\tipoequipounidad.scss */"./resources/sass/tipoequipounidad.scss");
 
 
 /***/ })
