@@ -18,7 +18,7 @@ class TipoUnidadController extends Controller
 
         $tipounidades = TipoUnidad::all();
            
-       return view('sub-sections.tipodeequipoyunidades',compact('tipounidades'));
+       return view('sections.activities.tipodeequipoyunidades',compact('tipounidades'));
    
     }
 
