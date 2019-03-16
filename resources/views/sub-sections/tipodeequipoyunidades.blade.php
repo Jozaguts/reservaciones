@@ -17,6 +17,7 @@
     @include('contents.tipoequipoyunidades')        
 </div>
 
+
 @include('modals.tipoequipounidad')
 @include('modals.edittipoequipounidad')
 {{-- finaliza el contenido --}}

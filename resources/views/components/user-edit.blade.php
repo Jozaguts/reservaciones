@@ -1,12 +1,14 @@
 
 <div class="container-fluid d-none" id="userEditModal">
-    <span class="close-modal-edit" id="closeModalEdit"></span>
+   
     <div class="row justify-content-center row-modal">
         <div class="col-md-6 modal-content">
             <div class="card">
-                <div class="header-modal-container">
-                    <div class="card-header" id="card-header">{{ __('Editar Usuario') }} <span class="text-capitalize font-weight-bold" id="userNametitle"> </span></div>
-                </div>
+                    <div class="header-modal-container"> 
+                            <div class="card-header" id="card-header">{{ __('Editar Usuario') }} </div>
+                            <span class="close-modal-edit " id="closeModalEdit"></span>
+                         
+                            </div>
                 <div class="card-body">
                     <form method="PUT" action="{{url ('usuarios') }}">
                          {{-- @csrf --}}

@@ -236,6 +236,8 @@
             .header-modal-container{
                 display: flex;
                 justify-content: space-between;
+                background-color: rgba(0, 0, 0, 0.03);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
             }
             #card-header{
                 display: inline-block;
@@ -561,6 +563,8 @@
                 .header-modal-container{
                     display: flex;
                     justify-content: space-between;
+                    background-color: rgba(0, 0, 0, 0.03);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
                 }
                 #card-header{
                     display: inline-block;
@@ -814,6 +818,8 @@
                 .header-modal-container{
                     display: flex;
                     justify-content: space-between;
+                    background-color: rgba(0, 0, 0, 0.03);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
                 }
                 #card-header{
                     display: inline-block;
