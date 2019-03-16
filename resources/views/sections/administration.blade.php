@@ -59,8 +59,8 @@
             </div>
         </div>
     </div>
-    @include('components.register-form')
-    @include('components.user-edit')
+    @include('modals.register-form')
+    @include('modals.user-edit')
 </div>
 {!! Form::open(['route' => ['usuarios.destroy', ':USER_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
 {!!Form::close() !!}
