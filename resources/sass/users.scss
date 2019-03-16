@@ -162,15 +162,15 @@
     }
     .close-modal-edit{
         display: flex;
-        padding: 1rem 1.25rem;
+        // padding: 1rem 1.25rem;
         background-image: url(/svg/cancel.svg);
-        // background-position: 50% 50%;
+        background-position: 50% 50%;
         background-size: 20px 20px;
         background-repeat: no-repeat;
-        position: relative;
+        // position: relative;
         z-index: 3000;
-        top: 4rem;
-        left: 83vw;
+        // top: 4rem;
+        // left: 83vw;
         // float: left;
         width: 2rem;
         height: 2rem;
@@ -180,5 +180,4 @@
 .tr-bg{
     background-color: rgba(212, 212, 212, 0.795) !important;
     color: rgba(20, 20, 20, 0.705) !important;
-
 }

@@ -64,6 +64,8 @@ closeModal.addEventListener('click',(e)=>{
 
 //////////////////////////////////////// ajax ////////////////////////////////////////////////////
 
+///////////////////////////////////////agreager producto///////////////////////////////////////////////////////////////////////////////////
+
 let tipoEUForm = document.getElementById('tipoEUForm');
 
 tipoEUForm.addEventListener('submit',(e)=>{
@@ -106,7 +108,7 @@ $.ajax({
       setTimeout(() => {
         $('#message-success').fadeOut();
       }, 3000);
-      console.log(data.correcto);
+      reload();
     }  
 },
   error:function(data){
@@ -123,3 +125,150 @@ $.ajax({
 })
 
 })
+
+
+/////////////reload
+
+function reload() {
+  location.reload(true);
+}
+
+
+///////////////////////////////////////mostrar modal edit equipo unidad////////////////////////////////////////////////
+
+let tipoEUEditModal = document.getElementById('tipoEUEditModal')
+function showEditModal(id){
+
+  let route = "tipounidades/"+id+"/edit";
+
+  $.get(route, function(data){
+    $('#editNombre').val(data.nombre);
+    $('#editCombustible').val(data.combustible);
+    $('#editMedio').val(data.medio);
+    $('#editId').val(data.id);
+    $('#editRemove').val(data.remove);
+    $('#editIdUsuario').val();
+   
+    
+  
+
+    $('#editActive').val(data.active);
+    
+    if(data.active==0){
+      $("#editActive").prop("checked", true);
+    }else{
+      $("#editActive").prop("checked", false);
+    } 
+   
+  });
+    if(tipoEUEditModal.classList.contains("d-none")){
+        tipoEUEditModal.classList.remove("d-none")
+        tipoEUEditModal.classList.toggle("showModal");
+    }
+   
+}
+
+
+////////////////////////////////////////// boton actualizar//////////////////////////////////////////////////
+//btn actualizar
+
+$('#btnEdit').click(function(){
+
+  let nombre = $('#editNombre').val();
+  let id = $('#editId').val();
+  let combustible = $('#editCombustible').val();
+  let medio = $('#editMedio').val(); 
+  let idUsuario = $('#editIdUsuario').val();
+  let remove = $('#editRemove').val();
+  let active;
+  if($('#editActive').is(':checked')){
+    active = 0;
+  }else{
+    active = 1;
+  }
+  let route =`tipounidades/${id}`
+  // let token = $('#token').val();
+
+  $.ajax({
+    url: route,
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    type: 'PUT',
+    dataType: 'json',
+    data: {nombre: nombre, combustible: combustible, medio: medio, active: active, id: id, idusuario: idUsuario, remove: remove },
+
+    success: function (data) {
+  
+      if(data.success == 'true')
+      {
+
+        $('#tipoEUEditModal').fadeOut();
+        $('#success').html(data.correcto);
+        $('#message-success').fadeIn();
+        setTimeout(() => {
+          $('#message-success').fadeOut();
+        }, 3000);
+        setTimeout("location.reload(true);",3000)
+        
+      }
+    },
+    error:function(data)
+    {
+      if(data.status==422){
+      
+      }
+    }
+  })
+})
+
+
+/////////close modal edit////////////////////////
+const closeModalEdit = document.getElementById("closeModalEdit");
+
+closeModalEdit.addEventListener('click',()=>{
+  if(tipoEUEditModal.classList.contains('showModal')){
+    tipoEUEditModal.classList.remove('showModal');
+    tipoEUEditModal.classList.add('d-none');
+    }
+})
+
+
+
+
+///////////////////////////////////////////////////////
+
+
+
+///////////////////////////////delete Unidad equipo////////////////////////////////
+//delete user
+$(document).ready(function() {
+  
+  $('.btn-delete').click(function(){
+
+    
+     var row = $(this).parents('tr');
+     var id = row.data('id');
+     var form = $('#form-delete');
+     var url = form.attr('action').replace(':TIPO_ID', id);
+     var data = form.serialize();
+     var name = row.data('name');
+     console.log(url);
+
+     let alert = confirm('¿Desea eiliminara a: ' + name);
+
+     if(alert == true){
+      row.fadeOut();
+
+      $.post(url,data, function(result){
+           alert(result);
+      });
+     }
+
+     
+  });
+});
+
+ //color para el tr si esta desactivado
+ let elements = document.querySelectorAll('[data-active="0"]');
+ elements .forEach(element => {
+    element.classList.add('tr-bg');
+});

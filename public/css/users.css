@@ -184,14 +184,11 @@
 
   .close-modal-edit {
     display: flex;
-    padding: 1rem 1.25rem;
     background-image: url(/svg/cancel.svg);
+    background-position: 50% 50%;
     background-size: 20px 20px;
     background-repeat: no-repeat;
-    position: relative;
     z-index: 3000;
-    top: 4rem;
-    left: 83vw;
     width: 2rem;
     height: 2rem;
   }

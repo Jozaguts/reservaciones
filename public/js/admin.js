@@ -25,7 +25,7 @@ function showEditModal(id){
     $('#editLast_name').val(data.last_name);
     $('#editDepartment').val(data.department);
     $('#editPassword').val(data.password);
-    console.log(data);
+  
 
     $('#editActive').val(data.active);
     
@@ -148,7 +148,7 @@ window.addEventListener('click', function(e){
        var row = $(this).parents('tr');
        var id = row.data('id');
        var form = $('#form-delete');
-       var url = form.attr('action').replace(':USER_ID', id);
+       var url = form.attr('action').replace(':TIPO_ID', id);
        var data = form.serialize();
        var name = row.data('name');
 

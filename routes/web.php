@@ -33,7 +33,7 @@ Route::get('register', function(){
 });
 
 Route::resource('tipounidades', 'TipoUnidadController')->middleware(['auth']);
-
+Route::get('listall', 'TipoUnidadController@listall');
 Route::get('unidades', function(){
     return view('sub-sections.equiposyunidades');
 });

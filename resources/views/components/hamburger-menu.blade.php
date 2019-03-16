@@ -4,7 +4,7 @@
          </a>
     <ul class="hm-list d-none mt-5" id="hmContanier">
         
-         <div class="user-name-contanier">
+         <div class="hm-user-name-contanier">
                 <a href="#" class="hm-list__link ">
                     <h4 class="hm-list__item user-name underline-from-left" id="btnUserName" ><span class="hb-icon user"></span>{{Auth::user()->first_name}} </h4> 
                 </a>
