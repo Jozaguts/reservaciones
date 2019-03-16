@@ -12,6 +12,7 @@
 
 @section('content')
 {{-- comienza el contenido --}}
+<<<<<<< HEAD
     <div class="container-fluid grid-contanier">
         @include('components.hamburger-menu')
        <div class="content">
@@ -68,8 +69,15 @@
        </div>
         
     </div>
+=======
+<div class="container-fluid grid-contanier">
+    @include('components.hamburger-menu')
+    @include('contents.tipoequipoyunidades')        
+</div>
+>>>>>>> jozaguts
 
 @include('modals.tipoequipounidad')
+@include('modals.edittipoequipounidad')
 {{-- finaliza el contenido --}}
 @endsection
 

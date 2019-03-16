@@ -294,5 +294,30 @@
     transition: all .8s ease-in-out;
       
 }
+.nav-home{
+    height: 3.5rem;
+}
+.nav-title-container{
+    display: block;
+    width: 49%;
+    float: left;
+    text-align: center;
+}
+.nav-title-container__title{
+    font-size: 100%;
+    font-weight: 900;
+    margin: 0;
+    line-height: 1rem;
+}
+.user-name-contanier{
+    display: block;
+    width: 49%;
+    float: right;
+    text-align: center;
+}
+.tr-bg{
+    background-color: rgba(212, 212, 212, 0.795) !important;
+    color: rgba(20, 20, 20, 0.705) !important;
+}
 
 

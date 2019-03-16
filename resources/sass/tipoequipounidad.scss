@@ -14,6 +14,8 @@
         .header-modal-container{
             display: flex;
             justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
         .modal-content{
             min-width:  90vw !important;
@@ -35,6 +37,21 @@
             padding: .2rem 1rem 1rem 1rem;
             
         }
+        .close-modal-edit{
+            display: flex;
+            padding: 1rem 1.25rem;
+            background-image: url(/svg/cancel.svg);
+            // background-position: 50% 50%;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 3000;
+            top: 4rem;
+            left: 80vw;
+            // float: left;
+            width: 2rem;
+            height: 2rem;
+        }
 }
 
 @media only screen and (min-device-width : 360px) and (max-device-width : 667px) {
@@ -53,6 +70,8 @@
     .header-modal-container{
         display: flex;
         justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
 }
 @media only screen and (min-device-width : 375px) and (max-device-width : 736px) {
@@ -71,6 +90,8 @@
     .header-modal-container{
         display: flex;
         justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
 }
   //ipad pro 
@@ -90,6 +111,8 @@
     .header-modal-container{
         display: flex;
         justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
 }
     //iphone 6 7 y 8 plus
@@ -109,6 +132,8 @@
         .header-modal-container{
             display: flex;
             justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
     }
     @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
@@ -129,6 +154,8 @@
         .header-modal-container{
             display: flex;
             justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
         .modal-content{
             min-width:  80vw !important;
@@ -150,6 +177,19 @@
             padding: .2rem 1rem 1rem 1rem;
             
         }
+        .close-modal-edit{
+            display: flex;
+            padding: 1rem 1.25rem;
+            background-image: url(/svg/cancel.svg);
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 3000;
+            top: 4rem;
+            left: 80vw;
+            width: 2rem;
+            height: 2rem;
+        }
     }
     @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
         .close-modal{
@@ -168,6 +208,8 @@
         .header-modal-container{
             display: flex;
             justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
         .modal-content{
             min-width:  80vw !important;
@@ -189,5 +231,22 @@
             padding: .2rem 1rem 1rem 1rem;
             
         }
+        .close-modal-edit{
+            display: block;
+            padding: 1rem;
+            background-image: url(/svg/cancel.svg);
+            background-position: 50% 50%;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            // position: relative;
+            z-index: 3000;
+            // top: 4rem;
+            // right: 0;
+            margin: 1rem;
+            width: 2rem;
+            height: 2rem;
+            
+        }
+        
     }
 

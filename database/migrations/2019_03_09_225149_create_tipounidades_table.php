@@ -23,6 +23,7 @@ class CreateTipounidadesTable extends Migration
             $table->unsignedInteger('idusuario');
             $table->foreign('idusuario')->references('id')->on('usuarios');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

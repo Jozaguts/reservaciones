@@ -6,7 +6,6 @@
             <div class="card">
                 <div class="header-modal-container">
                     <div class="card-header" id="card-header">{{ __('Editar Usuario') }} <span class="text-capitalize font-weight-bold" id="userNametitle"> </span></div>
-                    
                 </div>
                 <div class="card-body">
                     <form method="PUT" action="{{url ('usuarios') }}">

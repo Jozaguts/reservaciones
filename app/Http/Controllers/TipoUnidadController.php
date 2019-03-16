@@ -84,7 +84,9 @@ class TipoUnidadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $equipounidad = TipoUnidad::find($id); 
+     
+        return response()->json($equipounidad);
     }
 
     /**
@@ -95,8 +97,60 @@ class TipoUnidadController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        //reglas de validacion
+        $rules =[
+            'nombre' => ['string', 'max:255'],
+            'combustible' => ['string', 'max:255'],
+            'medio'=> ['string','max:255'],
+            'idusuario'=> ['integer'],
+            'removed' => ['nullable','boolean'],
+            'active' => ['nullable','boolean'],
+        ];
+           
+
+      if($request->ajax())
+      {
+          $tipo = TipoUnidad::find($id);
+         
+
+       
+            //Se realiza la validación
+        $validator = Validator::make($request->all(), $rules);
+        
+        //si falla se redirige con los errores a la vista
+        if ($validator->fails()) {
+            return redirect('tipounidades')
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
+            $inputs = $request->all();
+
+            $tipo->fill(['nombre' => $request->get('nombre'),
+                        'combustible'=> $request->get('combustible'),
+                        'medio'=> $request->get('medio'),
+                        'remove'=>$request->get('remove'),
+                        'active'=>$request->get('active'),
+                        'idusuario'=>$request->get('idusuario'),
+                       ]);
+                       $tipo->save();
+          
+            // $tipo->fill($inputs);
+            
+             if ($tipo) {
+                return response()->json(['success'=>'true', 200, 'correcto' => 'Editado Correctamente', 200]);
+            }
+            else
+             {
+                return response()->json(['success'=>'false','error'=>'Error no se Puedo Editar la Unidad/Equipo']);  
+            }
+           
+        }
+        
+        
+         
+         
+      }
     }
 
     /**
@@ -105,8 +159,12 @@ class TipoUnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        TipoUnidad::find($id)->delete();
+        $message = "Usuario Eliminado exitosamente";
+         if($request->ajax()){
+             return $message;
+         }
     }
 }
