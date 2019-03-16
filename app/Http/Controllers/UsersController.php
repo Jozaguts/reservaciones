@@ -172,13 +172,13 @@ class UsersController extends Controller
             $user->syncRoles($request->role);
         }
 
-          if($result)
-          {
-              return response()->json(['success'=>'true']);
-          }else
-          {
-              return response()->json(['success'=>'false']);
-          }
+          if($result) {
+            return response()->json(['success'=>'true', 200, 'correcto' => 'Usuario Editado Correctamente', 200]);
+        }
+        else
+         {
+            return response()->json(['success'=>'false','error'=>'Error no se Puedo Editar al Usuario ']);  
+        }
       }
     }
 
@@ -188,14 +188,20 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $requeste)
+    public function destroy(R $request, $id)
     {
          
          User::find($id)->delete();
          $message = "Usuario Eliminado exitosamente";
-         if($request->ajax()){
-             return $message;
-         }
+         $error ="No se pudo Eliminar";
+
+         if($request->ajax())
+            {
+                return response()->json(['success'=>'true', 'message'=> $message]);
+            }else
+            {
+                return response()->json(['success'=>'false', 'error'=> $error]);
+            }
        
        
     }

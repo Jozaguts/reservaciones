@@ -5,10 +5,14 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
 <link rel="stylesheet" href="{{asset('css/users.css')}}">
+<link rel="stylesheet" href="{{asset('css/hamburger-menu.css')}}">
 @endsection
 @section('content')
-<div class="container mt-3">
-     
+{{-- <div class="container mt-3"> --}}
+        <div class="container-fluid grid-contanier">
+                @include('components.hamburger-menu')
+                   
+           
       <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -17,22 +21,8 @@
                     <div class="row justify-content-end my-2">
                         <a href="" class="btn btn-success" id="addUser"><span class="font-weight-bolder">+</span> Usuario</a>
                     </div>
-                    @if ($errors->any())
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 offset-md-2">
-                                <div class="alert alert-danger float-right">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        
-                    @endif
+                {{-- alerts --}}
+                @include('components.ajax-alerts')
                         <div class="row">
                             <table class="table">
                                 <thead>
@@ -77,12 +67,8 @@
 @section('scripts')
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{asset('js/admin.js')}}"></script>
-
-
-
-
+<script src="{{asset('js/hamburgerMenu.js')}}"></script>
 @endsection
-
 @endsection
 
         

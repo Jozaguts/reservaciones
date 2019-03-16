@@ -76,6 +76,7 @@
 </div>
 >>>>>>> jozaguts
 
+
 @include('modals.tipoequipounidad')
 @include('modals.edittipoequipounidad')
 {{-- finaliza el contenido --}}
