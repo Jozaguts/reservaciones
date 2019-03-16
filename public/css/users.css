@@ -183,12 +183,11 @@
   }
 
   .close-modal-edit {
-    display: flex;
+    display: inline-block;
     background-image: url(/svg/cancel.svg);
-    background-position: 50% 50%;
     background-size: 20px 20px;
     background-repeat: no-repeat;
-    z-index: 3000;
+    margin: 1rem;
     width: 2rem;
     height: 2rem;
   }

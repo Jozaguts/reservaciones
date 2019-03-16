@@ -64,11 +64,8 @@ closeModal.addEventListener('click',(e)=>{
 
 //////////////////////////////////////// ajax ////////////////////////////////////////////////////
 
-<<<<<<< HEAD
-=======
 ///////////////////////////////////////agreager producto///////////////////////////////////////////////////////////////////////////////////
 
->>>>>>> jozaguts
 let tipoEUForm = document.getElementById('tipoEUForm');
 
 tipoEUForm.addEventListener('submit',(e)=>{
@@ -111,11 +108,7 @@ $.ajax({
       setTimeout(() => {
         $('#message-success').fadeOut();
       }, 3000);
-<<<<<<< HEAD
-      console.log(data.correcto);
-=======
       reload();
->>>>>>> jozaguts
     }  
 },
   error:function(data){
@@ -131,9 +124,6 @@ $.ajax({
 
 })
 
-<<<<<<< HEAD
-})
-=======
 })
 
 
@@ -282,4 +272,3 @@ $(document).ready(function() {
  elements .forEach(element => {
     element.classList.add('tr-bg');
 });
->>>>>>> jozaguts

@@ -70,7 +70,13 @@ $('#btnEdit').click(function(){
     success: function (data) {
 
       if(data.success == 'true'){
-        alert('funciona');
+        $('#userEditModal').fadeOut();
+        $('#success').html(data.correcto);
+        $('#message-success').fadeIn();
+        setTimeout(() => {
+          $('#message-success').fadeOut();
+        }, 3000);
+        setTimeout("location.reload(true);",3000)
        
       }
     },
@@ -95,11 +101,12 @@ closeModal.addEventListener('click',(e)=>{
 })
 //close modal edit user
 closeModalEdit.addEventListener('click',(e)=>{
-  e.preventDefault();
-  if(closeModalEdit.parentNode.classList.contains("showModal")){
-    closeModalEdit.parentNode.classList.remove("showModal")
-    closeModalEdit.parentNode.classList.toggle("d-none");
-  }
+  
+  if(userEditModal.classList.contains("showModal")){
+    userEditModal.classList.remove("showModal")
+    userEditModal.classList.add("d-none");
+}
+
      
 })
 closeModal.addEventListener('click',(e)=>{
@@ -148,24 +155,36 @@ window.addEventListener('click', function(e){
        var row = $(this).parents('tr');
        var id = row.data('id');
        var form = $('#form-delete');
-       var url = form.attr('action').replace(':TIPO_ID', id);
+       var url = form.attr('action').replace(':USER_ID', id);
        var data = form.serialize();
        var name = row.data('name');
 
        let alert = confirm('¿Desea eiliminara a: ' + name);
 
        if(alert == true){
-        row.fadeOut();
+        row.fadeOutDataCue
+        $.post(url,data, function(result) {
 
-        $.post(url,data, function(result){
-             alert(result);
+          if(result.success == 'true')
+          {
+           
+          console.log(result.message)
+            $('#success').html(result.message);
+            $('#message-success').fadeIn();
+            setTimeout(() => {
+              $('#message-success').fadeOut();
+            }, 3000);
+            setTimeout("location.reload(true);",1000)
+          }  
         });
+        // $.post(url,data, function(result){
+        //      alert(result);
+        // });
        }
 
        
     });
  });
-
 
  //color para el tr si esta desactivado
  let elements = document.querySelectorAll('[data-active="0"]');

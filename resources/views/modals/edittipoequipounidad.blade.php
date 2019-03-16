@@ -7,8 +7,8 @@
                     <div class="card">
                         <div class="header-modal-container">
                                
-                                <div class="card-header" id="card-header">{{ __('Editar Equipo/Unidad') }} </div>
-                                <span class="close-modal-edit " id="closeModalEdit"></span>
+                        <div class="card-header" id="card-header">{{ __('Editar Equipo/Unidad') }} </div>
+                        <span class="close-modal-edit " id="closeModalEdit"></span>
                         @if ($errors->any())
                         <div class="container">
                             <div class="row">
