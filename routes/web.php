@@ -37,3 +37,8 @@ Route::resource('tipounidades', 'TipoUnidadController')->middleware(['auth']);
 Route::get('unidades', function(){
     return view('sub-sections.equiposyunidades');
 });
+
+
+
+// tipo unidaddes controller 
+Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);

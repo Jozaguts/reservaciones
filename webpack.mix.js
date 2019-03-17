@@ -37,3 +37,6 @@ mix.js('resources/js/app.js', 'public/js')
                            mix.scripts([
                               'resources/js/tipounidad.js'],
                                  'public/js/tipounidad.js');
+                                 mix.scripts([
+                                    'resources/js/equiposyunidades.js'],
+                                       'public/js/equiposyunidades.js');

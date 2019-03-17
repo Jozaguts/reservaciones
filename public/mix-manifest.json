@@ -9,5 +9,6 @@
     "/js/admin.js": "/js/admin.js",
     "/js/reservations.js": "/js/reservations.js",
     "/js/hamburgerMenu.js": "/js/hamburgerMenu.js",
-    "/js/tipounidad.js": "/js/tipounidad.js"
+    "/js/tipounidad.js": "/js/tipounidad.js",
+    "/js/equiposyunidades.js": "/js/equiposyunidades.js"
 }

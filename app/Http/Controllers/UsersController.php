@@ -190,17 +190,17 @@ class UsersController extends Controller
      */
     public function destroy(R $request, $id)
     {
-         
-         User::find($id)->delete();
+        $user = User::find($id);  
+         $user->delete();
          $message = "Usuario Eliminado exitosamente";
          $error ="No se pudo Eliminar";
 
-         if($request->ajax())
-            {
-                return response()->json(['success'=>'true', 'message'=> $message]);
-            }else
+         if($user == null)
             {
                 return response()->json(['success'=>'false', 'error'=> $error]);
+            }else
+            {
+                return response()->json(['success'=>'true', 'message'=> $message]);
             }
        
        

@@ -14,12 +14,12 @@
 {{-- comienza el contenido --}}
 <div class="container-fluid grid-contanier">
     @include('components.hamburger-menu')
-    @include('contents.tipoequipoyunidades')        
+    @include('contents.activities.tipoequipoyunidades')        
 </div>
 
 
-@include('modals.tipoequipounidad')
-@include('modals.edittipoequipounidad')
+@include('modals.activities.tipoequipounidad')
+@include('modals.activities.edittipoequipounidad')
 {{-- finaliza el contenido --}}
 @endsection
 
