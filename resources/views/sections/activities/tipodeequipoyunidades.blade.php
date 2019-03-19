@@ -18,7 +18,7 @@
 </div>
 
 
-@include('modals.activities.tipoequipounidad')
+@include('modals.activities.addtipoequipounidad')
 @include('modals.activities.edittipoequipounidad')
 {{-- finaliza el contenido --}}
 @endsection

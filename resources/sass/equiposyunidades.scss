@@ -6,3 +6,16 @@
     display: block;
     margin-bottom: 2rem;
 }
+.showModal{
+    background-color:rgba(0, 0, 0, 0.438) !important;
+    // width: 100vw !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    margin: auto auto;
+    justify-content: center;
+    animation-name: show;
+    animation-duration: .5s;
+    padding: .2rem 1rem 1rem 1rem;
+}

@@ -12,5 +12,6 @@ class EquiposYUnidades extends Model
     
     protected $dates = ['deleted_at'];
    
-    protected $fillable = ['clave','placa','capacidad','remove','active','color','idusuario','idtipounidad'];  
+    protected $fillable = ['clave','placa','capacidad','descripcion','remove','active','color','idusuario','idtipounidad']; 
+  
 }

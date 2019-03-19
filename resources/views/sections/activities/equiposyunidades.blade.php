@@ -4,6 +4,8 @@
 @endsection
 @section('css')
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/tipoequipounidad.css') }}" rel="stylesheet">
+    
 @endsection
 @section('content')
 {{-- Contenido --}}
@@ -13,7 +15,8 @@
 
 
 
-
+@include('modals.activities.addequipounidad')
+@include('modals.activities.editequipounidad')
 </div>
 {{-- fin del contenido --}} 
 @endsection

@@ -6,7 +6,7 @@
                         <div class="card-header text-dark font-weight-bold">Equipos y Unidades</div>
                             <div class="card-body">
                                 <div class="row justify-content-end my-2">
-                                    <a href="#" class="btn btn-success" id="btnAddTipoEU"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
+                                    <a href="#" class="btn btn-success" id="btnShowAddEU"><span class="font-weight-bolder">+</span> Equipo/Unidad</a>
                                 </div>
                                   {{-- alerts --}}
                                   @include('components.ajax-alerts')

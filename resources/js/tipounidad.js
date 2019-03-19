@@ -50,11 +50,11 @@ if(toggleStatus==0){
  
 })
 
-//cerrar modal agregar unidad
+//close modal add unit
 let closeModal = document.getElementById('closeModal');
 
 closeModal.addEventListener('click',(e)=>{
-    if(e.target == closeModal){
+    if(e.target == closeModal){   //closeModal is a icon element like <X>
         if(tipoEUModal.classList.contains('showModal')){
             tipoEUModal.classList.remove('showModal')
             tipoEUModal.classList.add('d-none')
@@ -139,12 +139,12 @@ function reload() {
 let tipoEUEditModal = document.getElementById('tipoEUEditModal')
 function showEditModal(id){
 
-  let route = "tipounidades/"+id+"/edit";
+  let route = "unidades/"+id+"/edit";
 
   $.get(route, function(data){
-    $('#editNombre').val(data.nombre);
-    $('#editCombustible').val(data.combustible);
-    $('#editMedio').val(data.medio);
+    $('#editclave').val(data.nombre);
+    $('#editdescripcion').val(data.combustible);
+    $('#editplaca').val(data.medio);
     $('#editId').val(data.id);
     $('#editRemove').val(data.remove);
     $('#editIdUsuario').val();
