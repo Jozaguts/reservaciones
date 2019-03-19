@@ -12,8 +12,13 @@
                                   @include('components.ajax-alerts')
 
                                   {{-- btns container list--}}
-                                    <a href="#!"id="btnMoto" class=" btn btn-info mx-3 my-3" >Motos</a>
-                                    <div class="row ">
+                                <div class="container main-grid">
+
+
+                                    {{-- columna y boton --}}
+                                    <div class="colum-container">
+                                        <a href="#!"id="btnMoto" class=" btn btn-info mx-3 my-3" >Motos</a>
+                                    <div class="row d-none" id="motoContent">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -52,8 +57,12 @@
                                                 </tbody>
                                         </table>
                                     </div>
+                                    </div>
+                                    {{-- finaliza primera columna y boton --}}
+                                    {{-- segunda coluna y boton --}}
+                                    <div class="colum-container">
                                     <a href="#!"id="btnBus" class=" btn btn-info mx-3 my-3" >Autobus</a>
-                                    <div class="row ">
+                                    <div class="row d-none" id="busContent">
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -62,12 +71,8 @@
                                                         <th class="table-head" >Capacidad</th>
                                                         <th class="table-head" >Color</th>
                                                     </tr>
-                                                   
                                                 </thead>
-                                                    <tbody>
-                                                       
-                                                        {{-- <a href="#!"id="btnBus" class=" btn btn-info mx-3" >Autobus</a> --}}
-                                                  
+                                                    <tbody>      
                                                         @foreach ($unidades as $unidad)
                                                         @if($unidad->detele_at ==null)
                                                         @if ($unidad->clave == 'aut')
@@ -91,7 +96,11 @@
                                                         @endforeach
                                                     </tbody>
                                             </table>
-                                        </div>
+                                        </div> {{-- finaliza la columna  --}}
+                                    </div>
+                                </div>
+                                    
+                            
                                 </div>
                             </div>
                         </div>
