@@ -139,12 +139,12 @@ function reload() {
 let tipoEUEditModal = document.getElementById('tipoEUEditModal')
 function showEditModal(id){
 
-  let route = "unidades/"+id+"/edit";
+  let route = "tipounidades/"+id+"/edit";
 
   $.get(route, function(data){
-    $('#editclave').val(data.nombre);
-    $('#editdescripcion').val(data.combustible);
-    $('#editplaca').val(data.medio);
+    $('#editNombre').val(data.nombre);
+    $('#editCombustible').val(data.combustible);
+    $('#editMedio').val(data.medio);
     $('#editId').val(data.id);
     $('#editRemove').val(data.remove);
     $('#editIdUsuario').val();
