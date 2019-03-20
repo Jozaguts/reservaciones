@@ -235,6 +235,48 @@
                                         </div>
                                         </div>
                                         {{-- finaliza  columna y boton --}}
+                                          {{-- segunda coluna y boton --}}
+                                    <div class="colum-container">
+                                            <a href="#!"id="btnVele" class=" btn btn-info mx-3 my-3" >Velero</a>
+                                            <div class="row d-none" id="veleContent">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="table-head" >Clave</th>
+                                                                <th class="table-head" >Descripción</th>
+                                                                <th class="table-head" >Capacidad</th>
+                                                                <th class="table-head" >Color</th>
+                                                            </tr>
+                                                        </thead>
+                                                            <tbody>      
+                                                                @foreach ($unidades as $unidad)
+                                                               
+                                                                @if( $unidad->tipounidad->nombre == 'Velero')
+                                                                
+                                                            
+                                                                    <tr id="trBg" class="mot" data-id="{{$unidad->id}}"data-clave="{{$unidad->clave}}" >
+                                                                        <td class=" table-head table-head__name" data-active="{{$unidad->active}}">{{$unidad->clave}} 
+                                                                        </td>
+                                                                        <td class="table-head table-head__surname" data-active="{{$unidad->active}}">{{$unidad->descripcion}}
+                                                                        </td>
+                                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$unidad->active}}">{{$unidad->capacidad}}
+                                                                        </td>
+                                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$unidad->active}}">{{$unidad->color}}
+                                                                            </td>
+                                                                        <td class="table-head table-head__actions"> 
+                                                                            <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$unidad->id}});" data-id="{{$unidad->id}}">
+                                                                            </a>
+                                                                            <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                 
+                                                                @endif
+                                                                @endforeach
+                                                            </tbody>
+                                                    </table>
+                                                </div> {{-- finaliza la columna  --}}
+                                            </div>
+                                            {{-- finaliza segunda columna --}}
                                 </div>
                                     
                             

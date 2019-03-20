@@ -38,6 +38,14 @@ btnKay.addEventListener('click',()=>{
     kayContent.classList.contains('d-none')?kayContent.classList.toggle('show')&&kayContent.classList.remove('d-none'):kayContent.classList.add('d-none')
 
 })
+// btn velero content
+let veleContent = document.getElementById('veleContent')
+let btnVele = document.getElementById('btnVele')
+
+btnVele.addEventListener('click',()=>{
+    veleContent.classList.contains('d-none')?veleContent.classList.toggle('show')&&veleContent.classList.remove('d-none'):veleContent.classList.add('d-none')
+
+})
 
 //btns unidad equipo
 let btnShowAddEU = document.getElementById('btnShowAddEU')
@@ -189,9 +197,6 @@ function showEditModal(id){
         case 5:
         tipounidad.selectedIndex = 4;//Kayak
         break;
-    
-      default:
-        break;
     }
 
     
@@ -227,7 +232,7 @@ $('#btnEdit').click(function(){
   let descripcion = $('#editDescripcion').val();
   let capacidad = $('#editCapacidad').val();
   let color = $('#editColor').val(); 
-  let tipounidad = $('#idTipoUnidad').val();
+  let idtipounidad = $('#"editIdTipoUnidad').val();
   let idusuario = $('#editIdUsuario').val();
   let remove = $('#editRemove').val();
   let id = $('#editId').val();
@@ -246,7 +251,7 @@ $('#btnEdit').click(function(){
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
     type: 'PUT',
     dataType: 'json',
-    data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idtipounidad: tipounidad, idusuario: idusuario, remove: remove, active: active, placa: placa, id: id },
+    data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idtipounidad: idtipounidad, idusuario: idusuario, remove: remove, active: active, placa: placa, id: id },
 
     success: function (data) {
   

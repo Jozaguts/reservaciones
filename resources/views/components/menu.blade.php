@@ -9,7 +9,7 @@
                             <li class="list__item li-actividadaes">Tipo de Actividades</li>
                             <li class="list__item li-actividadaes">Actividades</li>
                             <a href="{{url ('tipounidades')}}" class="ul-link"> <li class="list__item li-actividadaes">Tipo de Equipos y Unidades</li></a>
-                            <li class="list__item li-actividadaes">Equipos y Unidades</li>
+                            <a href="{{url ('unidades')}}" class="ul-link"><li class="list__item li-actividadaes">Equipos y Unidades</li></a>
                         </ul>
             </a>  
           
