@@ -15,20 +15,20 @@ class UnidadesSeeder extends Seeder
     {
         foreach (range(1,3) as $index) {
 	        DB::table('unidades')->insert([
-            'clave' => 'mot',
-            'placa'=> '12qw',
+            'clave' => 'Mt01',
+            'placa'=> 'Mt01',
             'capacidad'=> '2',
-            'descripcion'=> 'Moto Acuatica para dos personas',
+            'descripcion'=> 'Moto para dos personas Editado',
             'color'=> 'rojo',
             'active'=> 1,
             'remove'=>0,
             'idusuario'=>2,
-            'idtipounidad'=>2,
+            'idtipounidad'=>1,
             ]);
             }
             foreach (range(4,6) as $index) {
                 DB::table('unidades')->insert([
-                    'clave' => 'aut',
+                    'clave' => 'Mt02',
                     'placa'=> '13ds3qw',
                     'capacidad'=> '40',
                     'descripcion'=> 'Autobus para 40 personas',

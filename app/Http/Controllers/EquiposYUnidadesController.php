@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EquiposYUnidades;
 use Validator;
+use App\TipoUnidad;
 
 class EquiposYUnidadesController extends Controller
 {
@@ -16,7 +17,9 @@ class EquiposYUnidadesController extends Controller
     public function index()
     {
         $unidades = EquiposYUnidades::all();
-        return view('sections.activities.equiposyunidades', compact('unidades'));
+        $tipounidades = TipoUnidad::all();
+        
+        return view('sections.activities.equiposyunidades', compact('unidades','tipounidades'));
     }
 
     /**
@@ -104,7 +107,65 @@ class EquiposYUnidadesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //reglas de validacion
+         $rules =[
+            'clave' => [ 'string', 'max:255'],
+            'placa' => [ 'string', 'max:255'],
+            'capacidad'=> [ 'string'],
+            'descripcion'=> [ 'string'],
+            'color'=> [ 'string'],
+            'idusuario'=> [ 'integer'],
+            'idtipounidad'=> ['nullable', 'integer'],
+            'removed' => ['nullable','boolean'],
+            'active' => ['nullable','boolean'],
+        ];
+           
+
+      if($request->ajax())
+      {
+          $unidad = EquiposYUnidades::find($id);
+         
+
+       
+            //Se realiza la validación
+        $validator = Validator::make($request->all(), $rules);
+        
+        //si falla se redirige con los errores a la vista
+        if ($validator->fails()) {
+            return redirect('tipounidades')
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
+            $inputs = $request->all();
+
+            $unidad->fill(['clave' => $request->get('clave'),
+                        'placa'=> $request->get('placa'),
+                        'capacidad'=> $request->get('capacidad'),
+                        'descripcion'=> $request->get('descripcion'),
+                        'color'=> $request->get('color'),
+                        'idtipounidad'=> $request->get('idtipounidad'),                        
+                        'remove'=>$request->get('remove'),
+                        'active'=>$request->get('active'),
+                        'idusuario'=>$request->get('idusuario'),
+                       ]);
+                       $unidad->save();
+          
+            // $tipo->fill($inputs);
+            
+             if ($unidad) {
+                return response()->json(['success'=>'true', 200, 'correcto' => 'Editado Correctamente', 200]);
+            }
+            else
+             {
+                return response()->json(['success'=>'false','error'=>'Error no se Puedo Editar la Unidad/Equipo']);  
+            }
+           
+        }
+        
+        
+         
+         
+      }
     }
 
     /**
@@ -113,8 +174,14 @@ class EquiposYUnidadesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
-    }
+        $unidad = EquiposYUnidades::find($id)->delete();
+
+        if($unidad == null){
+            return response()->json(['success'=>'false','error'=>'Error no se Puedo Eliminar la Unidad/Equipo']); 
+        }else{
+            return response()->json(['success'=>'true', 200, 'correcto' => 'Unidad Eliminada Correctamente', 200]);
+        }
+    }  
 }

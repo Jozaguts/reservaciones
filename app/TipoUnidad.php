@@ -14,4 +14,10 @@ class TipoUnidad extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = ['nombre','combustible','medio','remove','active','idusuario'];  
+
+public function unidades()
+{
+    return $this->hasMany('App\EquipoYUnidades','idtipounidad','id');
+}
+ 
 }

@@ -13,5 +13,12 @@ class EquiposYUnidades extends Model
     protected $dates = ['deleted_at'];
    
     protected $fillable = ['clave','placa','capacidad','descripcion','remove','active','color','idusuario','idtipounidad']; 
-  
+
+public function tipounidad()
+{
+    return $this->belongsTo('App\TipoUnidad','idtipounidad','id');
 }
+
+
+} 
+

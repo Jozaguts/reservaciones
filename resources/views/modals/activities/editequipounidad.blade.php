@@ -85,6 +85,38 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                            <label for="placa" class="col-md-4 col-form-label text-md-right">{{ __('Placa') }} <br>    
+                                                </label>
+                                           
+                                            <div class="col-md-6">
+                                                <input type="text" id="editPlaca" class="form-control{{ $errors->has('placa') ? ' is-invalid' : '' }}" name="placa" value="{{ old('placa') }}" required >
+                
+                                                @if ($errors->has('placa'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('placa') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            
+                                        </div>
+                                    <div class="form-group row">
+                                            <label for="idtipounidad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Unidad') }}</label>
+                                          
+                                            <div class="col-md-6">
+                                                <select name="idtipounidad" id="editIdTipoUnidad" class="form-control{{ $errors->has('idtipounidad') ? ' is-invalid' : '' }} text-capitalize" required>
+                                                    @forelse ($tipounidades as $tipounidad)
+                                                    <option  value="{{$tipounidad->id}}">{{$tipounidad->nombre}}</option>
+                                                    @empty
+                                                    @endforelse 
+                                                </select>
+                                                @if ($errors->has('idtipounidad'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('idtipounidad') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>                          
+                                        </div>
                                 <div class="form-group row">
                                         <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Desactivar') }}</label>
             

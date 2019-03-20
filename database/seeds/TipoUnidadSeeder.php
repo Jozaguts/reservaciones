@@ -12,14 +12,14 @@ class TipoUnidadSeeder extends Seeder
      */
     public function run()
     {
-    //  $tipounidad = TipoUnidad::create([
-    //      'nombre' => 'Moto',
-    //      'combustible'=> 'gasolina',
-    //      'medio'=> 'terrestre',
-    //      'remove'=> 0,
-    //      'active'=> 1,
-    //      'idusuario'=>1
-    //      ]);
+     $tipounidad = TipoUnidad::create([
+         'nombre' => 'Moto',
+         'combustible'=> 'gasolina',
+         'medio'=> 'terrestre',
+         'remove'=> 0,
+         'active'=> 1,
+         'idusuario'=>1
+         ]);
          $tipounidad = TipoUnidad::create([
             'nombre' => 'Cuatrimoto',
             'combustible'=> 'gasolina',
@@ -30,7 +30,7 @@ class TipoUnidadSeeder extends Seeder
             ]);
             
          $tipounidad = TipoUnidad::create([
-            'nombre' => 'Camion A',
+            'nombre' => 'Camion',
             'combustible'=> 'gasolina',
             'medio'=> 'terrestre',
             'remove'=> 0,

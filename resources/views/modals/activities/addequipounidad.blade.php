@@ -73,6 +73,27 @@
                                         </div>
                                         
                                     </div>
+                                    {{-- {{dd($unidades[0]->tipounidad)}} --}}
+                                    <div class="form-group row">
+                                            <label for="idtipounidad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Unidad') }}</label>
+                                          
+                                            <div class="col-md-6">
+                                                <select name="idtipounidad" id="idTipoUnidad" class="form-control{{ $errors->has('idtipounidad') ? ' is-invalid' : '' }} text-capitalize" required>
+                                                    @forelse ($tipounidades as $tipounidad)
+                                                    <option  value="{{$tipounidad->id}}">{{$tipounidad->nombre}}</option>
+                                                    @empty
+                                                        
+                                                    @endforelse
+                                                    
+                                                </select>
+                                                @if ($errors->has('idtipodeunidad'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('idtipodeunidad') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>                          
+                                        </div>
+
                           
                                 <div class="form-group row">
                                         <label for="capacidad" class="col-md-4 col-form-label text-md-right">{{ __('Capacidad') }}</label>
