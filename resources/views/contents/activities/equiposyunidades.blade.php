@@ -10,15 +10,14 @@
                                 </div>
                                   {{-- alerts --}}
                                   @include('components.ajax-alerts')
-
+                                 
                                   {{-- btns container list--}}
                                 <div class="container main-grid">
-
-
+                                        @foreach ($tipounidades as $tipo )
                                     {{-- columna y boton --}}
                                     <div class="colum-container">
-                                        <a href="#!"id="btnMoto" class=" btn btn-info mx-3 my-3" >Motos</a>
-                                    <div class="row d-none" id="motoContent">
+                                        <a href="#!"id="btn{{($tipo->nombre)}}" class="btn btn-info mx-3 my-3" onclick="showContent(this)">{{($tipo->nombre)}} </a>
+                                    <div class="row d-none" id="{{($tipo->nombre)}}Content">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -31,10 +30,11 @@
                                             </thead>
                                                 <tbody>
                                                    
-                                                    {{-- <a href="#!"id="btnBus" class=" btn btn-info mx-3" >Autobus</a> --}}
+                                              
                                               
                                                     @foreach ($unidades as $unidad)
-                                                    @if( $unidad->tipounidad->nombre == 'Moto')
+                                                    @if( $unidad->tipounidad->nombre == $tipo->nombre)
+                                                   
                                                     
                                                         <tr id="trBg" class="mot" data-id="{{$unidad->id}}"data-clave="{{$unidad->clave}}" >
                                                             <td class=" table-head table-head__name" data-active="{{$unidad->active}}">{{$unidad->clave}} 
@@ -58,9 +58,10 @@
                                         </table>
                                     </div>
                                     </div>
+                                    @endforeach
                                     {{-- finaliza primera columna y boton --}}
                                     {{-- segunda coluna y boton --}}
-                                    <div class="colum-container">
+                                    {{-- <div class="colum-container">
                                     <a href="#!"id="btnCuatri" class=" btn btn-info mx-3 my-3" >Cuatrimoto</a>
                                     <div class="row d-none" id="busContent">
                                             <table class="table">
@@ -98,13 +99,13 @@
                                                         @endforeach
                                                     </tbody>
                                             </table>
-                                        </div> {{-- finaliza la columna  --}}
-                                    </div>
+                                        </div> 
+                                    </div> --}}
                                     {{-- finaliza segunda columna --}}
 
                                     {{-- Tercera columna btn autobus --}}
                                        {{-- columna y boton --}}
-                                       <div class="colum-container">
+                                       {{-- <div class="colum-container">
                                             <a href="#!"id="btnCam" class=" btn btn-info mx-3 my-3" >Camion</a>
                                         <div class="row d-none" id="camContent">
                                             <table class="table">
@@ -145,10 +146,10 @@
                                                     </tbody>
                                             </table>
                                         </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- finaliza tercera columna y boton --}}
                                         {{-- columna y boton --}}
-                                       <div class="colum-container">
+                                       {{-- <div class="colum-container">
                                             <a href="#!"id="btnLan" class=" btn btn-info mx-3 my-3" >Lancha</a>
                                         <div class="row d-none" id="lanContent">
                                             <table class="table">
@@ -189,10 +190,10 @@
                                                     </tbody>
                                             </table>
                                         </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- finaliza columna y boton --}}
                                         {{-- columna y boton --}}
-                                       <div class="colum-container">
+                                       {{-- <div class="colum-container">
                                             <a href="#!"id="btnKay" class=" btn btn-info mx-3 my-3" >Kayak</a>
                                         <div class="row d-none" id="kayContent">
                                             <table class="table">
@@ -233,10 +234,10 @@
                                                     </tbody>
                                             </table>
                                         </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- finaliza  columna y boton --}}
                                           {{-- segunda coluna y boton --}}
-                                    <div class="colum-container">
+                                    {{-- <div class="colum-container">
                                             <a href="#!"id="btnVele" class=" btn btn-info mx-3 my-3" >Velero</a>
                                             <div class="row d-none" id="veleContent">
                                                     <table class="table">
@@ -274,9 +275,9 @@
                                                                 @endforeach
                                                             </tbody>
                                                     </table>
-                                                </div> {{-- finaliza la columna  --}}
-                                            </div>
-                                            {{-- finaliza segunda columna --}}
+                                                </div> 
+                                            </div> --}}
+                                            
                                 </div>
                                     
                             

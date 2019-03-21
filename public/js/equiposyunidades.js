@@ -1,51 +1,8 @@
 
-// btn moto content
-let motoContent = document.getElementById('motoContent')
-let btnMoto = document.getElementById('btnMoto')
+showContent = (e)=>{
+  e.nextSibling.nextSibling.classList.contains('d-none')?e.nextSibling.nextSibling.classList.toggle('show')&&e.nextSibling.nextSibling.classList.remove('d-none'):e.nextSibling.nextSibling.classList.add('d-none')
+}
 
-btnMoto.addEventListener('click',()=>{
-    motoContent.classList.contains('d-none')?motoContent.classList.toggle('show')&&motoContent.classList.remove('d-none'):motoContent.classList.add('d-none')
-
-})
-
-// btn cutrimoto content
-let busContent = document.getElementById('busContent')
-let btnCuatri = document.getElementById('btnCuatri')
-btnCuatri.addEventListener('click',()=>{
-    busContent.classList.contains('d-none')?busContent.classList.toggle('show')&&busContent.classList.remove('d-none'):busContent.classList.add('d-none')
-})
-// btn camion content
-let camContent = document.getElementById('camContent')
-let btnCam = document.getElementById('btnCam')
-
-btnCam.addEventListener('click',()=>{
-    camContent.classList.contains('d-none')?camContent.classList.toggle('show')&&camContent.classList.remove('d-none'):camContent.classList.add('d-none')
-
-})
-// btn lancha content
-let lanContent = document.getElementById('lanContent')
-let btnLan = document.getElementById('btnLan')
-
-btnLan.addEventListener('click',()=>{
-    lanContent.classList.contains('d-none')?lanContent.classList.toggle('show')&&lanContent.classList.remove('d-none'):lanContent.classList.add('d-none')
-
-})
-// btn kayak content
-let kayContent = document.getElementById('kayContent')
-let btnKay = document.getElementById('btnKay')
-
-btnKay.addEventListener('click',()=>{
-    kayContent.classList.contains('d-none')?kayContent.classList.toggle('show')&&kayContent.classList.remove('d-none'):kayContent.classList.add('d-none')
-
-})
-// btn velero content
-let veleContent = document.getElementById('veleContent')
-let btnVele = document.getElementById('btnVele')
-
-btnVele.addEventListener('click',()=>{
-    veleContent.classList.contains('d-none')?veleContent.classList.toggle('show')&&veleContent.classList.remove('d-none'):veleContent.classList.add('d-none')
-
-})
 
 //btns unidad equipo
 let btnShowAddEU = document.getElementById('btnShowAddEU')
@@ -232,7 +189,8 @@ $('#btnEdit').click(function(){
   let descripcion = $('#editDescripcion').val();
   let capacidad = $('#editCapacidad').val();
   let color = $('#editColor').val(); 
-  let idtipounidad = $('#"editIdTipoUnidad').val();
+  let idtipounidad = $('#editIdTipoUnidad').val();
+  console.log(idtipounidad)
   let idusuario = $('#editIdUsuario').val();
   let remove = $('#editRemove').val();
   let id = $('#editId').val();

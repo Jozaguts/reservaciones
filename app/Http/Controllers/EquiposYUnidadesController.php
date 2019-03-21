@@ -16,9 +16,9 @@ class EquiposYUnidadesController extends Controller
      */
     public function index()
     {
-        $unidades = EquiposYUnidades::all();
-        $tipounidades = TipoUnidad::all();
-        
+    
+        $unidades = EquiposYUnidades::all(); //mando la unidad
+        $tipounidades = TipoUnidad::all();// mando la categoria de la unidad
         return view('sections.activities.equiposyunidades', compact('unidades','tipounidades'));
     }
 
