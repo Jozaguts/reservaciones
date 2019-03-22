@@ -91,27 +91,44 @@ eUForm.addEventListener('submit',(e)=>{
           data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idusuario: idusuario, active: active, remove: remove, placa: placa, idtipounidad: idtipounidad},
           success:function(data)
           {
-            if(data.success == 'true')
-            {
-              $('#modalAddEU').fadeOut();
-              $('#success').html(data.correcto);
-              $('#message-success').fadeIn();
-              setTimeout(() => {
-                $('#message-success').fadeOut();
-              }, 3000);
-              setTimeout("location.reload(true);",3000)
-            }  
+
+            if(data.success == 'false')
+              {
+                  // $('#registerModal').fadeOut();
+              data.error.forEach(function(error){
+                $('#errorsIntoModal').html(error);
+                $('#message-errorIntoModal').fadeIn();
+              });
+                } 
+                else{
+                  $('#successIntoModal').html(data.correcto);
+                  $('#message-successIntoModal').fadeIn();
+                  setTimeout(() => {
+                    $('#modalAddEU').fadeOut();
+                  }, 3000);
+                  setTimeout("location.reload(true);",3000)
+              } 
+            // if(data.success == 'true')
+            // {
+            //   $('#modalAddEU').fadeOut();
+            //   $('#success').html(data.correcto);
+            //   $('#message-success').fadeIn();
+            //   setTimeout(() => {
+            //     $('#message-success').fadeOut();
+            //   }, 3000);
+            //   setTimeout("location.reload(true);",3000)
+            // }  
         },
-          error:function(data){
-            $('#tipoEUModal').fadeOut();
-            $('#error').html(data.error);
-              $('#message-error').fadeIn();
-              setTimeout(() => {
-                $('#message-error').fadeOut();
-              }, 3000);
+          // error:function(data){
+          //   $('#tipoEUModal').fadeOut();
+          //   $('#error').html(data.error);
+          //     $('#message-error').fadeIn();
+          //     setTimeout(() => {
+          //       $('#message-error').fadeOut();
+          //     }, 3000);
         
-            // console.log(data.error);
-          }
+          //   // console.log(data.error);
+          // }
         
         })
         
@@ -136,25 +153,7 @@ function showEditModal(id){
     $('#editId').val(data.id)
     $('#editIdUsuario').val();
     $('#editActive').val(data.active);
-    let tipounidad = document.getElementById('editIdTipoUnidad') 
-    
-    switch (data.idtipounidad) {
-      case 1:
-        tipounidad.selectedIndex = 0; //Moto
-        break;
-        case 2:
-        tipounidad.selectedIndex = 1; //Cuatrimoto
-        break;
-        case 3:
-        tipounidad.selectedIndex = 2;//Camion
-        break;
-        case 4:
-        tipounidad.selectedIndex = 3;//Lancha
-        break;
-        case 5:
-        tipounidad.selectedIndex = 4;//Kayak
-        break;
-    }
+    $('#editIdTipoUnidad').prop('selectedIndex', data.idtipounidad -1)
 
     
     if(data.active==0){

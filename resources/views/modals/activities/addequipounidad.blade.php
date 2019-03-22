@@ -8,28 +8,26 @@
                     <div class="card">
                         <div class="header-modal-container">
                                 <div class="card-header" id="card-header">{{ __('Agregar Equipo/Unidad') }} </div>
-                        @if ($errors->any())
-                        <div class="container">
+                     
+                        <div class="container mt-3">
                             <div class="row">
                                 <div class="col-sm-6 offset-md-2">
-                                    <div class="alert alert-danger float-right">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                    
+                                                @include('components.alertsintomodals')
+                                    
                                 </div>
                             </div>
                         </div>
                             
-                        @endif
+                      
+                      
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('tipounidades') }}" id="eUForm">
                                 <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                                 {{-- @method('PUT') --}}
-        
+                               
+                              
                                 <div class="form-group row">
                                     <label for="clave" class="col-md-4 col-form-label text-md-right">{{ __('Clave') }}
                                     </label>
