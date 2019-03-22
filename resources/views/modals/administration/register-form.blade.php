@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="header-modal-container">
                             <div class="card-header" id="card-header">{{ __('Registrar') }} </div>
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6 offset-md-2">
@@ -23,13 +23,14 @@
                         </div>
                     </div>
                         
-                    @endif
+                    @endif --}}
+                   
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ url('usuarios') }}">
+                        <form method="POST" action="{{ url('usuarios') }}" id="addUserForm">
                             @csrf
-                            {{-- @method('PUT') --}}
-    
+                         
+                            @include('components.alertsintomodals')
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de usuario') }}<br> <small id="helpId" class="text-muted">(Correo electrónico)</small>
                                 </label>
@@ -87,7 +88,7 @@
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirma contraseña') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
                                         </div>
                                     </div>
                             <div class="form-group row">

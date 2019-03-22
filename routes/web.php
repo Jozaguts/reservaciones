@@ -22,6 +22,7 @@ Route::get('/reservaciones', function () {
 });
 
 Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -42,3 +43,6 @@ Route::get('unidades', function(){
 
 // tipo unidaddes controller 
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
+
+
+Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);

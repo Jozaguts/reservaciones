@@ -6,10 +6,12 @@
     "/css/login-resposive.css": "/css/login-resposive.css",
     "/css/tipoequipounidad.css": "/css/tipoequipounidad.css",
     "/css/equiposyunidades.css": "/css/equiposyunidades.css",
+    "/css/tipoactividades.css": "/css/tipoactividades.css",
     "/js/all.js": "/js/all.js",
     "/js/admin.js": "/js/admin.js",
     "/js/reservations.js": "/js/reservations.js",
     "/js/hamburgerMenu.js": "/js/hamburgerMenu.js",
     "/js/tipounidad.js": "/js/tipounidad.js",
-    "/js/equiposyunidades.js": "/js/equiposyunidades.js"
+    "/js/equiposyunidades.js": "/js/equiposyunidades.js",
+    "/js/tipoactividades.js": "/js/tipoactividades.js"
 }

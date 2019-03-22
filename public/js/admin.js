@@ -177,9 +177,7 @@ window.addEventListener('click', function(e){
             setTimeout("location.reload(true);",1000)
           }  
         });
-        // $.post(url,data, function(result){
-        //      alert(result);
-        // });
+    
        }
 
        
@@ -192,3 +190,71 @@ window.addEventListener('click', function(e){
     element.classList.add('tr-bg');
 });
 
+
+// add user ajax
+let addUserForm = document.getElementById('addUserForm');
+
+addUserForm.addEventListener('submit',(e)=>{
+e.preventDefault();
+let datos = new FormData(addUserForm)
+// console.log(datos.get('email'))
+let email = datos.get('email')   
+let first_name = datos.get('first_name')
+let last_name = datos.get('last_name')
+let password = datos.get('password')
+let role = datos.get('role')
+let removed = datos.get('removed')
+let department = datos.get('department')
+let password_confirmation = datos.get('password_confirmation')
+
+
+let token = $("input[name=_token]").val();
+let active;
+  if($('#active').is(':checked')){
+    active = 0;
+  }else{
+    active = 1;
+  }
+  
+  // if($('#remove').is(':checked')){
+  //   remove = 0;
+  // }else{
+  //   remove = 1;
+  // }
+  console.log(removed);
+
+let route = 'usuarios'
+
+$.ajax({
+  url:route,
+  headers:{'X-CSRF-TOKEN':token},
+  type:'POST',
+  dataType: 'json',
+  data: {email: email, first_name: first_name, last_name: last_name, password: password, active: active, removed: removed, role: role, department:  department, password_confirmation: password_confirmation },
+  success:function(data)
+  {
+    if(data.success == 'false')
+    {
+      // $('#registerModal').fadeOut();
+   data.error.forEach(function(error){
+    $('#errorsIntoModal').html(error);
+    $('#message-errorIntoModal').fadeIn();
+   });
+    } 
+    else{
+      $('#successIntoModal').html('Usuario Agregado Correctamente');
+      $('#message-successIntoModal').fadeIn();
+      setTimeout(() => {
+        $('#registerModal').fadeOut();
+      }, 3000);
+    } 
+ 
+},
+ 
+    
+  
+
+
+})
+
+})
