@@ -7,7 +7,7 @@
             <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAct">Actividades
                     <ul class="ul-content" id="ulAct">
                             <li class="list__item li-actividadaes">Tipo de Actividades</li>
-                            <li class="list__item li-actividadaes">Actividades</li>
+                            <a href="{{url ('tipoactividades')}}" class="ul-link"><li class="list__item li-actividadaes">Actividades</li></a>
                             <a href="{{url ('tipounidades')}}" class="ul-link"> <li class="list__item li-actividadaes">Tipo de Equipos y Unidades</li></a>
                             <a href="{{url ('unidades')}}" class="ul-link"><li class="list__item li-actividadaes">Equipos y Unidades</li></a>
                         </ul>
