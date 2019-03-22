@@ -77,8 +77,8 @@
                                           
                                             <div class="col-md-6">
                                                 <select name="idtipounidad" id="idTipoUnidad" class="form-control{{ $errors->has('idtipounidad') ? ' is-invalid' : '' }} text-capitalize" required>
-                                                    @forelse ($tipounidades as $tipounidad)
-                                                    <option  value="{{$tipounidad->id}}">{{$tipounidad->nombre}}</option>
+                                                    @forelse ($unidades as $unidad)
+                                                    <option  value="{{$unidad->tipounidad->nombre}}">{{$unidad->tipounidad->nombre}}</option>
                                                     @empty
                                                         
                                                     @endforelse

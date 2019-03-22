@@ -153,8 +153,8 @@ function showEditModal(id){
     $('#editId').val(data.id)
     $('#editIdUsuario').val();
     $('#editActive').val(data.active);
-    $('#editIdTipoUnidad').prop('selectedIndex', data.idtipounidad -1)
-
+    $('#editIdTipoUnidad').val(data.idtipounidad);
+   
     
     if(data.active==0){
       $("#editActive").prop("checked", true);
