@@ -16,7 +16,7 @@
     @include('components.hamburger-menu')
     @include('contents.activities.tipoactividades')        
 </div>
-
+Contenido para actividades
 
 @include('modals.activities.addtipoactividades')
 @include('modals.activities.edittipoactividades')
