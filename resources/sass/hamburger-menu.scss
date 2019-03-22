@@ -299,9 +299,10 @@
 }
 .nav-title-container{
     display: block;
-    width: 49%;
+    width: fit-content;
     float: left;
     text-align: center;
+    margin-left: 2rem;
 }
 .nav-title-container__title{
     font-size: 100%;
@@ -311,9 +312,9 @@
 }
 .user-name-contanier{
     display: block;
-    width: 49%;
-    float: right;
+    width: fit-content;
     text-align: center;
+    margin-right: 2rem;
 }
 .tr-bg{
     background-color: rgba(212, 212, 212, 0.795) !important;

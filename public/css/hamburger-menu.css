@@ -335,9 +335,12 @@
 
 .nav-title-container {
   display: block;
-  width: 49%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   float: left;
   text-align: center;
+  margin-left: 2rem;
 }
 
 .nav-title-container__title {
@@ -349,9 +352,11 @@
 
 .user-name-contanier {
   display: block;
-  width: 49%;
-  float: right;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   text-align: center;
+  margin-right: 2rem;
 }
 
 .tr-bg {

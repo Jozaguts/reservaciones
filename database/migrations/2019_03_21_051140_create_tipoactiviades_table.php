@@ -15,7 +15,7 @@ class CreateTipoactiviadesTable extends Migration
     {
         Schema::create('tipoactividades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('clave',4);
+            $table->string('clave',5);
             $table->string('nombre');
             $table->string('color');
             $table->boolean('active',1);
