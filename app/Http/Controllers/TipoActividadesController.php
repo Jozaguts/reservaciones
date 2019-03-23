@@ -37,7 +37,29 @@ class TipoActividadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //reglas de validacion
+        $rules =[
+            'clave' => ['required', 'string', 'max:5 min:5'],
+            'nombre' => ['required', 'string', 'max:255'],
+            'color'=> ['required', 'string'],
+            'idusuario'=> ['required', 'integer'],
+            'removed' => ['nullable','boolean'],
+            'active' => ['nullable','boolean'],
+        ];
+         //Se realiza la validación
+         $validator = Validator::make($request->all(), $rules);
+
+        if($request->ajax())
+        {
+            $result = TipoUnidad::create($request->all());
+            if ($result) {
+                return response()->json(['success'=>'true', 200, 'correcto' => 'Agregado Correctamente', 200]);
+            }
+            else
+             {
+                return response()->json(['success'=>'false','error'=>'Error no se Puedo Agregar la Unidad/Equipo']);  
+            }
+        }
     }
 
     /**
