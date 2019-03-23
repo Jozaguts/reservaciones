@@ -43,7 +43,7 @@ class EquiposYUnidadesController extends Controller
     {
           //reglas de validacion
           $rules =[
-            'clave' => ['required', 'string', 'min:5', 'max:5'],
+            'clave' => ['required', 'string', 'max:5'],
             'placa' => ['required', 'string', 'max:16'],
             'capacidad'=> ['required', 'string'],
             'descripcion'=> ['required', 'string'],
@@ -65,19 +65,15 @@ class EquiposYUnidadesController extends Controller
              $result = EquiposYUnidades::create($request->all());
              if ($result) {
                  return response()->json(['success'=>'true', 200, 'correcto' => 'Agregado Correctamente', 200]);
+             }else{
+                 return response()->json(['success'=>'error', 'message'=>'No se puedo Agrear la Unidad' ]);
              }
-            //  else
-            //   {
-            //      return response()->json(['success'=>'false','error'=>'Error no se Puedo Agregar la Unidad/Equipo']);  
-            //  }
+       
+         }else{
+             return "Error al Metodo no encotrado";
          }
 
-         
-        //  if ($validator->fails()) {
-        //     return redirect('unidades')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
+
 
    
     }
@@ -117,7 +113,7 @@ class EquiposYUnidadesController extends Controller
     {
          //reglas de validacion
          $rules =[
-            'clave' => [ 'string', 'max:255'],
+            'clave' => [ 'string', 'max:5'],
             'placa' => [ 'string', 'max:255'],
             'capacidad'=> [ 'string'],
             'descripcion'=> [ 'string'],
