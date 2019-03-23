@@ -6,7 +6,7 @@
                     <div class="card-header text-dark font-weight-bold">Tipo De Actividades</div>
                         <div class="card-body">
                             <div class="row justify-content-end my-2">
-                                <a href="#" class="btn btn-success" id="btnAddTipoEU"><span class="font-weight-bolder">+</span> Tipo Actividad</a>
+                                <a href="#" class="btn btn-success" id="btnAddTipoActividad"><span class="font-weight-bolder">+</span> Tipo Actividad</a>
                             </div>
                               {{-- alerts --}}
                               @include('components.ajax-alerts')

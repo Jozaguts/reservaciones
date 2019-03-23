@@ -65,19 +65,15 @@ class EquiposYUnidadesController extends Controller
              $result = EquiposYUnidades::create($request->all());
              if ($result) {
                  return response()->json(['success'=>'true', 200, 'correcto' => 'Agregado Correctamente', 200]);
+             }else{
+                 return response()->json(['success'=>'error', 'message'=>'No se puedo Agrear la Unidad' ]);
              }
-            //  else
-            //   {
-            //      return response()->json(['success'=>'false','error'=>'Error no se Puedo Agregar la Unidad/Equipo']);  
-            //  }
+       
+         }else{
+             return "Error al Metodo no encotrado";
          }
 
-         
-        //  if ($validator->fails()) {
-        //     return redirect('unidades')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
+
 
    
     }
