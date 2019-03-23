@@ -43,7 +43,7 @@ class EquiposYUnidadesController extends Controller
     {
           //reglas de validacion
           $rules =[
-            'clave' => ['required', 'string', 'min:5', 'max:5'],
+            'clave' => ['required', 'string', 'max:5'],
             'placa' => ['required', 'string', 'max:16'],
             'capacidad'=> ['required', 'string'],
             'descripcion'=> ['required', 'string'],
@@ -113,7 +113,7 @@ class EquiposYUnidadesController extends Controller
     {
          //reglas de validacion
          $rules =[
-            'clave' => [ 'string', 'max:255'],
+            'clave' => [ 'string', 'max:5'],
             'placa' => [ 'string', 'max:255'],
             'capacidad'=> [ 'string'],
             'descripcion'=> [ 'string'],
