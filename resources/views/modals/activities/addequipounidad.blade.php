@@ -1,29 +1,30 @@
 
 
 <div class="container-fluid d-none" id="modalAddEU">
-        <span class="close-modal col-md-6 offset-6" id="closeModal"></span>
+        
        
             <div class="row justify-content-center row-modal">
                 <div class="col-sm-8 col-md-6 modal-content">
                     <div class="card">
                         <div class="header-modal-container">
-                                <div class="card-header" id="card-header">{{ __('Agregar Equipo/Unidad') }} </div>
+                                <div class="card-header" id="card-header">{{ __('Agregar Equipo/Unidad') }}  </div>
                      
-                        <div class="container mt-3">
-                            <div class="row">
-                                <div class="col-sm-6 offset-md-2">
-                                    
-                                                @include('components.alertsintomodals')
-                                    
-                                </div>
-                            </div>
-                        </div>
+                   
                             
-                      
+                        <span class="close-modal " id="closeModal"></span>
                       
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('tipounidades') }}" id="eUForm">
+                                <div class="container mt-3">
+                                    <div class="row">
+                                        <div class="col-sm-6 offset-md-2">
+                                            
+                                                        @include('components.alertsintomodals')
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                                 <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                                 {{-- @method('PUT') --}}
                                
@@ -119,7 +120,54 @@
                                                 @endif
                                             </div>
                                         </div>
-                                  
+
+
+                                        <div class="form-group row">
+                                        <label for="horario" class="col-md-4 col-form-label text-md-right">{{__('Horario')}}</label>
+                                        <div class="col-md-6">
+                                                <table >
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="table-head" >Día</th>
+                                                                <th class="table-head" >Inicio</th>
+                                                                <th class="table-head" >Fín</th>
+                                                            </tr>
+                                                        </thead>
+                                                   
+                                                        <tbody >
+                                                       
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="checkbox" name="todoslosdias" id="todosLosDias"  value="todoslosdias">
+                                                                 </td>
+        
+                                                                 <td>
+                                                                     <input type="time" name="iniciotodoslosdias" id="inicioTodosLosDias" class="form-control">
+                                                                 </td>
+                                                                 <td>
+                                                                        <input type="time" name="fintodoslosdias" id="finTodosLosDias" class="form-control">
+                                                                    </td>
+                                                            </tr>
+                                                            @foreach ($dias as $dia)
+                                                            <tr>
+                                                                    <td class="display-flexbox">
+                                                                    <input type="checkbox" name="{{$dia->dia}}" id="{{$dia->dia}}"  value="{{$dia->dia}}" class="day"><span class="day-span">{{$dia->dia}}</span>
+                                                                     </td>
+            
+                                                                     <td >
+                                                                     <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control">
+                                                                     </td>
+                                                                     <td >
+                                                                            <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control">
+                                                                        </td>
+                                                            </tr>
+                                                                
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                        </div>
+                                        </div>
+                         
                                 <input type="hidden" name="active" value=1>
                                 <input type="hidden" name="removed" value=0>
                                 <input type="hidden" name="idusuario" value={{Auth::user()->id}}>

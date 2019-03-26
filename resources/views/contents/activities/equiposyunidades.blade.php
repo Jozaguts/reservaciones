@@ -38,11 +38,11 @@
                                                 <tr id="trBg" class="mot" data-id="{{$unidad->id}}"data-clave="{{$unidad->clave}}" >
                                                 <td class=" table-head table-head__name" data-active="{{$unidad->active}}" data-tipo-unidad="{{$unidad->tipounidad->id}}">{{$unidad->clave}} 
                                                     </td>
-                                                    <td class="table-head table-head__surname" data-active="{{$unidad->active}}">{{$unidad->descripcion}}
+                                                    <td class="table-head table-head__surname" data-active="{{$unidad->active}}"> <p class="flex-content">{{$unidad->descripcion}}</p>
                                                     </td>
-                                                    <td class="table-head table-head__surname text-capitalize" data-active="{{$unidad->active}}">{{$unidad->capacidad}}
+                                                    <td class="table-head  text-capitalize" data-active="{{$unidad->active}}">{{$unidad->capacidad}}
                                                     </td>
-                                                    <td class="table-head table-head__surname text-capitalize" data-active="{{$unidad->active}}">{{$unidad->color}}
+                                                    <td class="table-head  text-capitalize" data-active="{{$unidad->active}}">{{$unidad->color}}
                                                         </td>
                                                     <td class="table-head table-head__actions"> 
                                                         <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$unidad->id}});" data-id="{{$unidad->id}}">

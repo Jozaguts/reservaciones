@@ -4,7 +4,8 @@
 @endsection
 @section('css')
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
-     <link href="{{ asset('css/tipoequipounidad.css') }}" rel="stylesheet">
+     {{-- <link href="{{ asset('css/tipoequipounidad.css') }}" rel="stylesheet"> --}}
+     <link href="{{ asset('css/equiposyunidades.css') }}" rel="stylesheet">
     
 @endsection
 @section('content')

@@ -66,6 +66,82 @@ eUForm.addEventListener('submit',(e)=>{
         let token = $("input[name=_token]").val();
         let idusuario = datos.get('idusuario')
         let idtipounidad = datos.get('idtipounidad');
+        let todosLosDias =0, totalDias=0;
+            iTD = $('#inicioTodosLosDias').val(),
+            fTD =  $('#finTodosLosDias').val(),
+            ilunes= $('#inicioL').val(),
+            imartes= $('#inicioM').val(),
+            imiercoles= $('#inicioX').val(),
+            ijueves= $('#inicioJ').val(),
+            iviernes= $('#inicioV').val(),
+            isabado= $('#inicioS').val(),
+            idomingo= $('#inicioD').val(),
+            flunes= $('#finL').val(),
+            fmartes= $('#finM').val(),
+            fmiercoles= $('#finX').val(),
+            fjueves= $('#finJ').val(),
+            fviernes= $('#finV').val(),
+            fsabado= $('#finS').val(), 
+            fdomingo= $('#finD').val()
+            let Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo;
+       
+        if($('#todosLosDias').is(':checked')){
+          todosLosDias = todosLosDias+1;
+          }else{
+            todosLosDias = todosLosDias; 
+            if($('#L').is(':checked')){
+              totalDias = totalDias+1;
+               Lunes = 'L';
+            }else{
+              totalDias = totalDias;
+              Lunes= '';
+            }
+            if($('#M').is(':checked')){
+              totalDias = totalDias+1;
+               Martes = 'M';
+            }else{
+              totalDias = totalDias;
+              Martes='';
+            }
+            if($('#X').is(':checked')){
+              totalDias = totalDias+1;
+               Miercoles = 'X';
+            }else{
+              totalDias = totalDias;
+              Miercoles='';
+            }
+            if($('#J').is(':checked')){
+              totalDias = totalDias +1;
+               Jueves = 'J';
+            }else{
+              totalDias = totalDias;
+              Jueves='';
+            }
+            if($('#V').is(':checked')){
+              totalDias = totalDias+1;
+               Viernes = 'V';
+            }else{
+              totalDias = totalDias;
+              Viernes='';
+            }
+            if($('#S').is(':checked')){
+              totalDias = totalDias+1;
+               Sabado = 'S';
+            }else{
+              totalDias = totalDias;
+              Sabado = '';
+            }
+            if($('#D').is(':checked')){
+              totalDias = totalDias+1;
+               Domingo = 'D';
+            }else{
+              totalDias = totalDias;
+              Domingo ='';
+            }
+          }
+                
+        
+  
       
         let active;
           if($('#active').is(':checked')){
@@ -82,13 +158,13 @@ eUForm.addEventListener('submit',(e)=>{
         
         
         let route = 'unidades'
-        
+   
         $.ajax({
           url:route,
           headers:{'X-CSRF-TOKEN':token},
           type:'POST',
           dataType: 'json',
-          data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idusuario: idusuario, active: active, remove: remove, placa: placa, idtipounidad: idtipounidad},
+          data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idusuario: idusuario, active: active, remove: remove, placa: placa, idtipounidad: idtipounidad, todosLosDias: todosLosDias, iTD: iTD, fTD:fTD, ilunes:ilunes, imartes: imartes, imiercoles: imiercoles, ijueves: ijueves, iviernes: iviernes, isabado: isabado, idomingo: idomingo, flunes:flunes, fmartes:fmartes,fmiercoles: fmiercoles, fjueves:fjueves, fviernes:fviernes, fsabado:fsabado, fdomingo:fdomingo, Lunes:Lunes, Martes:  Martes, Miercoles: Miercoles, Jueves: Jueves, Viernes: Viernes, Sabado: Sabado,Domingo: Domingo, totalDias:totalDias},
           success:function(data)
           {
 
@@ -290,3 +366,24 @@ $(document).ready(function() {
      
   });
 });
+
+
+let todosLosDias = document.getElementById('todosLosDias')
+
+todosLosDias.addEventListener('change',e=>{
+  if(e.target.checked){
+    checkboxs = document.querySelectorAll('input[class=day]')
+    checkboxs.forEach((check)=>{
+      check.checked = true;
+    })
+
+}else{
+  if(e.target.checked == false){
+    checkboxs = document.querySelectorAll('input[class=day]')
+    checkboxs.forEach((check)=>{
+      check.checked = false;
+    })
+
+}
+}
+})
