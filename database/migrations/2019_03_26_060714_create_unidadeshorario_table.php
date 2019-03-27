@@ -15,13 +15,20 @@ class CreateUnidadeshorarioTable extends Migration
     {
         Schema::create('unidadeshorario', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idtipounidad');
             $table->string('dia');
             $table->time('hini');
             $table->time('hfin');
             $table->boolean('active');
             $table->boolean('remove');
-            $table->integer('idusuario');
+
+            $table->unsignedInteger('unidades_id');
+            $table->foreign('unidades_id')->references('id')->on('unidades');			            
+            $table->unsignedInteger('idusuario');
+            $table->foreign('idusuario')->references('id')->on('usuarios');			
+            $table->unsignedInteger('idtipounidad');
+            $table->foreign('idtipounidad')->references('id')->on('tipounidades');
+
+			
             $table->timestamps();
         });
     }

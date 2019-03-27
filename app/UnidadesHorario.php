@@ -8,7 +8,7 @@ class UnidadesHorario extends Model
 {
     protected $table = "unidadeshorario";
 
-    protected $fillable =['dia','idtipounidad','hini','hfin','active','remove','idusuario'];
+    protected $fillable =['dia','idtipounidad','hini','hfin','active','remove','idusuario','unidades_id'];
 
  
 }

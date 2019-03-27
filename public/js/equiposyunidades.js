@@ -179,10 +179,10 @@ eUForm.addEventListener('submit',(e)=>{
                 else{
                   $('#successIntoModal').html(data.correcto);
                   $('#message-successIntoModal').fadeIn();
-                  setTimeout(() => {
-                    $('#modalAddEU').fadeOut();
-                  }, 3000);
-                  setTimeout("location.reload(true);",3000)
+                  // setTimeout(() => {
+                  //   $('#modalAddEU').fadeOut();
+                  // }, 3000);
+                  // setTimeout("location.reload(true);",3000)
               } 
             // if(data.success == 'true')
             // {

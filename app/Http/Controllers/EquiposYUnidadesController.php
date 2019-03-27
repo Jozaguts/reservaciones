@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\EquiposYUnidades;
 use Validator;
 use App\TipoUnidad;
@@ -68,191 +69,203 @@ class EquiposYUnidadesController extends Controller
              return response()->json(['success'=>'false','error'=>$validator->errors()->all()]);  
          }
          if($request->ajax())
-         {
+         {            
 
-            $horario = new UnidadesHorario;
+             $unidad = EquiposYUnidades::create($request->all());
+             $unidad_id = $unidad->id;
+            
+             if ($unidad) {
 
-            $totalDias = $request->totalDias;
+                 //  asignamos los ohrarios
+        $horario = new UnidadesHorario;
 
-            $todosLosDias = $request->todosLosDias;
-            if($todosLosDias==1){
-                // Lunes
+        $totalDias = $request->totalDias;
+
+        $todosLosDias = $request->todosLosDias;
+        if($todosLosDias==1){
+            // Lunes
+            $horario::create([
+                'dia'=> 'L',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id 
+            ]);
+             // Martes
+             $horario::create([
+                'dia'=> 'M',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id 
+            ]);
+             // Miercoles
+             $horario::create([
+                'dia'=> 'X',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id  
+            ]);
+             // Jueves
+             $horario::create([
+                'dia'=> 'J',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id  
+            ]);
+             // Viernes
+             $horario::create([
+                'dia'=> 'V',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id 
+            ]);
+             // Sabado
+             $horario::create([
+                'dia'=> 'S',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id 
+            ]);
+             // Domingo
+             $horario::create([
+                'dia'=> 'D',
+                'idtipounidad'=> $request->input('idtipounidad'),
+                'hini'=> $request->input('iTD'),
+                'hfin'=>$request->input('fTD'),
+                'active'=>1,
+                'remove'=>0,
+                'idusuario'=>$request->input('idusuario'), 
+                'unidades_id' => $unidad_id 
+            ]);
+
+        // agregamos dia por dia
+        }else{
+            // dd($request->input('ilunes'));
+            // Lunes
+            $lunes = $request->Lunes;
+            if($lunes == 'L'){
                 $horario::create([
                     'dia'=> 'L',
                     'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
+                    'hini'=> $request->input('ilunes'),
+                    'hfin'=>$request->input('flunes'),
                     'active'=>1,
                     'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
+                    'idusuario'=>$request->input('idusuario'), 'unidades_id' => $unidad_id 
                 ]);
-                 // Martes
-                 $horario::create([
+            }
+            // Martes
+            $martes = $request->Martes;
+            if($martes == 'M'){
+                $horario::create([
                     'dia'=> 'M',
                     'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
+                    'hini'=> $request->input('imartes'),
+                    'hfin'=>$request->input('fmartes'),
                     'active'=>1,
                     'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
+                    'idusuario'=>$request->input('idusuario'), 'unidades_id' => $unidad_id 
                 ]);
-                 // Miercoles
+            }
+             // Miercoles
+             $miercoles = $request->Miercoles;
+             if($miercoles == 'X'){
                  $horario::create([
-                    'dia'=> 'X',
-                    'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
-                    'active'=>1,
-                    'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
-                ]);
-                 // Jueves
-                 $horario::create([
+                     'dia'=> 'X',
+                     'idtipounidad'=> $request->input('idtipounidad'),
+                     'hini'=> $request->input('imiercoles'),
+                     'hfin'=>$request->input('fmiercoles'),
+                     'active'=>1,
+                     'remove'=>0,
+                     'idusuario'=>$request->input('idusuario'), 'unidades_id' => $unidad_id 
+                 ]);
+             }
+              // Jueves
+            $jueves = $request->Jueves;
+            if($jueves == 'J'){
+                $horario::create([
                     'dia'=> 'J',
                     'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
+                    'hini'=> $request->input('ijueves'),
+                    'hfin'=>$request->input('fjueves'),
                     'active'=>1,
                     'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
+                    'idusuario'=>$request->input('idusuario'), 'unidades_id' => $unidad_id 
                 ]);
-                 // Viernes
+            }
+             // Viernes
+             $viernes = $request->Viernes;
+             if($viernes == 'V'){
                  $horario::create([
-                    'dia'=> 'V',
-                    'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
-                    'active'=>1,
-                    'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
-                ]);
-                 // Sabado
-                 $horario::create([
+                     'dia'=> 'V',
+                     'idtipounidad'=> $request->input('idtipounidad'),
+                     'hini'=> $request->input('iviernes'),
+                     'hfin'=>$request->input('fviernes'),
+                     'active'=>1,
+                     'remove'=>0,
+                     'idusuario'=>$request->input('idusuario'), 'unidades_id' => $unidad_id 
+                 ]);
+             }
+              // sabado
+            $sabado = $request->Sabado;
+            if($sabado == 'S'){
+                $horario::create([
                     'dia'=> 'S',
                     'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
+                    'hini'=> $request->input('isabado'),
+                    'hfin'=>$request->input('fsabado'),
                     'active'=>1,
                     'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
+                    'idusuario'=>$request->input('idusuario'), 
+                    'unidades_id' => $unidad_id 
                 ]);
-                 // Domingo
-                 $horario::create([
+            }
+            // domingo
+            $domingo = $request->Domingo;
+            if($domingo == 'D'){
+                $horario::create([
                     'dia'=> 'D',
                     'idtipounidad'=> $request->input('idtipounidad'),
-                    'hini'=> $request->input('iTD'),
-                    'hfin'=>$request->input('fTD'),
+                    'hini'=> $request->input('idomingo'),
+                    'hfin'=>$request->input('fdomingo'),
                     'active'=>1,
                     'remove'=>0,
-                    'idusuario'=>$request->input('idusuario'),
+                    'idusuario'=>$request->input('idusuario'), 
+                    'unidades_id' => $unidad_id 
                 ]);
-
-            // agregamos dia por dia
-            }else{
-                // dd($request->input('ilunes'));
-                // Lunes
-                $lunes = $request->Lunes;
-                if($lunes == 'L'){
-                    $horario::create([
-                        'dia'=> 'L',
-                        'idtipounidad'=> $request->input('idtipounidad'),
-                        'hini'=> $request->input('ilunes'),
-                        'hfin'=>$request->input('flunes'),
-                        'active'=>1,
-                        'remove'=>0,
-                        'idusuario'=>$request->input('idusuario'),
-                    ]);
-                }
-                // Martes
-                $martes = $request->Martes;
-                if($martes == 'M'){
-                    $horario::create([
-                        'dia'=> 'M',
-                        'idtipounidad'=> $request->input('idtipounidad'),
-                        'hini'=> $request->input('imartes'),
-                        'hfin'=>$request->input('fmartes'),
-                        'active'=>1,
-                        'remove'=>0,
-                        'idusuario'=>$request->input('idusuario'),
-                    ]);
-                }
-                 // Miercoles
-                 $miercoles = $request->Miercoles;
-                 if($miercoles == 'X'){
-                     $horario::create([
-                         'dia'=> 'X',
-                         'idtipounidad'=> $request->input('idtipounidad'),
-                         'hini'=> $request->input('imiercoles'),
-                         'hfin'=>$request->input('fmiercoles'),
-                         'active'=>1,
-                         'remove'=>0,
-                         'idusuario'=>$request->input('idusuario'),
-                     ]);
-                 }
-                  // Jueves
-                $jueves = $request->Jueves;
-                if($jueves == 'J'){
-                    $horario::create([
-                        'dia'=> 'J',
-                        'idtipounidad'=> $request->input('idtipounidad'),
-                        'hini'=> $request->input('ijueves'),
-                        'hfin'=>$request->input('fjueves'),
-                        'active'=>1,
-                        'remove'=>0,
-                        'idusuario'=>$request->input('idusuario'),
-                    ]);
-                }
-                 // Viernes
-                 $viernes = $request->Viernes;
-                 if($viernes == 'V'){
-                     $horario::create([
-                         'dia'=> 'V',
-                         'idtipounidad'=> $request->input('idtipounidad'),
-                         'hini'=> $request->input('iviernes'),
-                         'hfin'=>$request->input('fviernes'),
-                         'active'=>1,
-                         'remove'=>0,
-                         'idusuario'=>$request->input('idusuario'),
-                     ]);
-                 }
-                  // sabado
-                $sabado = $request->Sabado;
-                if($sabado == 'S'){
-                    $horario::create([
-                        'dia'=> 'S',
-                        'idtipounidad'=> $request->input('idtipounidad'),
-                        'hini'=> $request->input('isabado'),
-                        'hfin'=>$request->input('fsabado'),
-                        'active'=>1,
-                        'remove'=>0,
-                        'idusuario'=>$request->input('idusuario'),
-                    ]);
-                }
-                // domingo
-                $domingo = $request->Domingo;
-                if($domingo == 'D'){
-                    $horario::create([
-                        'dia'=> 'D',
-                        'idtipounidad'=> $request->input('idtipounidad'),
-                        'hini'=> $request->input('idomingo'),
-                        'hfin'=>$request->input('fdomingo'),
-                        'active'=>1,
-                        'remove'=>0,
-                        'idusuario'=>$request->input('idusuario'),
-                    ]);
-                }
-
-
-                
             }
 
-         
+
             
+        }
 
 
-             $result = EquiposYUnidades::create($request->all());
-           
-             if ($result) {
+
+
+
                  return response()->json(['success'=>'true', 200, 'correcto' => 'Agregado Correctamente', 200]);
              }else{
                  return response()->json(['success'=>'error', 'message'=>'No se puedo Agrear la Unidad' ]);
@@ -262,6 +275,7 @@ class EquiposYUnidadesController extends Controller
              return "Error al Metodo no encotrado";
          }
 
+       
 
 
    
@@ -287,7 +301,7 @@ class EquiposYUnidadesController extends Controller
     public function edit($id)
     {
         $equipounidad = EquiposYUnidades::find($id); 
-     
+        
         return response()->json($equipounidad);
     }
 
@@ -339,7 +353,7 @@ class EquiposYUnidadesController extends Controller
                         'idtipounidad'=> $request->get('idtipounidad'),                        
                         'remove'=>$request->get('remove'),
                         'active'=>$request->get('active'),
-                        'idusuario'=>$request->get('idusuario'),
+                        'idusuario'=>$request->get('idusuario'), 'unidades_id' => $unidad_id 
                        ]);
                        $unidad->save();
           
