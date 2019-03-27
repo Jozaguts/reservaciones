@@ -151,14 +151,14 @@
                                                             @foreach ($dias as $dia)
                                                             <tr>
                                                                     <td class="display-flexbox">
-                                                                    <input type="checkbox" name="{{$dia->dia}}" id="{{$dia->dia}}"  value="{{$dia->dia}}" class="day"><span class="day-span">{{$dia->dia}}</span>
+                                                                    <input type="checkbox" name="{{$dia->dia}}" id="{{$dia->dia}}"  value="{{$dia->dia}}" class="day" onchange="habilitarInput(this)" ><span class="day-span">{{$dia->dia}}</span>
                                                                      </td>
             
                                                                      <td >
-                                                                     <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control">
+                                                                     <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control input-time" disabled>
                                                                      </td>
                                                                      <td >
-                                                                            <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control">
+                                                                            <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control input-time" disabled>
                                                                         </td>
                                                             </tr>
                                                                 

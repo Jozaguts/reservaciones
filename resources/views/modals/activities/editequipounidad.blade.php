@@ -8,7 +8,7 @@
                     <div class="header-modal-container">
                            
                     <div class="card-header" id="card-header">{{ __('Editar Equipo/Unidad') }} </div>
-                    <span class="close-modal-edit " id="closeModalEdit"></span>
+                    <span class="close-modal" id="closeModalEdit"></span>
                     @if ($errors->any())
                     <div class="container">
                         <div class="row">
@@ -117,6 +117,53 @@
                                                 @endif
                                             </div>                          
                                         </div>
+
+                                        {{-- edit horario --}}
+                                        <div class="form-group row">
+                                            <label for="horario" class="col-md-4 col-form-label text-md-right">{{__('Horario')}}</label>
+                                            <div class="col-md-6">
+                                                    <table >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="table-head" >Día</th>
+                                                                    <th class="table-head" >Inicio</th>
+                                                                    <th class="table-head" >Fín</th>
+                                                                </tr>
+                                                            </thead>
+                                                       
+                                                            <tbody >
+                                                           
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" name="todoslosdias" id="todosLosDias"  value="todoslosdias">
+                                                                     </td>
+            
+                                                                     <td>
+                                                                         <input type="time" name="iniciotodoslosdias" id="inicioTodosLosDias" class="form-control">
+                                                                     </td>
+                                                                     <td>
+                                                                            <input type="time" name="fintodoslosdias" id="finTodosLosDias" class="form-control">
+                                                                        </td>
+                                                                </tr>
+                                                                @foreach ($dias as $dia)
+                                                                <tr>
+                                                                        <td class="display-flexbox">
+                                                                        <input type="checkbox" name="{{$dia->dia}}" id="{{$dia->dia}}"  value="{{$dia->dia}}" class="day" onchange="habilitarInput(this)" ><span class="day-span">{{$dia->dia}}</span>
+                                                                         </td>
+                
+                                                                         <td >
+                                                                         <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control input-time" disabled>
+                                                                         </td>
+                                                                         <td >
+                                                                                <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control input-time" disabled>
+                                                                            </td>
+                                                                </tr>
+                                                                    
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                            </div>
+                                            </div>
                                 <div class="form-group row">
                                         <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Desactivar') }}</label>
             

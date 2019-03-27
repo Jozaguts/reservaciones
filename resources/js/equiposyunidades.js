@@ -367,8 +367,9 @@ $(document).ready(function() {
   });
 });
 
-
+// seleccionar todos los checkbox y desactivar todos inputs
 let todosLosDias = document.getElementById('todosLosDias')
+let inputsTime = document.querySelectorAll(' input[class*="input-time"]')   
 
 todosLosDias.addEventListener('change',e=>{
   if(e.target.checked){
@@ -376,14 +377,45 @@ todosLosDias.addEventListener('change',e=>{
     checkboxs.forEach((check)=>{
       check.checked = true;
     })
-
-}else{
-  if(e.target.checked == false){
-    checkboxs = document.querySelectorAll('input[class=day]')
-    checkboxs.forEach((check)=>{
-      check.checked = false;
+    inputsTime.forEach((input)=>{
+      input.disabled = true;
     })
 
-}
-}
+}else{
+   if(e.target.checked == false){
+     checkboxs = document.querySelectorAll('input[class=day]')
+     checkboxs.forEach((check)=>{
+       check.checked = false;
+     })
+    //  inputsTime.forEach((input)=>{
+    //    input.disabled = false;
+    //  })
+ }
+ }
 })
+
+//habilitar input time
+
+// let inputL = document.getElementById('inicioL')
+// console.log(inputL)
+// inputL.disabled ="false";
+
+// inputsTime.forEach((input)=>{
+//   input.disabled= false;
+  
+// })
+habilitarInput = (e)=>{
+let inputInicio = document.querySelectorAll(`input[id=inicio${e.id}]`)
+let inputFin = document.querySelectorAll(`input[id=fin${e.id}]`)
+
+if(inputFin[0].disabled == true ||inputInicio[0].disabled == true ){
+  inputFin[0].disabled = false;
+  inputInicio[0].disabled = false;
+}else{
+  if(inputFin[0].disabled == false ||inputInicio[0].disabled == false){
+    inputFin[0].disabled = true;
+    inputInicio[0].disabled = true;
+  }
+}
+
+}
