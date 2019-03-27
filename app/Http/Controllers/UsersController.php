@@ -111,8 +111,9 @@ class UsersController extends Controller
     public function edit(Request $request, $id)
     {
         $user = User::find($id); 
-     
-        return response()->json($user);
+        $role = $user->getRoleNames();
+        
+        return response()->json(['user'=>$user, 'role' => $role ]);
       
     }
      

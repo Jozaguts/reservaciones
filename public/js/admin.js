@@ -20,13 +20,13 @@ function showEditModal(id){
   let route = "usuarios/"+id+"/edit";
 
   $.get(route, function(data){
-    $('#editEmail').val(data.email);
-    $('#editFirst_name').val(data.first_name);
-    $('#editLast_name').val(data.last_name);
-    $('#editDepartment').val(data.department);
-    $('#editPassword').val(data.password);
+    $('#editEmail').val(data.user.email);
+    $('#editFirst_name').val(data.user.first_name);
+    $('#editLast_name').val(data.user.last_name);
+    $('#editDepartment').val(data.user.department);
+    $('#editPassword').val(data.user.password);
+    $('#editRole').val(data.role);
   
-
     $('#editActive').val(data.active);
     
     $('#userId').val(data.id);
