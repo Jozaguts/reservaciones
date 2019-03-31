@@ -163,7 +163,7 @@ class EquiposYUnidadesController extends Controller
 
         // agregamos dia por dia
         }else{
-            // dd($request->input('ilunes'));
+            
             // Lunes
             $lunes = $request->Lunes;
             if($lunes == 'L'){
@@ -300,9 +300,17 @@ class EquiposYUnidadesController extends Controller
      */
     public function edit($id)
     {
-        $equipounidad = EquiposYUnidades::find($id); 
+        $unidad = EquiposYUnidades::find($id); 
         
-        return response()->json($equipounidad);
+
+        // return response()->json($equipounidad);
+        $unidad_horario = DB::table('unidades as u')
+        ->join('unidadeshorario as uh', 'u.id','=','uh.unidades_id')
+        ->select('uh.dia','uh.hini','uh.hfin','uh.id')
+        ->where('u.id', '=',$id)
+        ->get();
+        return response()->json(['unidad'=>$unidad,'unidadHorario'=> $unidad_horario]);
+       
     }
 
     /**
@@ -314,6 +322,12 @@ class EquiposYUnidadesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        
+        $unidad = EquiposYUnidades::find($id);
+        
+        $horarios = UnidadesHorario::where('unidades_id','=', $id)->get();
+        
          //reglas de validacion
          $rules =[
             'clave' => [ 'string', 'max:5'],
@@ -327,12 +341,10 @@ class EquiposYUnidadesController extends Controller
             'active' => ['nullable','boolean'],
         ];
            
-
+      
       if($request->ajax())
       {
-          $unidad = EquiposYUnidades::find($id);
-         
-
+        
        
             //Se realiza la validación
         $validator = Validator::make($request->all(), $rules);
@@ -344,20 +356,162 @@ class EquiposYUnidadesController extends Controller
                         ->withInput();
         }else{
             $inputs = $request->all();
-
-            $unidad->fill(['clave' => $request->get('clave'),
+            
+            $unidad::updateOrCreate(['clave' => $request->get('clave'),
                         'placa'=> $request->get('placa'),
                         'capacidad'=> $request->get('capacidad'),
                         'descripcion'=> $request->get('descripcion'),
                         'color'=> $request->get('color'),
-                        'idtipounidad'=> $request->get('idtipounidad'),                        
+                        'idtipounidad'=> $request->get('idtipounidad'),              
                         'remove'=>$request->get('remove'),
                         'active'=>$request->get('active'),
-                        'idusuario'=>$request->get('idusuario'), 'unidades_id' => $unidad_id 
+                        'idusuario'=>$request->get('idusuario'), 
+                        
                        ]);
                        $unidad->save();
+
+                        $filas = 7;                        
+
+                        for ($i=1; $i <$filas+1 ; $i++) { 
+                           
+                           $dias = $request->get('dias');
+                           
+                            if($dias[$i-1][1] != null && $dias[$i-1][2] != null ){
+                                $unidad_dia = UnidadesHorario::where('unidades_id', $id)
+                                ->where('dia', $dias[$i-1][0])
+                                ->update(['hini' => $dias[$i-1][1],'hfin' => $dias[$i-1][2]]);
+                                if ($unidad_dia<1) {
+                                    UnidadesHorario::create([
+                                    'dia'=> $dias[$i-1][0],
+                                    'hini' => $dias[$i-1][1],
+                                    'hfin' => $dias[$i-1][2],
+                                    'active'=>1,
+                                    'remove'=>0,
+                                    'unidades_id'=> $id,
+                                    'idusuario'=>$request->get('idusuario'),
+                                    'idtipounidad'=>$request->get('idtipounidad')])
+                                    ->save();
+                                }
+
+                            }else{
+                                
+                              $unidad_dia =   DB::table('unidadeshorario')->where('unidades_id', $id)
+                              ->where('dia','=',$dias[$i-1][0])
+                              ->delete();
+                             
+                                if($unidad_dia == null){
+                                    return response()->json(['success'=>'false','error'=>'Error no se Puedo Eliminar la Unidad/Equipo']); 
+                                }else{
+                                    return response()->json(['success'=>'true', 200, 'correcto' => 'Unidad Eliminada Correctamente', 200]);
+                                }
+                                
+                            }
+  
+                        }
+
+                       foreach ( $horarios as $horario ) {
+                      
+                       
+                        if($horario->dia == 'L'){
+                          $horario::updateOrCreate([
+                            'dia'=> 'L',
+                            'idtipounidad'=> $request->get('idtipounidad'),
+                           'hini'=> $request->get('editIL'),
+                           'hfin'=>$request->get('editFL'),
+                           'active'=>$request->get('active'),
+                           'remove'=>0,
+                           'idusuario'=>$request->get('idusuario'), 
+                           'unidades_id' => $unidad->id  
+                          ]);
+                       
+
+                          
+                        }
+                        if($horario->dia == 'M' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'M',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editIM'),
+                             'hfin'=>$request->get('editFM'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save();
+                            
+                          }
+                          if($horario->dia == 'X' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'X',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editIX'),
+                             'hfin'=>$request->get('editFX'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save(); 
+                          }
+                          if($horario->dia == 'J' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'J',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editIJ'),
+                             'hfin'=>$request->get('editFJ'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save();
+                            
+                          }
+                          if($horario->dia == 'V' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'V',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editIV'),
+                             'hfin'=>$request->get('editFV'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save();
+                            
+                          }
+                          if($horario->dia == 'S' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'S',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editIS'),
+                             'hfin'=>$request->get('editFS'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save();
+                            
+                          }
+                          if($horario->dia == 'D' ){
+                            $horario::updateOrCreate([
+                              'dia'=> 'D',
+                              'idtipounidad'=> $request->get('idtipounidad'),
+                             'hini'=> $request->get('editID'),
+                             'hfin'=>$request->get('editFD'),
+                             'active'=>$request->get('active'),
+                             'remove'=>0,
+                             'idusuario'=>$request->get('idusuario'), 
+                             'unidades_id' => $unidad->id  
+                            ]);
+                            $horario->save();
+                            
+                          }
+                    }
           
-            // $tipo->fill($inputs);
             
              if ($unidad) {
                 return response()->json(['success'=>'true', 200, 'correcto' => 'Editado Correctamente', 200]);

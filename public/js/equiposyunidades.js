@@ -179,32 +179,14 @@ eUForm.addEventListener('submit',(e)=>{
                 else{
                   $('#successIntoModal').html(data.correcto);
                   $('#message-successIntoModal').fadeIn();
-                  // setTimeout(() => {
-                  //   $('#modalAddEU').fadeOut();
-                  // }, 3000);
-                  // setTimeout("location.reload(true);",3000)
+                  setTimeout(() => {
+                    $('#modalAddEU').fadeOut();
+                  }, 3000);
+                  setTimeout("location.reload(true);",3000)
               } 
-            // if(data.success == 'true')
-            // {
-            //   $('#modalAddEU').fadeOut();
-            //   $('#success').html(data.correcto);
-            //   $('#message-success').fadeIn();
-            //   setTimeout(() => {
-            //     $('#message-success').fadeOut();
-            //   }, 3000);
-            //   setTimeout("location.reload(true);",3000)
-            // }  
+  
         },
-          // error:function(data){
-          //   $('#tipoEUModal').fadeOut();
-          //   $('#error').html(data.error);
-          //     $('#message-error').fadeIn();
-          //     setTimeout(() => {
-          //       $('#message-error').fadeOut();
-          //     }, 3000);
-        
-          //   // console.log(data.error);
-          // }
+
         
         })
         
@@ -220,16 +202,51 @@ function showEditModal(id){
   let route = "unidades/"+id+"/edit";
 
   $.get(route, function(data){
-    $('#editClave').val(data.clave);
-    $('#editDescripcion').val(data.descripcion);
-    $('#editCapacidad').val(data.capacidad);
-    $('#editColor').val(data.color);
-    $('#editRemove').val(data.remove);
-    $('#editPlaca').val(data.placa)
-    $('#editId').val(data.id)
+    $('#editClave').val(data.unidad.clave);
+    $('#editDescripcion').val(data.unidad.descripcion);
+    $('#editCapacidad').val(data.unidad.capacidad);
+    $('#editColor').val(data.unidad.color);
+    $('#editRemove').val(data.unidad.remove);
+    $('#editPlaca').val(data.unidad.placa)
+    $('#editId').val(data.unidad.id)
     $('#editIdUsuario').val();
-    $('#editActive').val(data.active);
-    $('#editIdTipoUnidad').val(data.idtipounidad);
+    $('#editActive').val(data.unidad.active);
+    $('#editIdTipoUnidad').val(data.unidad.idtipounidad);
+    
+
+// ***********************set values into input:time*******************************
+// ##Laravel## 
+// get two querys from two diferents tables  
+    // get all schedules
+    let schedules = data.unidadHorario;
+
+    // get all the input where I'm going to insert the schedules
+    let inputEditSchedules = document.querySelectorAll(' input[id*="inputTimeInicioedit"]')
+    let inputEditSchedulesFin = document.querySelectorAll(' input[id*="inputTimeFinedit"]')
+    // with two foreach
+    // the first one is the input and then the one of the schedule
+    // I verify if within the classlist of each input it has a class in specifies,
+    //  if it is certain I assign the values to that input
+    inputEditSchedules.forEach(input => { //open first 
+      schedules.forEach(schedule => { //open second
+        if(input.classList.contains(schedule.dia) ){ //check have specifies class if its true  
+          input.value = schedule.hini //set value into input
+        }
+      });
+    });
+
+
+
+    inputEditSchedulesFin.forEach(input => { //open first 
+      schedules.forEach(schedule => { //open second
+        if(input.classList.contains(schedule.dia) ){ //check have specifies class if its true  
+          input.value = schedule.hfin //set value into input
+        }
+      });
+    });
+   
+      
+
    
     
     if(data.active==0){
@@ -265,11 +282,101 @@ $('#btnEdit').click(function(){
   let capacidad = $('#editCapacidad').val();
   let color = $('#editColor').val(); 
   let idtipounidad = $('#editIdTipoUnidad').val();
-  console.log(idtipounidad)
   let idusuario = $('#editIdUsuario').val();
   let remove = $('#editRemove').val();
   let id = $('#editId').val();
   let placa = $('#editPlaca').val()
+ 
+  let editIL = $('#inputTimeInicioeditL').val()
+  let editIM = $('#inputTimeInicioeditM').val()
+  let editIX= $('#inputTimeInicioeditX').val()
+  let editIJ= $('#inputTimeInicioeditJ').val()
+  let editIV= $('#inputTimeInicioeditV').val()
+  let editIS= $('#inputTimeInicioeditS').val()
+  let editID= $('#inputTimeInicioeditD').val()
+  let editFL= $('#inputTimeFineditL').val()
+  let editFM= $('#inputTimeFineditM').val()
+  let editFX= $('#inputTimeFineditX').val()
+  let editFJ= $('#inputTimeFineditJ').val()
+  let editFV= $('#inputTimeFineditV').val()
+  let editFS= $('#inputTimeFineditS').val()
+  let editFD= $('#inputTimeFineditD').val()
+  let editTodosLosDias =0, editTotalDias=0;  
+  let Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo;
+  if($('#editTodosLosDias').is(':checked')){
+    editTodosLosDias = editTodosLosDias+7;
+    }else{
+      // editTodosLosDias = editTodosLosDias; 
+      if($('#editL').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Lunes = 'L';
+      }else{
+        editTotalDias = editTotalDias;
+        Lunes= '';
+      }
+      if($('#editM').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Martes = 'M';
+      }else{
+        editTotalDias = editTotalDias;
+        Martes='';
+      }
+      if($('#editX').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Miercoles = 'X';
+      }else{
+        editTotalDias = editTotalDias;
+        Miercoles='';
+      }
+      if($('#editJ').is(':checked')){
+        editTotalDias = editTotalDias +1;
+         Jueves = 'J';
+      }else{
+        editTotalDias = editTotalDias;
+        Jueves='';
+      }
+      if($('#editV').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Viernes = 'V';
+      }else{
+        editTotalDias = editTotalDias;
+        Viernes='';
+      }
+      if($('#editS').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Sabado = 'S';
+      }else{
+        editTotalDias = editTotalDias;
+        Sabado = '';
+      }
+      if($('#editD').is(':checked')){
+        editTotalDias = editTotalDias+1;
+         Domingo = 'D';
+      }else{
+        editTotalDias = editTotalDias;
+        Domingo ='';
+      }
+    }
+          
+    
+    let dias =  [
+                ['L', editIL,editFL],
+               [ 'M', editIM,editFM],
+               [ 'X', editIX,editFX],
+               [ 'J', editIJ,editFJ],
+               [ 'V',editIV,editFV ],
+               [ 'S', editIS,editFS],
+               [ 'D',editID,editFD]
+              ];
+    
+  // let horarioId = ;
+
+
+
+
+
+
+
   let active;
   if($('#editActive').is(':checked')){
     active = 0;
@@ -284,7 +391,7 @@ $('#btnEdit').click(function(){
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
     type: 'PUT',
     dataType: 'json',
-    data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idtipounidad: idtipounidad, idusuario: idusuario, remove: remove, active: active, placa: placa, id: id },
+    data: {clave: clave, descripcion: descripcion, capacidad: capacidad, color: color, idtipounidad: idtipounidad, idusuario: idusuario, remove: remove, active: active, placa: placa, id: id, editIL: editIL, editIM: editIM, editIX: editIX, editIJ: editIJ, editIV: editIV, editIS: editIS, editID: editID, editFL: editFL, editFM: editFM, editFX: editFX, editFJ: editFJ, editFV: editFV, editFS: editFS, editFD: editFD, Lunes:Lunes, Martes:  Martes, Miercoles: Miercoles, Jueves: Jueves, Viernes: Viernes, Sabado: Sabado,Domingo: Domingo,editTodosLosDias: editTodosLosDias, editTotalDias:editTotalDias, dias: dias },
 
     success: function (data) {
   
@@ -294,10 +401,10 @@ $('#btnEdit').click(function(){
         $('#modalEditEquipoUnidad').fadeOut();
         $('#success').html(data.correcto);
         $('#message-success').fadeIn();
-        setTimeout(() => {
-          $('#message-success').fadeOut();
-        }, 3000);
-        setTimeout("location.reload(true);",3000)
+        // setTimeout(() => {
+        //   $('#message-success').fadeOut();
+        // }, 3000);
+        // setTimeout("location.reload(true);",3000)
         
       }
     },
@@ -328,8 +435,9 @@ $(document).ready(function() {
      var form = $('#form-delete');
      var url = form.attr('action').replace(':UNIDAD_ID', id);
      var data = form.serialize();
+   
      var name = row.data('clave');
-     console.log(url);
+
 
      let alert = confirm('¿Desea eiliminara a: ' + name);
 
@@ -340,7 +448,7 @@ $(document).ready(function() {
            
         if(result.success == 'true')
         {
-          console.log(result)
+
           // $('#modalEditEquipoUnidad').fadeOut();
           $('#success').html(result.correcto);
           $('#message-success').fadeIn();
@@ -396,26 +504,37 @@ todosLosDias.addEventListener('change',e=>{
 
 //habilitar input time
 
-// let inputL = document.getElementById('inicioL')
-// console.log(inputL)
-// inputL.disabled ="false";
-
-// inputsTime.forEach((input)=>{
-//   input.disabled= false;
-  
-// })
 habilitarInput = (e)=>{
-let inputInicio = document.querySelectorAll(`input[id=inicio${e.id}]`)
-let inputFin = document.querySelectorAll(`input[id=fin${e.id}]`)
-
-if(inputFin[0].disabled == true ||inputInicio[0].disabled == true ){
-  inputFin[0].disabled = false;
-  inputInicio[0].disabled = false;
-}else{
-  if(inputFin[0].disabled == false ||inputInicio[0].disabled == false){
-    inputFin[0].disabled = true;
-    inputInicio[0].disabled = true;
+  let inputInicio = document.querySelectorAll(`input[id=inicio${e.id}]`)
+  let inputFin = document.querySelectorAll(`input[id=fin${e.id}]`)
+  
+  if(inputFin[0].disabled == true ||inputInicio[0].disabled == true ){
+    inputFin[0].disabled = false;
+    inputInicio[0].disabled = false;
+  }else{
+    if(inputFin[0].disabled == false ||inputInicio[0].disabled == false){
+      inputFin[0].disabled = true;
+      inputInicio[0].disabled = true;
+    }
   }
-}
+  
+  }
 
-}
+  
+  habilitarEditInput = (e)=>{
+   
+    let inputEditInicio = document.querySelectorAll(`input[id=inputTimeInicio${e.id}]`)
+    let inputEditFin = document.querySelectorAll(`input[id=inputTimeFin${e.id}]`)
+ 
+    
+    if(inputEditFin[0].disabled == true ||inputEditInicio[0].disabled == true ){
+      inputEditFin[0].disabled = false;
+      inputEditInicio[0].disabled = false;
+    }else{
+      if(inputEditFin[0].disabled == false ||inputEditInicio[0].disabled == false){
+        inputEditFin[0].disabled = true;
+        inputEditInicio[0].disabled = true;
+      }
+    }
+    
+    }

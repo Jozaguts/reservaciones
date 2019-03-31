@@ -155,7 +155,7 @@
                                                                      </td>
             
                                                                      <td >
-                                                                     <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control input-time" disabled>
+                                                                     <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control input-time" disabled >
                                                                      </td>
                                                                      <td >
                                                                             <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control input-time" disabled>

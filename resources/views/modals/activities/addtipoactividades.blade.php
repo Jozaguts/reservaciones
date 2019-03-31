@@ -55,9 +55,15 @@
                                 </div>
                             </div>
                                 <div class="form-group row">
-                                        <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}</label>
+                                        <div class="card">
+                                                <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+                                                  <p>Click the below button to activate the Color Picker</p>
+                                                  <button class="btn btn-primary btn-sm" id="color-picker-2">Open Picker</button>
+                                                </div>
+                                              </div>
+                                        {{-- <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}</label> --}}
             
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color') }}" required >
             
                                             @if ($errors->has('color'))
@@ -65,7 +71,7 @@
                                                     <strong>{{ $errors->first('color') }}</strong>
                                                 </span>
                                             @endif
-                                        </div>
+                                        </div> --}}
                                     </div>
                               
                             <input type="hidden" name="active" value=1>
