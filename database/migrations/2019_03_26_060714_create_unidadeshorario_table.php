@@ -20,6 +20,7 @@ class CreateUnidadeshorarioTable extends Migration
             $table->time('hfin');
             $table->boolean('active');
             $table->boolean('remove');
+            $table->softDeletes();
 
             $table->unsignedInteger('unidades_id');
             $table->foreign('unidades_id')->references('id')->on('unidades');			            

@@ -72,11 +72,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}<br> <small id="helpId" class="text-muted">Minimo 6 caracteres entre <br>Mayuscula <br>  Minuscula <br>
-                                             signo<br>numero</small></label>
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}<br> </label>
             
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                            <small id="helpId" class="text-muted">Minimo 6 caracteres entre Mayuscula Minuscula
+                                                signo numero</small>
             
                                             @if ($errors->has('password'))
                                                 <span class="invalid-feedback" role="alert">

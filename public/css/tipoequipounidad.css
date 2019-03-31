@@ -31,7 +31,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    min-height: 100%;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+    min-height: fit-content;
     margin: auto auto;
     justify-content: center;
     -webkit-animation-name: show;
@@ -177,7 +179,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    min-height: 100%;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+    min-height: fit-content;
     margin: auto auto;
     justify-content: center;
     -webkit-animation-name: show;
@@ -235,7 +239,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    min-height: 100%;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+    min-height: fit-content;
     margin: auto auto;
     justify-content: center;
     -webkit-animation-name: show;

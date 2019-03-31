@@ -135,27 +135,28 @@
                                                            
                                                                 <tr>
                                                                     <td>
-                                                                        <input type="checkbox" name="todoslosdias" id="todosLosDias"  value="todoslosdias">
+                                                                        <input type="checkbox" name="todoslosdias" id="editTodosLosDias"  value="todoslosdias">
                                                                      </td>
             
                                                                      <td>
-                                                                         <input type="time" name="iniciotodoslosdias" id="inicioTodosLosDias" class="form-control">
+                                                                         <input type="time" name="iniciotodoslosdias" id="editInicioTodosLosDias" class="form-control">
                                                                      </td>
                                                                      <td>
-                                                                            <input type="time" name="fintodoslosdias" id="finTodosLosDias" class="form-control">
+                                                                            <input type="time" name="fintodoslosdias" id="editFinTodosLosDias" class="form-control">
                                                                         </td>
                                                                 </tr>
                                                                 @foreach ($dias as $dia)
                                                                 <tr>
+                                                                <input type="hidden" name="horario-id" data-id-horario="{{$dia->id}}">
                                                                         <td class="display-flexbox">
-                                                                        <input type="checkbox" name="{{$dia->dia}}" id="{{$dia->dia}}"  value="{{$dia->dia}}" class="day" onchange="habilitarInput(this)" ><span class="day-span">{{$dia->dia}}</span>
+                                                                        <input type="checkbox" name="{{$dia->dia}}" id="edit{{$dia->dia}}"  value="{{$dia->dia}}" class="day" onchange="habilitarEditInput(this);" ><span class="day-span">{{$dia->dia}}</span>
                                                                          </td>
                 
                                                                          <td >
-                                                                         <input type="time" name="inicio{{$dia->dia}}" id="inicio{{$dia->dia}}" class="form-control input-time" disabled>
+                                                                         <input type="time" name="inicio{{$dia->dia}}" id="inputTimeInicioedit{{$dia->dia}}"  class="form-control input-time {{$dia->dia}}" disabled>
                                                                          </td>
                                                                          <td >
-                                                                                <input type="time" name="fin{{$dia->dia}}" id="fin{{$dia->dia}}" class="form-control input-time" disabled>
+                                                                                <input type="time" name="fin{{$dia->dia}}" id="inputTimeFinedit{{$dia->dia}}" class="form-control input-time {{$dia->dia}}" disabled>
                                                                             </td>
                                                                 </tr>
                                                                     

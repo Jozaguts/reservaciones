@@ -17,6 +17,7 @@
                                                 <th class="table-head" >Clave</th>
                                                 <th class="table-head" >Nombre</th>
                                                 <th class="table-head" >Color</th>
+                                                
                                             </tr>
                                         </thead>
                                             <tbody>
@@ -24,6 +25,7 @@
                                                 @if($tipoactividad->detele_at ==null)
                                                     <tr id="trBg" class="" data-id="{{$tipoactividad->id}}"data-clave="{{$tipoactividad->clave}}" >
                                                         <td class=" table-head table-head__name" data-active="{{$tipoactividad->active}}">{{$tipoactividad->clave}} 
+                                                          
                                                         </td>
                                                         <td class="table-head table-head__surname" data-active="{{$tipoactividad->active}}">{{$tipoactividad->nombre}}
                                                         </td>

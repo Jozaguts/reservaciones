@@ -3,6 +3,7 @@
    Tipo de Actividades
 @endsection
 @section('css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
      <link href="{{ asset('css/tipoactividades.css') }}" rel="stylesheet">
@@ -27,4 +28,3 @@
 <script src="{{ asset('js/tipoactividades.js') }}" defer></script>
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
 
-@endsection

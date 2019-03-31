@@ -61,7 +61,7 @@
                         <div class="form-group row">
                                 <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Medio') }}</label>
     
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <input id="editColor" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color') }}"  >
     
                                     @if ($errors->has('color'))
@@ -69,7 +69,7 @@
                                             <strong>{{ $errors->first('color') }}</strong>
                                         </span>
                                     @endif
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="form-group row">
                                     <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Desactivar') }}</label>
