@@ -16,8 +16,8 @@ class CreateUnidadeshorarioTable extends Migration
         Schema::create('unidadeshorario', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dia');
-            $table->time('hini');
-            $table->time('hfin');
+            $table->time('hini')->nullable();
+            $table->time('hfin')->nullable();
             $table->boolean('active');
             $table->boolean('remove');
             $table->softDeletes();

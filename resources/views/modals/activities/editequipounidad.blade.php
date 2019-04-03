@@ -36,7 +36,8 @@
                                 </label>
                                    
                                 <div class="col-md-6">
-                                    <input id="editClave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  autofocus>
+                                    <input id="editClave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  autofocus equired autofocus size="5" maxlength="5" 
+                                    style="text-transform:uppercase">
                                     @if ($errors->has('clave'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('clave') }}</strong>

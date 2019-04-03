@@ -62,7 +62,7 @@ closeModal.addEventListener('click',(e)=>{
     }
 })
 
-AddTipoActividadesForm
+
 let AddTipoActividadesForm = document.getElementById('AddTipoActividadesForm');
 
 AddTipoActividadesForm.addEventListener('submit',(e)=>{
@@ -72,7 +72,7 @@ let clave = datos.get('clave')
 let nombre = datos.get('nombre')
 let color = datos.get('color')
 let token = $("input[name=_token]").val();
-let idusuario = datos.get('idusuario')
+let usuarios_id = datos.get('idusuario')
 let active;
   if($('#active').is(':checked')){
     active = 0;
@@ -94,7 +94,7 @@ $.ajax({
   headers:{'X-CSRF-TOKEN':token},
   type:'POST',
   dataType: 'json',
-  data: {clave: clave, nombre: nombre, color: color, idusuario: idusuario, active: active, remove: remove},
+  data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove},
   success:function(data)
   {
     if(data.success == 'true')
@@ -116,32 +116,40 @@ $.ajax({
         $('#message-error').fadeOut();
       }, 3000);
 
-    console.log(data.error);
+   
   }
 
 })
 
 })
 
-// const pickr2 = new Pickr({
-//   el: '#color-picker-2',
-//   useAsButton: true,
-//   default: "123456",
+// Show edit modal activities
+let tipoActividadEditModal = document.getElementById('TAEditModal')
 
-//   components: {
-//     preview: true,
-//     opacity: true,
-//     hue: true,
+function showEditModal(id){
 
-//     interaction: {
-//       hex: true,
-//       rgba: true,
-//       hsla: true,
-//       hsva: true,
-//       cmyk: true,
-//       input: true,
-//       clear: true,
-//       save: true
-//     }
-//   }
-// });
+  let route = "tipoactividades/"+id+"/edit";
+
+  $.get(route, function(data){
+    $('#editClave').val(data.clave);
+    $('#editColor').val(data.color);
+    $('#editRemove').val(data.remove);
+    $('#editId').val(data.id)
+    $('#editIdUsuario').val();
+    $('#editActive').val(data.active);   
+    
+    if(data.active==0){
+      $("#editActive").prop("checked", true);
+    }else{
+      $("#editActive").prop("checked", false);
+    } 
+   
+  });
+
+    if(tipoActividadEditModal.classList.contains("d-none")){
+      console.log(tipoActividadEditModal)
+        tipoActividadEditModal.classList.remove("d-none")
+        tipoActividadEditModal.classList.toggle("showModal");
+    }
+   
+}

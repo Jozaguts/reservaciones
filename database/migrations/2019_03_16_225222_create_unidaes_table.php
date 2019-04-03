@@ -17,7 +17,7 @@ class CreateUnidaesTable extends Migration
             $table->increments('id');
             $table->string('clave', 5);
             $table->string('placa');
-            $table->string('capacidad');
+            $table->integer('capacidad');
             $table->string('descripcion');
             $table->string('color');
             $table->boolean('active');

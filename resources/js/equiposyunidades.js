@@ -65,8 +65,9 @@ eUForm.addEventListener('submit',(e)=>{
         let placa = datos.get('placa')
         let token = $("input[name=_token]").val();
         let idusuario = datos.get('idusuario')
+     
         let idtipounidad = datos.get('idtipounidad');
-        let todosLosDias =0, totalDias=0;
+        let todosLosDias =0, totalDias=0, Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo;
             iTD = $('#inicioTodosLosDias').val(),
             fTD =  $('#finTodosLosDias').val(),
             ilunes= $('#inicioL').val(),
@@ -83,7 +84,7 @@ eUForm.addEventListener('submit',(e)=>{
             fviernes= $('#finV').val(),
             fsabado= $('#finS').val(), 
             fdomingo= $('#finD').val()
-            let Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo;
+           
        
         if($('#todosLosDias').is(':checked')){
           todosLosDias = todosLosDias+1;
@@ -303,6 +304,20 @@ $('#btnEdit').click(function(){
   let editFD= $('#inputTimeFineditD').val()
   let editTodosLosDias =0, editTotalDias=0;  
   let Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo;
+
+
+  // let InputsTimes = document.querySelectorAll('input[id*=inputTime]');
+
+      
+
+  //       for (let index = 0; index < InputsTimes.length; index++) {
+          
+  //         const inputsArray = InputsTimes[index].value
+  //         let r= [...inputsArray]
+    
+        
+  //     }
+
   if($('#editTodosLosDias').is(':checked')){
     editTodosLosDias = editTodosLosDias+7;
     }else{

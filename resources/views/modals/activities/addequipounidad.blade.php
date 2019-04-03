@@ -34,7 +34,8 @@
                                     </label>
                                        
                                     <div class="col-md-6">
-                                        <input id="clave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  required autofocus>
+                                        <input id="clave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  required autofocus equired autofocus size="5" maxlength="5" 
+                                        style="text-transform:uppercase">
                                         @if ($errors->has('clave'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('clave') }}</strong>
@@ -98,7 +99,7 @@
                                         <label for="capacidad" class="col-md-4 col-form-label text-md-right">{{ __('Capacidad') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="capacidad" type="text" class="form-control{{ $errors->has('capacidad') ? ' is-invalid' : '' }}" name="capacidad" value="{{ old('capacidad') }}" required >
+                                            <input id="capacidad" type="number" class="form-control{{ $errors->has('capacidad') ? ' is-invalid' : '' }}" name="capacidad" value="{{ old('capacidad') }}" required >
             
                                             @if ($errors->has('capacidad'))
                                                 <span class="invalid-feedback" role="alert">
