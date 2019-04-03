@@ -51,6 +51,22 @@
             animation-name: show;
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
+            display: block;
+            
+        }
+        .showEditModal{
+            background-color:rgba(0, 0, 0, 0.438) !important;
+            // width: 100vw !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-height: fit-content;
+            margin: auto auto;
+            justify-content: center;
+            animation-name: show;
+            animation-duration: 1s;
+            padding: .2rem 1rem 1rem 1rem;
+            
             
         }
         .close-modal-edit{
@@ -193,6 +209,20 @@
             padding: .2rem 1rem 1rem 1rem;
             
         }
+        .showEditModal{
+            background-color:rgba(0, 0, 0, 0.438) !important;
+            // width: 100vw !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-height: fit-content;
+            margin: auto auto;
+            justify-content: center;
+            animation-name: show;
+            animation-duration: 1s;
+            padding: .2rem 1rem 1rem 1rem;
+            
+        }
         .close-modal-edit{
             display: flex;
             padding: 1rem 1.25rem;
@@ -205,6 +235,20 @@
             left: 80vw;
             width: 2rem;
             height: 2rem;
+        }
+        .piker-color-icon{
+            display: flex !important;
+            justify-content: center !important;
+            span{
+                margin: auto auto  !important;
+            }
+        }
+        .span> i{
+            padding: 2rem !important;
+        }
+        .coloricon{
+            width: 1.5rem !important;
+            height: 1.5rem !important;
         }
     }
     @media only screen and (min-device-width : 900px) and (max-device-width : 1440px){
@@ -247,6 +291,20 @@
             padding: .2rem 1rem 1rem 1rem;
             
         }
+        .showEditModal{
+            background-color:rgba(0, 0, 0, 0.438) !important;
+            // width: 100vw !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-height: fit-content;
+            margin: auto auto;
+            justify-content: center;
+            animation-name: show;
+            animation-duration: 1s;
+            padding: .2rem 1rem 1rem 1rem;
+            
+        }
         .close-modal-edit{
             display: block;
             padding: 1rem;
@@ -263,6 +321,12 @@
             height: 2rem;
             
         }
+      
         
     }
 
+
+    .coloricon{
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }

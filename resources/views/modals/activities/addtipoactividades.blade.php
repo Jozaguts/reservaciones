@@ -33,7 +33,8 @@
                                 </label>
                                    
                                 <div class="col-md-6">
-                                    <input id="clave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  required autofocus>
+                                    <input id="clave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  required autofocus size="5" maxlength="5" 
+                                    style="text-transform:uppercase">
                                     @if ($errors->has('clave'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('clave') }}</strong>
@@ -54,32 +55,35 @@
                                     @endif
                                 </div>
                             </div>
-                                <div class="form-group row">
-                                        <div class="card">
-                                                <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
-                                                  <p>Click the below button to activate the Color Picker</p>
-                                                  <button class="btn btn-primary btn-sm" id="color-picker-2">Open Picker</button>
-                                                </div>
-                                              </div>
-                                        {{-- <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}</label> --}}
-            
-                                        {{-- <div class="col-md-6">
-                                            <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color') }}" required >
-            
-                                            @if ($errors->has('color'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('color') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div> --}}
-                                    </div>
+                            <div class="form-group row colorpicker colorpicker-component">
+                                <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}
+                                </label>
+                                   
+                                <div class="col-md-4">
+                                       
+                                    <input id="color" type="text" value="#00AABB"  class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color"  required autofocus> 
+                                    @if ($errors->has('color'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('Color') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-1 piker-color-icon">
+                                        <span class="input-group-addon"><i class="coloricon"></i></span>
+                                </div>
+                     
+                                    <script type="text/javascript">
+
+                                        $('.colorpicker').colorpicker();
+                                      
+                                      </script>
                               
                             <input type="hidden" name="active" value=1>
                             <input type="hidden" name="removed" value=0>
                             <input type="hidden" name="idusuario" value={{Auth::user()->id}}>
                  
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4 main-nav">
+                                <div class="col-md-6 main-nav">
                                     <button type="submit" class="btn main-navbar">
                                         {{ __('Agregar') }}
                                     </button>

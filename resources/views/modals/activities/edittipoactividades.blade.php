@@ -1,8 +1,8 @@
 
 
-<div class="container-fluid d-none" id="tipoActividadEditModal">
+<div class="container-fluid" id="TAEditModal">
        
-    <div class="row justify-content-center row-modal">
+    {{-- <div class="row justify-content-center row-modal">
         <div class="col-sm-8 col-md-6 modal-content">
             <div class="card">
                 <div class="header-modal-container">
@@ -36,7 +36,8 @@
                             </label>
                                
                             <div class="col-md-6">
-                                <input id="editClave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  autofocus>
+                                <input id="editClave" type="text" class="form-control{{ $errors->has('clave') ? ' is-invalid' : '' }}" name="clave"  autofocus equired autofocus size="5" maxlength="5" 
+                                style="text-transform:uppercase">
                                 @if ($errors->has('clave'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('clave') }}</strong>
@@ -61,15 +62,6 @@
                         <div class="form-group row">
                                 <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Medio') }}</label>
     
-                                {{-- <div class="col-md-6">
-                                    <input id="editColor" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color') }}"  >
-    
-                                    @if ($errors->has('color'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('color') }}</strong>
-                                        </span>
-                                    @endif
-                                </div> --}}
                             </div>
                             <div class="form-group row">
                                     <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Desactivar') }}</label>
@@ -84,7 +76,7 @@
                                         @endif
                                     </div>
                                 </div>
-                        {{-- <input type="hidden" name="editRemoved" value=0> --}}
+                      
                         <input type="hidden" name="editIdUsuario" value={{Auth::user()->id}} id="editIdUsuario">
                         <input type="hidden" name="editId" value="" id="editId">
                         <input type="hidden" name="editRemove" value="" id="editRemove">
@@ -98,5 +90,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
 </div>

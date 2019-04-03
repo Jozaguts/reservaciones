@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TipoActividades;
+use Validator;
+
 
 class TipoActividadesController extends Controller
 {
@@ -39,25 +41,29 @@ class TipoActividadesController extends Controller
     {
         //reglas de validacion
         $rules =[
-            'clave' => ['required', 'string', 'max:5 min:5'],
+            'clave' => ['required', 'string', 'max:5 min:5','unique:tipoactividades'],
             'nombre' => ['required', 'string', 'max:255'],
             'color'=> ['required', 'string'],
-            'idusuario'=> ['required', 'integer'],
+            'usuarios_id'=> ['required', 'integer'],
             'removed' => ['nullable','boolean'],
             'active' => ['nullable','boolean'],
         ];
          //Se realiza la validación
          $validator = Validator::make($request->all(), $rules);
+   
 
         if($request->ajax())
         {
-            $result = TipoUnidad::create($request->all());
-            if ($result) {
-                return response()->json(['success'=>'true', 200, 'correcto' => 'Agregado Correctamente', 200]);
+            // $result = TipoActividades::create($request->all());
+            if ($validator->fails()) 
+            {
+                return response()->json(['success'=>'false','error'=>$validator->errors()->all()]); 
             }
             else
              {
-                return response()->json(['success'=>'false','error'=>'Error no se Puedo Agregar la Unidad/Equipo']);  
+                $result = TipoActividades::create($request->all());
+                return response()->json(['success'=>'true', 200, 'correcto' => 'Actividad Agregada Correctamente', 200]);
+                
             }
         }
     }
