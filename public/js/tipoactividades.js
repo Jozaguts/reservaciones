@@ -96,26 +96,25 @@ $.ajax({
   type:'POST',
   dataType: 'json',
   data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove,tipounidad_id: tipounidad},
-  success:function(data){
-
+  success: function (data) {
+  
+    console.log(data);
     if(data.error == 'true'){
-      $('#error').html(data.errors);
-        $('#message-error').fadeIn();
+      $('#errorsIntoModal').html(data.errors);
+        $('#message-errorIntoModal').fadeIn();
         setTimeout(() => {
-          // $('#message-success').fadeOut();
+          $('#message-error').fadeOut();
         }, 3000);
-        // reload();
+        // setTimeout("location.reload(true);",3000)
         
     }else{
-      $('#success').html(data.ok);
-        $('#message-success').fadeIn();
+      $('#successIntoModal').html(data.ok);
+        $('#message-successIntoModal').fadeIn();
         setTimeout(() => {
-          $('#message-success').fadeOut();
+          $('#message-successIntoModal').fadeOut();
         }, 3000);
         setTimeout("location.reload(true);",3000)
     }
-
-  
   }
   
 
@@ -125,6 +124,8 @@ $.ajax({
 
 // Show edit modal activities
 let tipoActividadEditModal = document.getElementById('TAEditModal')
+let bginput = document.getElementById('editColor')
+let colorIcon = document.getElementById('colorIcon');
 
 function showEditModal(id){
 
@@ -133,10 +134,12 @@ function showEditModal(id){
   $.get(route, function(data){
     $('#editClave').val(data.clave);
     $('#editNombre').val(data.nombre);
+    bginput.setAttribute("value", data.color);
+    colorIcon.style.backgroundColor = data.color;
     $('#editColor').val(data.color);
     $('#editRemove').val(data.remove);
     $('#editId').val(data.id)
-    $('#tipounidad_id').val(data.tipounidad_id)
+    $('#editTipoUnidad').val(data.tipounidad_id)
 
     
     
@@ -178,7 +181,7 @@ $('#btnEdit').click(function(){
   let color = $('#editColor').val();
   let clave = $('#editClave').val(); 
   let idUsuario = $('#editIdUsuario').val();
-  let tipounidad_id = $('#tipounidad_id').val();
+  let tipounidad_id = $('#editTipoUnidad').val();
   let editRemove = $('#editRemove').val();
 
   let remove = $('#editRemove').val();
@@ -201,25 +204,75 @@ $('#btnEdit').click(function(){
 
     success: function (data) {
   
-      if(data.success == 'true')
-      {
-
-        $('#tipoEUEditModal').fadeOut();
-        $('#success').html(data.correcto);
-        $('#message-success').fadeIn();
-        setTimeout(() => {
-          $('#message-success').fadeOut();
-        }, 3000);
-        setTimeout("location.reload(true);",3000)
-        
-      }
-    },
-    error:function(data)
-    {
-      if(data.status==422){
-      
+      console.log(data);
+      if(data.error == 'true'){
+        $('#error').html(data.errors);
+          $('#message-error').fadeIn();
+          setTimeout(() => {
+            $('#message-error').fadeOut();
+          }, 3000);
+          // setTimeout("location.reload(true);",3000)
+          
+      }else{
+        $('#success').html(data.ok);
+          $('#message-success').fadeIn();
+          setTimeout(() => {
+            $('#message-success').fadeOut();
+          }, 3000);
+          setTimeout("location.reload(true);",3000)
       }
     }
   })
 })
 
+
+// Eliminar unidad
+$(document).ready(function() {
+  
+  $('.btn-delete').click(function(){
+
+    
+     var row = $(this).parents('tr');
+     var id = row.data('id');
+     var form = $('#form-delete');
+     var url = form.attr('action').replace(':TIPO_ID', id);
+     var data = form.serialize();
+   
+     var name = row.data('clave');
+
+
+     let alert = confirm('¿Desea eiliminara a: ' + name);
+
+     if(alert == true){
+      row.fadeOut();
+
+      $.post(url,data, function(result){
+           
+        if(result.success == 'true')
+        {
+
+          // $('#modalEditEquipoUnidad').fadeOut();
+          $('#success').html(result.correcto);
+          $('#message-success').fadeIn();
+          setTimeout(() => {
+            $('#message-success').fadeOut();
+          }, 3000);
+          setTimeout("location.reload(true);",3000)
+          
+        }else{
+          $('#modalEditEquipoUnidad').fadeOut();
+          $('#success').html(result.error);
+          $('#message-success').fadeIn();
+          setTimeout(() => {
+            $('#message-success').fadeOut();
+          }, 3000);
+          setTimeout("location.reload(true);",3000)
+        }
+
+
+      });
+     }
+
+     
+  });
+});

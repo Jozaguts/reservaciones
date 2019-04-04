@@ -206,6 +206,7 @@ function showEditModal(id){
     $('#editClave').val(data.unidad.clave);
     $('#editDescripcion').val(data.unidad.descripcion);
     $('#editCapacidad').val(data.unidad.capacidad);
+   
     $('#editColor').val(data.unidad.color);
     $('#editRemove').val(data.unidad.remove);
     $('#editPlaca').val(data.unidad.placa)

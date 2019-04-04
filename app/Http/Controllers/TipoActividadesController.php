@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TipoActividades;
 use App\TipoUnidad;
 use Validator;
+use Illuminate\Validation\Rule;
 
 
 class TipoActividadesController extends Controller
@@ -107,35 +108,40 @@ class TipoActividadesController extends Controller
     {
         $tipoactividad = TipoActividades::find($id);
         //reglas de validacion
+        
          $rules =[
-            'clave' => [ 'string', 'max:5 min:5','unique:tipoactividades'],
+            'clave' =>['string','min:5'],
             'nombre' => [ 'string', 'max:255'],
             'color'=> [ 'string'],
             'usuarios_id'=> ['integer'],
             'removed' => ['nullable','boolean'],
             'active' => ['nullable','boolean'],
-            'tipounidad_id'=>['integer']
+            'tipounidad_id'=>['integer'],
         ];
     
        
-        if($request['clave'] == $tipoactividad->clave ){
-            unset($request['clave']);
+        if(  $tipoactividad->clave == $request['clave'] ){
+           
+            $tipoactividad->clave =  $tipoactividad->clave;
+            
         }
         else{
-                
-                $request['clave'] =  $request['clave'];
+         
+            $tipoactividad->clave = $request['clave'];
+               
             }
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) 
         {
-            return response()->json(['success'=>'false','error'=>$validator->errors()->all()]);
+            return response()->json(['error'=> 'true','errors'=>$validator->errors()->all()]); 
         }
         else{
-            dd($request->all());
-            $tipoactividad::updateOrCreate($request->all()
+           
+            $tipoactividad->fill($request->all()
             );
-            return response()->json(['success'=>'true', 200, 'correcto' => 'Editado Correctamente', 200]);
+            $tipoactividad->save();
+            return response()->json([ 'ok' => 'Actividad Actualizada Correctamente', 200]);
         }
            
   
@@ -149,6 +155,12 @@ class TipoActividadesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $actividad = TipoActividades::find($id)->delete();
+
+        if($actividad == null){
+            return response()->json(['error'=>'true','errors'=>'Error no se Puedo Eliminar la Actividad']); 
+        }else{
+            return response()->json(['ok' => 'Unidad Eliminada Correctamente', 200]);
+        }
     }
 }

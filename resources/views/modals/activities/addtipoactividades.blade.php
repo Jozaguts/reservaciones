@@ -9,15 +9,15 @@
                     <div class="header-modal-container">
                             <div class="card-header" id="card-header">{{ __('Agregar Tipo de Actividad') }} </div>
                  
-                    <div class="container mt-3">
-                        <div class="row">
-                            <div class="col-sm-6 offset-md-2">
-                                @include('components.ajax-alerts')
-                                           
-                                
-                            </div>
-                        </div>
-                    </div>
+                            <div class="container mt-3">
+                                    <div class="row">
+                                        <div class="col-sm-6 offset-md-2">
+                                            @include('components.alertsintomodals')
+                                                       
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                         
                   
                   
