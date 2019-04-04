@@ -24,9 +24,9 @@
     @include('contents.activities.tipoactividades')        
 </div>
 
-
-@include('modals.activities.addtipoactividades')
 @include('modals.activities.edittipoactividades')
+@include('modals.activities.addtipoactividades')
+
 {{-- finaliza el contenido --}}
 @endsection
 

@@ -13,5 +13,5 @@ class TipoActividades extends Model
     
     protected $dates = ['deleted_at'];
     
-    protected $fillable = ['nombre','color','clave','remove','active','usuarios_id'];  
+    protected $fillable = ['nombre','color','clave','remove','active','usuarios_id','tipounidad_id'];  
 }

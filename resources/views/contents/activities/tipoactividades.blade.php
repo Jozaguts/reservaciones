@@ -9,7 +9,7 @@
                                 <a href="#" class="btn btn-success" id="btnAddTipoActividad"><span class="font-weight-bolder">+</span> Tipo Actividad</a>
                             </div>
                               {{-- alerts --}}
-                              @include('components.ajax-alerts')
+                             
                                 <div class="row">
                                     <table class="table">
                                         <thead>

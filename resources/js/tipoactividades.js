@@ -69,6 +69,7 @@ AddTipoActividadesForm.addEventListener('submit',(e)=>{
 e.preventDefault();
 let datos = new FormData(AddTipoActividadesForm) 
 let clave = datos.get('clave')
+let tipounidad = datos.get('tipounidad')
 let nombre = datos.get('nombre')
 let color = datos.get('color')
 let token = $("input[name=_token]").val();
@@ -94,30 +95,29 @@ $.ajax({
   headers:{'X-CSRF-TOKEN':token},
   type:'POST',
   dataType: 'json',
-  data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove},
-  success:function(data)
-  {
-    if(data.success == 'true')
-    {
-      $('#tipoEUModal').fadeOut();
-      $('#success').html(data.correcto);
-      $('#message-success').fadeIn();
-      setTimeout(() => {
-        $('#message-success').fadeOut();
-      }, 3000);
-      reload();
-    }  
-},
-  error:function(data){
-    $('#tipoEUModal').fadeOut();
-    $('#error').html(data.error);
-      $('#message-error').fadeIn();
-      setTimeout(() => {
-        $('#message-error').fadeOut();
-      }, 3000);
+  data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove,tipounidad_id: tipounidad},
+  success:function(data){
 
-   
+    if(data.error == 'true'){
+      $('#error').html(data.errors);
+        $('#message-error').fadeIn();
+        setTimeout(() => {
+          // $('#message-success').fadeOut();
+        }, 3000);
+        // reload();
+        
+    }else{
+      $('#success').html(data.ok);
+        $('#message-success').fadeIn();
+        setTimeout(() => {
+          $('#message-success').fadeOut();
+        }, 3000);
+        setTimeout("location.reload(true);",3000)
+    }
+
+  
   }
+  
 
 })
 
@@ -132,9 +132,14 @@ function showEditModal(id){
 
   $.get(route, function(data){
     $('#editClave').val(data.clave);
+    $('#editNombre').val(data.nombre);
     $('#editColor').val(data.color);
     $('#editRemove').val(data.remove);
     $('#editId').val(data.id)
+    $('#tipounidad_id').val(data.tipounidad_id)
+
+    
+    
     $('#editIdUsuario').val();
     $('#editActive').val(data.active);   
     
@@ -147,9 +152,74 @@ function showEditModal(id){
   });
 
     if(tipoActividadEditModal.classList.contains("d-none")){
-      console.log(tipoActividadEditModal)
         tipoActividadEditModal.classList.remove("d-none")
         tipoActividadEditModal.classList.toggle("showModal");
     }
    
 }
+
+const closeModalEdit = document.getElementById("closeModalEdit");
+
+closeModalEdit.addEventListener('click',()=>{
+  if(tipoActividadEditModal.classList.contains('showModal')){
+    tipoActividadEditModal.classList.remove('showModal');
+    tipoActividadEditModal.classList.add('d-none');
+    }
+})
+
+
+
+//boton actualizar
+
+$('#btnEdit').click(function(){
+
+  let nombre = $('#editNombre').val();
+  let id = $('#editId').val();
+  let color = $('#editColor').val();
+  let clave = $('#editClave').val(); 
+  let idUsuario = $('#editIdUsuario').val();
+  let tipounidad_id = $('#tipounidad_id').val();
+  let editRemove = $('#editRemove').val();
+
+  let remove = $('#editRemove').val();
+
+  let active;
+  if($('#editActive').is(':checked')){
+    active = 0;
+  }else{
+    active = 1;
+  }
+  let route =`tipoactividades/${id}`
+  
+
+  $.ajax({
+    url: route,
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    type: 'PUT',
+    dataType: 'json',
+    data: {nombre: nombre, color: color, clave:clave, active: active, id: id, usuarios_id: idUsuario, remove: remove, tipounidad_id: tipounidad_id },
+
+    success: function (data) {
+  
+      if(data.success == 'true')
+      {
+
+        $('#tipoEUEditModal').fadeOut();
+        $('#success').html(data.correcto);
+        $('#message-success').fadeIn();
+        setTimeout(() => {
+          $('#message-success').fadeOut();
+        }, 3000);
+        setTimeout("location.reload(true);",3000)
+        
+      }
+    },
+    error:function(data)
+    {
+      if(data.status==422){
+      
+      }
+    }
+  })
+})
+

@@ -18,12 +18,14 @@ class CreateTipoactiviadesTable extends Migration
             $table->string('clave',5);
             $table->string('nombre');
             $table->string('color');
+            $table->unsignedInteger('tipounidad_id');
             $table->boolean('active',1);
             $table->boolean('remove');
             $table->softDeletes();            
 
             $table->unsignedInteger('usuarios_id');
-            $table->foreign('usuarios_id')->references('id')->on('usuarios');            
+            $table->foreign('usuarios_id')->references('id')->on('usuarios'); 
+            $table->foreign('tipounidad_id')->references('id')->on('tipounidades');             
 
             $table->timestamps();
         });

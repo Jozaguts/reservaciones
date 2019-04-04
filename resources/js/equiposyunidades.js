@@ -183,7 +183,7 @@ eUForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#modalAddEU').fadeOut();
                   }, 3000);
-                  setTimeout("location.reload(true);",3000)
+                  // setTimeout("location.reload(true);",3000)
               } 
   
         },

@@ -1,8 +1,8 @@
 
 
-<div class="container-fluid" id="TAEditModal">
+<div class="container-fluid d-none" id="TAEditModal">
        
-    {{-- <div class="row justify-content-center row-modal">
+    <div class="row justify-content-center row-modal">
         <div class="col-sm-8 col-md-6 modal-content">
             <div class="card">
                 <div class="header-modal-container">
@@ -60,7 +60,42 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                                <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Medio') }}</label>
+                            <label for="tipounidad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo unidad') }}</label>
+                          
+                            <div class="col-md-6">
+                                <select name="tipounidad" id="editTipoUnidad" class="form-control{{ $errors->has('tipounidad') ? ' is-invalid' : '' }} text-capitalize" required>
+
+                                    @foreach ($tipounidades as $key =>$value)
+                                <option  value="{{$value->id}}">{{$value->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('tipounidad'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('tipounidad') }}</strong>
+                                    </span>
+                                @endif
+                            </div>                          
+                        </div>
+                        <div class="form-group row colorpicker2 colorpicker-component">
+                                <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}</label>
+                                <div class="col-md-4">
+                                       
+                                    <input id="editColor" type="text" value="#00AABB"  class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color"  required autofocus> 
+                                    @if ($errors->has('color'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('Color') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-1 piker-color-icon">
+                                        <span class="input-group-addon"><i class="coloricon"></i></span>
+                                </div>
+                     
+                                    <script type="text/javascript">
+
+                                        $('.colorpicker2').colorpicker();
+                                      
+                                      </script>
     
                             </div>
                             <div class="form-group row">
@@ -78,8 +113,9 @@
                                 </div>
                       
                         <input type="hidden" name="editIdUsuario" value={{Auth::user()->id}} id="editIdUsuario">
-                        <input type="hidden" name="editId" value="" id="editId">
                         <input type="hidden" name="editRemove" value="" id="editRemove">
+                        <input type="hidden" name="editId" value="" id="editId">
+                        <input type="hidden" name="tipounidad_id" value="" id="tipounidad_id">
              
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4 main-nav">
@@ -90,5 +126,5 @@
                 </div>
             </div>
         </div>
-    </div>  --}}
+    </div> 
 </div>
