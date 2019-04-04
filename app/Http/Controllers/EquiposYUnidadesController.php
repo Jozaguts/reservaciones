@@ -47,7 +47,7 @@ class EquiposYUnidadesController extends Controller
         
           //reglas de validacion
           $rules =[
-            'clave' => ['required', 'string', 'max:5'],
+            'clave' => ['required', 'string', 'max:5' ,'unique:unidades'],
             'placa' => ['required', 'string', 'max:16'],
             'capacidad'=> ['required', 'string'],
             'descripcion'=> ['required', 'string'],
@@ -325,6 +325,8 @@ class EquiposYUnidadesController extends Controller
         $unidad = EquiposYUnidades::find($id);
         
         $horarios = UnidadesHorario::where('unidades_id','=', $id)->get();
+      
+       
         // dd($horarios)->all();
         
          //reglas de validacion
@@ -339,6 +341,17 @@ class EquiposYUnidadesController extends Controller
             'removed' => ['nullable','boolean'],
             'active' => ['nullable','boolean'],
         ];
+
+        if($request['clave'] != $unidad->clave ){
+           
+            $unidad->clave =  $request['clave'];
+            
+        }
+        else{
+            $unidad->clave ='';
+            $unidad->clave = $unidad->clave;
+               
+            }
            
       
       if($request->ajax())
@@ -368,107 +381,26 @@ class EquiposYUnidadesController extends Controller
             $unidad->save();
 
                        foreach ( $horarios as $horario ) {
-                      
-                       
-                        if($horario->dia == 'L'){
+                                        
+                            $dias= $request->dias;
+                            foreach($dias as $dia){
                         
+                        
+
                           $horario::updateOrCreate([
-                            'dia'=> 'L',
+                            'dia'=> $dia[0][0],
                             'idtipounidad'=> $request->get('idtipounidad'),
-                           'hini'=> $request->get('editIL'),
-                           'hfin'=>$request->get('editFL'),
+                           'hini'=> $dia[1][0],
+                           'hfin'=>$dia[2][0],
                            'active'=>$request->get('active'),
                            'remove'=>0,
                            'idusuario'=>$request->get('idusuario'), 
                            'unidades_id' => $horario->unidades_id  
                           ]);
                        
-
-                          
                         }
-                        if($horario->dia == 'M' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'M',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editIM'),
-                             'hfin'=>$request->get('editFM'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save();
-                            
-                          }
-                          if($horario->dia == 'X' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'X',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editIX'),
-                             'hfin'=>$request->get('editFX'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save(); 
-                          }
-                          if($horario->dia == 'J' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'J',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editIJ'),
-                             'hfin'=>$request->get('editFJ'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save();
-                            
-                          }
-                          if($horario->dia == 'V' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'V',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editIV'),
-                             'hfin'=>$request->get('editFV'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save();
-                            
-                          }
-                          if($horario->dia == 'S' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'S',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editIS'),
-                             'hfin'=>$request->get('editFS'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save();
-                            
-                          }
-                          if($horario->dia == 'D' ){
-                            $horario::updateOrCreate([
-                              'dia'=> 'D',
-                              'idtipounidad'=> $request->get('idtipounidad'),
-                             'hini'=> $request->get('editID'),
-                             'hfin'=>$request->get('editFD'),
-                             'active'=>$request->get('active'),
-                             'remove'=>0,
-                             'idusuario'=>$request->get('idusuario'), 
-                             'unidades_id' => $unidad->id  
-                            ]);
-                            $horario->save();
-                            
-                          }
+                          
+                   
                     }
           
             

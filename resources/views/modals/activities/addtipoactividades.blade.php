@@ -12,8 +12,8 @@
                     <div class="container mt-3">
                         <div class="row">
                             <div class="col-sm-6 offset-md-2">
-                                
-                                            @include('components.alertsintomodals')
+                                @include('components.ajax-alerts')
+                                           
                                 
                             </div>
                         </div>
@@ -54,6 +54,23 @@
                                         </span>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tipounidad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo unidad') }}</label>
+                              
+                                <div class="col-md-6">
+                                    <select name="tipounidad" id="tipoUnidad" class="form-control{{ $errors->has('tipounidad') ? ' is-invalid' : '' }} text-capitalize" required>
+    
+                                        @foreach ($tipounidades as $key =>$value)
+                                    <option  value="{{$value->id}}">{{$value->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('role'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('role') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>                          
                             </div>
                             <div class="form-group row colorpicker colorpicker-component">
                                 <label for="color" class="col-md-4 col-form-label text-md-right">{{ __('Color') }}
