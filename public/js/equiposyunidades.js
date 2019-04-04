@@ -553,3 +553,27 @@ habilitarInput = (e)=>{
     }
     
     }
+    const editTodosLosDias = document.getElementById('editTodosLosDias');
+
+    editTodosLosDias.addEventListener('change',e=>{
+      if(e.target.checked){
+        checkboxs = document.querySelectorAll('input[class=day]')
+        checkboxs.forEach((check)=>{
+          check.checked = true;
+        })
+        inputsTime.forEach((input)=>{
+          input.disabled = true;
+        })
+    
+    }else{
+       if(e.target.checked == false){
+         checkboxs = document.querySelectorAll('input[class=day]')
+         checkboxs.forEach((check)=>{
+           check.checked = false;
+         })
+        //  inputsTime.forEach((input)=>{
+        //    input.disabled = false;
+        //  })
+     }
+     }
+    })
