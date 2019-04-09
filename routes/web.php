@@ -44,5 +44,9 @@ Route::get('unidades', function(){
 // tipo unidaddes controller 
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
 
-
+//tipo de actividades
 Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);
+
+
+Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
+

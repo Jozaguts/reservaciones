@@ -14,4 +14,12 @@ class TipoActividades extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = ['nombre','color','clave','remove','active','usuarios_id','tipounidad_id'];  
+
+    public function TipoUnidad(){
+        return $this->belongsTo(TipoUnidad::class,'tipounidad_id');
+    }
+
+    public function Actividades(){
+        return $this->hasMany(Actividades::class,'tipoactividades_id');
+    }
 }

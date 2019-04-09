@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/tipoequipounidad.scss', 'public/css')
    .sass('resources/sass/equiposyunidades.scss', 'public/css')
    .sass('resources/sass/tipoactividades.scss', 'public/css')
+   .sass('resources/sass/activities.scss', 'public/css')
 
    mix.browserSync({
       proxy:'reservaciones-dev.com'
@@ -45,3 +46,6 @@ mix.js('resources/js/app.js', 'public/js')
                                        mix.scripts([
                                           'resources/js/tipoactividades.js'],
                                              'public/js/tipoactividades.js');
+                                             mix.scripts([
+                                                'resources/js/activities.js'],
+                                                   'public/js/activities.js');
