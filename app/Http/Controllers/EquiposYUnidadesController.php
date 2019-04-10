@@ -93,7 +93,7 @@ class EquiposYUnidadesController extends Controller
                 'idusuario'=>$request->input('idusuario'), 
                 'unidades_id' => $unidad_id 
             ]);
-            dd($request->input('iTD'));
+        
              // Martes
              $horario::create([
                 'dia'=> 'M',
@@ -366,17 +366,20 @@ class EquiposYUnidadesController extends Controller
                            $dias = $request->get('dias');
                            
                             if($dias[$i][1] != null && $dias[$i][2] != null ){
-                                $unidad_dia = UnidadesHorario::where('unidades_id', $id)
+                                $unidad_dia = UnidadesHorario::where('unidades_id', $unidad->id)
                                 ->where('dia', $dias[$i][0])
                                 ->update(['hini' => $dias[$i][1],'hfin' => $dias[$i][2]]);
+                              
                                 if ($unidad_dia<1) {
+                                  
                                     UnidadesHorario::create([
+                                       
                                     'dia'=> $dias[$i][0],
                                     'hini' => $dias[$i][1],
                                     'hfin' => $dias[$i][2],
                                     'active'=>1,
                                     'remove'=>0,
-                                    'unidades_id'=> $id,
+                                    'unidades_id'=> $unidad->id,
                                     'idusuario'=>$request->get('idusuario'),
                                     'idtipounidad'=>$request->get('idtipounidad')])
                                     ->save();

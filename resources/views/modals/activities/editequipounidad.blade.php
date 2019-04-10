@@ -9,28 +9,21 @@
                            
                     <div class="card-header" id="card-header">{{ __('Editar Equipo/Unidad') }} </div>
                     <span class="close-modal" id="closeModalEdit"></span>
-                    @if ($errors->any())
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 offset-md-2">
-                                <div class="alert alert-danger float-right">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        
-                    @endif
+             
                     </div>
                     <div class="card-body">
                         <form method="PUT" action="{{ url('tipounidades') }}" id="tipoEUForm">
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
                             @method('PUT')
-    
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div class="col-sm-6 offset-md-2">
+                                        
+                                                    @include('components.alertsintomodals')
+                                        
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="clave" class="col-md-4 col-form-label text-md-right">{{ __('Clave') }}
                                 </label>
