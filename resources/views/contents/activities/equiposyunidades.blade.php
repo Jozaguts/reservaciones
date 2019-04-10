@@ -10,7 +10,7 @@
                                 </div>
                                   {{-- alerts --}}
                                   @include('components.ajax-alerts')
-                                 
+                               
                                   {{-- btns container list--}}
                                 <div class="container main-grid">
                                         @foreach ($tipounidades as $tipo )

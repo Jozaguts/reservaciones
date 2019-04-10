@@ -281,10 +281,6 @@
   background-color: #404040;
 }
 
-.show {
-  display: block;
-}
-
 /* Underline From Left */
 
 .hm-list__item::after {

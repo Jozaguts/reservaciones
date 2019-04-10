@@ -23,6 +23,7 @@ class EquiposYUnidadesController extends Controller
         $unidades = EquiposYUnidades::all(); //mando la unidad
         $tipounidades = TipoUnidad::orderBy('nombre', 'asc')->get();// mando la categoria de la unidad
         $dias = Dias::all();
+
         return view('sections.activities.equiposyunidades', compact('unidades','tipounidades', 'dias'));
     }
 
@@ -92,6 +93,7 @@ class EquiposYUnidadesController extends Controller
                 'idusuario'=>$request->input('idusuario'), 
                 'unidades_id' => $unidad_id 
             ]);
+            dd($request->input('iTD'));
              // Martes
              $horario::create([
                 'dia'=> 'M',
@@ -304,11 +306,11 @@ class EquiposYUnidadesController extends Controller
         // return response()->json($equipounidad);
         $unidad_horario = DB::table('unidades as u')
         ->join('unidadeshorario as uh', 'u.id','=','uh.unidades_id')
-        ->select('uh.dia','uh.hini','uh.hfin','uh.id')
+        ->select('uh.dia','uh.hini','uh.hfin','uh.unidades_id')
         ->where('u.id', '=',$id)
         ->get();
         return response()->json(['unidad'=>$unidad,'unidadHorario'=> $unidad_horario]);
-       
+       dd($unidad_horario);
     }
 
     /**
@@ -320,15 +322,9 @@ class EquiposYUnidadesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-   
-        $unidad = EquiposYUnidades::find($id);
-        
+        $unidad = EquiposYUnidades::find($id);   
         $horarios = UnidadesHorario::where('unidades_id','=', $id)->get();
-      
-       
-        // dd($horarios)->all();
-        
+
          //reglas de validacion
          $rules =[
             'clave' => [ 'string', 'max:5'],
@@ -344,64 +340,101 @@ class EquiposYUnidadesController extends Controller
 
         if($request['clave'] != $unidad->clave ){
            
-            $unidad->clave =  $request['clave'];
-            
+            $unidad->clave =  $request['clave'];            
         }
         else{
             $unidad->clave ='';
-            $unidad->clave = $unidad->clave;
-               
-            }
-           
-      
+            $unidad->clave = $unidad->clave;     
+            }  
       if($request->ajax())
       {
-        
-       
             //Se realiza la validación
-        $validator = Validator::make($request->all(), $rules);
-        
+        $validator = Validator::make($request->all(), $rules); 
         //si falla se redirige con los errores a la vista
         if ($validator->fails()) {
             return response()->json(['success'=>'false','error'=>$validator->errors()->all()]);  
         }else{
             $inputs = $request->all();
-        
-            $unidad->fill([
-            'clave' => $request->get('clave'),
-            'placa'=> $request->get('placa'),
-            'capacidad'=> $request->get('capacidad'),
-            'descripcion'=> $request->get('descripcion'),
-            'color'=> $request->get('color'),
-            'idtipounidad'=> $request->get('idtipounidad'),              
-            'remove'=>$request->get('remove'),
-            'active'=>$request->get('active'),
-            'idusuario'=>$request->get('idusuario'),       
-            ]);
+            $unidad->fill($inputs);
             $unidad->save();
 
-                       foreach ( $horarios as $horario ) {
-                                        
-                            $dias= $request->dias;
-                            foreach($dias as $dia){
-                        
-                        
 
-                          $horario::updateOrCreate([
-                            'dia'=> $dia[0][0],
-                            'idtipounidad'=> $request->get('idtipounidad'),
-                           'hini'=> $dia[1][0],
-                           'hfin'=>$dia[2][0],
-                           'active'=>$request->get('active'),
-                           'remove'=>0,
-                           'idusuario'=>$request->get('idusuario'), 
-                           'unidades_id' => $horario->unidades_id  
-                          ]);
-                       
+            $filas = 7;                        
+
+                        for ($i=0; $i <$filas ; $i++) { 
+                           
+                           $dias = $request->get('dias');
+                           
+                            if($dias[$i][1] != null && $dias[$i][2] != null ){
+                                $unidad_dia = UnidadesHorario::where('unidades_id', $id)
+                                ->where('dia', $dias[$i][0])
+                                ->update(['hini' => $dias[$i][1],'hfin' => $dias[$i][2]]);
+                                if ($unidad_dia<1) {
+                                    UnidadesHorario::create([
+                                    'dia'=> $dias[$i][0],
+                                    'hini' => $dias[$i][1],
+                                    'hfin' => $dias[$i][2],
+                                    'active'=>1,
+                                    'remove'=>0,
+                                    'unidades_id'=> $id,
+                                    'idusuario'=>$request->get('idusuario'),
+                                    'idtipounidad'=>$request->get('idtipounidad')])
+                                    ->save();
+                                }
+
+                            }else{
+                                $_dia = UnidadesHorario::where('unidades_id', $id)
+                                ->where('dia', $dias[$i][0])->get();
+                                // dd($_dia);
+                                   
+                                // if($_dia->first()->get()->id > 0){
+                            
+                                    $unidad_dia = DB::table('unidadeshorario')->where('unidades_id', $id)
+                                    ->where('dia','=',$dias[$i][0])
+                                    ->delete();
+                                // }
+
+                                // dd($dias[$i][0], $unidad_dia);
+                            //   $unidad_dia =   DB::table('unidadeshorario')->where('unidades_id', $id)
+                            //   ->where('dia','=',$dias[$i][0])
+                            //   ->delete();
+                             
+                            //     if($unidad_dia == null){
+                            //         return response()->json(['success'=>'false','error'=>'Error no se Puedo Eliminar la Unidad/Equipo']); 
+                            //     }else{
+                            //         return response()->json(['success'=>'true', 200, 'correcto' => 'Unidad Eliminada Correctamente', 200]);
+                            //     }
+                                
+                            }
+  
                         }
-                          
-                   
-                    }
+
+
+
+
+                // foreach ( $horarios as $horario ) 
+                // {    
+                //     $dias= $request->dias;
+                //         foreach($dias as $dia)
+                     
+                //         {
+                           
+                //             $horario::firstOrNew(
+                //             [ 'unidades_id' => $unidad->id, 
+                //             'dia'=> $dia[0][0],
+                //             'idtipounidad'=> $request->get('idtipounidad'),
+                //             'hini'=> $dia[1][0],
+                //             'hfin'=>$dia[2][0],
+                //             'active'=>$request->get('active'),
+                //             'remove'=>0,
+                //             'idusuario'=>$request->get('idusuario'), 
+                //             'unidades_id' => $unidad->id  
+                //             ])->save();
+
+                //         }
+
+
+                // }
           
             
              if ($unidad) {
