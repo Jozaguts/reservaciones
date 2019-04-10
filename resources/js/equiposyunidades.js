@@ -183,7 +183,7 @@ eUForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#modalAddEU').fadeOut();
                   }, 3000);
-                  // setTimeout("location.reload(true);",3000)
+                  setTimeout("location.reload(true);",1000)
               } 
   
         },
@@ -417,10 +417,10 @@ $('#btnEdit').click(function(){
         $('#modalEditEquipoUnidad').fadeOut();
         $('#success').html(data.correcto);
         $('#message-success').fadeIn();
-        // setTimeout(() => {
-        //   $('#message-success').fadeOut();
-        // }, 3000);
-        // setTimeout("location.reload(true);",3000)
+        setTimeout(() => {
+          $('#message-success').fadeOut();
+        }, 3000);
+        setTimeout("location.reload(true);",3000)
         
       }
     },
