@@ -276,3 +276,9 @@ $(document).ready(function() {
      
   });
 });
+
+//cambiar a color a inactivos
+let elements = document.querySelectorAll('[data-active="0"]');
+elements .forEach(element => {
+   element.classList.add('tr-bg');
+});
