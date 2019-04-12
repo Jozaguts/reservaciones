@@ -2,3 +2,20 @@
     background-color: rgba(212, 212, 212, 0.795) !important;
     color: rgba(20, 20, 20, 0.705) !important;
 }
+label{
+    color:rgb(54, 54, 54);
+}
+input{
+    border: .9px solid rgba(73, 73, 73, 0.842) !important;
+}
+select{
+    border: .9px solid rgba(73, 73, 73, 0.842) !important;
+}
+input[type="checkbox"]{
+width: 30px !important;
+height: 30px !important;
+
+}
+.label-ocupacion{
+    width: fit-content !important;
+}
