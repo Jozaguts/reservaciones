@@ -6,6 +6,8 @@ use App\Actividades;
 use App\TipoActividades;
 use Illuminate\Http\Request;
 use App\TipoUnidad;
+use App\Anticipos;
+use App\Personas;
 
 class ActividadesController extends Controller
 {
@@ -16,9 +18,11 @@ class ActividadesController extends Controller
      */
     public function index()
     {
+        $personas = Personas::all();
+        $anticipos = Anticipos::all();
         $actividades = Actividades::all();
         $tipoactividades = TipoActividades::all();
-        return view('sections.activities.activities', compact('actividades','tipoactividades','tipounidades'));
+        return view('sections.activities.activities', compact('actividades','tipoactividades','tipounidades','anticipos','personas'));
     }
 
     /**
