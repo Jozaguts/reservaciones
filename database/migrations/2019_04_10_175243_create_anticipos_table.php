@@ -14,6 +14,7 @@ class CreateAnticiposTable extends Migration
     public function up()
     {
         Schema::create('anticipos', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('nombre');
             $table->integer('porcentaje');
             $table->boolean('active');

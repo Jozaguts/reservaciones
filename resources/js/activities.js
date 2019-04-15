@@ -10,29 +10,78 @@ elements .forEach(element => {
    element.classList.add('tr-bg');
 });
 
-const home_tab = document.getElementById('home_tab');
-showTab =()=>{
 
-}
-home_tab.addEventListener('click',()=>{
+//show panel modal
+
+let general = document.getElementById('general')
+let profile = document.getElementById('profile')
+let contact = document.getElementById('contact')
+
+let panelsMOdal = document.querySelectorAll('.tab-pane')
+showPanel =(element)=>{
+  // let idButton = element.id
+
+panelsMOdal.forEach((panel)=>{
   
-}) 
+`${panel.id}-tab` != element.id?panel.classList.remove('show'):null;
+`${panel.id}-tab` != element.id?panel.classList.remove('active'):null;
+})
+}
+
+
+
+
+
+
+
+
+// opupacion fija y renta checkbox e inputs
+
+let fijo = document.getElementById('fijo')
+let renta = document.getElementById('renta')
+let inputsREnta = document.querySelectorAll('input[class~=renta__input]')
+
+
+
+renta.addEventListener('change',(e)=>{
+  	if(e.target.checked){
+     
+      inputsREnta.forEach((input)=>{
+        input.disabled = false;
+        input.required = true; 
+      })
+    }else{
+    
+      inputsREnta.forEach((input)=>{
+        input.disabled = true;
+        input.required = false; 
+      })
+    }
+})
+
+
+
+
+
+
 
 //add actividades 
 
 
-let AddTipoActividadesForm = document.getElementById('AddTipoActividadesForm');
+let AddActividadesForm = document.getElementById('AddActividadesForm');
 
-AddTipoActividadesForm.addEventListener('submit',(e)=>{
+AddActividadesForm.addEventListener('submit',(e)=>{
 e.preventDefault();
-let datos = new FormData(AddTipoActividadesForm) 
+
+let datos = new FormData(AddActividadesForm) 
 let clave = datos.get('clave')
-let tipounidad = datos.get('tipounidad')
+let tipoactividad = datos.get('tipoactividad')
 let nombre = datos.get('nombre')
 let color = datos.get('color')
 let token = $("input[name=_token]").val();
 let usuarios_id = datos.get('idusuario')
 let active;
+console.log(tipoactividad, nombre)
   if($('#active').is(':checked')){
     active = 0;
   }else{
