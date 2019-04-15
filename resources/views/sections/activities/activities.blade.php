@@ -6,6 +6,7 @@
 
      <link href="{{ asset('css/hamburger-menu.css') }}" rel="stylesheet">
      <link href="{{ asset('css/activities.css') }}" rel="stylesheet">
+     
 @endsection
 
 {{-- Contenido --}}
@@ -26,5 +27,6 @@
 @section('scripts')
 <script src="{{ asset('js/activities.js') }}" defer></script>
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
+
 
 @endsection

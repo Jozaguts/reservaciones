@@ -41,8 +41,8 @@ class CreateActividadesTable extends Migration
             $table->foreign('tipoactividades_id')->references('id')->on('tipoactividades');
             $table->unsignedInteger('tipounidades_id');
             $table->foreign('tipounidades_id')->references('id')->on('tipounidades');
-            $table->unsignedInteger('deposito_id');
-            $table->foreign('deposito_id')->references('id')->on('deposito');
+            $table->unsignedInteger('anticipo_id');
+            $table->foreign('anticipo_id')->references('id')->on('anticipos');
                         
 
             $table->timestamps();

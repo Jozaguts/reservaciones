@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Actividades;
-use App\TipoActividades;
 use Illuminate\Http\Request;
-use App\TipoUnidad;
-use App\Anticipos;
-use App\Personas;
 
-class ActividadesController extends Controller
+class AnticiposController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +13,7 @@ class ActividadesController extends Controller
      */
     public function index()
     {
-        $personas = Personas::all();
-        $anticipos = Anticipos::all();
-        $actividades = Actividades::all();
-        $tipoactividades = TipoActividades::all();
-        return view('sections.activities.activities', compact('actividades','tipoactividades','tipounidades','anticipos','personas'));
+        //
     }
 
     /**
@@ -49,10 +40,10 @@ class ActividadesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Actividades  $actividades
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Actividades $actividades)
+    public function show($id)
     {
         //
     }
@@ -60,10 +51,10 @@ class ActividadesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Actividades  $actividades
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Actividades $actividades)
+    public function edit($id)
     {
         //
     }
@@ -72,10 +63,10 @@ class ActividadesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Actividades  $actividades
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Actividades $actividades)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,10 +74,10 @@ class ActividadesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Actividades  $actividades
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Actividades $actividades)
+    public function destroy($id)
     {
         //
     }

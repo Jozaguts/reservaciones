@@ -3,3 +3,26 @@
   color: rgba(20, 20, 20, 0.705) !important;
 }
 
+label {
+  color: #363636;
+}
+
+input {
+  border: 0.9px solid rgba(73, 73, 73, 0.842) !important;
+}
+
+select {
+  border: 0.9px solid rgba(73, 73, 73, 0.842) !important;
+}
+
+input[type=checkbox] {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.label-ocupacion {
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+

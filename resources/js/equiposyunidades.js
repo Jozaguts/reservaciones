@@ -387,12 +387,6 @@ $('#btnEdit').click(function(){
     
   // let horarioId = ;
 
-
-
-
-
-
-
   let active;
   if($('#editActive').is(':checked')){
     active = 0;
