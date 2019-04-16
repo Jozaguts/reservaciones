@@ -39,8 +39,8 @@
 
                                           
                                                 @foreach ($actividades as $actividad)
-                                                
-                                                @if( $actividad->TipoUnidad->nombre == $tipoactividad->TipoUnidad->nombre)
+                                              
+                                                @if( $actividad->tipoactividades_id == $tipoactividad->id)
                                               
                                                 
                                             <tr id="trBg" class="mot" data-id="{{$actividad->id}}"data-clave="{{$actividad->clave}}" >

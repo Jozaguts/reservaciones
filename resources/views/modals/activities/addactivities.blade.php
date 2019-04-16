@@ -24,14 +24,25 @@
                   </ul>
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">General
+
+                        <div class="container mt-3">
+                            <div class="row">
+                                <div class="col-sm-6 offset-md-2">
+                                    @include('components.alertsintomodals')
+                                               
+                                    
+                                </div>
+                            </div>
+                        </div>
                     <form action="{{url('/actividades')}}" method="post" id="AddActividadesForm">
+                      <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
                       <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-2">
                                       <div class="form-group">
                                         <label for="">Clave</label>
-                                        <input type="text" name="clave" id="clave" class="form-control general" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase">
+                                        <input type="text" name="clave" id="clave" class="form-control general" placeholder="" aria-describedby="helpId" maxlength="4" required style="text-transform:uppercase">
                                        
                                       </div>
                                     </div>
@@ -45,11 +56,11 @@
                                  <div class="col-4">
                                  <div class="form-group">
                                    <label for="">Tipo de Actividad</label>
-                                   <select class="form-control " name="tipoactividad" id="tipoActividad" required>
+                                   <select class="form-control " name="tipoactividades_id" id="tipoactividades_id" required>
                                      @foreach ($tipoactividades as $tipoactividad)
                                          
                                      
-                                   <option value="{{$tipoactividad->nombre}}">{{$tipoactividad->nombre}}</option>
+                                   <option value="{{$tipoactividad->id}}">{{$tipoactividad->nombre}}</option>
                                      @endforeach
                                    </select>
                                  </div>
@@ -75,21 +86,21 @@
                                    <div class="col-2">
                                      
                                      <div class="form-group">
-                                       <label for="nimincluidos">Min. Incluidos</label>
-                                       <input type="number" class="form-control renta__input general" name="nimincluidos" id="minIncluidos" aria-describedby="helpId" placeholder="" disabled>
+                                       <label for="minutosincluidos">Min. Incluidos</label>
+                                       <input type="number" class="form-control renta__input general" name="minutosincluidos" id="minutosIncluidos" aria-describedby="helpId" placeholder="" disabled>
                                       
                                      </div>
                                    </div>
                                    <div class="col-2">
                                        <div class="form-group">
-                                         <label for="minincremento">Min. Incremento</label>
-                                         <input type="number" class="form-control renta__input general" name="minincremento" id="minIncremento" aria-describedby="helpId" placeholder="" disabled>
+                                         <label for="minutoincrementa">Min. Incremento</label>
+                                         <input type="number" class="form-control renta__input general" name="minutoincrementa" id="minutoIncrementa" aria-describedby="helpId" placeholder="" disabled>
                                         </div>
                                      </div>
                                      <div class="col-2">
                                          <div class="form-group">
                                            <label for="">$ Incremento</label>
-                                           <input type="number" class="form-control renta__input general" name="incremento" id="incremento" aria-describedby="helpId" placeholder="$" disabled step="0.01">
+                                           <input type="number" class="form-control renta__input general" name="montoincremento" id="montoIncremento" aria-describedby="helpId" placeholder="$" disabled step="0.01">
                                           </div>
                                        </div>
                                       
@@ -116,7 +127,7 @@
                                    <div class="row-modal">
                                        <div class="form-group  mr-5">
                                          <label for="">Max Cupones</label>
-                                         <input type="number" class="form-control general" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
+                                         <input type="number" class="form-control general" name="maxcupones" id="maxCupones" aria-describedby="helpId" placeholder="">
                                 
                                        </div>
                                       </div>
@@ -127,7 +138,7 @@
                                   
                                           
                                 
-                                      <select class="form-control" name="anticipo" id="anticipo" required>
+                                      <select class="form-control" name="anticipo_id" id="anticipoId" required>
                                           @foreach ($anticipos as $anticipo)
                                       <option value="{{$anticipo->id}}">{{$anticipo->nombre}}</option>
                                         {{-- motrar el nombre de tabla anticipo y guardar actividades anticipos_id --}}
@@ -148,7 +159,7 @@
                   </div>
                     <div class="tab-pane fade" id="PreciosYPases" role="tabpanel" aria-labelledby="PreciosYPases-tab">
                         <form action="{{url('/actividades')}}" method="post" id="AddPreciosYPasesForm">
-                          <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
+                          {{-- <meta name="csrf-token" content="{{ csrf_token() }}" id="_token"> --}}
                           <div class="container">
                             <div class="row">
                               <div class="col-3 offset-2">

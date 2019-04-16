@@ -98,7 +98,7 @@ $.ajax({
   data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove,tipounidad_id: tipounidad},
   success: function (data) {
   
-    console.log(data);
+    
     if(data.error == 'true'){
       $('#errorsIntoModal').html(data.errors);
         $('#message-errorIntoModal').fadeIn();
