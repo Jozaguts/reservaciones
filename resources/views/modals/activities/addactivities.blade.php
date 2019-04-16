@@ -250,50 +250,50 @@
                             </div>
                               <div class="col-1 bg-primary">
                                 <div class="form-group">
-                                
-                                  <input type="text" name="precio1" id="precio1" class="form-control" placeholder="" aria-describedby="helpId">
+                                  <input type="text" name="precio1" id="precio1" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  
                                 </div>
                               </div>
                               <div class="col-1 bg-primary">
                                   <div class="form-group">
+                                    <input type="text" name="precio2" id="precio2" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                    
-                                    <input type="text" name="precio2" id="precio2" class="form-control" placeholder="" aria-describedby="helpId">
                                   </div>
                                 </div>
                                 <div class="col-1 bg-primary">
                                     <div class="form-group">
-                                       
-                                      <input type="text" name="precio3" id="precio3" class="form-control" placeholder="" aria-describedby="helpId">
+                                      <input type="text" name="precio3" id="precio3" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                      
                                     </div>
                                   </div>
                                   
                                   <div class="col-1 bg-success pl-4">
                                       <div class="form-group">
-                                         
-                                        <input type="text" name="doble" id="doble" class="form-control" placeholder="" aria-describedby="helpId">
+                                        <input type="text" name="doble" id="doble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                        
                                       </div>
                                     </div>
                                     <div class="col-1 bg-success ">
                                         <div class="form-group">
-                                          
-                                          <input type="text" name="banlancedoble" id="balancedoble" class="form-control" placeholder="" aria-describedby="helpId">
+                                          <input type="text" name="banlancedoble" id="balancedoble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                        
                                         </div>
                                       </div>
                                       <div class="col-1 bg-success ">
                                           <div class="form-group">
-                                             
-                                            <input type="text" name="triple" id="triple" class="form-control" placeholder="" aria-describedby="helpId">
+                                            <input type="text" name="triple" id="triple" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                         
                                           </div>
                                         </div>
                                         <div class="col-1 bg-success ">
                                             <div class="form-group">
-                                               
-                                              <input type="text" name="balancetriple" id="balancetriple" class="form-control" placeholder="" aria-describedby="helpId">
+                                              <input type="text" name="balancetriple" id="balancetriple" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                            
                                             </div>
                                           </div>
                                           <div class="col-1 bg-warning ml-3">
                                               <div class="form-group">
-                                                 {{-- coment --}}
+                                                
 
                                                   <input type="checkbox" class="form-control ml-3" name="promo" id="promo" value="checkedValue" >
                                               </div>
