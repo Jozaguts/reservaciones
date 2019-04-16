@@ -12,7 +12,7 @@ class Actividades extends Model
     protected $table = 'actividades';
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['clave','nombre','precio', 'balance','fijo','renta','minutoincrementa','montoincremento','promocion','combo','observaciones','requisitos','maxcortesias','maxcupones','riesgo','puntos','active','remove','tipounidades_id'];
+    protected $fillable = ['clave','nombre','precio', 'balance','fijo','renta','minutoincrementa','montoincremento','minutosincluidos','promocion','combo','observaciones','requisitos','maxcortesias','maxcupones','riesgo','puntos','active','remove','tipounidades_id','idusuario','tipoactividades_id','anticipo_id'];
 
   
     public function TipoUnidad()

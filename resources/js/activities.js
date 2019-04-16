@@ -75,39 +75,59 @@ e.preventDefault();
 
 let datos = new FormData(AddActividadesForm) 
 let clave = datos.get('clave')
-let tipoactividad = datos.get('tipoactividad')
 let nombre = datos.get('nombre')
-let color = datos.get('color')
-let token = $("input[name=_token]").val();
-let usuarios_id = datos.get('idusuario')
-let active;
-console.log(tipoactividad, nombre)
-  if($('#active').is(':checked')){
-    active = 0;
+let tipoactividades_id = datos.get('tipoactividades_id')
+let active=1, remove=0;
+let tipounidades_id =0;
+
+  let fijo;
+  if($('#fijo').is(':checked')){
+    fijo = 1;
   }else{
-    active = 1;
+    fijo = 0;
   }
-  let remove;
-  if($('#remove').is(':checked')){
-    remove = 0;
+  let renta;
+  if($('#renta').is(':checked')){
+    renta = 1;
   }else{
-    remove = 1;
+    renta = 0;
   }
 
+  let minutosincluidos = datos.get('minutosincluidos')
+  let minutoincrementa = datos.get('minutoincrementa')
+  let montoincremento = datos.get('montoincremento')
+  let maxcortesias = datos.get('maxcortesias')
+  let maxcupones = datos.get('maxcupones')
+  let anticipo_id= datos.get('anticipo_id')
+  let idusuario = datos.get('idusuario')
+ 
 
-let route = 'tipoactividades'
+  // if($('#active').is(':checked')){
+  //   active = 0;
+  // }else{
+  //   active = 1;
+  // }
+  // let remove;
+  // if($('#remove').is(':checked')){
+  //   remove = 0;
+  // }else{
+  //   remove = 1;
+  // }
+
+let route = 'actividades'
 
 $.ajax({
   url:route,
-  headers:{'X-CSRF-TOKEN':token},
+  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
   type:'POST',
   dataType: 'json',
-  data: {clave: clave, nombre: nombre, color: color, usuarios_id: usuarios_id, active: active, remove: remove,tipounidad_id: tipounidad},
+  data: {clave: clave, nombre: nombre, tipoactividades_id: tipoactividades_id,fijo:fijo,renta:renta,minutosincluidos:minutosincluidos,minutoincrementa:minutoincrementa,montoincremento:montoincremento,maxcortesias:maxcortesias,maxcupones:maxcupones,anticipo_id:anticipo_id,idusuario:idusuario, active:active, remove:remove,tipounidades_id:tipounidades_id},
   success: function (data) {
   
-    console.log(data);
+   console.log(data)
     if(data.error == 'true'){
-      $('#errorsIntoModal').html(data.errors);
+      data.errors.forEach(()=>{})
+      $('#errorsIntoModal').html(data.errors[0]);
         $('#message-errorIntoModal').fadeIn();
         setTimeout(() => {
           $('#message-error').fadeOut();

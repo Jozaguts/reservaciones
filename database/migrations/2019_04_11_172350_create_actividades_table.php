@@ -16,12 +16,13 @@ class CreateActividadesTable extends Migration
         Schema::create('actividades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('clave',4);
-            $table->string('nombre',4);
+            $table->string('nombre',40);
             $table->decimal('precio',16,4);
-            $table->decimal('balance',16,4);            
+            $table->decimal('balance',16,4);        
             $table->boolean('fijo');
             $table->boolean('renta');
             $table->integer('minutoincrementa');
+            $table->integer('minutosincluidos');//agregue este campo a la db
             $table->double('montoincremento');
             $table->boolean('promocion');
             $table->boolean('combo');
@@ -32,7 +33,7 @@ class CreateActividadesTable extends Migration
             $table->string('riesgo', 45);      
             $table->integer('puntos');  
             $table->boolean('active');
-            $table->boolean('remove');         
+            $table->boolean('remove');     
             $table->softDeletes();           
 
             $table->unsignedInteger('idusuario');
