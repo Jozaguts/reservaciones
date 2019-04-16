@@ -170,73 +170,143 @@
                               <div class="col-6"><label for="" class="float-right">En Ocupación</label></div>
                               <div class="col-4"><label for=""  class="float-right">Acepta</label></div>
                             </div>
+                            <div class="row bg-warning ">
+                                <div class="col-1 bg-primary">
+                                    <div class="form-group">
+                                        <label for="" class="">Nombre</label>
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="col-1 bg-primary">
+                                      <div class="form-group">
+                                          <label for="" class="">Precio 1</label>
+                                        
+                                      </div>
+                                    </div>
+
+                                    <div class="col-1 bg-primary">
+                                        <div class="form-group">
+                                            <label for="" class="">Precio 2</label>
+                                          
+                                        </div>
+                                      </div>
+                                      <div class="col-1 bg-primary">
+                                          <div class="form-group">
+                                              <label for="" class="">Precio 3</label>
+                                            
+                                          </div>
+                                        </div>
+                                        <div class="col-1 bg-success pl-4">
+                                            <div class="form-group">
+                                                <label for="" class="">Doble</label>
+                                              
+                                            </div>
+                                          </div>
+                                          <div class="col-1 bg-success ">
+                                              <div class="form-group">
+                                                  <label for="" class="">Balance</label>
+                                                
+                                              </div>
+                                            </div>
+                                            <div class="col-1 bg-success ">
+                                                <div class="form-group">
+                                                    <label for="" class="">Triple</label>
+                                                  
+                                                </div>
+                                              </div>
+                                              <div class="col-1 bg-success ">
+                                                  <div class="form-group">
+                                                      <label for="" class="">Balance</label>
+                                                    
+                                                  </div>
+                                                </div>
+                                                <div class="col-1 bg-warning ml-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="">Promo</label>
+                                                       
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-1 bg-warning ">
+                                                      <div class="form-group">
+                                                          <label for="" class="">Restricción</label>
+                                                         
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-1 bg-warning">
+                                                        <div class="form-group">
+                                                            <label for="" class="">Acompañante</label>
+                                                           
+                                                        </div>
+                                                      </div>
+                              </div>
                             @foreach ($personas as $persona)
                                 
                           
                             <div class="row bg-warning">
                               <div class="col-1 bg-primary " >
-                                  <div class="form-group mt-4">
-                                  <label for="" class="mt-2 font-weight-bold" >{{$persona->nombre}}</label>
+                                  <div class="form-group ">
+                                  <label for="" class=" font-weight-bold" >{{$persona->nombre}}</label>
                               </div>
                             </div>
                               <div class="col-1 bg-primary">
                                 <div class="form-group">
-                                    <label for="" class="">Precio 1</label>
+                                
                                   <input type="text" name="precio1" id="precio1" class="form-control" placeholder="" aria-describedby="helpId">
                                 </div>
                               </div>
                               <div class="col-1 bg-primary">
                                   <div class="form-group">
-                                      <label for="" class="">Precio 2</label>
+                                   
                                     <input type="text" name="precio2" id="precio2" class="form-control" placeholder="" aria-describedby="helpId">
                                   </div>
                                 </div>
                                 <div class="col-1 bg-primary">
                                     <div class="form-group">
-                                        <label for="" class="">Precio 3</label>
+                                       
                                       <input type="text" name="precio3" id="precio3" class="form-control" placeholder="" aria-describedby="helpId">
                                     </div>
                                   </div>
                                   
                                   <div class="col-1 bg-success pl-4">
                                       <div class="form-group">
-                                          <label for="" class="">Doble</label>
+                                         
                                         <input type="text" name="doble" id="doble" class="form-control" placeholder="" aria-describedby="helpId">
                                       </div>
                                     </div>
                                     <div class="col-1 bg-success ">
                                         <div class="form-group">
-                                            <label for="" class="">Balance</label>
+                                          
                                           <input type="text" name="banlancedoble" id="balancedoble" class="form-control" placeholder="" aria-describedby="helpId">
                                         </div>
                                       </div>
                                       <div class="col-1 bg-success ">
                                           <div class="form-group">
-                                              <label for="" class="">Triple</label>
+                                             
                                             <input type="text" name="triple" id="triple" class="form-control" placeholder="" aria-describedby="helpId">
                                           </div>
                                         </div>
                                         <div class="col-1 bg-success ">
                                             <div class="form-group">
-                                                <label for="" class="">Balance</label>
+                                               
                                               <input type="text" name="balancetriple" id="balancetriple" class="form-control" placeholder="" aria-describedby="helpId">
                                             </div>
                                           </div>
                                           <div class="col-1 bg-warning ml-3">
                                               <div class="form-group">
-                                                  <label for="" class="">Promo</label>
+                                                 {{-- coment --}}
+
                                                   <input type="checkbox" class="form-control ml-3" name="promo" id="promo" value="checkedValue" >
                                               </div>
                                             </div>
                                             <div class="col-1 bg-warning ml-3">
                                                 <div class="form-group">
-                                                    <label for="" class="">Restricción</label>
+                                                   
                                                     <input type="checkbox" class="form-control ml-3" name="restriccion" id="restriccion" value="checkedValue" >
                                                 </div>
                                               </div>
                                               <div class="col-1 bg-warning ml-3">
                                                   <div class="form-group">
-                                                      <label for="" class="">Acompañante</label>
+                                                      
                                                       <input type="checkbox" class="form-control ml-3" name="acompanante" id="acompanante" value="checkedValue" >
                                                   </div>
                                                 </div>
