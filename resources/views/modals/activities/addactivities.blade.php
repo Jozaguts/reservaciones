@@ -293,7 +293,8 @@
                                           </div>
                                           <div class="col-1 bg-warning ml-3">
                                               <div class="form-group">
-                                                 
+                                                 {{-- coment --}}
+
                                                   <input type="checkbox" class="form-control ml-3" name="promo" id="promo" value="checkedValue" >
                                               </div>
                                             </div>
