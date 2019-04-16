@@ -15,7 +15,7 @@ class CreateActividadesTable extends Migration
     {
         Schema::create('actividades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('clave',4);
+            $table->string('clave',5);
             $table->string('nombre',40);
             $table->decimal('precio',16,4);
             $table->decimal('balance',16,4);        
