@@ -19,7 +19,7 @@ let contact = document.getElementById('contact')
 
 let panelsMOdal = document.querySelectorAll('.tab-pane')
 showPanel =(element)=>{
-  // let idButton = element.id
+  checkEmpty()
 
 panelsMOdal.forEach((panel)=>{
   
@@ -28,6 +28,23 @@ panelsMOdal.forEach((panel)=>{
 })
 }
 
+// const generalInputs = document.querySelectorAll('.general')gf 
+// function checkEmpty(){
+//   let contador =0;
+//   generalInputs.forEach((input)=>{
+//     if(input.value.length>0){
+      
+//       contador++;
+
+//      return contador;
+//     } 
+    
+//     })
+//    if(contador>2){
+//      confirm('No has Guardado los Cambios, ¿Deseas Continuar?')
+    
+//    }
+// }
 
 
 

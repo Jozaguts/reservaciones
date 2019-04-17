@@ -29,7 +29,8 @@
                                                         </td>
                                                         <td class="table-head table-head__surname" data-active="{{$tipoactividad->active}}">{{$tipoactividad->nombre}}
                                                         </td>
-                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$tipoactividad->active}}">{{$tipoactividad->color}}
+                                                        <td class="table-head table-head__surname text-capitalize" data-active="{{$tipoactividad->active}}" style="">
+                                                            <span style="display:block; width:5rem; height: 1.5rem; background-color: {{$tipoactividad->color}};" ></span>
                                                         </td>
                                                         <td class="table-head table-head__actions"> 
                                                             <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$tipoactividad->id}});" data-id="{{$tipoactividad->id}}">

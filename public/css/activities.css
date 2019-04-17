@@ -26,3 +26,8 @@ input[type=checkbox] {
   width: fit-content !important;
 }
 
+.padding-col {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+

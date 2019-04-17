@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" onclick="showPanel(this);" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                      <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" onclick="showPanel(this);" role="tab" aria-controls="home" aria-selected="true">General</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="PreciosYPases-tab" data-toggle="tab" href="#PreciosYPases"  onclick="showPanel(this);" role="tab" aria-controls="PreciosYPases" aria-selected="false">Precios y Pases</a>
@@ -23,7 +23,7 @@
                     </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">General
+                    <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
 
                         <div class="container mt-3">
                             <div class="row">
@@ -37,18 +37,18 @@
                     <form action="{{url('/actividades')}}" method="post" id="AddActividadesForm">
                       <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
                       <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
-                            <div class="container mt-5">
+                            <div class="container mt-2">
                                 <div class="row">
                                     <div class="col-2">
                                       <div class="form-group">
                                         <label for="">Clave</label>
-                                        <input type="text" name="clave" id="clave" class="form-control general" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase">
+                                        <input type="text" name="clave" id="clave" class="form-control general" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase" autofocus>
                                        
                                       </div>
                                     </div>
                                     <div class="col-6">
                                      <div class="form-group">
-                                       <label for="">Nombre</label>
+                                       <label for="" >Nombre</label>
                                        <input type="text" name="nombre" id="nombre" class="form-control general" placeholder="" aria-describedby="helpId" required>
                                       
                                      </div>
@@ -75,7 +75,7 @@
                                     
                                     </div>  
                                   </div>
-                                  <div class="col-1 ml-5">
+                                  <div class="col-1 padding-col ml-5">
                                      <div class="form-group ml-4">
                                       <label for="renta">Renta</label>
                                          <input type="checkbox" class="form-control general" name="renta" id="renta" value="checkedValue" >
@@ -161,7 +161,7 @@
                         <form action="{{url('/actividades')}}" method="post" id="AddPreciosYPasesForm">
                           {{-- <meta name="csrf-token" content="{{ csrf_token() }}" id="_token"> --}}
                           <div class="container">
-                            <div class="row">
+                            <div class="row ">
                               <div class="col-3 offset-2">
                                 <div class="form-group">
                                   <label for="">Balance general</label>
@@ -169,7 +169,7 @@
                                  
                                 </div>
                               </div>
-                              <div class="col-3 offset-2 mb-5">
+                              <div class="col-3 offset-2 mb-2">
                                   <div class="form-group">
                                     <label for="">Precio General</label>
                                     <input type="text" name="preciog" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required>
@@ -182,70 +182,70 @@
                               <div class="col-4"><label for=""  class="float-right">Acepta</label></div>
                             </div>
                             <div class="row "style="background-color: #FFFDCC">
-                                <div class="col-1" style="background-color: #CCFFFD">
+                                <div class="col-1 padding-col" style="background-color: white">
                                     <div class="form-group">
-                                        <label for="" class="">Nombre</label>
+                                        <label for="" class="font-weight-bold">Nombre</label>
                                       
                                     </div>
                                   </div>
-                                  <div class="col-1 "style="background-color: #CCFFFD">
+                                  <div class="col-1 padding-col "style="background-color: #CCFFFD">
                                       <div class="form-group">
-                                          <label for="" class="">Precio 1</label>
+                                          <label for="" class="font-weight-bold">Precio 1</label>
                                         
                                       </div>
                                     </div>
 
-                                    <div class="col-1 "style="background-color: #CCFFFD">
+                                    <div class="col-1 padding-col "style="background-color: #CCFFFD">
                                         <div class="form-group">
-                                            <label for="" class="">Precio 2</label>
+                                            <label for="" class="font-weight-bold">Precio 2</label>
                                           
                                         </div>
                                       </div>
-                                      <div class="col-1 "style="background-color: #CCFFFD">
+                                      <div class="col-1 padding-col "style="background-color: #CCFFFD">
                                           <div class="form-group">
-                                              <label for="" class="">Precio 3</label>
+                                              <label for="" class="font-weight-bold">Precio 3</label>
                                             
                                           </div>
                                         </div>
-                                        <div class="col-1  pl-4"style="background-color: #CCFFCC">
+                                        <div class="col-1 padding-col  pl-4"style="background-color: #CCFFCC">
                                             <div class="form-group">
-                                                <label for="" class="">Doble</label>
+                                                <label for="" class="font-weight-bold">Doble</label>
                                               
                                             </div>
                                           </div>
-                                          <div class="col-1  "style="background-color: #CCFFCC">
+                                          <div class="col-1 padding-col  "style="background-color: #CCFFCC">
                                               <div class="form-group">
-                                                  <label for="" class="">Balance</label>
+                                                  <label for="" class="font-weight-bold">Balance</label>
                                                 
                                               </div>
                                             </div>
-                                            <div class="col-1  "style="background-color: #CCFFCC">
+                                            <div class="col-1 padding-col  "style="background-color: #CCFFCC">
                                                 <div class="form-group">
-                                                    <label for="" class="">Triple</label>
+                                                    <label for="" class="font-weight-bold">Triple</label>
                                                   
                                                 </div>
                                               </div>
-                                              <div class="col-1 " style="background-color: #CCFFCC">
+                                              <div class="col-1 padding-col " style="background-color: #CCFFCC">
                                                   <div class="form-group">
-                                                      <label for="" class="">Balance</label>
+                                                      <label for="" class="font-weight-bold">Balance</label>
                                                     
                                                   </div>
                                                 </div>
-                                                <div class="col-1 ml-3" style="background-color: #FFFDCC">
+                                                <div class="col-1 padding-col ml-3" style="background-color: #FFFDCC">
                                                     <div class="form-group">
-                                                        <label for="" class="">Promo</label>
+                                                        <label for="" class="font-weight-bold">Promo</label>
                                                        
                                                     </div>
                                                   </div>
-                                                  <div class="col-1 " style="background-color: #FFFDCC" >
+                                                  <div class="col-1 padding-col " style="background-color: #FFFDCC" >
                                                       <div class="form-group">
-                                                          <label for="" class="">Restricción</label>
+                                                          <label for="" class="font-weight-bold">Restricción</label>
                                                          
                                                       </div>
                                                     </div>
-                                                    <div class="col-1 "style="background-color: #FFFDCC" >
+                                                    <div class="col-1 padding-col "style="background-color: #FFFDCC" >
                                                         <div class="form-group">
-                                                            <label for="" class="">Acompañante</label>
+                                                            <label for="" class="font-weight-bold">Acompañante</label>
                                                            
                                                         </div>
                                                       </div>
@@ -254,68 +254,68 @@
                                 
                           
                             <div class="row " style="background-color: #FFFDCC">
-                              <div class="col-1"style="background-color: #CCFFFD" >
+                              <div class="col-1 padding-col"style="background-color:white" >
                                   <div class="form-group ">
                                   <label for="" class=" font-weight-bold" >{{$persona->nombre}}</label>
                               </div>
                             </div>
-                              <div class="col-1" style="background-color: #CCFFFD">
+                              <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                 <div class="form-group">
                                   <input type="text" name="precio1" id="precio1" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                   
                                 </div>
                               </div>
-                              <div class="col-1" style="background-color: #CCFFFD">
+                              <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                   <div class="form-group">
                                     <input type="text" name="precio2" id="precio2" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                    
                                   </div>
                                 </div>
-                                <div class="col-1" style="background-color: #CCFFFD">
+                                <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                     <div class="form-group">
                                       <input type="text" name="precio3" id="precio3" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                       
                                     </div>
                                   </div>
                                   
-                                  <div class="col-1 pl-4" style="background-color: #CCFFCC">
+                                  <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
                                       <div class="form-group">
                                         <input type="text" name="doble" id="doble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                         
                                       </div>
                                     </div>
-                                    <div class="col-1" style="background-color: #CCFFCC">
+                                    <div class="col-1 padding-col" style="background-color: #CCFFCC">
                                         <div class="form-group">
                                           <input type="text" name="banlancedoble" id="balancedoble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                         
                                         </div>
                                       </div>
-                                      <div class="col-1 "style="background-color: #CCFFCC" >
+                                      <div class="col-1 padding-col "style="background-color: #CCFFCC" >
                                           <div class="form-group">
                                             <input type="text" name="triple" id="triple" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                          
                                           </div>
                                         </div>
-                                        <div class="col-1  "style="background-color: #CCFFCC">
+                                        <div class="col-1 padding-col  "style="background-color: #CCFFCC">
                                             <div class="form-group">
                                               <input type="text" name="balancetriple" id="balancetriple" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                             
                                             </div>
                                           </div>
-                                          <div class="col-1  ml-3" style="background-color: #FFFDCC">
+                                          <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
                                               <div class="form-group">
                                                 
 
                                                   <input type="checkbox" class="form-control ml-3" name="promo" id="promo" value="checkedValue" >
                                               </div>
                                             </div>
-                                            <div class="col-1  ml-3" style="background-color: #FFFDCC">
+                                            <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                 <div class="form-group">
                                                    
                                                     <input type="checkbox" class="form-control ml-3" name="restriccion" id="restriccion" value="checkedValue" >
                                                 </div>
                                               </div>
-                                              <div class="col-1 ml-3" style="background-color: #FFFDCC">
+                                              <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                   <div class="form-group">
                                                       
                                                       <input type="checkbox" class="form-control ml-3" name="acompanante" id="acompanante" value="checkedValue" >
