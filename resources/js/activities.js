@@ -19,7 +19,7 @@ let contact = document.getElementById('contact')
 
 let panelsMOdal = document.querySelectorAll('.tab-pane')
 showPanel =(element)=>{
-  checkEmpty()
+  // checkEmpty()
 
 panelsMOdal.forEach((panel)=>{
   
@@ -76,6 +76,17 @@ renta.addEventListener('change',(e)=>{
     }
 })
 
+//check restriciopn y acompañante
+
+habilitarAcompnante = (e)=>{
+  let checkAcompanante = document.querySelector(`#acompanante${e.id}`)
+if(e.checked){
+  
+  checkAcompanante.disabled = false;
+}else{
+  checkAcompanante.disabled = true;
+}
+}
 
 
 

@@ -306,19 +306,19 @@
                                               <div class="form-group">
                                                 
 
-                                                  <input type="checkbox" class="form-control ml-3" name="promo" id="promo" value="checkedValue" >
+                                                  <input type="checkbox" class="form-control ml-3" name="promo" id="promo{{$persona->id}}" value="checkedValue" >
                                               </div>
                                             </div>
                                             <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                 <div class="form-group">
                                                    
-                                                    <input type="checkbox" class="form-control ml-3" name="restriccion" id="restriccion" value="checkedValue" >
+                                                <input type="checkbox" class="form-control ml-3" name="restriccion" id="{{$persona->id}}" value="checkedValue" onchange="habilitarAcompnante(this);" >
                                                 </div>
                                               </div>
                                               <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                   <div class="form-group">
                                                       
-                                                      <input type="checkbox" class="form-control ml-3" name="acompanante" id="acompanante" value="checkedValue" >
+                                                      <input type="checkbox" class="form-control ml-3" name="acompanante" id="acompanante{{$persona->id}}" value="checkedValue" disabled>
                                                   </div>
                                                 </div>
                                               
