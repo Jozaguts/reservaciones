@@ -1,12 +1,12 @@
  <!-- The Modal -->
- <div class="modal fade" id="addActivities">
+ <div class="modal fade" id="addActivities" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
           
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Actividades</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button type="button" class="close" onclick="checkEmpty()">&times;</button>
             </div>
             
             <!-- Modal body -->

@@ -28,27 +28,40 @@ panelsMOdal.forEach((panel)=>{
 })
 }
 
-// const generalInputs = document.querySelectorAll('.general')gf 
-// function checkEmpty(){
-//   let contador =0;
-//   generalInputs.forEach((input)=>{
-//     if(input.value.length>0){
+const generalInputs = document.querySelectorAll('.general')
+function checkEmpty(){
+
+  let contador =0;
+  generalInputs.forEach((input)=>{
+    if(input.value.length>0){
       
-//       contador++;
+      contador++;
 
-//      return contador;
-//     } 
+     return contador;
+    } 
     
-//     })
-//    if(contador>2){
-//      confirm('No has Guardado los Cambios, ¿Deseas Continuar?')
-    
-//    }
-// }
+    })
+   if(contador>2){
+    let confirmar = confirm('No has Guardado los Cambios, ¿Deseas Continuar?')
+    if(confirmar==true){
+      $('#addActivities').modal('hide');
+      $(this).find('form').trigger('reset');
+    }else{
+
+    }
+   
+   }else{
+    $('#addActivities').modal('hide');
+   }
+   
+}
 
 
-$('#addActivities').on('hidden.bs.modal', function () {
-  $(this).find('form').trigger('reset');
+
+$('#addActivities').on('hide.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+  
+  
 })
 
 
@@ -99,16 +112,21 @@ if(e.checked){
 
 
 let AddActividadesForm = document.getElementById('AddActividadesForm');
+let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
 
 AddActividadesForm.addEventListener('submit',(e)=>{
 e.preventDefault();
 
 let datos = new FormData(AddActividadesForm) 
+let datos2 = new FormData(AddPreciosYPasesForm)
+
 let clave = datos.get('clave')
 let nombre = datos.get('nombre')
 let tipoactividades_id = datos.get('tipoactividades_id')
 let active=1, remove=0;
 let tipounidades_id =0;
+let balance = datos2.get('balanceg')
+let precio = datos2.get('preciog')
 
   let fijo;
   if($('#fijo').is(':checked')){
@@ -151,7 +169,7 @@ $.ajax({
   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
   type:'POST',
   dataType: 'json',
-  data: {clave: clave, nombre: nombre, tipoactividades_id: tipoactividades_id,fijo:fijo,renta:renta,minutosincluidos:minutosincluidos,minutoincrementa:minutoincrementa,montoincremento:montoincremento,maxcortesias:maxcortesias,maxcupones:maxcupones,anticipo_id:anticipo_id,idusuario:idusuario, active:active, remove:remove,tipounidades_id:tipounidades_id},
+  data: {clave: clave, nombre: nombre, tipoactividades_id: tipoactividades_id,fijo:fijo,renta:renta,minutosincluidos:minutosincluidos,minutoincrementa:minutoincrementa,montoincremento:montoincremento,maxcortesias:maxcortesias,maxcupones:maxcupones,anticipo_id:anticipo_id,idusuario:idusuario, active:active, remove:remove,tipounidades_id:tipounidades_id,balance:balance, precio:precio},
   success: function (data) {
   
    console.log(data)
@@ -160,7 +178,7 @@ $.ajax({
       $('#errorsIntoModal').html(data.errors[0]);
         $('#message-errorIntoModal').fadeIn();
         setTimeout(() => {
-          $('#message-error').fadeOut();
+          $('#message-errorIntoModal').fadeOut();
         }, 3000);
         // setTimeout("location.reload(true);",3000)
         
@@ -170,7 +188,7 @@ $.ajax({
         setTimeout(() => {
           $('#message-successIntoModal').fadeOut();
         }, 3000);
-        setTimeout("location.reload(true);",3000)
+        setTimeout("location.reload(true);",1000)
     }
   }
   

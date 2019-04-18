@@ -9,6 +9,7 @@ use App\TipoUnidad;
 use App\Anticipos;
 use App\Personas;
 use Validator;
+use App\ActividadPrecios;
 
 class ActividadesController extends Controller
 {
@@ -44,26 +45,10 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-
-        
-        // precio //no va en general
-        // balance //no va en general          
-        // promocion //no va en genelar
-        // combo //no va en genelar
-        // observaciones//no va en genelar
-        // requisitos //no va en genelar
-        // riesgo //no va en genelar   
-        // puntos //no va en genelar
-             
-		
-        // tipounidades_id //pendiente
-      
-        // anticipo_id ;//no va en general
-       
        
                      //reglas de validacion
              $rules =[
-                'clave' => ['required', 'string', 'max:4','unique:actividades'],
+                'clave' => ['required', 'string', 'max:5','unique:actividades'],
                 'nombre' => ['required', 'string', 'max:255'],
                 'tipoactividades_id'=> ['required', 'integer'],
                 'fijo'=> ['nullable', 'boolean'],
@@ -71,14 +56,21 @@ class ActividadesController extends Controller
                 'active'=> ['nullable', 'boolean'],
                 'remove' => ['nullable','boolean'],
                 'minutosincluidos' => ['nullable','integer'],
-                'minincremento'=>['nullable','integer'],
-                'incremento'=>['nullable','integer'],
-                'montoincremento'=>['nullable','between:0,99.99'],
+                'minutoincrementa'=>['nullable','integer'],
+                'montoincremento'=>['nullable','between:0,999999.99'],
                 'maxcortesias'=>['nullable','integer'],
                 'maxcupones'=>['nullable','integer'],
-                'anticipo'=>['nullable','integer'],
+                'anticipo_id'=>['required','integer'],
                 'idusuario'=> ['integer','required'],
-                'tipounidades_id'=>['integer', 'required']
+                'tipounidades_id'=>['integer', 'required'],
+                'precio' =>['required','between:0,999999.99'],
+                'balance' =>['required','between:0,999999.99'],
+                'promocion'=>['boolean','nullable'],
+                'combo' =>['boolean','nullable'],
+                'observaciones' =>['nullable','string'], 
+                'requisitos' =>['nullable','string'],
+                'riesgo' =>['nullable','string','max:45'],
+                'puntos' =>['nullable','integer'],
                
             ];
        
@@ -97,7 +89,7 @@ class ActividadesController extends Controller
               }else{
                 $tipoActividadId = $request->get('tipoactividades_id');
                 $tipoActividad = TipoActividades::find($tipoActividadId);
-
+              
                    
                 $actividad = Actividades::create([
                     'clave' => $request->get('clave'),
@@ -109,23 +101,27 @@ class ActividadesController extends Controller
                     'remove' => $request->get('remove'),
                     'minutosincluidos' => $request->get('minutosincluidos'),
                     'minutoincrementa'=>$request->get('minutoincrementa'),
-                    'incremento'=>$request->get('incremento'),
                     'montoincremento'=>$request->get('montoincremento'),
                     'maxcortesias'=>$request->get('maxcortesias'),
                     'maxcupones'=>$request->get('maxcupones'),
                     'anticipo_id'=>$request->get('anticipo_id'),
                     'idusuario'=> $request->get('idusuario'),
-                    'precio' => 1.00,
-                    'balance' => 10.00,
+                    'tipounidades_id' => $tipoActividad->tipoUnidad->id, 
+                    'precio' => $request->get('precio'),
+                    'balance' => $request->get('balance'),
                     'promocion' => 0,
                     'combo' => 0,
                     'observaciones' => 'Observacion por Default', 
                     'requisitos' => 'Requisitos por default',
                     'riesgo' => 'Riesgos por Default',
                     'puntos' => 1,
-                    'tipounidades_id' => $tipoActividad->tipoUnidad->id, 
+                    
                      
                  ]);
+
+                //  $precios = ActividadPrecios::create([
+                //      'name' => 'Flight 10'
+                //      ]);
                
                  return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
               

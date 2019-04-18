@@ -20,6 +20,7 @@ class TipoActividadSeeder extends Seeder
             'color'=> $faker->safeColorName,
             'active'=> 1,
             'remove'=>0,
+            'tipounidad_id'=> $faker->numberBetween($min = 1, $max = 5),
             'usuarios_id'=> $faker->numberBetween($min = 1, $max = 3),
        
             ]);
