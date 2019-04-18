@@ -28,8 +28,8 @@ class CreateActividadesTable extends Migration
             $table->boolean('combo');
             $table->string('observaciones');
             $table->string('requisitos');
-            $table->integer('maxcortesias');
-            $table->integer('maxcupones');
+            $table->integer('maxcortesias')->nullable();
+            $table->integer('maxcupones')->nullable();
             $table->string('riesgo', 45);      
             $table->integer('puntos');  
             $table->boolean('active');
