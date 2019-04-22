@@ -70,7 +70,7 @@
                                   <div class="col-2 ml-5">
                                     <div class="form-group ">
                                       <label for="ocupacion" class="label-ocupacion">Ocupacion Fija</label>
-                                        <input type="checkbox" class="form-control ml-3 general" name="fijo" id="fijo" value="checkedValue" >
+                                        <input type="checkbox" class="form-control ml-3 general" name="fijo" id="fijo" value="1" >
                                        
                                     
                                     </div>  
@@ -78,7 +78,7 @@
                                   <div class="col-1 padding-col ml-5">
                                      <div class="form-group ml-4">
                                       <label for="renta">Renta</label>
-                                         <input type="checkbox" class="form-control general" name="renta" id="renta" value="checkedValue" >
+                                         <input type="checkbox" class="form-control general" name="renta" id="renta" value="1" >
                                      
                                        
                                      </div>
@@ -158,6 +158,15 @@
                     </div>
                   
                     <div class="tab-pane fade" id="PreciosYPases" role="tabpanel" aria-labelledby="PreciosYPases-tab">
+                        <div class="container mt-3">
+                            <div class="row">
+                                <div class="col-sm-6 offset-md-2">
+                                    @include('components.alertsintomodals')
+                                               
+                                    
+                                </div>
+                            </div>
+                        </div>
                         <form action="{{url('/actividades')}}" method="post" id="AddPreciosYPasesForm">
                           {{-- <meta name="csrf-token" content="{{ csrf_token() }}" id="_token"> --}}
                           <div class="container">
@@ -165,14 +174,14 @@
                               <div class="col-3 offset-2">
                                 <div class="form-group">
                                   <label for="">Balance general</label>
-                                  <input type="text" name="balanceg" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required>
+                                  <input type="text" name="balanceg" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                  
                                 </div>
                               </div>
                               <div class="col-3 offset-2 mb-2">
                                   <div class="form-group">
                                     <label for="">Precio General</label>
-                                    <input type="text" name="preciog" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required>
+                                    <input type="text" name="preciog" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                    
                                   </div>
                                 </div>
@@ -256,49 +265,49 @@
                             <div class="row " style="background-color: #FFFDCC">
                               <div class="col-1 padding-col"style="background-color:white" >
                                   <div class="form-group ">
-                                  <label for="" class=" font-weight-bold" >{{$persona->nombre}}</label>
+                                  <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
                               </div>
                             </div>
                               <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                 <div class="form-group">
-                                  <input type="text" name="precio1" id="precio1" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  <input type="text" name="p1PersonaId{{$persona->id}}" id="p1PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                   
                                 </div>
                               </div>
                               <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                   <div class="form-group">
-                                    <input type="text" name="precio2" id="precio2" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                    <input type="text" name="p2PersonaId{{$persona->id}}" id="p2PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                    
                                   </div>
                                 </div>
                                 <div class="col-1 padding-col" style="background-color: #CCFFFD">
                                     <div class="form-group">
-                                      <input type="text" name="precio3" id="precio3" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                      <input type="text" name="p3PersonaId{{$persona->id}}" id="p3PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                       
                                     </div>
                                   </div>
                                   
                                   <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
                                       <div class="form-group">
-                                        <input type="text" name="doble" id="doble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                        <input type="text" name="doblePersonaId{{$persona->id}}" id="doblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                         
                                       </div>
                                     </div>
                                     <div class="col-1 padding-col" style="background-color: #CCFFCC">
                                         <div class="form-group">
-                                          <input type="text" name="banlancedoble" id="balancedoble" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                          <input type="text" name="balanceDoblePersonaId{{$persona->id}}" id="balanceDoblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                         
                                         </div>
                                       </div>
                                       <div class="col-1 padding-col "style="background-color: #CCFFCC" >
                                           <div class="form-group">
-                                            <input type="text" name="triple" id="triple" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                            <input type="text" name="triplePersonaId{{$persona->id}}" id="triplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                          
                                           </div>
                                         </div>
                                         <div class="col-1 padding-col  "style="background-color: #CCFFCC">
                                             <div class="form-group">
-                                              <input type="text" name="balancetriple" id="balancetriple" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                              <input type="text" name="balanceTriplePersonaId{{$persona->id}}" id="balanceTriplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                             
                                             </div>
                                           </div>
@@ -306,19 +315,19 @@
                                               <div class="form-group">
                                                 
 
-                                                  <input type="checkbox" class="form-control ml-3" name="promo" id="promo{{$persona->id}}" value="checkedValue" >
+                                                  <input type="checkbox" class="form-control ml-3" name="promoPersonaId{{$persona->id}}" id="promoPersonaId{{$persona->id}}" value="1" >
                                               </div>
                                             </div>
                                             <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                 <div class="form-group">
                                                    
-                                                <input type="checkbox" class="form-control ml-3" name="restriccion" id="{{$persona->id}}" value="checkedValue" onchange="habilitarAcompnante(this);" >
+                                                <input type="checkbox" class="form-control ml-3" name="restriccionPersonaId{{$persona->id}}" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
                                                 </div>
                                               </div>
                                               <div class="col-1 padding-col " style="background-color: #FFFDCC">
                                                   <div class="form-group">
                                                       
-                                                      <input type="checkbox" class="form-control ml-3" name="acompanante" id="acompanante{{$persona->id}}" value="checkedValue" disabled>
+                                                      <input type="checkbox" class="form-control ml-3" name="acompanantePersonaId{{$persona->id}}" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
                                                   </div>
                                                 </div>
                                               
@@ -328,8 +337,110 @@
                           </form>
                     </div>
              
-                
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> ada</div>
+                {{-- tercer pestaña --}}
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
+                    <form action=""{{url('actividades')}} method="post" id="addHorariosYPuntos">
+                    <div class="container mt-2">
+                      <div class="col-2">
+                          <h2 class="lead">Horario 1</h2>
+                      </div>
+                      <div class="row">
+                        <div class="col-2 mt-3">
+                          <div class="form-group">
+                            <label for="">Hora de Inicio:</label>
+                            <input type="time" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                          </div>
+                        </div>
+                       
+                        <div class="col-2 mr-5 mt-3">
+                          <div class="form-group">
+                            <label for="">Hora de Finalización:</label>
+                            <input type="time" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                          </div>
+                        </div>
+                        <div class="col-1 ml-5">
+                            <div class="form-group ">
+                                <label for="entregas">Diario Entregas</label>
+                                   <input type="checkbox" class="form-control general" name="entrega" id="entrega" value="checkedValue" >
+                            </div>
+                        </div>
+                        <div class="col-5">
+                          <div class="container-fluid">
+                            <div class="row mt-5 ml-3">
+                              <div class="">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">L
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">M
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">X
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">J
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">V
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">S
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                              <div class="ml-3">
+                                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">D
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                              </div>
+                            </div>
+                          </div>
+                            
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-2">
+                               <h2 class="lead">Recolecciones</h2>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                              <div class="form-group">
+                                <label for="">Punto 1</label>
+                                <select class="form-control" name="" id="">
+                                  <option></option>
+                                  <option></option>
+                                  <option></option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-2">
+                              <div class="form-group">
+                                <label for="">Hora</label>
+                                <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                              </div>
+                              
+                            </div>
+                            <div class="col-1 d-inline mt-4 pt-1">
+                                <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
+                              </div>
+                          </div>
+                      </div>
+
+                    </div>
+                    </form>
+                    
+                    </div>
                   </div>
                  
              
@@ -343,3 +454,4 @@
           </div>
         </div>
       </div>
+      

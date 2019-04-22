@@ -48,7 +48,7 @@ class ActividadesController extends Controller
        
                      //reglas de validacion
              $rules =[
-                'clave' => ['required', 'string', 'max:5','unique:actividades'],
+                'clave' => ['required', 'string', 'min:5','unique:actividades'],
                 'nombre' => ['required', 'string', 'max:255'],
                 'tipoactividades_id'=> ['required', 'integer'],
                 'fijo'=> ['nullable', 'boolean'],
@@ -118,11 +118,37 @@ class ActividadesController extends Controller
                     
                      
                  ]);
+                 $datosPersonas = $request->datosPersonas;
+                
+                 foreach ($datosPersonas as $datoPersona ) {
+                     if($datoPersona['acompanante'] == 'null') {
+                      
+                        $datoPersona['acompanante'] = 0;
+                     }
+                     
 
-                //  $precios = ActividadPrecios::create([
-                //      'name' => 'Flight 10'
-                //      ]);
+                    $actividadPrecio = ActividadPrecios::firstOrCreate(
+                        ['actividades_id' => $actividad->id, 'persona_id' => $datoPersona['persona_id']  ], 
+                        [
+                           'precio1' => $datoPersona['precio1'],
+                           'precio2'=> $datoPersona['precio2'],
+                           'precio3'=> $datoPersona['precio3'],
+                           'doble'=> $datoPersona['doble'],
+                           'doblebalanc'=> $datoPersona['doblebalanc'],
+                           'triple'=> $datoPersona['triple'],
+                           'triplebalanc'=> $datoPersona['triplebalanc'],
+                           'promocion'=> $datoPersona['promocion'],
+                           'restriccion'=> $datoPersona['restriccion'],
+                           'active'=> $datoPersona['active'],
+                           'acompanante'=> $datoPersona['acompanante'],
+                           'remove'=> $datoPersona['remove'],
+                           'usuarios_id'=> 1,
+                        ]
+                    );
+                   
+                 }
                
+           
                  return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
               
 
