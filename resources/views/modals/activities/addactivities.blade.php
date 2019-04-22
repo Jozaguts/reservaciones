@@ -434,8 +434,45 @@
                             <div class="col-1 d-inline mt-4 pt-1">
                                 <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
                               </div>
+
+
+                              <div class="col-2">
+                                <div class="form-group">
+                                  <label for="">Punto 1</label>
+                                  <select class="form-control" name="" id="">
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-2">
+                                <div class="form-group">
+                                  <label for="">Hora</label>
+                                  <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                                
+                              </div>
+                              <div class="col-1 d-inline mt-4 pt-1">
+                                  <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
+                                </div>
                           </div>
+                          <div class="container" id="rowContanier">
+                            
+                          </div>
+                          <div class="col-2">
+                           <button type="submit" class="btn btn-primary" id="addHorarioContanier"><span>+ Horario</span></button>
+                          </div>
+
+                        
+                          
                       </div>
+
+                      {{--  --}}
+
+                      
+
+                      {{--  --}}
 
                     </div>
                     </form>
