@@ -15,16 +15,16 @@ class CreateActividadpreciosTable extends Migration
     {
         Schema::create('actividadprecios', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('precio1');
-            $table->decimal('precio2');
-            $table->decimal('precio3');   
-            $table->decimal('doble');                        
-            $table->decimal('doblebalanc');   
-            $table->decimal('triple');   
-            $table->decimal('triplebalanc');   
-            $table->boolean('promocion');
-            $table->boolean('restriccion');//antes campo cobro
-            $table->boolean('acompanante'); //agrege campo
+            $table->decimal('precio1')->nullable()->default(null);
+            $table->decimal('precio2')->nullable()->default(null);
+            $table->decimal('precio3')->nullable()->default(null);   
+            $table->decimal('doble')->nullable()->default(null);                        
+            $table->decimal('doblebalanc')->nullable()->default(null);   
+            $table->decimal('triple')->nullable()->default(null);   
+            $table->decimal('triplebalanc')->nullable()->default(null);   
+            $table->boolean('promocion')->nullable()->default(null);
+            $table->boolean('restriccion')->nullable()->default(null);//antes campo cobro
+            $table->boolean('acompanante')->nullable()->default(null); //agrege campo
             $table->boolean('active');
             $table->boolean('remove');
             $table->timestamps();
