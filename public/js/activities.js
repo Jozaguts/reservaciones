@@ -244,3 +244,144 @@ btnHora.addEventListener('submit',(e)=>{
 e.preventDefault();
 })
 
+
+
+
+// add horarios container
+
+const addHorarioContanier = document.getElementById('addHorarioContanier')
+const rowContanier = document.getElementById('rowContanier')
+
+addHorarioContanier.addEventListener('click',(e)=>{
+  e.preventDefault();
+
+  let container= document.createElement('div')
+  container.innerHTML= `
+   <div class="container mt-2">
+                        <div class="col-2">
+                            <h2 class="lead">Horario 1</h2>
+                        </div>
+                        <div class="row">
+                          <div class="col-2 mt-3">
+                            <div class="form-group">
+                              <label for="">Hora de Inicio:</label>
+                              <input type="time" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                          </div>
+                         
+                          <div class="col-2 mr-5 mt-3">
+                            <div class="form-group">
+                              <label for="">Hora de Finalización:</label>
+                              <input type="time" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                          </div>
+                          <div class="col-1 ml-5">
+                              <div class="form-group ">
+                                  <label for="entregas">Diario Entregas</label>
+                                     <input type="checkbox" class="form-control general" name="entrega" id="entrega" value="checkedValue" >
+                              </div>
+                          </div>
+                          <div class="col-5">
+                            <div class="container-fluid">
+                              <div class="row mt-5 ml-3">
+                                <div class="">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">L
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">M
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">X
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">J
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">V
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">S
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">D
+                                      </label>
+                                      <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                </div>
+                              </div>
+                            </div>
+                              
+                            </div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-2">
+                                 <h2 class="lead">Recolecciones</h2>
+                              </div>
+                             
+                          </div>
+                          <div class="row">
+                              <div class="col-2">
+                                <div class="form-group">
+                                  <label for="">Punto 1</label>
+                                  <select class="form-control" name="" id="">
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-2">
+                                <div class="form-group">
+                                  <label for="">Hora</label>
+                                  <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                                
+                              </div>
+                              <div class="col-1 d-inline mt-4 pt-1">
+                                  <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
+                                </div>
+  
+  
+                                <div class="col-2">
+                                  <div class="form-group">
+                                    <label for="">Punto 1</label>
+                                    <select class="form-control" name="" id="">
+                                      <option></option>
+                                      <option></option>
+                                      <option></option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-2">
+                                  <div class="form-group">
+                                    <label for="">Hora</label>
+                                    <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                  </div>
+                                  
+                                </div>
+                                <div class="col-1 d-inline mt-4 pt-1">
+                                    <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
+                                  </div>
+                            </div>
+  
+                          
+                            
+                        </div> 
+
+  `;
+  rowContanier.appendChild(container);
+ 
+
+})
+

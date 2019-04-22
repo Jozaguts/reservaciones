@@ -125,6 +125,14 @@ class ActividadesController extends Controller
                       
                         $datoPersona['acompanante'] = 0;
                      }
+                     if($datoPersona['restriccion'] == 'null') {
+                      
+                        $datoPersona['restriccion'] = 0;
+                     }
+                     if($datoPersona['promocion'] == 'null') {
+                      
+                        $datoPersona['promocion'] = 0;
+                     }
                      
 
                     $actividadPrecio = ActividadPrecios::firstOrCreate(
