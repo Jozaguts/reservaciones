@@ -18,9 +18,11 @@ class ActividadPrecios extends Model
     'triple',
     'triplebalanc',
     'promocion',
-    'cobro',
+    'restriccion',
     'active',
+    'acompanante',
     'remove',
+    'persona_id',
     'usuarios_id',
     'pases_id',
     'actividades_id'
