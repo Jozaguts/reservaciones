@@ -1,4 +1,5 @@
 
+
 // mostrar contenido de los boones
 showContent = function (e){
     e.nextSibling.nextSibling.classList.contains('d-none')?e.nextSibling.nextSibling.classList.toggle('show')&&e.nextSibling.nextSibling.classList.remove('d-none'):e.nextSibling.nextSibling.classList.add('d-none')
@@ -94,7 +95,11 @@ renta.addEventListener('change',(e)=>{
 //check restriciopn y acompañante
 
 habilitarAcompnante = (e)=>{
-  let checkAcompanante = document.querySelector(`#acompanante${e.id}`)
+  let id = e.getAttribute('data-id');
+  let checkAcompanante = document.querySelector(`#acompanantePersonaId${id}`)
+
+
+
 if(e.checked){
   
   checkAcompanante.disabled = false;
@@ -127,6 +132,42 @@ let active=1, remove=0;
 let tipounidades_id =0;
 let balance = datos2.get('balanceg')
 let precio = datos2.get('preciog')
+
+//datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+
+const personas = document.querySelectorAll('[id^=persona]')
+
+
+let datosPersonas = [];
+
+personas.forEach(function(persona){ 
+  persona={
+    precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+    precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+    precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+    doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+    doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+    triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+    triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+    promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+    restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+    acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+    remove: 0,
+    active: 1,
+    persona_id: persona.getAttribute('data-id')
+  }
+  
+datosPersonas.push(persona)
+
+})
+console.log(datosPersonas)
+
+
+// 'persona_id',
+// 'usuarios_id',
+// 'pases_id',
+// 'actividades_id'
+
 
   let fijo;
   if($('#fijo').is(':checked')){
@@ -169,10 +210,10 @@ $.ajax({
   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
   type:'POST',
   dataType: 'json',
-  data: {clave: clave, nombre: nombre, tipoactividades_id: tipoactividades_id,fijo:fijo,renta:renta,minutosincluidos:minutosincluidos,minutoincrementa:minutoincrementa,montoincremento:montoincremento,maxcortesias:maxcortesias,maxcupones:maxcupones,anticipo_id:anticipo_id,idusuario:idusuario, active:active, remove:remove,tipounidades_id:tipounidades_id,balance:balance, precio:precio},
+  data: {clave: clave, nombre: nombre, tipoactividades_id: tipoactividades_id,fijo:fijo,renta:renta,minutosincluidos:minutosincluidos,minutoincrementa:minutoincrementa,montoincremento:montoincremento,maxcortesias:maxcortesias,maxcupones:maxcupones,anticipo_id:anticipo_id,idusuario:idusuario, active:active, remove:remove,tipounidades_id:tipounidades_id,balance:balance, precio:precio,datosPersonas:datosPersonas},
   success: function (data) {
   
-   console.log(data)
+  
     if(data.error == 'true'){
       data.errors.forEach(()=>{})
       $('#errorsIntoModal').html(data.errors[0]);
@@ -196,3 +237,10 @@ $.ajax({
 })
 
 })
+
+btnHora = document.getElementById('btnHora')
+
+btnHora.addEventListener('submit',(e)=>{
+e.preventDefault();
+})
+
