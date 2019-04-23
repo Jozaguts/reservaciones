@@ -19,7 +19,7 @@
                       <a class="nav-link" id="PreciosYPases-tab" data-toggle="tab" href="#PreciosYPases"  onclick="showPanel(this);" role="tab" aria-controls="PreciosYPases" aria-selected="false">Precios y Pases</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"  onclick="showPanel(this);" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"  onclick="showPanel(this);" role="tab" aria-controls="contact" aria-selected="false">Horarios y Puntos de Recolección</a>
                     </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
@@ -339,6 +339,8 @@
              
                 {{-- tercer pestaña --}}
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
+                      <div class="container">
+                 
                     <form action=""{{url('actividades')}} method="post" id="addHorariosYPuntos">
                     <div class="container mt-2">
                       <div class="col-2">
@@ -361,7 +363,7 @@
                         <div class="col-1 ml-5">
                             <div class="form-group ">
                                 <label for="entregas">Diario Entregas</label>
-                                   <input type="checkbox" class="form-control general" name="entrega" id="entrega" value="checkedValue" >
+                                   <input type="checkbox" class="form-control general" name="entrega" id="entrega" value="1" onchange="diarioEntrega(this);" data-id="1" >
                             </div>
                         </div>
                         <div class="col-5">
@@ -370,37 +372,37 @@
                               <div class="">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">L
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="dial1" id="dial1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">M
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="diam1" id="diam1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">X
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="diax1" id="diax1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">J
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="diaj1" id="diaj1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">V
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="diav1" id="diav1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">S
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="dias1" id="dias1" value="1"> 
                               </div>
                               <div class="ml-3">
                                   <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">D
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="" id="" value="checkedValue"> 
+                                    <input class="form-check-input diarioEntrega1" type="checkbox" name="diad1" id="diad1" value="1"> 
                               </div>
                             </div>
                           </div>
@@ -414,29 +416,36 @@
                            
                         </div>
                         <div class="row">
-                            <div class="col-2">
-                              <div class="form-group">
-                                <label for="">Punto 1</label>
-                                <select class="form-control" name="" id="">
-                                  <option></option>
-                                  <option></option>
-                                  <option></option>
-                                </select>
-                              </div>
+
+                          <div class="col-6" >
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                      <label for="">Punto 1</label>
+                                      <select class="form-control" name="" id="">
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-4">
+                                    <div class="form-group">
+                                      <label for="">Hora</label>
+                                      <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                    </div>
+                                    
+                                  </div>
+                                  <div class="col-4 d-inline mt-4 pt-1">
+                                      <a href="#!" class="btn btn-secondary d-inline" id="primarybtnHora1" onclick="addpunto(this);">+</a>
+                                    </div>
                             </div>
-                            <div class="col-2">
-                              <div class="form-group">
-                                <label for="">Hora</label>
-                                <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                              </div>
+                            </div>
                               
-                            </div>
-                            <div class="col-1 d-inline mt-4 pt-1">
-                                <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
-                              </div>
-
-
-                              <div class="col-2">
+                          
+                        <div class="col-6" id="puntosContainer">
+                          <div class="row">
+                            <div class="col-4">
                                 <div class="form-group">
                                   <label for="">Punto 1</label>
                                   <select class="form-control" name="" id="">
@@ -446,36 +455,41 @@
                                   </select>
                                 </div>
                               </div>
-                              <div class="col-2">
+                              <div class="col-4">
                                 <div class="form-group">
                                   <label for="">Hora</label>
                                   <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                                 </div>
                                 
                               </div>
-                              <div class="col-1 d-inline mt-4 pt-1">
-                                  <button type="submit" class="btn btn-secondary d-inline" id="btnHora">+</button>
+                              <div class="col-4 d-inline mt-4 pt-1">
+                                  <a href="#!" class="btn btn-secondary d-inline" id="secondarybtnHora1" onclick="addpunto(this);"> +</a>
                                 </div>
+                              </div>
                           </div>
-                          <div class="container" id="rowContanier">
+                        </div> 
+                       
+
+                              
+                        </form>
+                               
+                      </div>
+                          <div class="container-fluid" id="rowContanier">
+                      
                             
+                                
                           </div>
                           <div class="col-2">
-                           <button type="submit" class="btn btn-primary" id="addHorarioContanier"><span>+ Horario</span></button>
+                           <button type="submit" class="btn btn-primary" id="addHorarioContanier" onclick="addHoraioContainer();"><span>+ Horario</span></button>
                           </div>
 
                         
                           
                       </div>
 
-                      {{--  --}}
-
-                      
-
-                      {{--  --}}
-
+            
                     </div>
-                    </form>
+                  
                     
                     </div>
                   </div>
