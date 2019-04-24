@@ -11,6 +11,7 @@ use App\Personas;
 use Validator;
 use App\ActividadPrecios;
 
+
 class ActividadesController extends Controller
 {
     /**
@@ -150,7 +151,7 @@ class ActividadesController extends Controller
                            'active'=> $datoPersona['active'],
                            'acompanante'=> $datoPersona['acompanante'],
                            'remove'=> $datoPersona['remove'],
-                           'usuarios_id'=> 1,
+                           'usuarios_id'=> $request->get('idusuario'),
                         ]
                     );
                    
