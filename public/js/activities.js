@@ -259,87 +259,94 @@ function addHoraioContainer(){
   
     let container= document.createElement('div')
     container.classList = "contanier";
-    container.innerHTML= `<form action=""{{url('actividades')}} method="post" id="addHorariosYPuntos${contador}">
-    <div class="container mt-2">
-      <div class="col-2">
-          <h2 class="lead">Horario ${contador}</h2>
-      </div>
-      <div class="row">
-        <div class="col-2 mt-3">
-          <div class="form-group">
-            <label for="">Hora de Inicio:</label>
-            <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control" placeholder="" aria-describedby="helpId">
-          </div>
-        </div>
-       
-        <div class="col-2 mr-5 mt-3">
-          <div class="form-group">
-            <label for="">Hora de Finalización:</label>
-            <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control" placeholder="" aria-describedby="helpId">
-          </div>
-        </div>
-        <div class="col-1 ml-5">
-            <div class="form-group ">
-                <label for="entregas">Diario Entregas</label>
-                   <input type="checkbox" class="form-control general" name="entrega${contador}" id="entrega${contador}" value="1" onchange="diarioEntrega(this);" data-id="${contador}">
-            </div>
-        </div>
-        <div class="col-5">
-          <div class="container-fluid">
-            <div class="row mt-5 ml-3">
-              <div class="">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">L
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="dial${contador}" id="dial${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">M
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">X
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="diax${contador} id="diax${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">J
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">V
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="diav${contador}" id="diav${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">S
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"> 
-              </div>
-              <div class="ml-3">
-                  <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">D
-                    </label>
-                    <input class="form-check-input diarioEntrega${contador}" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"> 
-              </div>
-            </div>
-          </div>
-            
-          </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-2">
-               <h2 class="lead">Recolecciones</h2>
-            </div>
-           
-        </div>
+    container.innerHTML= `<div class="h-divider">
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3"> Horario ${contador}</div>
+      <div class="col-6">
         <div class="row">
+          <div class="col-4">
+              <div class="form-group">
+                  <label for="">Hora de Inicio:</label>
+                  <input type="time" name="horainicio${contador}" id="horainicio ${contador}" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+          </div>
+          <div class="col-4">
+              <div class="form-group">
+                  <label for="">Hora de Finalización:</label>
+                  <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row mt-3">
+            <div class="col-3 ml-1 ">
+                <div class="form-group float-left">
+                    <label class="form-check-label lbcheck">
+                      <input class="form-check-input sizecheck general " type="checkbox" name="entrega${contador}" id="entrega${contador}" value="1" onchange="diarioEntrega(this);" data-id="22" checked>Diario
+                    </label>
+                  </div>
+            </div>
+            <div class="col-8 ">
+                          <div class="container">
+                              <div class="row">
+                                <div class="">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">L
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" checked> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">M
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="diam${contador}" id="diam${contador}" value="1" checked> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">X
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" checked> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">J
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" checked> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">V
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="diav${contador}" id="diav${contador}" value="1"checked> 
+                                </div>
+                                <div class="ml-3" >
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">S
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" checked> 
+                                </div>
+                                <div class="ml-3">
+                                    <label class="form-check-label font-weight-bolder mr-3 pr-2 pt-1">D
+                                      </label>
+                                      <input class="form-check-input diarioEntrega22 sizecheck" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" checked> 
+                                </div>
+                              </div>
+                            </div>
+                      </div>
 
-          <div class="col-6" >
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-12 ">
+        <div class="row">
+          <div class="col-6">  <h2 class="lead">Recolecciones</h2></div>
+          <div class="col-6">  <h2 class="lead">Entregas</h2></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-6" >
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                      <label for="">Punto 1</label>
+                      <label for="" data-punto="${contador}">Punto ${contador}</label>
                       <select class="form-control" name="" id="">
                         <option></option>
                         <option></option>
@@ -359,37 +366,32 @@ function addHoraioContainer(){
                     </div>
             </div>
             </div>
-              
-          
-        <div class="col-6">
-          <div class="row">
-            <div class="col-4">
-                <div class="form-group">
-                  <label for="">Punto 1</label>
-                  <select class="form-control" name="" id="">
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                  </select>
+            <div class="col-6">
+                <div class="row">
+                  <div class="col-4">
+                      <div class="form-group">
+                        <label for="" data-punto="${contador}">Punto ${contador}</label>
+                        <select class="form-control" name="" id="">
+                          <option></option>
+                          <option></option>
+                          <option></option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="">Hora</label>
+                        <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                      
+                    </div>
+                    <div class="col-4 d-inline mt-4 pt-1">
+                        <a href="#!" class="btn btn-secondary d-inline" id="secondarybtnHora${contador}" onclick="addpunto(this);">+</a>
+                      </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-4">
-                <div class="form-group">
-                  <label for="">Hora</label>
-                  <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                </div>
-                
-              </div>
-              <div class="col-4 d-inline mt-4 pt-1">
-                  <a href="#!" class="btn btn-secondary d-inline" id="secondarybtnHora${contador}" onclick="addpunto(this);">+</a>
-                </div>
-              </div>
-          </div>
-        </div> 
-       
+    </div>
 
-              
-        </form>
   
     `;
     rowContanier.appendChild(container);
@@ -402,17 +404,23 @@ function addHoraioContainer(){
 
 
 
-
+let countRecolecion=2;
 function addpunto(e){
-  let row = document.createElement('div');
+
   let parent = e.parentElement.parentElement;
+  let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
+  let intNumPunto = parseInt(numPunto)+1;
+  console.log(parent.children[0].children[0].children[0].getAttribute('data-punto'));
+
+  let row = document.createElement('div');
+ 
   row.classList ="container";
   row.innerHTML=`
   
   <div class="row">
   <div class="col-4">
       <div class="form-group">
-        <label for="">Punto 1</label>
+        <label for="" data-punto="${countRecolecion}">Punto ${countRecolecion}</label>
         <select class="form-control" name="" id="">
           <option></option>
           <option></option>
@@ -435,6 +443,8 @@ function addpunto(e){
   `;
 
 parent.appendChild(row);
+intNumPunto++;
+countRecolecion++;
 }
 
 
