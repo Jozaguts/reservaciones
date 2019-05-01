@@ -29,8 +29,8 @@ padding-top: 5px !important;
 //     height: 15px !important;
 // }
 .sizecheck{
-    width: 15px !important;
-    height: 15px !important;
+    width: 12px !important;
+    height: 12px !important;
 }
 .lbcheck{
     line-height: 30px !important;
@@ -43,4 +43,23 @@ padding-top: 5px !important;
  height:1px;
  width:100%;
  border-top:1px solid gray;
+}
+.anchorElemet {
+    pointer-events: none !important;
+    cursor: default !important;
+}
+.overflow{
+  width: 100%; 
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+  max-height: 30vh;
+  border: 1px dotted black;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+
+} 
+.flex-text{
+    width: fit-content;
+    font-size: 1vw;
+    padding-left: 0 !important;
 }
