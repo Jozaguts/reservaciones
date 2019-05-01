@@ -22,10 +22,10 @@ class CreateActividadhorariosTable extends Migration
             $table->boolean('remove');
 
             $table->unsignedInteger('usuarios_id');
-            $table->foreign('unidades_id')->references('id')->on('usuarios');	
+            $table->foreign('usuarios_id')->references('id')->on('usuarios');	
 
             $table->unsignedInteger('actividades_id');
-            $table->foreign('unidades_id')->references('id')->on('actividades');
+            $table->foreign('actividades_id')->references('id')->on('actividades');
             
 
             $table->timestamps();
