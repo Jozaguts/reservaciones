@@ -399,6 +399,7 @@ e.parentElement.parentElement.remove();
 // AJAX ##########################################################################
 
     // PESTAÑA 1 INICIO
+    let AddActividadesForm = document.getElementById('AddActividadesForm');
     AddActividadesForm.addEventListener('submit',(e)=>{
         e.preventDefault();
         
@@ -417,9 +418,11 @@ e.parentElement.parentElement.remove();
         let maxcupones = datos.get('maxcupones')
         let anticipoid= datos.get('anticipo_id')
         let idusuario = datos.get('idusuario')
+        let checkFijo = datos.get('fijo')
+        let checkRenta = datos.get('renta')
         
         console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
-        montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario}`)
+        montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}`)
         let route = 'actividades'
         
         $.ajax({
@@ -430,9 +433,12 @@ e.parentElement.parentElement.remove();
         data: {
             clave: clave,
             nombre: nombre,
+            active:active,
+            remove:remove,
             tipoactividades_id: tipoactividadesid,
-            fijo:fijo,
-            renta:renta,
+            tipounidades_id:tipoUnidadId,
+            fijo:checkFijo,
+            renta:checkRenta,
             duracion:duracion,
             minutoincrementa:minutoincrementa,
             montoincremento:montoincremento,
@@ -440,9 +446,7 @@ e.parentElement.parentElement.remove();
             maxcupones:maxcupones,
             anticipo_id:anticipoid,
             idusuario:idusuario,
-            active:active,
-            remove:remove,
-            tipounidades_id:tipoUnidadId
+            
         },
 
         success: function (data) {
