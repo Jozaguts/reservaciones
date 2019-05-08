@@ -22,16 +22,18 @@ class CreateActividadesTable extends Migration
             $table->boolean('fijo');
             $table->boolean('renta');
             $table->integer('minutoincrementa')->nullable();
-            $table->integer('minutosincluidos')->nullable();//agregue este campo a la db
+            // $table->integer('minutosincluidos')->nullable();//agregue este campo a la db
             $table->double('montoincremento')->nullable();
             $table->boolean('promocion');
             $table->boolean('combo');
             $table->string('observaciones');
             $table->string('requisitos');
             $table->integer('maxcortesias')->nullable();
+            $table->integer('duracion')->nullable()->comment('si esta nulo acepta multiples horarios');
             $table->integer('maxcupones')->nullable();
             $table->string('riesgo', 45);      
             $table->integer('puntos');  
+            $table->boolean('libre');
             $table->boolean('active');
             $table->boolean('remove');     
             $table->softDeletes();           

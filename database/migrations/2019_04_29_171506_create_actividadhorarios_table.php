@@ -13,22 +13,26 @@ class CreateActividadhorariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('actividadhorarios', function (Blueprint $table) {
+        Schema::create('actividadeshorarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dia',1);
-            $table->time('hini')->nullable(); 
-            $table->time('hfin')->nullable();
+            $table->time('hini')->nullable();
+            $table->time('hfin')->nullable();            
+            $table->boolean('l');
+            $table->boolean('m');
+            $table->boolean('x');
+            $table->boolean('j');
+            $table->boolean('v');
+            $table->boolean('s');
+            $table->boolean('d');
+            $table->timestamps();
             $table->boolean('active');
-            $table->boolean('remove');
-
-            $table->unsignedInteger('usuarios_id');
-            $table->foreign('usuarios_id')->references('id')->on('usuarios');	
+            $table->boolean('remove');                   
 
             $table->unsignedInteger('actividades_id');
             $table->foreign('actividades_id')->references('id')->on('actividades');
             
-
-            $table->timestamps();
+            $table->unsignedInteger('usuarios_id');
+            $table->foreign('usuarios_id')->references('id')->on('usuarios');		                    
         });
     }
 

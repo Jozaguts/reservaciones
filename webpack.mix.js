@@ -26,27 +26,30 @@ mix.js('resources/js/app.js', 'public/js')
       proxy:'reservaciones-dev.com'
    });
    
-   mix.scripts([
+      mix.scripts([
       'resources/js/main.js'],
-         'public/js/all.js');
-         mix.scripts([
-            'resources/js/admin.js'],
-               'public/js/admin.js');
-               mix.scripts([
-                  'resources/js/reservations.js'],
-                     'public/js/reservations.js');
-                     mix.scripts([
-                        'resources/js/hamburgerMenu.js'],
-                           'public/js/hamburgerMenu.js');
-                           mix.scripts([
-                              'resources/js/tipounidad.js'],
-                                 'public/js/tipounidad.js');
-                                 mix.scripts([
-                                    'resources/js/equiposyunidades.js'],
-                                       'public/js/equiposyunidades.js');
-                                       mix.scripts([
-                                          'resources/js/tipoactividades.js'],
-                                             'public/js/tipoactividades.js');
-                                             mix.scripts([
-                                                'resources/js/activities.js'],
-                                                   'public/js/activities.js');
+      'public/js/all.js');
+      mix.scripts([
+      'resources/js/admin.js'],
+      'public/js/admin.js');
+      mix.scripts([
+      'resources/js/reservations.js'],
+      'public/js/reservations.js');
+      mix.scripts([
+      'resources/js/hamburgerMenu.js'],
+      'public/js/hamburgerMenu.js');
+      mix.scripts([
+      'resources/js/tipounidad.js'],
+      'public/js/tipounidad.js');
+      mix.scripts([
+      'resources/js/equiposyunidades.js'],
+      'public/js/equiposyunidades.js');
+      mix.scripts([
+      'resources/js/tipoactividades.js'],
+      'public/js/tipoactividades.js');
+      mix.scripts([
+      'resources/js/activities.js'],
+      'public/js/activities.js');
+      mix.scripts([
+      'resources/js/test.js'],
+         'public/js/test.js');

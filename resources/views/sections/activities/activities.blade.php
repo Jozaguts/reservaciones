@@ -27,7 +27,8 @@
 @section('scripts')
 
 
-<script src="{{ asset('js/activities.js') }}" defer></script>
+{{-- <script src="{{ asset('js/activities.js') }}" defer></script> --}}
+<script src="{{ asset('js/test.js') }}" defer></script>
 
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
 

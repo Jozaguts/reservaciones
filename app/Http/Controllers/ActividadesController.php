@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\TipoUnidad;
 use App\Anticipos;
 use App\Personas;
+use App\SalidasLlegadas;
 use Validator;
 use App\ActividadPrecios;
 
@@ -22,10 +23,11 @@ class ActividadesController extends Controller
     public function index()
     {
         $personas = Personas::all();
+        $salidasLlegadas = SalidasLlegadas::all();
         $anticipos = Anticipos::all();
         $actividades = Actividades::all();
         $tipoactividades = TipoActividades::all();
-        return view('sections.activities.activities', compact('actividades','tipoactividades','tipounidades','anticipos','personas'));
+        return view('sections.activities.activities', compact('actividades','tipoactividades','tipounidades','anticipos','personas','salidasLlegadas'));
     }
 
     /**
@@ -72,6 +74,7 @@ class ActividadesController extends Controller
                 'requisitos' =>['nullable','string'],
                 'riesgo' =>['nullable','string','max:45'],
                 'puntos' =>['nullable','integer'],
+                'libre'=> ['boolean']
                
             ];
        
@@ -116,6 +119,7 @@ class ActividadesController extends Controller
                     'requisitos' => 'Requisitos por default',
                     'riesgo' => 'Riesgos por Default',
                     'puntos' => 1,
+                    'libre'=> $request->get('libre'),
                     
                      
                  ]);
