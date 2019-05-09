@@ -103,58 +103,60 @@
 
 //add actividades 
 
-let AddActividadesForm = document.getElementById('AddActividadesForm');
-let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
+// let AddActividadesForm = document.getElementById('AddActividadesForm');
+// let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
 
 AddActividadesForm.addEventListener('submit',(e)=>{
 e.preventDefault();
 
-let datos = new FormData(AddActividadesForm) 
-let datos2 = new FormData(AddPreciosYPasesForm)
-let datos3 = new FormData(addHorariosYPuntos)
-let clave = datos.get('clave')
-let nombre = datos.get('nombre')
+// let datos = new FormData(AddActividadesForm) 
+// let datos2 = new FormData(AddPreciosYPasesForm)
+// let datos3 = new FormData(addHorariosYPuntos)
+// let clave = datos.get('clave')
+// let nombre = datos.get('nombre')
 
-let active=1, remove=0;
-let tipoUnidadId = document.getElementById('tipoactividades_id').value; //tipo de unidad 
-let tipoactividadesid = document.getElementById('tipoactividades_id'); //tipo de actividad
-console.log(tipoUnidadId)
-let balance = datos2.get('balanceg')
-let precio = datos2.get('preciog')
+// // let active=1, remove=0;
+// let tipoUnidadId = document.getElementById('tipoactividades_id').value; //tipo de unidad 
+// let tipoactividadesid = document.getElementById('tipoactividades_id'); //tipo de actividad
 
-//datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
-const personas = document.querySelectorAll('[id^=persona]')
-let datosPersonas = [];
+// let balance = datos2.get('balanceg')
+// let precio = datos2.get('preciog')
 
-personas.forEach(function(persona){ 
-persona={
-  precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
-  precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
-  precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
-  doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
-  doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
-  triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
-  triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
-  promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
-  restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
-  acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
-  remove: 0,
-  active: 1,
-  persona_id: persona.getAttribute('data-id')
-}
+// //datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+// const personas = document.querySelectorAll('[id^=persona]')
+// let datosPersonas = [];
 
-datosPersonas.push(persona)
+// personas.forEach(function(persona){ 
+// persona={
+//   precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+//   precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+//   precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+//   doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+//   doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+//   triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+//   triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+//   promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+//   restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+//   acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+//   remove: 0,
+//   active: 1,
+//   persona_id: persona.getAttribute('data-id')
+// }
 
-})
+// datosPersonas.push(persona)
+
+// })
 
 
 
-let libre;
-if($('#libre').is(':checked')){
-  libre = 1;
-}else{
-  libre = 0;
-}
+// let libre;
+// let checksHorarioFijo = document.querySelectorAll('.horario-fijo');
+// if($('#libre').is(':checked')){
+//   libre = 1;
+//   console.log(checksHorarioFijo)
+// }else{
+//   libre = 0;
+// }
 // let renta;
 // if($('#renta').is(':checked')){
 //   renta = 1;
@@ -172,33 +174,33 @@ let idusuario = datos.get('idusuario')
 
 // ######################## DATOS DE LA TERCERA PESTAÑA ######################################
 
-const d3CheckLibre = datos3.get('libre');
-    if(d3CheckLibre == 1 ){
-      let  diario;
-      diario = document.getElementById('diario')
-      const diasSeleccionados = [];
-      if(diario.checked){
-        let l={dia: "lunes", activado: "true"}, m={dia: "martes", activado: "true"}, x={dia: "miercoles",activado: "true"},j={dia: "jueves",activado: "true"},v={dia: "viernes",activado: "true"},s={dia: "sabado",activado: "true"},d={dia: "domingo",activado: "true"}
-        diasSeleccionados.push(l,m,x,j,v,s,d);
-        let selecetSalidas = document.getElementsByName('salidas')
-        alert(selecetSalidas)
-      }
-      else{
-        let id = diario.getAttribute('data-id')
-        let diasDisponibles = document.querySelectorAll(`.diarioEntrega${id}`)
+// const d3CheckLibre = datos3.get('libre');
+//     if(d3CheckLibre == 1 ){
+//       let  diario;
+//       diario = document.getElementById('diario')
+//       const diasSeleccionados = [];
+//       if(diario.checked){
+//         let l={dia: "lunes", activado: "true"}, m={dia: "martes", activado: "true"}, x={dia: "miercoles",activado: "true"},j={dia: "jueves",activado: "true"},v={dia: "viernes",activado: "true"},s={dia: "sabado",activado: "true"},d={dia: "domingo",activado: "true"}
+//         diasSeleccionados.push(l,m,x,j,v,s,d);
+//         let selecetSalidas = document.getElementsByName('salidas')
+//         alert(selecetSalidas)
+//       }
+//       else{
+//         let id = diario.getAttribute('data-id')
+//         let diasDisponibles = document.querySelectorAll(`.diarioEntrega${id}`)
        
 
-        diasDisponibles.forEach(function(diaDisponible){
-          if(diaDisponible.checked){
-            dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "true"}
-            diasSeleccionados.push(dia)
-          }
+//         diasDisponibles.forEach(function(diaDisponible){
+//           if(diaDisponible.checked){
+//             dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "true"}
+//             diasSeleccionados.push(dia)
+//           }
          
-        })
+//         })
        
-      }
-      // duracion = datos3.get('duracion')
-    }
+//       }
+//       // duracion = datos3.get('duracion')
+//     }
 
 
     
