@@ -11,6 +11,8 @@ use App\Personas;
 use App\SalidasLlegadas;
 use Validator;
 use App\ActividadPrecios;
+use App\ActividadesHorario;
+use App\SalidasLlegadasHorario;
 
 
 class ActividadesController extends Controller
@@ -48,7 +50,7 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-       
+        
                      //reglas de validacion
              $rules =[
                 'clave' => ['required', 'string', 'min:5','unique:actividades'],
@@ -58,7 +60,7 @@ class ActividadesController extends Controller
                 'renta' => ['nullable','boolean'],
                 'active'=> ['nullable', 'boolean'],
                 'remove' => ['nullable','boolean'],
-                'minutosincluidos' => ['nullable','integer'],
+                'duracion' => ['nullable','integer'],
                 'minutoincrementa'=>['nullable','integer'],
                 'montoincremento'=>['nullable','between:0,999999.99'],
                 'maxcortesias'=>['nullable','integer'],
@@ -74,7 +76,9 @@ class ActividadesController extends Controller
                 'requisitos' =>['nullable','string'],
                 'riesgo' =>['nullable','string','max:45'],
                 'puntos' =>['nullable','integer'],
-                'libre'=> ['boolean']
+                'libre'=> ['boolean'],
+                'salidas'=>['integer', 'required'],
+                'llegadas'=>['integer','required'] 
                
             ];
        
@@ -93,37 +97,51 @@ class ActividadesController extends Controller
               }else{
                 $tipoActividadId = $request->get('tipoactividades_id');
                 $tipoActividad = TipoActividades::find($tipoActividadId);
-              
+
+
+
+                if($request->libre == 1){ //SI LIBRE ESTA CHECKEADO  ### SI SON HORARIOS ABIERTOS ###
+                    $count = count($request->diasSeleccionados);
+                    if($request->duracion == null){
+                        $message ='El Campo Duración Debe Contener Información ';
+                       return response()->json(['error'=> 'true','errors'=> $message]);
+                    }
+                    if($count==0){ //valido que al menos 1 dia este seleccionado si no hay checkeados mando el aviso
+                        $message ='Al Menos Debes de Seleccionar 1 Dia Fijo';
+                       return response()->json(['error'=> 'true','errors'=> $message]);
                    
-                $actividad = Actividades::create([
-                    'clave' => $request->get('clave'),
-                    'nombre' => $request->get('nombre'),
-                    'tipoactividades_id'=> $request->get('tipoactividades_id'),
-                    'fijo'=> $request->get('fijo'),
-                    'renta' => $request->get('renta'),
-                    'active'=> $request->get('active'),
-                    'remove' => $request->get('remove'),
-                    'minutosincluidos' => $request->get('minutosincluidos'),
-                    'minutoincrementa'=>$request->get('minutoincrementa'),
-                    'montoincremento'=>$request->get('montoincremento'),
-                    'maxcortesias'=>$request->get('maxcortesias'),
-                    'maxcupones'=>$request->get('maxcupones'),
-                    'anticipo_id'=>$request->get('anticipo_id'),
-                    'idusuario'=> $request->get('idusuario'),
-                    'tipounidades_id' => $tipoActividad->tipoUnidad->id, 
-                    'precio' => $request->get('precio'),
-                    'balance' => $request->get('balance'),
-                    'promocion' => 0,
-                    'combo' => 0,
-                    'observaciones' => 'Observacion por Default', 
-                    'requisitos' => 'Requisitos por default',
-                    'riesgo' => 'Riesgos por Default',
-                    'puntos' => 1,
-                    'libre'=> $request->get('libre'),
+                    }
                     
-                     
-                 ]);
-                 $datosPersonas = $request->datosPersonas;
+                    //si al menos hay uno chekeado guardo en DB
+                    $actividad = Actividades::create([
+                        'clave' => $request->get('clave'),
+                        'nombre' => $request->get('nombre'),
+                        'tipoactividades_id'=> $request->get('tipoactividades_id'),
+                        'fijo'=> $request->get('fijo'),
+                        'renta' => $request->get('renta'),
+                        'active'=> $request->get('active'),
+                        'remove' => $request->get('remove'),
+                        'duracion' => $request->get('duracion'),
+                        'minutoincrementa'=>$request->get('minutoincrementa'),
+                        'montoincremento'=>$request->get('montoincremento'),
+                        'maxcortesias'=>$request->get('maxcortesias'),
+                        'maxcupones'=>$request->get('maxcupones'),
+                        'anticipo_id'=>$request->get('anticipo_id'),
+                        'idusuario'=> $request->get('idusuario'),
+                        'tipounidades_id' => $tipoActividad->tipoUnidad->id, 
+                        'precio' => $request->get('precio'),
+                        'balance' => $request->get('balance'),
+                        'promocion' => 0,
+                        'combo' => 0,
+                        'observaciones' => 'Observacion por Default', 
+                        'requisitos' => 'Requisitos por default',
+                        'riesgo' => 'Riesgos por Default',
+                        'puntos' => 1,
+                        'libre'=> $request->get('libre'),
+                        
+                         
+                     ]);
+                     $datosPersonas = $request->datosPersonas;
                 
                  foreach ($datosPersonas as $datoPersona ) {
                      if($datoPersona['acompanante'] == 'null') {
@@ -158,15 +176,65 @@ class ActividadesController extends Controller
                            'usuarios_id'=> $request->get('idusuario'),
                         ]
                     );
+                    $actividadPrecio->save();
+                 
+                        $ActividadesHorario = ActividadesHorario::firstOrCreate(
+                            ['actividades_id' => $actividad->id],
+                            
+                            [
+                            'hini' => null,
+                            'hfin' => null,
+                            'l'=> $request->diasSeleccionados[0]['activado'],
+                            'm'=> $request->diasSeleccionados[1]['activado'],
+                            'x'=> $request->diasSeleccionados[2]['activado'],
+                            'j'=> $request->diasSeleccionados[3]['activado'],
+                            'v'=> $request->diasSeleccionados[4]['activado'],
+                            's'=> $request->diasSeleccionados[5]['activado'],
+                            'd'=> $request->diasSeleccionados[6]['activado'],
+                            'active'=> 1,
+                            'remove'=>0,
+                            'usuarios_id'=> $request->get('idusuario')                            
+                            ]
+                        );
+                        $ActividadesHorario->save();
+
+
+                        $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::firstOrCreate(
+                            ['actividadeshorario_id' => $ActividadesHorario->id,'salidallegadas_id' => $request->salidas, 'salida' =>1  ], 
+                            ['hora' =>null,
+                            // 'salida' =>1,
+                             'active' =>1,
+                             'remove' =>0,                        
+                             'usuarios_id' => $request->get('idusuario'),
+                            ]
+                        
+                        );
+                        $SalidasLlegadasHorarioSALIDA->save();
+                        $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::firstOrCreate(
+                            ['actividadeshorario_id' => $ActividadesHorario->id,'salidallegadas_id' => $request->llegadas, 'salida'=>0  ], 
+                            ['hora' =>null,
+                            // 'salida' =>0,
+                             'active' =>1,
+                             'remove' =>0,                        
+                             'usuarios_id' => $request->get('idusuario'),
+                            ]
+                        
+                        );
+                         $SalidasLlegadasHorarioLLEGADA->save();
+                    
+                  
+
+
+
                    
                  }
-               
-           
                  return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
-              
-
-
-          
+                    
+                }else{
+                    //#######################
+                                        
+                }
+                   
              }
              
          }

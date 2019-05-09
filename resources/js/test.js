@@ -177,7 +177,7 @@ function diarioEntrega(e){
 
 const addHorarioContanier = document.getElementById('addHorarioContanier')
 const rowContanier = document.getElementById('rowContanier')
-let contador=2;
+let contador=1;
 function addHoraioContainer(){
 // addHorarioContanier.addEventListener('click',(e)=>{
  
@@ -202,13 +202,13 @@ function addHoraioContainer(){
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Inicio:</label>
-                                        <input type="time" name="horainicio" id="horainicio" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
+                                        <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
                                       </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Finalización:</label>
-                                        <input type="time" name="horafin" id="horafin" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
+                                        <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
                                       </div>
                                 </div>
                               </div>
@@ -398,7 +398,7 @@ e.parentElement.parentElement.remove();
 
 // AJAX ##########################################################################
 
-    // PESTAÑA 1 INICIO
+    // #############################################################################################PESTAÑA 1 INICIO
     let AddActividadesForm = document.getElementById('AddActividadesForm');
     AddActividadesForm.addEventListener('submit',(e)=>{
         e.preventDefault();
@@ -408,9 +408,8 @@ e.parentElement.parentElement.remove();
         let nombre = datos.get('nombre')
         let active=1;
         let remove=0;
-        let tipoUnidadId = document.getElementById('tipoactividades_id').value; //tipo de unidad 
-        let tipoactividadesid =1; //falta capturar el tipo de actividad
-        // let tipoactividadesid = document.getElementById('tipoactividades_id'); //tipo de actividad       
+        let tipoUnidadId = document.getElementById('tipoactividades_id').value; //tipo de unidad
+        let tipoactividadesid = document.querySelector(':checked').getAttribute('data-tipoactividad');        
         let duracion = datos.get('duracion')
         let minutoincrementa = datos.get('minutoincrementa')
         let montoincremento = datos.get('montoincremento')
@@ -420,9 +419,91 @@ e.parentElement.parentElement.remove();
         let idusuario = datos.get('idusuario')
         let checkFijo = datos.get('fijo')
         let checkRenta = datos.get('renta')
+
+         // ############################################################################################### PESTAÑA 1 FIN
+
+        //  INICIO PESTAÑA 2 ############################################################################################
+        let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
+        let datos2 = new FormData(AddPreciosYPasesForm)
+        let balance = datos2.get('balanceg')
+        let precio = datos2.get('preciog')
+
+        //datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+        const personas = document.querySelectorAll('[id^=persona]')
+        let datosPersonas = [];
+
+        personas.forEach(function(persona){ 
+        persona={
+          precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+          precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+          precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+          doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+          doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+          triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+          triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+          promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+          restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+          acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+          remove: 0,
+          active: 1,
+          persona_id: persona.getAttribute('data-id')
+        }
+
+        datosPersonas.push(persona)
+
+        })
         
-        console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
-        montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}`)
+         //  FIN PESTAÑA 2 ############################################################################################
+
+        // ########################################################################################### PESTAÑA 3 INICIO
+
+        let libre;
+      
+       if($('#libre').is(':checked')){
+          libre = 1;
+        }else{
+          libre = 0;
+        }
+        let addHorariosYPuntos = document.getElementById('addHorariosYPuntos');
+        let datos3 = new FormData(addHorariosYPuntos)
+        const d3CheckLibre = datos3.get('libre');
+        const diasSeleccionados = [];
+          if(d3CheckLibre == 1 ){
+        let  diario;
+        diario = document.getElementById('diario')
+        
+            if(diario.checked){
+        let l={dia: "l", activado: "1"}, m={dia: "m", activado: "1"}, x={dia: "miercoles",activado: "1"},j={dia: "jueves",activado: "1"},v={dia: "viernes",activado: "1"},s={dia: "sabado",activado: "1"},d={dia: "domingo",activado: "1"}
+        diasSeleccionados.push(l,m,x,j,v,s,d);
+        }
+        else{
+        let id = diario.getAttribute('data-id')
+        let diasDisponibles = document.querySelectorAll(`.diarioEntrega${id}`)
+        diasDisponibles.forEach(function(diaDisponible){
+          if(diaDisponible.checked){
+            dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "1"}
+            diasSeleccionados.push(dia)
+          }else{
+            dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "0"}
+            diasSeleccionados.push(dia)
+          }
+        
+        })
+      
+      }
+      // duracion = datos3.get('duracion')
+    }
+    console.log(diasSeleccionados);
+    const salidaFijo = document.getElementById('salidas').value;
+    const llegadasFijo = document.getElementById('llegadas').value;
+      
+
+        // ########################################################################################### PESTAÑA 3 FIN
+
+
+
+        // console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
+        // montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}  datos Persona = ${datosPersonas}, balance = ${balance}, Precio = ${precio} Libre = ${libre} dias Seleccionandos = ${diasSeleccionados}` )
         let route = 'actividades'
         
         $.ajax({
@@ -446,15 +527,22 @@ e.parentElement.parentElement.remove();
             maxcupones:maxcupones,
             anticipo_id:anticipoid,
             idusuario:idusuario,
-            
+            precio: precio,
+            balance:balance,
+            libre:libre,
+            datosPersonas:datosPersonas,
+            diasSeleccionados:diasSeleccionados,
+            salidas:salidaFijo,
+            llegadas:llegadasFijo
         },
 
         success: function (data) {
         
         
           if(data.error == 'true'){
-            data.errors.forEach(()=>{})
-            $('#errorsIntoModal').html(data.errors[0]);
+            // data.errors.forEach(()=>{})
+            
+            $('#errorsIntoModal').html(data.errors);
               $('#message-errorIntoModal').fadeIn();
               setTimeout(() => {
                 $('#message-errorIntoModal').fadeOut();
@@ -479,7 +567,7 @@ e.parentElement.parentElement.remove();
 
 
     
-    // PESTAÑA 1 FIN
+   
 
 
 

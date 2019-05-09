@@ -346,21 +346,21 @@
                                   <div class="">
                                     <label class="form-check-label font-weight-bolder  ">Lunes
                                       </label>
-                                      <input class="  diarioEntrega1 sizecheck" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
+                                      <input class="  diarioEntrega1 sizecheck  horario-fijo" type="checkbox" name="l" id="dial1" value="1" disabled> 
                                 </div>
                               </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weiFght-bolder  ">Martes
                                           </label>
-                                          <input class="  diarioEntrega1 sizecheck" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                     <label class="form-check-label font-weight-bolder  ">Miercoles
                                       </label>
-                                      <input class="  diarioEntrega1 sizecheck" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+                                      <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
                                 </div>
                               </div>
                               </div>
@@ -369,28 +369,28 @@
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Jueves
                                           </label>
-                                          <input class="  diarioEntrega1 sizecheck" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Viernes
                                           </label>
-                                          <input class="  diarioEntrega1 sizecheck" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="" >
                                         <label class="form-check-label font-weight-bolder  ">Sabado
                                           </label>
-                                          <input class="  diarioEntrega1 sizecheck" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Domingo
                                           </label>
-                                          <input class="  diarioEntrega1 sizecheck" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
                                     </div>
                                 </div>
                               </div>                             
