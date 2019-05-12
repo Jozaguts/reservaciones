@@ -578,8 +578,8 @@ countRecolecionLLEGADAS--;
       
       }
       // duracion = datos3.get('duracion')
-    }
-    console.log(diasSeleccionados);
+    
+
 
     const salidaFijo = document.getElementById('salidas').value;
     const llegadasFijo = document.getElementById('llegadas').value;
