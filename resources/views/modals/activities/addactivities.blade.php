@@ -314,7 +314,7 @@
                             <div class="col-6"> 
                                 <div class="form-group float-left">
                                     <label class="form-check-label lbcheck">
-                                      <input class="  sizecheck general " type="checkbox" name="diario" id="diario" value="1" onchange="diarioEntrega(this);" data-id="1" disabled>Diario
+                                      <input class="  sizecheck general " type="checkbox" name="diario" id="diario" value="1" onchange="diarioEntrega(this);" data-id="0" disabled>Diario
                                     </label>
                                   </div>
                             </div>
@@ -346,21 +346,45 @@
                                   <div class="">
                                     <label class="form-check-label font-weight-bolder  ">Lunes
                                       </label>
+<<<<<<< HEAD
                                       <input class="  diarioEntrega1 sizecheck  horario-fijo" type="checkbox" name="l" id="dial1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                      <input class="  diarioEntrega0 sizecheck  horario-fijo" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
+=======
+                                      <input class="  diarioEntrega1 sizecheck  horario-fijo" type="checkbox" name="l" id="dial1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                 </div>
                               </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weiFght-bolder  ">Martes
                                           </label>
+<<<<<<< HEAD
                                           <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+=======
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                     <label class="form-check-label font-weight-bolder  ">Miercoles
                                       </label>
+<<<<<<< HEAD
                                       <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                      <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+=======
+                                      <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                 </div>
                               </div>
                               </div>
@@ -369,28 +393,60 @@
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Jueves
                                           </label>
+<<<<<<< HEAD
                                           <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+=======
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Viernes
                                           </label>
+<<<<<<< HEAD
                                           <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+=======
+<<<<<<< HEAD
+                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+=======
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="" >
                                         <label class="form-check-label font-weight-bolder  ">Sabado
                                           </label>
+<<<<<<< HEAD
                                           <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+=======
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="">
                                         <label class="form-check-label font-weight-bolder  ">Domingo
                                           </label>
+<<<<<<< HEAD
                                           <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+=======
+<<<<<<< HEAD
+                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+=======
+                                          <input class="  diarioEntrega1 sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+>>>>>>> jozaguts
+>>>>>>> 8e15d631bf0c5a3293df830244044f8adc2fc0bb
                                     </div>
                                 </div>
                               </div>                             
@@ -436,11 +492,14 @@
                                
                            </div>
                           </div>
-                      <div class="container overflow">
+                     <div class="container overflow">
                             <div class="row mt-3">
-                            <div class="col-6">
+                              <div class="col-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ducimus voluptatem eaque accusamus nostrum reiciendis itaque totam earum! Quisquam earum fugiat nobis amet, quia officia sapiente nemo? Ratione, eum sapiente!</p>
+                              </div>
+                            {{-- <div class="col-6">
                                 <div class="row">
-                                 {{-- <div class="col-3 flex-text"><span class="flex-text">Horario 1</span> </div> --}}
+                             
                                  <div class="col-3 flex-text"><span class="flex-text">12:12 pm</span></div>
                                  <div class="col-3 flex-text"><span class="flex-text">12:12 pm</span></div>
                                  <div class="col-3 flex-text">
@@ -453,8 +512,8 @@
                                  
                                 </div>
                               
-                              </div>
-                              <div class="col-6">
+                              </div> --}}
+                              {{-- <div class="col-6">
                                   <div class="row">
                                     <div class="col-8">                                    
                                         <label class="form-check-label font-weight-bolder  mr-2 ">L
@@ -482,11 +541,11 @@
                                     <div class="col-2"><a href="#!" class="btn btn-success">Editar</a></div>
                                     <div class="col-2"><a href="#!" class="btn btn-danger">Borrar</a></div>
                                   </div>
-                            </div>
+                            </div> --}}
                          
                             </div>
-                            {{--  --}}
-                         </div>
+                      
+                         </div> 
                         <div class="row">
                             <div class="col-2">
                                 <a href="#!" class="btn btn-primary horario-multiple" id="addHorarioContanier" onclick="addHoraioContainer();"><span>+ Horario</span></a>
