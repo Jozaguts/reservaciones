@@ -533,6 +533,7 @@ countRecolecionLLEGADAS--;
           if(d3CheckLibre == 1 ){
         let  diario;
         diario = document.getElementById('diario')
+<<<<<<< HEAD
         
             if(diario.checked){
         let l={dia: "l", activado: "1"}, m={dia: "m", activado: "1"}, x={dia: "miercoles",activado: "1"},j={dia: "jueves",activado: "1"},v={dia: "viernes",activado: "1"},s={dia: "sabado",activado: "1"},d={dia: "domingo",activado: "1"}
@@ -556,12 +557,38 @@ countRecolecionLLEGADAS--;
       
     }
     
+=======
+        
+            if(diario.checked){
+        let l={dia: "l", activado: "1"}, m={dia: "m", activado: "1"}, x={dia: "miercoles",activado: "1"},j={dia: "jueves",activado: "1"},v={dia: "viernes",activado: "1"},s={dia: "sabado",activado: "1"},d={dia: "domingo",activado: "1"}
+        diasSeleccionados.push(l,m,x,j,v,s,d);
+        }
+        else{
+        let id = diario.getAttribute('data-id')
+        let diasDisponibles = document.querySelectorAll(`.diarioEntrega${id}`)
+        diasDisponibles.forEach(function(diaDisponible){
+          if(diaDisponible.checked){
+            dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "1"}
+            diasSeleccionados.push(dia)
+          }else{
+            dia= {dia: `${diaDisponible.getAttribute('name')}`, activado: "0"}
+            diasSeleccionados.push(dia)
+          }
+        
+        })
+      
+      }
+      // duracion = datos3.get('duracion')
+    }
+    console.log(diasSeleccionados);
+>>>>>>> jozaguts
     const salidaFijo = document.getElementById('salidas').value;
     const llegadasFijo = document.getElementById('llegadas').value;
       
 
         // ########################################################################################### PESTAÑA 3 FIN
 
+<<<<<<< HEAD
         //############################################################################################ HORARIO MULTIPLE INICIO
         const horasInicio = document.querySelectorAll('[id^="horainicio"]');
         const horasFin = document.querySelectorAll('[id^="horafin"]');
@@ -694,6 +721,8 @@ countRecolecionLLEGADAS--;
 
         //############################################################################################ HORARIO MULTIPLE FIN
 
+=======
+>>>>>>> jozaguts
 
 
         // console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
