@@ -21,6 +21,9 @@
                     <li class="nav-item">
                       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"  onclick="showPanel(this);" role="tab" aria-controls="contact" aria-selected="false">Horarios y Puntos de Salida y Llegadas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="generales-tab" data-toggle="tab" href="#generales"  onclick="showPanel(this);" role="tab" aria-controls="generales" aria-selected="false">Datos Generales</a>
+                      </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
@@ -456,52 +459,7 @@
                               <div class="col-12">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ducimus voluptatem eaque accusamus nostrum reiciendis itaque totam earum! Quisquam earum fugiat nobis amet, quia officia sapiente nemo? Ratione, eum sapiente!</p>
                               </div>
-                            {{-- <div class="col-6">
-                                <div class="row">
-                             
-                                 <div class="col-3 flex-text"><span class="flex-text">12:12 pm</span></div>
-                                 <div class="col-3 flex-text"><span class="flex-text">12:12 pm</span></div>
-                                 <div class="col-3 flex-text">
-                                   <div class="form-group float-left">
-                                    <label class="form-check-label lbcheck">
-                                      <input class="  sizecheck general horario-multiple" type="checkbox" name="entrega" id="entrega" value="1" onchange="diarioEntrega(this);" data-id="999">Diario
-                                    </label>
-                                  </div>
-                                </div>
-                                 
-                                </div>
-                              
-                              </div> --}}
-                              {{-- <div class="col-6">
-                                  <div class="row">
-                                    <div class="col-8">                                    
-                                        <label class="form-check-label font-weight-bolder  mr-2 ">L
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="dial1" id="dial1" value="1" checked> 
-                                        <label class="form-check-label font-weight-bolder  mr-2 ">M
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="diam1" id="diam1" value="1" checked> 
-                                        <label class="form-check-label font-weight-bolder  mr-2 ">X
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="diax1" id="diax1" value="1" checked> 
-                                        <label class="form-check-label font-weight-bolder  mr-2 ">J
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="diaj1" id="diaj1" value="1" checked> 
-                                        <label class="form-check-label font-weight-bolder  mr-2 ">V
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="diav1" id="diav1" value="1"checked> 
-                                        <label class="form-check-label font-weight-bolder   mr-2">S
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="dias1" id="dias1" value="1" checked> 
-                                        <label class="form-check-label font-weight-bolder   mr-2">D
-                                        </label>
-                                        <input class="  diarioEntrega999 sizecheck horario-multiple" type="checkbox" name="diad1" id="diad1" value="1" checked>                    
-                                    </div>
-                                    <div class="col-2"><a href="#!" class="btn btn-success">Editar</a></div>
-                                    <div class="col-2"><a href="#!" class="btn btn-danger">Borrar</a></div>
-                                  </div>
-                            </div> --}}
-                         
+                       
                             </div>
                       
                          </div> 
@@ -515,6 +473,49 @@
                           <div class="container-fluid" id="rowContanier"></div>
                           </form>   
                           </div>
+                          {{-- 4ta --}}
+                          <div class="tab-pane fade" id="generales" role="tabpanel" aria-labelledby="generales-tab">
+                              <form action=""{{url('actividades')}} method="post" id="generales">
+                          <div class="container mt-2">
+                           <div class="row mt-5">
+                            <div class="col-6">
+                                <label for=""  class="form-label pull-right">Actividad de Alto Riesgo</label>
+                            </div>
+                            <div class="col-2 ">
+                                <input type="checkbox" name="" id="" class="form-control pull-left" placeholder="" aria-describedby="helpId">
+                            </div> 
+                           </div>
+                           <div class="row mt-5">
+                            <div class="col-6">
+                              <label for=""  class="form-label pull-right">Puntos Acumulables</label>
+                          </div>
+                          <div class="col-2 ">
+                            <input type="input" name="" id="" class="form-control pull-left" placeholder="" aria-describedby="helpId">
+                            <small>Clientes</small>
+                        </div>
+                           </div>
+                           <div class="row mt-5">
+                            <div class="col-6">
+                              <label for=""  class="form-label pull-right">Requisitos o Tips</label>
+                          </div>
+                          <div class="col-4 ">
+                            <textarea name="" id="" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                          
+                        </div>
+                           </div>
+                           <div class="row mt-5">
+                              <div class="col-6">
+                                <label for=""  class="form-label pull-right">Observaciones Espesiales</label>
+                            </div>
+                            <div class="col-4 ">
+                              <textarea name="" id="" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                            
+                          </div>
+                             </div>
+                          </div>
+                          </form >
+                          </div>
+                          {{-- 4ta --}}
                       </div>
                     </div>  
                     </div>

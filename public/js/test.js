@@ -205,13 +205,13 @@ function addHoraioContainer(){
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Inicio:</label>
-                                        <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
+                                        <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}">
                                       </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Finalización:</label>
-                                        <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId">
+                                        <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}">
                                       </div>
                                 </div>
                               </div>
@@ -285,10 +285,10 @@ function addHoraioContainer(){
                                           <div class="form-group">
                                             <label for="" data-punto="1";>Punto 1</label>
                                             <select class="form-control horario-multiple" name="salidas${contador}" id="salidas${contador}">
-                                              <option></option>
-                                              <option></option>
-                                              <option></option>
-                                            </select>
+                                            @foreach ($salidasLlegadas as $salidaLlegada)
+                                            <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
+                                                @endforeach
+                                              </select>
                                           </div>
                                         </div>
                                         <div class="col-4">
@@ -356,7 +356,7 @@ function addpunto(e){
 
 let parent = e.parentElement.parentElement;
 let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
-let intNumPunto = parseInt(numPunto)+1;
+// let intNumPunto = parseInt(numPunto)+1;
 
 
 let row = document.createElement('div');
@@ -589,133 +589,98 @@ countRecolecionLLEGADAS--;
 
 
         //############################################################################################ HORARIO MULTIPLE INICIO
+
         const horasInicio = document.querySelectorAll('[id^="horainicio"]');
         const horasFin = document.querySelectorAll('[id^="horafin"]');
-        const checkboxSeleccionados = document.querySelectorAll('.horario-multiple__dia');
+        const salidas = document.querySelectorAll('[id^="horafin"]');
+        const llegadas = document.querySelectorAll('[id^="horafin"]');
+        const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
         const identificadores = document.querySelectorAll('#titulo');
-        const arraryDeDias = [];
-        const h = [];
-        const ArrayHorariosData = [];
-        class HorarioMultiple{
-
-          constructor(hini,hfin,checkboxSeleccionados, identificadores){
-            this.hini = hini;
-            this.hfin=hfin;
-            this.checkboxSeleccionados = checkboxSeleccionados;
-            this.identificadores = identificadores;
-          }
-          diasSeleccionados(){
-            let array=[];
-            let objeto ={};
-            this.checkboxSeleccionados.forEach(function(dia,index){
-              objeto ={
-                dia:dia.name,
-                value:dia.value,
-                identificador: dia.getAttribute('data-horarioid')
-              };
-              identificadores.forEach(function(identificador){
-                if(identificador.getAttribute('data-identificadores') == objeto.identificador){
-                  array.push(objeto)
-                }
-              })
-            })
-            
-            console.log(array)
-           
-          }
-        }
-        const x = new HorarioMultiple(horasInicio,horasFin,checkboxSeleccionados,identificadores) 
-        const y = x.diasSeleccionados();
-       
+        let vueltas =diasMultiplesSeleccionados.length;
+        let horariosData=[];
  
-        // class DiasSeleccionados{
-        //   constructor(dias, repeticiones){
+        class Horarios{
+          constructor(hini,hfin,dias,id){
+        this.hini=hini;
+        this.hfin=hfin;
+        this.dias=dias;
+        // this.salidas=salidas
+        // this.llegadas=llegadas;
+        this.identificadores=identificadores;
+        }
+      }
 
-        //     this.repeticiones = repeticiones;
-        //     for (let index = 0; index < repeticiones; index++) {
+      /*  Se filtran los dias */
+      class FiltroDias{
+        constructor(id,dias){
+          this.id=id;
+          this.dias=dias;
+          dias = Array.from(dias);
+          let diasFiltrados = dias.filter(function(dia){
+            return dia.getAttribute('data-horarioid') == id;
+          }).map(function(dia){
+             return dia.checked?1:0
+          })
+          return diasFiltrados;
+        }
+      }
+      /* Termina el filtrado de dias*/
 
-        //       this.dias = dias.forEach(function(dia){
-        //         let diaData={
-        //         dia: dia.getAttribute('name'),
-        //         value: dia.checked?1:0,
-        //         identificadores: dia.getAttribute('data-horarioid')
-        //       }
-        //       index = diaData;
-        //       const array = []
-            
-        //       if(diaData.identificadores == repeticiones){
-        //         array.push(index)
-        //       }
-        //       arraryDeDias.push(array)
-              
-        //       })
-              
-        //     }
-            
-        //     return arraryDeDias;
-        //   }
-          
-        // }
-        
-        // const diasS = new DiasSeleccionados(diasMultiplesSeleccionados, contador) 
-     
-        //instaciamos un horario dentro de un for 
-        // horasInicio.forEach(function(x){
-        
-        // })
-        // for (let i = 0; i < contador; i++) {
-                
-        //         i = new HorarioMultiple(horasInicio[i].value,horasFin[i].value,diasS)
-        //         ArrayHorariosData.push(i);
-                
-               
-          
-        // }
-        
+      //#### se genera un array con los dias ya separados por hoarios
+      let ArrayDeDIas =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let dias = new FiltroDias(i+1,diasMultiplesSeleccionados)
+        ArrayDeDIas.push(dias)
+      }
+      // console.log(ArrayDeDIas) 
+      //####//aqui ya tengo todos los horarios separados FIN####
 
 
-        
-       
+      // se filtran las horas de inicio de cada horario
+      class HorasInicio {
+        constructor(id,hini){
+          this.hini= hini;
+          this.id=id;
 
-       
-        
-        
-      //   let diasMultiplesData = {}
-      //   function crearHorarioMultuple(contador){
-      //     for (let index = 0; index < contador.length; index++) {
-      //       if(index < contador){
-      //         diasMultiplesData = {
-      //           horainicio:horasInicio,
-      //           horafin:horasFin,
-      //           dias:diasMultiplesSeleccionados,
-      //         };
-      //       } 
-      //     }
-      //   }
-       
-        
-         
-     
-      //  let array = [1,2,3,4,5,6,7,8,9]
-      //  let array2=[]
+          hini=Array.from(hini);
+          let arrayHorasInicio = hini.filter(function(hr){
+            return hr.getAttribute('data-horarioid') ==id;
+          }).map(function(hr){
+            return hr.value;
+          })
+          return arrayHorasInicio
+        }
+      }
       
-      //  for (let index = 0; index < 3; index++) {
-      //    array[0]=horasInicio[index]
-      //    array[1]=horasFin[index]
-      //    diasMultiplesSeleccionados[0].checked?array[2]=1:array[2]=0
-      //    diasMultiplesSeleccionados[1].checked?array[3]=1:array[3]=0
-      //    diasMultiplesSeleccionados[2].checked?array[4]=1:array[4]=0
-      //    diasMultiplesSeleccionados[3].checked?array[5]=1:array[5]=0
-      //    diasMultiplesSeleccionados[4].checked?array[6]=1:array[6]=0
-      //    diasMultiplesSeleccionados[5].checked?array[7]=1:array[7]=0
-      //    diasMultiplesSeleccionados[6].checked?array[8]=1:array[8]=0
-          
-         
-      //    array2.push(array)
-         
-         
-      //  }
-     
+      let ArrayHini =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let hini = new HorasInicio(i+1,horasInicio)
+        
+        ArrayHini.push(hini)
+      }
+      // se filtran las horas de inicio de cada horario FIN####
+      class HorasFin{
+        constructor(id,hfin){
+          this.hfin= hfin;
+          this.id=id;
+
+          hfin=Array.from(hfin);
+          let arrayHorasFin = hfin.filter(function(hr){
+            return hr.getAttribute('data-horarioid') ==id;
+          }).map(function(hr){
+            return hr.value;
+          })
+          return arrayHorasFin
+        }
+      }
+      
+      let ArrayHrFin =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let hfin = new HorasInicio(i+1,horasFin)
+        ArrayHrFin.push(hfin)
+      }
+      console.log(ArrayHrFin)
+
       
 
         //############################################################################################ HORARIO MULTIPLE FIN
