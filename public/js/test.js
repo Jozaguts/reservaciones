@@ -178,10 +178,21 @@ function diarioEntrega(e){
 const addHorarioContanier = document.getElementById('addHorarioContanier')
 const rowContanier = document.getElementById('rowContanier')
 let contador=1;
+
 function addHoraioContainer(){
 // addHorarioContanier.addEventListener('click',(e)=>{
  
 //   e.preventDefault();
+let salidasDOM;
+const xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function(){
+    if(this.readyState==4 && this.status == 200)
+    salidasDOM = JSON.parse(xhr.responseText);
+  }
+
+xhr.open('GET','/salidasllegadas',false)
+xhr.send();
 
   let container= document.createElement('div')
   container.classList = "contanier";
@@ -274,7 +285,7 @@ function addHoraioContainer(){
                             <div class="col-12 ">
                               <div class="row">
                                 <div class="col-6">  <h2 class="lead">Salidas</h2></div>
-                                <div class="col-6">  <h2 class="lead">Llegadas</h2></div>
+                                <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
                               </div>
                             </div>
                           </div>
@@ -285,9 +296,7 @@ function addHoraioContainer(){
                                           <div class="form-group">
                                             <label for="" data-punto="1";>Punto 1</label>
                                             <select class="form-control horario-multiple" name="salidas${contador}" id="salidas${contador}">
-                                            @foreach ($salidasLlegadas as $salidaLlegada)
-                                            <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
-                                                @endforeach
+                                          
                                               </select>
                                           </div>
                                         </div>
@@ -308,10 +317,7 @@ function addHoraioContainer(){
                                         <div class="col-4">
                                             <div class="form-group">
                                               <label for="" data-punto="1";>Punto 1</label>
-                                              <select class="form-control horario-multiple" name="llegada${contador}" id="llegada${contador}">
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
+                                              <select class="form-control horario-multiple" name="llegadas${contador}" id="llegadas${contador}">
                                               </select>
                                             </div>
                                           </div>
@@ -336,6 +342,42 @@ function addHoraioContainer(){
   contador++;
 
 
+let salidasyllegadas = salidasDOM.salidasLlegadas;
+
+  /*SELECT SALIDAS
+  *
+  *
+  * la peticion xhr esta de forma sincrono por eso el retardo al abrir el nuevo horario se peude mejorar con fetch
+  */
+  let selectsSalidasLegadas = document.querySelectorAll('[id^="salidas"]')
+  let selectsSalidasLegadas__llegadas = document.querySelectorAll('[id^="llegadas"]')
+   selectsSalidasLegadas = Array.from(selectsSalidasLegadas)
+   selectsSalidasLegadas__llegadas = Array.from(selectsSalidasLegadas__llegadas)
+
+ 
+  
+  for (let i = 1; i < salidasyllegadas.length; i++) {
+    let option = document.createElement('option');
+    option.value = salidasyllegadas[i].id
+    option.innerHTML =salidasyllegadas[i].direccion;
+    
+    
+    selectsSalidasLegadas.forEach(function(select){
+      select.appendChild(option)
+    })
+  }
+   
+  for (let i = 1; i < salidasyllegadas.length; i++) {
+    let option = document.createElement('option');
+    option.value = salidasyllegadas[i].id
+    option.innerHTML =salidasyllegadas[i].direccion;
+    
+    
+    selectsSalidasLegadas__llegadas.forEach(function(select){
+      select.appendChild(option)
+    })
+  }
+
 }
 
 
@@ -356,7 +398,7 @@ function addpunto(e){
 
 let parent = e.parentElement.parentElement;
 let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
-// let intNumPunto = parseInt(numPunto)+1;
+let intNumPunto = parseInt(numPunto)+1;
 
 
 let row = document.createElement('div');
@@ -632,7 +674,7 @@ countRecolecionLLEGADAS--;
         let dias = new FiltroDias(i+1,diasMultiplesSeleccionados)
         ArrayDeDIas.push(dias)
       }
-      // console.log(ArrayDeDIas) 
+   
       //####//aqui ya tengo todos los horarios separados FIN####
 
 
@@ -679,7 +721,7 @@ countRecolecionLLEGADAS--;
         let hfin = new HorasInicio(i+1,horasFin)
         ArrayHrFin.push(hfin)
       }
-      console.log(ArrayHrFin)
+    
 
       
 
@@ -697,7 +739,7 @@ countRecolecionLLEGADAS--;
         let puntos = datos4.get('puntos')
         let requisito = datos4.get('requisito')
         let observaciones = datos4.get('observaciones')
-        console.log(riesgo,puntos,requisito,observaciones)
+        
 
         // console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
         // montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}  datos Persona = ${datosPersonas}, balance = ${balance}, Precio = ${precio} Libre = ${libre} dias Seleccionandos = ${diasSeleccionados}` )

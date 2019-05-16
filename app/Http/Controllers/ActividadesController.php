@@ -284,4 +284,12 @@ class ActividadesController extends Controller
     {
         //
     }
+    public function salidasllegadas(Request $request)
+    {
+        $salidasLlegadas = SalidasLlegadas::all();
+
+     
+            return compact('salidasLlegadas');
+        
+    }
 }
