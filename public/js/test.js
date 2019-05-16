@@ -685,7 +685,19 @@ countRecolecionLLEGADAS--;
 
         //############################################################################################ HORARIO MULTIPLE FIN
 
-
+        // PESTAÑA 4 INICIO
+        const formGenerales = document.getElementById('formGenerales')
+        const datos4 = new FormData(formGenerales)
+        let riesgo = datos4.get('riesgo')
+        if(riesgo==null){
+          riesgo =0;
+        }else if(riesgo.checked){
+          riesgo =1;
+        }
+        let puntos = datos4.get('puntos')
+        let requisito = datos4.get('requisito')
+        let observaciones = datos4.get('observaciones')
+        console.log(riesgo,puntos,requisito,observaciones)
 
         // console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
         // montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}  datos Persona = ${datosPersonas}, balance = ${balance}, Precio = ${precio} Libre = ${libre} dias Seleccionandos = ${diasSeleccionados}` )
@@ -718,7 +730,11 @@ countRecolecionLLEGADAS--;
             datosPersonas:datosPersonas,
             diasSeleccionados:diasSeleccionados,
             salidas:salidaFijo,
-            llegadas:llegadasFijo
+            llegadas:llegadasFijo,
+            riesgo:riesgo,
+            puntos:puntos,
+            requisito:requisito,
+            observaciones:observaciones
         },
 
         success: function (data) {

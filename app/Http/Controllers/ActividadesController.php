@@ -74,11 +74,11 @@ class ActividadesController extends Controller
                 'combo' =>['boolean','nullable'],
                 'observaciones' =>['nullable','string'], 
                 'requisitos' =>['nullable','string'],
-                'riesgo' =>['nullable','string','max:45'],
+                'riesgo' =>['nullable','boolean'],
                 'puntos' =>['nullable','integer'],
                 'libre'=> ['boolean'],
-                'salidas'=>['integer', 'required'],
-                'llegadas'=>['integer','required'] 
+                'salidas'=>['integer', 'nullable'],
+                'llegadas'=>['integer','nullable'] 
                
             ];
        
@@ -133,10 +133,10 @@ class ActividadesController extends Controller
                         'balance' => $request->get('balance'),
                         'promocion' => 0,
                         'combo' => 0,
-                        'observaciones' => 'Observacion por Default', 
-                        'requisitos' => 'Requisitos por default',
-                        'riesgo' => 'Riesgos por Default',
-                        'puntos' => 1,
+                        'observaciones' => $request->get('observaciones'),
+                        'requisitos' => $request->get('requisito'),
+                        'riesgo' => $request->get('riesgo'),
+                        'puntos' => $request->get('puntos'),
                         'libre'=> $request->get('libre'),
                         
                          

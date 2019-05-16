@@ -475,14 +475,14 @@
                           </div>
                           {{-- 4ta --}}
                           <div class="tab-pane fade" id="generales" role="tabpanel" aria-labelledby="generales-tab">
-                              <form action=""{{url('actividades')}} method="post" id="generales">
+                              <form action=""{{url('actividades')}} method="post" id="formGenerales">
                           <div class="container mt-2">
                            <div class="row mt-5">
                             <div class="col-6">
                                 <label for=""  class="form-label pull-right">Actividad de Alto Riesgo</label>
                             </div>
                             <div class="col-2 ">
-                                <input type="checkbox" name="" id="" class="form-control pull-left" placeholder="" aria-describedby="helpId">
+                                <input type="checkbox" name="riesgo" id="riesgo" class="form-control pull-left" value="1">
                             </div> 
                            </div>
                            <div class="row mt-5">
@@ -490,7 +490,8 @@
                               <label for=""  class="form-label pull-right">Puntos Acumulables</label>
                           </div>
                           <div class="col-2 ">
-                            <input type="input" name="" id="" class="form-control pull-left" placeholder="" aria-describedby="helpId">
+                              
+                            <input type="text" name="puntos" id="puntos" class="form-control pull-left" placeholder="" aria-describedby="helpId"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             <small>Clientes</small>
                         </div>
                            </div>
@@ -499,7 +500,7 @@
                               <label for=""  class="form-label pull-right">Requisitos o Tips</label>
                           </div>
                           <div class="col-4 ">
-                            <textarea name="" id="" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                            <textarea name="requisito" id="requisito" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
                           
                         </div>
                            </div>
@@ -508,7 +509,7 @@
                                 <label for=""  class="form-label pull-right">Observaciones Espesiales</label>
                             </div>
                             <div class="col-4 ">
-                              <textarea name="" id="" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                              <textarea name="observaciones" id="observaciones" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
                             
                           </div>
                              </div>

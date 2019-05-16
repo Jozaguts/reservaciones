@@ -26,13 +26,13 @@ class CreateActividadesTable extends Migration
             $table->double('montoincremento')->nullable();
             $table->boolean('promocion');
             $table->boolean('combo');
-            $table->string('observaciones');
-            $table->string('requisitos');
+            $table->string('observaciones');//4ta pestaña
+            $table->string('requisitos'); //4ta pestaña
             $table->integer('maxcortesias')->nullable();
             $table->integer('duracion')->nullable()->comment('si esta nulo acepta multiples horarios');
             $table->integer('maxcupones')->nullable();
-            $table->string('riesgo', 45);      
-            $table->integer('puntos');  
+            $table->boolean('riesgo');      //cambio de string a boolean
+            $table->integer('puntos');  //4ta pestaña
             $table->boolean('libre');
             $table->boolean('active');
             $table->boolean('remove');     
