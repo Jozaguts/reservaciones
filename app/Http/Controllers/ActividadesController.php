@@ -51,7 +51,7 @@ class ActividadesController extends Controller
     public function store(Request $request)
     {
        
-        // dd($request->ArrayDeDIas[0][0],$request->ArrayDeDIas[1][0]);
+        
             //reglas de validacion
              $rules =[
                 'clave' => ['required', 'string', 'min:5','unique:actividades'],
@@ -104,7 +104,7 @@ class ActividadesController extends Controller
                 if($request->libre == 1){ //SI LIBRE ESTA CHECKEADO  ### SI SON HORARIOS ABIERTOS ###
                     $count = count($request->diasSeleccionados);
                     if($request->duracion == null){
-                        $message ='El Campo Duración Debe Contener Información ';
+                        $message ='El Campo Duración Debe Contener Información';
                        return response()->json(['error'=> 'true','errors'=> $message]);
                     }
                     if($count==0){ //valido que al menos 1 dia este seleccionado si no hay checkeados mando el aviso
@@ -227,12 +227,17 @@ class ActividadesController extends Controller
 
 
 
-                   
+                         return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 'status' => 200]);
                  }
-                 return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
+                
                     
                 }else{
-                   //si al menos hay uno chekeado guardo en DB
+                    if($request->libre == 0){ //valido si no hay checkeados mando el aviso
+                        if (count($request->ArrayDeDIas) == 0) {
+                            $message ='Al Menos Debes de Crear o Seleccionar un Horario';
+                            return response()->json(['error'=> 'true','errors'=> $message]);
+                        }else{
+                    //si al menos hay uno chekeado guardo en DB
                    $actividad = Actividades::create([
                     'clave' => $request->get('clave'),
                     'nombre' => $request->get('nombre'),
@@ -306,8 +311,8 @@ class ActividadesController extends Controller
             $count2 = count($request->ArrayDeDIas);
       
                 for ($i=0; $i <$count2 ; $i++) { 
-                    // var_dump($request->ArrayDeDIas[0][0]);
-                    var_dump($i);
+                    
+                    
                     $ActividadesHorario = ActividadesHorario::create(
                         [
                         'actividades_id' => $actividad->id,
@@ -325,14 +330,56 @@ class ActividadesController extends Controller
                         'usuarios_id'=> $request->get('idusuario')                            
                         ]
                     );
-                    // $ActividadesHorario->save();
-                }
-                                        
-                }
-                   
-             }
              
+                }
+
+                for ($i=0; $i <count($request->salidasSeleccionadas) ; $i++) { 
+                    
+                    $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
+                        ['actividadeshorario_id' => $ActividadesHorario->id,
+                        'salidallegadas_id' => $request->salidasSeleccionadas[$i][0],
+                        'salida' =>1  , 
+                        'hora' =>null,
+                        // 'salida' =>1,
+                         'active' =>1,
+                         'remove' =>0,                        
+                         'usuarios_id' => $request->get('idusuario'),
+                        ]
+                    
+                    );
+                    
+                }
+                for ($i=0; $i <count($request->llegadasSelecciondas); $i++) { 
+                $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::create(
+                    ['actividadeshorario_id' => $ActividadesHorario->id,
+                    'salidallegadas_id' => $request->llegadasSelecciondas[$i][0],
+                    'salida'=>0, 
+                    'hora' =>null,
+                    // 'salida' =>0,
+                     'active' =>1,
+                     'remove' =>0,                        
+                     'usuarios_id' => $request->get('idusuario'),
+                    ]
+                
+                );
+                
+                
+            }
+            return response()->json(['ok'=>'Actividad Agregada Correctamente']);
+            }
+         
+                   
+                    }
+                    
+                  
+            
+            
+                }
+               
+             }
+           
          }
+
     }
 
     /**

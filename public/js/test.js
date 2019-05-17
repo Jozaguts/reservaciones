@@ -93,10 +93,11 @@ if(checkLibre.checked){
 // duracion.disabled = false;
 // entrega.disabled = false;
 // entrega.checked=false;
+disabledHOrarioMultiple();
 salidas.disabled = false;
 llegadas.disabled = false;
 checkDiario.disabled =false;
-disabledHOrarioMultiple();
+
 // checks horarios
 const id = e.target.getAttribute('data-id')
 
@@ -108,6 +109,7 @@ checkboks.forEach(function(checkbox){
 }else{
 // duracion.disabled = true;
 // entrega.disabled = true;
+enableddHOrarioMultiple();
 salidas.disabled = true;
 llegadas.disabled = true;
 checkDiario.disabled =true;
@@ -118,7 +120,7 @@ checkDiario.disabled =true;
   checkboks.forEach(function(checkbox){
     checkbox.checked = false;
     checkbox.disabled = true;
-    enableddHOrarioMultiple();
+    
     })
 
 }
@@ -706,7 +708,7 @@ countRecolecionLLEGADAS--;
         let dias = new FiltroDias(i+1,diasMultiplesSeleccionados)
         ArrayDeDIas.push(dias)
       }
-      console.log(ArrayDeDIas)
+  
      
    
       //####//aqui ya tengo todos los horarios separados FIN####
@@ -883,6 +885,7 @@ countRecolecionLLEGADAS--;
               // setTimeout("location.reload(true);",3000)
               
           }else{
+            co
             $('#successIntoModal').html(data.ok);
               $('#message-successIntoModal').fadeIn();
               setTimeout(() => {
