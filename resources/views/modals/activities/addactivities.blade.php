@@ -478,15 +478,15 @@
                               <form action=""{{url('actividades')}} method="post" id="formGenerales">
                           <div class="container mt-2">
                            <div class="row mt-5">
-                            <div class="col-6">
+                            <div class="col-3">
                                 <label for=""  class="form-label pull-right">Actividad de Alto Riesgo</label>
                             </div>
                             <div class="col-2 ">
-                                <input type="checkbox" name="riesgo" id="riesgo" class="form-control pull-left" value="1">
+                                <input type="checkbox" name="riesgo" id="riesgo" class="pull-left" value="1">
                             </div> 
                            </div>
                            <div class="row mt-5">
-                            <div class="col-6">
+                            <div class="col-3">
                               <label for=""  class="form-label pull-right">Puntos Acumulables</label>
                           </div>
                           <div class="col-2 ">
@@ -496,19 +496,19 @@
                         </div>
                            </div>
                            <div class="row mt-5">
-                            <div class="col-6">
+                            <div class="col-3">
                               <label for=""  class="form-label pull-right">Requisitos o Tips</label>
                           </div>
-                          <div class="col-4 ">
+                          <div class="col-8 ">
                             <textarea name="requisito" id="requisito" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
                           
                         </div>
                            </div>
                            <div class="row mt-5">
-                              <div class="col-6">
+                              <div class="col-3">
                                 <label for=""  class="form-label pull-right">Observaciones Espesiales</label>
                             </div>
-                            <div class="col-4 ">
+                            <div class="col-6 ">
                               <textarea name="observaciones" id="observaciones" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
                             
                           </div>
