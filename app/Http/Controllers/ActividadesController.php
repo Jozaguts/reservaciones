@@ -50,8 +50,9 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-        
-                     //reglas de validacion
+       
+        // dd($request->ArrayDeDIas[0][0],$request->ArrayDeDIas[1][0]);
+            //reglas de validacion
              $rules =[
                 'clave' => ['required', 'string', 'min:5','unique:actividades'],
                 'nombre' => ['required', 'string', 'max:255'],
@@ -231,7 +232,101 @@ class ActividadesController extends Controller
                  return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
                     
                 }else{
-                    //#######################
+                   //si al menos hay uno chekeado guardo en DB
+                   $actividad = Actividades::create([
+                    'clave' => $request->get('clave'),
+                    'nombre' => $request->get('nombre'),
+                    'tipoactividades_id'=> $request->get('tipoactividades_id'),
+                    'fijo'=> $request->get('fijo'),
+                    'renta' => $request->get('renta'),
+                    'active'=> $request->get('active'),
+                    'remove' => $request->get('remove'),
+                    'duracion' => $request->get('duracion'),
+                    'minutoincrementa'=>$request->get('minutoincrementa'),
+                    'montoincremento'=>$request->get('montoincremento'),
+                    'maxcortesias'=>$request->get('maxcortesias'),
+                    'maxcupones'=>$request->get('maxcupones'),
+                    'anticipo_id'=>$request->get('anticipo_id'),
+                    'idusuario'=> $request->get('idusuario'),
+                    'tipounidades_id' => $tipoActividad->tipoUnidad->id, 
+                    'precio' => $request->get('precio'),
+                    'balance' => $request->get('balance'),
+                    'promocion' => 0,
+                    'combo' => 0,
+                    'observaciones' => $request->get('observaciones'),
+                    'requisitos' => $request->get('requisito'),
+                    'riesgo' => $request->get('riesgo'),
+                    'puntos' => $request->get('puntos'),
+                    'libre'=> $request->get('libre'),
+                    
+                     
+                 ]);
+                 $datosPersonas = $request->datosPersonas;
+            
+             foreach ($datosPersonas as $datoPersona ) {
+                 if($datoPersona['acompanante'] == 'null') {
+                  
+                    $datoPersona['acompanante'] = 0;
+                 }
+                 if($datoPersona['restriccion'] == 'null') {
+                  
+                    $datoPersona['restriccion'] = 0;
+                 }
+                 if($datoPersona['promocion'] == 'null') {
+                  
+                    $datoPersona['promocion'] = 0;
+                 }
+                 
+
+                $actividadPrecio = ActividadPrecios::firstOrCreate(
+                    ['actividades_id' => $actividad->id, 'persona_id' => $datoPersona['persona_id']  ], 
+                    [
+                       'precio1' => $datoPersona['precio1'],
+                       'precio2'=> $datoPersona['precio2'],
+                       'precio3'=> $datoPersona['precio3'],
+                       'doble'=> $datoPersona['doble'],
+                       'doblebalanc'=> $datoPersona['doblebalanc'],
+                       'triple'=> $datoPersona['triple'],
+                       'triplebalanc'=> $datoPersona['triplebalanc'],
+                       'promocion'=> $datoPersona['promocion'],
+                       'restriccion'=> $datoPersona['restriccion'],
+                       'active'=> $datoPersona['active'],
+                       'acompanante'=> $datoPersona['acompanante'],
+                       'remove'=> $datoPersona['remove'],
+                       'usuarios_id'=> $request->get('idusuario'),
+                    ]
+                );
+                $actividadPrecio->save();
+
+                
+
+
+
+            }
+            $count2 = count($request->ArrayDeDIas);
+      
+                for ($i=0; $i <$count2 ; $i++) { 
+                    // var_dump($request->ArrayDeDIas[0][0]);
+                    var_dump($i);
+                    $ActividadesHorario = ActividadesHorario::create(
+                        [
+                        'actividades_id' => $actividad->id,
+                        'hini' => $request->ArrayHini[$i][0],
+                        'hfin' => $request->ArrayHrFin[$i][0],
+                        'l'=> $request->ArrayDeDIas[$i][0],
+                        'm'=> $request->ArrayDeDIas[$i][1],
+                        'x'=> $request->ArrayDeDIas[$i][2],
+                        'j'=> $request->ArrayDeDIas[$i][3],
+                        'v'=> $request->ArrayDeDIas[$i][4],
+                        's'=> $request->ArrayDeDIas[$i][5],
+                        'd'=> $request->ArrayDeDIas[$i][6],
+                        'active'=> 1,
+                        'remove'=>0,
+                        'usuarios_id'=> $request->get('idusuario')                            
+                        ]
+                    );
+                    // $ActividadesHorario->save();
+                }
                                         
                 }
                    

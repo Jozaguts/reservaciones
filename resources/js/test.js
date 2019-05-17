@@ -625,6 +625,7 @@ countRecolecionLLEGADAS--;
 
     const salidaFijo = document.getElementById('salidas').value;
     const llegadasFijo = document.getElementById('llegadas').value;
+ 
       
 
         // ########################################################################################### PESTAÑA 3 FIN
@@ -634,12 +635,43 @@ countRecolecionLLEGADAS--;
 
         const horasInicio = document.querySelectorAll('[id^="horainicio"]');
         const horasFin = document.querySelectorAll('[id^="horafin"]');
-        const salidas = document.querySelectorAll('[id^="horafin"]');
-        const llegadas = document.querySelectorAll('[id^="horafin"]');
+        const salidas = document.querySelectorAll('[id^="salidas"]');
+        const salidasSeleccionadas = [];
+        const llegadas = document.querySelectorAll('[id^="llegadas"]');
+        const llegadasSelecciondas = [];
         const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
         const identificadores = document.querySelectorAll('#titulo');
         let vueltas =diasMultiplesSeleccionados.length;
-        let horariosData=[];
+        
+
+
+        // ## obtengo solo las salidas Seleccionas ID ##
+        salidas.forEach(function(salida,index){
+          if(index>0){
+            let salidaS = salida.options[salida.selectedIndex].value;
+            let integerSalida = parseInt(salidaS)
+            salidasSeleccionadas.push(integerSalida)
+          
+          }
+      
+          
+        })
+        
+        // ## obtengo salo las llegas selecciondas ID ##
+
+        llegadas.forEach(function(llegada,index){
+          if(index>0){
+            let llegadaS = llegada.options[llegada.selectedIndex].value;
+            let integerLlegada = parseInt(llegadaS)
+            llegadasSelecciondas.push(integerLlegada)
+          
+          }
+      
+          
+        })
+     
+        
+     
  
         class Horarios{
           constructor(hini,hfin,dias,id){
@@ -674,6 +706,8 @@ countRecolecionLLEGADAS--;
         let dias = new FiltroDias(i+1,diasMultiplesSeleccionados)
         ArrayDeDIas.push(dias)
       }
+      console.log(ArrayDeDIas)
+     
    
       //####//aqui ya tengo todos los horarios separados FIN####
 
@@ -718,11 +752,62 @@ countRecolecionLLEGADAS--;
       
       let ArrayHrFin =[];
       for (let i = 0; i < identificadores.length; i++) {
-        let hfin = new HorasInicio(i+1,horasFin)
+        let hfin = new HorasFin(i+1,horasFin)
         ArrayHrFin.push(hfin)
       }
     
 
+      // ## puntos de salida ##
+        
+      class PuntosSalida{
+        constructor(id,puntosS){
+          this.id= id;
+          this.puntosS=puntosS;
+
+          this.puntosS =Array.from(puntosS);
+          let arrayPuntosS = puntosS.filter(function(puntoS){
+          
+
+          })
+        }
+      }
+
+
+      // class Insertar{
+      //   constructor(arrayDias){
+      //    this.arrayDias=arrayDias 
+      //   }
+
+      //   RecorreArray(arrayDias,hini){
+      //     this.arrayDias=arrayDias;
+      //     this.hini = hini;
+       
+
+
+      //     for (let i = 0; i < arrayDias.length; i++) {
+      //       this.InsertaHorario(arrayDias[i],hini[i]);
+
+      //       console.log(arrayDias[i])
+
+
+            
+      //     }
+      //   }
+
+
+      //   InsertaHorario(array,hini){
+      //     this.array=array;
+      //     this.hini = hini;
+      //     // console.log(string)
+      //   }
+      // }
+      // const ins = new Insertar(ArrayDeDIas)
+      // const recor = ins.RecorreArray(ArrayDeDIas,ArrayHini) 
+      // const horariosData = ins.InsertaHorario
+      // console.log(recor)
+
+
+    
       
 
         //############################################################################################ HORARIO MULTIPLE FIN
@@ -776,7 +861,12 @@ countRecolecionLLEGADAS--;
             riesgo:riesgo,
             puntos:puntos,
             requisito:requisito,
-            observaciones:observaciones
+            observaciones:observaciones,
+            ArrayDeDIas:ArrayDeDIas,
+            ArrayHrFin:ArrayHrFin,
+            ArrayHini:ArrayHini,
+            llegadasSelecciondas:llegadasSelecciondas,
+            salidasSeleccionadas:salidasSeleccionadas
         },
 
         success: function (data) {
