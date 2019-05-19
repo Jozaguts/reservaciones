@@ -21,7 +21,7 @@
                                 {{-- columna y boton --}}
                                
                                 <div class="colum-container">
-                                <a href="#!"id="btn{{($tipoactividad->nombre)}}" style="background-color:{{$tipoactividad->color}}" class="btn btn-info mx-3 my-3" onclick="showContent(this);">{{($tipoactividad->nombre)}} / {{($tipoactividad->clave)}} / {{($tipoactividad->TipoUnidad->nombre)}}</a>
+                                <a href="#!"id="btn{{($tipoactividad->nombre)}}" style="background-color:{{$tipoactividad->color}}" class="btn btn-info mx-3 my-3 btn-actividades font-weight-bolder" onclick="showContent(this);">{{($tipoactividad->nombre)}} / {{($tipoactividad->clave)}} / {{($tipoactividad->TipoUnidad->nombre)}}</a>
                            
                                    
                                 <div class="row d-none" id="{{($tipoactividad->nombre)}}Content">

@@ -50,7 +50,7 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-       
+       dd($request->arrayPuntosLlegada);
         
             //reglas de validacion
              $rules =[
@@ -332,8 +332,8 @@ class ActividadesController extends Controller
                     );
              
                 }
-
-                for ($i=0; $i <count($request->salidasSeleccionadas) ; $i++) { 
+               
+                for ($i=0; $i <count($request->arrayPuntosLlegada) ; $i++) { 
                     
                     $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
                         ['actividadeshorario_id' => $ActividadesHorario->id,

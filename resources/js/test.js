@@ -1,3 +1,9 @@
+// mostrar contenido de los boones
+showContent = function (e){
+  e.nextSibling.nextSibling.classList.contains('d-none')?e.nextSibling.nextSibling.classList.toggle('show')&&e.nextSibling.nextSibling.classList.remove('d-none'):e.nextSibling.nextSibling.classList.add('d-none')
+}
+
+
 //check restriciopn y acompañante
 
 habilitarAcompnante = (e)=>{
@@ -51,17 +57,17 @@ panelsMOdal.forEach((panel)=>{
 const generalInputs = document.querySelectorAll('.general')
 function checkEmpty(){
 
-let contador =0;
+let checkemptycontador =0;
 generalInputs.forEach((input)=>{
   if(input.value.length>0){
     
-    contador++;
+    checkemptycontador++;
 
-   return contador;
+   return checkemptycontador;
   } 
   
   })
- if(contador>2){
+ if(checkemptycontador>2){
   let confirmar = confirm('No has Guardado los Cambios, ¿Deseas Continuar?')
   if(confirmar==true){
     $('#addActivities').modal('hide');
@@ -179,12 +185,8 @@ function diarioEntrega(e){
 
 const addHorarioContanier = document.getElementById('addHorarioContanier')
 const rowContanier = document.getElementById('rowContanier')
-let contador=1;
+let contador=0;
 
-function addHoraioContainer(){
-// addHorarioContanier.addEventListener('click',(e)=>{
- 
-//   e.preventDefault();
 let salidasDOM;
 const xhr = new XMLHttpRequest();
 
@@ -196,6 +198,14 @@ const xhr = new XMLHttpRequest();
 xhr.open('GET','/salidasllegadas',false)
 xhr.send();
 
+let salidasyllegadas = salidasDOM.salidasLlegadas; 
+
+function addHoraioContainer(){
+// addHorarioContanier.addEventListener('click',(e)=>{
+ 
+//   e.preventDefault();
+
+  contador++;
   let container= document.createElement('div')
   container.classList = "contanier";
   container.innerHTML= `
@@ -297,7 +307,7 @@ xhr.send();
                                       <div class="col-4">
                                           <div class="form-group">
                                             <label for="" data-punto="1";>Punto 1</label>
-                                            <select class="form-control horario-multiple" name="salidas${contador}" id="salidas${contador}">
+                                            <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
                                           
                                               </select>
                                           </div>
@@ -319,7 +329,7 @@ xhr.send();
                                         <div class="col-4">
                                             <div class="form-group">
                                               <label for="" data-punto="1";>Punto 1</label>
-                                              <select class="form-control horario-multiple" name="llegadas${contador}" id="llegadas${contador}">
+                                              <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
                                               </select>
                                             </div>
                                           </div>
@@ -341,15 +351,15 @@ xhr.send();
   `;
   rowContanier.appendChild(container);
 
-  contador++;
+  
 
 
-let salidasyllegadas = salidasDOM.salidasLlegadas;
+
 
   /*SELECT SALIDAS
   *
   *
-  * la peticion xhr esta de forma sincrono por eso el retardo al abrir el nuevo horario se peude mejorar con fetch
+  * la peticion xhr esta de forma sincrona por eso el retardo al abrir el nuevo horario se peude mejorar con fetch
   */
   let selectsSalidasLegadas = document.querySelectorAll('[id^="salidas"]')
   let selectsSalidasLegadas__llegadas = document.querySelectorAll('[id^="llegadas"]')
@@ -412,10 +422,8 @@ row.innerHTML=`
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecion}">Punto ${countRecolecion}</label>
-      <select class="form-control" name="" id="">
-        <option></option>
-        <option></option>
-        <option></option>
+      <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
+                                          
       </select>
     </div>
   </div>
@@ -437,6 +445,27 @@ row.innerHTML=`
 parent.appendChild(row);
 intNumPunto++;
 countRecolecion++;
+
+let selectsSalidasLegadas = document.querySelectorAll('[id^="salidas"]')
+
+   selectsSalidasLegadas = Array.from(selectsSalidasLegadas)
+
+
+ 
+  
+  for (let i = 1; i < salidasyllegadas.length; i++) {
+    let option = document.createElement('option');
+    option.value = salidasyllegadas[i].id
+    option.innerHTML =salidasyllegadas[i].direccion;
+    
+    
+    selectsSalidasLegadas.forEach(function(select){
+      select.appendChild(option)
+    })
+  }
+   
+
+
 }
 
 // funcion remover punto
@@ -467,10 +496,8 @@ row.innerHTML=`
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecionLLEGADAS}">Punto ${countRecolecionLLEGADAS}</label>
-      <select class="form-control" name="" id="">
-        <option></option>
-        <option></option>
-        <option></option>
+      <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}" data-horarioid="${contador}"
+      >
       </select>
     </div>
   </div>
@@ -492,6 +519,27 @@ row.innerHTML=`
 parent.appendChild(row);
 intNumPunto++;
 countRecolecionLLEGADAS++;
+
+  let selectsSalidasLegadas__llegadas = document.querySelectorAll('[id^="llegadas"]')
+  
+   selectsSalidasLegadas__llegadas = Array.from(selectsSalidasLegadas__llegadas)
+
+ 
+  
+
+   
+  for (let i = 1; i < salidasyllegadas.length; i++) {
+    let option = document.createElement('option');
+    option.value = salidasyllegadas[i].id
+    option.innerHTML =salidasyllegadas[i].direccion;
+    
+    
+    selectsSalidasLegadas__llegadas.forEach(function(select){
+      select.appendChild(option)
+    })
+  }
+
+
 }
 
 // funcion remover punto
@@ -524,8 +572,21 @@ countRecolecionLLEGADAS--;
         let anticipoid= datos.get('anticipo_id')
         let idusuario = datos.get('idusuario')
         let checkFijo = datos.get('fijo')
+        let fijoValue;
+        if(checkFijo==null){
+          fijoValue=0;
+        }else{
+          fijoValue=1;
+        }
         let checkRenta = datos.get('renta')
-
+        let rentaValue;
+        if(checkRenta==null){
+          rentaValue=0;
+        }else{
+          rentaValue=1;
+        }
+         
+         
          // ############################################################################################### PESTAÑA 1 FIN
 
         //  INICIO PESTAÑA 2 ############################################################################################
@@ -637,9 +698,9 @@ countRecolecionLLEGADAS--;
 
         const horasInicio = document.querySelectorAll('[id^="horainicio"]');
         const horasFin = document.querySelectorAll('[id^="horafin"]');
-        const salidas = document.querySelectorAll('[id^="salidas"]');
+        // const salidas = document.querySelectorAll('[id^="salidas"]');
         const salidasSeleccionadas = [];
-        const llegadas = document.querySelectorAll('[id^="llegadas"]');
+        // const llegadas = document.querySelectorAll('[id^="llegadas"]');
         const llegadasSelecciondas = [];
         const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
         const identificadores = document.querySelectorAll('#titulo');
@@ -648,29 +709,28 @@ countRecolecionLLEGADAS--;
 
 
         // ## obtengo solo las salidas Seleccionas ID ##
-        salidas.forEach(function(salida,index){
-          if(index>0){
-            let salidaS = salida.options[salida.selectedIndex].value;
-            let integerSalida = parseInt(salidaS)
-            salidasSeleccionadas.push(integerSalida)
+        // salidas.forEach(function(salida,index){
+        //   if(index>0){
+        //     let salidaS = salida.options[salida.selectedIndex].value;
+        //     let integerSalida = parseInt(salidaS)
+        //     salidasSeleccionadas.push(integerSalida)
           
-          }
-      
-          
-        })
+        //   }
+        // })
         
         // ## obtengo salo las llegas selecciondas ID ##
 
-        llegadas.forEach(function(llegada,index){
-          if(index>0){
-            let llegadaS = llegada.options[llegada.selectedIndex].value;
-            let integerLlegada = parseInt(llegadaS)
-            llegadasSelecciondas.push(integerLlegada)
+        // llegadas.forEach(function(llegada,index){
+        //   if(index>0){
+        //     let llegadaS = llegada.options[llegada.selectedIndex].value;
+        //     let integerLlegada = parseInt(llegadaS)
+        //     llegadasSelecciondas.push(integerLlegada)
           
-          }
+        //   }
       
           
-        })
+        // })
+        console.log(llegadasSelecciondas)
      
         
      
@@ -760,56 +820,57 @@ countRecolecionLLEGADAS--;
     
 
       // ## puntos de salida ##
-        
+        const puntosSalida = document.querySelectorAll('.select-multiple__salidas');
+     
       class PuntosSalida{
-        constructor(id,puntosS){
-          this.id= id;
-          this.puntosS=puntosS;
-
-          this.puntosS =Array.from(puntosS);
-          let arrayPuntosS = puntosS.filter(function(puntoS){
-          
-
-          })
+          constructor(id,puntos){
+            this.puntos= puntos;
+            this.id=id;
+  
+            puntos=Array.from(puntos);
+            let arraypuntos = puntos.filter(function(punto){
+              return punto.getAttribute('data-horarioid') ==id;
+            }).map(function(punto){
+              return punto.value;
+            })
+            return arraypuntos
+          }
         }
+        let arrayPuntosSalida =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let puntos = new PuntosSalida(i+1,puntosSalida)
+        arrayPuntosSalida.push(puntos)
       }
-
-
-      // class Insertar{
-      //   constructor(arrayDias){
-      //    this.arrayDias=arrayDias 
-      //   }
-
-      //   RecorreArray(arrayDias,hini){
-      //     this.arrayDias=arrayDias;
-      //     this.hini = hini;
-       
-
-
-      //     for (let i = 0; i < arrayDias.length; i++) {
-      //       this.InsertaHorario(arrayDias[i],hini[i]);
-
-      //       console.log(arrayDias[i])
-
-
-            
-      //     }
-      //   }
-
-
-      //   InsertaHorario(array,hini){
-      //     this.array=array;
-      //     this.hini = hini;
-      //     // console.log(string)
-      //   }
-      // }
-      // const ins = new Insertar(ArrayDeDIas)
-      // const recor = ins.RecorreArray(ArrayDeDIas,ArrayHini) 
-      // const horariosData = ins.InsertaHorario
-      // console.log(recor)
-
-
     
+
+       // ## puntos de salida ##
+       const puntosllegadas = document.querySelectorAll('.select-multiple__llegadas');
+      
+     
+       class PuntosLlegadas{
+           constructor(id,puntos){
+             this.puntos= puntos;
+             this.id=id;
+   
+             puntos=Array.from(puntos);
+             let arraypuntos = puntos.filter(function(punto){
+               return punto.getAttribute('data-horarioid') ==id;
+             }).map(function(punto){
+               return punto.value;
+             })
+             return arraypuntos
+           }
+         }
+         let arrayPuntosLlegada =[];
+       for (let i = 0; i < identificadores.length; i++) {
+         let puntos = new PuntosLlegadas(i+1,puntosllegadas)
+         arrayPuntosLlegada.push(puntos)
+       }
+      
+
+
+
+   
       
 
         //############################################################################################ HORARIO MULTIPLE FIN
@@ -844,8 +905,8 @@ countRecolecionLLEGADAS--;
             remove:remove,
             tipoactividades_id: tipoactividadesid,
             tipounidades_id:tipoUnidadId,
-            fijo:checkFijo,
-            renta:checkRenta,
+            fijo:fijoValue,
+            renta:rentaValue,
             duracion:duracion,
             minutoincrementa:minutoincrementa,
             montoincremento:montoincremento,
@@ -867,8 +928,11 @@ countRecolecionLLEGADAS--;
             ArrayDeDIas:ArrayDeDIas,
             ArrayHrFin:ArrayHrFin,
             ArrayHini:ArrayHini,
-            llegadasSelecciondas:llegadasSelecciondas,
-            salidasSeleccionadas:salidasSeleccionadas
+            // llegadasSelecciondas:llegadasSelecciondas,
+            // salidasSeleccionadas:salidasSeleccionadas,
+            arrayPuntosLlegada:arrayPuntosLlegada,
+            arrayPuntosSalida:arrayPuntosSalida
+
         },
 
         success: function (data) {
