@@ -218,7 +218,7 @@ function addHoraioContainer(){
       </a>
     </div>
     <div class="col-4">
-    <p class="lead titulo-horario-multiple" data-identificadores="${contador}" id="titulo">Horario ${contador}</p>
+    <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="titulo">Horario ${contador}</label>
     </div>
   </div>
   <div class="row">
@@ -315,7 +315,7 @@ function addHoraioContainer(){
                                         <div class="col-4">
                                           <div class="form-group">
                                             <label for="">Hora</label>
-                                            <input type="time" class="form-control horario-multiple" name="salidahora${contador}" id="salidahora${contador}" aria-describedby="helpId" placeholder="">
+                                            <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
                                           </div>
                                           
                                         </div>
@@ -336,7 +336,7 @@ function addHoraioContainer(){
                                           <div class="col-4">
                                             <div class="form-group">
                                               <label for="">Hora</label>
-                                              <input type="time" class="form-control horario-multiple" name="llegadahora${contador}" id="llegada${contador}" aria-describedby="helpId" placeholder="">
+                                              <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
                                             </div>
                                             
                                           </div>
@@ -430,7 +430,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+      <input type="time" class="form-control hora-salida" name="" id="" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
     </div>
     
   </div>
@@ -504,7 +504,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+      <input type="time" class="form-control hora-llegada" name="" id=""  data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
     </div>
     
   </div>
@@ -730,7 +730,7 @@ countRecolecionLLEGADAS--;
       
           
         // })
-        console.log(llegadasSelecciondas)
+    
      
         
      
@@ -867,7 +867,17 @@ countRecolecionLLEGADAS--;
          arrayPuntosLlegada.push(puntos)
        }
       
+       //HORAS
+      //  #### SALIDAS #####
+      let horasSalidas = document.querySelectorAll('.hora-salida')
+      let horasLlegada = document.querySelectorAll('.hora-llegada')
 
+      horasSalidas = Array.from(horasSalidas)
+      horasLlegada = Array.from(horasLlegada)
+
+
+
+      console.log(horasSalidas,horasLlegada)
 
 
    
