@@ -50,7 +50,7 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-       dd($request->arrayPuntosLlegada);
+       
         
             //reglas de validacion
              $rules =[
@@ -330,29 +330,30 @@ class ActividadesController extends Controller
                         'usuarios_id'=> $request->get('idusuario')                            
                         ]
                     );
-             
-                }
-               
-                for ($i=0; $i <count($request->arrayPuntosLlegada) ; $i++) { 
+            //  entran los puntos de llegada
+           
+            for ($j=0; $j <count($request->arrayPuntosLlegada) ; $j++) { 
                     
-                    $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
-                        ['actividadeshorario_id' => $ActividadesHorario->id,
-                        'salidallegadas_id' => $request->salidasSeleccionadas[$i][0],
-                        'salida' =>1  , 
-                        'hora' =>null,
-                        // 'salida' =>1,
-                         'active' =>1,
-                         'remove' =>0,                        
-                         'usuarios_id' => $request->get('idusuario'),
-                        ]
-                    
-                    );
-                    
-                }
-                for ($i=0; $i <count($request->llegadasSelecciondas); $i++) { 
+                $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
+                    ['actividadeshorario_id' => $ActividadesHorario->id,
+                    'salidallegadas_id' => $request->arrayPuntosSalida[$j][0],
+                    'salida' =>1  , 
+                    'hora' =>$request->arrayHorasLlegada[$j][0],
+                    // 'salida' =>1,
+                     'active' =>1,
+                     'remove' =>0,                        
+                     'usuarios_id' => $request->get('idusuario'),
+                    ]
+                
+                );
+                
+            }
+
+            //entran los puntos de salida
+            for ($i=0; $i <count($request->llegadasSelecciondas); $i++) { 
                 $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::create(
                     ['actividadeshorario_id' => $ActividadesHorario->id,
-                    'salidallegadas_id' => $request->llegadasSelecciondas[$i][0],
+                    'salidallegadas_id' => $request->arrayPuntosLlegada[$i][0],
                     'salida'=>0, 
                     'hora' =>null,
                     // 'salida' =>0,
@@ -365,6 +366,10 @@ class ActividadesController extends Controller
                 
                 
             }
+                }
+               
+                
+                
             return response()->json(['ok'=>'Actividad Agregada Correctamente']);
             }
          

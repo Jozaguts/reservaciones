@@ -836,11 +836,16 @@ countRecolecionLLEGADAS--;
             return arraypuntos
           }
         }
+
+
         let arrayPuntosSalida =[];
       for (let i = 0; i < identificadores.length; i++) {
         let puntos = new PuntosSalida(i+1,puntosSalida)
         arrayPuntosSalida.push(puntos)
       }
+
+
+     
     
 
        // ## puntos de salida ##
@@ -872,16 +877,39 @@ countRecolecionLLEGADAS--;
       let horasSalidas = document.querySelectorAll('.hora-salida')
       let horasLlegada = document.querySelectorAll('.hora-llegada')
 
-      horasSalidas = Array.from(horasSalidas)
-      horasLlegada = Array.from(horasLlegada)
+      class HorasLlegadas{
+        constructor(id,horas){
+          this.horas= horas;
+          this.id=id;
+
+          horas=Array.from(horas);
+          let arrayHoras = horas.filter(function(hora){
+            return hora.getAttribute('data-horarioid') == id;
+          }).map(function(hora){
+            return hora.value;
+          })
+          return arrayHoras
+        }
+      }
+
+      let arrayHorasLlegada =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let llegada = new HorasLlegadas(i+1,horasLlegada)
+        arrayHorasLlegada.push(llegada)
+      }
+
+      let arrayHorasSalida =[];
+      for (let i = 0; i < identificadores.length; i++) {
+        let salida = new HorasLlegadas(i+1,horasSalidas)
+        arrayHorasSalida.push(salida)
+      }
+
+      console.log( `Puntos de llegada ${arrayPuntosLlegada}, horas de llegada${arrayHorasLlegada}`)
+      console.log(`Puntos de salida${arrayPuntosSalida}, horas de salida${arrayHorasSalida}`)
 
 
+  
 
-      console.log(horasSalidas,horasLlegada)
-
-
-   
-      
 
         //############################################################################################ HORARIO MULTIPLE FIN
 
@@ -938,8 +966,8 @@ countRecolecionLLEGADAS--;
             ArrayDeDIas:ArrayDeDIas,
             ArrayHrFin:ArrayHrFin,
             ArrayHini:ArrayHini,
-            // llegadasSelecciondas:llegadasSelecciondas,
-            // salidasSeleccionadas:salidasSeleccionadas,
+            arrayHorasLlegada:arrayHorasLlegada,
+            arrayHorasSalida:arrayHorasSalida,
             arrayPuntosLlegada:arrayPuntosLlegada,
             arrayPuntosSalida:arrayPuntosSalida
 
