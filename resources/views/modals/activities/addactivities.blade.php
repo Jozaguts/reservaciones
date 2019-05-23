@@ -2,8 +2,7 @@
  <div class="modal fade" id="addActivities" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
-          
-            <!-- Modal Header -->
+                      <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Actividades</h4>
               <button type="button" class="close" onclick="checkEmpty()">&times;</button>
@@ -22,7 +21,7 @@
                       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"  onclick="showPanel(this);" role="tab" aria-controls="contact" aria-selected="false">Horarios y Puntos de Salida y Llegadas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="generales-tab" data-toggle="tab" href="#generales"  onclick="showPanel(this);" role="tab" aria-controls="generales" aria-selected="false">Datos Generales</a>
+                        <a class="nav-link" id="generales-tab" data-toggle="tab" href="#generales"  onclick="showPanel(this);" role="tab" aria-controls="generales" aria-selected="false">Observaciones Especiales </a>
                       </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
@@ -529,8 +528,8 @@
             
            
         
-        
+{{--         
           </div>
         </div>
       </div>
-      
+       --}}

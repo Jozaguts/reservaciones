@@ -368,10 +368,10 @@ function addHoraioContainer(){
 
  
   
-  for (let i = 1; i < salidasyllegadas.length; i++) {
+  for (let i = 0; i < salidasyllegadas.length; i++) {
     let option = document.createElement('option');
     option.value = salidasyllegadas[i].id
-    option.innerHTML =salidasyllegadas[i].direccion;
+    option.innerHTML =salidasyllegadas[i].nombre;
     
     
     selectsSalidasLegadas.forEach(function(select){
@@ -379,10 +379,10 @@ function addHoraioContainer(){
     })
   }
    
-  for (let i = 1; i < salidasyllegadas.length; i++) {
+  for (let i = 0; i < salidasyllegadas.length; i++) {
     let option = document.createElement('option');
     option.value = salidasyllegadas[i].id
-    option.innerHTML =salidasyllegadas[i].direccion;
+    option.innerHTML =salidasyllegadas[i].nombre;
     
     
     selectsSalidasLegadas__llegadas.forEach(function(select){
