@@ -1023,54 +1023,49 @@ function editarActividad(e){
   const route =`actividades/${id}/edit`;
 
   $.get(route, function(data){
-    console.log(data.data[0])
-    $('#clave').val(data.data[0].clave)
-    $('#nombre').val(data.data[0].nombre)
+    
+    $('#clave').val(data.pestana1.actividades[0].clave)
+    $('#nombre').val(data.pestana1.actividades[0].nombre)
     let tipoActividad = document.getElementById('tipoactividades_id')
-    tipoActividad.selectedIndex = data.data[0].taid -1;
+    tipoActividad.selectedIndex = data.pestana1.actividades[0].taid -1;
     let checkFijo = document.getElementById('fijo')
-    if(data.data[0].fijo ==1){
+    if(data.pestana1.actividades[0].fijo ==1){
       checkFijo.checked = true;
     }
     let checkDuracion = document.getElementById('duracion')
-    checkDuracion.value = data.data[0].duracion;
+    checkDuracion.value = data.pestana1.actividades[0].duracion;
 
     let checkRenta = document.getElementById('renta')
-    if(data.data[0].renta ==1){
+    if(data.pestana1.actividades[0].renta ==1){
       checkRenta.checked = true;
     }
     let minutoIncrementa = document.getElementById('minutoIncrementa')
-    minutoIncrementa.value= data.data[0].minutoincrementa;
+    minutoIncrementa.value= data.pestana1.actividades[0].minutoincrementa;
 
     let montoIncremento = document.getElementById('montoIncremento')
-    montoIncremento.value = data.data[0].montoincremento
+    montoIncremento.value = data.pestana1.actividades[0].montoincremento
     let maxCortesias = document.getElementById('maxCortesias')
-    maxCortesias.value = data.data[0].maxcortesias;
+    maxCortesias.value = data.pestana1.actividades[0].maxcortesias;
     let maxCupones = document.getElementById('maxCupones')
-    maxCupones.value = data.data[0].maxcupones;
+    maxCupones.value = data.pestana1.actividades[0].maxcupones;
     let anticipoId = document.getElementById('anticipoId')
-     anticipoId.selectedIndex =data.data[0].anid -1;
+     anticipoId.selectedIndex =data.pestana1.actividades[0].anid -1;
 
-  
+  // PESTAÑA 2
+    // balances
+    let balanceG = document.getElementById('balanceG')
+    balanceG.value = data.pestana2.balances[0].balance;
+    let precioG = document.getElementById('precioG')
+    precioG.value = data.pestana2.balances[0].precio;
+    
+    
+    // precios
+    console.log(data.pestana2.precios)
+
   });
  
 
 }
-
-// : 1
-// annombre: "Sin Anticipo"
-// clave: "12ddd"
-// duracion: 3
-// fijo: 1
-// id: 3
-// : 1
-// maxcupones: 1
-// minutoincrementa: 1
-// montoincremento: 55
-// nombre: "Nombre de Actividad"
-// renta: 1
-// taid: 1
-// tanombre: "ova17"
 
 
 

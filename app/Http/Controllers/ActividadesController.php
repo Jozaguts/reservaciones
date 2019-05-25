@@ -412,8 +412,23 @@ class ActividadesController extends Controller
        ->Where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
        ->get();
 
+    //    balance y precio
 
-        return response()->json(['data'=> $act]);
+       $actpa = DB::table('actividades as ac')
+                  ->select('ac.precio', 'ac.balance')
+                  ->where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
+                  ->get();
+            
+                //   precios
+$actp = DB::table('actividadprecios as ap')
+       ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
+       ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
+       ->where([['ap.actividades_id', '=', $id], ['ap.active', '=', '1'], ['ap.remove', '=', '0']])
+       ->orderBy('ap.id')
+       ->get();
+    
+
+        return response()->json(['pestana1' => ['actividades'=> $act], 'pestana2' => ['balances' => $actpa, 'precios' => $actp]]);
     }
 
     /**
