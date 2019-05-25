@@ -53,8 +53,8 @@
                                                 <td class="table-head  text-capitalize" data-active="{{$actividad->active}}">{{$actividad->balance}}
                                                     </td>
                                                 <td class="table-head table-head__actions"> 
-                                                    <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$actividad->id}});" data-id="{{$actividad->id}}">
-                                                    </a>
+                                                     <button type="button" class="table-head table-head__btn btn-edit btn btn-primary" data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);">
+                                        <span class="font-weight-bolder"></button>
                                                     <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                                 </td>
                                             </tr>
@@ -66,7 +66,7 @@
                                 </div>
                                 </div>
                                 @endforeach
-                           
+                              
                                         
                             </div>
                                 
