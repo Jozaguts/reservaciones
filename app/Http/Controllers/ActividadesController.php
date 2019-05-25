@@ -13,6 +13,7 @@ use Validator;
 use App\ActividadPrecios;
 use App\ActividadesHorario;
 use App\SalidasLlegadasHorario;
+use DB;
 
 
 class ActividadesController extends Controller
@@ -402,9 +403,17 @@ class ActividadesController extends Controller
      * @param  \App\Actividades  $actividades
      * @return \Illuminate\Http\Response
      */
-    public function edit(Actividades $actividades)
+    public function edit(Request $request, $id)
     {
-        //
+         $act = DB::table('actividades as ac')
+        ->Join('tipoactividades as ta', 'ac.tipoactividades_id', '=', 'ta.id')
+        ->Join('anticipos as an', 'ac.anticipo_id', '=', 'an.id')
+        ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre')
+       ->Where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
+       ->get();
+
+
+        return response()->json(['data'=> $act]);
     }
 
     /**
@@ -414,9 +423,9 @@ class ActividadesController extends Controller
      * @param  \App\Actividades  $actividades
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Actividades $actividades)
+    public function update(Request $request, $id)
     {
-        //
+     
     }
 
     /**

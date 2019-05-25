@@ -345,7 +345,7 @@
                             <div class="col-6">
                               <div class="row">
                                 <div class="col-3">
-                                  <div class="">
+                                  <div class="dia-check-container">
                                     <label class="form-check-label font-weight-bolder  ">Lunes
                                       </label>
 
@@ -355,8 +355,8 @@
                                 </div>
                               </div>
                                 <div class="col-3">
-                                    <div class="">
-                                        <label class="form-check-label font-weiFght-bolder  ">Martes
+                                    <div class="dia-check-container">
+                                        <label class="form-check-label font-weight-bolder  ">Martes
                                           </label>
 
                                           <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
@@ -364,7 +364,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="">
+                                    <div class="dia-check-container">
                                     <label class="form-check-label font-weight-bolder  ">Miercoles
                                       </label>
 
@@ -375,7 +375,7 @@
                               </div>
                               <div class="row">
                                 <div class="col-3">
-                                    <div class="">
+                                    <div class="dia-check-container">
                                         <label class="form-check-label font-weight-bolder  ">Jueves
                                           </label>
 
@@ -384,7 +384,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="">
+                                    <div class="dia-check-container">
                                         <label class="form-check-label font-weight-bolder  ">Viernes
                                           </label>
 
@@ -393,7 +393,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="" >
+                                    <div class="dia-check-container" >
                                         <label class="form-check-label font-weight-bolder  ">Sabado
                                           </label>
 
@@ -402,7 +402,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="">
+                                    <div class="dia-check-container">
                                         <label class="form-check-label font-weight-bolder  ">Domingo
                                           </label>
 
@@ -416,6 +416,8 @@
                                 <h2 class="lead">Llegadas</h2>
                              </div>                           
                         </div>
+
+                        {{-- Select llegadas --}}
                         <div class="row">
 
                           <div class="col-6" >
@@ -438,6 +440,7 @@
                               </div>
                           </div>
                         </div>
+                        {{-- fin select llegadas --}}
                         <div class="row position-sticky mt-3">
                             <div class="col-6">
                               <div class="row">
