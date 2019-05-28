@@ -993,7 +993,7 @@ countRecolecionLLEGADAS--;
               setTimeout(() => {
                 $('#message-successIntoModal').fadeOut();
               }, 3000);
-              setTimeout("location.reload(true);",1000)
+              // setTimeout("location.reload(true);",1000)
           }
         }
         
@@ -1006,7 +1006,6 @@ countRecolecionLLEGADAS--;
 
     
    
-
 
 
 
@@ -1023,56 +1022,113 @@ function editarActividad(e){
   const route =`actividades/${id}/edit`;
 
   $.get(route, function(data){
-    console.log(data.data[0])
-    $('#clave').val(data.data[0].clave)
-    $('#nombre').val(data.data[0].nombre)
+    
+    $('#clave').val(data.pestana1.actividades[0].clave)
+    $('#nombre').val(data.pestana1.actividades[0].nombre)
     let tipoActividad = document.getElementById('tipoactividades_id')
-    tipoActividad.selectedIndex = data.data[0].taid -1;
+    tipoActividad.selectedIndex = data.pestana1.actividades[0].taid -1;
     let checkFijo = document.getElementById('fijo')
-    if(data.data[0].fijo ==1){
+    if(data.pestana1.actividades[0].fijo ==1){
       checkFijo.checked = true;
     }
     let checkDuracion = document.getElementById('duracion')
-    checkDuracion.value = data.data[0].duracion;
+    checkDuracion.value = data.pestana1.actividades[0].duracion;
 
     let checkRenta = document.getElementById('renta')
-    if(data.data[0].renta ==1){
+    if(data.pestana1.actividades[0].renta ==1){
       checkRenta.checked = true;
     }
     let minutoIncrementa = document.getElementById('minutoIncrementa')
-    minutoIncrementa.value= data.data[0].minutoincrementa;
+    minutoIncrementa.value= data.pestana1.actividades[0].minutoincrementa;
 
     let montoIncremento = document.getElementById('montoIncremento')
-    montoIncremento.value = data.data[0].montoincremento
+    montoIncremento.value = data.pestana1.actividades[0].montoincremento
     let maxCortesias = document.getElementById('maxCortesias')
-    maxCortesias.value = data.data[0].maxcortesias;
+    maxCortesias.value = data.pestana1.actividades[0].maxcortesias;
     let maxCupones = document.getElementById('maxCupones')
-    maxCupones.value = data.data[0].maxcupones;
+    maxCupones.value = data.pestana1.actividades[0].maxcupones;
     let anticipoId = document.getElementById('anticipoId')
-     anticipoId.selectedIndex =data.data[0].anid -1;
+     anticipoId.selectedIndex =data.pestana1.actividades[0].anid -1;
 
-  
+  // PESTAÑA 2
+    // balances
+    let balanceG = document.getElementById('balanceG')
+    balanceG.value = data.pestana2.balances[0].balance;
+    let precioG = document.getElementById('precioG')
+    precioG.value = data.pestana2.balances[0].precio;
+    
+    let precios = data.pestana2.precios;
+    let templete = document.createElement('div');
+    let rowPrecios = document.getElementById('preciosContainer')
+    rowPrecios.innerHTML="";
+    precios.forEach(function(precio){
+      console.log(precio)
+     
+      rowPrecios.innerHTML +=`
+              <div class="col-1 padding-col"style="background-color:white" >
+                <div class="form-group ">
+              <label for="" class=" font-weight-bold" data-id=" ${precio.id}" value="persona${precio.id}" id="persona${precio.id}" >${precio.penombre}</label>
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p1PersonaId${precio.id}" id="p1PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio1}">
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p2PersonaId${precio.id}"" id="p2PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio2}">
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p3PersonaId${precio.id}" id="p3PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /value="${precio.precio3}">
+              </div>
+              </div>
+              <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="doblePersonaId${precio.id}" id="doblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="${precio.doble}"  "/>
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="balanceDoblePersonaId${precio.id}" id="balanceDoblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.doblebalanc}">
+              </div>
+              </div>
+              <div class="col-1 padding-col "style="background-color: #CCFFCC" >
+              <div class="form-group">
+              <input type="text" name="triplePersonaId${precio.id}" id="triplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triple}"/>
+              </div>
+              </div>
+              <div class="col-1 padding-col  "style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="balanceTriplePersonaId${precio.id}" id="balanceTriplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triplebalanc}"/>
+              </div>
+              </div>
+              <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
+              <div class="form-group">
+              <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId${precio.id}" id="promoPersonaId${precio.id}" ${precio.promocion==1?checked=true:checked =false} >
+              </div>
+              </div>
+              <div class="col-1 padding-col " style="background-color: #FFFDCC">
+              <div class="form-group">                                                   
+              <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId${precio.id}" id="restriccionPersonaId${precio.id}" value="1" onchange="habilitarAcompnante(this);" data-id="${precio.id}" value="${precio.restriccion}">
+              </div>
+              </div>
+              <div class="col-1 padding-col " style="background-color: #FFFDCC">
+              <div class="form-group">
+                
+                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId${precio.id}" id="acompanantePersonaId${precio.id}" value="1" disabled>
+              </div>
+              </div>
+            `;
+           
+    })
+                     
+    // precios
+    console.log(precios)
+
   });
  
 
 }
-
-// : 1
-// annombre: "Sin Anticipo"
-// clave: "12ddd"
-// duracion: 3
-// fijo: 1
-// id: 3
-// : 1
-// maxcupones: 1
-// minutoincrementa: 1
-// montoincremento: 55
-// nombre: "Nombre de Actividad"
-// renta: 1
-// taid: 1
-// tanombre: "ova17"
-
-
-
-
-
