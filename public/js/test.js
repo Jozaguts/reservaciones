@@ -993,7 +993,7 @@ countRecolecionLLEGADAS--;
               setTimeout(() => {
                 $('#message-successIntoModal').fadeOut();
               }, 3000);
-              setTimeout("location.reload(true);",1000)
+              // setTimeout("location.reload(true);",1000)
           }
         }
         
@@ -1006,7 +1006,6 @@ countRecolecionLLEGADAS--;
 
     
    
-
 
 
 
@@ -1058,16 +1057,78 @@ function editarActividad(e){
     let precioG = document.getElementById('precioG')
     precioG.value = data.pestana2.balances[0].precio;
     
+<<<<<<< HEAD
     
     // precios
     console.log(data.pestana2.precios)
-
-  });
- 
-
-}
-
-
-
-
-
+=======
+    let precios = data.pestana2.precios;
+    let templete = document.createElement('div');
+    let rowPrecios = document.getElementById('preciosContainer')
+    rowPrecios.innerHTML="";
+    precios.forEach(function(precio){
+      console.log(precio)
+     
+      rowPrecios.innerHTML +=`
+              <div class="col-1 padding-col"style="background-color:white" >
+                <div class="form-group ">
+              <label for="" class=" font-weight-bold" data-id=" ${precio.id}" value="persona${precio.id}" id="persona${precio.id}" >${precio.penombre}</label>
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p1PersonaId${precio.id}" id="p1PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio1}">
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p2PersonaId${precio.id}"" id="p2PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio2}">
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFFD">
+              <div class="form-group">
+              <input type="text" name="p3PersonaId${precio.id}" id="p3PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /value="${precio.precio3}">
+              </div>
+              </div>
+              <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="doblePersonaId${precio.id}" id="doblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="${precio.doble}"  "/>
+              </div>
+              </div>
+              <div class="col-1 padding-col" style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="balanceDoblePersonaId${precio.id}" id="balanceDoblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.doblebalanc}">
+              </div>
+              </div>
+              <div class="col-1 padding-col "style="background-color: #CCFFCC" >
+              <div class="form-group">
+              <input type="text" name="triplePersonaId${precio.id}" id="triplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triple}"/>
+              </div>
+              </div>
+              <div class="col-1 padding-col  "style="background-color: #CCFFCC">
+              <div class="form-group">
+              <input type="text" name="balanceTriplePersonaId${precio.id}" id="balanceTriplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triplebalanc}"/>
+              </div>
+              </div>
+              <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
+              <div class="form-group">
+              <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId${precio.id}" id="promoPersonaId${precio.id}" ${precio.promocion==1?checked=true:checked =false} >
+              </div>
+              </div>
+              <div class="col-1 padding-col " style="background-color: #FFFDCC">
+              <div class="form-group">                                                   
+              <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId${precio.id}" id="restriccionPersonaId${precio.id}" value="1" onchange="habilitarAcompnante(this);" data-id="${precio.id}" value="${precio.restriccion}">
+              </div>
+              </div>
+              <div class="col-1 padding-col " style="background-color: #FFFDCC">
+              <div class="form-group">
+                
+                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId${precio.id}" id="acompanantePersonaId${precio.id}" value="1" disabled>
+              </div>
+              </div>
+            `;
+           
+    })
+                     
+    // precios
+    console.log(precios)

@@ -236,8 +236,8 @@
                             @foreach ($personas as $persona)
                                 
                           
-                            <div class="row " style="background-color: #FFFDCC">
-                              <div class="col-1 padding-col"style="background-color:white" >
+                            <div class="row " style="background-color: #FFFDCC" id="preciosContainer">
+                              {{-- <div class="col-1 padding-col"style="background-color:white" >
                                   <div class="form-group ">
                                   <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
                               </div>
@@ -292,7 +292,7 @@
                                                       
                                                       <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId{{$persona->id}}" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
                                                   </div>
-                                                </div>                                              
+                                                </div>                                               --}}
                             </div>
                             @endforeach
                           </div>
@@ -307,7 +307,7 @@
                         <div class="col-6 mt-3">
                           <div class="row">
                             <div class="col-3">
-                              <div class="form-check form-check-inline">
+                              <div class="form-check form-check-inline" >
                                 <label class="form-check-label">
                                     <input class=" sizecheck" type="checkbox" name="libre" id="libre" value="1"  data-id="1" >Libre
                                 </label>
