@@ -89,7 +89,7 @@
                                       <div class="row">
                                       <div class="col-4">
                                           <label class="form-group pt-4 pl-5 lbcheck" for="ocupacion">
-                                              <input class="  general pases-precios-check" type="checkbox"name="renta" id="renta" value="1"> Renta
+                                              <input class="  general pases-precios-check " type="checkbox"name="renta" id="renta" value="1"> Renta
                                             </label>
                                       </div>
                                       <div class="col-4">
@@ -227,73 +227,71 @@
                                                           <label for="" class="font-weight-bold">Restricción</label>
                                                       </div>
                                                     </div>
-                                                    <div class="col-1 padding-col "style="background-color: #FFFDCC" >
-                                                        <div class="form-group">
-                                                            <label for="" class="font-weight-bold">Acompañante</label>
-                                                        </div>
-                                                      </div>
-                              </div>
-                            @foreach ($personas as $persona)
-                                
-                          
-                            <div class="row " style="background-color: #FFFDCC" id="preciosContainer">
-                              {{-- <div class="col-1 padding-col"style="background-color:white" >
-                                  <div class="form-group ">
-                                  <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
-                              </div>
-                            </div>
-                              <div class="col-1 padding-col" style="background-color: #CCFFFD">
-                                <div class="form-group">
-                                  <input type="text" name="p1PersonaId{{$persona->id}}" id="p1PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                </div>
-                              </div>
-                              <div class="col-1 padding-col" style="background-color: #CCFFFD">
-                                  <div class="form-group">
-                                    <input type="text" name="p2PersonaId{{$persona->id}}" id="p2PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                  </div>
-                                </div>
-                                <div class="col-1 padding-col" style="background-color: #CCFFFD">
-                                    <div class="form-group">
-                                      <input type="text" name="p3PersonaId{{$persona->id}}" id="p3PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                    </div>
-                                  </div>
-                                  <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
-                                      <div class="form-group">
-                                        <input type="text" name="doblePersonaId{{$persona->id}}" id="doblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                      </div>
-                                    </div>
-                                    <div class="col-1 padding-col" style="background-color: #CCFFCC">
-                                        <div class="form-group">
-                                          <input type="text" name="balanceDoblePersonaId{{$persona->id}}" id="balanceDoblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                        </div>
-                                      </div>
-                                      <div class="col-1 padding-col "style="background-color: #CCFFCC" >
-                                          <div class="form-group">
-                                            <input type="text" name="triplePersonaId{{$persona->id}}" id="triplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                          </div>
-                                        </div>
-                                        <div class="col-1 padding-col  "style="background-color: #CCFFCC">
-                                            <div class="form-group">
-                                              <input type="text" name="balanceTriplePersonaId{{$persona->id}}" id="balanceTriplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                            </div>
-                                          </div>
-                                          <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
-                                              <div class="form-group">
-                                                  <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId{{$persona->id}}" id="promoPersonaId{{$persona->id}}" value="1" >
-                                              </div>
-                                            </div>
-                                            <div class="col-1 padding-col " style="background-color: #FFFDCC">
-                                                <div class="form-group">                                                   
-                                                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId{{$persona->id}}" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
-                                                </div>
-                                              </div>
-                                              <div class="col-1 padding-col " style="background-color: #FFFDCC">
-                                                  <div class="form-group">
-                                                      
-                                                      <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId{{$persona->id}}" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
+                                                  <div class="col-1 padding-col "style="background-color: #FFFDCC" >
+                                                    <div class="form-group">
+                                                      <label for="" class="font-weight-bold">Acompañante</label>
+                                                    </div>
                                                   </div>
-                                                </div>                                               --}}
-                            </div>
+                              </div>
+@foreach ($personas as $persona)
+
+  <div class="row " style="background-color: #FFFDCC" id="preciosContainer">
+    <div class="col-1 padding-col"style="background-color:white" >
+      <div class="form-group ">
+        <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="p1PersonaId{{$persona->id}}" id="p1PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="p2PersonaId{{$persona->id}}" id="p2PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="p3PersonaId{{$persona->id}}" id="p3PersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="doblePersonaId{{$persona->id}}" id="doblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="balanceDoblePersonaId{{$persona->id}}" id="balanceDoblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col "style="background-color: #CCFFCC" >
+      <div class="form-group">
+        <input type="text" name="triplePersonaId{{$persona->id}}" id="triplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col  "style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="balanceTriplePersonaId{{$persona->id}}" id="balanceTriplePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
+      <div class="form-group">
+        <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean" name="promoPersonaId{{$persona->id}}" id="promoPersonaId{{$persona->id}}" value="1" >
+      </div>
+    </div>
+    <div class="col-1 padding-col " style="background-color: #FFFDCC">
+      <div class="form-group">                                                   
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean" name="restriccionPersonaId{{$persona->id}}" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
+      </div>
+    </div>
+    <div class="col-1 padding-col " style="background-color: #FFFDCC">
+      <div class="form-group">
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean" name="acompanantePersonaId{{$persona->id}}" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
+      </div>
+    </div>                                              
+  </div>
                             @endforeach
                           </div>
                           </form>
@@ -442,24 +440,22 @@
                         </div>
                         {{-- fin select llegadas --}}
                         <div class="row position-sticky mt-3">
-                            <div class="col-6">
+                            <div class="col-12">
                               <div class="row">
                                {{-- <div class="col-3">Horario</div> --}}
-                               <div class="col-3">H. Inicio</div>
-                               <div class="col-3">H. Fin</div>
-                               <div class="col-2">Días</div>
+                               <div class="col-2 text-center">H. Inicio</div>
+                               <div class="col-2 text-center">H. Fin</div>
+                               <div class="col-4text-center offset-2 justify-content-center align-content-center align-items-center">Días</div>
                                
                               </div>
                             
                             </div>
-                            <div class="col-6">
-                               
-                           </div>
+                            
                           </div>
                      <div class="container overflow">
                             <div class="row mt-3">
-                              <div class="col-12">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ducimus voluptatem eaque accusamus nostrum reiciendis itaque totam earum! Quisquam earum fugiat nobis amet, quia officia sapiente nemo? Ratione, eum sapiente!</p>
+                              <div class="col-12" id="actividadesHorarioContainer" style="padding:0;">
+                               
                               </div>
                        
                             </div>

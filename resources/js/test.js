@@ -79,6 +79,12 @@ generalInputs.forEach((input)=>{
  }else{
   $('#addActivities').modal('hide');
  }
+ let allCheckbox = document.querySelectorAll('[class~=check-clean]')
+
+ allCheckbox.forEach(function(check){
+ check.removeAttribute("unchecked");
+ check.removeAttribute("checked");
+ })
  
 }
 
@@ -904,8 +910,7 @@ countRecolecionLLEGADAS--;
         arrayHorasSalida.push(salida)
       }
 
-      console.log( `Puntos de llegada ${arrayPuntosLlegada}, horas de llegada${arrayHorasLlegada}`)
-      console.log(`Puntos de salida${arrayPuntosSalida}, horas de salida${arrayHorasSalida}`)
+ 
 
 
   
@@ -1056,83 +1061,166 @@ function editarActividad(e){
     balanceG.value = data.pestana2.balances[0].balance;
     let precioG = document.getElementById('precioG')
     precioG.value = data.pestana2.balances[0].precio;
-    
-
-    
+   
     // precios
-    console.log(data.pestana2.precios)
-
     let precios = data.pestana2.precios;
-    let templete = document.createElement('div');
-    let rowPrecios = document.getElementById('preciosContainer')
-    rowPrecios.innerHTML="";
-    precios.forEach(function(precio){
-      console.log(precio)
-     
-      rowPrecios.innerHTML +=`
-              <div class="col-1 padding-col"style="background-color:white" >
-                <div class="form-group ">
-              <label for="" class=" font-weight-bold" data-id=" ${precio.id}" value="persona${precio.id}" id="persona${precio.id}" >${precio.penombre}</label>
-              </div>
-              </div>
-              <div class="col-1 padding-col" style="background-color: #CCFFFD">
-              <div class="form-group">
-              <input type="text" name="p1PersonaId${precio.id}" id="p1PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio1}">
-              </div>
-              </div>
-              <div class="col-1 padding-col" style="background-color: #CCFFFD">
-              <div class="form-group">
-              <input type="text" name="p2PersonaId${precio.id}"" id="p2PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.precio2}">
-              </div>
-              </div>
-              <div class="col-1 padding-col" style="background-color: #CCFFFD">
-              <div class="form-group">
-              <input type="text" name="p3PersonaId${precio.id}" id="p3PersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /value="${precio.precio3}">
-              </div>
-              </div>
-              <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
-              <div class="form-group">
-              <input type="text" name="doblePersonaId${precio.id}" id="doblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="${precio.doble}"  "/>
-              </div>
-              </div>
-              <div class="col-1 padding-col" style="background-color: #CCFFCC">
-              <div class="form-group">
-              <input type="text" name="balanceDoblePersonaId${precio.id}" id="balanceDoblePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / value="${precio.doblebalanc}">
-              </div>
-              </div>
-              <div class="col-1 padding-col "style="background-color: #CCFFCC" >
-              <div class="form-group">
-              <input type="text" name="triplePersonaId${precio.id}" id="triplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triple}"/>
-              </div>
-              </div>
-              <div class="col-1 padding-col  "style="background-color: #CCFFCC">
-              <div class="form-group">
-              <input type="text" name="balanceTriplePersonaId${precio.id}" id="balanceTriplePersonaId${precio.id}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${precio.triplebalanc}"/>
-              </div>
-              </div>
-              <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
-              <div class="form-group">
-              <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId${precio.id}" id="promoPersonaId${precio.id}"${precio.promocion==1? "checked":"unchecked"} >
-              </div>
-              </div>
-              <div class="col-1 padding-col " style="background-color: #FFFDCC">
-              <div class="form-group">                                                   
-              <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId${precio.id}" id="restriccionPersonaId${precio.id}" value="1" onchange="habilitarAcompnante(this);" data-id="${precio.id}" ${precio.restriccion==1? "checked":"unchecked"}>
-              </div>
-              </div>
-              <div class="col-1 padding-col " style="background-color: #FFFDCC">
-              <div class="form-group">
-                
-                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId${precio.id}" id="acompanantePersonaId${precio.id}" ${precio.acompanante==1? "checked":"unchecked"}  disabled>
-              </div>
-              </div>
-            `;
+ 
+    // PERSONA 1
+    let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
+    let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value =`${precios[0].precio1}`;
+    let precio2P1 = document.getElementById(`p2PersonaId${precios[0].peid}`).value =`${precios[0].precio2}`;
+    let precio3P1 = document.getElementById(`p3PersonaId${precios[0].peid}`).value =`${precios[0].precio3}`;
+    let dobleP1 = document.getElementById(`doblePersonaId${precios[0].peid}`).value =`${precios[0].doble}`;
+    let balanceDobleP1 = document.getElementById(`balanceDoblePersonaId${precios[0].peid}`).value =`${precios[0].doblebalanc}`;
+    let tripleP1 = document.getElementById(`triplePersonaId${precios[0].peid}`).value =`${precios[0].triple}`;
+    let balanceTripleP1 =document.getElementById(`balanceTriplePersonaId${precios[0].peid}`).value =`${precios[0].triplebalanc}`;
+    let promoP1 =document.getElementById(`promoPersonaId${precios[0].peid}`);
+    `${precios[0].promocion}`==1?promoP1.setAttribute('checked','true'):promoP1.setAttribute('unchecked','true')
+    let restriccionP1 =document.getElementById(`restriccionPersonaId${precios[0].peid}`);
+    `${precios[0].restriccion}`==1?restriccionP1.setAttribute('checked','true'):restriccionP1.setAttribute('unchecked','true')
+    let acompananteP1 =document.getElementById(`acompanantePersonaId${precios[0].peid}`);
+    `${precios[0].acompanante}`==1?acompananteP1.setAttribute('checked','true'):acompananteP1.setAttribute('unchecked','true')
+    // PERSONA 2
+
+    let personaPrecio2Id = document.getElementById(`persona${precios[1].peid}`).innerHTML =`${precios[1].penombre}`;
+    let precio1P2 = document.getElementById(`p1PersonaId${precios[1].peid}`).value =`${precios[1].precio1}`;
+    let precio2P2 = document.getElementById(`p2PersonaId${precios[1].peid}`).value =`${precios[1].precio2}`;
+    let precio3P2 = document.getElementById(`p3PersonaId${precios[1].peid}`).value =`${precios[1].precio3}`;
+    let dobleP2 = document.getElementById(`doblePersonaId${precios[1].peid}`).value =`${precios[1].doble}`;
+    let balanceDobleP2 = document.getElementById(`balanceDoblePersonaId${precios[1].peid}`).value =`${precios[1].doblebalanc}`;
+    let tripleP2 = document.getElementById(`triplePersonaId${precios[1].peid}`).value =`${precios[1].triple}`;
+    let balanceTripleP2 =document.getElementById(`balanceTriplePersonaId${precios[1].peid}`).value =`${precios[1].triplebalanc}`;
+    let promoP2 =document.getElementById(`promoPersonaId${precios[1].peid}`);
+    `${precios[1].promocion}`==1?promoP2.setAttribute('checked','true'):promoP2.setAttribute('unchecked','true')
+    let restriccionP2 =document.getElementById(`restriccionPersonaId${precios[1].peid}`);
+    `${precios[1].restriccion}`==1?restriccionP2.setAttribute('checked','true'):restriccionP2.setAttribute('unchecked','true')
+    let acompananteP2 =document.getElementById(`acompanantePersonaId${precios[1].peid}`);
+    `${precios[1].acompanante}`==1?acompananteP2.setAttribute('checked','true'):acompananteP2.setAttribute('unchecked','true')
+     // PERSONA 3
+     let personaPrecio3Id = document.getElementById(`persona${precios[2].peid}`).innerHTML =`${precios[2].penombre}`;
+     let precio1P3 = document.getElementById(`p1PersonaId${precios[2].peid}`).value =`${precios[2].precio1}`;
+     let precio2P3 = document.getElementById(`p2PersonaId${precios[2].peid}`).value =`${precios[2].precio2}`;
+     let precio3P3 = document.getElementById(`p3PersonaId${precios[2].peid}`).value =`${precios[2].precio3}`;
+     let dobleP3 = document.getElementById(`doblePersonaId${precios[2].peid}`).value =`${precios[2].doble}`;
+     let balanceDobleP3 = document.getElementById(`balanceDoblePersonaId${precios[2].peid}`).value =`${precios[2].doblebalanc}`;
+     let tripleP3 = document.getElementById(`triplePersonaId${precios[2].peid}`).value =`${precios[2].triple}`;
+     let balanceTripleP3 =document.getElementById(`balanceTriplePersonaId${precios[2].peid}`).value =`${precios[2].triplebalanc}`;
+     let promoP3 =document.getElementById(`promoPersonaId${precios[2].peid}`);
+     `${precios[2].promocion}`==1?promoP3.setAttribute('checked','true'):promoP3.setAttribute('unchecked','true')
+     let restriccionP3 =document.getElementById(`restriccionPersonaId${precios[2].peid}`);
+     `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
+     let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
+     `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+
+    // PESTANA 3
+    let actividadesHorario = data.pestana3.actividadesHorario;
+    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer');
+    actividadesHorario.forEach(function(horario){
+      console.log(horario.l)
+      let bolcheckL;
+      if(horario.l == 1){
+        bolcheckL = 'checked';
+      }else{
+        bolcheckL='unchecked';
+      }
+      let bolcheckM;
+      if(horario.m == 1){
+        bolcheckM = 'checked';
+      }else{
+        bolcheckM='unchecked';
+      }
+      let bolcheckX;
+      if(horario.x == 1){
+        bolcheckX = 'checked';
+      }else{
+        bolcheckX='unchecked';
+      }
+      let bolcheckJ;
+      if(horario.j == 1){
+        bolcheckJ = 'checked';
+      }else{
+        bolcheckJ='unchecked';
+      }
+      let bolcheckV;
+      if(horario.v == 1){
+        bolcheckV = 'checked';
+      }else{
+        bolcheckV='unchecked';
+      }
+      let bolcheckS;
+      if(horario.s == 1){
+        bolcheckS = 'checked';
+      }else{
+        bolcheckS='unchecked';
+      }
+      let bolcheckD;
+      if(horario.d == 1){
+        bolcheckD = 'checked';
+      }else{
+        bolcheckD='unchecked';
+      }
+
+      let templete = document.createElement('div');
+      templete.innerHTML=`<div class="col-12 p-0">
+      <div class="container">
+  
+          <div class="row" >
+          <div class="col-2">
+          <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
+          </div>
+          <div class="col-2">
+          <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
+          </div>
+          <div class="col-5 offset-2 pt-3">
+          
+                <label class="form-check-label font-weight-bolder  ">L
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
+            
            
+            <label class="form-check-label font-weight-bolder  ">M
+              </label>
+              <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
+      
+       
+                <label class="form-check-label font-weight-bolder  ">X
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
+            
+            
+                <label class="form-check-label font-weight-bolder  ">J
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
+            
+           
+                <label class="form-check-label font-weight-bolder  ">V
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
+            
+           
+                <label class="form-check-label font-weight-bolder  ">S
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
+           
+                <label class="form-check-label font-weight-bolder  ">D
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
+            
+         
+        </div>
+  </div>
+
+</div>`
+      actividadesHorarioContainer.appendChild(templete);
+  
+
+  
     })
-                     
-    // precios
-    console.log(precios)
+
+   
+
+ 
+
 
   });
 }
-
