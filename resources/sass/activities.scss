@@ -12,8 +12,8 @@ select{
     border: .9px solid rgba(73, 73, 73, 0.842) !important;
 }
 .pases-precios-check{
-width: 30px !important;
-height: 30px !important;
+width: 25px !important;
+height: 25px !important;
 padding-top: 5px !important;
 
 }
@@ -29,8 +29,9 @@ padding-top: 5px !important;
 //     height: 15px !important;
 // }
 .sizecheck{
-    width: 12px !important;
-    height: 12px !important;
+    width: 15px !important;
+    height: 15px !important;
+    margin-top: 0.4rem;
 }
 .lbcheck{
     line-height: 30px !important;
@@ -55,7 +56,7 @@ padding-top: 5px !important;
   max-height: 30vh;
   border: 1px dotted black;
   margin-bottom: 1rem;
-  padding-top: 1rem;
+//   padding-top: 1rem;
 
 } 
 .flex-text{
@@ -92,7 +93,27 @@ textarea{
     min-width: 1rem;
 }
 .dia-check-container{
-    background-color:red;
+    min-width: 2.5rem;
     width: fit-content;
   
+}
+.dinamic-input-time{
+    display: block;
+    /* width: 100%; */
+    height: calc(1.6em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.days-dinamic-container{
+    display: inline-block;
+    width: 100%;
+
 }

@@ -440,24 +440,22 @@
                         </div>
                         {{-- fin select llegadas --}}
                         <div class="row position-sticky mt-3">
-                            <div class="col-6">
+                            <div class="col-12">
                               <div class="row">
                                {{-- <div class="col-3">Horario</div> --}}
-                               <div class="col-3">H. Inicio</div>
-                               <div class="col-3">H. Fin</div>
-                               <div class="col-2">Días</div>
+                               <div class="col-2 text-center">H. Inicio</div>
+                               <div class="col-2 text-center">H. Fin</div>
+                               <div class="col-4text-center offset-2 justify-content-center align-content-center align-items-center">Días</div>
                                
                               </div>
                             
                             </div>
-                            <div class="col-6">
-                               
-                           </div>
+                            
                           </div>
                      <div class="container overflow">
                             <div class="row mt-3">
-                              <div class="col-12">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ducimus voluptatem eaque accusamus nostrum reiciendis itaque totam earum! Quisquam earum fugiat nobis amet, quia officia sapiente nemo? Ratione, eum sapiente!</p>
+                              <div class="col-12" id="actividadesHorarioContainer" style="padding:0;">
+                               
                               </div>
                        
                             </div>

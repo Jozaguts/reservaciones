@@ -26,42 +26,6 @@ class ActividadesController extends Controller
      */
     public function index()
     {
-// $act = DB::table('actividades as ac')
-// 		->Join('tipoactividades as ta', 'ac.tipoactividades_id', '=', 'ta.id')
-// 		->Join('anticipos as an', 'ac.anticipo_id', '=', 'an.id')
-// 		->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre')
-//         ->Where([['ac.id','=', '1'], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
-//         ->get();
-//          var_dump($act);   
-
-        // $actpa = DB::table('actividades as ac')
-        //     ->select('ac.precio', 'ac.balance')
-        //     ->where([['ac.id','=', '1'], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
-        //     ->get();               
-        // var_dump($actpa);
-
-        // $actp = DB::table('actividadprecios as ap')
-        // ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
-        // ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
-        // ->where([['ap.actividades_id', '=', '1'], ['ap.active', '=', '1'], ['ap.remove', '=', '0']])
-        // ->orderBy('ap.id')
-        // ->get();
-        // dd($actp);
-
-        // $sal = DB::table('salida_llegadahorarios as slh')
-        //     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
-        //     ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-        //     ->where([['slh.actividadeshorario_id', '=', '1'], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
-        //     ->orderBy('slh.id')
-        //     ->get();
-        //     var_dump($sal);
-
-        // $actpa = DB::table('actividades as ac')
-        //     ->select('ac.riesgo', 'ac.puntos', 'ac.requisitos', 'ac.observaciones')
-        //     ->where([['ac.id','=', '1'], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
-        //     ->get();               
-        // var_dump($actpa);
-         
 
         $personas = Personas::all();
         $salidasLlegadas = SalidasLlegadas::all();
@@ -365,8 +329,14 @@ class ActividadesController extends Controller
        ->where([['ap.actividades_id', '=', $id], ['ap.active', '=', '1'], ['ap.remove', '=', '0']])
        ->orderBy('ap.id')
        ->get();
+    //    actividades horario
+       $acth = DB::table('Actividadeshorarios as ah')
+           ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
+           ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
+           ->orderBy('ah.hini')
+           ->get();
 
-        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp]]);
+        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth]]);
 
     }
 

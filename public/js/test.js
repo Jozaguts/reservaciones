@@ -80,7 +80,7 @@ generalInputs.forEach((input)=>{
   $('#addActivities').modal('hide');
  }
  let allCheckbox = document.querySelectorAll('[class~=check-clean]')
- console.log(allCheckbox)
+
  allCheckbox.forEach(function(check){
  check.removeAttribute("unchecked");
  check.removeAttribute("checked");
@@ -910,8 +910,7 @@ countRecolecionLLEGADAS--;
         arrayHorasSalida.push(salida)
       }
 
-      console.log( `Puntos de llegada ${arrayPuntosLlegada}, horas de llegada${arrayHorasLlegada}`)
-      console.log(`Puntos de salida${arrayPuntosSalida}, horas de salida${arrayHorasSalida}`)
+ 
 
 
   
@@ -1112,6 +1111,116 @@ function editarActividad(e){
      `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
      let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
      `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+
+    // PESTANA 3
+    let actividadesHorario = data.pestana3.actividadesHorario;
+    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer');
+    actividadesHorario.forEach(function(horario){
+      console.log(horario.l)
+      let bolcheckL;
+      if(horario.l == 1){
+        bolcheckL = 'checked';
+      }else{
+        bolcheckL='unchecked';
+      }
+      let bolcheckM;
+      if(horario.m == 1){
+        bolcheckM = 'checked';
+      }else{
+        bolcheckM='unchecked';
+      }
+      let bolcheckX;
+      if(horario.x == 1){
+        bolcheckX = 'checked';
+      }else{
+        bolcheckX='unchecked';
+      }
+      let bolcheckJ;
+      if(horario.j == 1){
+        bolcheckJ = 'checked';
+      }else{
+        bolcheckJ='unchecked';
+      }
+      let bolcheckV;
+      if(horario.v == 1){
+        bolcheckV = 'checked';
+      }else{
+        bolcheckV='unchecked';
+      }
+      let bolcheckS;
+      if(horario.s == 1){
+        bolcheckS = 'checked';
+      }else{
+        bolcheckS='unchecked';
+      }
+      let bolcheckD;
+      if(horario.d == 1){
+        bolcheckD = 'checked';
+      }else{
+        bolcheckD='unchecked';
+      }
+
+      let templete = document.createElement('div');
+      templete.innerHTML=`<div class="col-12 p-0">
+      <div class="container">
+  
+          <div class="row" >
+          <div class="col-2">
+          <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
+          </div>
+          <div class="col-2">
+          <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
+          </div>
+          <div class="col-5 offset-2 pt-3">
+          
+                <label class="form-check-label font-weight-bolder  ">L
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
+            
+           
+            <label class="form-check-label font-weight-bolder  ">M
+              </label>
+              <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
+      
+       
+                <label class="form-check-label font-weight-bolder  ">X
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
+            
+            
+                <label class="form-check-label font-weight-bolder  ">J
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
+            
+           
+                <label class="form-check-label font-weight-bolder  ">V
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
+            
+           
+                <label class="form-check-label font-weight-bolder  ">S
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
+           
+                <label class="form-check-label font-weight-bolder  ">D
+                  </label>
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
+            
+         
+        </div>
+  </div>
+
+</div>`
+      actividadesHorarioContainer.appendChild(templete);
+  
+
+  
+    })
+
+   
+
+ 
+
+
   });
 }
-
