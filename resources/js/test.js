@@ -1057,11 +1057,11 @@ function editarActividad(e){
     let precioG = document.getElementById('precioG')
     precioG.value = data.pestana2.balances[0].precio;
     
-<<<<<<< HEAD
+
     
     // precios
     console.log(data.pestana2.precios)
-=======
+
     let precios = data.pestana2.precios;
     let templete = document.createElement('div');
     let rowPrecios = document.getElementById('preciosContainer')
@@ -1112,18 +1112,18 @@ function editarActividad(e){
               </div>
               <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
               <div class="form-group">
-              <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId${precio.id}" id="promoPersonaId${precio.id}" ${precio.promocion==1?checked=true:checked =false} >
+              <input type="checkbox" class="form-control pases-precios-check ml-3" name="promoPersonaId${precio.id}" id="promoPersonaId${precio.id}"${precio.promocion==1? "checked":"unchecked"} >
               </div>
               </div>
               <div class="col-1 padding-col " style="background-color: #FFFDCC">
               <div class="form-group">                                                   
-              <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId${precio.id}" id="restriccionPersonaId${precio.id}" value="1" onchange="habilitarAcompnante(this);" data-id="${precio.id}" value="${precio.restriccion}">
+              <input type="checkbox" class="form-control ml-3 pases-precios-check" name="restriccionPersonaId${precio.id}" id="restriccionPersonaId${precio.id}" value="1" onchange="habilitarAcompnante(this);" data-id="${precio.id}" ${precio.restriccion==1? "checked":"unchecked"}>
               </div>
               </div>
               <div class="col-1 padding-col " style="background-color: #FFFDCC">
               <div class="form-group">
                 
-                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId${precio.id}" id="acompanantePersonaId${precio.id}" value="1" disabled>
+                <input type="checkbox" class="form-control ml-3 pases-precios-check" name="acompanantePersonaId${precio.id}" id="acompanantePersonaId${precio.id}" ${precio.acompanante==1? "checked":"unchecked"}  disabled>
               </div>
               </div>
             `;
@@ -1132,3 +1132,7 @@ function editarActividad(e){
                      
     // precios
     console.log(precios)
+
+  });
+}
+
