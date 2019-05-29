@@ -330,7 +330,7 @@ class ActividadesController extends Controller
        ->orderBy('ap.id')
        ->get();
     //    actividades horario
-       $acth = DB::table('Actividadeshorarios as ah')
+       $acth = DB::table('actividadeshorarios as ah')
            ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
            ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
            ->orderBy('ah.hini')
