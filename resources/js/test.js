@@ -1128,6 +1128,8 @@ function editarActividad(e){
     // PESTANA 3
     let diasActividadesHorario = data.pestana3.actividadesHorario; 
     let salidasHLibre = data.pestana3.salidasHLibre; //obtengo las salidas Horario libre
+    let llegadasHLibre = data.pestana3.llegadasHLibre
+    console.log(llegadasHLibre)
   
       // ########################HORARIO MULTIPLE
       
@@ -1165,8 +1167,10 @@ function editarActividad(e){
     if(salidasHLibre.length != 0){
       document.getElementById('libre').checked =true;
        document.getElementById('salidas').options.selectedIndex = salidasHLibre[0][0].slid - 1;
+       document.getElementById('llegadas').options.selectedIndex = llegadasHLibre[0][0].slid - 1;
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
     }
+    
  
      
 

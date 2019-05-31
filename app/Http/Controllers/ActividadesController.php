@@ -338,6 +338,7 @@ class ActividadesController extends Controller
 
             $salidasHorarioMultiple = array();
             $salidasHorarioLibre = array();
+            $llegadasHorarioLibre = array();
            foreach ($acth as $horario) {
                
                if($horario->hini == null && $horario->hfin == null ) {
@@ -349,7 +350,20 @@ class ActividadesController extends Controller
                ->orderBy('slh.id')
                ->get();
 
+
+
                array_push($salidasHorarioLibre, $sal);
+
+            //    llegadas
+
+        $llegadas = DB::table('salida_llegadahorarios as slh')
+           ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+           ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+           ->orderBy('slh.id')
+           ->get();
+           array_push($llegadasHorarioLibre, $llegadas);
+     
 
                }
 
@@ -375,7 +389,7 @@ class ActividadesController extends Controller
            
           
 
-        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth, 'salidasHLibre'=>  $salidasHorarioLibre , 'salidasHMultiple'=>  $salidasHorarioMultiple]]);
+        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth, 'salidasHLibre'=>  $salidasHorarioLibre , 'llegadasHLibre'=> $llegadasHorarioLibre, 'salidasHMultiple'=>  $salidasHorarioMultiple]]);
 
     }
 
