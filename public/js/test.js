@@ -1127,9 +1127,12 @@ function editarActividad(e){
 
     // PESTANA 3
     let diasActividadesHorario = data.pestana3.actividadesHorario; 
-    let salidasHLibre = data.pestana3.salidasHLibre; //obtengo las salidas Horario libre
+    let salidasHLibre = data.pestana3.salidasHLibre; //obtengo las salidas Horario libre 
     let llegadasHLibre = data.pestana3.llegadasHLibre
-    console.log(llegadasHLibre)
+    let salidasHMultiple = data.pestana3.salidasHMultiple //obtengo las salidas de HORAIO MULTIPLE
+    let llegadasHMultiple = data.pestana3.llegadasHMultiple
+    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer'); //conteneder mini crud
+
   
       // ########################HORARIO MULTIPLE
       
@@ -1163,8 +1166,9 @@ function editarActividad(e){
 
       }
       // ejecuto la funcion: llenarDiasHLibre si SALIDAS HORARIO LIBRE TIENE VALORES.
-      console.log(salidasHLibre[0][0].slid)
+      
     if(salidasHLibre.length != 0){
+       actividadesHorarioContainer.innerHTML=""; //limpio el mini cruud
       document.getElementById('libre').checked =true;
        document.getElementById('salidas').options.selectedIndex = salidasHLibre[0][0].slid - 1;
        document.getElementById('llegadas').options.selectedIndex = llegadasHLibre[0][0].slid - 1;
@@ -1176,109 +1180,356 @@ function editarActividad(e){
 
 
 
-
+if(salidasHMultiple != 0){
 
       // FIN HORARIO MULTIPLE###################
-    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer');
-//     actividadesHorario.forEach(function(horario){
-//       
-//       let bolcheckL;
-//       if(horario.l == 1){
-//         bolcheckL = 'checked';
-//       }else{
-//         bolcheckL='unchecked';
-//       }
-//       let bolcheckM;
-//       if(horario.m == 1){
-//         bolcheckM = 'checked';
-//       }else{
-//         bolcheckM='unchecked';
-//       }
-//       let bolcheckX;
-//       if(horario.x == 1){
-//         bolcheckX = 'checked';
-//       }else{
-//         bolcheckX='unchecked';
-//       }
-//       let bolcheckJ;
-//       if(horario.j == 1){
-//         bolcheckJ = 'checked';
-//       }else{
-//         bolcheckJ='unchecked';
-//       }
-//       let bolcheckV;
-//       if(horario.v == 1){
-//         bolcheckV = 'checked';
-//       }else{
-//         bolcheckV='unchecked';
-//       }
-//       let bolcheckS;
-//       if(horario.s == 1){
-//         bolcheckS = 'checked';
-//       }else{
-//         bolcheckS='unchecked';
-//       }
-//       let bolcheckD;
-//       if(horario.d == 1){
-//         bolcheckD = 'checked';
-//       }else{
-//         bolcheckD='unchecked';
-//       }
-
-//       let templete = document.createElement('div');
-//       templete.innerHTML=`<div class="col-12 p-0">
-//       <div class="container">
-  
-//           <div class="row" >
-//           <div class="col-2">
-//           <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
-//           </div>
-//           <div class="col-2">
-//           <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
-//           </div>
-//           <div class="col-5 offset-2 pt-3">
-          
-//                 <label class="form-check-label font-weight-bolder  ">L
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
-            
-           
-//             <label class="form-check-label font-weight-bolder  ">M
-//               </label>
-//               <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
+   
+    actividadesHorarioContainer.innerHTML="";
+    diasActividadesHorario.forEach(function(horario){
       
-       
-//                 <label class="form-check-label font-weight-bolder  ">X
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
-            
-            
-//                 <label class="form-check-label font-weight-bolder  ">J
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
-            
-           
-//                 <label class="form-check-label font-weight-bolder  ">V
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
-            
-           
-//                 <label class="form-check-label font-weight-bolder  ">S
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
-           
-//                 <label class="form-check-label font-weight-bolder  ">D
-//                   </label>
-//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
-            
-         
-//         </div>
-//   </div>
+      
+      let bolcheckL;
+      if(horario.l == 1){
+        bolcheckL = 'checked';
+      }else{
+        bolcheckL='unchecked';
+      }
+      let bolcheckM;
+      if(horario.m == 1){
+        bolcheckM = 'checked';
+      }else{
+        bolcheckM='unchecked';
+      }
+      let bolcheckX;
+      if(horario.x == 1){
+        bolcheckX = 'checked';
+      }else{
+        bolcheckX='unchecked';
+      }
+      let bolcheckJ;
+      if(horario.j == 1){
+        bolcheckJ = 'checked';
+      }else{
+        bolcheckJ='unchecked';
+      }
+      let bolcheckV;
+      if(horario.v == 1){
+        bolcheckV = 'checked';
+      }else{
+        bolcheckV='unchecked';
+      }
+      let bolcheckS;
+      if(horario.s == 1){
+        bolcheckS = 'checked';
+      }else{
+        bolcheckS='unchecked';
+      }
+      let bolcheckD;
+      if(horario.d == 1){
+        bolcheckD = 'checked';
+      }else{
+        bolcheckD='unchecked';
+      }
 
-// </div>`
-//       actividadesHorarioContainer.appendChild(templete);
+      let templete = document.createElement('div');
   
-//     })
+      templete.innerHTML=`
+      <div class="col-12 p-0">
+        <div class="container">
+          <div class="row" >
+                <div class="col-2">
+                  <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
+                </div>
+                <div class="col-2">
+                  <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
+                </div>
+              <div class="col-3 offset-2 pt-3">
+                <label class="form-check-label font-weight-bolder">L</label>
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
+                <label class="form-check-label font-weight-bolder">M</label>
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
+                <label class="form-check-label font-weight-bolder  ">X</label>
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
+                <label class="form-check-label font-weight-bolder  ">J</label>
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
+                <label class="form-check-label font-weight-bolder">V</label>
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
+                <label class="form-check-label font-weight-bolder  ">S</label>
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
+                <label class="form-check-label font-weight-bolder  ">D</label>
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
+              </div>
+              <div class="col-2 pt-3"> 
+                <button type="button" class="table-head table-head__btn btn-edit btn btn-primary"  onclick="MostrarHMultiple(this);" data-id=${horario.id}> <span class="font-weight-bolder">
+                </button>
+                <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+              </div>
+          </div>
+      </div>
+    </div>`
+      actividadesHorarioContainer.appendChild(templete);
+  
+    })
+  }
   });
 
 }
+let horarioMultipleAJAX;
+
+function MostrarHMultiple(horario){
+  let id = horario.getAttribute('data-id')
+
+let xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function(){
+  if(this.readyState==4 && this.status == 200)
+  horarioMultipleAJAX = JSON.parse(xhr.responseText);
+
+  
+ 
+}
+
+xhr.open('GET',`/horario-multiple/${id}`,false)
+xhr.send();
+
+
+let respuesta   = horarioMultipleAJAX.pestana3;
+let horarios = respuesta.actividadesHorario;
+
+horarios.forEach(function(horario){
+  console.log(horario)
+  let bolcheckL;
+  if(horario.l == 1){
+    bolcheckL = 'checked';
+  }else{
+    bolcheckL='unchecked';
+  }
+  let bolcheckM;
+  if(horario.m == 1){
+    bolcheckM = 'checked';
+  }else{
+    bolcheckM='unchecked';
+  }
+  let bolcheckX;
+  if(horario.x == 1){
+    bolcheckX = 'checked';
+  }else{
+    bolcheckX='unchecked';
+  }
+  let bolcheckJ;
+  if(horario.j == 1){
+    bolcheckJ = 'checked';
+  }else{
+    bolcheckJ='unchecked';
+  }
+  let bolcheckV;
+  if(horario.v == 1){
+    bolcheckV = 'checked';
+  }else{
+    bolcheckV='unchecked';
+  }
+  let bolcheckS;
+  if(horario.s == 1){
+    bolcheckS = 'checked';
+  }else{
+    bolcheckS='unchecked';
+  }
+  let bolcheckD;
+  if(horario.d == 1){
+    bolcheckD = 'checked';
+  }else{
+    bolcheckD='unchecked';
+  }
+})
+
+  
+    contador++;
+    let container= document.createElement('div')
+    container.classList = "contanier";
+    container.innerHTML= `
+    <div class="container"> 
+    <div class="h-divider">
+    </div>
+    <div class="row">
+      <div class="col-12"> 
+        <a href="#!" class="btn btn-danger float-right" onclick="cancelHorario(this)">X 
+        </a>
+      </div>
+      <div class="col-4">
+      <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="titulo">Horario ${contador}</label>
+      </div>
+    </div>
+    <div class="row">
+                              
+                              <div class="col-6">
+                                <div class="row">
+                                  <div class="col-4">
+                                      <div class="form-group">
+                                          <label for="">Hora de Inicio:</label>
+                                          <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" value=${horario.hini} aria-describedby="helpId" data-horarioid="${contador}" required>
+                                        </div>
+                                  </div>
+                                  <div class="col-4">
+                                      <div class="form-group">
+                                          <label for="">Hora de Finalización:</label>
+                                          <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+                                        </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="row mt-3">
+                                    <div class="col-3 ml-1 ">
+                                        <div class="form-group float-left">
+                                            <label class="form-check-label lbcheck">
+                                              <input class="  sizecheck general horario-multiple" type="checkbox" name="checkdiario${contador}" id="checkdiario${contador}" value="1" onchange="diarioEntrega(this);" data-id="${contador}">Diario
+                                            </label>
+                                          </div>
+                                    </div>
+                                    <div class="col-8 ">
+                                                  <div class="container">
+                                                      <div class="row">
+                                                        <div class="">
+                                                            <label class="form-check-label font-weight-bolder  ">L
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <label class="form-check-label font-weight-bolder  ">M
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <label class="form-check-label font-weight-bolder  ">X
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <label class="form-check-label font-weight-bolder  ">J
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <label class="form-check-label font-weight-bolder  ">V
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1"checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3" >
+                                                            <label class="form-check-label font-weight-bolder  ">S
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <label class="form-check-label font-weight-bolder  ">D
+                                                              </label>
+                                                              <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" checked data-horarioid="${contador}"> 
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                              </div>
+  
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row ">
+                              <div class="col-12 ">
+                                <div class="row">
+                                  <div class="col-6">  <h2 class="lead">Salidas</h2></div>
+                                  <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6" >
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                              <label for="" data-punto="1";>Punto 1</label>
+                                              <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
+                                            
+                                                </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-4">
+                                            <div class="form-group">
+                                              <label for="">Hora</label>
+                                              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+                                            </div>
+                                            
+                                          </div>
+                                          <div class="col-4 d-inline mt-4 pt-1">
+                                              <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="primarybtnHora${contador}" onclick="addpunto(this);">+</a>
+                                            </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                          <div class="col-4">
+                                              <div class="form-group">
+                                                <label for="" data-punto="1";>Punto 1</label>
+                                                <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="col-4">
+                                              <div class="form-group">
+                                                <label for="">Hora</label>
+                                                <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+                                              </div>
+                                              
+                                            </div>
+                                            <div class="col-4 d-inline mt-4 pt-1">
+                                                <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="secondarybtnHora${contador}" onclick="addpuntoLLEGADAS(this);">+</a>
+                                              </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            </div>
+  
+    `;
+    rowContanier.appendChild(container);
+  
+    
+  
+  
+  
+  
+    /*SELECT SALIDAS
+    *
+    *
+    * la peticion xhr esta de forma sincrona por eso el retardo al abrir el nuevo horario se peude mejorar con fetch
+    */
+    let selectsSalidasLegadas = document.querySelectorAll('[id^="salidas"]')
+    let selectsSalidasLegadas__llegadas = document.querySelectorAll('[id^="llegadas"]')
+     selectsSalidasLegadas = Array.from(selectsSalidasLegadas)
+     selectsSalidasLegadas__llegadas = Array.from(selectsSalidasLegadas__llegadas)
+  
+   
+    
+    for (let i = 0; i < salidasyllegadas.length; i++) {
+      let option = document.createElement('option');
+      option.value = salidasyllegadas[i].id
+      option.innerHTML =salidasyllegadas[i].nombre;
+      
+      
+      selectsSalidasLegadas.forEach(function(select){
+        select.appendChild(option)
+      })
+    }
+     
+    for (let i = 0; i < salidasyllegadas.length; i++) {
+      let option = document.createElement('option');
+      option.value = salidasyllegadas[i].id
+      option.innerHTML =salidasyllegadas[i].nombre;
+      
+      
+      selectsSalidasLegadas__llegadas.forEach(function(select){
+        select.appendChild(option)
+      })
+    }
+  
+  
+// fin ajaxx HORARIO MULTIPLE
+}
+
+

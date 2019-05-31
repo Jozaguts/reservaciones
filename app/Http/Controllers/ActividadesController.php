@@ -15,8 +15,6 @@ use App\ActividadesHorario;
 use App\SalidasLlegadasHorario;
 use Illuminate\Support\Facades\DB;
 
-
-
 class ActividadesController extends Controller
 {
     /**
@@ -339,6 +337,7 @@ class ActividadesController extends Controller
             $salidasHorarioMultiple = array();
             $salidasHorarioLibre = array();
             $llegadasHorarioLibre = array();
+            $llegadasHorarioMultiple =array();
            foreach ($acth as $horario) {
                
                if($horario->hini == null && $horario->hfin == null ) {
@@ -379,17 +378,22 @@ class ActividadesController extends Controller
 
                array_push($salidasHorarioMultiple, $sal);
 
+               //legada HORARIO MULTIPLE 
+               $llegadas = DB::table('salida_llegadahorarios as slh')
+           ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+           ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+           ->orderBy('slh.id')
+           ->get();
+           array_push($llegadasHorarioMultiple, $llegadas);
+
+               
+
                }
                
            }
-     
 
-
-            
-           
-          
-
-        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth, 'salidasHLibre'=>  $salidasHorarioLibre , 'llegadasHLibre'=> $llegadasHorarioLibre, 'salidasHMultiple'=>  $salidasHorarioMultiple]]);
+        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth, 'salidasHLibre'=>  $salidasHorarioLibre , 'llegadasHLibre'=> $llegadasHorarioLibre, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple]]);
 
     }
 
@@ -422,5 +426,53 @@ class ActividadesController extends Controller
      
             return compact('salidasLlegadas');
         
+    }
+    public function horarioMultiple(Request $request, $id)
+    {
+      
+        
+      
+       
+             //actividades horario
+            $acth = DB::table('actividadeshorarios as ah')
+            ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
+            ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
+            ->orderBy('ah.hini')
+            ->get();
+ 
+             $salidasHorarioMultiple = array();
+             $llegadasHorarioMultiple =array();
+            foreach ($acth as $horario) {
+             //    horario multiple
+             if($horario->hini != null && $horario->hfin != null ) {
+                 $id =$horario->id;
+                 $sal = DB::table('salida_llegadahorarios as slh')
+                ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+                ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+                ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                ->orderBy('slh.id')
+                ->get();
+ 
+                array_push($salidasHorarioMultiple, $sal);
+ 
+                //legada HORARIO MULTIPLE 
+                $llegadas = DB::table('salida_llegadahorarios as slh')
+            ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+            ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+            ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+            ->orderBy('slh.id')
+            ->get();
+            array_push($llegadasHorarioMultiple, $llegadas);
+ 
+                
+ 
+                }
+                
+            }
+ 
+         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple]]);
+         
+      
+
     }
 }

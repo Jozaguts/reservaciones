@@ -52,3 +52,4 @@ Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['au
 Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
 
 Route::get('salidasllegadas','ActividadesController@salidasllegadas')->middleware(['auth']);
+Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->middleware(['auth']);

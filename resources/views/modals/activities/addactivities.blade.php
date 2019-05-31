@@ -454,7 +454,7 @@
                           </div>
                      <div class="container overflow">
                             <div class="row mt-3">
-                              <div class="col-12" id="actividadesHorarioContainer" style="padding:0;">
+                              <div class="col-12 " id="actividadesHorarioContainer"  style="padding:0;">
                                
                               </div>
                        
