@@ -17,7 +17,7 @@ class CreateSalidallegadasTable extends Migration
             $table->increments('id');
             $table->string('clave',4);
             $table->string('nombre',40);
-            $table->string('direccion',40);   
+            $table->string('direccion',100);   
             $table->string('kml');
             $table->string('longitud');
             $table->string('latitud');

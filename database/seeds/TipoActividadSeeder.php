@@ -13,10 +13,10 @@ class TipoActividadSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $index) {
+        foreach (range(1,5) as $index) {
             DB::table('tipoactividades')->insert([
             'clave' => $faker->randomElement($array = array ('MT011','CM011','KY031','CMT31','MT021','LA021','LA011',)),
-            'nombre'=> $faker->userName,
+            'nombre'=> $faker->unique()->randomElement($array = array ('Motos','Canopy','Rio','Lanchas','Paseo en Bote','Paracaidas',)),
             'color'=> $faker->safeColorName,
             'active'=> 1,
             'remove'=>0,
