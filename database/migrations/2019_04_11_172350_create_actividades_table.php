@@ -29,7 +29,7 @@ class CreateActividadesTable extends Migration
             $table->string('observaciones')->nullable();//4ta pestaña
             $table->string('requisitos')->nullable(); //4ta pestaña
             $table->integer('maxcortesias')->nullable();
-            $table->integer('duracion')->nullable()->comment('si esta nulo acepta multiples horarios');
+            $table->integer('duracion')->nullable();
             $table->integer('maxcupones')->nullable();
             $table->boolean('riesgo');      //cambio de string a boolean
             $table->integer('puntos')->nullable();  //4ta pestaña

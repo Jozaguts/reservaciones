@@ -321,11 +321,11 @@
                           </div>  
                         </div>
                         <div class="col-6">
-                                    <h2 class="lead">Salidas</h2>                         
+                                    {{-- <h2 class="lead">Salidas</h2>                          --}}
                                         <div class="row">
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                  <label for="" data-punto="1";>Punto 1</label>                                                 
+                                                  <label for="" data-punto="1";>Salidas</label>                                                 
                                                 </div>
                                               </div>
                                               <div class="col-6">
@@ -348,7 +348,7 @@
                                       </label>
 
 
-                                      <input class="  diarioEntrega0 sizecheck  horario-fijo" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
+                                      <input class="  diarioEntrega0 check-horario-libre sizecheck  horario-fijo" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
 
                                 </div>
                               </div>
@@ -357,7 +357,7 @@
                                         <label class="form-check-label font-weight-bolder  ">Martes
                                           </label>
 
-                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
 
                                     </div>
                                 </div>
@@ -366,7 +366,7 @@
                                     <label class="form-check-label font-weight-bolder  ">Miercoles
                                       </label>
 
-                                      <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+                                      <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
 
                                 </div>
                               </div>
@@ -377,7 +377,7 @@
                                         <label class="form-check-label font-weight-bolder  ">Jueves
                                           </label>
 
-                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
 
                                     </div>
                                 </div>
@@ -386,7 +386,7 @@
                                         <label class="form-check-label font-weight-bolder  ">Viernes
                                           </label>
 
-                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
 
                                     </div>
                                 </div>
@@ -395,7 +395,7 @@
                                         <label class="form-check-label font-weight-bolder  ">Sabado
                                           </label>
 
-                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
 
                                     </div>
                                 </div>
@@ -404,14 +404,14 @@
                                         <label class="form-check-label font-weight-bolder  ">Domingo
                                           </label>
 
-                                          <input class="  diarioEntrega0 sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
 
                                     </div>
                                 </div>
                               </div>                             
                             </div>
                             <div class="col-6">
-                                <h2 class="lead">Llegadas</h2>
+                                {{-- <h2 class="lead">Llegadas</h2> --}}
                              </div>                           
                         </div>
 
@@ -425,7 +425,7 @@
                           <div class="row">
                             <div class="col-2">
                                 <div class="form-group">
-                                  <label for="" data-punto="1"; >Punto 1</label>                                 
+                                  <label for="" data-punto="1"; >Llegadas</label>                                 
                                 </div>
                               </div>
                               <div class="col-6">

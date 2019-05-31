@@ -336,7 +336,46 @@ class ActividadesController extends Controller
            ->orderBy('ah.hini')
            ->get();
 
-        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth]]);
+            $salidasHorarioMultiple = array();
+            $salidasHorarioLibre = array();
+           foreach ($acth as $horario) {
+               
+               if($horario->hini == null && $horario->hfin == null ) {
+                $id =$horario->id;
+                $sal = DB::table('salida_llegadahorarios as slh')
+               ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+               ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+               ->orderBy('slh.id')
+               ->get();
+
+               array_push($salidasHorarioLibre, $sal);
+
+               }
+
+            //    horario multiple
+            if($horario->hini != null && $horario->hfin != null ) {
+                $id =$horario->id;
+                $sal = DB::table('salida_llegadahorarios as slh')
+               ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+               ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+               ->orderBy('slh.id')
+               ->get();
+
+               array_push($salidasHorarioMultiple, $sal);
+
+               }
+               
+           }
+     
+
+
+            
+           
+          
+
+        return response()->json(['pestana1'=> ['actividades'=> $act], 'pestana2'=>['balances'=> $actpa, 'precios'=> $actp], 'pestana3'=>['actividadesHorario'=> $acth, 'salidasHLibre'=>  $salidasHorarioLibre , 'salidasHMultiple'=>  $salidasHorarioMultiple]]);
 
     }
 

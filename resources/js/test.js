@@ -234,13 +234,13 @@ function addHoraioContainer(){
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Inicio:</label>
-                                        <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}">
+                                        <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
                                       </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="">Hora de Finalización:</label>
-                                        <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}">
+                                        <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
                                       </div>
                                 </div>
                               </div>
@@ -878,12 +878,12 @@ countRecolecionLLEGADAS--;
          arrayPuntosLlegada.push(puntos)
        }
       
-       //HORAS
-      //  #### SALIDAS #####
-      let horasSalidas = document.querySelectorAll('.hora-salida')
-      let horasLlegada = document.querySelectorAll('.hora-llegada')
+          //HORAS
+        //  #### SALIDAS #####
+        let horasSalidas = document.querySelectorAll('.hora-salida')
+        let horasLlegada = document.querySelectorAll('.hora-llegada')
 
-      class HorasLlegadas{
+        class HorasLlegadas{
         constructor(id,horas){
           this.horas= horas;
           this.id=id;
@@ -898,17 +898,17 @@ countRecolecionLLEGADAS--;
         }
       }
 
-      let arrayHorasLlegada =[];
-      for (let i = 0; i < identificadores.length; i++) {
-        let llegada = new HorasLlegadas(i+1,horasLlegada)
-        arrayHorasLlegada.push(llegada)
-      }
+        let arrayHorasLlegada =[];
+        for (let i = 0; i < identificadores.length; i++) {
+          let llegada = new HorasLlegadas(i+1,horasLlegada)
+          arrayHorasLlegada.push(llegada)
+        }
 
-      let arrayHorasSalida =[];
-      for (let i = 0; i < identificadores.length; i++) {
+        let arrayHorasSalida =[];
+        for (let i = 0; i < identificadores.length; i++) {
         let salida = new HorasLlegadas(i+1,horasSalidas)
         arrayHorasSalida.push(salida)
-      }
+       }
 
  
 
@@ -932,78 +932,91 @@ countRecolecionLLEGADAS--;
         let observaciones = datos4.get('observaciones')
         
 
-        // console.log(`clave = ${clave}nombre = ${nombre}active = ${active}remove = ${remove} tipoUnidadId = ${tipoUnidadId}tipoUnidadId = ${tipoUnidadId} tipoactividadesid = ${tipoactividadesid}duracion = ${duracion} minutoincrementa = ${minutoincrementa}
-        // montoincremento = ${montoincremento}maxcortesias = ${maxcortesias} maxcupones = ${maxcupones} anticipoid = ${anticipoid} idusuario = ${idusuario} fijo = ${checkFijo} renta = ${checkRenta}  datos Persona = ${datosPersonas}, balance = ${balance}, Precio = ${precio} Libre = ${libre} dias Seleccionandos = ${diasSeleccionados}` )
-        let route = 'actividades'
-        
-        $.ajax({
-        url:route,
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:'POST',
-        dataType: 'json',
-        data: {
-            clave: clave,
-            nombre: nombre,
-            active:active,
-            remove:remove,
-            tipoactividades_id: tipoactividadesid,
-            tipounidades_id:tipoUnidadId,
-            fijo:fijoValue,
-            renta:rentaValue,
-            duracion:duracion,
-            minutoincrementa:minutoincrementa,
-            montoincremento:montoincremento,
-            maxcortesias:maxcortesias,
-            maxcupones:maxcupones,
-            anticipo_id:anticipoid,
-            idusuario:idusuario,
-            precio: precio,
-            balance:balance,
-            libre:libre,
-            datosPersonas:datosPersonas,
-            diasSeleccionados:diasSeleccionados,
-            salidas:salidaFijo,
-            llegadas:llegadasFijo,
-            riesgo:riesgo,
-            puntos:puntos,
-            requisito:requisito,
-            observaciones:observaciones,
-            ArrayDeDIas:ArrayDeDIas,
-            ArrayHrFin:ArrayHrFin,
-            ArrayHini:ArrayHini,
-            arrayHorasLlegada:arrayHorasLlegada,
-            arrayHorasSalida:arrayHorasSalida,
-            arrayPuntosLlegada:arrayPuntosLlegada,
-            arrayPuntosSalida:arrayPuntosSalida
+      //   let errores = {
+      //     hini:'Hora Fin No Puede Ser Nula',
+      //     hfin: 'Hora inicio no puede ser nula',
+      //     hllegada:'hora de llegada no puede ser nula',
+      //     hsalida:'Hora de salida no pude ser nula'
 
-        },
+      //  };
+        // $('#errorsIntoModal').html( errores.hfin);
+        // $('#message-errorIntoModal').fadeIn();
+        // setTimeout(() => {
+        //   $('#message-errorIntoModal').fadeOut();
+        // }, 3000);
 
-        success: function (data) {
         
-        
-          if(data.error == 'true'){
-            // data.errors.forEach(()=>{})
+          let route = 'actividades';
+          $.ajax({
+            url:route,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'POST',
+            dataType: 'json',
+            data: {
+                clave: clave,
+                nombre: nombre,
+                active:active,
+                remove:remove,
+                tipoactividades_id: tipoactividadesid,
+                tipounidades_id:tipoUnidadId,
+                fijo:fijoValue,
+                renta:rentaValue,
+                duracion:duracion,
+                minutoincrementa:minutoincrementa,
+                montoincremento:montoincremento,
+                maxcortesias:maxcortesias,
+                maxcupones:maxcupones,
+                anticipo_id:anticipoid,
+                idusuario:idusuario,
+                precio: precio,
+                balance:balance,
+                libre:libre,
+                datosPersonas:datosPersonas,
+                diasSeleccionados:diasSeleccionados,
+                salidas:salidaFijo,
+                llegadas:llegadasFijo,
+                riesgo:riesgo,
+                puntos:puntos,
+                requisito:requisito,
+                observaciones:observaciones,
+                ArrayDeDIas:ArrayDeDIas,
+                ArrayHrFin:ArrayHrFin,
+                ArrayHini:ArrayHini,
+                arrayHorasLlegada:arrayHorasLlegada,
+                arrayHorasSalida:arrayHorasSalida,
+                arrayPuntosLlegada:arrayPuntosLlegada,
+                arrayPuntosSalida:arrayPuntosSalida
+    
+            },
+    
+            success: function (data) {
             
-            $('#errorsIntoModal').html(data.errors);
-              $('#message-errorIntoModal').fadeIn();
-              setTimeout(() => {
-                $('#message-errorIntoModal').fadeOut();
-              }, 3000);
-              // setTimeout("location.reload(true);",3000)
-              
-          }else{
             
-            $('#successIntoModal').html(data.ok);
-              $('#message-successIntoModal').fadeIn();
-              setTimeout(() => {
-                $('#message-successIntoModal').fadeOut();
-              }, 3000);
-              // setTimeout("location.reload(true);",1000)
-          }
-        }
+              if(data.error == 'true'){
+                // data.errors.forEach(()=>{})
+                
+                $('#errorsIntoModal').html(data.errors);
+                  $('#message-errorIntoModal').fadeIn();
+                  setTimeout(() => {
+                    $('#message-errorIntoModal').fadeOut();
+                  }, 3000);
+                  // setTimeout("location.reload(true);",3000)
+                  
+              }else{
+                
+                $('#successIntoModal').html(data.ok);
+                  $('#message-successIntoModal').fadeIn();
+                  setTimeout(() => {
+                    $('#message-successIntoModal').fadeOut();
+                  }, 3000);
+                  // setTimeout("location.reload(true);",1000)
+              }
+            }
+            
+            
+            })
         
         
-        })
         
         })
 
@@ -1113,114 +1126,155 @@ function editarActividad(e){
      `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
 
     // PESTANA 3
-    let actividadesHorario = data.pestana3.actividadesHorario;
-    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer');
-    actividadesHorario.forEach(function(horario){
-      console.log(horario.l)
-      let bolcheckL;
-      if(horario.l == 1){
-        bolcheckL = 'checked';
-      }else{
-        bolcheckL='unchecked';
-      }
-      let bolcheckM;
-      if(horario.m == 1){
-        bolcheckM = 'checked';
-      }else{
-        bolcheckM='unchecked';
-      }
-      let bolcheckX;
-      if(horario.x == 1){
-        bolcheckX = 'checked';
-      }else{
-        bolcheckX='unchecked';
-      }
-      let bolcheckJ;
-      if(horario.j == 1){
-        bolcheckJ = 'checked';
-      }else{
-        bolcheckJ='unchecked';
-      }
-      let bolcheckV;
-      if(horario.v == 1){
-        bolcheckV = 'checked';
-      }else{
-        bolcheckV='unchecked';
-      }
-      let bolcheckS;
-      if(horario.s == 1){
-        bolcheckS = 'checked';
-      }else{
-        bolcheckS='unchecked';
-      }
-      let bolcheckD;
-      if(horario.d == 1){
-        bolcheckD = 'checked';
-      }else{
-        bolcheckD='unchecked';
-      }
-
-      let templete = document.createElement('div');
-      templete.innerHTML=`<div class="col-12 p-0">
-      <div class="container">
+    let diasActividadesHorario = data.pestana3.actividadesHorario; 
+    let salidasHLibre = data.pestana3.salidasHLibre; //obtengo las salidas Horario libre
   
-          <div class="row" >
-          <div class="col-2">
-          <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
-          </div>
-          <div class="col-2">
-          <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
-          </div>
-          <div class="col-5 offset-2 pt-3">
+      // ########################HORARIO MULTIPLE
+      
+      
+      let diasLibres = document.querySelectorAll('.check-horario-libre'); //obtengo todos los check que pertenecen a horarios libres
+     
+      
+    // funcion que recibe como parametros los dias de la BD y los checks pintados en el DOM
+      function llenarDiasHLibre (diasDB, DOMChecks){
+        dias = []; //un array solo para guardar el valor de los dias porque la data me manda ID's y valores nulos
+        dias.push(diasDB[0].l) //obtengo y guardo los dias
+        dias.push(diasDB[0].m)
+        dias.push(diasDB[0].x)
+        dias.push(diasDB[0].j)
+        dias.push(diasDB[0].v)
+        dias.push(diasDB[0].s)
+        dias.push(diasDB[0].d)
+
+        // para acceder a el atributo cheked paso de NodeList a Array los cheks del DOm
+        DOMChecks = Array.from(DOMChecks)
+
+        // un for para iterar los dias con los checks y si el valor es 1 en dias[] en DOMchecks tomo el mismo indice al check lo pongo en true
+          for (let i = 0; i < dias.length; i++) {
+            if(dias[i] == 1 && dias[i].hini == null && dias[i].hfin== null){
+              DOMChecks[i].checked =true;
+            }else{
+              DOMChecks[i].checked =false;
+            }
+            
+          }
+
+      }
+      // ejecuto la funcion: llenarDiasHLibre si SALIDAS HORARIO LIBRE TIENE VALORES.
+      console.log(salidasHLibre[0][0].slid)
+    if(salidasHLibre.length != 0){
+      document.getElementById('libre').checked =true;
+       document.getElementById('salidas').options.selectedIndex = salidasHLibre[0][0].slid - 1;
+      llenarDiasHLibre(diasActividadesHorario, diasLibres);
+    }
+ 
+     
+
+
+
+
+
+      // FIN HORARIO MULTIPLE###################
+    let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer');
+//     actividadesHorario.forEach(function(horario){
+//       
+//       let bolcheckL;
+//       if(horario.l == 1){
+//         bolcheckL = 'checked';
+//       }else{
+//         bolcheckL='unchecked';
+//       }
+//       let bolcheckM;
+//       if(horario.m == 1){
+//         bolcheckM = 'checked';
+//       }else{
+//         bolcheckM='unchecked';
+//       }
+//       let bolcheckX;
+//       if(horario.x == 1){
+//         bolcheckX = 'checked';
+//       }else{
+//         bolcheckX='unchecked';
+//       }
+//       let bolcheckJ;
+//       if(horario.j == 1){
+//         bolcheckJ = 'checked';
+//       }else{
+//         bolcheckJ='unchecked';
+//       }
+//       let bolcheckV;
+//       if(horario.v == 1){
+//         bolcheckV = 'checked';
+//       }else{
+//         bolcheckV='unchecked';
+//       }
+//       let bolcheckS;
+//       if(horario.s == 1){
+//         bolcheckS = 'checked';
+//       }else{
+//         bolcheckS='unchecked';
+//       }
+//       let bolcheckD;
+//       if(horario.d == 1){
+//         bolcheckD = 'checked';
+//       }else{
+//         bolcheckD='unchecked';
+//       }
+
+//       let templete = document.createElement('div');
+//       templete.innerHTML=`<div class="col-12 p-0">
+//       <div class="container">
+  
+//           <div class="row" >
+//           <div class="col-2">
+//           <input type="time" value='${horario.hini}' class="m-1 dinamic-input-time text-center ">
+//           </div>
+//           <div class="col-2">
+//           <input type="time" value='${horario.hfin}' class="m-1 dinamic-input-time text-center">
+//           </div>
+//           <div class="col-5 offset-2 pt-3">
           
-                <label class="form-check-label font-weight-bolder  ">L
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
+//                 <label class="form-check-label font-weight-bolder  ">L
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL}> 
             
            
-            <label class="form-check-label font-weight-bolder  ">M
-              </label>
-              <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
+//             <label class="form-check-label font-weight-bolder  ">M
+//               </label>
+//               <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM}> 
       
        
-                <label class="form-check-label font-weight-bolder  ">X
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
+//                 <label class="form-check-label font-weight-bolder  ">X
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX}> 
             
             
-                <label class="form-check-label font-weight-bolder  ">J
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
-            
-           
-                <label class="form-check-label font-weight-bolder  ">V
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
+//                 <label class="form-check-label font-weight-bolder  ">J
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ}> 
             
            
-                <label class="form-check-label font-weight-bolder  ">S
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
+//                 <label class="form-check-label font-weight-bolder  ">V
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV}> 
+            
            
-                <label class="form-check-label font-weight-bolder  ">D
-                  </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
+//                 <label class="form-check-label font-weight-bolder  ">S
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS}> 
+           
+//                 <label class="form-check-label font-weight-bolder  ">D
+//                   </label>
+//                   <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD}> 
             
          
-        </div>
-  </div>
+//         </div>
+//   </div>
 
-</div>`
-      actividadesHorarioContainer.appendChild(templete);
+// </div>`
+//       actividadesHorarioContainer.appendChild(templete);
   
-
-  
-    })
-
-   
-
- 
-
-
+//     })
   });
+
 }
