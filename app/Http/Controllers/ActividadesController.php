@@ -429,10 +429,7 @@ class ActividadesController extends Controller
     }
     public function horarioMultiple(Request $request, $id)
     {
-      
-        
-      
-       
+        	
              //actividades horario
             $acth = DB::table('actividadeshorarios as ah')
             ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
@@ -463,14 +460,14 @@ class ActividadesController extends Controller
             ->orderBy('slh.id')
             ->get();
             array_push($llegadasHorarioMultiple, $llegadas);
- 
+     
                 
  
                 }
                 
             }
  
-         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple]]);
+         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple, 'idActividad' => $id]]);
          
       
 

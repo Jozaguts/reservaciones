@@ -325,7 +325,7 @@
                                         <div class="row">
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                  <label for="" data-punto="1";>Salidas</label>                                                 
+                                                  <label for="" data-punto="1";>Salida</label>                                                 
                                                 </div>
                                               </div>
                                               <div class="col-6">
@@ -425,7 +425,7 @@
                           <div class="row">
                             <div class="col-2">
                                 <div class="form-group">
-                                  <label for="" data-punto="1"; >Llegadas</label>                                 
+                                  <label for="" data-punto="1"; >Llegada</label>                                 
                                 </div>
                               </div>
                               <div class="col-6">

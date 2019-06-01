@@ -102,6 +102,11 @@ const checkDiario = document.getElementById('diario');
 const checkLibre = document.getElementById('libre');
 checkLibre.addEventListener('change',(e)=>{
 if(checkLibre.checked){
+  let diarioEntrega0 = document.querySelectorAll('.diarioEntrega0');
+  
+  diarioEntrega0.forEach(function(check){
+    check.disabled = false;
+  })
 // duracion.disabled = false;
 // entrega.disabled = false;
 // entrega.checked=false;
@@ -1277,27 +1282,26 @@ if(salidasHMultiple != 0){
 let horarioMultipleAJAX;
 
 function MostrarHMultiple(horario){
-  let id = horario.getAttribute('data-id')
 
-let xhr = new XMLHttpRequest();
+  let actividadId = horario.getAttribute('data-id')
+
+let xhr = new XMLHttpRequest()
 
 xhr.onreadystatechange = function(){
   if(this.readyState==4 && this.status == 200)
   horarioMultipleAJAX = JSON.parse(xhr.responseText);
-
-  
- 
 }
-
-xhr.open('GET',`/horario-multiple/${id}`,false)
+console.log(actividadId)
+xhr.open('GET',`/horario-multiple/${actividadId}`,false)
 xhr.send();
 
 
 let respuesta   = horarioMultipleAJAX.pestana3;
 let horarios = respuesta.actividadesHorario;
-
-horarios.forEach(function(horario){
-  console.log(horario)
+let salidasHMultiple = respuesta.salidasHMultiple;
+console.log(respuesta)
+horarios.forEach(function(horario, index){
+ 
   let bolcheckL;
   if(horario.l == 1){
     bolcheckL = 'checked';
@@ -1431,60 +1435,63 @@ horarios.forEach(function(horario){
                                 </div>
                               </div>
                             </div>
-                            <div class="row ">
+                  
+                      <div class="row" id="row">
                               <div class="col-12 ">
                                 <div class="row">
-                                  <div class="col-6">  <h2 class="lead">Salidas</h2></div>
-                                  <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
-                                </div>
+                                <div class="col-6">  <h2 class="lead">Salidas</h2></div>
+                                <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
                               </div>
                             </div>
-                            <div class="row">
-                                <div class="col-6" >
-                                    <div class="row">
+                          </div>
+                          <div class="row">
+                              <div class="col-6" >
+                                  <div class="row">
+                                      <div class="col-4">
+                                          <div class="form-group">
+                                            <label for="" data-punto="1";>Punto 1</label>
+                                            <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
+                                          
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-4">
+                                          <div class="form-group">
+                                            <label for="">Hora</label>
+                                            <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+                                          </div>
+                                          
+                                        </div>
+                                        <div class="col-4 d-inline mt-4 pt-1">
+                                            <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="primarybtnHora${contador}" onclick="addpunto(this);">+</a>
+                                          </div>
+                                  </div>
+                                  </div>
+                                  <div class="col-6">
+                                      <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                               <label for="" data-punto="1";>Punto 1</label>
-                                              <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
-                                            
-                                                </select>
+                                              <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
+                                              </select>
                                             </div>
                                           </div>
                                           <div class="col-4">
                                             <div class="form-group">
                                               <label for="">Hora</label>
-                                              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+                                              <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
                                             </div>
                                             
                                           </div>
                                           <div class="col-4 d-inline mt-4 pt-1">
-                                              <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="primarybtnHora${contador}" onclick="addpunto(this);">+</a>
+                                              <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="secondarybtnHora${contador}" onclick="addpuntoLLEGADAS(this);">+</a>
                                             </div>
-                                    </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                          <div class="col-4">
-                                              <div class="form-group">
-                                                <label for="" data-punto="1";>Punto 1</label>
-                                                <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
-                                                </select>
-                                              </div>
-                                            </div>
-                                            <div class="col-4">
-                                              <div class="form-group">
-                                                <label for="">Hora</label>
-                                                <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
-                                              </div>
-                                              
-                                            </div>
-                                            <div class="col-4 d-inline mt-4 pt-1">
-                                                <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="secondarybtnHora${contador}" onclick="addpuntoLLEGADAS(this);">+</a>
-                                              </div>
-                                            </div>
-                                        </div>
+                                          </div>
+                                      </div>
                             </div>
                             </div>
+                    
+                            
   
     `;
     rowContanier.appendChild(container);
