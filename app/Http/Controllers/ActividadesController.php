@@ -467,7 +467,7 @@ class ActividadesController extends Controller
                 
             }
  
-         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple]]);
+         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple, 'idActividad' => $id]]);
          
       
 
