@@ -1277,6 +1277,7 @@ if(salidasHMultiple != 0){
 let horarioMultipleAJAX;
 
 function MostrarHMultiple(horario){
+  let actividadId = document.getElementById('trBg').getAttribute('data-id');
   let id = horario.getAttribute('data-id')
 
 let xhr = new XMLHttpRequest();
@@ -1289,15 +1290,15 @@ xhr.onreadystatechange = function(){
  
 }
 
-xhr.open('GET',`/horario-multiple/${id}`,false)
+xhr.open('GET',`/horario-multiple/${actividadId}`,false)
 xhr.send();
 
 
 let respuesta   = horarioMultipleAJAX.pestana3;
 let horarios = respuesta.actividadesHorario;
-
-horarios.forEach(function(horario){
-  console.log(horario)
+let salidasHMultiple = respuesta.salidasHMultiple;
+horarios.forEach(function(horario, index){
+ 
   let bolcheckL;
   if(horario.l == 1){
     bolcheckL = 'checked';
@@ -1431,7 +1432,8 @@ horarios.forEach(function(horario){
                                 </div>
                               </div>
                             </div>
-                            <div class="row ">
+                  
+                      <div class="row" id="row">
                               <div class="col-12 ">
                                 <div class="row">
                                   <div class="col-6">  <h2 class="lead">Salidas</h2></div>
@@ -1462,29 +1464,13 @@ horarios.forEach(function(horario){
                                             </div>
                                     </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                          <div class="col-4">
-                                              <div class="form-group">
-                                                <label for="" data-punto="1";>Punto 1</label>
-                                                <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
-                                                </select>
-                                              </div>
-                                            </div>
-                                            <div class="col-4">
-                                              <div class="form-group">
-                                                <label for="">Hora</label>
-                                                <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
-                                              </div>
-                                              
-                                            </div>
-                                            <div class="col-4 d-inline mt-4 pt-1">
-                                                <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="secondarybtnHora${contador}" onclick="addpuntoLLEGADAS(this);">+</a>
-                                              </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-6" id="row-salidas">
+                                       
+                                </div>
                             </div>
                             </div>
+                    
+                            
   
     `;
     rowContanier.appendChild(container);
