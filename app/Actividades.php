@@ -23,6 +23,6 @@ class Actividades extends Model
     public function TipoActividad(){
         return $this->belongsTo(TipoActividades::class,'tipoactividades_id');
     }
-
-
+ 
+  
 }

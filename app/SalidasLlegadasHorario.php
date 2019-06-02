@@ -17,4 +17,5 @@ class SalidasLlegadasHorario extends Model
         'actividadeshorario_id'
     ];
 
+
 }

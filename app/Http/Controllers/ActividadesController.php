@@ -442,11 +442,11 @@ class ActividadesController extends Controller
             foreach ($acth as $horario) {
              //    horario multiple
              if($horario->hini != null && $horario->hfin != null ) {
-                 $id =$horario->id;
+                 $idh =$horario->id;
                  $sal = DB::table('salida_llegadahorarios as slh')
                 ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                 ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-                ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                ->where([['slh.actividadeshorario_id', '=',$idh], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
                 ->orderBy('slh.id')
                 ->get();
  
@@ -456,18 +456,15 @@ class ActividadesController extends Controller
                 $llegadas = DB::table('salida_llegadahorarios as slh')
             ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
             ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-            ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+            ->where([['slh.actividadeshorario_id', '=', $idh], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
             ->orderBy('slh.id')
             ->get();
             array_push($llegadasHorarioMultiple, $llegadas);
-     
-                
- 
                 }
                 
             }
  
-         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple, 'idActividad' => $id]]);
+         return response()->json(['pestana3'=>['actividadesHorario'=> $acth, 'salidasHMultiple'=>  $salidasHorarioMultiple , 'llegadasHMultiple' => $llegadasHorarioMultiple]]);
          
       
 
