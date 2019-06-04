@@ -239,13 +239,13 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Inicio:</label>
-              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
             </div>
       </div>
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
             </div>
       </div>
     </div>
@@ -556,7 +556,12 @@ countRecolecionLLEGADAS--;
     // #############################################################################################PESTAÑA 1 INICIO
 let AddActividadesForm = document.getElementById('AddActividadesForm');
 AddActividadesForm.addEventListener('submit',(e)=>{
+
+
+
+
     e.preventDefault();
+  
     
     let datos = new FormData(AddActividadesForm) 
     let clave = datos.get('clave')
@@ -1305,13 +1310,13 @@ horarios.forEach(function(horario){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora de Inicio:</label>
-              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" value=${horario.hini} aria-describedby="helpId" data-horarioid="${contador}" required>
+              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" value=${horario.hini} aria-describedby="helpId" data-horarioid="${contador}" required>
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} >
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} >
             </div>
           </div>
         </div>
@@ -1533,5 +1538,40 @@ selectHmultipleSalidas.forEach(function(select){
   
 // fin ajaxx HORARIO MULTIPLE
 }
+
+
+
+
+function ValidadHIni(){
+  let selectHIni = document.querySelectorAll('.listener-hora-ini')
+  let selectHFin = document.querySelectorAll('.listener-hora-fin')
+
+  for (let i = 0; i < selectHIni.length; i++) {
+    if(selectHFin[i].value <= selectHIni[i].value){
+    
+      selectHFin[i].classList.add('btn-danger')
+      let small = document.createElement('small');
+      small.classList.add('text-danger')
+      small.setAttribute('id', 'labelSmall')
+      small.innerHTML ="Hora Fin tiene que ser Mayor a Hora inicio";
+      selectHFin[i].parentElement.appendChild(small)
+      
+    }else{
+      selectHFin[i].classList.remove('btn-danger')
+      let smallLabel = document.querySelector("#labelSmall")
+      smallLabel.remove();
+      // console.log(selectHFin[i].previousSibling)
+
+      
+    }
+  
+  }
+
+}
+
+document.addEventListener('change',function(e){
+  e.target.classList.contains('listener-hora-fin')?ValidadHIni():null
+  e.target.classList.contains('listener-hora-ini')?ValidadHIni():null
+})
 
 
