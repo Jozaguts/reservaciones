@@ -429,7 +429,8 @@ class ActividadesController extends Controller
     }
     public function horarioMultiple(Request $request, $id)
     {
-        	
+          
+            
              //actividades horario
             $acth = DB::table('actividadeshorarios as ah')
             ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
@@ -445,7 +446,7 @@ class ActividadesController extends Controller
                  $idh =$horario->id;
                  $sal = DB::table('salida_llegadahorarios as slh')
                 ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
-                ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+                ->select('slh.id','slh.actividadeshorario_id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
                 ->where([['slh.actividadeshorario_id', '=',$idh], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
                 ->orderBy('slh.id')
                 ->get();
@@ -455,7 +456,7 @@ class ActividadesController extends Controller
                 //legada HORARIO MULTIPLE 
                 $llegadas = DB::table('salida_llegadahorarios as slh')
             ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
-            ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
+            ->select('slh.id', 'slh.hora','slh.actividadeshorario_id', 'sl.id as slid', 'sl.direccion')
             ->where([['slh.actividadeshorario_id', '=', $idh], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
             ->orderBy('slh.id')
             ->get();

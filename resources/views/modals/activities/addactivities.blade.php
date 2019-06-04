@@ -297,221 +297,139 @@
                           </form>
                     </div>             
                 {{-- tercer pestaña --}}
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
-                      <div class="container">               
-                    <form action=""{{url('actividades')}} method="post" id="addHorariosYPuntos">
-                    <div class="container mt-2">
-                      <div class="row">
-                        <div class="col-6 mt-3">
-                          <div class="row">
-                            <div class="col-3">
-                              <div class="form-check form-check-inline" >
-                                <label class="form-check-label">
-                                    <input class=" sizecheck" type="checkbox" name="libre" id="libre" value="1"  data-id="1" >Libre
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-6"> 
-                                <div class="form-group float-left">
-                                    <label class="form-check-label lbcheck">
-                                      <input class="  sizecheck general " type="checkbox" name="diario" id="diario" value="1" onchange="diarioEntrega(this);" data-id="0" disabled>Diario
-                                    </label>
-                                  </div>
-                            </div>
-                          </div>  
-                        </div>
-                        <div class="col-6">
-                                    {{-- <h2 class="lead">Salidas</h2>                          --}}
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="form-group">
-                                                  <label for="" data-punto="1";>Salida</label>                                                 
-                                                </div>
-                                              </div>
-                                              <div class="col-6">
-                                                  <select class="form-control" name="salidas" id="salidas" data-salida="true" disabled>
-                                                      @foreach ($salidasLlegadas as $salidaLlegada)
-                                                  <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
-                                                      @endforeach
-                                                    </select>
-                                              </div>
-                                            
-                                        </div>                             
-                        </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-6">
-                              <div class="row">
-                                <div class="col-3">
-                                  <div class="dia-check-container">
-                                    <label class="form-check-label font-weight-bolder  ">Lunes
-                                      </label>
-
-
-                                      <input class="  diarioEntrega0 check-horario-libre sizecheck  horario-fijo" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
-
-                                </div>
-                              </div>
-                                <div class="col-3">
-                                    <div class="dia-check-container">
-                                        <label class="form-check-label font-weight-bolder  ">Martes
-                                          </label>
-
-                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
-
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="dia-check-container">
-                                    <label class="form-check-label font-weight-bolder  ">Miercoles
-                                      </label>
-
-                                      <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
-
-                                </div>
-                              </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-3">
-                                    <div class="dia-check-container">
-                                        <label class="form-check-label font-weight-bolder  ">Jueves
-                                          </label>
-
-                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
-
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="dia-check-container">
-                                        <label class="form-check-label font-weight-bolder  ">Viernes
-                                          </label>
-
-                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
-
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="dia-check-container" >
-                                        <label class="form-check-label font-weight-bolder  ">Sabado
-                                          </label>
-
-                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
-
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="dia-check-container">
-                                        <label class="form-check-label font-weight-bolder  ">Domingo
-                                          </label>
-
-                                          <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
-
-                                    </div>
-                                </div>
-                              </div>                             
-                            </div>
-                            <div class="col-6">
-                                {{-- <h2 class="lead">Llegadas</h2> --}}
-                             </div>                           
-                        </div>
-
-                        {{-- Select llegadas --}}
-                        <div class="row">
-
-                          <div class="col-6" >
-                            
-                            </div>
-                        <div class="col-6" id="puntosContainer">
-                          <div class="row">
-                            <div class="col-2">
-                                <div class="form-group">
-                                  <label for="" data-punto="1"; >Llegada</label>                                 
-                                </div>
-                              </div>
-                              <div class="col-6">
-                                  <select class="form-control" name="llegadas" id="llegadas" data-salida="false" disabled>
-                                      @foreach ($salidasLlegadas as $salidaLlegada)
-                                      <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>                                       
-                                          @endforeach
-                                    </select>
-                              </div>                             
-                              </div>
-                          </div>
-                        </div>
-                        {{-- fin select llegadas --}}
-                        <div class="row position-sticky mt-3">
-                            <div class="col-12">
-                              <div class="row">
-                               {{-- <div class="col-3">Horario</div> --}}
-                               <div class="col-2 text-center">H. Inicio</div>
-                               <div class="col-2 text-center">H. Fin</div>
-                               <div class="col-4text-center offset-2 justify-content-center align-content-center align-items-center">Días</div>
-                               
-                              </div>
-                            
-                            </div>
-                            
-                          </div>
-                     <div class="container overflow">
-                            <div class="row mt-3">
-                              <div class="col-12 " id="actividadesHorarioContainer"  style="padding:0;">
-                               
-                              </div>
-                       
-                            </div>
-                      
-                         </div> 
-                        <div class="row">
-                            <div class="col-2">
-                                <a href="#!" class="btn btn-primary horario-multiple" id="addHorarioContanier" onclick="addHoraioContainer();"><span>+ Horario</span></a>
-                               </div>
-                        </div>
-                      </div>       
-                          </div>
-                          <div class="container-fluid" id="rowContanier"></div>
-                          </form>   
-                          </div>
+<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
+  <div class="container">               
+    <form action=""{{url('actividades')}} method="post" id="addHorariosYPuntos">
+      <div class="pestana3-seccion1">
+        <div class="checks-column">
+          <div class="content">
+            <label class="form-check-label">H. Libre</label>
+            <input class=" sizecheck" type="checkbox" name="libre" id="libre" value="1"  data-id="1" >
+          </div>
+          <div class="content">
+            <label class="form-check-label font-weight-bolder">Lunes</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck  horario-fijo" type="checkbox" name="lunes" id="dial1" value="1" disabled> 
+          </div>
+          <div class="content">
+            <label class="form-check-label font-weight-bolder">Viernes</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="viernes" id="diav1" value="1"disabled> 
+          </div>
+        </div>
+        <div class="checks-column">
+          <div class="content">
+            <label class="form-check-label lbcheck">Diario</label>
+            <input class="  sizecheck general " type="checkbox" name="diario" id="diario" value="1" onchange="diarioEntrega(this);" data-id="0" disabled>
+          </div>
+          <div class="content">
+            <label class="form-check-label font-weight-bolder">Martes</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="martes" id="diam1" value="1" disabled> 
+          </div>
+          <div class="content">
+            <label class="form-check-label font-weight-bolder">Sabado</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
+          </div>
+        </div>
+        <div class="checks-column">  
+          <div class="content mt-5">
+            <label class="form-check-label font-weight-bolder">Miercoles</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
+          </div>
+          <div class="content">
+            <label class="form-check-label font-weight-bolder">Domingo</label>
+            <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
+          </div>
+        </div>
+        <div class="checks-column">
+          <div class="content mt-5">
+              <label class="form-check-label font-weight-bolder">Jueves</label>
+                <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 
+          </div>
+        </div>
+        <div class="checks-column">
+          <div class="content-salidas-llegadas">
+            <div class="content">
+                <h2 class="d-inline lead">Llegada</h2>
+                <select class="d-inline form-control-salidas" name="llegadas" id="llegadas" data-salida="false" disabled>
+                    @foreach ($salidasLlegadas as $salidaLlegada)
+                      <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="content">
+                <h2 class="d-inline lead">Salida</h2>
+                  <select class="d-inline form-control-salidas " name="salidas" id="salidas" data-salida="true" disabled>
+                    @foreach ($salidasLlegadas as $salidaLlegada)
+                      <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
+                    @endforeach
+                  </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row position-sticky mt-3">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-2 text-center">H. Inicio</div>
+            <div class="col-2 text-center">H. Fin</div>
+            <div class="col-4text-center offset-2 justify-content-center align-content-center align-items-center">Días</div>
+          </div>
+        </div> 
+      </div>
+      <div class="container overflow">
+        <div class="row mt-3">
+          <div class="col-12 " id="actividadesHorarioContainer"  style="padding:0;"></div>
+        </div>
+        </div> 
+      <div class="row">
+        <div class="col-2">
+          <a href="#!" class="btn btn-primary horario-multiple" id="addHorarioContanier" onclick="addHoraioContainer();"><span>+ Horario</span></a>
+        </div>
+      </div>
+    </form>
+  </div>
+        <div class="container-fluid" id="rowContanier"></div> 
+</div> 
                           {{-- 4ta --}}
                           <div class="tab-pane fade" id="generales" role="tabpanel" aria-labelledby="generales-tab">
                               <form action=""{{url('actividades')}} method="post" id="formGenerales">
-                          <div class="container mt-2">
-                           <div class="row mt-5">
-                            <div class="col-3">
-                                <label for=""  class="form-label pull-right">Actividad de Alto Riesgo</label>
-                            </div>
-                            <div class="col-2 ">
-                                <input type="checkbox" name="riesgo" id="riesgo" class="pull-left" value="1">
-                            </div> 
-                           </div>
-                           <div class="row mt-5">
-                            <div class="col-3">
-                              <label for=""  class="form-label pull-right">Puntos Acumulables</label>
-                          </div>
-                          <div class="col-2 ">
-                              
-                            <input type="text" name="puntos" id="puntos" class="form-control pull-left" placeholder="" aria-describedby="helpId"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                            <small>Clientes</small>
-                        </div>
-                           </div>
-                           <div class="row mt-5">
-                            <div class="col-3">
-                              <label for=""  class="form-label pull-right">Requisitos o Tips</label>
-                          </div>
-                          <div class="col-8 ">
-                            <textarea name="requisito" id="requisito" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
-                          
-                        </div>
-                           </div>
-                           <div class="row mt-5">
-                              <div class="col-3">
-                                <label for=""  class="form-label pull-right">Observaciones Espesiales</label>
-                            </div>
-                            <div class="col-6 ">
-                              <textarea name="observaciones" id="observaciones" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
-                            
-                          </div>
-                             </div>
-                          </div>
+                                  <div class="container mt-2">
+                                      <div class="row mt-5">
+                                       <div class="col-3">
+                                           <label for=""  class="form-label pull-right">Actividad de Alto Riesgo</label>
+                                       </div>
+                                       <div class="col-2 ">
+                                           <input type="checkbox" name="riesgo" id="riesgo" class="pull-left" value="1">
+                                       </div> 
+                                      </div>
+                                      <div class="row mt-5">
+                                       <div class="col-3">
+                                         <label for=""  class="form-label pull-right">Puntos Acumulables</label>
+                                     </div>
+                                     <div class="col-2 ">
+                                         
+                                       <input type="text" name="puntos" id="puntos" class="form-control pull-left" placeholder="" aria-describedby="helpId"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                       <small>Clientes</small>
+                                   </div>
+                                      </div>
+                                      <div class="row mt-5">
+                                       <div class="col-3">
+                                         <label for=""  class="form-label pull-right">Requisitos o Tips</label>
+                                     </div>
+                                     <div class="col-8 ">
+                                       <textarea name="requisito" id="requisito" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                                     
+                                   </div>
+                                      </div>
+                                      <div class="row mt-5">
+                                         <div class="col-3">
+                                           <label for=""  class="form-label pull-right">Observaciones Espesiales</label>
+                                       </div>
+                                       <div class="col-6 ">
+                                         <textarea name="observaciones" id="observaciones" cols="30" rows="4" class="form-control pull-left" aria-describedby="helpId"></textarea>
+                                       
+                                     </div>
+                                        </div>
+                                     </div> 
                           </form >
                           </div>
                           {{-- 4ta --}}
