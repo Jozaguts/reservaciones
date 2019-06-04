@@ -239,13 +239,21 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Inicio:</label>
+<<<<<<< HEAD
               <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+=======
+              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+>>>>>>> jozaguts
             </div>
       </div>
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Finalización:</label>
+<<<<<<< HEAD
               <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+=======
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+>>>>>>> jozaguts
             </div>
       </div>
     </div>
@@ -556,6 +564,7 @@ countRecolecionLLEGADAS--;
     // #############################################################################################PESTAÑA 1 INICIO
 let AddActividadesForm = document.getElementById('AddActividadesForm');
 AddActividadesForm.addEventListener('submit',(e)=>{
+<<<<<<< HEAD
     e.preventDefault();
     
     let datos = new FormData(AddActividadesForm) 
@@ -620,6 +629,77 @@ AddActividadesForm.addEventListener('submit',(e)=>{
 
     // ########################################################################################### PESTAÑA 3 INICIO
 
+=======
+
+
+
+
+    e.preventDefault();
+  
+    
+    let datos = new FormData(AddActividadesForm) 
+    let clave = datos.get('clave')
+    let nombre = datos.get('nombre')
+    let active=1;
+    let remove=0;
+    let tipoUnidadId = document.getElementById('tipoactividades_id').value; //tipo de unidad
+    let tipoactividadesid = document.querySelector(':checked').getAttribute('data-tipoactividad');        
+    let duracion = datos.get('duracion')
+    let minutoincrementa = datos.get('minutoincrementa')
+    let montoincremento = datos.get('montoincremento')
+    let maxcortesias = datos.get('maxcortesias')
+    let maxcupones = datos.get('maxcupones')
+    let anticipoid= datos.get('anticipo_id')
+    let idusuario = datos.get('idusuario')
+    let checkFijo = datos.get('fijo')
+    let fijoValue;
+    if(checkFijo==null){
+      fijoValue=0;
+    }else{
+      fijoValue=1;
+    }
+    let checkRenta = datos.get('renta')
+    let rentaValue;
+    if(checkRenta==null){
+      rentaValue=0;
+    }else{
+      rentaValue=1;
+    }
+      // ############################################################################################### PESTAÑA 1 FIN
+
+    //  INICIO PESTAÑA 2 ############################################################################################
+    let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
+    let datos2 = new FormData(AddPreciosYPasesForm)
+    let balance = datos2.get('balanceg')
+    let precio = datos2.get('preciog')
+
+    //datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+    const personas = document.querySelectorAll('[id^=persona]')
+    let datosPersonas = [];
+
+    personas.forEach(function(persona){ 
+    persona={
+      precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+      precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+      precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+      doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+      doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+      triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+      triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+      promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+      restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+      acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+      remove: 0,
+      active: 1,
+      persona_id: persona.getAttribute('data-id')
+    }
+    datosPersonas.push(persona)
+    })
+      //  FIN PESTAÑA 2 ############################################################################################
+
+    // ########################################################################################### PESTAÑA 3 INICIO
+
+>>>>>>> jozaguts
     let libre;
   
     if($('#libre').is(':checked')){
@@ -1305,13 +1385,21 @@ horarios.forEach(function(horario){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora de Inicio:</label>
+<<<<<<< HEAD
               <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple" placeholder="" value=${horario.hini} aria-describedby="helpId" data-horarioid="${contador}" required>
+=======
+              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" value=${horario.hini} aria-describedby="helpId" data-horarioid="${contador}" required>
+>>>>>>> jozaguts
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora de Finalización:</label>
+<<<<<<< HEAD
               <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} >
+=======
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} >
+>>>>>>> jozaguts
             </div>
           </div>
         </div>
@@ -1387,14 +1475,26 @@ horarios.forEach(function(horario){
 
 salidasHMultiple.forEach(function(salida){
   salida.forEach(function(sal){
+<<<<<<< HEAD
+=======
 
    if(sal.actividadeshorario_id == horarioID ){
     agregarSalidasHorarioMultiple(sal);
 
     }
   })
+>>>>>>> jozaguts
+
+   if(sal.actividadeshorario_id == horarioID ){
+    agregarSalidasHorarioMultiple(sal);
+
+<<<<<<< HEAD
+    }
+  })
 
 
+=======
+>>>>>>> jozaguts
  
 })
  
@@ -1533,5 +1633,40 @@ selectHmultipleSalidas.forEach(function(select){
   
 // fin ajaxx HORARIO MULTIPLE
 }
+
+
+
+
+function ValidadHIni(){
+  let selectHIni = document.querySelectorAll('.listener-hora-ini')
+  let selectHFin = document.querySelectorAll('.listener-hora-fin')
+
+  for (let i = 0; i < selectHIni.length; i++) {
+    if(selectHFin[i].value <= selectHIni[i].value){
+    
+      selectHFin[i].classList.add('btn-danger')
+      let small = document.createElement('small');
+      small.classList.add('text-danger')
+      small.setAttribute('id', 'labelSmall')
+      small.innerHTML ="Hora Fin tiene que ser Mayor a Hora inicio";
+      selectHFin[i].parentElement.appendChild(small)
+      
+    }else{
+      selectHFin[i].classList.remove('btn-danger')
+      let smallLabel = document.querySelector("#labelSmall")
+      smallLabel.remove();
+      // console.log(selectHFin[i].previousSibling)
+
+      
+    }
+  
+  }
+
+}
+
+document.addEventListener('change',function(e){
+  e.target.classList.contains('listener-hora-fin')?ValidadHIni():null
+  e.target.classList.contains('listener-hora-ini')?ValidadHIni():null
+})
 
 
