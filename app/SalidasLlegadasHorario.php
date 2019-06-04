@@ -14,7 +14,8 @@ class SalidasLlegadasHorario extends Model
         'remove',                   
         'salidallegadas_id',       
         'usuarios_id',
-        'actividadeshorario_id'
+        'actividadeshorario_id',
+     
     ];
 
 
