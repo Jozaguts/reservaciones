@@ -245,7 +245,6 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
               <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
             </div>
       </div>
@@ -1391,20 +1390,18 @@ horarios.forEach(function(horario){
  
 })
 
-// salidasHMultiple.forEach(function(salida){
-//   salida.forEach(function(sal){
+salidasHMultiple.forEach(function(salida){
+  salida.forEach(function(sal){
 
-//    if(sal.actividadeshorario_id == horarioID ){
-//     agregarSalidasHorarioMultiple(sal);
+   if(sal.actividadeshorario_id == horarioID ){
+    agregarSalidasHorarioMultiple(sal);
 
-//     }
-//   })
+    }
+  })
 
-//    if(sal.actividadeshorario_id == horarioID ){
-//     agregarSalidasHorarioMultiple(sal);
 
  
-//   })
+})
  
   // console.log(salidasyllegadas)
 
