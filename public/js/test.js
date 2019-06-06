@@ -245,7 +245,8 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required onchange="validarHoraFin(this)">
+              <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
             </div>
       </div>
     </div>
@@ -329,7 +330,8 @@ function addHoraioContainer(){
             <div class="col-4">
               <div class="form-group">
                 <label for="">Hora</label>
-                <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+                <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange=" ValidaHoraSalida(this);">
+                <small class="text-danger" id="labelSmallSalida${contador}"></small>
               </div>
               
             </div>
@@ -350,7 +352,8 @@ function addHoraioContainer(){
         <div class="col-4">
           <div class="form-group">
             <label for="">Hora</label>
-            <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+            <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange="ValidaHoraLlegada(this)">
+            <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
           </div>
           
         </div>
@@ -1317,7 +1320,8 @@ horarios.forEach(function(horario){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} >
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required value=${horario.hfin} onchange="validarHoraFin(this)" >
+            
             </div>
           </div>
         </div>
@@ -1399,7 +1403,7 @@ salidasHMultiple.forEach(function(salida){
 llegadasHMultiple.forEach(function(llegada){
   llegada.forEach(function(lleg){
    if(lleg.actividadeshorario_id == horarioID ){
-     console.log(lleg)
+
      agregarLlegadaHorarioMultiple(lleg)
     }
   })
@@ -1421,7 +1425,7 @@ function agregarSalidasHorarioMultiple(salida){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora</label>
-              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${salida.hora}">
+              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${salida.hora}"onchange=" ValidaHoraSalida(this);">
             </div>
           </div>
             <div class="col-4 d-inline mt-4 pt-1">
@@ -1453,7 +1457,8 @@ function agregarLlegadaHorarioMultiple(llegada){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora</label>
-              <input type="time" class="form-control horario-multiple hora-salida " name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${llegada.hora}">
+              <input type="time" class="form-control horario-multiple hora-llegada " name="llegada${contador}" id="llegadadahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${llegada.hora}" onchange="ValidaHoraLlegada(this)" >
+              <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
             </div>
           </div>
             <div class="col-4 d-inline mt-4 pt-1">
@@ -1538,81 +1543,94 @@ function agregarLlegadaHorarioMultiple(llegada){
 
 
 
-function ValidadHIni(){
+function ValidadHIni(horaini,horafin){
 
-  let selectHIni = document.querySelectorAll('.listener-hora-ini')
-  let selectHFin = document.querySelectorAll('.listener-hora-fin')
-  let small = document.createElement('small');
-  small.classList.add('text-danger')
-  small.setAttribute('id', 'labelSmall')
-  for (let i = 0; i < selectHIni.length; i++) {
-    if(selectHFin[i].value <= selectHIni[i].value){
-      selectHFin[i].parentElement.appendChild(small)
-      small.innerHTML ='';
-      selectHFin[i].classList.add('btn-danger')
-      small.innerHTML = "Hora Fin tiene que ser Mayor a Hora inicio ";
+  if(horaini<horafin){
+    console.log('funciona');
+  }
+
+//   let selectHIni = document.querySelectorAll('.listener-hora-ini')
+//   let selectHFin = document.querySelectorAll('.listener-hora-fin')
+//   let small = document.getElementById('labelSmall');
+//   for (let i = 0; i < selectHIni.length; i++) {
+//     if(selectHFin[i].value <= selectHIni[i].value && selectHFin[i].getAttribute('data-horarioid')  == selectHIni[i].getAttribute('data-horarioid')){
+//       small.innerText ="";
+//       selectHFin[i].classList.add('btn-danger')
+//       small.innerText = "";
       
-    }else{
-      selectHFin[i].parentElement.children[2].remove()
-      selectHFin[i].classList.remove('btn-danger')
-      selectHFin[i].classList.add('btn-success')
-    }
+//     }else{
+//       selectHFin[i].parentElement.children[2].remove()
+//       selectHFin[i].classList.remove('btn-danger')
+//       selectHFin[i].classList.add('btn-success')
+//     }
   
-  }
+//   }
 
 }
 
-function HoraSalida(){
-  let selectSalida = document.querySelectorAll('.hora-salida')
-  let selectHini = document.querySelectorAll('.listener-hora-ini')
-  let small = document.createElement('small');
-  for (let i = 0; i < selectHini.length; i++) {
-    if(selectHini[i].value < selectSalida[i].value ){
-    selectSalida[i].classList.add('btn-danger');
-      small.classList.add('text-danger')
-      small.setAttribute('id', 'labelSmallSalida')
-      small.innerHTML ="La Hora de Salida Tiene que ser Menor a Hora inicio";
-      selectSalida[i].parentElement.appendChild(small)
-    }else{
-      selectSalida[i].classList.remove('btn-danger');
-      small.innerHTML ="";
-      let smallLabel = document.querySelector("#labelSmallSalida")
-      smallLabel.remove();
+// function HoraSalida(){
+//   let selectSalida = document.querySelectorAll('.hora-salida')
+//   let selectHini = document.querySelectorAll('.listener-hora-ini')
+//   let small = document.createElement('small');
+//   for (let i = 0; i < selectHini.length; i++) {
+//     if(selectHini[i].value < selectSalida[i].value ){
+//     selectSalida[i].classList.add('btn-danger');
+//       small.classList.add('text-danger')
+//       small.setAttribute('id', 'labelSmallSalida')
+//       small.innerHTML ="La Hora de Salida Tiene que ser Menor a Hora inicio";
+//       selectSalida[i].parentElement.appendChild(small)
+//     }else{
+//       selectSalida[i].classList.remove('btn-danger');
+//       small.innerHTML ="";
+//       let smallLabel = document.querySelector("#labelSmallSalida")
+//       smallLabel.remove();
 
-    }
+//     }
     
+//   }
+
+// }
+function validarHoraFin(e){
+  let horaFin = e.value;
+  let horaInicio = e.parentElement.parentElement.parentElement.children[0].children[0].children[1].value;
+  
+  if(horaFin <= horaInicio){
+    e.parentElement.children[2].innerText = "Hora Fin tiene que ser Mayor a Hora inicio."
+  }else{
+    e.parentElement.children[2].innerText = "";
+    e.classList.add('btn-success');
   }
-
 }
+function ValidaHoraSalida(e){
+let horaSalida = e.value;
+let horaInicio = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[2].children[0].children[0].children[0].children[0].children[1].value;
+if( horaSalida >= horaInicio){
 
-document.addEventListener('change',function(e){
-  e.target.classList.contains('listener-hora-fin')?ValidadHIni():null
-  e.target.classList.contains('listener-hora-ini')?ValidadHIni():null
-  e.target.classList.contains('hora-salida')?HoraSalida():null
+  e.parentElement.children[2].innerText = "Hora de Salida Tiene que ser Menor a Hora Inicio."
+  // setInterval(() => {
+  //   e.parentElement.children[2].style.display ="none";
+  // }, 3000);
  
-})
 
+}else{
+  e.classList.add('btn-success');
+  e.parentElement.children[2].innerText = "";
+}
+}
+//validar si se toma hora de salida o de llegada
+function ValidaHoraLlegada(e){
+  let horallegada = e.value;
+let horaFin = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[2].children[0].children[0].children[1].children[0].children[1].value
+
+if( horallegada < horaFin){
+  e.parentElement.children[2].innerText = "Hora de Llegada Tiene que ser Mayor a Hora Fin."
+}else{
+  e.parentElement.children[2].innerText = "";
+  e.classList.add('btn-success');
+}
+}
 
 
 function DefaultSelect(select,salidas){
   select.value =salidas.slid;
-  // console.log()
-  // select.children('option[value="'+ 1 +'"]');
-  // select.options[select.options.selectedIndex].selected = true;
-  // select.setAttribute('selectedIndex','1')
-  // console.log()
-   // document.querySelector('#sel [value="' + val + '"]').selected = true;
-//  console.log(select,salidas)
-    // for (let i = 0; i < selectHmultipleSalidas.length; i++) {
-        // select.options.
-        // select.
-        
-        // document.getElementById(`salidas3`).children[0];
-        // document.getElementById(`salidas3`).value = 2
-    
-      // document.getElementById(`salidas3`).children
-      // selectHmultipleSalidas[i].options.selectedIndex = 2;
-      // salidasHMultiple[i][i].slid -1
-    // }
-  
 } 
