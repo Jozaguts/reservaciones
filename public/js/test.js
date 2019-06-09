@@ -229,7 +229,7 @@ function addHoraioContainer(){
       </a>
     </div>
     <div class="col-4">
-    <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="titulo">Horario ${contador}</label>
+    <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="horarioId${contador}">Horario ${contador} </label>
     </div>
   </div>
   <div class="row">
@@ -311,7 +311,7 @@ function addHoraioContainer(){
   <div class="row ">
     <div class="col-12 ">
       <div class="row">
-        <div class="col-6">  <h2 class="lead">Salidas</h2></div>
+        <div class="col-6">  <h2 class="lead">Salidas</h2> <span id="salidaError"></span> </div>
         <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
       </div>
     </div>
@@ -322,7 +322,7 @@ function addHoraioContainer(){
           <div class="col-4">
               <div class="form-group">
                 <label for="" data-punto="1";>Punto 1</label>
-                <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
+                <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}" onchange="validarPuntosSalida()">
               
                   </select>
               </div>
@@ -433,7 +433,7 @@ row.innerHTML=`
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecion}">Punto ${countRecolecion}</label>
-      <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}">
+      <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}" onchange="validarPuntosSalida()">
                                           
       </select>
     </div>
@@ -441,7 +441,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-salida" name="" id="" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+      <input type="time" class="form-control hora-salida" name="" id="salidahora${contador+1}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
     </div>
     
   </div>
@@ -508,7 +508,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-llegada" name="" id=""  data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
+      <input type="time" class="form-control hora-llegada" name="" id="llegadahora${contador+1}"  data-horarioid="${contador}" aria-describedby="helpId" placeholder="">
     </div>
     
   </div>
@@ -564,8 +564,12 @@ AddActividadesForm.addEventListener('submit',(e)=>{
 
 
     e.preventDefault();
-  
-    
+
+    // ###### VALIDACIONES #####
+
+      validarPuntosSalida();  
+
+      // #####
     let datos = new FormData(AddActividadesForm) 
     let clave = datos.get('clave')
     let nombre = datos.get('nombre')
@@ -988,7 +992,7 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
-   
+   $('#clave').prop('disabled',true); 
 
   const id =  e.parentElement.parentElement.getAttribute('data-id')
   IDACTIVIDAD = id;
@@ -1305,7 +1309,7 @@ horarios.forEach(function(horario){
         <a href="#!" class="btn btn-danger float-right" onclick="cancelHorario(this)">X</a>
       </div>
       <div class="col-4">
-        <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="titulo">Horario ${contador}</label>
+        <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="horarioId${contador}">Horario ${contador} > </label>
       </div>
     </div>
     <div class="row">                          
@@ -1416,7 +1420,7 @@ function agregarSalidasHorarioMultiple(salida){
           <div class="col-4">
             <div class="form-group">
               <label for="" data-punto="1";>Punto 1</label>
-              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-horarioid="${salida.actividadeshorario_id}" >
+              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-horarioid="${salida.actividadeshorario_id}" onchange="validarPuntosSalida()">
               
               </select>
             </div>
@@ -1546,7 +1550,7 @@ function agregarLlegadaHorarioMultiple(llegada){
 function ValidadHIni(horaini,horafin){
 
   if(horaini<horafin){
-    console.log('funciona');
+    // console.log('funciona');
   }
 
 //   let selectHIni = document.querySelectorAll('.listener-hora-ini')
@@ -1634,3 +1638,51 @@ if( horallegada < horaFin){
 function DefaultSelect(select,salidas){
   select.value =salidas.slid;
 } 
+
+function validarPuntosSalida(){
+let horarios = document.querySelectorAll('[id^="horarioId"]')
+let salidas = document.querySelectorAll('[class~="select-multiple__salidas"]')
+// por cada horario obtener sus salidas
+let ArraysalidasPorHorario = [];
+let salidasMismoHorario = [];
+
+horarios.forEach(function(horario, index){
+  // por cada horario genero un nuevo array 
+  let Arhorario = [];
+
+  for (let i = 0; i < salidas.length; i++) {
+    
+  // comparo si la salida tiene el mismo id de horario
+    if(salidas[i].getAttribute('data-horarioid') == horario.getAttribute('data-identificadores') ){
+
+      if(Arhorario.length>0){
+        if(salidas[i].value == salidas[i-1].value){
+          
+        $('#salidaError').addClass('text-danger d-inline');
+        $('#salidaError').text('No pueder Selecionar el Mismo Punto de Salida.');
+         }else{
+          $('#salidaError').text('');
+         }
+      }else{
+        Arhorario.push(salidas[i])
+      }
+      
+    }
+    
+  }
+  // ya tengo las salidas separadas por horario 
+  // ahora toca verificar que cada horario no se repita entre ellos
+
+
+  
+
+  ArraysalidasPorHorario.push(Arhorario)
+ 
+
+})
+
+// console.log(ArraysalidasPorHorario)
+
+}
+
+
