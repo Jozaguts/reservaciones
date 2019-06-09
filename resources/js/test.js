@@ -311,8 +311,8 @@ function addHoraioContainer(){
   <div class="row ">
     <div class="col-12 ">
       <div class="row">
-        <div class="col-6">  <h2 class="lead">Salidas</h2> <span id="salidaError"></span> </div>
-        <div class="col-6">  <h2 class="lead">Llegadas </h2></div>
+        <div class="col-6">  <h2 class="lead">Salidas <span id="salidaError"></span></h2>  </div>
+        <div class="col-6">  <h2 class="lead">Llegadas <span id="llegadaError"></span> </h2></div>
       </div>
     </div>
   </div>
@@ -345,7 +345,7 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
             <label for="" data-punto="1";>Punto 1</label>
-            <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}">
+            <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}" onchange="validarPuntosLlegada()">
             </select>
           </div>
         </div>
@@ -500,7 +500,7 @@ row.innerHTML=`
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecionLLEGADAS}">Punto ${countRecolecionLLEGADAS}</label>
-      <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}" data-horarioid="${contador}"
+      <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}" data-horarioid="${contador}" onchange="validarPuntosLlegada()"
       >
       </select>
     </div>
@@ -568,6 +568,8 @@ AddActividadesForm.addEventListener('submit',(e)=>{
     // ###### VALIDACIONES #####
 
       validarPuntosSalida();  
+      validarPuntosLlegada();
+     
 
       // #####
     let datos = new FormData(AddActividadesForm) 
@@ -1452,7 +1454,7 @@ function agregarLlegadaHorarioMultiple(llegada){
           <div class="col-4">
             <div class="form-group">
               <label for="" data-punto="1";>Punto 1</label>
-              <select class="form-control horario-multiple select-multiple__llegadas hsalidas" name="llegda${llegada.id}" id="llegada${llegada.id}" data-horarioid="${llegada.actividadeshorario_id}" >
+              <select class="form-control horario-multiple select-multiple__llegadas hsalidas" name="llegda${llegada.id}" id="llegada${llegada.id}" data-horarioid="${llegada.actividadeshorario_id}" onchange="validarPuntosLlegada()" >
               
               </select>
             </div>
@@ -1684,5 +1686,52 @@ horarios.forEach(function(horario, index){
 // console.log(ArraysalidasPorHorario)
 
 }
+
+
+function validarPuntosLlegada(){
+  let horarios = document.querySelectorAll('[id^="horarioId"]')
+  let llegadas = document.querySelectorAll('[class~="select-multiple__llegadas"]')
+  // por cada horario obtener sus salidas
+  let ArraysalidasPorHorario = [];
+  let llegadasMismoHorario = [];
+  
+  horarios.forEach(function(horario, index){
+    // por cada horario genero un nuevo array 
+    let Arhorario = [];
+  
+    for (let i = 0; i < llegadas.length; i++) {
+      
+    // comparo si la salida tiene el mismo id de horario
+      if(llegadas[i].getAttribute('data-horarioid') == horario.getAttribute('data-identificadores') ){
+  
+        if(Arhorario.length>0){
+          if(llegadas[i].value == llegadas[i-1].value){
+            
+          $('#llegadaError').addClass('text-danger');
+          $('#llegadaError').text('No pueder Selecionar el Mismo Punto de Llegada.');
+           }else{
+            $('#llegadaError').text('');
+           }
+        }else{
+          Arhorario.push(llegadas[i])
+        }
+        
+      }
+      
+    }
+    // ya tengo las salidas separadas por horario 
+    // ahora toca verificar que cada horario no se repita entre ellos
+  
+  
+    
+  
+    ArraysalidasPorHorario.push(Arhorario)
+   
+  
+  })
+  
+  // console.log(ArraysalidasPorHorario)
+  
+  }
 
 
