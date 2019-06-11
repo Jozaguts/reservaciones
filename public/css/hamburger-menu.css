@@ -360,3 +360,13 @@
   color: rgba(20, 20, 20, 0.705) !important;
 }
 
+.btn-disabled {
+  background-image: url(/svg/disabled.svg);
+  background-size: 1.5rem 1.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
