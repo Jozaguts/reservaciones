@@ -329,7 +329,7 @@
             <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="sabado" id="dias1" value="1" disabled> 
           </div>
         </div>
-        <div class="checks-column">  
+        <div class="checks-column mt-3">  
           <div class="content mt-5">
             <label class="form-check-label font-weight-bolder">Miercoles</label>
             <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="miercoles" id="diax1" value="1" disabled> 
@@ -339,7 +339,7 @@
             <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="domingo" id="diad1" value="1" disabled> 
           </div>
         </div>
-        <div class="checks-column">
+        <div class="checks-column mt-3">
           <div class="content mt-5">
               <label class="form-check-label font-weight-bolder">Jueves</label>
                 <input class="  diarioEntrega0 check-horario-libre sizecheck horario-fijo" type="checkbox" name="jueves" id="diaj1" value="1" disabled> 

@@ -1,3 +1,8 @@
+const error = false;
+
+
+
+
 // mostrar contenido de los boones
 showContent = function (e){
   e.nextSibling.nextSibling.classList.contains('d-none')?e.nextSibling.nextSibling.classList.toggle('show')&&e.nextSibling.nextSibling.classList.remove('d-none'):e.nextSibling.nextSibling.classList.add('d-none')
@@ -713,28 +718,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
         const identificadores = document.querySelectorAll('#titulo');
         let vueltas =diasMultiplesSeleccionados.length;
-        // ## obtengo solo las salidas Seleccionas ID ##
-        // salidas.forEach(function(salida,index){
-        //   if(index>0){
-        //     let salidaS = salida.options[salida.selectedIndex].value;
-        //     let integerSalida = parseInt(salidaS)
-        //     salidasSeleccionadas.push(integerSalida)
-          
-        //   }
-        // })
-        
-        // ## obtengo salo las llegas selecciondas ID ##
 
-        // llegadas.forEach(function(llegada,index){
-        //   if(index>0){
-        //     let llegadaS = llegada.options[llegada.selectedIndex].value;
-        //     let integerLlegada = parseInt(llegadaS)
-        //     llegadasSelecciondas.push(integerLlegada)
-          
-        //   }
-      
-          
-        // })
         class Horarios{
           constructor(hini,hfin,dias,id){
         this.hini=hini;
@@ -900,18 +884,6 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         let observaciones = datos4.get('observaciones')
         
 
-      //   let errores = {
-      //     hini:'Hora Fin No Puede Ser Nula',
-      //     hfin: 'Hora inicio no puede ser nula',
-      //     hllegada:'hora de llegada no puede ser nula',
-      //     hsalida:'Hora de salida no pude ser nula'
-
-      //  };
-        // $('#errorsIntoModal').html( errores.hfin);
-        // $('#message-errorIntoModal').fadeIn();
-        // setTimeout(() => {
-        //   $('#message-errorIntoModal').fadeOut();
-        // }, 3000);
 
         
           let route = 'actividades';
@@ -986,7 +958,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         
         
         
-        })
+  })
 
 
 
@@ -1049,7 +1021,7 @@ function editarActividad(e){
  
     // PERSONA 1
     let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
-    let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value =`${precios[0].precio1}`;
+    let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value = `${precios[0].precio1}`;
     let precio2P1 = document.getElementById(`p2PersonaId${precios[0].peid}`).value =`${precios[0].precio2}`;
     let precio3P1 = document.getElementById(`p3PersonaId${precios[0].peid}`).value =`${precios[0].precio3}`;
     let dobleP1 = document.getElementById(`doblePersonaId${precios[0].peid}`).value =`${precios[0].doble}`;
@@ -1063,6 +1035,7 @@ function editarActividad(e){
     let acompananteP1 =document.getElementById(`acompanantePersonaId${precios[0].peid}`);
     `${precios[0].acompanante}`==1?acompananteP1.setAttribute('checked','true'):acompananteP1.setAttribute('unchecked','true')
     // PERSONA 2
+ 
 
     let personaPrecio2Id = document.getElementById(`persona${precios[1].peid}`).innerHTML =`${precios[1].penombre}`;
     let precio1P2 = document.getElementById(`p1PersonaId${precios[1].peid}`).value =`${precios[1].precio1}`;
@@ -1103,6 +1076,18 @@ function editarActividad(e){
     let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer'); //conteneder mini crud
 
   
+
+      let  inputsType = document.querySelectorAll('[type=text]')
+
+        inputsType.forEach(function(input){
+          if(input.value == "null"){
+            input.value = '';
+            console.log(input.value)
+          }
+   
+
+      })
+
       // ########################HORARIO MULTIPLE
       
       
@@ -1241,6 +1226,8 @@ if(salidasHMultiple != 0){
     })
   }
   });
+
+
 
 }
 let horarioMultipleAJAX;
