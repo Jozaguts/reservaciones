@@ -1759,4 +1759,3 @@ function validarPuntosLlegada(){
 function desactivarActividad(){
   
 }
->>>>>>> jozaguts
