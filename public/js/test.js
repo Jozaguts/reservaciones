@@ -569,6 +569,14 @@ AddActividadesForm.addEventListener('submit',(e)=>{
 
       validarPuntosSalida();  
       validarPuntosLlegada();
+
+      let inputHoraIni = document.querySelectorAll('.listener-hora-ini');
+      let inputHoraFin = document.querySelectorAll('.listener-hora-fin');
+      let validator = new  ValidarInputTime();
+      validator.HoraInicio(inputHoraIni);
+      validator.HoraFin(inputHoraFin)
+
+  
      
 
       // #####
@@ -960,7 +968,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#message-errorIntoModal').fadeOut();
                   }, 3000);
-                  // setTimeout("location.reload(true);",3000)
+                  setTimeout("location.reload(true);",3000)
                   
               }else{
                 
@@ -969,7 +977,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#message-successIntoModal').fadeOut();
                   }, 3000);
-                  // setTimeout("location.reload(true);",1000)
+                  setTimeout("location.reload(true);",1000)
               }
             }
             
@@ -1549,53 +1557,8 @@ function agregarLlegadaHorarioMultiple(llegada){
 
 
 
-function ValidadHIni(horaini,horafin){
 
-  if(horaini<horafin){
-    // console.log('funciona');
-  }
 
-//   let selectHIni = document.querySelectorAll('.listener-hora-ini')
-//   let selectHFin = document.querySelectorAll('.listener-hora-fin')
-//   let small = document.getElementById('labelSmall');
-//   for (let i = 0; i < selectHIni.length; i++) {
-//     if(selectHFin[i].value <= selectHIni[i].value && selectHFin[i].getAttribute('data-horarioid')  == selectHIni[i].getAttribute('data-horarioid')){
-//       small.innerText ="";
-//       selectHFin[i].classList.add('btn-danger')
-//       small.innerText = "";
-      
-//     }else{
-//       selectHFin[i].parentElement.children[2].remove()
-//       selectHFin[i].classList.remove('btn-danger')
-//       selectHFin[i].classList.add('btn-success')
-//     }
-  
-//   }
-
-}
-
-// function HoraSalida(){
-//   let selectSalida = document.querySelectorAll('.hora-salida')
-//   let selectHini = document.querySelectorAll('.listener-hora-ini')
-//   let small = document.createElement('small');
-//   for (let i = 0; i < selectHini.length; i++) {
-//     if(selectHini[i].value < selectSalida[i].value ){
-//     selectSalida[i].classList.add('btn-danger');
-//       small.classList.add('text-danger')
-//       small.setAttribute('id', 'labelSmallSalida')
-//       small.innerHTML ="La Hora de Salida Tiene que ser Menor a Hora inicio";
-//       selectSalida[i].parentElement.appendChild(small)
-//     }else{
-//       selectSalida[i].classList.remove('btn-danger');
-//       small.innerHTML ="";
-//       let smallLabel = document.querySelector("#labelSmallSalida")
-//       smallLabel.remove();
-
-//     }
-    
-//   }
-
-// }
 function validarHoraFin(e){
   let horaFin = e.value;
   let horaInicio = e.parentElement.parentElement.parentElement.children[0].children[0].children[1].value;
@@ -1719,19 +1682,78 @@ function validarPuntosLlegada(){
       }
       
     }
-    // ya tengo las salidas separadas por horario 
-    // ahora toca verificar que cada horario no se repita entre ellos
-  
-  
-    
   
     ArraysalidasPorHorario.push(Arhorario)
-   
   
   })
   
-  // console.log(ArraysalidasPorHorario)
+  } 
+
   
+  class ValidarInputTime {
+    constructor (){
+    }
+    HoraInicio(inputsHini){
+      this.inputsHini =inputsHini;
+      let contador=0;
+
+     return inputsHini.forEach(function(input){
+       if(input.value == ""){
+         contador++;
+       }
+       if(contador>0){
+           
+         $('#errorsInputs').text('El Campo Hora de Inicio no Puede Estar Vacio');
+         $('#message-errorIntoModal2').fadeIn();
+         setTimeout(() => {
+           $('#message-errorIntoModal2').fadeOut();
+         }, 3000);
+       }
+       
+     })
+    }
+    HoraFin(inputsHFin){
+      this.inputsHFin =inputsHFin;
+      let contador=0;
+
+     return inputsHFin.forEach(function(input){
+       if(input.value == ""){
+         contador++;
+       }
+       if(contador>0){
+           
+         $('#errorsInputs').text('El Campo Hora de Fin no Puede Estar Vacio');
+         $('#message-errorIntoModal2').fadeIn();
+         setTimeout(() => {
+           $('#message-errorIntoModal2').fadeOut();
+         }, 3000);
+       }
+       
+     })
+    }
   }
 
+ let balanceFix = document.querySelectorAll('.balanceFix')
 
+
+ balanceFix.forEach(function(balance){
+   let fix = balance.innerText;
+  let setter = fix.substring(0, 4);
+  balance.innerText = setter;
+  // console.log( );
+
+ })
+
+ let precioFix =document.querySelectorAll('.precioFix')
+
+ precioFix.forEach(function(precio){
+  let fix = precio.innerText;
+ let setter = fix.substring(0, 4);
+ precio.innerText = setter;
+ // console.log( );
+
+})
+
+function desactivarActividad(){
+  
+}

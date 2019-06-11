@@ -48,13 +48,15 @@
                                                 </td>
                                                 <td class="table-head table-head__surname" data-active="{{$actividad->active}}"> <p class="flex-content">{{$actividad->nombre}}</p>
                                                 </td>
-                                                <td class="table-head  text-capitalize" data-active="{{$actividad->active}}">{{$actividad->precio}}
+                                                <td class="table-head  text-capitalize precioFix" data-active="{{$actividad->active}}">{{$actividad->precio}}
                                                 </td>
-                                                <td class="table-head  text-capitalize" data-active="{{$actividad->active}}">{{$actividad->balance}}
+                                                <td class="table-head  text-capitalize balanceFix" data-active="{{$actividad->active}}" >{{$actividad->balance}}
                                                     </td>
                                                 <td class="table-head table-head__actions"> 
-                                                     <button type="button" class="table-head table-head__btn btn-edit btn btn-primary" data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);">
-                                        <span class="font-weight-bolder"></button>
+                                                <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);">
+                                               
+                                                </button>
+                                                 <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)" data-id="{{$actividad->id}}"></a>
                                                     <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                                 </td>
                                             </tr>
