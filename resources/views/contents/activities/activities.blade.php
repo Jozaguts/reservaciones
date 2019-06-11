@@ -53,7 +53,7 @@
                                                 <td class="table-head  text-capitalize balanceFix" data-active="{{$actividad->active}}" >{{$actividad->balance}}
                                                     </td>
                                                 <td class="table-head table-head__actions"> 
-                                                <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);">
+                                                <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);" data-isEdit="true" data-id="{{$actividad->id}}">
                                                
                                                 </button>
                                                  <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)" data-id="{{$actividad->id}}"></a>

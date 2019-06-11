@@ -72,6 +72,7 @@ generalInputs.forEach((input)=>{
   if(confirmar==true){
     $('#addActivities').modal('hide');
     $(this).find('form').trigger('reset');
+    setTimeout("location.reload(true);",1000)
   }else{
 
   }
@@ -558,6 +559,10 @@ countRecolecionLLEGADAS--;
 
     // #############################################################################################PESTAÑA 1 INICIO
 let AddActividadesForm = document.getElementById('AddActividadesForm');
+
+
+
+
 AddActividadesForm.addEventListener('submit',(e)=>{
 
 
@@ -899,22 +904,19 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         let requisito = datos4.get('requisito')
         let observaciones = datos4.get('observaciones')
         
-
-      //   let errores = {
-      //     hini:'Hora Fin No Puede Ser Nula',
-      //     hfin: 'Hora inicio no puede ser nula',
-      //     hllegada:'hora de llegada no puede ser nula',
-      //     hsalida:'Hora de salida no pude ser nula'
-
-      //  };
-        // $('#errorsIntoModal').html( errores.hfin);
-        // $('#message-errorIntoModal').fadeIn();
-        // setTimeout(() => {
-        //   $('#message-errorIntoModal').fadeOut();
-        // }, 3000);
-
         
-          let route = 'actividades';
+          
+          
+    
+          let route;
+
+          // if(isEdit()){
+          //   route =`activades/${id}`;
+          // }else{
+          //   
+          // }
+          route = 'actividades';
+          console.log(isEdit())
           $.ajax({
             url:route,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -1002,6 +1004,9 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
+  console.log(e.getAttribute('data-isEdit'));
+  isEdit(e.getAttribute('data-isEdit'));
+
    $('#clave').prop('disabled',true); 
 
   const id =  e.parentElement.parentElement.getAttribute('data-id')
@@ -1756,4 +1761,12 @@ function validarPuntosLlegada(){
 
 function desactivarActividad(){
   
+}
+function isEdit(isEdit){
+  if(isEdit == 'true'){
+    return true;
+  }else{
+    return false;
+  }
+ 
 }
