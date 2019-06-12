@@ -1,4 +1,3 @@
-const error = false;
 
 
 
@@ -564,10 +563,6 @@ countRecolecionLLEGADAS--;
     // #############################################################################################PESTAÑA 1 INICIO
 let AddActividadesForm = document.getElementById('AddActividadesForm');
 AddActividadesForm.addEventListener('submit',(e)=>{
-
-
-
-
     e.preventDefault();
 
     // ###### VALIDACIONES #####
@@ -580,6 +575,8 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       let validator = new  ValidarInputTime();
       validator.HoraInicio(inputHoraIni);
       validator.HoraFin(inputHoraFin)
+      errores ();
+      
 
   
      
@@ -890,78 +887,91 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           // if(isActividad){
           // route = `actividades/${idactividad}`;
           // }else{
-           
+            // route = "actividades";
           // }
         
           route = "actividades";
-          $.ajax({
-            url:route,
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type:'POST',
-            dataType: 'json',
-            data: {
-                clave: clave,
-                nombre: nombre,
-                active:active,
-                remove:remove,
-                tipoactividades_id: tipoactividadesid,
-                tipounidades_id:tipoUnidadId,
-                fijo:fijoValue,
-                renta:rentaValue,
-                duracion:duracion,
-                minutoincrementa:minutoincrementa,
-                montoincremento:montoincremento,
-                maxcortesias:maxcortesias,
-                maxcupones:maxcupones,
-                anticipo_id:anticipoid,
-                idusuario:idusuario,
-                precio: precio,
-                balance:balance,
-                libre:libre,
-                datosPersonas:datosPersonas,
-                diasSeleccionados:diasSeleccionados,
-                salidas:salidaFijo,
-                llegadas:llegadasFijo,
-                riesgo:riesgo,
-                puntos:puntos,
-                requisito:requisito,
-                observaciones:observaciones,
-                ArrayDeDIas:ArrayDeDIas,
-                ArrayHrFin:ArrayHrFin,
-                ArrayHini:ArrayHini,
-                arrayHorasLlegada:arrayHorasLlegada,
-                arrayHorasSalida:arrayHorasSalida,
-                arrayPuntosLlegada:arrayPuntosLlegada,
-                arrayPuntosSalida:arrayPuntosSalida
-    
-            },
-    
-            success: function (data) {
-            
-            
-              if(data.error == 'true'){
-                // data.errors.forEach(()=>{})
-                
-                $('#errorsIntoModal').html(data.errors);
-                  $('#message-errorIntoModal').fadeIn();
-                  setTimeout(() => {
-                    $('#message-errorIntoModal').fadeOut();
-                  }, 3000);
-                  // setTimeout("location.reload(true);",3000)
+        
+          if(error == true){
+            $('#errorsIntoModal').html('Corriga los Campos De Horarios Multiples');
+                    $('#message-errorIntoModal').fadeIn();
+                    setTimeout(() => {
+                      $('#message-errorIntoModal').fadeOut();
+                    }, 3000);
+          }else{
+            $.ajax({
+              url:route,
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              type:'POST',
+              dataType: 'json',
+              data: {
+                  clave: clave,
+                  nombre: nombre,
+                  active:active,
+                  remove:remove,
+                  tipoactividades_id: tipoactividadesid,
+                  tipounidades_id:tipoUnidadId,
+                  fijo:fijoValue,
+                  renta:rentaValue,
+                  duracion:duracion,
+                  minutoincrementa:minutoincrementa,
+                  montoincremento:montoincremento,
+                  maxcortesias:maxcortesias,
+                  maxcupones:maxcupones,
+                  anticipo_id:anticipoid,
+                  idusuario:idusuario,
+                  precio: precio,
+                  balance:balance,
+                  libre:libre,
+                  datosPersonas:datosPersonas,
+                  diasSeleccionados:diasSeleccionados,
+                  salidas:salidaFijo,
+                  llegadas:llegadasFijo,
+                  riesgo:riesgo,
+                  puntos:puntos,
+                  requisito:requisito,
+                  observaciones:observaciones,
+                  ArrayDeDIas:ArrayDeDIas,
+                  ArrayHrFin:ArrayHrFin,
+                  ArrayHini:ArrayHini,
+                  arrayHorasLlegada:arrayHorasLlegada,
+                  arrayHorasSalida:arrayHorasSalida,
+                  arrayPuntosLlegada:arrayPuntosLlegada,
+                  arrayPuntosSalida:arrayPuntosSalida
+      
+              },
+      
+              success: function (data) {
+              
+              
+                if(data.error == 'true'){
+                  // data.errors.forEach(()=>{})
                   
-              }else{
-                
-                $('#successIntoModal').html(data.ok);
-                  $('#message-successIntoModal').fadeIn();
-                  setTimeout(() => {
-                    $('#message-successIntoModal').fadeOut();
-                  }, 3000);
-                  // setTimeout("location.reload(true);",1000)
+                  $('#errorsIntoModal').html(data.errors);
+                    $('#message-errorIntoModal').fadeIn();
+                    setTimeout(() => {
+                      $('#message-errorIntoModal').fadeOut();
+                    }, 3000);
+                    // setTimeout("location.reload(true);",3000)
+                    
+                }else{
+                  
+                  $('#successIntoModal').html(data.ok);
+                    $('#message-successIntoModal').fadeIn();
+                    setTimeout(() => {
+                      $('#message-successIntoModal').fadeOut();
+                    }, 3000);
+                    // setTimeout("location.reload(true);",1000)
+                }
               }
-            }
-            
-            
-            })
+              
+              
+              })
+          }
+
+             
+          
+         
         
         
         
@@ -1561,6 +1571,9 @@ function validarHoraFin(e){
   
   if(horaFin <= horaInicio){
     e.parentElement.children[2].innerText = "Hora Fin tiene que ser Mayor a Hora inicio."
+     
+    
+
   }else{
     e.parentElement.children[2].innerText = "";
     e.classList.add('btn-success');
@@ -1572,6 +1585,8 @@ let horaInicio = e.parentElement.parentElement.parentElement.parentElement.paren
 if( horaSalida >= horaInicio){
 
   e.parentElement.children[2].innerText = "Hora de Salida Tiene que ser Menor a Hora Inicio."
+   
+  
   // setInterval(() => {
   //   e.parentElement.children[2].style.display ="none";
   // }, 3000);
@@ -1588,7 +1603,8 @@ function ValidaHoraLlegada(e){
 let horaFin = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[2].children[0].children[0].children[1].children[0].children[1].value
 
 if( horallegada < horaFin){
-  e.parentElement.children[2].innerText = "Hora de Llegada Tiene que ser Mayor a Hora Fin."
+  e.parentElement.children[2].innerText = "Hora de Llegada Tiene que ser Mayor a Hora Fin.";
+
 }else{
   e.parentElement.children[2].innerText = "";
   e.classList.add('btn-success');
@@ -1621,6 +1637,7 @@ horarios.forEach(function(horario, index){
           
         $('#salidaError').addClass('text-danger d-inline');
         $('#salidaError').text('No pueder Selecionar el Mismo Punto de Salida.');
+
          }else{
           $('#salidaError').text('');
          }
@@ -1668,6 +1685,8 @@ function validarPuntosLlegada(){
             
           $('#llegadaError').addClass('text-danger');
           $('#llegadaError').text('No pueder Selecionar el Mismo Punto de Llegada.');
+  
+    
            }else{
             $('#llegadaError').text('');
            }
@@ -1701,11 +1720,13 @@ function validarPuntosLlegada(){
            
          $('#errorsInputs').text('El Campo Hora de Inicio no Puede Estar Vacio');
          $('#message-errorIntoModal2').fadeIn();
+       
+
          setTimeout(() => {
            $('#message-errorIntoModal2').fadeOut();
          }, 3000);
        }
-       
+        
      })
     }
     HoraFin(inputsHFin){
@@ -1718,13 +1739,14 @@ function validarPuntosLlegada(){
        }
        if(contador>0){
            
-         $('#errorsInputs').text('El Campo Hora de Fin no Puede Estar Vacio');
+         $('#errorsInputs').text('El Campo Hora Fin no Puede Estar Vacio');
          $('#message-errorIntoModal2').fadeIn();
+        
          setTimeout(() => {
            $('#message-errorIntoModal2').fadeOut();
          }, 3000);
        }
-       
+        
      })
     }
   }
@@ -1746,7 +1768,6 @@ function validarPuntosLlegada(){
   let fix = precio.innerText;
  let setter = fix.substring(0, 4);
  precio.innerText = `$ ${setter}`;
- // console.log( );
 
 })
 function isActividad(e){
@@ -1756,3 +1777,20 @@ function isActividad(e){
 function desactivarActividad(){
   
 }
+
+let error = false;
+function  errores (){
+  let contadorDErrores =0;
+  let labelSmall =  document.querySelectorAll('[id^=labelSmall]')
+  labelSmall.forEach(function(label){
+    if(label.innerText != ""){
+      contadorDErrores++;
+    }if(contadorDErrores > 0){
+      error = true;
+    }else if(contadorDErrores == 0){
+      error = false;
+    }
+  })
+  
+}
+

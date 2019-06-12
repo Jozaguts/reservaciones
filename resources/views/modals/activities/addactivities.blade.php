@@ -48,7 +48,7 @@
                                     <div class="col-6">
                                      <div class="form-group">
                                        <label for="" >Nombre</label>
-                                       <input type="text" name="nombre" id="nombre" class="form-control general" placeholder="" aria-describedby="helpId" required>                           
+                                       <input type="text" name="nombre" id="nombre" class="form-control general" placeholder="" aria-describedby="helpId" required maxlength="40">                           
                                      </div>
                                  </div>
                                  <div class="col-4">
