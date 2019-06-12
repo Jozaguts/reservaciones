@@ -883,10 +883,17 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         let requisito = datos4.get('requisito')
         let observaciones = datos4.get('observaciones')
         
-
-
+          let route, idactividad;
+          idactividad = document.getElementById('idActividad').value
+          
         
-          let route = 'actividades';
+          // if(isActividad){
+          // route = `actividades/${idactividad}`;
+          // }else{
+           
+          // }
+        
+          route = "actividades";
           $.ajax({
             url:route,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -974,6 +981,8 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
+
+
    $('#clave').prop('disabled',true); 
 
   const id =  e.parentElement.parentElement.getAttribute('data-id')
@@ -1726,7 +1735,7 @@ function validarPuntosLlegada(){
  balanceFix.forEach(function(balance){
    let fix = balance.innerText;
   let setter = fix.substring(0, 4);
-  balance.innerText = setter;
+  balance.innerText = `$ ${setter}`;
   // console.log( );
 
  })
@@ -1736,10 +1745,13 @@ function validarPuntosLlegada(){
  precioFix.forEach(function(precio){
   let fix = precio.innerText;
  let setter = fix.substring(0, 4);
- precio.innerText = setter;
+ precio.innerText = `$ ${setter}`;
  // console.log( );
 
 })
+function isActividad(e){
+  return true;
+}
 
 function desactivarActividad(){
   

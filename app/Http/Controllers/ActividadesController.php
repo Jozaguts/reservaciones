@@ -404,9 +404,9 @@ class ActividadesController extends Controller
      * @param  \App\Actividades  $actividades
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Actividades $actividades)
+    public function update(Request $request)
     {
-        //
+       echo 'estass en update';
     }
 
     /**
