@@ -947,7 +947,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#message-errorIntoModal').fadeOut();
                   }, 3000);
-                  setTimeout("location.reload(true);",3000)
+                  // setTimeout("location.reload(true);",3000)
                   
               }else{
                 
@@ -956,7 +956,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   setTimeout(() => {
                     $('#message-successIntoModal').fadeOut();
                   }, 3000);
-                  setTimeout("location.reload(true);",1000)
+                  // setTimeout("location.reload(true);",1000)
               }
             }
             
