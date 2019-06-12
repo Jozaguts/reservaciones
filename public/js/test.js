@@ -716,7 +716,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         // const llegadas = document.querySelectorAll('[id^="llegadas"]');
         const llegadasSelecciondas = [];
         const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
-        const identificadores = document.querySelectorAll('#titulo');
+        const identificadores = document.querySelectorAll('[id^="horarioId"]');
         let vueltas =diasMultiplesSeleccionados.length;
 
         class Horarios{
