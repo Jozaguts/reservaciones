@@ -884,7 +884,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         let observaciones = datos4.get('observaciones')
         
           let route, idactividad;
-          idactividad = document.getElementById('idActividad').value
+          // idactividad = document.getElementById('idActividad').value
           
         
           // if(isActividad){
