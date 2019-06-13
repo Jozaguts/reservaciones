@@ -9,8 +9,8 @@
                         <div class="card-body">
                             <div class="row justify-content-end my-2">
                                 {{-- <a href="#" class=""  id="btnShowAddEU">Actividad</a> --}}
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addActivities">
-                                        <span class="font-weight-bolder">+</span>  Actividad</button>
+                                <button type="button" class="btn btn-success btn-crear" data-toggle="modal" data-target="#addActivities">
+                                        <span class="font-weight-bolder btn-crear">+</span>  Actividad</button>
                             </div>
                               {{-- alerts --}}
                               @include('components.ajax-alerts')
@@ -53,7 +53,7 @@
                                                 <td class="table-head  text-capitalize balanceFix" data-active="{{$actividad->active}}" >{{$actividad->balance}}
                                                     </td>
                                                 <td class="table-head table-head__actions"> 
-                                                <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this), isActividad(this);" data-isEdit="true" data-id="{{$actividad->id}}">
+                                                <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary btn-editar"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);" data-isEdit="true" data-id="{{$actividad->id}}" id="editActividad">
                                                
                                                 </button>
                                                 <input type="hidden" name="idactividad" value="{{$actividad->id}}" id="idActividad">
