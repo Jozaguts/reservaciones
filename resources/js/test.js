@@ -1,6 +1,8 @@
 
 let editar = false;
 let ACTIVIDADid;
+let HID = [];
+
 
 
 // mostrar contenido de los boones
@@ -232,6 +234,8 @@ function addHoraioContainer(){
   container.classList = "contanier";
   container.innerHTML= `
   <div class="container"> 
+  <input type="hidden" class="h-id" data-id="0"> 
+ 
   <div class="h-divider">
   </div>
   <div class="row">
@@ -240,7 +244,7 @@ function addHoraioContainer(){
       </a>
     </div>
     <div class="col-4">
-    <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="horarioId${contador}">Horario ${contador} </label>
+    <label class="lead titulo-horario-multiple HID" data-identificadores="${contador}" id="horarioId${contador}" data-hid="0">Horario ${contador} </label>
     </div>
   </div>
   <div class="row">
@@ -573,7 +577,15 @@ AddActividadesForm.addEventListener('submit',(e)=>{
     e.preventDefault();
 
     // ###### VALIDACIONES #####
-
+     
+      let hidNuevo = document.querySelectorAll('input[class*="h-id"]')
+     
+      hidNuevo.forEach(function(HIDnuevo){
+        HID.push(Number(HIDnuevo.getAttribute('data-id')) )
+      })
+     let SetID = new Set(HID)
+     let ArrayHID = Array.from(SetID)
+      console.log(ArrayHID)
       validarPuntosSalida();  
       validarPuntosLlegada();
 
@@ -720,6 +732,8 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         // const llegadas = document.querySelectorAll('[id^="llegadas"]');
         const llegadasSelecciondas = [];
         const diasMultiplesSeleccionados = document.querySelectorAll('.horario-multiple__dia');
+      
+      
         const identificadores = document.querySelectorAll('[id^="horarioId"]');
         let vueltas =diasMultiplesSeleccionados.length;
 
@@ -740,9 +754,12 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           this.dias=dias;
           dias = Array.from(dias);
           let diasFiltrados = dias.filter(function(dia){
+            
             return dia.getAttribute('data-horarioid') == id;
           }).map(function(dia){
-             return dia.checked?1:0
+        
+           
+             return dia.checked?1:0;
           })
           return diasFiltrados;
         }
@@ -751,9 +768,14 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       //#### se genera un array con los dias ya separados por hoarios
       let ArrayDeDIas =[];
       for (let i = 0; i < identificadores.length; i++) {
+       
         let dias = new FiltroDias(i+1,diasMultiplesSeleccionados)
+       
         ArrayDeDIas.push(dias)
+    
       }
+     
+      
       //####//aqui ya tengo todos los horarios separados FIN####
       // se filtran las horas de inicio de cada horario
       class HorasInicio {
@@ -890,7 +912,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           let route
         
           let metodo;
-          console.log(ACTIVIDADid);
+         
           if(editar == true ){
           route = `actividades/${ACTIVIDADid}`;
           metodo = "PUT";
@@ -902,7 +924,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
  
           
           // route = "actividades";
-     
+         
           if(error == true){
             $('#errorsIntoModal').html('Corriga los Campos De Horarios Multiples');
                     $('#message-errorIntoModal').fadeIn();
@@ -949,7 +971,8 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   arrayHorasSalida:arrayHorasSalida,
                   arrayPuntosLlegada:arrayPuntosLlegada,
                   arrayPuntosSalida:arrayPuntosSalida,
-                  actividadid:ACTIVIDADid
+                  actividadid:ACTIVIDADid,
+                  horariosId:ArrayHID
       
               },
       
@@ -964,7 +987,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                     setTimeout(() => {
                       $('#message-errorIntoModal').fadeOut();
                     }, 3000);
-                    setTimeout("location.reload(true);",3000)
+                    // setTimeout("location.reload(true);",3000)
                     
                 }else{
                   
@@ -973,7 +996,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                     setTimeout(() => {
                       $('#message-successIntoModal').fadeOut();
                     }, 3000);
-                    setTimeout("location.reload(true);",3000)
+                    // setTimeout("location.reload(true);",3000)
                 }
               }
               
@@ -1003,7 +1026,9 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
+  let HORARIOID;
   editar = true;
+
 
   ACTIVIDADid = e.getAttribute('data-id')
    $('#clave').prop('disabled',true); 
@@ -1014,7 +1039,16 @@ function editarActividad(e){
   const route =`actividades/${id}/edit`;
 
   $.get(route, function(data){
-    
+    // data.pestana3.actividadesHorario.forEach(function(actHorario){
+      
+    //   HID.push(actHorario.id)
+   
+      
+    // })
+
+  
+
+
     $('#clave').val(data.pestana1.actividades[0].clave)
     $('#nombre').val(data.pestana1.actividades[0].nombre)
     let tipoActividad = document.getElementById('tipoactividades_id')
@@ -1115,7 +1149,7 @@ function editarActividad(e){
         inputsType.forEach(function(input){
           if(input.value == "null"){
             input.value = '';
-            // console.log(input.value)
+           
           }
    
 
@@ -1258,16 +1292,13 @@ if(salidasHMultiple != 0){
   
     })
   }
-  console.log(data.pestana4.ob[0].riesgo)
-  // let setPuntos =data.pestana4.ob[0].puntos;
-  // let selectPuntos = document.getElementById('puntos')
-  // selectPuntos.value = setPuntos
-  // $('#')
+ 
+
   if( data.pestana4.ob[0].riesgo == 1){
-    console.log('éntro a true')
+   
     $('#riesgo').prop('checked',true)
   }else{
-    console.log('éntro a false')
+  
     $('#riesgo').prop('checked',false)
   }
 
@@ -1350,13 +1381,14 @@ horarios.forEach(function(horario){
   container.classList = "contanier";
   container.innerHTML= `
   <div class="container"> 
+  <input type="hidden" class="h-id" data-id="${horario.id}"> 
   <span class="h-divider"> </span>
     <div class="row">
       <div class="col-12"> 
         <a href="#!" class="btn btn-danger float-right" onclick="cancelHorario(this)">X</a>
       </div>
       <div class="col-4">
-        <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="horarioId${contador}">Horario ${contador} > </label>
+        <label class="lead titulo-horario-multiple" data-identificadores="${contador}" id="horarioId${contador}" data-HID=${horario.id}>Horario ${contador}  </label>
       </div>
     </div>
     <div class="row">                          
@@ -1390,31 +1422,31 @@ horarios.forEach(function(horario){
             <div class="row">
               <div class="">
                 <label class="form-check-label font-weight-bolder">L</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" ${bolcheckL} data-horarioid="${contador}"> 
+                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" ${bolcheckL} data-horarioid="${contador}" data-HID=${horario.id}> 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">M</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}"value="1" ${bolcheckM}data-horarioid="${contador}"> 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}"value="1" ${bolcheckM} data-horarioid="${contador}"  > 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder ">X</label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" ${bolcheckX} data-horarioid="${contador}">
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" ${bolcheckX} data-horarioid="${contador}" >
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">J</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" ${bolcheckJ} data-horarioid="${contador}"> 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" ${bolcheckJ} data-horarioid="${contador}" > 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">V</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" ${bolcheckV} data-horarioid="${contador}"> 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" ${bolcheckV} data-horarioid="${contador}" > 
               </div>
               <div class="ml-3" >
                 <label class="form-check-label font-weight-bolder">S</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" ${bolcheckS} data-horarioid="${contador}"> 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" ${bolcheckS} data-horarioid="${contador}" > 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">D</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" ${bolcheckD} data-horarioid="${contador}"> 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" ${bolcheckD} data-horarioid="${contador}" > 
               </div>
             </div>
           </div>
@@ -1694,7 +1726,7 @@ horarios.forEach(function(horario, index){
 
 })
 
-// console.log(ArraysalidasPorHorario)
+
 
 }
 
@@ -1810,7 +1842,7 @@ function isActividad(e){
 
   let x 
   if(atributo == 'true'){
-    // console.log(e);
+
     x = true;
   }else{
     x= false;
