@@ -60,7 +60,7 @@
                                                  <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)" data-id="{{$actividad->id}}"></a>
                                                     <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                                 </td>
-                                            </tr>
+                                            </tr>addHoraioContainer
                                                     
                                                 @endif
                                                 @endforeach
