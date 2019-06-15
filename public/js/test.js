@@ -25,7 +25,7 @@ habilitarAcompnante = (e)=>{
     }
     }
 // habilitar acompañante
-    let fijo = document.getElementById('fijo')
+    // let fijo = document.getElementById('fijo')
 let renta = document.getElementById('renta')
 let inputsREnta = document.querySelectorAll('input[class~=renta__input]')
 
@@ -284,37 +284,37 @@ function addHoraioContainer(){
             <div class="">
                 <label class="form-check-label font-weight-bolder  ">L
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="1" checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3">
                 <label class="form-check-label font-weight-bolder  ">M
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1" checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3">
                 <label class="form-check-label font-weight-bolder  ">X
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3">
-                <label class="form-check-label font-weight-bolder  ">J
+                <label class="form-check-label font-weight-bolder">J
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3">
-                <label class="form-check-label font-weight-bolder  ">V
+                <label class="form-check-label font-weight-bolder " >V
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1"checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1"checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3" >
-                <label class="form-check-label font-weight-bolder  ">S
+                <label class="form-check-label font-weight-bolder " >S
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" checked data-horarioid="${contador}" data-HID="0"> 
             </div>
             <div class="ml-3">
-                <label class="form-check-label font-weight-bolder  ">D
+                <label class="form-check-label font-weight-bolder">D
                   </label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" checked data-horarioid="${contador}"> 
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" checked data-horarioid="${contador}"  data-HID="0"> 
             </div>
           </div>
         </div>
@@ -585,7 +585,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       })
      let SetID = new Set(HID)
      let ArrayHID = Array.from(SetID)
-      console.log(ArrayHID)
+      // console.log(ArrayHID)
       validarPuntosSalida();  
       validarPuntosLlegada();
 
@@ -764,6 +764,33 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           return diasFiltrados;
         }
       }
+      class FiltrIDs{
+        constructor(id,dias){
+          this.id=id;
+          this.dias=dias;
+          dias = Array.from(dias);
+          let diasFiltrados = dias.filter(function(dia){
+            
+            return dia.getAttribute('data-horarioid') == id;
+          }).map(function(dia){
+        
+           
+             return dia.getAttribute('data-HID');
+          })
+          return diasFiltrados;
+        }
+      }
+      let ArrayDeIds =[];
+      for (let i = 0; i < identificadores.length; i++) {
+       
+        let dias = new FiltrIDs(i+1,diasMultiplesSeleccionados)
+       
+        ArrayDeIds.push(dias)
+    
+      }
+
+
+      // console.log(ArrayDeIds)
       /* Termina el filtrado de dias*/
       //#### se genera un array con los dias ya separados por hoarios
       let ArrayDeDIas =[];
@@ -774,6 +801,9 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         ArrayDeDIas.push(dias)
     
       }
+      ArrayDeDIas.push(ArrayDeIds)
+      
+      console.log(ArrayDeDIas.flat())
      
       
       //####//aqui ya tengo todos los horarios separados FIN####
@@ -1426,27 +1456,27 @@ horarios.forEach(function(horario){
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">M</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}"value="1" ${bolcheckM} data-horarioid="${contador}"  > 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}"value="1" ${bolcheckM} data-horarioid="${contador}"  data-HID=${horario.id}> 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder ">X</label>
-                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" ${bolcheckX} data-horarioid="${contador}" >
+                  <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1" ${bolcheckX} data-horarioid="${contador}" data-HID=${horario.id}>
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">J</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" ${bolcheckJ} data-horarioid="${contador}" > 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1" ${bolcheckJ} data-horarioid="${contador}" data-HID=${horario.id}> 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">V</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" ${bolcheckV} data-horarioid="${contador}" > 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" ${bolcheckV} data-horarioid="${contador}" data-HID=${horario.id}> 
               </div>
               <div class="ml-3" >
                 <label class="form-check-label font-weight-bolder">S</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" ${bolcheckS} data-horarioid="${contador}" > 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1" ${bolcheckS} data-horarioid="${contador}" data-HID=${horario.id}> 
               </div>
               <div class="ml-3">
                 <label class="form-check-label font-weight-bolder">D</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" ${bolcheckD} data-horarioid="${contador}" > 
+                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1" ${bolcheckD} data-horarioid="${contador}" data-HID=${horario.id}> 
               </div>
             </div>
           </div>
