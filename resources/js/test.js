@@ -803,7 +803,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       }
       ArrayDeDIas.push(ArrayDeIds)
       
-      console.log(ArrayDeDIas.flat())
+      console.log(ArrayDeDIas)
      
       
       //####//aqui ya tengo todos los horarios separados FIN####
