@@ -176,3 +176,11 @@ display: flex;
 max-width: 20vw;
 width: 100%;
 }
+.precioFix, .balanceFix{
+text-align: right;
+// width: 10em;
+// max-width: fit-content !important;
+}
+.title-{
+    text-align: center;
+}

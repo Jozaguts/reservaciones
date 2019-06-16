@@ -591,10 +591,10 @@ class ActividadesController extends Controller
                             //si al menos hay uno chekeado guardo en DB
 
                             $count2 = count($request->ArrayDeDIas);    
-                            //   dd($request->horariosId);
+                     
                         for ($i=0; $i <$count2 ; $i++) { 
-                            dd($request->ArrayDeDIas);
-                                if(intval($request->horariosId[$i]) > 0  ){
+                        
+                                if(intval($request->horariosId[$i]) >0  ){
                                     $ActividadesHorario = ActividadesHorario::where('id', $request->horariosId[$i])
                                     ->update([
                                         'actividades_id' => $request->get('actividadid'),
@@ -612,7 +612,7 @@ class ActividadesController extends Controller
                                     );
                                 }else{
                     // inserta ActividadesHorario    
-                    // dd($request->ArrayDeDIas[$i]);                              
+                                               
                     $ActividadesHorario = ActividadesHorario::create(
                                                
                         ['actividades_id' => $request->get('actividadid'),

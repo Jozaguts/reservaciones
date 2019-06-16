@@ -193,3 +193,12 @@ textarea {
   width: 100%;
 }
 
+.precioFix,
+.balanceFix {
+  text-align: right;
+}
+
+.title- {
+  text-align: center;
+}
+

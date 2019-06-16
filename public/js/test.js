@@ -1852,19 +1852,23 @@ function validarPuntosLlegada(){
 
 
  balanceFix.forEach(function(balance){
-   let fix = balance.innerText;
-  let setter = fix.substring(0, 4);
-  balance.innerText = `$ ${setter}`;
-  
+ 
+  let setter =  Math.round(Number(balance.innerText));
 
+  balance.innerText = `${setter.toLocaleString('en-IN', { style: 'currency', currency: 'MXN' })}`;
+  
+  ;
  })
 
  let precioFix =document.querySelectorAll('.precioFix')
 
  precioFix.forEach(function(precio){
   let fix = precio.innerText;
- let setter = fix.substring(0, 4);
- precio.innerText = `$ ${setter}.00`;
+ let setter =  Math.round(Number(precio.innerText));
+ let cantidad = setter.toLocaleString('en-IN', { style: 'currency', currency: 'MXN' }).substr(2, setter.length);
+ let moneda =setter.toLocaleString('en-IN', { style: 'currency', currency: 'MXN' }).substr(0, 2);
+console.log(cantidad)
+ precio.innerText = `${cantidad} ${moneda}`;
 
 })
 function isActividad(e){
