@@ -585,7 +585,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       })
      let SetID = new Set(HID)
      let ArrayHID = Array.from(SetID)
-      // console.log(ArrayHID)
+    
       validarPuntosSalida();  
       validarPuntosLlegada();
 
@@ -790,7 +790,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       }
 
 
-      // console.log(ArrayDeIds)
+      
       /* Termina el filtrado de dias*/
       //#### se genera un array con los dias ya separados por hoarios
       let ArrayDeDIas =[];
@@ -803,7 +803,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
       }
       ArrayDeDIas.push(ArrayDeIds)
       
-      console.log(ArrayDeDIas)
+    
      
       
       //####//aqui ya tengo todos los horarios separados FIN####
@@ -1069,15 +1069,6 @@ function editarActividad(e){
   const route =`actividades/${id}/edit`;
 
   $.get(route, function(data){
-    // data.pestana3.actividadesHorario.forEach(function(actHorario){
-      
-    //   HID.push(actHorario.id)
-   
-      
-    // })
-
-  
-
 
     $('#clave').val(data.pestana1.actividades[0].clave)
     $('#nombre').val(data.pestana1.actividades[0].nombre)
@@ -1109,9 +1100,10 @@ function editarActividad(e){
   // PESTAÑA 2
     // balances
     let balanceG = document.getElementById('balanceG')
-    balanceG.value = data.pestana2.balances[0].balance;
+    
+    balanceG.value = Math.round(Number(data.pestana2.balances[0].balance));
     let precioG = document.getElementById('precioG')
-    precioG.value = data.pestana2.balances[0].precio;
+    precioG.value =  Math.round(Number(data.pestana2.balances[0].precio));
    
     // precios
     let precios = data.pestana2.precios;
@@ -1678,7 +1670,7 @@ function validarHoraFin(e){
 }
 function ValidaHoraSalida(e){
 let horaSalida = e.value;
-let horaInicio = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[2].children[0].children[0].children[0].children[0].children[1].value;
+let horaInicio = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[3].children[0].children[0].children[0].children[0].children[1].value;
 if( horaSalida >= horaInicio){
 
   e.parentElement.children[2].innerText = "Hora de Salida Tiene que ser Menor a Hora Inicio."
@@ -1697,7 +1689,7 @@ if( horaSalida >= horaInicio){
 //validar si se toma hora de salida o de llegada
 function ValidaHoraLlegada(e){
   let horallegada = e.value;
-let horaFin = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[2].children[0].children[0].children[1].children[0].children[1].value
+let horaFin = e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[3].children[0].children[0].children[1].children[0].children[1].value
 
 if( horallegada < horaFin){
   e.parentElement.children[2].innerText = "Hora de Llegada Tiene que ser Mayor a Hora Fin.";
@@ -1867,7 +1859,7 @@ function validarPuntosLlegada(){
  let setter =  Math.round(Number(precio.innerText));
  let cantidad = setter.toLocaleString('en-IN', { style: 'currency', currency: 'MXN' }).substr(2, setter.length);
  let moneda =setter.toLocaleString('en-IN', { style: 'currency', currency: 'MXN' }).substr(0, 2);
-console.log(cantidad)
+
  precio.innerText = `${cantidad} ${moneda}`;
 
 })
@@ -1883,9 +1875,77 @@ function isActividad(e){
   }
   return x;
 }
-
-function desactivarActividad(){
+// desactivar actividad
+function desactivarActividad (e){
+  let actividad
+  let route = `/actividades/${e.getAttribute('data-id')}`;
+  let desactivar = e.getAttribute('data-desactivar');
+  let id = e.getAttribute('data-id');
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   
+  $.ajax({
+    url:route,
+    headers:{'X-CSRF-TOKEN':token},
+    type:'PUT',
+    dataType: 'json',
+    data: {id: id,desactivar:desactivar},
+    success:function(data)
+    {
+ 
+      if(data.status == 200){
+        $('#message-success').fadeIn();
+        $('#success').text(data.response);
+        setTimeout(() => {  
+          $('#message-success').fadeOut();
+        }, 3000);
+       
+      }else{
+        $('#message-error').fadeIn();
+        $('#error').text('Error Al Procesar la Petición');
+        setTimeout(() => {  
+          $('#message-success').fadeOut();
+        }, 3000);
+      }   
+  },
+  })
+
+}
+
+
+// eliminar actividad
+function eliminarActividad (e){
+  let actividad
+  let route = `/actividades/${e.getAttribute('data-id')}`;
+  let eliminar = e.getAttribute('data-eliminar');
+  let id = e.getAttribute('data-id');
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  
+  $.ajax({
+    url:route,
+    headers:{'X-CSRF-TOKEN':token},
+    type:'DELETE',
+    dataType: 'json',
+    data: {id: id,eliminar:eliminar},
+    success:function(data)
+    {
+
+      if(data.status == 200){
+        $('#message-success').fadeIn();
+        $('#success').text(data.response);
+        setTimeout(() => {  
+          $('#message-success').fadeOut();
+        }, 3000);
+       
+      }else{
+        $('#message-error').fadeIn();
+        $('#error').text('Error Al Procesar la Petición');
+        setTimeout(() => {  
+          $('#message-success').fadeOut();
+        }, 3000);
+      }   
+  },
+  })
+
 }
 
 let error = false;
@@ -1905,5 +1965,13 @@ function  errores (){
 }
 
 
-
-
+ //color para el tr si esta desactivado 
+ let elements = document.querySelectorAll('[data-active="0"]');
+ elements.forEach(element => {
+    element.classList.add('tr-bg');
+});
+// o activado
+let btnStatus = document.querySelectorAll('[data-btn-status="0"]');
+btnStatus.forEach(btn => {
+    btn.classList.add('btn-status');
+});

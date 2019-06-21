@@ -48,8 +48,9 @@ Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
 //tipo de actividades
 Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);
 
-
+Route::put('actividades/{id}', 'ActividadesController@updateActividad')->middleware(['auth']);
 Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
+// Route::delete('actividades/{id}', 'ActividadesController@destroy')->middleware(['auth']);
 
 Route::get('salidasllegadas','ActividadesController@salidasllegadas')->middleware(['auth']);
 Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->middleware(['auth']);

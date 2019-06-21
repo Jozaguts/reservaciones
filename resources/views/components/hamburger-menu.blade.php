@@ -28,6 +28,7 @@
             <a href="{{url('actividades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Actividades</li></a>
              <a href="{{url ('tipounidades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Tipo de Equipos y Unidades</li></a>
            <a href="{{url ('unidades')}}" class="sub-li__link"> <li class="sub-ul__item sub-li-actividadaes">Equipos y Unidades</li></a>
+           <a href="{{url ('combos')}}" class="sub-li__link"> <li class="sub-ul__item sub-li-actividadaes">Combos</li></a>
         </ul>
         <a href="#" class="hm-list__link ">
         <li class="hm-list__item comisionistas" id="comLink"><span class="hb-icon commission-agent"></span>Comisionistas</li>

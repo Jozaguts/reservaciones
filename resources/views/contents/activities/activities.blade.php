@@ -1,6 +1,7 @@
 
 
    <div class="content" id="listContent">
+        {{ csrf_field() }}
     <div class="col-md-12">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -43,22 +44,23 @@
                                                 @if( $actividad->tipoactividades_id == $tipoactividad->id)
                                               
                                                 
-                                            <tr id="trBg" class="mot" data-id="{{$actividad->id}}"data-clave="{{$actividad->clave}}" >
-                                            <td class=" table-head table-head__name" data-active="{{$actividad->active}}">{{$actividad->clave}} 
+                                            <tr id="trBg" class="mot" data-id="{{$actividad->id}}"data-clave="{{$actividad->clave}}" data-active="{{$actividad->active}}" >
+                                            <td class=" table-head table-head__name" >{{$actividad->clave}} 
                                                 </td>
-                                                <td class="table-head table-head__surname" data-active="{{$actividad->active}}"> <p class="flex-content">{{$actividad->nombre}}</p>
+                                                <td class="table-head table-head__surname"> <p class="flex-content">{{$actividad->nombre}}</p>
                                                 </td>
-                                                <td class="table-head  text-capitalize precioFix" data-active="{{$actividad->active}}">{{$actividad->precio}}
+                                                <td class="table-head  text-capitalize precioFix">{{$actividad->precio}}
                                                 </td>
-                                                <td class="table-head  text-capitalize balanceFix" data-active="{{$actividad->active}}" >{{$actividad->balance}}
+                                                <td class="table-head  text-capitalize balanceFix">{{$actividad->balance}}
                                                     </td>
                                                 <td class="table-head table-head__actions"> 
                                                 <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary btn-editar"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);" data-isEdit="true" data-id="{{$actividad->id}}" id="editActividad">
                                                
                                                 </button>
                                                 <input type="hidden" name="idactividad" value="{{$actividad->id}}" id="idActividad">
-                                                 <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)" data-id="{{$actividad->id}}"></a>
-                                                    <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+                                                 <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)" data-id="{{$actividad->id}}" data-desactivar="{{$actividad->active}}" data-btn-status="{{$actividad->active}}" ></a>
+
+                                                    <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger" onclick="eliminarActividad(this)" data-id="{{$actividad->id}}" data-eliminar="true"></a>
                                                 </td>
                                             </tr>
                                                     
@@ -80,5 +82,5 @@
                 </div>
             </div>
         </div>
-{!! Form::open(['route' => ['actividades.destroy', ':UNIDAD_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
-{!!Form::close() !!}
+{{-- {!! Form::open(['route' => ['actividades.destroy', ':UNIDAD_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
+{!!Form::close() !!} --}}

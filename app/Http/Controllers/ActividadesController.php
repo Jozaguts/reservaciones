@@ -15,6 +15,7 @@ use App\ActividadesHorario;
 use App\SalidasLlegadasHorario;
 use Illuminate\Support\Facades\DB;
 
+
 class ActividadesController extends Controller
 {
     /**
@@ -311,7 +312,7 @@ class ActividadesController extends Controller
              //    pestaña 4 $
              $obs = DB::table('actividades as ac')
              ->select('ac.riesgo', 'ac.puntos', 'ac.requisitos', 'ac.observaciones')
-             ->where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
+             ->where([['ac.id','=', $id], /*['ac.active', '=', '1'],*/ ['ac.remove', '=', '0']])
              ->get();
 
 
@@ -319,7 +320,7 @@ class ActividadesController extends Controller
         ->Join('tipoactividades as ta', 'ac.tipoactividades_id', '=', 'ta.id')
         ->Join('anticipos as an', 'ac.anticipo_id', '=', 'an.id')
         ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre')
-       ->Where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
+       ->Where([['ac.id','=', $id], /*['ac.active', '=', '1'],*/ ['ac.remove', '=', '0']])
        ->get();
 
 
@@ -328,18 +329,18 @@ class ActividadesController extends Controller
 
        $actpa = DB::table('actividades as ac')
            ->select('ac.precio', 'ac.balance')
-           ->where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
+           ->where([['ac.id','=', $id],/* ['ac.active', '=', '1'],*/ ['ac.remove', '=', '0']])
            ->get();
            $actp = DB::table('actividadprecios as ap')
        ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
        ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
-       ->where([['ap.actividades_id', '=', $id], ['ap.active', '=', '1'], ['ap.remove', '=', '0']])
+       ->where([['ap.actividades_id', '=', $id], /*['ap.active', '=', '1'],*/ ['ap.remove', '=', '0']])
        ->orderBy('ap.id')
        ->get();
     //    actividades horario
        $acth = DB::table('actividadeshorarios as ah')
            ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
-           ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
+           ->where([/*['ah.active','=','1'],*/ ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
            ->orderBy('ah.hini')
            ->get();
 
@@ -354,7 +355,7 @@ class ActividadesController extends Controller
                 $sal = DB::table('salida_llegadahorarios as slh')
                ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'],/* ['slh.active', '=', '1'],*/ ['slh.remove', '=', '0']])
                ->orderBy('slh.id')
                ->get();
 
@@ -367,7 +368,7 @@ class ActividadesController extends Controller
         $llegadas = DB::table('salida_llegadahorarios as slh')
            ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
            ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'],/* ['slh.active', '=', '1'],*/ ['slh.remove', '=', '0']])
            ->orderBy('slh.id')
            ->get();
            array_push($llegadasHorarioLibre, $llegadas);
@@ -381,7 +382,7 @@ class ActividadesController extends Controller
                 $sal = DB::table('salida_llegadahorarios as slh')
                ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+               ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], /*['slh.active', '=', '1'],*/ ['slh.remove', '=', '0']])
                ->orderBy('slh.id')
                ->get();
 
@@ -391,8 +392,8 @@ class ActividadesController extends Controller
                $llegadas = DB::table('salida_llegadahorarios as slh')
            ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
            ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
-           ->orderBy('slh.id')
+           ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'],/* ['slh.active', '=', '1'],*/ ['slh.remove', '=', '0']])
+           ->orderBy('slh.id')  
            ->get();
            array_push($llegadasHorarioMultiple, $llegadas);
 
@@ -416,7 +417,6 @@ class ActividadesController extends Controller
      */
     public function update(Request $request)
     {
-   
         //reglas de validacion
         $rules =[
             // 'clave' => ['required', 'string', 'min:5','unique:actividades'],
@@ -526,6 +526,7 @@ class ActividadesController extends Controller
                 // $actividadPrecio->save();
             }                 
 
+            // dd($request->diasSeleccionados);
             if($request->libre == 1){ //SI LIBRE ESTA CHECKEADO  ### SI SON HORARIOS ABIERTOS ###
                 $count = count($request->diasSeleccionados);
                 if($request->duracion == null){
@@ -589,13 +590,12 @@ class ActividadesController extends Controller
                         return response()->json(['error'=> 'true','errors'=> $message]);
                     }else{
                             //si al menos hay uno chekeado guardo en DB
-
-                            $count2 = count($request->ArrayDeDIas);    
-                     
-                        for ($i=0; $i <$count2 ; $i++) { 
-                        
-                                if(intval($request->horariosId[$i]) >0  ){
-                                    $ActividadesHorario = ActividadesHorario::where('id', $request->horariosId[$i])
+                        // dd($request->ArrayDeDIas);
+                            // $count2 = ;    
+                            //   dd($request->ArrayDeDIas[count($request->ArrayDeDIas)-1][0][0]);
+                        for ($i=0; $i < count($request->ArrayDeDIas) ; $i++) { 
+                                if(intval($request->ArrayDeDIas[count($request->ArrayDeDIas)-1][$i][0]) > 0  ){
+                                    $ActividadesHorario = ActividadesHorario::where('id', $request->ArrayDeDIas[count($request->ArrayDeDIas)-1][$i][0])
                                     ->update([
                                         'actividades_id' => $request->get('actividadid'),
                                         'hini' => $request->ArrayHini[$i][0],
@@ -612,9 +612,8 @@ class ActividadesController extends Controller
                                     );
                                 }else{
                     // inserta ActividadesHorario    
-                                               
-                    $ActividadesHorario = ActividadesHorario::create(
-                                               
+                    // dd($request->ArrayDeDIas[$i]);                              
+                    $ActividadesHorario = ActividadesHorario::create(                                               
                         ['actividades_id' => $request->get('actividadid'),
                             'hini' => $request->ArrayHini[$i][0],
                             'hfin' =>  $request->ArrayHrFin[$i][0],
@@ -668,7 +667,7 @@ class ActividadesController extends Controller
                             //     );
                             // }
                         }
-                        return response()->json(['ok'=>'Actividad Agregada Correctamente']);
+                        return response()->json(['ok'=>'Actividad Editada Correctamente']);
                     }                            
                 }
             }               
@@ -684,9 +683,24 @@ class ActividadesController extends Controller
      * @param  \App\Actividades  $actividades
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Actividades $actividades)
+    public function destroy(Request $request, $id)
     {
-        //
+
+        if($request->ajax()){
+           
+
+            
+            if( $actividad = Actividades::find($id)->delete()){
+              
+                return response()->json(['status'=>200,'response' => 'Actividad Eliminada Correctamente']);
+            }else{
+                
+                return response()->json(['status'=>200,'response' => 'No se Pudo Eliminar la Actividad']);
+            }
+
+       
+
+        }
     }
     public function salidasllegadas(Request $request)
     {
@@ -738,5 +752,21 @@ class ActividadesController extends Controller
          
       
 
+    }
+    public function updateActividad(Request $request, $id) {
+
+      
+        if($request->ajax()){
+            $actividad = Actividades::find($id);
+            if($request->desactivar == 1){
+                $actividad::where('id', $request->id)
+                                ->update(['active' => 0]);
+                return response()->json(['status'=>200,'response' => 'Actividad Desactivada Correctamente']);
+            }else{
+                $actividad::where('id', $request->id)
+                ->update(['active' => 1]);
+                return response()->json(['status'=>200,'response' => 'Actividad Activada Correctamente']);
+            }
+        }
     }
 }

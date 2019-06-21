@@ -161,13 +161,13 @@
                             <div class="row ">
                               <div class="col-3 offset-2">
                                 <div class="form-group">
-                                  <label for="">Balance general</label>
+                                  <label for="">Balance general (MXN)</label>
                                   <input type="text" name="balanceg" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                 </div>
                               </div>
                               <div class="col-3 offset-2 mb-2">
                                   <div class="form-group">
-                                    <label for="">Precio General</label>
+                                    <label for="">Precio General (MXN)</label>
                                     <input type="text" name="preciog" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                   </div>
                                 </div>
