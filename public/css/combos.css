@@ -1,0 +1,20 @@
+.form-group {
+  display: flex;
+}
+
+label {
+  display: inline-block;
+  text-align: center;
+  align-self: center;
+  margin-right: 0.5rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.form-control {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+

@@ -8,6 +8,7 @@
     "/css/equiposyunidades.css": "/css/equiposyunidades.css",
     "/css/tipoactividades.css": "/css/tipoactividades.css",
     "/css/activities.css": "/css/activities.css",
+    "/css/combos.css": "/css/combos.css",
     "/js/all.js": "/js/all.js",
     "/js/admin.js": "/js/admin.js",
     "/js/reservations.js": "/js/reservations.js",
@@ -16,5 +17,6 @@
     "/js/equiposyunidades.js": "/js/equiposyunidades.js",
     "/js/tipoactividades.js": "/js/tipoactividades.js",
     "/js/activities.js": "/js/activities.js",
-    "/js/test.js": "/js/test.js"
+    "/js/test.js": "/js/test.js",
+    "/js/combos.js": "/js/combos.js"
 }

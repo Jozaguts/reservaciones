@@ -44,11 +44,12 @@ Route::resource('test', 'testController');
 
 // tipo unidaddes controller 
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
+Route::resource('combos', 'CombosController')->middleware(['auth']);
 
 //tipo de actividades
 Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);
 
-Route::put('actividades/{id}', 'ActividadesController@updateActividad')->middleware(['auth']);
+Route::put('editar-actividad/{id}', 'ActividadesController@updateActividad')->middleware(['auth']);
 Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
 // Route::delete('actividades/{id}', 'ActividadesController@destroy')->middleware(['auth']);
 

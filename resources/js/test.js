@@ -870,8 +870,10 @@ AddActividadesForm.addEventListener('submit',(e)=>{
         let arrayPuntosSalida =[];
       for (let i = 0; i < identificadores.length; i++) {
         let puntos = new PuntosSalida(i+1,puntosSalida)
+        console.log(puntosSalida);
         arrayPuntosSalida.push(puntos)
       }
+     
        // ## puntos de salida ##
        const puntosllegadas = document.querySelectorAll('.select-multiple__llegadas');
        class PuntosLlegadas{
@@ -888,12 +890,13 @@ AddActividadesForm.addEventListener('submit',(e)=>{
              return arraypuntos
            }
          }
+         
          let arrayPuntosLlegada =[];
        for (let i = 0; i < identificadores.length; i++) {
          let puntos = new PuntosLlegadas(i+1,puntosllegadas)
          arrayPuntosLlegada.push(puntos)
        }
-      
+      console.log(arrayPuntosLlegada)
           //HORAS
         //  #### SALIDAS #####
         let horasSalidas = document.querySelectorAll('.hora-salida')
@@ -1353,6 +1356,7 @@ let respuesta = horarioMultipleAJAX.pestana3;
 let horarios = respuesta.actividadesHorario;
 let salidasHMultiple = respuesta.salidasHMultiple;
 let llegadasHMultiple = respuesta.llegadasHMultiple;
+// console.log(respuesta);
 horarios.forEach(function(horario){
   if(horarioID == horario.id ){
     
@@ -1515,13 +1519,13 @@ llegadasHMultiple.forEach(function(llegada){
 })
 function agregarSalidasHorarioMultiple(salida){
   let agreageSalidasHmultiple = document.getElementById('agreageSalidasHmultiple');
-  
+  // console.log(salida);
   agreageSalidasHmultiple.innerHTML +=`
         <div class="row">
           <div class="col-4">
             <div class="form-group">
               <label for="" data-punto="1";>Punto 1</label>
-              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-horarioid="${salida.actividadeshorario_id}" onchange="validarPuntosSalida()">
+              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-horarioid="${salida.actividadeshorario_id}" onchange="validarPuntosSalida()" data-salidallegadahorario="${salida.id}";>
               
               </select>
             </div>
@@ -1878,7 +1882,7 @@ function isActividad(e){
 // desactivar actividad
 function desactivarActividad (e){
   let actividad
-  let route = `/actividades/${e.getAttribute('data-id')}`;
+  let route = `/editar-actividad/${e.getAttribute('data-id')}`;
   let desactivar = e.getAttribute('data-desactivar');
   let id = e.getAttribute('data-id');
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
