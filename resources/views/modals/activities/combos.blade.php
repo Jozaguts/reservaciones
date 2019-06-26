@@ -32,20 +32,20 @@
                   <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
                   <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                         <div class="container mt-2">
-                            <div class="row">
+                               <div class="row">
                                 <div class="col-3">
                                   <div class="form-group">
                                     <label for="">Clave</label>
-                                    <input type="text" name="clave" id="clave" class="form-control general" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase" autofocus>
+                                    <input type="text" name="clave" id="clave" class="form-control general input-clave" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase" autofocus>
                                   </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-5">
                                  <div class="form-group">
                                    <label for="" >Nombre</label>
-                                   <input type="text" name="nombre" id="nombre" class="form-control general" placeholder="" aria-describedby="helpId" required maxlength="40">                           
+                                   <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40">                           
                                  </div>
                              </div>
-                             <div class="col-5">
+                             <div class="col-4">
                              <div class="form-group">
                                <label for="">Tipo de Actividad</label>
                                <select class="form-control " name="tipoactividades_id" id="tipoactividades_id" required>
@@ -57,117 +57,85 @@
                            </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">
+                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="">Max Cortesias</label>
-                                        <input type="number" class="form-control general" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
+                                        <input type="number" class="form-control general input-cortesias" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
                                     </div>
-                                </div>
-                                <div class="col-4">
+                                </div> 
+                                <div class="col-5">
                                     <div class="form-group  ">
                                         <label for="">Max Cupones</label>
-                                        <input type="number" class="form-control general" name="maxcupones" id="maxCupones" aria-describedby="helpId" placeholder="">
+                                        <input type="number" class="form-control general input-cupones" name="maxcupones" id="maxCupones" aria-describedby="helpId" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for=""> Anticipo</label>
-                                        <select class="form-control" name="anticipo_id" id="anticipoId" required>
+                                        <select class="form-control input-anticipo" name="anticipo_id" id="anticipoId" required>
                                             @foreach ($anticipos as $anticipo)
                                                 <option value="{{$anticipo->id}}">{{$anticipo->nombre}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                              {{-- <div class="col-5">
-                                <div class="container">
-                                  <div class="row ">
-                                    <div class="col-6 pt-4">
-                                        
-                                        <div class="row-modal">
-                                            <div class="form-group">
-                                              <label for="">Max Cortesias</label>
-                                              <input type="number" class="form-control general" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
-                                            </div>
-                                           </div>
-
-
-                                      <div class="form-check form-check-inline">
-                                        <label class="form-check-label lbcheck" for="ocupacion">
-                                          <input class="  general pases-precios-check" type="checkbox"name="fijo" id="fijo" value="1"> Ocupacion Fija
-                                        </label>
-                                      </div>
-                                      
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="duracion">Duración</label>
-                                            <input type="number" class="form-control  general" name="duracion" id="duracion" aria-describedby="helpId" placeholder="" >                  
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-7">
-                                <div class="container">
-                                  <div class="row">
-                                  <div class="col-4">
-                                      <label class="form-group pt-4 pl-5 lbcheck" for="ocupacion">
-                                          <input class="  general pases-precios-check " type="checkbox"name="renta" id="renta" value="1"> Renta
-                                        </label>
-                                  </div>
-                                  <div class="col-4">
-                                      <div class="form-group">
-                                          <label for="minutoincrementa">Min. Incremento</label>
-                                          <input type="number" class="form-control renta__input general" name="minutoincrementa" id="minutoIncrementa" aria-describedby="helpId" placeholder="" disabled>
-                                         </div>
-                                  </div>
-                                  <div class="col-4">
-                                      <div class="form-group">
-                                          <label for="">$ Incremento</label>
-                                          <input type="number" class="form-control renta__input general" name="montoincremento" id="montoIncremento" aria-describedby="helpId" placeholder="$" disabled step="0.01">
-                                         </div>
-                                  </div>
-                                  </div>
-                                </div>
-                              </div> --}}
+      
                             </div>
                             <div class="row">
-                              <div class="col-4">
-
-                                <div class="form-group">
-                                  <label for="">Incluido en Combos:</label>
-                                  <textarea class="form-control" name="" id="" rows="3" style="min-height: 7.5rem !important;"></textarea>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for=""> Agregar Actividad</label>
+                                        <select class="form-control input-agregar-actividad" name="actividad" id="actividad" required>
+                                            @foreach ($actividades as $actividad)
+                                                <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
+                                            @endforeach
+                                        </select>
+                                        <a href="#!" class="btn btn-secondary ml-3 btn-agregar" >+</a>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-3 ml-5 mr-5">
-                                <div class="row-modal">
-                                <div class="form-group">
-                                  <label for="">Max Cortesias</label>
-                                  <input type="number" class="form-control general" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
+                                <div class="col-5 offset-2">
+                                    <div class="form-group">
+                                    <label for=""> Aplicar Mismo Día </label>
+                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="" id="" value="" >
+                                  </div>
                                 </div>
-                               </div>
-                               <div class="row-modal">
-                                   <div class="form-group  mr-5">
-                                     <label for="">Max Cupones</label>
-                                     <input type="number" class="form-control general" name="maxcupones" id="maxCupones" aria-describedby="helpId" placeholder="">
-                                   </div>
+                                
+                            </div>
+                            <div class="row">
+                              <div class="col-10">
+                                  <div class="form-group">
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th>Clave</th>
+                                          <th>Nombre</th>
+                                          <th>Precio</th>
+                                          <th>Balance</th>
+                                          <th>Horario <span class="ml-5">Fín</span> <span class="ml-5">Días</span></th>
+                                        
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td scope="row"  >Can01</td>
+                                          <td>Canopy el Eden</td>
+                                          <td>$1,500</td>
+                                          <td>$200</td>
+                                          <td colspan="5"><div class="form-group">
+                                              <label for=""></label>
+                                              <select class="form-control" name="" id="">
+                                                <option>9:00PM | 01:00PM | L,M,X,J,V</option>
+                                              </select>
+                                            </div> 
+                                          </td>
+                                        </tr>
+                                   
+                                      </tbody>
+                                    </table>
                                   </div>
                               </div>
-                              <div class="col-3">
-                                <div class="form-group">
-                                  <label for=""> Acepta anticipo</label>
-                                  {{-- <select class="form-control" name="anticipo_id" id="anticipoId" required>
-                                      @foreach ($anticipos as $anticipo)
-                                  <option value="{{$anticipo->id}}">{{$anticipo->nombre}}</option>
-                                    @endforeach
-                                  </select> --}}
-                                </div>
-                             <div class="row-modal mt-5">
-                                <button type="submit" class="btn btn-success ">Guardar</button>
-                             </div>
-                              </div>
-                               </div>
+                            </div>
+                            
                             </div>
                      </form>
                 </div>
@@ -180,7 +148,7 @@
                         </div>
                     </div>
                     <form action="{{url('/actividades')}}" method="post" id="AddPreciosYPasesForm">
-                      {{-- <meta name="csrf-token" content="{{ csrf_token() }}" id="_token"> --}}
+                     <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                       <div class="container">
                         <div class="row ">
                           <div class="col-3 offset-2">

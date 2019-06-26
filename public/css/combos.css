@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.row {
+  margin-bottom: 0.5rem;
+}
+
 label {
   display: inline-block;
   text-align: center;
@@ -10,11 +14,41 @@ label {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  line-height: 2rem;
 }
 
 .form-control {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+}
+
+.input-clave {
+  max-width: 100%;
+  width: 70%;
+}
+
+.input-nombre {
+  max-width: 100%;
+  width: 100%;
+}
+
+.input-cortesias {
+  max-width: 100%;
+  width: 47%;
+}
+
+.input-cupones {
+  max-width: 100%;
+  width: 27%;
+}
+
+.input-anticipo {
+  max-width: 100%;
+  width: 60%;
+}
+
+.checkbox {
+  width: 1.5rem;
 }
 
