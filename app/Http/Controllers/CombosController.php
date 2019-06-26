@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Anticipos;
 use App\TipoActividades;
-
+use Illuminate\Support\Facades\DB;
 class CombosController extends Controller
 {
     /**
@@ -18,7 +18,13 @@ class CombosController extends Controller
 
         $anticipos = Anticipos::all();
         $tipoactividades = TipoActividades::all();
-        return view('sections.activities.combos',compact('anticipos','tipoactividades'));
+         $actividades = DB::table('actividades as ac')
+               ->select('ac.id', 'ac.clave', 'ac.nombre')
+               ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0']])
+               ->orderBy('ac.clave')
+               ->get();
+            
+        return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades'));
     }
 
     /**
@@ -85,5 +91,9 @@ class CombosController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function infoactividad($id){
+        
+        return $id;
     }
 }

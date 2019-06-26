@@ -4,7 +4,31 @@ $(document).ready(function () {
     // addEventListener para el boton de del combo y mostrar la tabla con su contenido
    $(document).on('click', '.show-btn', function () {
     $(this).siblings('div').toggleClass('d-none')
-    });
+
+    });$(document).on('click','.btn-agregar', function(e){
+      // e.preventDefault();
+      
+      let id = e.target.parentElement.children[1].value;
+      let xhr = new XMLHttpRequest()
+      let respuesta;
+      xhr.onreadystatechange = function (){
+        if(this.readyState==400 && this.status ==200){
+          respuesta = JSON.parse(xhr.responseText);
+          alert(respuesta);
+          console.log(respuesta);
+        }
+      }
+      xhr.open('GET',`/horario-multiple/${id}`,true)
+      xhr.send();
+        // xhr.open('GET', `/info-actividad/${id}`,true);
+        // xhr.send();
+        
+      
+      
+    })
+
+    // AGREGAR ACTIVIDAD 
+    
    
  
 });
