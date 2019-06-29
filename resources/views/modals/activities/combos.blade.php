@@ -21,14 +21,15 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
 
-                    <div class="container mt-3">
-                        <div class="row">
-                            <div class="col-sm-6 offset-md-2">
-                                @include('components.alertsintomodals')                                    
-                            </div>
-                        </div>
-                    </div>
+                    {{-- <div class="container mt-3">
+                       
+                    </div> --}}
                 <form action="{{url('/actividades')}}" method="post" id="AddActividadesForm">
+                  <div class="row">
+                    <div class="col-sm-6 offset-md-2">
+                        @include('components.alertsintomodals')                                    
+                    </div>
+                </div>
                   <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
                   <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                         <div class="container mt-2">
@@ -39,14 +40,14 @@
                                     <input type="text" name="clave" id="clave" class="form-control general input-clave" placeholder="" aria-describedby="helpId" maxlength="5" required style="text-transform:uppercase" autofocus>
                                   </div>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4 offset-1">
                                  <div class="form-group">
                                    <label for="" >Nombre</label>
                                    <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40">                           
                                  </div>
                              </div>
-                             <div class="col-4">
-                             <div class="form-group">
+                             <div class="col-4 ">
+                             <div class="form-group float-right">
                                <label for="">Tipo de Actividad</label>
                                <select class="form-control " name="tipoactividades_id" id="tipoactividades_id" required>
                                  @foreach ($tipoactividades as $tipoactividad)
@@ -63,14 +64,14 @@
                                         <input type="number" class="form-control general input-cortesias" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
                                     </div>
                                 </div> 
-                                <div class="col-5">
+                                <div class="col-4 offset-1">
                                     <div class="form-group  ">
                                         <label for="">Max Cupones</label>
                                         <input type="number" class="form-control general input-cupones" name="maxcupones" id="maxCupones" aria-describedby="helpId" placeholder="">
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
+                                <div class="col-4 ">
+                                    <div class="form-group float-right">
                                         <label for=""> Anticipo</label>
                                         <select class="form-control input-anticipo" name="anticipo_id" id="anticipoId" required>
                                             @foreach ($anticipos as $anticipo)
@@ -82,7 +83,7 @@
       
                             </div>
                             <div class="row">
-                                <div class="col-5">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label for=""> Agregar Actividad</label>
                                         <select class="form-control input-agregar-actividad" name="actividad" id="actividad" required>
@@ -90,10 +91,10 @@
                                                 <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
                                             @endforeach
                                         </select>
-                                        <a href="#!" class="btn btn-secondary ml-3 btn-agregar" >+</a>
+                                        <a href="#!" class="btn btn-success ml-3 btn-agregar" >+</a>
                                     </div>
                                 </div>
-                                <div class="col-5 offset-2">
+                                <div class="col-5 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
                                     <input type="checkbox" class="form-control d-inline-block checkbox" name="" id="" value="" >
@@ -101,16 +102,16 @@
                                 </div>
                                 
                             </div>
-                            <div class="row">
-                              <div class="col-10">
+                            <div class="row table-container">
+                              <div class="col-12">
                                   <div class="form-group">
                                     <table class="table">
                                       <thead>
                                         <tr>
                                           <th>Clave</th>
-                                          <th>Nombre</th>
-                                          <th>Precio</th>
-                                          <th>Balance</th>
+                                          <th class="th-nombre">Nombre</th>
+                                          <th class="th-precio">Precio</th>
+                                          <th class="th-balance">Balance</th>
                                           <th>Horario <span class="ml-5">Fín</span> <span class="ml-5">Días</span></th>
                                         
                                         </tr>
@@ -126,6 +127,7 @@
                                               <select class="form-control" name="" id="">
                                                 <option>9:00PM | 01:00PM | L,M,X,J,V</option>
                                               </select>
+                                              <a href="#!" class="btn btn-danger ml-3 btn-agregar" >-</a>
                                             </div> 
                                           </td>
                                         </tr>

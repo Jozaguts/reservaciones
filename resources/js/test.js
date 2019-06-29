@@ -230,7 +230,7 @@ function addHoraioContainer(){
   let container= document.createElement('div')
   container.classList = "contanier";
   container.innerHTML= `
-  <div class="container punto-container" data-puntoid="0" > 
+  <div class="container horarios punto-container" data-puntoid="0" > 
   <input type="hidden" class="h-id" data-id="0"> 
  
   <div class="h-divider">
@@ -251,13 +251,13 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Inicio:</label>
-              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required>
+              <input type="time" name="horainicio${contador}" id="horainicio${contador}" class="form-control horario-multiple listener-hora-ini" placeholder="" aria-describedby="helpId" data-id="0" data-horarioid="${contador}" required>
             </div>
       </div>
       <div class="col-4">
           <div class="form-group">
               <label for="">Hora de Finalización:</label>
-              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-horarioid="${contador}" required onchange="validarHoraFin(this)">
+              <input type="time" name="horafin${contador}" id="horafin${contador}" class="form-control horario-multiple listener-hora-fin" placeholder="" aria-describedby="helpId" data-id="0" data-horarioid="${contador}" required onchange="validarHoraFin(this)">
               <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
             </div>
       </div>
@@ -334,7 +334,7 @@ function addHoraioContainer(){
           <div class="col-4">
               <div class="form-group">
                 <label for="" data-punto="1";>Punto 1</label>
-                <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-horarioid="${contador}" onchange="validarPuntosSalida()" data-puntoid="0" data-identificadores="${contador}">
+                <select class="form-control horario-multiple select-multiple__salidas" name="salidas${contador}" id="salidas${contador}" data-id="0" data-horarioid="${contador}" onchange="validarPuntosSalida()" data-puntoid="0" data-identificadores="${contador}">
               
                   </select>
               </div>
@@ -342,7 +342,7 @@ function addHoraioContainer(){
             <div class="col-4">
               <div class="form-group">
                 <label for="">Hora</label>
-                <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange=" ValidaHoraSalida(this);"  data-puntoid="0" data-identificadores="${contador}">
+                <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-id="0" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange=" ValidaHoraSalida(this);"  data-puntoid="0" data-identificadores="${contador}">
                 <small class="text-danger" id="labelSmallSalida${contador}"></small>
               </div>
               
@@ -357,14 +357,14 @@ function addHoraioContainer(){
       <div class="col-4">
           <div class="form-group">
             <label for="" data-punto="1";>Punto 1</label>
-            <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}"data-horarioid="${contador}" onchange="validarPuntosLlegada()"  data-puntoid="0" data-identificadores="${contador}">
+            <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegada${contador}" data-id="0" data-horarioid="${contador}" onchange="validarPuntosLlegada()"  data-puntoid="0" data-identificadores="${contador}">
             </select>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label for="">Hora</label>
-            <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange="ValidaHoraLlegada(this)"  data-puntoid="0" data-identificadores="${contador}">
+            <input type="time" class="form-control horario-multiple hora-llegada" name="llegadahora${contador}" id="llegada${contador}" data-id="0" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" onchange="ValidaHoraLlegada(this)"  data-puntoid="0" data-identificadores="${contador}">
             <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
           </div>
           
@@ -437,6 +437,7 @@ function addpunto(e){
 let parent = e.parentElement.parentElement;
 let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
 let intNumPunto = parseInt(numPunto)+1;
+console.log(intNumPunto)
 
 
 let row = document.createElement('div');
@@ -445,6 +446,7 @@ row.classList ="container";
 row.innerHTML=`
 
 <div class="row">
+
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecion}">Punto ${countRecolecion}</label>
@@ -456,7 +458,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-salida" name="" id="salidahora${contador+1}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
+      <input type="time" class="form-control hora-salida" name="salidahora${intNumPunto}" id="salidahora${intNumPunto}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
     </div>
     
   </div>
@@ -523,7 +525,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-llegada" name="" id="llegadahora${contador+1}"  data-horarioid="${contador}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
+      <input type="time" class="form-control hora-llegada" name="llegadahora${intNumPunto}" id="llegadahora${intNumPunto}"  data-horarioid="${contador}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
     </div>
     
   </div>
@@ -1348,8 +1350,6 @@ let horarioID = horario.getAttribute('data-id')
 let xhr = new XMLHttpRequest()
 
 xhr.onreadystatechange = function(){
-  console.log(this.status)
-
   if(this.readyState==4 && this.status == 200)
   horarioMultipleAJAX = JSON.parse(xhr.responseText);
 }
@@ -1412,8 +1412,8 @@ horarios.forEach(function(horario){
   let container= document.createElement('div')
   container.classList = "contanier";
   container.innerHTML= `
-  <div class="container"> 
-  <input type="hidden" class="h-id" id="horarioIdPunto${horario.id}" data-puntoId="${horario.id}"> 
+  <div class="container horarios"> 
+  <input type="hidden" class="h-id" data-id="${horario.id}" id="horarioIdPunto${horario.id}" data-puntoId="${horario.id}"> 
   <span class="h-divider"> </span>
     <div class="row">
       <div class="col-12"> 
@@ -1525,6 +1525,7 @@ llegadasHMultiple.forEach(function(llegada){
 })
 function agregarSalidasHorarioMultiple(salida){
  
+ 
   let agreageSalidasHmultiple = document.getElementById('agreageSalidasHmultiple');
 
   agreageSalidasHmultiple.innerHTML +=`
@@ -1532,7 +1533,7 @@ function agregarSalidasHorarioMultiple(salida){
           <div class="col-4">
             <div class="form-group">
               <label for="" data-punto="1";>Punto 1</label>
-              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-horarioid="${salida.actividadeshorario_id}" onchange="validarPuntosSalida()" data-salidallegadahorario="${salida.id}"; data-puntoid="${salida.id}" data-identificadores="${contador}">
+              <select class="form-control horario-multiple select-multiple__salidas hsalidas" name="salidas${salida.id}" id="salidas${salida.id}" data-id="${salida.id}" data-horarioid="${salida.actividadeshorario_id}" onchange="validarPuntosSalida()" data-salidallegadahorario="${salida.id}"; data-puntoid="${salida.id}" data-identificadores="${contador}">
               
               </select>
             </div>
@@ -1541,7 +1542,7 @@ function agregarSalidasHorarioMultiple(salida){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora</label>
-              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${contador}" id="salidahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${salida.hora}"onchange=" ValidaHoraSalida(this);"  data-puntoid="${salida.actividadeshorario_id}" data-identificadores="${contador}">
+              <input type="time" class="form-control horario-multiple hora-salida" name="salidahora${salida.id}" id="salidahora${salida.id}" data-horarioid="${salida.id}" aria-describedby="helpId" placeholder="" value="${salida.hora}"onchange=" ValidaHoraSalida(this);" data-id="${salida.id}"  data-puntoid="${salida.actividadeshorario_id}" data-identificadores="${contador}">
             </div>
           </div>
             <div class="col-4 d-inline mt-4 pt-1">
@@ -1551,6 +1552,7 @@ function agregarSalidasHorarioMultiple(salida){
   `;
   rellenarSelect();
   let select = document.getElementById(`salidas${salida.id}`)
+
   DefaultSelect(select,salida)
  
 }
@@ -1564,7 +1566,7 @@ function agregarLlegadaHorarioMultiple(llegada){
           <div class="col-4">
             <div class="form-group">
               <label for="" data-punto="1";>Punto 1</label>
-              <select class="form-control horario-multiple select-multiple__llegadas hsalidas" name="llegda${llegada.id}" id="llegada${llegada.id}" data-horarioid="${llegada.actividadeshorario_id}" onchange="validarPuntosLlegada()"  data-puntoid="${llegada.id}" data-identificadores="${contador}">
+              <select class="form-control horario-multiple select-multiple__llegadas hsalidas" name="llegadas${llegada.id}" id="llegadas${llegada.id}" data-horarioid="${llegada.actividadeshorario_id}" onchange="validarPuntosLlegada()"  data-puntoid="${llegada.id}" data-identificadores="${contador}">
               
               </select>
             </div>
@@ -1573,7 +1575,7 @@ function agregarLlegadaHorarioMultiple(llegada){
           <div class="col-4">
             <div class="form-group">
               <label for="">Hora</label>
-              <input type="time" class="form-control horario-multiple hora-llegada " name="llegada${contador}" id="llegadadahora${contador}" data-horarioid="${contador}" aria-describedby="helpId" placeholder="" value="${llegada.hora}" onchange="ValidaHoraLlegada(this)"  data-puntoid="${llegada.id}" data-identificadores="${contador}">
+              <input type="time" class="form-control horario-multiple hora-llegada " name="llegadahora${llegada.id}" id="llegadahora${llegada.id}" data-horarioid="${llegada.id}" aria-describedby="helpId" placeholder="" value="${llegada.id}" onchange="ValidaHoraLlegada(this)"  data-puntoid="${llegada.id}" data-identificadores="${contador}">
               <small class="text-danger" id="labelSmall${contador}" data-labelid="${contador}"></small>
             </div>
           </div>
@@ -1583,7 +1585,7 @@ function agregarLlegadaHorarioMultiple(llegada){
         </div> 
   `;
   rellenarSelectLlegadas()
-  let select = document.getElementById(`llegada${llegada.id}`)
+  let select = document.getElementById(`llegadas${llegada.id}`)
   DefaultSelect(select,llegada)
 }
 
@@ -2055,3 +2057,106 @@ function getPuntosLlegadas(){
 
   
 }
+
+function prueba(){
+  let horarios = document.querySelectorAll('.horarios');
+  let h= [];
+  for (let horario = 0; horario < horarios.length; horario++) {
+      // dias
+      let dias = horarios[horario].querySelectorAll('.horario-multiple__dia');
+      let diaa = [];
+      let l, m, x, j, v, s, d;
+      for (let di = 0; di < dias.length; di++) {
+          switch (dias[di].name.substring(3,4)) {
+              case 'l':
+                l= dias[di].checked;
+                break;
+              case 'm':
+                m=dias[di].checked;
+                break;
+              case 'x':
+                x=dias[di].checked;
+                break;
+              case 'j':
+                j=dias[di].checked;
+                break;
+              case 'v':
+                v=dias[di].checked;
+                break;
+              case 's':
+                s=dias[di].checked;
+                break;
+              case 'd':
+                d=dias[di].checked;
+                break;                    
+          }      
+      }
+      diaa ={
+        l:l, m:m, x:x, j:j, v:v, s:s, d:d
+      }
+
+      // salidas
+      let sa = horarios[horario].querySelectorAll('[id^=salidas');
+      let sah = horarios[horario].querySelectorAll('[id^=salidahora');
+      let salid =[];
+      let ids;
+      for (let s = 0; s < sa.length; s++) {
+        let hora;           
+        for (let h = 0; h < sah.length; h++) {
+          let tmp1=sa[s].name.substring(7);               
+          let tmp2= sah[h].name.substring(10);          
+            if (sa[s].name.substring(7)===sah[h].name.substring(10)) {
+                hora= sah[h].value;
+                ids= sah[h].getAttribute('data-id');
+                break;
+            }          
+        }
+        let stemp ={
+          id: ids,
+          s: sa[s].value,
+          hor: hora
+        };  
+        salid.push(stemp);          
+      }      
+
+      // llegadas
+      let ll = horarios[horario].querySelectorAll('[id^=llegadas');
+      let llh = horarios[horario].querySelectorAll('[id^=llegadahora');
+      let llegad =[];
+      let idl;
+      for (let l = 0; l < ll.length; l++) {
+        let horal;           
+        for (let h = 0; h < llh.length; h++) {
+          let tmp1=ll[l].name.substring(8);               
+          let tmp2= llh[h].name.substring(11);          
+            if (ll[l].name.substring(8)===llh[h].name.substring(11)) {
+              horal= llh[h].value;
+                ids= llh[h].getAttribute('data-id');
+                break;
+            }          
+        }
+        let ltemp ={
+          id: ids,
+          l: ll[l].value,
+          hor: horal
+        };  
+        llegad.push(ltemp);          
+      }       
+
+      let datos = {
+        cont : horario,        
+        id : horarios[horario].children[0].getAttribute('data-id'),
+        hini : horarios[horario].querySelectorAll('[id^=horainicio')[0].value,
+        hfin : horarios[horario].querySelectorAll('[id^=horafin')[0].value,
+        dia : diaa,
+        sal : salid
+      }
+      let ho=[];
+      ho.push(datos);
+      h.push(ho);        
+  }
+  console.log(h)
+}
+
+
+
