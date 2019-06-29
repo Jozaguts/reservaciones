@@ -45,10 +45,33 @@ label {
 
 .input-anticipo {
   max-width: 100%;
-  width: 60%;
+  width: 75%;
 }
 
 .checkbox {
   width: 1.5rem;
+}
+
+form {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto auto;
+}
+
+.th-nombre {
+  width: 25vw;
+}
+
+.th-precio {
+  width: 10vw;
+}
+
+.th-balance {
+  width: 10vw;
+}
+
+.table-container {
+  justify-content: center;
 }
 
