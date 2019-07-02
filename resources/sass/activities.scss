@@ -144,13 +144,13 @@ textarea{
 }
 .content-salidas-llegadas{
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 
 }
 .content-salidas-llegadas > .content{
     display:flex;
    align-items: center;
-    margin-top: 2rem;
+    // margin-top: 2rem;
     margin-right: 0;
     align-items: baseline;
     min-width: 100%;
@@ -193,4 +193,8 @@ text-align: right;
 .btn-status{
     background-color: rgba(123, 228, 123, 0.795) !important;
     color: rgba(20, 20, 20, 0.705) !important;
+}
+.h-horario-multiple-input{
+    width: 58%;
+    text-align: center;
 }
