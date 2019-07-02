@@ -347,14 +347,15 @@
         </div>
         <div class="checks-column">
           <div class="content-salidas-llegadas">
-            <div class="content">
-                <h2 class="d-inline lead">Llegada</h2>
-                <select class="d-inline form-control-salidas" name="llegadas" id="llegadas" data-salida="false" disabled>
-                    @foreach ($salidasLlegadas as $salidaLlegada)
-                      <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
-                    @endforeach
-                </select>
-            </div>
+              <div class="content">
+                  <h2 class="d-inline lead">Primer Salida</h2>
+                <input type="time" name="hiniHorarioLibre" id="hiniHorarioLibre" class="form-control h-horario-multiple-input" disabled>
+              </div>
+              <div class="content">
+                  <h2 class="d-inline lead">Ultima Salida</h2>
+                <input type="time" name="hfinHorarioLibre" id="hfinHorarioLibre" class="form-control h-horario-multiple-input" disabled>
+              </div>
+          
             <div class="content">
                 <h2 class="d-inline lead">Salida</h2>
                   <select class="d-inline form-control-salidas " name="salidas" id="salidas" data-salida="true" disabled>
@@ -362,6 +363,14 @@
                       <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
                     @endforeach
                   </select>
+            </div>
+            <div class="content">
+                <h2 class="d-inline lead">Llegada</h2> 
+                <select class="d-inline form-control-salidas" name="llegadas" id="llegadas" data-salida="false" disabled>
+                    @foreach ($salidasLlegadas as $salidaLlegada)
+                      <option value="{{$salidaLlegada->id}}"> {{$salidaLlegada->nombre}}</option>
+                    @endforeach
+                </select>
             </div>
           </div>
         </div>
