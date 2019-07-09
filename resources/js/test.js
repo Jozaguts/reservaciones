@@ -668,8 +668,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
 
     // ########################################################################################### PESTAÑA 3 INICIO
 
-    let libre;
-  
+    let libre,hfinHorarioLibre,hiniHorarioLibre
     if($('#libre').is(':checked')){
       libre = 1;
     }else{
@@ -680,6 +679,9 @@ AddActividadesForm.addEventListener('submit',(e)=>{
     const d3CheckLibre = datos3.get('libre');
     const diasSeleccionados = [];
       if(d3CheckLibre == 1 ){
+         hiniHorarioLibre = $('#hiniHorarioLibre').val();
+         hfinHorarioLibre = $('#hfinHorarioLibre').val();
+       
     let  diario;
     diario = document.getElementById('diario')
         if(diario.checked){
@@ -1013,6 +1015,9 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   horariosId:ArrayHID,
                   puntosSalidaHmultiple:puntosSalidaHmultiple,
                   puntosLlegadasHMultiple:puntosLlegadasHMultiple,
+                  hiniHorarioLibre:hiniHorarioLibre,
+                  hfinHorarioLibre:hfinHorarioLibre
+
       
               },
       
@@ -1209,7 +1214,7 @@ function editarActividad(e){
 
         // un for para iterar los dias con los checks y si el valor es 1 en dias[] en DOMchecks tomo el mismo indice al check lo pongo en true
           for (let i = 0; i < dias.length; i++) {
-            if(dias[i] == 1 && dias[i].hini == null && dias[i].hfin== null){
+            if(dias[i] == 1 ){
               DOMChecks[i].checked =true;
             }else{
               DOMChecks[i].checked =false;
@@ -1225,6 +1230,12 @@ function editarActividad(e){
       document.getElementById('libre').checked =true;
        document.getElementById('salidas').options.selectedIndex = salidasHLibre[0][0].slid - 1;
        document.getElementById('llegadas').options.selectedIndex = llegadasHLibre[0][0].slid - 1;
+       $('#hiniHorarioLibre').val(diasActividadesHorario[0].hini)
+       $('#hfinHorarioLibre').val(diasActividadesHorario[0].hfin)
+   
+       
+
+
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
     }
     
@@ -2160,6 +2171,31 @@ function prueba(){
   }
   console.log(h)
 }
+
+
+// #### validación horas horario libre
+$('#hfinHorarioLibre').focusout(function(e){
+ 
+ 
+
+
+
+ if($('#hfinHorarioLibre').val() <= $('#hiniHorarioLibre').val() ){
+  $('#content-salidas-llegadas__message-error').text(" El Horario Debe de ser Mayor.");
+  $('#content-salidas-llegadas__message-error').addClass('text-danger d-block text-right mb-3');
+ 
+
+
+  
+
+ }
+ 
+})
+
+// if(){
+
+// }
+
 
 
 

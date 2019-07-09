@@ -181,8 +181,8 @@ class ActividadesController extends Controller
                     $ActividadesHorario = ActividadesHorario::firstOrCreate(
                         ['actividades_id' => $actividad->id],                        
                         [
-                            'hini' => null,
-                            'hfin' => null,
+                            'hini' => $request->hiniHorarioLibre,
+                            'hfin' => $request->hfinHorarioLibre,
                             'l'=> $request->diasSeleccionados[0]['activado'],
                             'm'=> $request->diasSeleccionados[1]['activado'],
                             'x'=> $request->diasSeleccionados[2]['activado'],
@@ -192,7 +192,8 @@ class ActividadesController extends Controller
                             'd'=> $request->diasSeleccionados[6]['activado'],
                             'active'=> 1,
                             'remove'=>0,
-                            'usuarios_id'=> $request->get('idusuario')                            
+                            'usuarios_id'=> $request->get('idusuario'),
+                            'libre'=> $request->get('libre')                         
                         ]
                     );
                     $ActividadesHorario->save();
@@ -343,7 +344,7 @@ class ActividadesController extends Controller
        ->get();
     //    actividades horario
        $acth = DB::table('actividadeshorarios as ah')
-           ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
+           ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d','ah.libre')
            ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
            ->orderBy('ah.hini')
            ->get();
@@ -354,8 +355,8 @@ class ActividadesController extends Controller
             $llegadasHorarioLibre = array();
             $llegadasHorarioMultiple =array();
            foreach ($acth as $horario) {
-               
-               if($horario->hini == null && $horario->hfin == null ) {
+               //cambie el hini y hfin por libre igual a 1
+               if($horario->libre==1 ) {
                     $id =$horario->id;
                     $sal = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
@@ -377,7 +378,8 @@ class ActividadesController extends Controller
                }
 
             //    horario multiple
-                if($horario->hini != null && $horario->hfin != null ) {
+            // cambie el horario hini y hfin diferente de null a libre igual a 0
+                if($horario->libre==0 ) {
                     $id =$horario->id;
                     $sal = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
@@ -544,8 +546,8 @@ class ActividadesController extends Controller
                 $ActividadesHorario = ActividadesHorario::updateOrCreate(
                     ['actividades_id' => $request->get('actividadid')],                        
                     [
-                        'hini' => null,
-                        'hfin' => null,
+                        'hini' => $request->hiniHorarioLibre,
+                        'hfin' => $request->hfinHorarioLibre,
                         'l'=> $request->diasSeleccionados[0]['activado'],
                         'm'=> $request->diasSeleccionados[1]['activado'],
                         'x'=> $request->diasSeleccionados[2]['activado'],
@@ -555,7 +557,8 @@ class ActividadesController extends Controller
                         'd'=> $request->diasSeleccionados[6]['activado'],
                         'active'=> 1,
                         'remove'=>0,
-                        'usuarios_id'=> $request->get('idusuario')                            
+                        'usuarios_id'=> $request->get('idusuario'),
+                        'libre'=> $request->get('libre')                          
                     ]
                 );
                 $ActividadesHorario->save();

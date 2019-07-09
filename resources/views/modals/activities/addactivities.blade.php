@@ -346,7 +346,9 @@
           </div>
         </div>
         <div class="checks-column">
+            <small id="content-salidas-llegadas__message-error"></small>
           <div class="content-salidas-llegadas">
+            
               <div class="content">
                   <h2 class="d-inline lead">Primer Salida</h2>
                 <input type="time" name="hiniHorarioLibre" id="hiniHorarioLibre" class="form-control h-horario-multiple-input" disabled>
