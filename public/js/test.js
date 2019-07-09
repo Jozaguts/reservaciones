@@ -117,8 +117,10 @@ if(checkLibre.checked){
   })
 // duracion.disabled = false;
 // entrega.disabled = false;
+// entrega.checked=false;
 $('#hiniHorarioLibre').prop('disabled', false);
 $('#hfinHorarioLibre').prop('disabled', false);
+disabledHOrarioMultiple();
 salidas.disabled = false;
 llegadas.disabled = false;
 checkDiario.disabled =false;
@@ -152,7 +154,6 @@ $('#hfinHorarioLibre').prop('disabled', true);
   checkboks.forEach(function(checkbox){
     checkbox.checked = false;
     checkbox.disabled = true;
-    
     })
 
 }
@@ -434,12 +435,10 @@ let countRecolecion=2;
 function addpunto(e){
   
   let idpuntohorario = e.parentElement.parentElement.children[0].children[0].children[1].getAttribute('data-puntoid')
-  console.log(document.querySelector('.bnt-eliminar'));
 
 let parent = e.parentElement.parentElement;
 let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
 let intNumPunto = parseInt(numPunto)+1;
-console.log(intNumPunto)
 
 
 let row = document.createElement('div');
@@ -448,11 +447,10 @@ row.classList ="container";
 row.innerHTML=`
 
 <div class="row">
-
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecion}">Punto ${countRecolecion}</label>
-      <select class="form-control horario-multiple select-multiple__salidas" name="salidas${intNumPunto}" id="salidas${intNumPunto}" data-horarioid="${idpuntohorario}" onchange="validarPuntosSalida()" data-puntoid="0" data-identificadores="${intNumPunto}">
+      <select class="form-control horario-multiple select-multiple__salidas" name="salidas${intNumPunto}" id="salidas${intNumPunto}" data-id="0" data-horarioid="${idpuntohorario}" onchange="validarPuntosSalida()" data-puntoid="0" data-identificadores="${intNumPunto}">
                                           
       </select>
     </div>
@@ -460,7 +458,7 @@ row.innerHTML=`
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-salida" name="" id="salidahora${intNumPunto}" data-horarioid="${intNumPunto}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${intNumPunto}">
+      <input type="time" class="form-control hora-salida" name="salidahora${intNumPunto}" id="salidahora${intNumPunto}" data-id="0" data-horarioid="${intNumPunto}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${intNumPunto}">
     </div>
     
   </div>
@@ -509,7 +507,6 @@ let parent = e.parentElement.parentElement;
 let numPunto = parent.children[0].children[0].children[0].getAttribute('data-punto');
 let intNumPunto = parseInt(numPunto)+1;
 
-
 let row = document.createElement('div');
 
 row.classList ="container";
@@ -519,21 +516,21 @@ row.innerHTML=`
 <div class="col-4">
     <div class="form-group">
       <label for="" data-punto="${countRecolecionLLEGADAS}">Punto ${countRecolecionLLEGADAS}</label>
-      <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${contador}" id="llegadas${contador}" data-horarioid="${contador}" onchange="validarPuntosLlegada()"
-      data-puntoid="0" data-identificadores="${contador}">
+      <select class="form-control horario-multiple select-multiple__llegadas" name="llegadas${intNumPunto}" id="llegadas${intNumPunto}" data-id="0"  data-horarioid="${intNumPunto}" onchange="validarPuntosLlegada()"
+      data-puntoid="0" data-identificadores="${intNumPunto}">
       </select>
     </div>
   </div>
   <div class="col-4">
     <div class="form-group">
       <label for="">Hora</label>
-      <input type="time" class="form-control hora-llegada" name="" id="llegadahora${intNumPunto}"  data-horarioid="${contador}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
+      <input type="time" class="form-control hora-llegada" name="llegadahora${intNumPunto}" id="llegadahora${intNumPunto}"  data-horarioid="${intNumPunto}" aria-describedby="helpId" placeholder="" data-puntoid="0" data-identificadores="${contador}">
     </div>
     
   </div>
   <div class="col-4 d-inline mt-4 pt-1">
       <a href="#!" class="btn btn-secondary d-inline" id="secondarybtnHora1" onclick="addpuntoLLEGADAS(this);"> +</a>
-      <a href="#!" class="btn btn-danger d-inline horario-multiple" id="primarybtnHora${contador}" onclick="removepuntoLLEGADAS(this);" >-</a>
+      <a href="#!" class="btn btn-danger d-inline horario-multiple" id="primarybtnHora${intNumPunto}" onclick="removepuntoLLEGADAS(this);" >-</a>
     </div>
     
   </div>  
@@ -669,6 +666,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
     // ########################################################################################### PESTAÑA 3 INICIO
 
     let libre,hfinHorarioLibre,hiniHorarioLibre
+  
     if($('#libre').is(':checked')){
       libre = 1;
     }else{
@@ -679,10 +677,9 @@ AddActividadesForm.addEventListener('submit',(e)=>{
     const d3CheckLibre = datos3.get('libre');
     const diasSeleccionados = [];
       if(d3CheckLibre == 1 ){
-         hiniHorarioLibre = $('#hiniHorarioLibre').val();
-         hfinHorarioLibre = $('#hfinHorarioLibre').val();
-       
-    let  diario;
+        hiniHorarioLibre = $('#hiniHorarioLibre').val();
+        hfinHorarioLibre = $('#hfinHorarioLibre').val();    
+        let  diario;
     diario = document.getElementById('diario')
         if(diario.checked){
     let l={dia: "l", activado: "1"}, m={dia: "m", activado: "1"}, x={dia: "miercoles",activado: "1"},j={dia: "jueves",activado: "1"},v={dia: "viernes",activado: "1"},s={dia: "sabado",activado: "1"},d={dia: "domingo",activado: "1"}
@@ -964,7 +961,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
  
           
           // route = "actividades";
-         
+          let dat = prueba();
           if(error == true){
             $('#errorsIntoModal').html('Corriga los Campos De Horarios Multiples');
                     $('#message-errorIntoModal').fadeIn();
@@ -1015,10 +1012,9 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   horariosId:ArrayHID,
                   puntosSalidaHmultiple:puntosSalidaHmultiple,
                   puntosLlegadasHMultiple:puntosLlegadasHMultiple,
+                  datosarray: dat,
                   hiniHorarioLibre:hiniHorarioLibre,
                   hfinHorarioLibre:hfinHorarioLibre
-
-      
               },
       
               success: function (data) {
@@ -1232,10 +1228,6 @@ function editarActividad(e){
        document.getElementById('llegadas').options.selectedIndex = llegadasHLibre[0][0].slid - 1;
        $('#hiniHorarioLibre').val(diasActividadesHorario[0].hini)
        $('#hfinHorarioLibre').val(diasActividadesHorario[0].hfin)
-   
-       
-
-
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
     }
     
@@ -1538,7 +1530,6 @@ llegadasHMultiple.forEach(function(llegada){
 })
 function agregarSalidasHorarioMultiple(salida){
  
- 
   let agreageSalidasHmultiple = document.getElementById('agreageSalidasHmultiple');
 
   agreageSalidasHmultiple.innerHTML +=`
@@ -1565,7 +1556,6 @@ function agregarSalidasHorarioMultiple(salida){
   `;
   rellenarSelect();
   let select = document.getElementById(`salidas${salida.id}`)
-
   DefaultSelect(select,salida)
  
 }
@@ -1593,7 +1583,7 @@ function agregarLlegadaHorarioMultiple(llegada){
             </div>
           </div>
             <div class="col-4 d-inline mt-4 pt-1">
-              <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="primarybtnHora${contador}" onclick="addpunto(this);">+</a>
+              <a href="#!" class="btn btn-secondary d-inline horario-multiple" id="primarybtnHora${contador}" onclick="addpuntoLLEGADAS(this);">+</a>
             </div>
         </div> 
   `;
@@ -2082,25 +2072,25 @@ function prueba(){
       for (let di = 0; di < dias.length; di++) {
           switch (dias[di].name.substring(3,4)) {
               case 'l':
-                l= dias[di].checked;
+                l= dias[di].checked==true ? 1:0 ;
                 break;
               case 'm':
-                m=dias[di].checked;
+                m=dias[di].checked==true ? 1:0 ;
                 break;
               case 'x':
-                x=dias[di].checked;
+                x=dias[di].checked==true ? 1:0;
                 break;
               case 'j':
-                j=dias[di].checked;
+                j=dias[di].checked==true ? 1:0 ;
                 break;
               case 'v':
-                v=dias[di].checked;
+                v=dias[di].checked==true ? 1:0 ;
                 break;
               case 's':
-                s=dias[di].checked;
+                s=dias[di].checked==true ? 1:0 ;
                 break;
               case 'd':
-                d=dias[di].checked;
+                d=dias[di].checked==true ? 1:0 ;
                 break;                    
           }      
       }
@@ -2120,12 +2110,12 @@ function prueba(){
           let tmp2= sah[h].name.substring(10);          
             if (sa[s].name.substring(7)===sah[h].name.substring(10)) {
                 hora= sah[h].value;
-                ids= sah[h].getAttribute('data-id');
+                ids= sa[s].getAttribute('data-id');
                 break;
             }          
         }
         let stemp ={
-          id: ids,
+          idsal: ids,
           s: sa[s].value,
           hor: hora
         };  
@@ -2144,7 +2134,7 @@ function prueba(){
           let tmp2= llh[h].name.substring(11);          
             if (ll[l].name.substring(8)===llh[h].name.substring(11)) {
               horal= llh[h].value;
-                ids= llh[h].getAttribute('data-id');
+                ids= ll[l].getAttribute('data-id');
                 break;
             }          
         }
@@ -2154,8 +2144,8 @@ function prueba(){
           hor: horal
         };  
         llegad.push(ltemp);          
-      }       
-
+      }
+      
       let datos = {
         cont : horario,        
         id : horarios[horario].children[0].getAttribute('data-id'),
@@ -2166,36 +2156,56 @@ function prueba(){
         lle : llegad
       }
       let ho=[];
-      ho.push(datos);
+      ho.push(datos); 
       h.push(ho);        
   }
-  console.log(h)
+
+  // // horarios libres
+  // let dd= document.querySelectorAll('.pestana3-seccion1')[0].querySelectorAll('[id^=dia');
+  // let l, m, x, j, v, s, d;
+  // for (let i = 0; i < dd.length; i++) {          
+  //     switch (dd[i].id.substring(3,4)) {
+  //       case 'l':
+  //         l= dd[i].checked;
+  //         break;
+  //       case 'm':
+  //         m=dd[i].checked;
+  //         break;
+  //       case 'x':
+  //         x=dd[i].checked;
+  //         break;
+  //       case 'j':
+  //         j=dd[i].checked;
+  //         break;
+  //       case 'v':
+  //         v=dd[i].checked;
+  //         break;
+  //       case 's':
+  //         s=dd[i].checked;
+  //         break;
+  //       case 'd':
+  //         d=dd[i].checked;
+  //         break;                    
+  //   }  
+  //   diasl ={
+  //     l:l, m:m, x:x, j:j, v:v, s:s, d:d
+  //   }              
+  // }
+
+  // let diasLib ={
+  //   cont: -1,
+  //   dias: diasl,
+  //   lleg: document.querySelectorAll('.pestana3-seccion1')[0].querySelectorAll('[id^=llegadas')[0].value,
+  //   sali: document.querySelectorAll('.pestana3-seccion1')[0].querySelectorAll('[id^=salidas')[0].value
+  // };
+
+  // let diasli =[];
+  // diasli.push(diasLib);
+
+  // h.push(diasli) 
+  console.log(h);
+  return h;
 }
-
-
-// #### validación horas horario libre
-$('#hfinHorarioLibre').focusout(function(e){
- 
- 
-
-
-
- if($('#hfinHorarioLibre').val() <= $('#hiniHorarioLibre').val() ){
-  $('#content-salidas-llegadas__message-error').text(" El Horario Debe de ser Mayor.");
-  $('#content-salidas-llegadas__message-error').addClass('text-danger d-block text-right mb-3');
- 
-
-
-  
-
- }
- 
-})
-
-// if(){
-
-// }
-
 
 
 
