@@ -304,6 +304,7 @@
         <div class="checks-column">
           <div class="content">
             <label class="form-check-label">H. Libre</label>
+            <input type="hidden" value="" id="idHorarioLibre">
             <input class=" sizecheck" type="checkbox" name="libre" id="libre" value="1"  data-id="1" >
           </div>
           <div class="content">

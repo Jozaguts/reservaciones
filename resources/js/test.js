@@ -1,5 +1,6 @@
 
 let editar = false;
+let horarioLibreEdita ="", salidaId="",llegadaId="";
 let ACTIVIDADid;
 let HID = [];
 
@@ -953,6 +954,12 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           if(editar == true ){
           route = `actividades/${ACTIVIDADid}`;
           metodo = "PUT";
+          horarioLibreEdita = document.getElementById('salidas').getAttribute('data-horarioid')
+          salidaId = document.getElementById('salidas').getAttribute('data-salidaId')
+          llegadaId = document.getElementById('llegadas').getAttribute('data-llegadaId')
+          console.log(llegadaId)
+        
+
           }else{
             route = "actividades";
             metodo = 'POST'
@@ -1014,7 +1021,10 @@ AddActividadesForm.addEventListener('submit',(e)=>{
                   puntosLlegadasHMultiple:puntosLlegadasHMultiple,
                   datosarray: dat,
                   hiniHorarioLibre:hiniHorarioLibre,
-                  hfinHorarioLibre:hfinHorarioLibre
+                  hfinHorarioLibre:hfinHorarioLibre,
+                  horarioLibreId:horarioLibreEdita,
+                  salidaId:salidaId,
+                  llegadaId:llegadaId
               },
       
               success: function (data) {
@@ -1193,7 +1203,7 @@ function editarActividad(e){
       
       let diasLibres = document.querySelectorAll('.check-horario-libre'); //obtengo todos los check que pertenecen a horarios libres
      
-      
+ 
     // funcion que recibe como parametros los dias de la BD y los checks pintados en el DOM
       function llenarDiasHLibre (diasDB, DOMChecks){
         dias = []; //un array solo para guardar el valor de los dias porque la data me manda ID's y valores nulos
@@ -1224,8 +1234,18 @@ function editarActividad(e){
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
       document.getElementById('libre').checked =true;
-       document.getElementById('salidas').options.selectedIndex = salidasHLibre[0][0].slid - 1;
-       document.getElementById('llegadas').options.selectedIndex = llegadasHLibre[0][0].slid - 1;
+       let salidainput = document.getElementById('salidas')
+       salidainput.options.selectedIndex = salidasHLibre[0][0].slid - 1;
+       salidainput.setAttribute('data-horarioid',salidasHLibre[0][0]['actividadeshorario_id'])
+       salidainput.setAttribute('data-salidaId',salidasHLibre[0][0]['id'])
+
+
+      
+       let llegadainput = document.getElementById('llegadas')
+       llegadainput.options.selectedIndex = llegadasHLibre[0][0].slid - 1;
+       llegadainput.setAttribute('data-llegadaId',llegadasHLibre[0][0]['id'])
+     
+
        $('#hiniHorarioLibre').val(diasActividadesHorario[0].hini)
        $('#hfinHorarioLibre').val(diasActividadesHorario[0].hfin)
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
