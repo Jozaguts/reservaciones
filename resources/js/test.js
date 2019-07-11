@@ -957,7 +957,7 @@ AddActividadesForm.addEventListener('submit',(e)=>{
           horarioLibreEdita = document.getElementById('salidas').getAttribute('data-horarioid')
           salidaId = document.getElementById('salidas').getAttribute('data-salidaId')
           llegadaId = document.getElementById('llegadas').getAttribute('data-llegadaId')
-          console.log(llegadaId)
+         
         
 
           }else{
@@ -1386,6 +1386,7 @@ let respuesta = horarioMultipleAJAX.pestana3;
 let horarios = respuesta.actividadesHorario;
 let salidasHMultiple = respuesta.salidasHMultiple;
 let llegadasHMultiple = respuesta.llegadasHMultiple;
+
 
 horarios.forEach(function(horario){
   if(horarioID == horario.id ){
@@ -2223,7 +2224,7 @@ function prueba(){
   // diasli.push(diasLib);
 
   // h.push(diasli) 
-  console.log(h);
+
   return h;
 }
 
