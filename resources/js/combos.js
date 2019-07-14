@@ -1,31 +1,30 @@
 $(document).ready(function () {
     let cl= console.log;
     // LISTENERS
-    // addEventListener para el boton de del combo y mostrar la tabla con su contenido
+    // addEventListener para el boton  del +combo y mostrar el modal para agregar un combo
    $(document).on('click', '.show-btn', function () {
     $(this).siblings('div').toggleClass('d-none')
 
-    });$(document).on('click','.btn-agregar', function(e){
+    });
+    let respuesta;
+    $(document).on('click','.btn-agregar', function(e){
       // e.preventDefault();
-      
       let id = e.target.parentElement.children[1].value;
       let xhr = new XMLHttpRequest()
-      let respuesta;
-      xhr.onreadystatechange = function (){
-        if(this.readyState==400 && this.status ==200){
-          respuesta = JSON.parse(xhr.responseText);
-          alert(respuesta);
-          console.log(respuesta);
-        }
-      }
       xhr.open('GET',`/horario-multiple/${id}`,true)
-      xhr.send();
-        // xhr.open('GET', `/info-actividad/${id}`,true);
-        // xhr.send();
+      xhr.onreadystatechange = function (){
+
+        if(this.readyState == 400 && this.status ==200){
+          respuesta = JSON.parse(xhr.responseText);
         
-      
-      
+        }else{
+        
+        }  
+      }
+      xhr.send();
+    
     })
+
 
     // AGREGAR ACTIVIDAD 
     

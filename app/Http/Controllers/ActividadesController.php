@@ -549,7 +549,7 @@ class ActividadesController extends Controller
                     ]
                 );
                 $ActividadesHorario->save();
-             
+                // dd($request->salidaId);
                 // salidas
                 $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::updateOrCreate(
                     ['id' => $request->get('salidaId') ], 
@@ -578,19 +578,16 @@ class ActividadesController extends Controller
                 $SalidasLlegadasHorarioLLEGADA->save();
                      return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 'status' => 200]);                                                     
             }else{
-
                 if($request->libre == 0){ //valido si no hay checkeados mando el aviso
-                  
                     if (count($request->ArrayDeDIas) == 0) {
                         $message ='Al Menos Debes de Crear o Seleccionar un Horario';
                         return response()->json(['error'=> 'true','errors'=> $message]);
                     }else{
-                          
+                            //si al menos hay uno chekeado guardo en DB
                              //si al menos hay uno chekeado guardo en DB
                              for ($i=0; $i < count($request->datosarray); $i++) { 
-                                if ($request->datosarray[$i][0]['cont']>= 0) {
-                                    if($request->datosarray[$i][0]['id']>0){
-                                    
+                                // if ($request->datosarray[$i][0]['cont']>0) {
+                                if($request->datosarray[$i][0]['id']>0){
                                         $ActividadesHorario = ActividadesHorario::where('id', $request->datosarray[$i][0]['id'])
                                     ->update([
                                         'hini' => $request->datosarray[$i][0]['hini'],
@@ -648,34 +645,64 @@ class ActividadesController extends Controller
                                                         'actividadeshorario_id' => $request->datosarray[$i][0]['id'],
                                                         'usuarios_id'=> $request->get('idusuario'),
                                                         'active'=>1,
-                                                        'remove'=>0,
-                                                       
+                                                        'remove'=>0
                                                     ]);
                                                     $salidas->save();
                                             }
                                         }
-                                    }else{
-                                        // inserta ActividadesHorario    
-                                                              
-                                        $ActividadesHorario = ActividadesHorario::create(                                               
-                                            ['actividades_id' => $request->get('actividadid'),
-                                            'hini' => $request->datosarray[$i][0]['hini'],
-                                            'hfin' => $request->datosarray[$i][0]['hfin'],
-                                            'l'=> $request->datosarray[$i][0]['dia']['l'],
-                                            'm'=> $request->datosarray[$i][0]['dia']['m'],
-                                            'x'=> $request->datosarray[$i][0]['dia']['x'],
-                                            'j'=> $request->datosarray[$i][0]['dia']['j'],
-                                            'v'=> $request->datosarray[$i][0]['dia']['v'],
-                                            's'=> $request->datosarray[$i][0]['dia']['s'],
-                                            'd'=> $request->datosarray[$i][0]['dia']['d'],
-                                            'active'=> 1,
-                                            'remove'=>0,
-                                            'libre'=>0,
-                                            'usuarios_id'=> $request->get('idusuario')                            
-                                            ]
-                                        );
-                                        $ActividadesHorario->save();                                        
+                                    // }
+                                }else{
+                                    // inserta ActividadesHorario    
+                                    $ActividadesHorario = ActividadesHorario::create(                                               
+                                        [
+                                        'actividades_id' => $request->get('actividadid'),
+                                        'hini' => $request->datosarray[$i][0]['hini'],
+                                        'hfin' => $request->datosarray[$i][0]['hfin'],
+                                        'l'=> $request->datosarray[$i][0]['dia']['l'],
+                                        'm'=> $request->datosarray[$i][0]['dia']['m'],
+                                        'x'=> $request->datosarray[$i][0]['dia']['x'],
+                                        'j'=> $request->datosarray[$i][0]['dia']['j'],
+                                        'v'=> $request->datosarray[$i][0]['dia']['v'],
+                                        's'=> $request->datosarray[$i][0]['dia']['s'],
+                                        'd'=> $request->datosarray[$i][0]['dia']['d'],
+                                        'libre'=>0,
+                                        'active'=> 1,
+                                        'remove'=>0,
+                                        'usuarios_id'=> $request->get('idusuario')                            
+                                        ]
+                                    );
+                                    $ActividadesHorario->save();     
+                                    
+                                    // salidas
+                                    // dd($ActividadesHorario->id);
+                                    for ($s=0; $s < count($request->datosarray[$i][0]['sal']); $s++) {                                         
+                                        $salidas = SalidasLlegadasHorario::create(
+                                        [
+                                            'hora'=> $request->datosarray[$i][0]['sal'][$s]['hor'],
+                                            'salida'=> 1,
+                                            'salidallegadas_id' => $request->datosarray[$i][0]['sal'][$s]['s'],
+                                            'actividadeshorario_id' => $ActividadesHorario->id,
+                                            'usuarios_id'=> $request->get('idusuario'),
+                                            'active'=>1,
+                                            'remove'=>0
+                                        ]);
+                                        $salidas->save();                                        
                                     }
+                                    //llegadas
+                                    for ($l=0; $l < count($request->datosarray[$i][0]['lle']); $l++) {                                             
+                                        $llegadas = SalidasLlegadasHorario::create(
+                                            [
+                                                'hora'=> $request->datosarray[$i][0]['lle'][$l]['hor'],
+                                                'salida'=> 0,
+                                                'salidallegadas_id' => $request->datosarray[$i][0]['lle'][$l]['l'],
+                                                'actividadeshorario_id' => $ActividadesHorario->id,
+                                                'usuarios_id'=> $request->get('idusuario'),
+                                                'active'=>1,
+                                                'remove'=>0
+                                            ]);
+                                            $salidas->save();                                            
+                                    }   
+
                                 }
                             }
 
@@ -801,6 +828,8 @@ class ActividadesController extends Controller
     }
     public function horarioMultiple(Request $request, $id)
     {
+          
+            
              //actividades horario
             $acth = DB::table('actividadeshorarios as ah')
             ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d')
@@ -814,7 +843,6 @@ class ActividadesController extends Controller
              //    horario multiple
              if($horario->hini != null && $horario->hfin != null ) {
                  $idh =$horario->id;
-                 dd($idh);
                  $sal = DB::table('salida_llegadahorarios as slh')
                 ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                 ->select('slh.id','slh.actividadeshorario_id', 'slh.hora', 'sl.id as slid', 'sl.direccion')

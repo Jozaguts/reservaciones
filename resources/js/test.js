@@ -229,6 +229,7 @@ xhr.send();
 let salidasyllegadas = salidasDOM.salidasLlegadas; 
 
 function addHoraioContainer(){
+  
 
   contador++;
   let container= document.createElement('div')
@@ -1233,7 +1234,9 @@ function editarActividad(e){
       
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
-      document.getElementById('libre').checked =true;
+      // document.getElementById('libre').checked =true;
+      // $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+ 
        let salidainput = document.getElementById('salidas')
        salidainput.options.selectedIndex = salidasHLibre[0][0].slid - 1;
        salidainput.setAttribute('data-horarioid',salidasHLibre[0][0]['actividadeshorario_id'])
@@ -1263,7 +1266,7 @@ if(salidasHMultiple != 0){
     actividadesHorarioContainer.innerHTML="";
     diasActividadesHorario.forEach(function(horario){
       
-      
+     
       let bolcheckL;
       if(horario.l == 1){
         bolcheckL = 'checked';
@@ -1343,7 +1346,10 @@ if(salidasHMultiple != 0){
           </div>
       </div>
     </div>`
+    if(horario.libre == 0){
       actividadesHorarioContainer.appendChild(templete);
+    }
+     
   
     })
   }
@@ -1367,7 +1373,6 @@ if(salidasHMultiple != 0){
 
 }
 let horarioMultipleAJAX;
-
 function MostrarHMultiple(horario){
 
 let horarioID = horario.getAttribute('data-id')
@@ -1387,10 +1392,10 @@ let horarios = respuesta.actividadesHorario;
 let salidasHMultiple = respuesta.salidasHMultiple;
 let llegadasHMultiple = respuesta.llegadasHMultiple;
 
-
 horarios.forEach(function(horario){
+
   if(horarioID == horario.id ){
-    
+   
   let bolcheckL;
   if(horario.l == 1){
     bolcheckL = 'checked';
@@ -1434,10 +1439,11 @@ horarios.forEach(function(horario){
     bolcheckD='unchecked';
   }
   contador++;
-
+  
   let container= document.createElement('div')
   container.classList = "contanier";
   container.innerHTML= `
+  
   <div class="container horarios"> 
   <input type="hidden" class="h-id" data-id="${horario.id}" id="horarioIdPunto${horario.id}" data-puntoId="${horario.id}"> 
   <span class="h-divider"> </span>
@@ -1562,7 +1568,7 @@ function agregarSalidasHorarioMultiple(salida){
               
               </select>
             </div>
-            ${salida.slid}
+            
           </div>
           <div class="col-4">
             <div class="form-group">
@@ -1623,7 +1629,19 @@ function agregarLlegadaHorarioMultiple(llegada){
       option.innerHTML =salidasyllegadas[i].nombre;
     
       selectHmultipleSalidas.forEach(function(select){
-        select.appendChild(option)     
+
+        for (let i = 0; i < select.length; i++) {
+
+          if(select.children[i].value != option.value){
+            select.appendChild(option)   
+          }
+         
+          
+        }
+
+    
+
+        
       })
     }
   }
@@ -1636,7 +1654,14 @@ function agregarLlegadaHorarioMultiple(llegada){
       option.innerHTML =salidasyllegadas[i].nombre;
     
       selectHmultipleLlegadas.forEach(function(select){
-        select.appendChild(option)     
+        for (let i = 0; i < select.length; i++) {
+
+          if(select.children[i].value != option.value){
+            select.appendChild(option)   
+          }
+         
+          
+        }   
       })
     }
   }
@@ -2227,6 +2252,5 @@ function prueba(){
 
   return h;
 }
-
 
 
