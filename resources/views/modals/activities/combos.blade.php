@@ -16,7 +16,8 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="PreciosYPases-tab" data-toggle="tab" href="#PreciosYPases"    role="tab" aria-controls="PreciosYPases" aria-selected="false">Precios y Pases</a>
-                </li>               
+                </li>  
+                <span id='alerta'class=""> </span>             
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
@@ -116,8 +117,8 @@
                                         
                                         </tr>
                                       </thead>
-                                      <tbody>
-                                        <tr>
+                                      <tbody id="bodyTable">
+                                        {{-- <tr>
                                           <td scope="row"  >Can01</td>
                                           <td>Canopy el Eden</td>
                                           <td>$1,500</td>
@@ -130,7 +131,7 @@
                                               <a href="#!" class="btn btn-danger ml-3 btn-agregar" >-</a>
                                             </div> 
                                           </td>
-                                        </tr>
+                                        </tr> --}}
                                    
                                       </tbody>
                                     </table>

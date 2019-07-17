@@ -75,3 +75,7 @@ form {
   justify-content: center;
 }
 
+.close:hover {
+  cursor: pointer;
+}
+

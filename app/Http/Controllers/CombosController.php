@@ -92,8 +92,22 @@ class CombosController extends Controller
     {
         //
     }
-    public function infoactividad($id){
+    public function infoactividad(Request $request, $id){
         
-        return $id;
+        $actividades = DB::table('actividades as ac')
+        ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance')
+        ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.id','=',$id]])
+        ->orderBy('ac.clave')
+        ->get();
+
+        $ach = DB::table('actividadeshorarios as ach')
+        ->select('ach.id','ach.actividades_id', DB::raw('concat(ach.hini, " | ", ach.hfin, " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
+        ->where([['ach.active','=','1'],['ach.remove','=','0'], ['ach.actividades_id','=',$id]])
+        ->orderBy('ach.id')
+        ->get();    
+        
+        return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $ach]);
     }
+   
+  
 }
