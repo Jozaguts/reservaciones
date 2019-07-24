@@ -1,5 +1,18 @@
 
 $(document).ready(function () {
+
+
+  
+  let comboActividaes ={
+    hini: "as",
+    hfin: "",
+    actividades_id: "",
+    actividades_id_combo: "",
+    horario_id: "",
+    usuarios_id: ""
+    }
+  let {hini} =  comboActividaes; 
+   console.log(hini)
     let cl= console.log;  
     // LISTENERS
     // addEventListener para el boton  del +combo y mostrar el modal para agregar un combo
@@ -31,14 +44,11 @@ $(document).ready(function () {
       })
     return infoactividad;
     }
-   
-
 
 
       //cargarActiviad() pinta en pantalla la activiad
       let activiadesInsertadas =[];
     function cargarActividad(actividad){
-/* <option>9:00PM | 01:00PM | L,M,X,J,V</option> */
   let horarios = actividad.infoactiviadhorario;
      
      if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
@@ -56,7 +66,7 @@ $(document).ready(function () {
         
           
           </select>
-          <a href="#!" class="btn btn-danger ml-3 btn-agregar" >-</a>
+          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" >-</a>
         </div> 
       </td>
     </tr>

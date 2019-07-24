@@ -168,6 +168,8 @@ function disabledHOrarioMultiple(){
       item.disabled =true;
       if(item.nodeName == 'A'){
         item.classList.add('anchorElemet')
+        $('#addHorarioContanier').addClass('btn-secondary');
+      
       }
     })
     }
@@ -183,6 +185,9 @@ function disabledHOrarioMultiple(){
       item.disabled = false;
       if(item.nodeName == 'A'){
         item.classList.remove('anchorElemet')
+        item.classList.remove('btn-secondary')
+        $('#addHorarioContanier').addClass('btn-primary ');
+       
       }
     })
     }
@@ -1235,7 +1240,14 @@ function editarActividad(e){
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
       // document.getElementById('libre').checked =true;
-      // $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+      $('#libre').attr('checked',true);
+      $('#addHorarioContanier').removeClass('btn-primary');
+      $('#addHorarioContanier').addClass('btn-secondary anchorElemet');
+   
+        // $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+      
+
+     
  
        let salidainput = document.getElementById('salidas')
        salidainput.options.selectedIndex = salidasHLibre[0][0].slid - 1;
@@ -1253,9 +1265,7 @@ function editarActividad(e){
        $('#hfinHorarioLibre').val(diasActividadesHorario[0].hfin)
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
     }
-    
- 
-     
+  
 
 
 
@@ -1630,14 +1640,14 @@ function agregarLlegadaHorarioMultiple(llegada){
     
       selectHmultipleSalidas.forEach(function(select){
 
-        for (let i = 0; i < select.length; i++) {
-
-          if(select.children[i].value != option.value){
+        // for (let i = 0; i < select.length; i++) {
+       
+          if(select.value != option.value){
             select.appendChild(option)   
           }
          
           
-        }
+        // }
 
     
 
@@ -1654,14 +1664,14 @@ function agregarLlegadaHorarioMultiple(llegada){
       option.innerHTML =salidasyllegadas[i].nombre;
     
       selectHmultipleLlegadas.forEach(function(select){
-        for (let i = 0; i < select.length; i++) {
+        // for (let i = 0; i < select.length; i++) {
 
-          if(select.children[i].value != option.value){
+          if(select.value != option.value){
             select.appendChild(option)   
           }
          
           
-        }   
+        // }   
       })
     }
   }
@@ -2252,5 +2262,21 @@ function prueba(){
 
   return h;
 }
+
+
+$('.addHorarioContanier').click(function (e) { 
+  e.preventDefault();
+
+  if(this.children[0].classList.contains('btn-secondary')){
+    $('#alerForHLibre').addClass('text-danger fadeIn')
+    $('#alerForHLibre').text('Deshabilita el Horario Libre')
+    setTimeout(() => {
+      $('#alerForHLibre').text(' ')
+    }, 2000);
+  }
+  
+});
+
+
 
 

@@ -393,9 +393,11 @@
         </div>
         </div> 
       <div class="row">
-        <div class="col-2">
+        <div class="col-2 addHorarioContanier">
+          
           <a href="#!" class="btn btn-primary horario-multiple" id="addHorarioContanier" onclick="addHoraioContainer();" disabled><span>+ Horario</span></a>
         </div>
+        <small id="alerForHLibre"></small>
       </div>
     </form>
   </div>
