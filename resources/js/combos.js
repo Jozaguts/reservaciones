@@ -1,19 +1,6 @@
 
 $(document).ready(function () {
 
-
-  
-  let comboActividaes ={
-    hini: "as",
-    hfin: "",
-    actividades_id: "",
-    actividades_id_combo: "",
-    horario_id: "",
-    usuarios_id: ""
-    }
-  let {hini} =  comboActividaes; 
-   console.log(hini)
-    let cl= console.log;  
     // LISTENERS
     // addEventListener para el boton  del +combo y mostrar el modal para agregar un combo
    $(document).on('click', '.show-btn', function () {
@@ -44,7 +31,14 @@ $(document).ready(function () {
       })
     return infoactividad;
     }
-
+      // funcion convierte la hora de un input time en entero para poder sumar o restar y asi hacer los multiples options 
+      // del select en el mini crud
+      function timeStringToFloat(time) {
+        var hoursMinutes = time.split(/[.:]/);
+        var hours = parseInt(hoursMinutes[0], 10);
+        var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+        return parseInt( hours + minutes / 60);
+      }
 
       //cargarActiviad() pinta en pantalla la activiad
       let activiadesInsertadas =[];
@@ -53,7 +47,9 @@ $(document).ready(function () {
      
      if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
  for(let i=0; i<actividad.infoactivad.length; i++) {
-        let idActividad = actividad.infoactivad[i].id;
+  // console.log(actividad.infoactiviadhorario[i].libre ==1);
+
+    let idActividad = actividad.infoactivad[i].id;
         $('#bodyTable').append(`
       <tr >
       <td scope="row">${actividad.infoactivad[i].clave}</td>
@@ -100,12 +96,26 @@ $(document).ready(function () {
   
        let select = document.querySelector(`select[name=select${idselect}]`)
        for(let i = 0; i<infoactiviadeshorarios.length; i++) {
+        let resultado ,hiniHorario,hfinHorario;
+   
         
+        if(infoactiviadeshorarios[i].libre==1) {
+     
+           hiniHorario  = timeStringToFloat(infoactiviadeshorarios[i].hini)
+           hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
+          resultado = hfinHorario - hiniHorario;
+        }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
-         let option = document.createElement("option")
-         option.innerHTML =infoactiviadeshorarios[i].horario;
-         select.appendChild(option)
-        }else{
+
+            for (let j = 0; j < resultado; j++) {
+              let paste = infoactiviadeshorarios[i].horario.substring(10, infoactiviadeshorarios[i].horario.length);
+              let option = document.createElement("option")
+              option.innerHTML =`${hiniHorario+j}:00:00 |${paste}`;
+              option.setAttribute('data-hora',hiniHorario+j)
+              select.appendChild(option)
+            }
+        
+        }else{ 
           $('#myTab').text('no se puuede')
         }
        

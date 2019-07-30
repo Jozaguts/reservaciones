@@ -101,12 +101,36 @@ class CombosController extends Controller
         ->get();
 
         $ach = DB::table('actividadeshorarios as ach')
-        ->select('ach.id','ach.actividades_id', DB::raw('concat(ach.hini, " | ", ach.hfin, " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
+        ->select('ach.id','ach.actividades_id','ach.libre','ach.hini','ach.hfin', DB::raw('concat(ach.hini, " | ", ach.hfin, " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
         ->where([['ach.active','=','1'],['ach.remove','=','0'], ['ach.actividades_id','=',$id]])
         ->orderBy('ach.id')
-        ->get();    
+        ->get();   
         
-        return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $ach]);
+         $arrHLibres =array();
+         $arrHMultiple = array();
+        //  array_push($arrHLibres, dato)
+        $length = $ach->count();
+        for ($i=0; $i < $length; $i++) { 
+
+            if($ach[$i]->libre == 1) {
+
+                array_push($arrHLibres, $ach[$i]);
+
+            } else if($ach[$i]->libre == 0) {
+
+                array_push($arrHMultiple,$ach[$i]);
+
+            }
+        
+        }
+
+        if(count($arrHLibres) > 0){
+            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHLibres]);
+        }else{
+            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHMultiple]);
+        }
+        
+      
     }
    
   
