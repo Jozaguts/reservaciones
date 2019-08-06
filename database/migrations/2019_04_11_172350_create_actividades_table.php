@@ -34,7 +34,7 @@ class CreateActividadesTable extends Migration
             $table->boolean('riesgo');      //cambio de string a boolean
             $table->integer('puntos')->nullable();  //4ta pestaña
             $table->boolean('mismo_dia')->default('1');//default true
-            $table->boolean('libre');
+            $table->boolean('libre')->nullable();
             $table->boolean('active');
             $table->boolean('remove');     
             $table->softDeletes();           

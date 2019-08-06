@@ -52,7 +52,8 @@ $(document).ready(function () {
     let idActividad = actividad.infoactivad[i].id;
     let duracion = actividad.infoactivad[i].duracion;
         $('#bodyTable').append(`
-      <tr >
+      <tr class="actividad-id">
+      <input type="hidden" name="idActividad${idActividad}" value="${idActividad}">
       <td scope="row">${actividad.infoactivad[i].clave}</td>
       <td>${actividad.infoactivad[i].nombre}</td>
       <td class="precioFix">${actividad.infoactivad[i].precio}</td>
@@ -155,13 +156,36 @@ $(document).ready(function () {
     }
 
     if(e.target.classList.contains('btn-guardar')) {
-
+      let arrayDataSet =[];
+      let mismodia = $('#mismodia').prop('checked')
       let dataform = $('#combosForm').serializeArray();
       let data = {};
       $(dataform ).each(function(index, obj){
         data[obj.name] = obj.value;
       });
-      console.log(data)
+      data.mismodia = mismodia;
+
+      let trs = document.querySelectorAll('.actividad-id');
+
+      trs.forEach(function(tr){
+        let dataSet={hini: "",
+          hfin: "",
+          actividades_id: "",
+          actividades_id_combo: "",
+          horario_id: "",
+          usuarios_id: "",
+          active: "",
+          remove: ""};
+        let fd = $(tr).find('select').val()
+        let  hini =fd.substring(0, 8)
+        let  hfin =fd.substring(10, 19)
+        dataSet.hini = hini
+        dataSet.hfin = hfin
+        arrayDataSet.push(dataSet)
+      })
+      data.dataSet=arrayDataSet;
+      
+     
       let horarioId = $('.btn-eliminar').data('horarioid')
   
       fetch('/combos',{

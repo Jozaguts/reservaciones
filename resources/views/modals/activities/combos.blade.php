@@ -87,7 +87,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for=""> Agregar Actividad</label>
-                                        <select class="form-control input-agregar-actividad" name="actividad" id="actividad" required>
+                                        <select class="form-control input-agregar-actividad"  id="actividad" required>
                                             @foreach ($actividades as $actividad)
                                                 <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
                                             @endforeach
@@ -98,7 +98,7 @@
                                 <div class="col-3 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
-                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="" id="" value="" >
+                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismodia" id="mismodia" value="" >
                                   </div>
                                 </div>
                                 <div class="col-2 ">

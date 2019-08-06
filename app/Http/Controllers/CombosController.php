@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Anticipos;
 use App\TipoActividades;
+use Validator;
+use App\Actividades;
 use Illuminate\Support\Facades\DB;
-use function GuzzleHttp\json_decode;
+
 
 class CombosController extends Controller
 {
@@ -21,7 +23,7 @@ class CombosController extends Controller
         $anticipos = Anticipos::all();
         $tipoactividades = TipoActividades::all();
          $actividades = DB::table('actividades as ac')
-               ->select('ac.id', 'ac.clave', 'ac.nombre')
+               ->select('ac.id', 'ac.clave', 'ac.nombre','ac.tipoactividades_id','ac.active','ac.precio', 'ac.balance')
                ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0']])
                ->orderBy('ac.clave')
                ->get();
@@ -52,23 +54,59 @@ class CombosController extends Controller
             'clave' => ['required', 'string', 'min:5','unique:actividades'],
             'nombre' => ['required', 'string', 'max:255'],
             'tipoactividades_id'=> ['required', 'integer'],
-            
             'active'=> ['nullable', 'boolean'],
             'remove' => ['nullable','boolean'],
-            
             'maxcortesias'=>['nullable','integer'],
             'maxcupones'=>['nullable','integer'],
             'anticipo_id'=>['required','integer'],
             'idusuario'=> ['integer','required'],
-            
-            'libre'=> ['boolean'],
-            
-           
+            'libre'=> ['boolean','nullable'],
+            'combo'=> ['boolean','nullable']
         ];
-   
+     
+     
+             //Se realiza la validación
+             $validator = Validator::make($request->all(), $rules);
 
-        dd($request['idusuario']);
-     return response()->json([$request['form']]);
+             if($validator->fails()){
+                return response()->json(['errors'=> $validator->errors()->all()]);
+             }else{
+                 $act = Actividades::create([
+
+                    'clave' => $request['clave'],
+                    'nombre' => $request['nombre'],
+                    'tipoactividades_id' =>$request['tipoactividades_id'],
+                    'active'=> '1',
+                    'remove' => '0',
+                    'maxcortesias'=>$request['maxcortesias'],
+                    'maxcupones'=>$request['maxcupones'],
+                    'anticipo_id'=>$request['anticipo_id'],
+                    'idusuario'=> $request['idusuario'],
+                    'libre'=> $request['libre'],
+                    'combo'=> '1',
+                    'precio'=> '1',
+                    'balance'=> '1',
+                    'fijo'=>0,
+                    'renta'=>0,
+                    'promocion' => 0,
+                    'riesgo'=>0,
+                    'tipounidades_id'=>1
+                     
+                     ]);
+
+                     if($act){
+                        return response()->json(['message', 'Combo Guardado']);
+                     }else{
+                        return response()->json(['message', 'Error Al Guardar']);
+                     }
+             }
+           
+            
+             
+        
+
+        
+     
     }
 
     /**
