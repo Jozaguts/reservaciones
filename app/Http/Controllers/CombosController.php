@@ -7,6 +7,7 @@ use App\Anticipos;
 use App\TipoActividades;
 use Validator;
 use App\Actividades;
+use App\Personas;
 use Illuminate\Support\Facades\DB;
 
 
@@ -19,7 +20,7 @@ class CombosController extends Controller
      */
     public function index()
     {
-
+        $personas = Personas::all();
         $anticipos = Anticipos::all();
         $tipoactividades = TipoActividades::all();
          $actividades = DB::table('actividades as ac')
@@ -28,7 +29,7 @@ class CombosController extends Controller
                ->orderBy('ac.clave')
                ->get();
             
-        return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades'));
+        return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades','personas'));
     }
 
     /**
