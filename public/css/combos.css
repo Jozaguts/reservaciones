@@ -79,3 +79,7 @@ form {
   cursor: pointer;
 }
 
+.lead {
+  font-size: 12px;
+}
+

@@ -1240,8 +1240,9 @@ function editarActividad(e){
       
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
-       let id = $('#libre').data('id');
-
+       $('#libre').attr('data-actividadid', `${diasActividadesHorario[0].id}`);
+       let id = $('#libre').data('actividadid');
+       console.log(diasActividadesHorario);
 
        statusActividad(id).then(data => data)
        .then(function(data){
@@ -2323,7 +2324,7 @@ $('.addHorarioContanier').click(function (e) {
 
 
 function activarActividad(){
-  let id = $('#libre').data('id');
+  let id = $('#libre').data('actividadid');
     $.ajax({
       type: "PUT",
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

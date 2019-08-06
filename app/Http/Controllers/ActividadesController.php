@@ -334,13 +334,13 @@ class ActividadesController extends Controller
            $actp = DB::table('actividadprecios as ap')
        ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
        ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
-       ->where([['ap.actividades_id', '=', $id], ['ap.active', '=', '1'], ['ap.remove', '=', '0']])
+       ->where([['ap.actividades_id', '=', $id],  ['ap.remove', '=', '0']])
        ->orderBy('ap.id')
        ->get();
     //    actividades horario
        $acth = DB::table('actividadeshorarios as ah')
            ->select('ah.id','ah.hini', 'ah.hfin', 'ah.l', 'ah.m', 'ah.x', 'ah.j', 'ah.v', 'ah.s', 'ah.d','ah.libre')
-           ->where([['ah.active','=','1'], ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
+           ->where([ ['ah.remove','=','0'], ['ah.actividades_id', '=', $id]])
            ->orderBy('ah.hini')
            ->get();
            
@@ -356,7 +356,7 @@ class ActividadesController extends Controller
                     $sal = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                     ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion','slh.actividadeshorario_id')
-                    ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                    ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'],  ['slh.remove', '=', '0']])
                     ->orderBy('slh.id')
                     ->get();
                     array_push($salidasHorarioLibre, $sal);
@@ -366,7 +366,7 @@ class ActividadesController extends Controller
                     $llegadas = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                     ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-                    ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                    ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'],  ['slh.remove', '=', '0']])
                     ->orderBy('slh.id')
                     ->get();
                     array_push($llegadasHorarioLibre, $llegadas);
@@ -379,7 +379,7 @@ class ActividadesController extends Controller
                     $sal = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                     ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-                    ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                    ->where([['slh.actividadeshorario_id', '=',$id], ['slh.salida', '=', '1'],  ['slh.remove', '=', '0']])
                     ->orderBy('slh.id')
                     ->get();
 
@@ -389,7 +389,7 @@ class ActividadesController extends Controller
                         $llegadas = DB::table('salida_llegadahorarios as slh')
                     ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
                     ->select('slh.id', 'slh.hora', 'sl.id as slid', 'sl.direccion')
-                    ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.active', '=', '1'], ['slh.remove', '=', '0']])
+                    ->where([['slh.actividadeshorario_id', '=', $id], ['slh.salida', '=', '0'], ['slh.remove', '=', '0']])
                     ->orderBy('slh.id')  
                     ->get();
                     array_push($llegadasHorarioMultiple, $llegadas);
@@ -890,8 +890,7 @@ class ActividadesController extends Controller
     public function deshabilitarActividad(Request $request, $id){
 
         $actividad = Actividades::find($id);
-       
-       
+    
         if($request->ajax()){
            
         if($actividad->libre==1){
@@ -899,6 +898,7 @@ class ActividadesController extends Controller
             $ch = ActividadesHorario::where('libre', '1')
             ->where('actividades_id', $id)
             ->update(['active'=> 0]);
+         
             
             return response()->json(['message'=>'Desactivada Correctamente']);
         } 

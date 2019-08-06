@@ -47,7 +47,7 @@ $(document).ready(function () {
      
      if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
  for(let i=0; i<actividad.infoactivad.length; i++) {
-  // console.log(actividad.infoactiviadhorario[i].libre ==1);
+  
 
     let idActividad = actividad.infoactivad[i].id;
     let duracion = actividad.infoactivad[i].duracion;
@@ -63,7 +63,7 @@ $(document).ready(function () {
         
           
           </select>
-          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}">-</a>
+          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}" name="">-</a>
         </div> 
       </td>
     </tr>
@@ -108,10 +108,10 @@ $(document).ready(function () {
           resultado = hfinHorario - hiniHorario;
         }else if (infoactiviadeshorarios[i].libre==0){
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
-            console.log('entro')
             let option = document.createElement("option")
             option.innerHTML =infoactiviadeshorarios[i].horario;
             select.appendChild(option)
+          select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
           }
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
@@ -122,6 +122,7 @@ $(document).ready(function () {
               option.innerHTML =`${hiniHorario+j}:00:00 |${paste}`;
               option.setAttribute('data-hora',hiniHorario+j)
               select.appendChild(option)
+              select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
             }
         
         }else{ 
@@ -135,6 +136,10 @@ $(document).ready(function () {
  
   // elimniar fila en el mini crud
  
+      document.addEventListener('submit',function(e){
+        e.preventDefault();
+      })
+
   document.addEventListener('click',function(e){
     
     if(e.target.classList.contains('btn-eliminar')) {
@@ -144,18 +149,46 @@ $(document).ready(function () {
       if(confirm("Eliminiar Actividad") == true){
         parent.remove();
         delete activiadesInsertadas[index]
-        console.log(activiadesInsertadas)
+      
         activiadesInsertadas.length -= 1
       }    
     }
 
-    
+    if(e.target.classList.contains('btn-guardar')) {
+
+      let dataform = $('#combosForm').serializeArray();
+      let data = {};
+      $(dataform ).each(function(index, obj){
+        data[obj.name] = obj.value;
+      });
+      console.log(data)
+      let horarioId = $('.btn-eliminar').data('horarioid')
+  
+      fetch('/combos',{
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      })
+      .then(function(response){
+        return response.json();
+      })
+        .then(function(responseJson){
+          console.log(responseJson)
+        })
+    }
       
   
   })
 
 
- 
+// Comienza la el ajax para guardar combos
+
+
+
+
 
  
 });
@@ -210,11 +243,4 @@ $(document).ready(function () {
           })
         }
 
-
-
-
-
-
-
-        /////////////////////////////////////////////////////////###
         

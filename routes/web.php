@@ -60,3 +60,4 @@ Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->mid
 
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
 
+

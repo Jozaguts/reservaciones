@@ -25,7 +25,7 @@
                     {{-- <div class="container mt-3">
                        
                     </div> --}}
-                <form action="{{url('/actividades')}}" method="post" id="AddActividadesForm">
+                <form action="#!" method="post" id="combosForm">
                   <div class="row">
                     <div class="col-sm-6 offset-md-2">
                         @include('components.alertsintomodals')                                    
@@ -95,12 +95,17 @@
                                         <a href="#!" class="btn btn-success ml-3 btn-agregar" >+</a>
                                     </div>
                                 </div>
-                                <div class="col-5 offset-1">
+                                <div class="col-3 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
                                     <input type="checkbox" class="form-control d-inline-block checkbox" name="" id="" value="" >
                                   </div>
                                 </div>
+                                <div class="col-2 ">
+                                  <div class="form-group">
+                                  <button class="btn btn-success btn-guardar" >Guardar</button>
+                                </div>
+                              </div>
                                 
                             </div>
                             <div class="row table-container">
@@ -118,26 +123,22 @@
                                         </tr>
                                       </thead>
                                       <tbody id="bodyTable">
-                                        {{-- <tr>
-                                          <td scope="row"  >Can01</td>
-                                          <td>Canopy el Eden</td>
-                                          <td>$1,500</td>
-                                          <td>$200</td>
-                                          <td colspan="5"><div class="form-group">
-                                              <label for=""></label>
-                                              <select class="form-control" name="" id="">
-                                                <option>9:00PM | 01:00PM | L,M,X,J,V</option>
-                                              </select>
-                                              <a href="#!" class="btn btn-danger ml-3 btn-agregar" >-</a>
-                                            </div> 
-                                          </td>
-                                        </tr> --}}
+                                      
                                    
                                       </tbody>
                                     </table>
                                   </div>
                               </div>
                             </div>
+                            <div class="row">
+                             <div class="col-4 lead text-center">HORA INICIO:  (Horario menor)</div>
+                             <div class="col-4 lead text-center"> HORA FIN: (Horario Mayor)</div>
+                             <div class="col-4 lead text-center">PRECIO SUGERIDO</div>
+                            </div>
+                            <div class="row mt-3">
+                              <div class="col-12 lead text-center">(No pueden ser agregadas actividades de Renta)</div>
+                              
+                             </div>
                             
                             </div>
                      </form>
@@ -150,7 +151,7 @@
                             </div>
                         </div>
                     </div>
-                    <form action="{{url('/actividades')}}" method="post" id="AddPreciosYPasesForm">
+                    <form action="#!" method="post" id="AddPreciosYPasesForm">
                      <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
                       <div class="container">
                         <div class="row ">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Anticipos;
 use App\TipoActividades;
 use Illuminate\Support\Facades\DB;
+use function GuzzleHttp\json_decode;
+
 class CombosController extends Controller
 {
     /**
@@ -45,7 +47,28 @@ class CombosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          //reglas de validacion
+          $rules =[
+            'clave' => ['required', 'string', 'min:5','unique:actividades'],
+            'nombre' => ['required', 'string', 'max:255'],
+            'tipoactividades_id'=> ['required', 'integer'],
+            
+            'active'=> ['nullable', 'boolean'],
+            'remove' => ['nullable','boolean'],
+            
+            'maxcortesias'=>['nullable','integer'],
+            'maxcupones'=>['nullable','integer'],
+            'anticipo_id'=>['required','integer'],
+            'idusuario'=> ['integer','required'],
+            
+            'libre'=> ['boolean'],
+            
+           
+        ];
+   
+
+        dd($request['idusuario']);
+     return response()->json([$request['form']]);
     }
 
     /**
