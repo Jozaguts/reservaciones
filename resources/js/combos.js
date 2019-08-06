@@ -159,6 +159,12 @@ $(document).ready(function () {
       let arrayDataSet =[];
       let mismodia = $('#mismodia').prop('checked')
       let dataform = $('#combosForm').serializeArray();
+      let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
+
+      let datadataPreciosYpases={};
+   
+     
+
       let data = {};
       $(dataform ).each(function(index, obj){
         data[obj.name] = obj.value;
@@ -184,7 +190,14 @@ $(document).ready(function () {
         arrayDataSet.push(dataSet)
       })
       data.dataSet=arrayDataSet;
-      
+         
+      $(dataPreciosYpases ).each(function(index, obj){
+        datadataPreciosYpases[obj.name] = obj.value;
+      });
+    
+      data.preciosYpases =datadataPreciosYpases
+
+      console.log(data)
      
       let horarioId = $('.btn-eliminar').data('horarioid')
   
@@ -267,4 +280,15 @@ $(document).ready(function () {
           })
         }
 
-        
+        // habilitar acompañate 
+        habilitarAcompnante = (e)=>{
+          let id = e.getAttribute('data-id');
+          let checkAcompanante = document.querySelector(`#acompanantePersonaId${id}`)
+          
+          if(e.checked){
+          
+          checkAcompanante.disabled = false;
+          }else{
+          checkAcompanante.disabled = true;
+          }
+          }
