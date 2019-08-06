@@ -50,10 +50,13 @@ Route::resource('combos', 'CombosController')->middleware(['auth']);
 Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);
 
 Route::put('editar-actividad/{id}', 'ActividadesController@updateActividad')->middleware(['auth']);
+Route::put('deshabilitar-actividad/{id}', 'ActividadesController@deshabilitarActividad')->middleware(['auth']);
+Route::get('status-actividad/{id}','ActividadesController@statusActividad')->middleware(['auth']);
 Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
-// Route::delete('actividades/{id}', 'ActividadesController@destroy')->middleware(['auth']);
+
 
 Route::get('salidasllegadas','ActividadesController@salidasllegadas')->middleware(['auth']);
 Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->middleware(['auth']);
 
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
+

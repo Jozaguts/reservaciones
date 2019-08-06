@@ -1083,6 +1083,7 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
+  $('#libre').attr('onchange', 'activarActividad()')
   let HORARIOID;
   editar = true;
 
@@ -1239,10 +1240,51 @@ function editarActividad(e){
       
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
-      // document.getElementById('libre').checked =true;
-      $('#libre').attr('checked',true);
+       let id = $('#libre').data('id');
+
+
+       statusActividad(id).then(data => data)
+       .then(function(data){
+        
+       if( data.message =='Habilitada'){
+        console.log('entro en 1' ,data.message)
+        $('#libre').attr('checked',true);
+        $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+      }else{
+        $('#libre').attr('checked',false);
+        console.log('entro en 0',data.message)
+        $('#libre').css('box-shadow', '0px 0px 0px 0px green');
+      }
+      })
+
+     
+     
+
+
+
+     
       $('#addHorarioContanier').removeClass('btn-primary');
       $('#addHorarioContanier').addClass('btn-secondary anchorElemet');
+    
+
+    
+    // traer el estado del campo LIBRE en actividades
+     async function statusActividad(idActividad){
+     
+      const url = `status-actividad/${idActividad}`;
+      const response = await fetch(url);
+      const data = await response.json()
+
+      return data
+
+      
+      }
+
+  //  desactivar o activar el campo libre en actividades
+
+      
+
+   
    
         // $('#libre').css('box-shadow', '0px 0px 0px 3px green');
       
@@ -2280,3 +2322,26 @@ $('.addHorarioContanier').click(function (e) {
 
 
 
+function activarActividad(){
+  let id = $('#libre').data('id');
+    $.ajax({
+      type: "PUT",
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: `deshabilitar-actividad/${id}`,
+      data: id,
+      dataType: "json",
+      success: function (response) {
+        if( response.message =='Activada Correctamente'){
+          console.log('entro en 1' ,response.message)
+          $('#libre').attr('checked',true);
+          $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+        }else{
+          $('#libre').attr('checked',false);
+          console.log('entro en 0',response.message)
+          $('#libre').css('box-shadow', '0px 0px 0px 0px green');
+        }
+        console.log(response.message)
+      }
+    });
+ 
+}

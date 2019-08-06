@@ -26,7 +26,7 @@ class CreateActividadhorariosTable extends Migration
             $table->boolean('d');
             $table->timestamps();
             $table->boolean('active');
-            $table->boolean('libre');
+            $table->boolean('libre')->default(0);
             $table->boolean('remove');                   
 
             $table->unsignedInteger('actividades_id');

@@ -885,4 +885,46 @@ class ActividadesController extends Controller
             }
         }
     }
+
+
+    public function deshabilitarActividad(Request $request, $id){
+
+        $actividad = Actividades::find($id);
+       
+       
+        if($request->ajax()){
+           
+        if($actividad->libre==1){
+            $actividad::where('id', $id)->update(['libre' => 0, ]);
+            $ch = ActividadesHorario::where('libre', '1')
+            ->where('actividades_id', $id)
+            ->update(['active'=> 0]);
+            
+            return response()->json(['message'=>'Desactivada Correctamente']);
+        } 
+        if($actividad->libre==0){
+            $actividad::where('id', $id)->update(['libre' => 1]);
+            $ch = ActividadesHorario::where('libre', '1')
+            ->where('actividades_id', $id)
+            ->update(['active'=>1]);
+            return response()->json(['message'=>'Activada Correctamente']);
+        }
+    }
+    }
+    public function statusActividad(Request $request, $id){
+        
+        
+         
+        $actividad = Actividades::find($id);
+       
+        if($actividad->libre==1){
+            
+            return response()->json(['message'=>'Habilitada']);
+        } 
+        if($actividad->libre==0){
+            
+            return response()->json(['message'=>'Deshabilitada']);
+        }
+    
+    }
 }

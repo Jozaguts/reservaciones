@@ -95,7 +95,7 @@ class CombosController extends Controller
     public function infoactividad(Request $request, $id){
         
         $actividades = DB::table('actividades as ac')
-        ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance')
+        ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion')
         ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.id','=',$id]])
         ->orderBy('ac.clave')
         ->get();
@@ -132,6 +132,8 @@ class CombosController extends Controller
         
       
     }
+
+
    
   
 }

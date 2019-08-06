@@ -50,6 +50,7 @@ $(document).ready(function () {
   // console.log(actividad.infoactiviadhorario[i].libre ==1);
 
     let idActividad = actividad.infoactivad[i].id;
+    let duracion = actividad.infoactivad[i].duracion;
         $('#bodyTable').append(`
       <tr >
       <td scope="row">${actividad.infoactivad[i].clave}</td>
@@ -68,7 +69,8 @@ $(document).ready(function () {
     </tr>
         `)
         // esta funcion recive como parametros el id del select y los horarios
-        insertaOPtions(horarios,idActividad );
+  
+        insertaOPtions(horarios,idActividad, duracion);
         activiadesInsertadas.push(actividad.infoactivad[i].clave)
         cambiaAMoneda("balanceFix")
         cambiaAMoneda("precioFix")
@@ -92,8 +94,8 @@ $(document).ready(function () {
       
     }
     // funcion para insertear opciones en cada select
-    function insertaOPtions(infoactiviadeshorarios, idselect) {
-  
+    function insertaOPtions(infoactiviadeshorarios, idselect, duracion) {
+     
        let select = document.querySelector(`select[name=select${idselect}]`)
        for(let i = 0; i<infoactiviadeshorarios.length; i++) {
         let resultado ,hiniHorario,hfinHorario;
@@ -104,6 +106,13 @@ $(document).ready(function () {
            hiniHorario  = timeStringToFloat(infoactiviadeshorarios[i].hini)
            hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
           resultado = hfinHorario - hiniHorario;
+        }else if (infoactiviadeshorarios[i].libre==0){
+          if(infoactiviadeshorarios[i].actividades_id == idselect) {
+            console.log('entro')
+            let option = document.createElement("option")
+            option.innerHTML =infoactiviadeshorarios[i].horario;
+            select.appendChild(option)
+          }
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
 
@@ -127,7 +136,7 @@ $(document).ready(function () {
   // ## Cerar alerta
   // let cerrarAlerta = e => console.log(e.parentElement);
   $('.close').on('click', function () {
-    alert('fucnioas')
+   
   });
 
 
@@ -184,3 +193,10 @@ $(document).ready(function () {
         }
 
 
+
+
+
+
+
+        /////////////////////////////////////////////////////////###
+        
