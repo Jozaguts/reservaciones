@@ -63,7 +63,7 @@ $(document).ready(function () {
         
           
           </select>
-          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" >-</a>
+          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}">-</a>
         </div> 
       </td>
     </tr>
@@ -133,13 +133,31 @@ $(document).ready(function () {
       }
     
  
-  // ## Cerar alerta
-  // let cerrarAlerta = e => console.log(e.parentElement);
-  $('.close').on('click', function () {
-   
-  });
+  // elimniar fila en el mini crud
+ 
+  document.addEventListener('click',function(e){
+    
+    if(e.target.classList.contains('btn-eliminar')) {
+      let parent = e.target.parentNode.parentNode.parentNode;
+      let index = e.target.getAttribute('data-index');  
+
+      if(confirm("Eliminiar Actividad") == true){
+        parent.remove();
+        delete activiadesInsertadas[index]
+        console.log(activiadesInsertadas)
+        activiadesInsertadas.length -= 1
+      }    
+    }
+
+    
+      
+  
+  })
 
 
+ 
+
+ 
 });
     // VALIDACIONES ####
     
