@@ -293,7 +293,7 @@
     </div>                                              
   </div>
                             @endforeach
-                          </div>
+  </div>
                           </form>
                     </div>             
                 {{-- tercer pestaña --}}

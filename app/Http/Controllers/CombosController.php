@@ -7,6 +7,7 @@ use App\Anticipos;
 use App\TipoActividades;
 use Validator;
 use App\Actividades;
+use App\Personas;
 use Illuminate\Support\Facades\DB;
 
 
@@ -19,16 +20,16 @@ class CombosController extends Controller
      */
     public function index()
     {
-
+        $personas = Personas::all();
         $anticipos = Anticipos::all();
         $tipoactividades = TipoActividades::all();
          $actividades = DB::table('actividades as ac')
-               ->select('ac.id', 'ac.clave', 'ac.nombre','ac.tipoactividades_id','ac.active','ac.precio', 'ac.balance')
+               ->select('ac.id', 'ac.clave', 'ac.nombre','ac.tipoactividades_id','ac.active', 'ac.combo','ac.precio', 'ac.balance')
                ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0']])
                ->orderBy('ac.clave')
                ->get();
             
-        return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades'));
+        return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades','personas'));
     }
 
     /**
@@ -64,7 +65,7 @@ class CombosController extends Controller
             'combo'=> ['boolean','nullable']
         ];
      
-     
+        dd($request->all());
              //Se realiza la validación
              $validator = Validator::make($request->all(), $rules);
 
