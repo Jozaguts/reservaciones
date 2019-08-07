@@ -85,7 +85,7 @@ $(document).ready(function () {
       a.setAttribute('href','#')
       a.classList.add('close','ml-3')
       $('#alerta').append(a);     
-       
+      //  aler
 
      }
 
