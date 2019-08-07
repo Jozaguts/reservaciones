@@ -42,7 +42,7 @@
                                       
                                             @foreach ($actividades as $actividad)
                                           
-                                            @if( $actividad->tipoactividades_id == $tipoactividad->id)
+                                            @if( $actividad->tipoactividades_id == $tipoactividad->id && $actividad->combo ==1 )
                                      
                                             
                                         <tr id="trBg" class="mot"data-id="{{$actividad->id}}" data-clave="{{$actividad->clave}}"    data-active="{{$actividad->active}}"  >

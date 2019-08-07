@@ -85,7 +85,7 @@ $(document).ready(function () {
       a.setAttribute('href','#')
       a.classList.add('close','ml-3')
       $('#alerta').append(a);     
-       
+      //  aler
 
      }
 
@@ -171,6 +171,7 @@ $(document).ready(function () {
       });
       data.mismodia = mismodia;
 
+      // trs fila que contiene info de actividad y horarios
       let trs = document.querySelectorAll('.actividad-id');
 
       trs.forEach(function(tr){
@@ -187,6 +188,8 @@ $(document).ready(function () {
         let  hfin =fd.substring(10, 19)
         dataSet.hini = hini
         dataSet.hfin = hfin
+        let horarioId = $(tr).find('a').data('horarioid')
+        dataSet.horario_id =horarioId
         arrayDataSet.push(dataSet)
       })
       data.dataSet=arrayDataSet;
