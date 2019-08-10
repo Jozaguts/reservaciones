@@ -8,6 +8,8 @@ use App\TipoActividades;
 use Validator;
 use App\Actividades;
 use App\Personas;
+use App\ComboDet;
+use App\ActividadPrecios;
 use Illuminate\Support\Facades\DB;
 
 
@@ -50,8 +52,8 @@ class CombosController extends Controller
      */
     public function store(Request $request)
     {
-          //reglas de validacion
-          $rules =[
+           //reglas de validacion
+           $rules =[
             'clave' => ['required', 'string', 'min:5','unique:actividades'],
             'nombre' => ['required', 'string', 'max:255'],
             'tipoactividades_id'=> ['required', 'integer'],
@@ -64,16 +66,13 @@ class CombosController extends Controller
             'libre'=> ['boolean','nullable'],
             'combo'=> ['boolean','nullable']
         ];
-     
-        dd($request->all());
+       
              //Se realiza la validación
              $validator = Validator::make($request->all(), $rules);
-
              if($validator->fails()){
                 return response()->json(['errors'=> $validator->errors()->all()]);
              }else{
                  $act = Actividades::create([
-
                     'clave' => $request['clave'],
                     'nombre' => $request['nombre'],
                     'tipoactividades_id' =>$request['tipoactividades_id'],
@@ -85,17 +84,66 @@ class CombosController extends Controller
                     'idusuario'=> $request['idusuario'],
                     'libre'=> $request['libre'],
                     'combo'=> '1',
-                    'precio'=> '1',
-                    'balance'=> '1',
+                    'precio' => $request->get('precio'),
+                    'balance' => $request->get('balance'),
                     'fijo'=>0,
                     'renta'=>0,
                     'promocion' => 0,
                     'riesgo'=>0,
-                    'tipounidades_id'=>1
-                     
+                    'tipounidades_id'=>1                     
                      ]);
-
+                    //  dd($request->get('dataSet')[0]['hfin']);
                      if($act){
+                         for ($h=0; $h < count($request->get('dataSet')); $h++) { 
+                             $cDet = ComboDet::create([
+                                 'hini' => $request->get('dataSet')[$h]['hini'],
+                                 'hfin' =>$request->get('dataSet')[$h]['hfin'],
+                                 'actividades_id'=>$act->id,
+                                 'horario_id' =>$request->get('dataSet')[$h]['horario_id'],
+                                 'usuarios_id'=>$request['idusuario'],
+                                 'actividades_id_combo'=>'1',
+                                 'active'=>'1',
+                                 'remove'=>'0'
+                             ]);
+                         }
+                 
+                      
+                        
+                                // inserta precios
+                $datosPersonas = $request->datosPersonas;
+                foreach ($datosPersonas as $datoPersona ) {
+                    if($datoPersona['acompanante'] == 'null') {                  
+                        $datoPersona['acompanante'] = 0;
+                    }
+                    if($datoPersona['restriccion'] == 'null') {                  
+                        $datoPersona['restriccion'] = 0;
+                    }
+                    if($datoPersona['promocion'] == 'null') {                  
+                        $datoPersona['promocion'] = 0;
+                    }                 
+                    $actividadPrecio = ActividadPrecios::firstOrCreate(
+                        ['actividades_id' => $act->id, 'persona_id' => $datoPersona['persona_id']  ], 
+                        [
+                        'precio1' => $datoPersona['precio1'],
+                        'precio2'=> $datoPersona['precio2'],
+                        'precio3'=> $datoPersona['precio3'],
+                        'doble'=> $datoPersona['doble'],
+                        'doblebalanc'=> $datoPersona['doblebalanc'],
+                        'triple'=> $datoPersona['triple'],
+                        'triplebalanc'=> $datoPersona['triplebalanc'],
+                        'promocion'=> $datoPersona['promocion'],
+                        'restriccion'=> $datoPersona['restriccion'],
+                        'active'=> $datoPersona['active'],
+                        'acompanante'=> $datoPersona['acompanante'],
+                        'remove'=> $datoPersona['remove'],
+                        'usuarios_id'=> $request->get('idusuario'),
+                        ]
+                    );
+                    $actividadPrecio->save();
+                }  
+
+
+
                         return response()->json(['message', 'Combo Guardado']);
                      }else{
                         return response()->json(['message', 'Error Al Guardar']);

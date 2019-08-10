@@ -85,8 +85,6 @@ $(document).ready(function () {
       a.setAttribute('href','#')
       a.classList.add('close','ml-3')
       $('#alerta').append(a);     
-      //  aler
-
      }
 
 
@@ -159,9 +157,9 @@ $(document).ready(function () {
       let arrayDataSet =[];
       let mismodia = $('#mismodia').prop('checked')
       let dataform = $('#combosForm').serializeArray();
-      let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
+      // let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
 
-      let datadataPreciosYpases={};
+      // let datadataPreciosYpases={};
    
      
 
@@ -174,7 +172,8 @@ $(document).ready(function () {
       // trs fila que contiene info de actividad y horarios
       let trs = document.querySelectorAll('.actividad-id');
 
-      trs.forEach(function(tr){
+      trs.forEach(function(tr,index){
+    
         let dataSet={hini: "",
           hfin: "",
           actividades_id: "",
@@ -190,20 +189,54 @@ $(document).ready(function () {
         dataSet.hfin = hfin
         let horarioId = $(tr).find('a').data('horarioid')
         dataSet.horario_id =horarioId
+        dataSet.actividades_id =data.idActividad
         arrayDataSet.push(dataSet)
       })
       data.dataSet=arrayDataSet;
-         
-      $(dataPreciosYpases ).each(function(index, obj){
-        datadataPreciosYpases[obj.name] = obj.value;
-      });
-    
-      data.preciosYpases =datadataPreciosYpases
+  //  INICIO PESTAÑA 2 ############################################################################################
+  let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
+  let datos2 = new FormData(AddPreciosYPasesForm)
+  let balance = datos2.get('balanceg')
+  let precio = datos2.get('preciog')
 
+  //datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+  const personas = document.querySelectorAll('[id^=persona]')
+  let datosPersonas = [];
+
+  personas.forEach(function(persona){ 
+  persona={
+    precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+    precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+    precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+    doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+    doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+    triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+    triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+    promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+    restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+    acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+    remove: 0,
+    active: 1,
+    persona_id: persona.getAttribute('data-id')
+  }
+  datosPersonas.push(persona)
+  })
+
+    //  FIN PESTAÑA 2 ############################################################################################    
+         
+      // $(dataPreciosYpases ).each(function(index, obj){
+      //   datadataPreciosYpases[obj.name] = obj.value;
+      // });
+    
+      // data.preciosYpases =datadataPreciosYpases
+      data.datosPersonas =datosPersonas
+      data.precio = precio;
+      data.balance =balance;
       console.log(data)
      
       let horarioId = $('.btn-eliminar').data('horarioid')
   
+// Comienza la el ajax para guardar combos
       fetch('/combos',{
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
@@ -224,7 +257,6 @@ $(document).ready(function () {
   })
 
 
-// Comienza la el ajax para guardar combos
 
 
 
