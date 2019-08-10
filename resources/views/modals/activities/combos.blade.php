@@ -52,7 +52,7 @@
                                <label for="">Tipo de Actividad</label>
                                <select class="form-control " name="tipoactividades_id" id="tipoactividades_id" required>
                                  @foreach ($tipoactividades as $tipoactividad)
-                               <option value="{{$tipoactividad->TipoUnidad->id}}" data-tipoactividad="{{$tipoactividad->id}}">{{$tipoactividad->nombre}}</option>
+                               <option value="{{$tipoactividad->id}}" data-tipoUnidad="{{  $tipoactividad->TipoUnidad->id}}">{{$tipoactividad->nombre}}</option>
                                  @endforeach
                                </select>
                              </div>
