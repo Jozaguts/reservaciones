@@ -249,7 +249,25 @@ $(document).ready(function () {
         return response.json();
       })
         .then(function(responseJson){
-          console.log(responseJson)
+          if(responseJson['message'] != 'Combo Guardado'){
+            // data.errors.forEach(()=>{})
+            
+            $('#errorsIntoModal').html(responseJson.errors[0]);
+              $('#message-errorIntoModal').fadeIn();
+              setTimeout(() => {
+                $('#message-errorIntoModal').fadeOut();
+              }, 3000);
+              // setTimeout("location.reload(true);",3000)
+              
+          }else{
+            $('#successIntoModal').html(responseJson['message']);
+              $('#message-successIntoModal').fadeIn();
+              setTimeout(() => {
+                $('#message-successIntoModal').fadeOut();
+              }, 3000);
+              // setTimeout("location.reload(true);",3000)
+          }
+          console.log(responseJson.errors[0])
         })
     }
       

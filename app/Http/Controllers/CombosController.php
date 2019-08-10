@@ -144,9 +144,9 @@ class CombosController extends Controller
 
 
 
-                        return response()->json(['message', 'Combo Guardado']);
+                        return response()->json(['message' => 'Combo Guardado']);
                      }else{
-                        return response()->json(['message', 'Error Al Guardar']);
+                        return response()->json(['message'=>'Error Al Guardar']);
                      }
              }
            
