@@ -27,7 +27,7 @@ class CombosController extends Controller
         $tipoactividades = TipoActividades::all();
          $actividades = DB::table('actividades as ac')
                ->select('ac.id', 'ac.clave', 'ac.nombre','ac.tipoactividades_id','ac.active', 'ac.combo','ac.precio', 'ac.balance')
-               ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0']])
+               ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'],['ac.combo','=','0']])
                ->orderBy('ac.clave')
                ->get();
             

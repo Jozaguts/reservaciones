@@ -186,6 +186,8 @@ $(document).ready(function () {
         let  hini =fd.substring(0, 8)
         let  hfin =fd.substring(10, 19)
         dataSet.hini = hini
+        // let idAct = $(tr)[0].children[0].value; 
+        // let idAct = $(tr)[0].children[0].value;
         dataSet.hfin = hfin
         let horarioId = $(tr).find('a').data('horarioid')
         dataSet.horario_id =horarioId
