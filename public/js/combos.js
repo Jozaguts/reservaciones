@@ -43,94 +43,92 @@ $(document).ready(function () {
     //cargarActiviad() pinta en pantalla la activiad
     let activiadesInsertadas =[];
   function cargarActividad(actividad){
-let horarios = actividad.infoactiviadhorario;
-   
-   if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
-for(let i=0; i<actividad.infoactivad.length; i++) {
-
-
-  let idActividad = actividad.infoactivad[i].id;
-  let duracion = actividad.infoactivad[i].duracion;
-      $('#bodyTable').append(`
-    <tr class="actividad-id">
-    <input type="hidden" name="idActividad${idActividad}" value="${idActividad}">
-    <td scope="row">${actividad.infoactivad[i].clave}</td>
-    <td>${actividad.infoactivad[i].nombre}</td>
-    <td class="precioFix">${actividad.infoactivad[i].precio}</td>
-    <td class="balanceFix">${actividad.infoactivad[i].balance}</td>
-    <td colspan="5"><div class="form-group">
-        <label for=""></label>
-        <select class="form-control select-info" name="select${actividad.infoactivad[i].id}" id="${actividad.infoactivad[i].id}">
-      
-        
-        </select>
-        <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}" name="">-</a>
-      </div> 
-    </td>
-  </tr>
-      `)
-      // esta funcion recive como parametros el id del select y los horarios
-
-      insertaOPtions(horarios,idActividad, duracion);
-      activiadesInsertadas.push(actividad.infoactivad[i].clave)
-      cambiaAMoneda("balanceFix")
-      cambiaAMoneda("precioFix")
-      $('#alerta').html('')
-  }
-   }else{
-    $('#alerta').addClass('text-danger ml-5')
-    $('#alerta').text('Solo Puedes Agregar una Vez Cada Actividad')
-    let a = document.createElement('a');
-    a.innerText= 'X';
-    a.setAttribute('href','#')
-    a.classList.add('close','ml-3')
-    $('#alerta').append(a);     
-   }
+      let horarios = actividad.infoactiviadhorario;
+          
+      if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
+          for(let i=0; i<actividad.infoactivad.length; i++) {
+              let idActividad = actividad.infoactivad[i].id;
+              let duracion = actividad.infoactivad[i].duracion;
+                  $('#bodyTable').append(`
+                <tr class="actividad-id">
+                <input type="hidden" name="idActividad${idActividad}" value="${idActividad}">
+                <td scope="row">${actividad.infoactivad[i].clave}</td>
+                <td>${actividad.infoactivad[i].nombre}</td>
+                <td class="precioFix">${actividad.infoactivad[i].precio}</td>
+                <td class="balanceFix">${actividad.infoactivad[i].balance}</td>
+                <td colspan="5"><div class="form-group">
+                    <label for=""></label>
+                    <select class="form-control select-info" name="select${actividad.infoactivad[i].id}" id="${actividad.infoactivad[i].id}">
+                  
+                    
+                    </select>
+                    <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}" name="">-</a>
+                  </div> 
+                </td>
+              </tr>
+                  `)
+                  // esta funcion recive como parametros el id del select y los horarios
+            
+                  insertaOPtions(horarios,idActividad, duracion);
+                  activiadesInsertadas.push(actividad.infoactivad[i].clave)
+                  cambiaAMoneda("balanceFix")
+                  cambiaAMoneda("precioFix")
+                  $('#alerta').html('')
+              }
+          }else{
+            $('#alerta').addClass('text-danger ml-5')
+            $('#alerta').text('Solo Puedes Agregar una Vez Cada Actividad')
+            let a = document.createElement('a');
+            a.innerText= 'X';
+            a.setAttribute('href','#')
+            a.classList.add('close','ml-3')
+            $('#alerta').append(a);     
+          }
 
 
 
  
     
   }
+      
   // funcion para insertear opciones en cada select
   function insertaOPtions(infoactiviadeshorarios, idselect, duracion) {
    
-     let select = document.querySelector(`select[name=select${idselect}]`)
-     for(let i = 0; i<infoactiviadeshorarios.length; i++) {
-      let resultado ,hiniHorario,hfinHorario;
- 
-      
-      if(infoactiviadeshorarios[i].libre==1) {
-   
-         hiniHorario  = timeStringToFloat(infoactiviadeshorarios[i].hini)
-         hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
-        resultado = hfinHorario - hiniHorario;
-      }else if (infoactiviadeshorarios[i].libre==0){
-        if(infoactiviadeshorarios[i].actividades_id == idselect) {
-          let option = document.createElement("option")
-          option.innerHTML =infoactiviadeshorarios[i].horario;
-          select.appendChild(option)
-        select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
-        }
-      }
-        if(infoactiviadeshorarios[i].actividades_id == idselect) {
-
-          for (let j = 0; j < resultado; j++) {
-            let paste = infoactiviadeshorarios[i].horario.substring(10, infoactiviadeshorarios[i].horario.length);
+    let select = document.querySelector(`select[name=select${idselect}]`)
+    for(let i = 0; i<infoactiviadeshorarios.length; i++) {
+        let resultado ,hiniHorario,hfinHorario;
+    
+        if(infoactiviadeshorarios[i].libre==1) {    
+            hiniHorario  = timeStringToFloat(infoactiviadeshorarios[i].hini)
+            hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
+            resultado = hfinHorario - hiniHorario;
+        }else if (infoactiviadeshorarios[i].libre==0){
+          console.log(infoactiviadeshorarios[i]);
+          if(infoactiviadeshorarios[i].actividades_id == idselect) {
             let option = document.createElement("option")
-            option.innerHTML =`${hiniHorario+j}:00:00 |${paste}`;
-            option.setAttribute('data-hora',hiniHorario+j)
+            option.innerHTML =infoactiviadeshorarios[i].horario;
             select.appendChild(option)
-            select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
+          select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
           }
-      
-      }else{ 
-        $('#myTab').text('no se puuede')
-      }
-     
-     }
-     
+        }
+          if(infoactiviadeshorarios[i].actividades_id == idselect) {    
+            for (let j = 0; j < resultado; j++) {
+              // let paste = infoactiviadeshorarios[i].horario.substring(10, infoactiviadeshorarios[i].horario.length);
+              let paste = `${hiniHorario+j+duracion}:00` + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
+              let option = document.createElement("option")
+              option.innerHTML =`${hiniHorario+j}:00:00 |${paste}`;
+              option.setAttribute('data-hora',hiniHorario+j)
+              select.appendChild(option)
+              select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
+            }
+        
+        }else{ 
+          $('#myTab').text('no se puuede')
+        }
+    
     }
+    
+   }
   
 
 // elimniar fila en el mini crud
@@ -185,13 +183,14 @@ document.addEventListener('click',function(e){
       let fd = $(tr).find('select').val()
       let  hini =fd.substring(0, 8)
       let  hfin =fd.substring(10, 19)
+      let idAct = $(tr)[0].children[0].value;
       dataSet.hini = hini
       // let idAct = $(tr)[0].children[0].value; 
       // let idAct = $(tr)[0].children[0].value;
       dataSet.hfin = hfin
       let horarioId = $(tr).find('a').data('horarioid')
       dataSet.horario_id =horarioId
-      dataSet.actividades_id =data.idActividad
+      dataSet.actividades_id = idAct; 
       arrayDataSet.push(dataSet)
     })
     data.dataSet=arrayDataSet;

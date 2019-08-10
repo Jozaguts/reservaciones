@@ -41,7 +41,7 @@
 
                                       
                                             @foreach ($actividades as $actividad)
-                                          
+                                   
                                             @if( $actividad->tipoactividades_id == $tipoactividad->id && $actividad->combo ==1 )
                                      
                                             
