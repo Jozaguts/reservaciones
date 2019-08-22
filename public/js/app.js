@@ -36668,6 +36668,17 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/sass/asignaciones.scss":
+/*!******************************************!*\
+  !*** ./resources/sass/asignaciones.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\nError: ENOENT: no such file or directory, open 'C:\\laragon\\www\\reservaciones\\resources\\sass\\asignaciones.scss'\n    at runLoaders (C:\\laragon\\www\\reservaciones\\node_modules\\webpack\\lib\\NormalModule.js:301:20)\n    at C:\\laragon\\www\\reservaciones\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\laragon\\www\\reservaciones\\node_modules\\loader-runner\\lib\\LoaderRunner.js:203:19\n    at process.nextTick (C:\\laragon\\www\\reservaciones\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:73:15)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
+
+/***/ }),
+
 /***/ "./resources/sass/combos.scss":
 /*!************************************!*\
   !*** ./resources/sass/combos.scss ***!
@@ -36746,9 +36757,9 @@ if (token) {
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/users.scss ./resources/sass/hamburger-menu.scss ./resources/sass/login-resposive.scss ./resources/sass/tipoequipounidad.scss ./resources/sass/equiposyunidades.scss ./resources/sass/tipoactividades.scss ./resources/sass/activities.scss ./resources/sass/combos.scss ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/users.scss ./resources/sass/hamburger-menu.scss ./resources/sass/login-resposive.scss ./resources/sass/tipoequipounidad.scss ./resources/sass/equiposyunidades.scss ./resources/sass/tipoactividades.scss ./resources/sass/activities.scss ./resources/sass/combos.scss ./resources/sass/asignaciones.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36761,7 +36772,8 @@ __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\tipoequipoun
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\equiposyunidades.scss */"./resources/sass/equiposyunidades.scss");
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\tipoactividades.scss */"./resources/sass/tipoactividades.scss");
 __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\activities.scss */"./resources/sass/activities.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\combos.scss */"./resources/sass/combos.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\combos.scss */"./resources/sass/combos.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\asignaciones.scss */"./resources/sass/asignaciones.scss");
 
 
 /***/ })
