@@ -20,7 +20,7 @@
 
 .grid-contanier {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 20vw 80vw;
 }
 
 .btn-edit {

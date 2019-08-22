@@ -22,6 +22,7 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/tipoactividades.scss', 'public/css')
    .sass('resources/sass/activities.scss', 'public/css')
    .sass('resources/sass/combos.scss', 'public/css')
+   .sass('resources/sass/asignaciones.scss', 'public/css')
 
    mix.browserSync({
       proxy:'reservaciones-dev.com'
@@ -54,6 +55,22 @@ mix.js('resources/js/app.js', 'public/js')
       mix.scripts([
       'resources/js/test.js'],
          'public/js/test.js');
+      mix.scripts([
+         'resources/js/combos.js'],
+         'public/js/combos.js');
          mix.scripts([
-            'resources/js/combos.js'],
-               'public/js/combos.js');
+         'resources/js/datatables.js'],
+         'public/js/datatables.js');
+         mix.scripts([
+         'resources/js/dataTables.bootstrap4.min.js'],
+         'public/js/dataTables.bootstrap4.min.js');
+
+         // Css simplecss/
+         mix.styles([
+    'resources/sass/datatables.css'
+], 'public/css/datatables.css');
+
+
+mix.styles([
+   'resources/sass/dataTables.bootstrap4.min.css'
+], 'public/css/dataTables.bootstrap4.min.css');
