@@ -24,8 +24,10 @@
             <li class="hm-list__item actividades" id="actLink" ><span class="hb-icon activity"></span>Actividades</li>
         </a>
         <ul class="sub-ul d-none" id="subUlAct">
+        <a href="{{url('actividades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Actividades</li></a>
+        <a href="{{url('asignaciones')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Asignaciones</li></a>
             <a href="{{url ('tipoactividades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Tipo de Actividades</li></a>
-            <a href="{{url('actividades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Actividades</li></a>
+            
              <a href="{{url ('tipounidades')}}" class="sub-li__link"><li class="sub-ul__item sub-li-actividadaes">Tipo de Equipos y Unidades</li></a>
            <a href="{{url ('unidades')}}" class="sub-li__link"> <li class="sub-ul__item sub-li-actividadaes">Equipos y Unidades</li></a>
            <a href="{{url ('combos')}}" class="sub-li__link"> <li class="sub-ul__item sub-li-actividadaes">Combos</li></a>

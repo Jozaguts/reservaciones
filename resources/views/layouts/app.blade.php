@@ -8,6 +8,7 @@
     <title>@yield('title') {{ config('app.name', 'Demo') }}</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     @yield('css')
 
 </head>
@@ -33,6 +34,7 @@
     </main>
     </div>
     <!-- Scripts -->
+   
     <script src="{{ asset('js/app.js') }}" ></script>
     @yield('scripts')
     

@@ -9,6 +9,7 @@
     "/css/tipoactividades.css": "/css/tipoactividades.css",
     "/css/activities.css": "/css/activities.css",
     "/css/combos.css": "/css/combos.css",
+    "/css/asignaciones.css": "/css/asignaciones.css",
     "/js/all.js": "/js/all.js",
     "/js/admin.js": "/js/admin.js",
     "/js/reservations.js": "/js/reservations.js",
@@ -18,5 +19,9 @@
     "/js/tipoactividades.js": "/js/tipoactividades.js",
     "/js/activities.js": "/js/activities.js",
     "/js/test.js": "/js/test.js",
-    "/js/combos.js": "/js/combos.js"
+    "/js/combos.js": "/js/combos.js",
+    "/js/datatables.js": "/js/datatables.js",
+    "/js/dataTables.bootstrap4.min.js": "/js/dataTables.bootstrap4.min.js",
+    "/css/datatables.css": "/css/datatables.css",
+    "/css/dataTables.bootstrap4.min.css": "/css/dataTables.bootstrap4.min.css"
 }

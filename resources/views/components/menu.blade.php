@@ -6,8 +6,10 @@
         <div class="grid-item" >
             <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnAct">Actividades
                     <ul class="ul-content" id="ulAct">
-                            <a href="{{url ('tipoactividades')}}" class="ul-link"><li class="list__item li-actividadaes">Tipo de Actividades</li></a>
+                            
                             <a href="{{url ('actividades')}}" class="ul-link"><li class="list__item li-actividadaes">Actividades</li></a>
+                            <a href="{{url ('asignaciones')}}" class="ul-link"><li class="list__item li-actividadaes">Asignaciones</li></a>
+                            <a href="{{url ('tipoactividades')}}" class="ul-link"><li class="list__item li-actividadaes">Tipo de Actividades</li></a>
                             <a href="{{url ('tipounidades')}}" class="ul-link"> <li class="list__item li-actividadaes">Tipo de Equipos y Unidades</li></a>
                             <a href="{{url ('unidades')}}" class="ul-link"><li class="list__item li-actividadaes">Equipos y Unidades</li></a>
                             <a href="{{url ('combos')}}" class="sub-li__link"> <li class="list__item li-actividadaes">Combos</li></a>
