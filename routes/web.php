@@ -60,6 +60,11 @@ Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->mid
 
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
 
+// Route::get('asignaciones',function(){
+//     return view('sections.activities.asignaciones');
+// });
+// Route::get('asignaciones' , 'AsignacionesController@index')->middleware(['auth']);
+// Route::get('asignaciones-get' , 'AsignacionesController@getAsignaciones');
+Route::resource('asignaciones' , 'AsignacionesController')->middleware(['auth']);
 
-Route::get('asignaciones' , 'AsignacionesController@index')->middleware(['auth']);
-
+Route::get('asignaciones-get','AsignacionesController@getAsignaciones');

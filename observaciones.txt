@@ -1,8 +1,0 @@
-REgistro 
-    etiquetas
-        nombre cambiar a Nombre de usuario, small tag (Email) input Email
-        Apellido cambiarlo a: Nombre input text
-        Perfil se se queda
-        departameto se queda
-        email se va
-        

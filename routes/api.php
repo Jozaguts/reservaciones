@@ -12,3 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+ Route::get('asignaciones',function(){
+    return datatables()
+    ->eloquent(App\EquiposYUnidades::query())
+    >toJson();
+});
