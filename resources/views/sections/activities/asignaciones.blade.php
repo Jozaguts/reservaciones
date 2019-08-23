@@ -31,29 +31,33 @@
 <script src="{{ asset('js/datatables.js') }}" ></script> 
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}" ></script> 
 {{-- <script src="{{ asset('js/test.js') }}" defer></script> --}}
-
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
-
 <script>
-$(document).ready(function() {
+ 
+    
+
+
+
+ function getdataDataTables() {
     $('#asignaciones').DataTable({
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ Resultados",
-            "sSearch": "Buscar:",
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Página _PAGE_ de _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        }
-        
+        processing: true,
+        serverSide: false,
+        pageLength: 20,
+        ajax: '{!! url('asignaciones-get') !!}',
+        columns: [
+            { data: 'clave', name: 'clave' },
+            { data: 'capacidad', name: 'capacidad' },
+            { data: 'capacidad', name: 'capacidad' },
+            { data: 'active', name: 'activo' },
+            { data: null,  render: function ( data, type, row ) {
+                return "<a href='{{ url('asignaciones.show') }}/"+ data.id +"' class='btn btn-xs btn-primary' >Editar  <a href='{{ url('asignaciones.delete/') }}/"+ data.id +"' class='btn btn-xs btn-danger ml-1' >Eliminar </button>" }  
+            }
+
+        ]
     });
-} );
+}
+getdataDataTables();
+
 </script>
 
 
