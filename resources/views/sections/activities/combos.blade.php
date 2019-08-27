@@ -13,9 +13,11 @@
 {{-- Contenido --}}
 
 @section('content')
-{{-- comienza el contenido --}}
+{{-- contenedor GRID 20vw 80vw --}}
 <div class="container-fluid grid-contanier">
+    {{-- menu desplegable --}}
     @include('components.hamburger-menu')
+    {{-- contenido principal --}}
     @include('contents.activities.combos')        
 </div>
 

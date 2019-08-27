@@ -15,14 +15,13 @@
 {{-- Contenido --}}
 
 @section('content')
-{{-- comienza el contenido --}}
+{{-- comienza el contenedor grid 20 x 80 vw --}}
 <div class="container-fluid grid-contanier">
     @include('components.hamburger-menu')
-    @include('contents.activities.asignaciones')       
+    @include('contents.activities.asignaciones')    
+    @include('modals.activities.asignaciones')       
 </div>
-
-
-{{-- finaliza el contenido --}}
+{{-- finaliza el contenedor grid --}}
 @endsection
 
 @section('scripts')
@@ -30,7 +29,7 @@
 
 <script src="{{ asset('js/datatables.js') }}" ></script> 
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}" ></script> 
-{{-- <script src="{{ asset('js/test.js') }}" defer></script> --}}
+<script src="{{ asset('js/asignaciones.js') }}" defer></script>
 <script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
 <script>
  
@@ -45,12 +44,13 @@
         pageLength: 20,
         ajax: '{!! url('asignaciones-get') !!}',
         columns: [
-            { data: 'id', name: 'id' },
             { data: 'clave', name: 'clave' },
+            { data: 'descripcion', name: 'descripcion' },
+            { data: 'capacidad', name: 'capacidad' },
             { data: 'capacidad', name: 'capacidad' },
             { data: 'active', name: 'activo' },
             { data: null,  render: function ( data, type, row ) {
-                return "<a href='{{ url('asignaciones.show') }}/"+ data.id +"' class='btn btn-xs btn-primary' >Editar  <a href='{{ url('asignaciones.delete/') }}/"+ data.id +"' class='btn btn-xs btn-danger ml-1' >Eliminar </button>" }  
+                return "<a href='{{ url('asignaciones.show') }}/"+ data.id +"' class='btn btn-xs btn-primary'data-unidadid="+ data.id +" onclick='asignacionesInfo(this);'  data-toggle='modal' data-target='.modal'>Asignaciones </button>" }  
             }
 
         ]

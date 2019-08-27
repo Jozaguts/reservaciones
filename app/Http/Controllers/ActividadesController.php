@@ -225,9 +225,10 @@ class ActividadesController extends Controller
                             return response()->json(['error'=> 'true','errors'=> $message]);
                         }else{
                                 //si al menos hay uno chekeado guardo en DB
-
+                                // dd($request->ArrayHini);
+                            dd($request->ArrayHrFin,$request->ArrayDeDIas);
                                 $count2 = count($request->ArrayDeDIas);      
-                            for ($i=0; $i <$count2 ; $i++) {                                         
+                            for ($i=0; $i <$count2 ; $i++) {                                       
                                 $ActividadesHorario = ActividadesHorario::create(
                                     [
                                     'actividades_id' => $actividad->id,
