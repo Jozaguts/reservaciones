@@ -64,6 +64,9 @@ mix.js('resources/js/app.js', 'public/js')
          mix.scripts([
          'resources/js/dataTables.bootstrap4.min.js'],
          'public/js/dataTables.bootstrap4.min.js');
+         mix.scripts([
+            'resources/js/asignaciones.js'],
+            'public/js/asignaciones.js');
 
          // Css simplecss/
          mix.styles([

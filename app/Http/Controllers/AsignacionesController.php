@@ -21,7 +21,7 @@ class AsignacionesController extends Controller
    public function getAsignaciones(Request $request){
 
       // $unidades = EquiposYUnidades::select(['id','clave','active','capacidad']);
-      return Datatables::of( EquiposYUnidades::select(['id','clave','active','capacidad']))
+      return Datatables::of( EquiposYUnidades::select(['id','descripcion','clave','active','capacidad']))
       ->make(true);
 
    }

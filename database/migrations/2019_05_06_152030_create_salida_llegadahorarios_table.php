@@ -17,6 +17,7 @@ class CreateSalidaLlegadahorariosTable extends Migration
             $table->increments('id');
             $table->time('hora')->nullable();
             $table->boolean('salida');//se agrego este campo
+
             $table->boolean('active');
             $table->boolean('remove');                   
 
