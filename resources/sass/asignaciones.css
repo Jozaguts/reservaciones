@@ -1,4 +1,18 @@
 .container-asiginaciones {
   position: relative;
-  left: 20vw;
+  left: 1vw;
+  width: 95%;
+  padding: 1rem;
+}
+.modal-xl {
+  max-width: 1100px;
+}
+tr > td {
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+.btn-danger {
+  float: right;
 }
