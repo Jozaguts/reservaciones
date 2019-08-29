@@ -51,8 +51,6 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-        
-       
             //reglas de validacion
              $rules =[
                 'clave' => ['required', 'string', 'min:5','unique:actividades'],
@@ -80,8 +78,7 @@ class ActividadesController extends Controller
                 'puntos' =>['nullable','integer'],
                 'libre'=> ['boolean'],
                 'salidas'=>['integer', 'nullable'],
-                'llegadas'=>['integer','nullable'] 
-               
+                'llegadas'=>['integer','nullable']                
             ];
        
 
@@ -172,11 +169,12 @@ class ActividadesController extends Controller
                        return response()->json(['error'=> 'true','errors'=> $message]);
                    
                     }
+                    
                     // inserta ActividadesHorario                                    
                     $ActividadesHorario = ActividadesHorario::firstOrCreate(
                         ['actividades_id' => $actividad->id],                        
                         [
-                            'hini' => $request->hiniHorarioLibre,
+                            'hini' => $request->datosarray[$i][0]['hini'],
                             'hfin' => $request->hfinHorarioLibre,
                             'l'=> $request->diasSeleccionados[0]['activado'],
                             'm'=> $request->diasSeleccionados[1]['activado'],
@@ -186,7 +184,7 @@ class ActividadesController extends Controller
                             's'=> $request->diasSeleccionados[5]['activado'],
                             'd'=> $request->diasSeleccionados[6]['activado'],
                             'active'=> 1,
-                            'remove'=>0,
+                            'remove'=> 0,
                             'usuarios_id'=> $request->get('idusuario'),
                             'libre'=> $request->get('libre')                         
                         ]
@@ -220,67 +218,114 @@ class ActividadesController extends Controller
                          return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 'status' => 200]);                                                     
                 }else{
                     if($request->libre == 0){ //valido si no hay checkeados mando el aviso
-                        if (count($request->ArrayDeDIas) == 0) {
+                        if (count($request->datosarray) == 0) {
                             $message ='Al Menos Debes de Crear o Seleccionar un Horario';
                             return response()->json(['error'=> 'true','errors'=> $message]);
                         }else{
-                                //si al menos hay uno chekeado guardo en DB
-                                // dd($request->ArrayHini);
-                            dd($request->ArrayHrFin,$request->ArrayDeDIas);
-                                $count2 = count($request->ArrayDeDIas);      
-                            for ($i=0; $i <$count2 ; $i++) {                                       
-                                $ActividadesHorario = ActividadesHorario::create(
-                                    [
-                                    'actividades_id' => $actividad->id,
-                                    'hini' => $request->ArrayHini[$i][0],
-                                    'hfin' => $request->ArrayHrFin[$i][0],
-                                    'l'=> $request->ArrayDeDIas[$i][0],
-                                    'm'=> $request->ArrayDeDIas[$i][1],
-                                    'x'=> $request->ArrayDeDIas[$i][2],
-                                    'j'=> $request->ArrayDeDIas[$i][3],
-                                    'v'=> $request->ArrayDeDIas[$i][4],
-                                    's'=> $request->ArrayDeDIas[$i][5],
-                                    'd'=> $request->ArrayDeDIas[$i][6],
-                                    'active'=> 1,
-                                    'remove'=>0,
-                                    'usuarios_id'=> $request->get('idusuario')                            
-                                    ]
-                                );
-                                //  entran los puntos de llegada
-                                $cont2= count($request->arrayHorasLlegada[$i]);
-                                for ($j=0; $j < $cont2; $j++) {  
-                                    $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::create(
-                                        ['actividadeshorario_id' => $ActividadesHorario->id,
-                                        'salidallegadas_id' => $request->arrayPuntosLlegada[$i][$j],
-                                        'salida' =>0  , 
-                                        'hora' =>$request->arrayHorasLlegada[$i][$j],
-                                        // 'salida' =>1,
-                                        'active' =>1,
-                                        'remove' =>0,                        
-                                        'usuarios_id' => $request->get('idusuario'),
+                                //si al menos hay uno chekeado guardo en DB                            
+                                for ($i=0; $i<count($request->datosarray); $i++) { 
+                                    $ActividadesHorario = ActividadesHorario::create(                                               
+                                        [
+                                        'actividades_id' => $actividad->id,
+                                        'hini' => $request->datosarray[$i][0]['hini'],
+                                        'hfin' => $request->datosarray[$i][0]['hfin'],
+                                        'l'=> $request->datosarray[$i][0]['dia']['l'],
+                                        'm'=> $request->datosarray[$i][0]['dia']['m'],
+                                        'x'=> $request->datosarray[$i][0]['dia']['x'],
+                                        'j'=> $request->datosarray[$i][0]['dia']['j'],
+                                        'v'=> $request->datosarray[$i][0]['dia']['v'],
+                                        's'=> $request->datosarray[$i][0]['dia']['s'],
+                                        'd'=> $request->datosarray[$i][0]['dia']['d'],
+                                        'libre'=>0,
+                                        'active'=> 1,
+                                        'remove'=>0,
+                                        'usuarios_id'=> $request->get('idusuario')                            
                                         ]
-                                    
                                     );
+                                    $ActividadesHorario->save(); 
                                     
+                                    // salidas
+                                    for ($s=0; $s < count($request->datosarray[$i][0]['sal']); $s++) {                                         
+                                        $salidas = SalidasLlegadasHorario::create(
+                                        [
+                                            'hora'=> $request->datosarray[$i][0]['sal'][$s]['hor'],
+                                            'salida'=> 1,
+                                            'salidallegadas_id' => $request->datosarray[$i][0]['sal'][$s]['s'],
+                                            'actividadeshorario_id' => $ActividadesHorario->id,
+                                            'usuarios_id'=> $request->get('idusuario'),
+                                            'active'=>1,
+                                            'remove'=>0
+                                        ]);
+                                        $salidas->save();                                        
+                                    }
+                                    //llegadas
+                                    for ($l=0; $l < count($request->datosarray[$i][0]['lle']); $l++) {                                             
+                                        $llegadas = SalidasLlegadasHorario::create(
+                                            [
+                                                'hora'=> $request->datosarray[$i][0]['lle'][$l]['hor'],
+                                                'salida'=> 0,
+                                                'salidallegadas_id' => $request->datosarray[$i][0]['lle'][$l]['l'],
+                                                'actividadeshorario_id' => $ActividadesHorario->id,
+                                                'usuarios_id'=> $request->get('idusuario'),
+                                                'active'=>1,
+                                                'remove'=>0
+                                            ]);
+                                            $salidas->save();                                            
+                                    }                                                                         
                                 }
+                            // for ($i=0; $i <$count2 ; $i++) {                                         
+                            //     $ActividadesHorario = ActividadesHorario::create(
+                            //         [
+                            //         'actividades_id' => $actividad->id,
+                            //         'hini' => $request->ArrayHini[$i][0],
+                            //         'hfin' => $request->ArrayHrFin[$i][0],
+                            //         'l'=> $request->ArrayDeDIas[$i][0],
+                            //         'm'=> $request->ArrayDeDIas[$i][1],
+                            //         'x'=> $request->ArrayDeDIas[$i][2],
+                            //         'j'=> $request->ArrayDeDIas[$i][3],
+                            //         'v'=> $request->ArrayDeDIas[$i][4],
+                            //         's'=> $request->ArrayDeDIas[$i][5],
+                            //         'd'=> $request->ArrayDeDIas[$i][6],
+                            //         'active'=> 1,
+                            //         'remove'=>0,
+                            //         'usuarios_id'=> $request->get('idusuario')                            
+                            //         ]
+                            //     );
+                            //     //  entran los puntos de llegada
+                            //     $cont2= count($request->arrayHorasLlegada[$i]);
+                            //     for ($j=0; $j < $cont2; $j++) {  
+                            //         $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::create(
+                            //             ['actividadeshorario_id' => $ActividadesHorario->id,
+                            //             'salidallegadas_id' => $request->arrayPuntosLlegada[$i][$j],
+                            //             'salida' =>0  , 
+                            //             'hora' =>$request->arrayHorasLlegada[$i][$j],
+                            //             // 'salida' =>1,
+                            //             'active' =>1,
+                            //             'remove' =>0,                        
+                            //             'usuarios_id' => $request->get('idusuario'),
+                            //             ]
+                                    
+                            //         );
+                                    
+                            //     }
 
-                                // entran los puntos de salida
-                                $cont2= count($request->arrayHorasSalida[$i]);
-                                for ($j=0; $j <$cont2; $j++) { 
-                                    $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
-                                        ['actividadeshorario_id' => $ActividadesHorario->id,
-                                        'salidallegadas_id' => $request->arrayPuntosSalida[$i][$j],
-                                        'salida'=>1, 
-                                        'hora' =>$request->arrayHorasSalida[$i][$j],
-                                        // 'salida' =>0,
-                                        'active' =>1,
-                                        'remove' =>0,                        
-                                        'usuarios_id' => $request->get('idusuario'),
-                                        ]
+                            //     // entran los puntos de salida
+                            //     $cont2= count($request->arrayHorasSalida[$i]);
+                            //     for ($j=0; $j <$cont2; $j++) { 
+                            //         $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::create(
+                            //             ['actividadeshorario_id' => $ActividadesHorario->id,
+                            //             'salidallegadas_id' => $request->arrayPuntosSalida[$i][$j],
+                            //             'salida'=>1, 
+                            //             'hora' =>$request->arrayHorasSalida[$i][$j],
+                            //             // 'salida' =>0,
+                            //             'active' =>1,
+                            //             'remove' =>0,                        
+                            //             'usuarios_id' => $request->get('idusuario'),
+                            //             ]
                                     
-                                    );
-                                }
-                            }
+                            //         );
+                            //     }
+                            // }
                             return response()->json(['ok'=>'Actividad Agregada Correctamente']);
                         }                            
                     }
