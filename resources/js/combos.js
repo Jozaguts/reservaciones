@@ -113,10 +113,11 @@ $(document).ready(function () {
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {    
             for (let j = 0; j < resultado; j++) {
-              // let paste = infoactiviadeshorarios[i].horario.substring(10, infoactiviadeshorarios[i].horario.length);
               let paste = `${hiniHorario+j+duracion}:00` + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
+              
               let option = document.createElement("option")
-              option.innerHTML =`${hiniHorario+j}:00:00 |${paste}`;
+              let hi = `${hiniHorario+j}:00`.padStart(5,"0");
+              option.innerHTML =`${hi}|${paste}`;
               option.setAttribute('data-hora',hiniHorario+j)
               select.appendChild(option)
               select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
