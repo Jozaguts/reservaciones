@@ -367,7 +367,7 @@ class ActividadesController extends Controller
         $act = DB::table('actividades as ac')
         ->Join('tipoactividades as ta', 'ac.tipoactividades_id', '=', 'ta.id')
         ->Join('anticipos as an', 'ac.anticipo_id', '=', 'an.id')
-        ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre')
+        ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre', 'ac.libre')
        ->Where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
        ->get();
 
@@ -566,8 +566,9 @@ class ActividadesController extends Controller
                 // $actividadPrecio->save();
             }                 
 
-           
+            // dd($request->libre);
             if($request->libre == 1){ //SI LIBRE ESTA CHECKEADO  ### SI SON HORARIOS ABIERTOS ###
+                
                 $count = count($request->diasSeleccionados);
                 if($request->duracion == null){
                     $message ='El Campo Duración Debe Contener Información';
@@ -577,7 +578,7 @@ class ActividadesController extends Controller
                     $message ='Al Menos Debes de Seleccionar 1 Dia Fijo';
                    return response()->json(['error'=> 'true','errors'=> $message]);               
                 }
-                // inserta ActividadesHorario                                    
+                // inserta ActividadesHorario                                                    
                 $ActividadesHorario = ActividadesHorario::updateOrCreate(
                     ['actividades_id' => $request->get('actividadid'), 'id'=>$request->get('horarioLibreId')],                        
                     [
@@ -596,38 +597,39 @@ class ActividadesController extends Controller
                         'libre'=> $request->get('libre')                          
                     ]
                 );
-                $ActividadesHorario->save();
-                // dd($request->salidaId);
+                $ActividadesHorario->save(); 
                 // salidas
+              
                 $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::updateOrCreate(
-                    ['id' => $request->get('salidaId') ], 
+                    ['id' => $request->salidaId ], 
                     ['hora' =>null,
                     'salida' =>1,
                     'active' =>1,
                     'remove' =>0,
                     'salidallegadas_id'=>$request->salidas,                        
+                    'actividadeshorario_id'=>$ActividadesHorario->id,
                     'usuarios_id' => $request->get('idusuario'),
                     ]
                 
-                );
+                );                
                 // llegadas
                 $SalidasLlegadasHorarioSALIDA->save();
                 $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::updateOrCreate(
-                    ['id' => $request->get('llegadaId')], 
+                    ['id' => $request->llegadaId], 
                     ['hora' =>null,
                     'salida' =>0,
                     'active' =>1,
                     'remove' =>0,
-                    'salidasllegadas_id'=>$request->llegadas,                        
+                    'salidallegadas_id'=>$request->llegadas,
+                    'actividadeshorario_id'=>$ActividadesHorario->id,                        
                     'usuarios_id' => $request->get('idusuario'),
-                    ]
-                
+                    ]                
                 );
                 $SalidasLlegadasHorarioLLEGADA->save();
+
                      return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 'status' => 200]);                                                     
             }else{
                 if($request->libre == 0){ //valido si no hay checkeados mando el aviso
-                    dd($request->ArrayDeDIas,$request->datosarray);
                     if (count($request->ArrayDeDIas) == 0) {
                         $message ='Al Menos Debes de Crear o Seleccionar un Horario';
                         return response()->json(['error'=> 'true','errors'=> $message]);
@@ -755,84 +757,6 @@ class ActividadesController extends Controller
 
                                 }
                             }
-
-
-                        //     $count2 = count($request->ArrayDeDIas);    
-                            
-                        // for ($i=0; $i <$count2 ; $i++) { 
-                        //         if(intval($request->ArrayDeDIas[count($request->ArrayDeDIas)-1][$i][0]) > 0  ){
-                        //             $ActividadesHorario = ActividadesHorario::where('id', $request->ArrayDeDIas[count($request->ArrayDeDIas)-1][$i][0])
-                        //             ->update([
-                        //                 'actividades_id' => $request->get('actividadid'),
-                        //                 'hini' => $request->ArrayHini[$i][0],
-                        //                 'hfin' => $request->ArrayHrFin[$i][0],
-                        //                 'l'=> $request->ArrayDeDIas[$i][0],
-                        //                 'm'=> $request->ArrayDeDIas[$i][1],
-                        //                 'x'=> $request->ArrayDeDIas[$i][2],
-                        //                 'j'=> $request->ArrayDeDIas[$i][3],
-                        //                 'v'=> $request->ArrayDeDIas[$i][4],
-                        //                 's'=> $request->ArrayDeDIas[$i][5],
-                        //                 'd'=> $request->ArrayDeDIas[$i][6],
-                        //                 'usuarios_id'=> $request->get('idusuario')                            
-                        //                 ]
-                        //             );
-                        //         }else{
-                        //             // inserta ActividadesHorario    
-                                                             
-                        //             $ActividadesHorario = ActividadesHorario::create(                                               
-                        //                 ['actividades_id' => $request->get('actividadid'),
-                        //                     'hini' => $request->ArrayHini[$i][0],
-                        //                     'hfin' =>  $request->ArrayHrFin[$i][0],
-                        //                     'l'=> $request->ArrayDeDIas[$i][0],
-                        //                     'm'=> $request->ArrayDeDIas[$i][1],
-                        //                     'x'=> $request->ArrayDeDIas[$i][2],
-                        //                     'j'=> $request->ArrayDeDIas[$i][3],
-                        //                     'v'=> $request->ArrayDeDIas[$i][4],
-                        //                     's'=> $request->ArrayDeDIas[$i][5],
-                        //                     'd'=> $request->ArrayDeDIas[$i][6],
-                        //                     'active'=> 1,
-                        //                     'remove'=>0,
-                        //                     'usuarios_id'=> $request->get('idusuario')                            
-                        //                 ]
-                        //             );
-                        //             $ActividadesHorario->save();
-
-                        //         }  
-                        //     //  entran los puntos de llegada
-                        //     // $cont2= count($request->arrayHorasLlegada[$i]);
-                        //     // for ($j=0; $j < $cont2; $j++) {  
-                        //     //     $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::updateOrCreate(
-                        //     //         ['actividadeshorario_id' => $ActividadesHorario->id,
-                        //     //         'salidallegadas_id' => $request->arrayPuntosLlegada[$i][$j],
-                        //     //         'salida' =>0  , 
-                        //     //         'hora' =>$request->arrayHorasLlegada[$i][$j],
-                        //     //         // 'salida' =>1,
-                        //     //         'active' =>1,
-                        //     //         'remove' =>0,                        
-                        //     //         'usuarios_id' => $request->get('idusuario'),
-                        //     //         ]
-                                
-                        //     //     );
-                                
-                        //     // }
-
-                        //     // entran los puntos de salida
-                        //     // $cont2= count($request->arrayHorasSalida[$i]);
-                        //     // for ($j=0; $j <$cont2; $j++) { 
-                        //     //     $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::updateOrCreate(
-                        //     //         ['actividadeshorario_id' => $ActividadesHorario->id,
-                        //     //         'salidallegadas_id' => $request->arrayPuntosSalida[$i][$j],
-                        //     //         'salida'=>1, 
-                        //     //         'hora' =>$request->arrayHorasSalida[$i][$j],
-                        //     //         // 'salida' =>0,
-                        //     //         'active' =>1,
-                        //     //         'remove' =>0,                        
-                        //     //         'usuarios_id' => $request->get('idusuario'),
-                        //     //         ]
-                                
-                        //     //     );
-                        //     // }
-                        // }
                         return response()->json(['ok'=>'Actividad Agregada Correctamente']);
                     }                            
                 }
