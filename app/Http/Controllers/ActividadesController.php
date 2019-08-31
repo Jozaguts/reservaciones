@@ -170,11 +170,12 @@ class ActividadesController extends Controller
                    
                     }
                     
-                    // inserta ActividadesHorario                                    
+                    // inserta ActividadesHorario    
+                                                   
                     $ActividadesHorario = ActividadesHorario::firstOrCreate(
                         ['actividades_id' => $actividad->id],                        
                         [
-                            'hini' => $request->datosarray[$i][0]['hini'],
+                            'hini' => $request->hiniHorarioLibre,
                             'hfin' => $request->hfinHorarioLibre,
                             'l'=> $request->diasSeleccionados[0]['activado'],
                             'm'=> $request->diasSeleccionados[1]['activado'],
@@ -219,6 +220,7 @@ class ActividadesController extends Controller
                 }else{
                     if($request->libre == 0){ //valido si no hay checkeados mando el aviso
                         if (count($request->datosarray) == 0) {
+                            dd($request->ArrayDeDIas,$request->datosarray);
                             $message ='Al Menos Debes de Crear o Seleccionar un Horario';
                             return response()->json(['error'=> 'true','errors'=> $message]);
                         }else{
@@ -625,6 +627,7 @@ class ActividadesController extends Controller
                      return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 'status' => 200]);                                                     
             }else{
                 if($request->libre == 0){ //valido si no hay checkeados mando el aviso
+                    dd($request->ArrayDeDIas,$request->datosarray);
                     if (count($request->ArrayDeDIas) == 0) {
                         $message ='Al Menos Debes de Crear o Seleccionar un Horario';
                         return response()->json(['error'=> 'true','errors'=> $message]);
@@ -659,6 +662,7 @@ class ActividadesController extends Controller
                                                 ]);
                                             }
                                             else{
+                                                dd( $request->datosarray[$i][0]['id']);
                                                 $salidas = SalidasLlegadasHorario::create(
                                                 [
                                                     'hora'=> $request->datosarray[$i][0]['sal'][$s]['hor'],

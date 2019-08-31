@@ -388,6 +388,7 @@ function addHoraioContainer(){
   </div>
 
   `;
+  rowContanier.innerHTML = "";
   rowContanier.appendChild(container);
   /*SELECT SALIDAS
   *
@@ -1192,7 +1193,7 @@ function editarActividad(e){
     // let llegadasHMultiple = data.pestana3.llegadasHMultiple
     let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer'); //conteneder mini crud
 
-  
+      console.log(actividadesHorarioContainer.childNodes.length);
 
       let  inputsType = document.querySelectorAll('[type=text]')
 
@@ -1291,9 +1292,9 @@ function editarActividad(e){
       
 
      
- 
+      console.log(salidasHLibre);
        let salidainput = document.getElementById('salidas')
-       salidainput.options.selectedIndex = salidasHLibre[0][0].slid - 1;
+       salidainput.options.value = salidasHLibre[0][0].slid;
        salidainput.setAttribute('data-horarioid',salidasHLibre[0][0]['actividadeshorario_id'])
        salidainput.setAttribute('data-salidaId',salidasHLibre[0][0]['id'])
 
@@ -1589,6 +1590,7 @@ horarios.forEach(function(horario){
     </div>
   </div>
   `;
+  rowContanier.innerHTML = "";
   rowContanier.appendChild(container);
   }
 })
