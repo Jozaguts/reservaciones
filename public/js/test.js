@@ -1450,7 +1450,7 @@ let horarios = respuesta.actividadesHorario;
 let salidasHMultiple = respuesta.salidasHMultiple;
 let llegadasHMultiple = respuesta.llegadasHMultiple;
 
-horarios.forEach(function(horario){
+horarios.forEach(function(horario){/*  por cada horario registrado en la DB crea un  y se muestra un horario */
 
   if(horarioID == horario.id ){
    
@@ -1617,7 +1617,7 @@ llegadasHMultiple.forEach(function(llegada){
 function agregarSalidasHorarioMultiple(salida){
  
   let agreageSalidasHmultiple = document.getElementById('agreageSalidasHmultiple');
-
+  agreageSalidasHmultiple.innerHTML ="";
   agreageSalidasHmultiple.innerHTML +=`
         <div class="row">
           <div class="col-4">
@@ -1649,7 +1649,7 @@ function agregarSalidasHorarioMultiple(salida){
 // agregar llegas al horario multiple
 function agregarLlegadaHorarioMultiple(llegada){
   let agreagarLlegadasHmultiple = document.getElementById('agreageLlegadasHmultiple');
-  
+  agreagarLlegadasHmultiple.innerHTML ="";
   agreagarLlegadasHmultiple.innerHTML +=`
         <div class="row">
           <div class="col-4">
@@ -1680,48 +1680,41 @@ function agregarLlegadaHorarioMultiple(llegada){
 
 
   function rellenarSelect(){
+    /* 
+    *Tomo todos los select que tengan la clase .select-multiple__salidas
+    */
     let selectHmultipleSalidas = document.querySelectorAll('.select-multiple__salidas');
 
+/* por cada salida registrada el la BD creo un option y lo inserto dentro del select */
     for (let i = 0; i < salidasyllegadas.length; i++) {
       let option = document.createElement('option');
       option.value = salidasyllegadas[i].id
-      option.innerHTML =salidasyllegadas[i].nombre;
-    
-      selectHmultipleSalidas.forEach(function(select){
+      option.innerHTML = salidasyllegadas[i].nombre;
 
-        // for (let i = 0; i < select.length; i++) {
-       
-          if(select.value != option.value){
-            select.appendChild(option)   
+      for(let j = 0; j <selectHmultipleSalidas.length; j++){
+       if(selectHmultipleSalidas[j].getAttribute('value') != option.getAttribute('value')){
+            selectHmultipleSalidas[j].appendChild(option)   
           }
-         
-          
-        // }
-
-    
-
-        
-      })
+      }
     }
   }
   function rellenarSelectLlegadas(){
     let selectHmultipleLlegadas = document.querySelectorAll('.select-multiple__llegadas');
 
     for (let i = 0; i < salidasyllegadas.length; i++) {
+      console.log(salidasyllegadas);
       let option = document.createElement('option');
       option.value = salidasyllegadas[i].id
       option.innerHTML =salidasyllegadas[i].nombre;
-    
-      selectHmultipleLlegadas.forEach(function(select){
-        // for (let i = 0; i < select.length; i++) {
 
-          if(select.value != option.value){
-            select.appendChild(option)   
-          }
+         for (let j = 0; j < selectHmultipleLlegadas.length; j++) {
+          if(selectHmultipleLlegadas[j].getAttribute('value') != option.getAttribute('value')){
          
-          
-        // }   
-      })
+            selectHmultipleLlegadas[j].appendChild(option)   
+          }
+           
+         }
+
     }
   }
 
@@ -1741,25 +1734,25 @@ function agregarLlegadaHorarioMultiple(llegada){
   
    
     
-    for (let i = 0; i < salidasyllegadas.length; i++) {
-      let option = document.createElement('option');
-      option.value = salidasyllegadas[i].id
-      option.innerHTML =salidasyllegadas[i].nombre;
-      selectsSalidasLegadas.forEach(function(select){
-        select.appendChild(option)
-      })
-    }
+    // for (let i = 0; i < salidasyllegadas.length; i++) {
+    //   let option = document.createElement('option');
+    //   option.value = salidasyllegadas[i].id
+    //   option.innerHTML =salidasyllegadas[i].nombre;
+    //   selectsSalidasLegadas.forEach(function(select){
+    //     select.appendChild(option)
+    //   })
+    // }
      
-    for (let i = 0; i < salidasyllegadas.length; i++) {
-      let option = document.createElement('option');
-      option.value = salidasyllegadas[i].id
-      option.innerHTML =salidasyllegadas[i].nombre;
+    // for (let i = 0; i < salidasyllegadas.length; i++) {
+    //   let option = document.createElement('option');
+    //   option.value = salidasyllegadas[i].id
+    //   option.innerHTML =salidasyllegadas[i].nombre;
       
       
-      selectsSalidasLegadas__llegadas.forEach(function(select){
-        select.appendChild(option)
-      })
-    }
+    //   selectsSalidasLegadas__llegadas.forEach(function(select){
+    //     select.appendChild(option)
+    //   })
+    // }
   
   
 
