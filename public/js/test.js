@@ -1213,18 +1213,26 @@ function editarActividad(e){
       
       
       let diasLibres = document.querySelectorAll('.check-horario-libre'); //obtengo todos los check que pertenecen a horarios libres
-     
+   
  
     // funcion que recibe como parametros los dias de la BD y los checks pintados en el DOM
       function llenarDiasHLibre (diasDB, DOMChecks){
+        
         dias = []; //un array solo para guardar el valor de los dias porque la data me manda ID's y valores nulos
-        dias.push(diasDB[0].l) //obtengo y guardo los dias
-        dias.push(diasDB[0].m)
-        dias.push(diasDB[0].x)
-        dias.push(diasDB[0].j)
-        dias.push(diasDB[0].v)
-        dias.push(diasDB[0].s)
-        dias.push(diasDB[0].d)
+        //obtengo y guardo los dias
+
+        diasDB.forEach(function(setDeDias){
+          if(setDeDias.libre ==1){
+            dias.push(setDeDias.l) 
+            dias.push(setDeDias.m)
+            dias.push(setDeDias.x)
+            dias.push(setDeDias.j)
+            dias.push(setDeDias.v)
+            dias.push(setDeDias.s)
+            dias.push(setDeDias.d)
+          }
+        })
+       
 
         // para acceder a el atributo cheked paso de NodeList a Array los cheks del DOm
         DOMChecks = Array.from(DOMChecks)
@@ -1241,7 +1249,7 @@ function editarActividad(e){
 
       }
       // ejecuto la funcion: llenarDiasHLibre si SALIDAS HORARIO LIBRE TIENE VALORES.
-      
+    
     if(salidasHLibre.length != 0){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
        $('#libre').attr('data-actividadid', `${diasActividadesHorario[0].id}`);
@@ -1298,23 +1306,27 @@ function editarActividad(e){
      
 
        let salidainput = document.getElementById('salidas')
-       salidainput.options.value = salidasHLibre[0][0].slid;
+   
+        $(salidainput).val(salidasHLibre[0][0].slid)
        salidainput.setAttribute('data-horarioid',salidasHLibre[0][0]['actividadeshorario_id'])
        salidainput.setAttribute('data-salidaId',salidasHLibre[0][0]['id'])
 
 
       
        let llegadainput = document.getElementById('llegadas')
-       llegadainput.options.selectedIndex = llegadasHLibre[0][0].slid - 1;
+      $(llegadainput).val(llegadasHLibre[0][0].slid)
        llegadainput.setAttribute('data-llegadaId',llegadasHLibre[0][0]['id'])
      
-
-       $('#hiniHorarioLibre').val(diasActividadesHorario[0].hini)
-       $('#hfinHorarioLibre').val(diasActividadesHorario[0].hfin)
+       diasActividadesHorario.forEach(function(diaActividadHorario){
+         if(diaActividadHorario.libre ==1){
+          $('#hiniHorarioLibre').val(diaActividadHorario.hini)
+          $('#hfinHorarioLibre').val(diaActividadHorario.hfin)
+         }
+       })
+      
       llenarDiasHLibre(diasActividadesHorario, diasLibres);
     }
   
-
 
 
 if(salidasHMultiple != 0){
@@ -1702,7 +1714,7 @@ function agregarLlegadaHorarioMultiple(llegada){
     let selectHmultipleLlegadas = document.querySelectorAll('.select-multiple__llegadas');
 
     for (let i = 0; i < salidasyllegadas.length; i++) {
-      console.log(salidasyllegadas);
+    
       let option = document.createElement('option');
       option.value = salidasyllegadas[i].id
       option.innerHTML =salidasyllegadas[i].nombre;
@@ -2337,7 +2349,7 @@ $('.addHorarioContanier').click(function (e) {
 //           $('#libre').css('box-shadow', '0px 0px 0px 3px green');
 //         }else{
 //           $('#libre').attr('checked',false);
-//           console.log('entro en 0',response.message)
+//         
 //           $('#libre').css('box-shadow', '0px 0px 0px 0px green');
 //         }
 //   
