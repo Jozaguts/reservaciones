@@ -1084,7 +1084,7 @@ let IDACTIVIDAD;
 
 // Editar ajax
 function editarActividad(e){
-  $('#libre').attr('onchange', 'activarActividad()')
+  
   let HORARIOID;
   editar = true;
 
@@ -1101,6 +1101,9 @@ function editarActividad(e){
 
     $('#clave').val(data.pestana1.actividades[0].clave)
     $('#nombre').val(data.pestana1.actividades[0].nombre)
+    data.pestana1.actividades[0].libre == 1 ?  $('#libre').prop('checked', true) :$('#libre').prop('checked', false)
+   
+    //
     let tipoActividad = document.getElementById('tipoactividades_id')
     tipoActividad.selectedIndex = data.pestana1.actividades[0].taid -1;
     let checkFijo = document.getElementById('fijo')
@@ -1193,7 +1196,7 @@ function editarActividad(e){
     // let llegadasHMultiple = data.pestana3.llegadasHMultiple
     let actividadesHorarioContainer = document.getElementById('actividadesHorarioContainer'); //conteneder mini crud
 
-      console.log(actividadesHorarioContainer.childNodes.length);
+ 
 
       let  inputsType = document.querySelectorAll('[type=text]')
 
@@ -1243,21 +1246,22 @@ function editarActividad(e){
        actividadesHorarioContainer.innerHTML=""; //limpio el mini crud
        $('#libre').attr('data-actividadid', `${diasActividadesHorario[0].id}`);
        let id = $('#libre').data('actividadid');
-       console.log(diasActividadesHorario);
+     
 
-       statusActividad(id).then(data => data)
-       .then(function(data){
+      //  statusActividad(id)
+      //  .then(data => data)
+      //  .then(function(data){
         
-       if( data.message =='Habilitada'){
-        console.log('entro en 1' ,data.message)
-        $('#libre').attr('checked',true);
-        $('#libre').css('box-shadow', '0px 0px 0px 3px green');
-      }else{
-        $('#libre').attr('checked',false);
-        console.log('entro en 0',data.message)
-        $('#libre').css('box-shadow', '0px 0px 0px 0px green');
-      }
-      })
+      //  if( data.message =='Habilitada'){
+      
+      //   $('#libre').attr('checked',true);
+      //   $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+      // }else{
+      //   $('#libre').attr('checked',false);
+    
+      //   $('#libre').css('box-shadow', '0px 0px 0px 0px green');
+      // }
+      // })
 
      
      
@@ -1271,16 +1275,16 @@ function editarActividad(e){
 
     
     // traer el estado del campo LIBRE en actividades
-     async function statusActividad(idActividad){
+    //  async function statusActividad(idActividad){
      
-      const url = `status-actividad/${idActividad}`;
-      const response = await fetch(url);
-      const data = await response.json()
+    //   const url = `status-actividad/${idActividad}`;
+    //   const response = await fetch(url);
+    //   const data = await response.json()
 
-      return data
+    //   return data
 
       
-      }
+    //   }
 
   //  desactivar o activar el campo libre en actividades
 
@@ -1292,7 +1296,7 @@ function editarActividad(e){
       
 
      
-      console.log(salidasHLibre);
+
        let salidainput = document.getElementById('salidas')
        salidainput.options.value = salidasHLibre[0][0].slid;
        salidainput.setAttribute('data-horarioid',salidasHLibre[0][0]['actividadeshorario_id'])
@@ -2325,26 +2329,26 @@ $('.addHorarioContanier').click(function (e) {
 
 
 
-function activarActividad(){
-  let id = $('#libre').data('actividadid');
-    $.ajax({
-      type: "PUT",
-      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-      url: `deshabilitar-actividad/${id}`,
-      data: id,
-      dataType: "json",
-      success: function (response) {
-        if( response.message =='Activada Correctamente'){
-          console.log('entro en 1' ,response.message)
-          $('#libre').attr('checked',true);
-          $('#libre').css('box-shadow', '0px 0px 0px 3px green');
-        }else{
-          $('#libre').attr('checked',false);
-          console.log('entro en 0',response.message)
-          $('#libre').css('box-shadow', '0px 0px 0px 0px green');
-        }
-        console.log(response.message)
-      }
-    });
+// function activarActividad(){
+//   let id = $('#libre').data('actividadid');
+//     $.ajax({
+//       type: "PUT",
+//       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+//       url: `deshabilitar-actividad/${id}`,
+//       data: id,
+//       dataType: "json",
+//       success: function (response) {
+//         if( response.message =='Activada Correctamente'){
+//         
+//           $('#libre').attr('checked',true);
+//           $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+//         }else{
+//           $('#libre').attr('checked',false);
+//           console.log('entro en 0',response.message)
+//           $('#libre').css('box-shadow', '0px 0px 0px 0px green');
+//         }
+//   
+//       }
+//     });
  
-}
+// }
