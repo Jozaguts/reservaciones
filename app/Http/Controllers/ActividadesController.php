@@ -367,7 +367,7 @@ class ActividadesController extends Controller
         $act = DB::table('actividades as ac')
         ->Join('tipoactividades as ta', 'ac.tipoactividades_id', '=', 'ta.id')
         ->Join('anticipos as an', 'ac.anticipo_id', '=', 'an.id')
-        ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre')
+        ->select('ac.id', 'ac.clave', 'ac.nombre', 'ta.id as taid', 'ta.nombre as tanombre',   'ac.fijo', 'ac.duracion', 'ac.renta', 'ac.minutoincrementa', 'ac.montoincremento', 'ac.maxcortesias', 'ac.maxcupones', 'ac.anticipo_id as anid', 'an.nombre as annombre','ac.libre')
        ->Where([['ac.id','=', $id], ['ac.active', '=', '1'], ['ac.remove', '=', '0']])
        ->get();
 
