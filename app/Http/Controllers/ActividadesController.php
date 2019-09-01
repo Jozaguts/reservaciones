@@ -898,7 +898,7 @@ class ActividadesController extends Controller
         if($actividad->libre==0){
             
             return response()->json(['message'=>'Deshabilitada']);
-           /*  test */
+           
         }
     }
 }
