@@ -211,7 +211,7 @@ class CombosController extends Controller
         ->get();
 
         $ach = DB::table('actividadeshorarios as ach')
-        ->select('ach.id','ach.actividades_id','ach.libre','ach.hini','ach.hfin', DB::raw('concat(ach.hini, " | ", ach.hfin, " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
+        ->select('ach.id','ach.actividades_id','ach.libre','ach.hini','ach.hfin', DB::raw('concat ( substring(ach.hini,1,5), " | ", substring(ach.hfin,1,5), " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
         ->where([['ach.active','=','1'],['ach.remove','=','0'], ['ach.actividades_id','=',$id]])
         ->orderBy('ach.id')
         ->get();   

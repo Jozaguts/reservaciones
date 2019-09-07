@@ -105,19 +105,19 @@ $(document).ready(function () {
       
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
             let option = document.createElement("option")
-            option.innerHTML =infoactiviadeshorarios[i].horario;
+            option.innerHTML =infoactiviadeshorarios[i].horario
             select.appendChild(option)
           select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
           }
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {    
             for (let j = 0; j < resultado; j++) {
-              let hf = `${hiniHorario+j+duracion}:0`;
-              let paste = hf.padStart(4,"0")  + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
+              let hf = `${hiniHorario+j+duracion}:00`;
+              let paste = hf.padStart(5,"0") +" | " + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
               
               let option = document.createElement("option")
               let hi = `${hiniHorario+j}:00`.padStart(5,"0");
-              option.innerHTML =`${hi}|${paste}`;
+              option.innerHTML =`${hi} | ${paste}`;
               option.setAttribute('data-hora',hiniHorario+j)
               select.appendChild(option)
               select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
@@ -183,7 +183,7 @@ document.addEventListener('click',function(e){
         remove: 0};
       let fd = $(tr).find('select').val()
       let  hini =fd.substring(0, 5)
-      let  hfin =fd.substring(6, 11)
+      let  hfin =fd.substring(8, 13)
       let idAct = $(tr)[0].children[0].value;
       dataSet.hini = hini
       dataSet.hfin = hfin
