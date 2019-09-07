@@ -11,7 +11,6 @@ $(document).ready(function () {
 
   $(document).on('click','.btn-agregar', function(e){
     let id = e.target.parentElement.children[1].value;
-
     obtenerActividad(id)  
   })
 
@@ -103,7 +102,7 @@ $(document).ready(function () {
             hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
             resultado = hfinHorario - hiniHorario;
         }else if (infoactiviadeshorarios[i].libre==0){
-          console.log(infoactiviadeshorarios[i]);
+      
           if(infoactiviadeshorarios[i].actividades_id == idselect) {
             let option = document.createElement("option")
             option.innerHTML =infoactiviadeshorarios[i].horario;
@@ -113,7 +112,8 @@ $(document).ready(function () {
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {    
             for (let j = 0; j < resultado; j++) {
-              let paste = `${hiniHorario+j+duracion}:00` + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
+              let hf = `${hiniHorario+j+duracion}:0`;
+              let paste = hf.padStart(4,"0")  + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
               
               let option = document.createElement("option")
               let hi = `${hiniHorario+j}:00`.padStart(5,"0");
@@ -159,35 +159,33 @@ document.addEventListener('click',function(e){
     // let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
 
     // let datadataPreciosYpases={};
- 
+
    
 
     let data = {};
-    $(dataform ).each(function(index, obj){
+    $(dataform).each(function(index, obj){
       data[obj.name] = obj.value;
+     
     });
     data.mismodia = mismodia;
-
     // trs fila que contiene info de actividad y horarios
     let trs = document.querySelectorAll('.actividad-id');
 
     trs.forEach(function(tr,index){
   
-      let dataSet={hini: "",
+      let dataSet={
+        hini: "",
         hfin: "",
         actividades_id: "",
-        actividades_id_combo: "",
         horario_id: "",
-        usuarios_id: "",
-        active: "",
-        remove: ""};
+        usuarios_id: $('#idUsuario').val(),
+        active: 1,
+        remove: 0};
       let fd = $(tr).find('select').val()
-      let  hini =fd.substring(0, 8)
-      let  hfin =fd.substring(10, 19)
+      let  hini =fd.substring(0, 5)
+      let  hfin =fd.substring(6, 11)
       let idAct = $(tr)[0].children[0].value;
       dataSet.hini = hini
-      // let idAct = $(tr)[0].children[0].value; 
-      // let idAct = $(tr)[0].children[0].value;
       dataSet.hfin = hfin
       let horarioId = $(tr).find('a').data('horarioid')
       dataSet.horario_id =horarioId
@@ -234,14 +232,14 @@ datosPersonas.push(persona)
     data.datosPersonas =datosPersonas
     data.precio = precio;
     data.balance =balance;
-    console.log(data)
+  
    
     let horarioId = $('.btn-eliminar').data('horarioid')
-
+console.log(data);
 // Comienza la el ajax para guardar combos
     fetch('/combos',{
       method: 'POST', // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
+      body: JSON.stringify(data), 
       headers:{
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -269,9 +267,9 @@ datosPersonas.push(persona)
             }, 3000);
             // setTimeout("location.reload(true);",3000)
         }
-        console.log(responseJson.errors[0])
+     
       })
-  }
+  } /* termina boton guardar */
     
 
 })
