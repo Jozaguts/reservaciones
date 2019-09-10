@@ -274,9 +274,48 @@ console.log(data);
 
 })
 
+// editar combo 
 
+$(document).on('click','.btn-editar', function(e){
+  const ID = e.target.getAttribute('data-id');
+  var token = $("input[name='_token']").val();
+  console.log(ID,token);
+  let infoCombo;
+  fetch(`combos/${ID}/edit`,{
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-Token": $('input[name="_token"]').val()
+    },
+  })
+  .then((response) => {
+    return response.json();
+  }).then((responseJson)=>{
 
+    // empieazo a rellenar el modal 
+    infoCombo = responseJson;
+    $('#clave').val(infoCombo.infoactivad[0].clave);
+    $('#nombre').val(infoCombo.infoactivad[0].nombre);
+    $('#tipoactividades_id').val(infoCombo.infoactivad[0].tipoactividades_id)
+    $('#maxCortesias').val(infoCombo.infoactivad[0].maxcortesias)
+    $('#maxCupones').val(infoCombo.infoactivad[0].maxcupones)
+    $('#anticipoId').val(infoCombo.infoactivad[0].anticipo_id)
+    infoCombo.infoactivad[0].mismo_dia == '1'? $('#mismodia').attr('checked', true):$('#mismodia').attr('checked', false);
 
+    // pestaña 2 
+    $('#balanceG').val(infoCombo.infoactivad[0].balance);
+    $('#precioG').val(infoCombo.infoactivad[0].precio);
+
+   
+    console.log(infoCombo.infoactivad[0])
+  }).catch((err) => {
+    console.log(err);
+  })
+  
+  $('#combos').modal('show')
+  
+})
 
 
 

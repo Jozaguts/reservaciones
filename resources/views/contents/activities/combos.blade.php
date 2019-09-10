@@ -53,7 +53,7 @@
                                             <td class="table-head  text-capitalize precioFix"> {{$actividad->precio}}                                             </td>
                                             <td class="table-head  text-capitalize balanceFix"> {{$actividad->balance}}                                                 </td>
                                             <td class="table-head table-head__actions"> 
-                                            <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary btn-editar"  data-toggle="modal" data-target="#addActivities" onclick="editarActividad(this);" data-isEdit="true" data-id="{{$actividad->id}}" id="editActividad">
+                                            <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary btn-editar"   data-id="{{$actividad->id}}">
                                            
                                             </button>
                                             <input type="hidden" name="idactividad"    value="{{$actividad->id}}" id="idActividad">

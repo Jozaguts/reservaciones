@@ -89,7 +89,11 @@
                                         <label for=""> Agregar Actividad</label>
                                         <select class="form-control input-agregar-actividad"  id="actividad" required>
                                             @foreach ($actividades as $actividad)
-                                                <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
+                                            @if($actividad->combo ==0){
+                                              <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
+                                            }
+                                            @endif
+                                               
                                             @endforeach
                                         </select>
                                         <a href="#!" class="btn btn-success ml-3 btn-agregar" >+</a>

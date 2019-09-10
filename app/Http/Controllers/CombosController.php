@@ -95,16 +95,16 @@ class CombosController extends Controller
                     //  dd($request->get('dataSet')[0]['hfin']);
                      if($act){
                          for ($h=0; $h < count($request->get('dataSet')); $h++) { 
-                             $cDet = ComboDet::create([
-                                 'hini' => $request->get('dataSet')[$h]['hini'],
-                                 'hfin' =>$request->get('dataSet')[$h]['hfin'],
-                                 'actividades_id'=>$act->id,
-                                 'horario_id' =>$request->get('dataSet')[$h]['horario_id'],
-                                 'usuarios_id'=>$request['idusuario'],
-                                 'actividades_id_combo'=>'1',
-                                 'active'=>'1',
-                                 'remove'=>'0'
-                             ]);
+                            $cDet = ComboDet::create([
+                                'hini' => $request->get('dataSet')[$h]['hini'],
+                                'hfin' =>$request->get('dataSet')[$h]['hfin'],
+                                'actividades_id'=>$request->get('dataSet')[$h]['actividades_id'],
+                                'horario_id' =>$request->get('dataSet')[$h]['horario_id'],
+                                'usuarios_id'=>$request['idusuario'],
+                                'actividades_id_combo'=>$act->id,
+                                'active'=>'1',
+                                'remove'=>'0'
+                            ]);
                          }
                  
                       
@@ -177,7 +177,52 @@ class CombosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $actividades = DB::table('actividades as ac')
+       ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion', 'ac.anticipo_id', 'ac.tipoactividades_id', 'ac.maxcortesias', 'ac.maxcupones','ac.mismo_dia')
+       ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'],['ac.combo','=','1'], ['ac.id', '=', $id]])
+       ->orderBy('ac.clave')
+       ->get();
+     
+       $actp = DB::table('actividadprecios as ap')
+      ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
+      ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
+      ->where([['ap.actividades_id', '=', $id],  ['ap.remove', '=', '0']])
+      ->orderBy('ap.id')
+      ->get();
+ 
+       $ach = DB::table('combo_det as co')
+            ->join('actividades as ac', 'co.actividades_id', '=', 'ac.id')
+            ->join('actividadeshorarios as ach', 'co.horario_id', '=', 'ach.id')
+            ->select('co.id', 'ac.id as acid', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion', DB::raw('concat ( substring(IF(ach.libre=1, co.hini, ach.hini),1,5), " | ", substring(IF(ach.libre=1, co.hfin, ach.hfin),1,5), " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'), 'co.horario_id', 'ach.libre', 'ach.hini', 'ach.hfin')
+            ->where([['co.active', '=', '1'], ['co.remove', '=', '0'], ['co.actividades_id_combo', '=', $id]])
+           ->get();
+         
+        
+         $arrHLibres =array();
+         $arrHMultiple = array();
+        //  array_push($arrHLibres, dato)
+        $length = $ach->count();
+        for ($i=0; $i < $length; $i++) { 
+
+            if($ach[$i]->libre == 1) {
+
+                array_push($arrHLibres, $ach[$i]);
+
+            } else if($ach[$i]->libre == 0) {
+
+                array_push($arrHMultiple,$ach[$i]);
+
+            }
+        
+        }
+
+        if(count($arrHLibres) > 0){
+            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHLibres,'activiadadPrecios'=>$actp]);
+        }else{
+            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHMultiple,'activiadadPrecios'=>$actp]);
+        }
+        
+      
     }
 
     /**
@@ -203,12 +248,13 @@ class CombosController extends Controller
         //
     }
     public function infoactividad(Request $request, $id){
-        
+       
         $actividades = DB::table('actividades as ac')
         ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion')
         ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.id','=',$id],['ac.combo','=','0']])
         ->orderBy('ac.clave')
         ->get();
+      
 
         $ach = DB::table('actividadeshorarios as ach')
         ->select('ach.id','ach.actividades_id','ach.libre','ach.hini','ach.hfin', DB::raw('concat ( substring(ach.hini,1,5), " | ", substring(ach.hfin,1,5), " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
