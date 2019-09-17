@@ -92,7 +92,7 @@ class CombosController extends Controller
                     'riesgo'=>0,
                     'tipounidades_id'=>1                     
                      ]);
-                    //  dd($request->get('dataSet')[0]['hfin']);
+                
                      if($act){
                          for ($h=0; $h < count($request->get('dataSet')); $h++) { 
                             $cDet = ComboDet::create([
@@ -177,7 +177,7 @@ class CombosController extends Controller
      */
     public function edit($id)
     {
-        $actividades = DB::table('actividades as ac')
+        $combo = DB::table('actividades as ac')
        ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion', 'ac.anticipo_id', 'ac.tipoactividades_id', 'ac.maxcortesias', 'ac.maxcupones','ac.mismo_dia')
        ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'],['ac.combo','=','1'], ['ac.id', '=', $id]])
        ->orderBy('ac.clave')
@@ -197,32 +197,13 @@ class CombosController extends Controller
             ->where([['co.active', '=', '1'], ['co.remove', '=', '0'], ['co.actividades_id_combo', '=', $id]])
            ->get();
          
+         $horarios = array();
         
-         $arrHLibres =array();
-         $arrHMultiple = array();
-        //  array_push($arrHLibres, dato)
-        $length = $ach->count();
-        for ($i=0; $i < $length; $i++) { 
-
-            if($ach[$i]->libre == 1) {
-
-                array_push($arrHLibres, $ach[$i]);
-
-            } else if($ach[$i]->libre == 0) {
-
-                array_push($arrHMultiple,$ach[$i]);
-
-            }
-        
+        for ($i=0; $i < $ach->count(); $i++) { 
+                array_push($horarios, $ach[$i]);
         }
-
-        if(count($arrHLibres) > 0){
-            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHLibres,'activiadadPrecios'=>$actp]);
-        }else{
-            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHMultiple,'activiadadPrecios'=>$actp]);
-        }
+            return response()->json(['infoCombo' => $combo, 'horarios'=> $horarios,'activiadadPrecios'=>$actp]);
         
-      
     }
 
     /**

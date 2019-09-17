@@ -279,8 +279,8 @@ console.log(data);
 $(document).on('click','.btn-editar', function(e){
   const ID = e.target.getAttribute('data-id');
   var token = $("input[name='_token']").val();
-  console.log(ID,token);
-  let infoCombo;
+ 
+  let info;
   fetch(`combos/${ID}/edit`,{
     headers: {
       "Content-Type": "application/json",
@@ -294,21 +294,71 @@ $(document).on('click','.btn-editar', function(e){
   }).then((responseJson)=>{
 
     // empieazo a rellenar el modal 
-    infoCombo = responseJson;
-    $('#clave').val(infoCombo.infoactivad[0].clave);
-    $('#nombre').val(infoCombo.infoactivad[0].nombre);
-    $('#tipoactividades_id').val(infoCombo.infoactivad[0].tipoactividades_id)
-    $('#maxCortesias').val(infoCombo.infoactivad[0].maxcortesias)
-    $('#maxCupones').val(infoCombo.infoactivad[0].maxcupones)
-    $('#anticipoId').val(infoCombo.infoactivad[0].anticipo_id)
-    infoCombo.infoactivad[0].mismo_dia == '1'? $('#mismodia').attr('checked', true):$('#mismodia').attr('checked', false);
+    info = responseJson;
+    
+
+    $('#clave').val(info.infoCombo[0].clave);
+    $('#nombre').val(info.infoCombo[0].nombre);
+    $('#tipoactividades_id').val(info.infoCombo[0].tipoactividades_id);
+    $('#maxCortesias').val( info.infoCombo[0].maxcortesias)
+    $('#maxCupones').val(info.infoCombo[0].maxcupones)
+    $('#anticipoId').val(info.infoCombo[0].anticipo_id)
+    info.infoCombo[0].mismo_dia == '1'? $('#mismodia').attr('checked', true):$('#mismodia').attr('checked', false);
 
     // pestaña 2 
-    $('#balanceG').val(infoCombo.infoactivad[0].balance);
-    $('#precioG').val(infoCombo.infoactivad[0].precio);
+    $('#balanceG').val(info.infoCombo[0].balance);
+    $('#precioG').val(info.infoCombo[0].precio);
 
-   
-    console.log(infoCombo.infoactivad[0])
+     let precios = info.activiadadPrecios
+     console.log(precios)
+    // personas
+    let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
+    let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value = `${precios[0].precio1}`;
+    let precio2P1 = document.getElementById(`p2PersonaId${precios[0].peid}`).value =`${precios[0].precio2}`;
+    let precio3P1 = document.getElementById(`p3PersonaId${precios[0].peid}`).value =`${precios[0].precio3}`;
+    let dobleP1 = document.getElementById(`doblePersonaId${precios[0].peid}`).value =`${precios[0].doble}`;
+    let balanceDobleP1 = document.getElementById(`balanceDoblePersonaId${precios[0].peid}`).value =`${precios[0].doblebalanc}`;
+    let tripleP1 = document.getElementById(`triplePersonaId${precios[0].peid}`).value =`${precios[0].triple}`;
+    let balanceTripleP1 =document.getElementById(`balanceTriplePersonaId${precios[0].peid}`).value =`${precios[0].triplebalanc}`;
+    let promoP1 =document.getElementById(`promoPersonaId${precios[0].peid}`);
+    `${precios[0].promocion}`==1?promoP1.setAttribute('checked','true'):promoP1.setAttribute('unchecked','true')
+    let restriccionP1 =document.getElementById(`restriccionPersonaId${precios[0].peid}`);
+    `${precios[0].restriccion}`==1?restriccionP1.setAttribute('checked','true'):restriccionP1.setAttribute('unchecked','true')
+    let acompananteP1 =document.getElementById(`acompanantePersonaId${precios[0].peid}`);
+    `${precios[0].acompanante}`==1?acompananteP1.setAttribute('checked','true'):acompananteP1.setAttribute('unchecked','true')
+    // PERSONA 2
+ 
+
+    let personaPrecio2Id = document.getElementById(`persona${precios[1].peid}`).innerHTML =`${precios[1].penombre}`;
+    let precio1P2 = document.getElementById(`p1PersonaId${precios[1].peid}`).value =`${precios[1].precio1}`;
+    let precio2P2 = document.getElementById(`p2PersonaId${precios[1].peid}`).value =`${precios[1].precio2}`;
+    let precio3P2 = document.getElementById(`p3PersonaId${precios[1].peid}`).value =`${precios[1].precio3}`;
+    let dobleP2 = document.getElementById(`doblePersonaId${precios[1].peid}`).value =`${precios[1].doble}`;
+    let balanceDobleP2 = document.getElementById(`balanceDoblePersonaId${precios[1].peid}`).value =`${precios[1].doblebalanc}`;
+    let tripleP2 = document.getElementById(`triplePersonaId${precios[1].peid}`).value =`${precios[1].triple}`;
+    let balanceTripleP2 =document.getElementById(`balanceTriplePersonaId${precios[1].peid}`).value =`${precios[1].triplebalanc}`;
+    let promoP2 =document.getElementById(`promoPersonaId${precios[1].peid}`);
+    `${precios[1].promocion}`==1?promoP2.setAttribute('checked','true'):promoP2.setAttribute('unchecked','true')
+    let restriccionP2 =document.getElementById(`restriccionPersonaId${precios[1].peid}`);
+    `${precios[1].restriccion}`==1?restriccionP2.setAttribute('checked','true'):restriccionP2.setAttribute('unchecked','true')
+    let acompananteP2 =document.getElementById(`acompanantePersonaId${precios[1].peid}`);
+    `${precios[1].acompanante}`==1?acompananteP2.setAttribute('checked','true'):acompananteP2.setAttribute('unchecked','true')
+     // PERSONA 3
+     let personaPrecio3Id = document.getElementById(`persona${precios[2].peid}`).innerHTML =`${precios[2].penombre}`;
+     let precio1P3 = document.getElementById(`p1PersonaId${precios[2].peid}`).value =`${precios[2].precio1}`;
+     let precio2P3 = document.getElementById(`p2PersonaId${precios[2].peid}`).value =`${precios[2].precio2}`;
+     let precio3P3 = document.getElementById(`p3PersonaId${precios[2].peid}`).value =`${precios[2].precio3}`;
+     let dobleP3 = document.getElementById(`doblePersonaId${precios[2].peid}`).value =`${precios[2].doble}`;
+     let balanceDobleP3 = document.getElementById(`balanceDoblePersonaId${precios[2].peid}`).value =`${precios[2].doblebalanc}`;
+     let tripleP3 = document.getElementById(`triplePersonaId${precios[2].peid}`).value =`${precios[2].triple}`;
+     let balanceTripleP3 =document.getElementById(`balanceTriplePersonaId${precios[2].peid}`).value =`${precios[2].triplebalanc}`;
+     let promoP3 =document.getElementById(`promoPersonaId${precios[2].peid}`);
+     `${precios[2].promocion}`==1?promoP3.setAttribute('checked','true'):promoP3.setAttribute('unchecked','true')
+     let restriccionP3 =document.getElementById(`restriccionPersonaId${precios[2].peid}`);
+     `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
+     let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
+     `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+
   }).catch((err) => {
     console.log(err);
   })
