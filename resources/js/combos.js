@@ -112,7 +112,7 @@ $(document).ready(function () {
         }
           if(infoactiviadeshorarios[i].actividades_id == idselect) {    
             for (let j = 0; j < resultado; j++) {
-              let hf = `${hiniHorario+j+duracion}:00`;
+              let hf = `${hiniHorario+j+ (duracion/60)}:00`;
               let paste = hf.padStart(5,"0") +" | " + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
               
               let option = document.createElement("option")
@@ -310,7 +310,7 @@ $(document).on('click','.btn-editar', function(e){
     $('#precioG').val(info.infoCombo[0].precio);
 
      let precios = info.activiadadPrecios
-     console.log(precios)
+     
     // personas
     let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
     let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value = `${precios[0].precio1}`;
@@ -358,7 +358,75 @@ $(document).on('click','.btn-editar', function(e){
      `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
      let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
      `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+     let comboActividades = info.horarios;
+    
+     comboActividades.forEach(function(comboActividad, index){
+      $('#bodyTable').append(`
+      <tr class="actividad-id">
+      <input type="hidden" name="idActividad${comboActividad.id}" value="${comboActividad.id}">
+      <td scope="row">${comboActividad.clave}</td>
+      <td>${comboActividad.nombre}</td>
+      <td class="precioFix">${comboActividad.precio}</td>
+      <td class="balanceFix">${comboActividad.balance}</td>
+      <td colspan="5"><div class="form-group">
+          <label for=""></label>
+          <select class="form-control select-info" name="editselect${comboActividad.id}" id="editselect${comboActividad.id}">
+        
+          
+          </select>
+          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${index}" name="">-</a>
+        </div> 
+      </td>
+    </tr>`
+      )
 
+    document.querySelector(`#select${comboActividad.id}`);
+    let hini=comboActividad.hini.slice(0,2,), hfin = comboActividad.hfin.slice(0,2); 
+    hini == "00"? hini="12":hini
+    hfin == "00"? hfin="12":hfin
+    let length = hfin - hini; /* longitud de iteraciones  */
+    
+   for (let i = 0; i <=length; i++) {
+ 
+    if(comboActividad.libre == 1){ /* si no es horario libre se procede una una manera */
+   
+        hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+        hfin.replace('0',""); 
+        
+        let numerodelahoraHini = Number(hini)+i; /* hora inicial */
+
+        let horaInicial ="";
+        numerodelahoraHini < 10 ?horaInicial = String("0"+numerodelahoraHini):horaInicial=String(numerodelahoraHini)
+
+        let minutosHini = comboActividad.horario.substring(3,5); /* despues de la hora obtengo los minutos y la linea separadora */
+        let numerodelahoraHfin = Number(hini)+i+1; /* obtengo la hora inicial y le sumo 1 hora  */
+        let horaFinal="";
+        numerodelahoraHfin <10 ? horaFinal= String("0"+ numerodelahoraHfin): horaFinal = String( numerodelahoraHfin);
+         
+        let diasActividad = comboActividad.horario.substring(16,comboActividad.horario.length)
+
+
+        let option = document.createElement('option');
+        option.innerText = `${horaInicial}:${minutosHini} | ${horaFinal}:${minutosHini} | ${diasActividad}`;
+        document.querySelector(`#editselect${comboActividad.id}`).appendChild(option) 
+    } else if(comboActividad.libre == 0){
+      hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+      hfin.replace('0',""); 
+      
+      let numerodelahoraHini = Number(hini)+i; /* hora inicial */
+
+      let horaInicial ="";
+      console.log(numerodelahoraHini);
+    }
+
+
+   
+   
+     
+   }
+
+
+     })
   }).catch((err) => {
     console.log(err);
   })

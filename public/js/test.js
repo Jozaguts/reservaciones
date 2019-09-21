@@ -1611,8 +1611,11 @@ horarios.forEach(function(horario){/*  por cada horario registrado en la DB crea
   }
 })
 salidasHMultiple.forEach(function(salida){
+ 
   salida.forEach(function(sal){
+   
    if(sal.actividadeshorario_id == horarioID ){
+    
     agregarSalidasHorarioMultiple(sal);
     }
   })
@@ -1627,9 +1630,9 @@ llegadasHMultiple.forEach(function(llegada){
   })
 })
 function agregarSalidasHorarioMultiple(salida){
- 
+
   let agreageSalidasHmultiple = document.getElementById('agreageSalidasHmultiple');
-  agreageSalidasHmultiple.innerHTML ="";
+  agreageSalidasHmultiple.innerHTML +="";
   agreageSalidasHmultiple.innerHTML +=`
         <div class="row">
           <div class="col-4">
@@ -1661,7 +1664,7 @@ function agregarSalidasHorarioMultiple(salida){
 // agregar llegas al horario multiple
 function agregarLlegadaHorarioMultiple(llegada){
   let agreagarLlegadasHmultiple = document.getElementById('agreageLlegadasHmultiple');
-  agreagarLlegadasHmultiple.innerHTML ="";
+  agreagarLlegadasHmultiple.innerHTML +="";
   agreagarLlegadasHmultiple.innerHTML +=`
         <div class="row">
           <div class="col-4">
