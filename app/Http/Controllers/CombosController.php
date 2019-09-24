@@ -189,6 +189,8 @@ class CombosController extends Controller
       ->where([['ap.actividades_id', '=', $id],  ['ap.remove', '=', '0']])
       ->orderBy('ap.id')
       ->get();
+
+      
  
        $ach = DB::table('combo_det as co')
             ->join('actividades as ac', 'co.actividades_id', '=', 'ac.id')
@@ -197,6 +199,7 @@ class CombosController extends Controller
             ->where([['co.active', '=', '1'], ['co.remove', '=', '0'], ['co.actividades_id_combo', '=', $id]])
            ->get();
          
+           
          $horarios = array();
         
         for ($i=0; $i < $ach->count(); $i++) { 

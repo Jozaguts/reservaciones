@@ -235,7 +235,7 @@ datosPersonas.push(persona)
   
    
     let horarioId = $('.btn-eliminar').data('horarioid')
-console.log(data);
+
 // Comienza la el ajax para guardar combos
     fetch('/combos',{
       method: 'POST', // or 'PUT'
@@ -358,9 +358,14 @@ $(document).on('click','.btn-editar', function(e){
      `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
      let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
      `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+
+
+
+    //  minicrud empieza
      let comboActividades = info.horarios;
-    
+      
      comboActividades.forEach(function(comboActividad, index){
+      
       $('#bodyTable').append(`
       <tr class="actividad-id">
       <input type="hidden" name="idActividad${comboActividad.id}" value="${comboActividad.id}">
@@ -370,63 +375,124 @@ $(document).on('click','.btn-editar', function(e){
       <td class="balanceFix">${comboActividad.balance}</td>
       <td colspan="5"><div class="form-group">
           <label for=""></label>
-          <select class="form-control select-info" name="editselect${comboActividad.id}" id="editselect${comboActividad.id}">
-        
-          
+       
+           <select class="form-control select-info" name="selectEdit${comboActividad.id}" id="${comboActividad.id}">
+                  
+                    
           </select>
           <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${index}" name="">-</a>
         </div> 
       </td>
     </tr>`
       )
-
-    document.querySelector(`#select${comboActividad.id}`);
-    let hini=comboActividad.hini.slice(0,2,), hfin = comboActividad.hfin.slice(0,2); 
-    hini == "00"? hini="12":hini
-    hfin == "00"? hfin="12":hfin
-    let length = hfin - hini; /* longitud de iteraciones  */
-    
-   for (let i = 0; i <=length; i++) {
- 
-    if(comboActividad.libre == 1){ /* si no es horario libre se procede una una manera */
+      insertaOPtionsEdit(comboActividades,comboActividad.id,comboActividad.duracion)
+ //  <div id ="selectContainer${comboActividad.id}"></div>
+    })
    
-        hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
-        hfin.replace('0',""); 
-        
-        let numerodelahoraHini = Number(hini)+i; /* hora inicial */
-
-        let horaInicial ="";
-        numerodelahoraHini < 10 ?horaInicial = String("0"+numerodelahoraHini):horaInicial=String(numerodelahoraHini)
-
-        let minutosHini = comboActividad.horario.substring(3,5); /* despues de la hora obtengo los minutos y la linea separadora */
-        let numerodelahoraHfin = Number(hini)+i+1; /* obtengo la hora inicial y le sumo 1 hora  */
-        let horaFinal="";
-        numerodelahoraHfin <10 ? horaFinal= String("0"+ numerodelahoraHfin): horaFinal = String( numerodelahoraHfin);
+  function insertaOPtionsEdit(infoDeHorariosDeUnaActividadCombo, IdSelectArrellenar, duracionActividad) {
+   
+    let select = document.querySelector(`select[name=selectEdit${IdSelectArrellenar}]`)
+   
+    for(let i = 0; i<infoDeHorariosDeUnaActividadCombo.length; i++) {
+      console.log(infoDeHorariosDeUnaActividadCombo.length)
+        let resultado ,hiniHorario,hfinHorario;
+  
+        if(infoDeHorariosDeUnaActividadCombo[i].libre==1) {    
+       
+            hiniHorario  = timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hini)
+            hfinHorario =timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hfin)
+            resultado = hfinHorario - hiniHorario;
          
-        let diasActividad = comboActividad.horario.substring(16,comboActividad.horario.length)
-
-
-        let option = document.createElement('option');
-        option.innerText = `${horaInicial}:${minutosHini} | ${horaFinal}:${minutosHini} | ${diasActividad}`;
-        document.querySelector(`#editselect${comboActividad.id}`).appendChild(option) 
-    } else if(comboActividad.libre == 0){
-      hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
-      hfin.replace('0',""); 
-      
-      let numerodelahoraHini = Number(hini)+i; /* hora inicial */
-
-      let horaInicial ="";
-      console.log(numerodelahoraHini);
+        }else if (infoDeHorariosDeUnaActividadCombo[i].libre==0){
+        
+          if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {
+            let option = document.createElement("option")
+            option.innerHTML =infoDeHorariosDeUnaActividadCombo[i].horario
+            
+            select.appendChild(option)
+           
+          select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
+          }
+        }
+          if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {    
+            for (let j = 0; j < resultado; j++) {
+              let hf = `${hiniHorario+j+ (duracionActividad/60)}:00`;
+              let paste = hf.padStart(5,"0") +" | " + infoDeHorariosDeUnaActividadCombo[i].horario.substring(18, infoDeHorariosDeUnaActividadCombo[i].horario.length);
+              
+              let option = document.createElement("option")
+              let hi = `${hiniHorario+j}:00`.padStart(5,"0");
+              option.innerHTML =`${hi} | ${paste}`;
+              option.setAttribute('data-hora',hiniHorario+j)
+              select.appendChild(option)
+              select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
+            }
+        
+        }else{ 
+          $('#myTab').text('no se puuede')
+        }
+    
     }
-
-
-   
-   
-     
+    
    }
 
+    // let horariosCombos = info.horarios;
+   
+    // let lenghtHorarios = horariosCombos.length; /* Cantidad de horarios == cuantas actividades tiene el combo */
+    //  for (let i = 0; i < lenghtHorarios; i++) {
+    //    let selectHorarios =document.createElement('select');
+    //    selectHorarios.classList.add('form-control');
+    //    if(horariosCombos[i].libre==1){
+    //     let hini=horariosCombos[i].hini.slice(0,2,), hfin = horariosCombos[i].hfin.slice(0,2); 
+    //     hini == "00"? hini="12":hini
+    //     hfin == "00"? hfin="12":hfin
+    //     let length = hfin - hini; /* longitud de iteraciones para las opciones de los selects "Horas en los selects"    */
 
-     })
+        
+    //    // esta zona es solo para crear las opciones de los selects, los selects de cada horario
+    //    for (let j = 0; j <=length; j++) {
+  
+    //     // if(horariosCombos[i].libre == 1){ /* si no es horario libre se procede una una manera */
+       
+    //         hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+    //         hfin.replace('0',""); 
+            
+    //         let numerodelahoraHini = Number(hini)+j; /* hora inicial */
+            
+    //         let horaInicial ="";
+    //         numerodelahoraHini < 10 ?horaInicial = String("0"+numerodelahoraHini):horaInicial=String(numerodelahoraHini)
+            
+    //         let minutosHini = horariosCombos[i].horario.substring(3,5); /* despues de la hora obtengo los minutos y la linea separadora */
+    //         let numerodelahoraHfin = Number(hini)+j+1; /* obtengo la hora inicial y le sumo 1 hora  */
+    //         let horaFinal="";
+    //         numerodelahoraHfin <10 ? horaFinal= String("0"+ numerodelahoraHfin): horaFinal = String( numerodelahoraHfin);
+             
+    //         let diasActividad = horariosCombos[i].horario.substring(16,horariosCombos[i].horario.length)
+            
+    //         let option = document.createElement('option');
+    //         option.innerText = `${horaInicial}:${minutosHini} | ${horaFinal}:${minutosHini} | ${diasActividad}`;
+
+          
+    //       selectHorarios.appendChild(option)
+    //       // 
+    //     // } 
+    
+    //    }
+    //    } else if(horariosCombos[i].libre == 0){
+    //     console.log('entro');
+    //      // hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+    //      // hfin.replace('0',""); 
+         
+    //      // let numerodelahoraHini = Number(hini)+j; /* hora inicial */
+   
+    //      // let horaInicial ="";
+       
+    //   }
+     
+       
+ 
+    //     document.getElementById('selectContainer').appendChild(selectHorarios)
+ 
+    //  }
   }).catch((err) => {
     console.log(err);
   })
