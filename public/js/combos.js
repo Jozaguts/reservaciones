@@ -21,13 +21,17 @@ document.addEventListener('submit',function(e){
 */
 const getInfoActivity = id =>{  
   // get info of specific activity
+  $('#loading').removeClass('d-none')
   fetch(`/info-actividad/${id}`)
   .then((response) => {
     return response.json();
   })
   .then((responseJson)=>{
     printActivity(responseJson)
+    $('#loading').addClass('d-none')
   })
+
+ 
   .catch((err) => {
     console.log(err);
   })

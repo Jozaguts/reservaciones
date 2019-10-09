@@ -17,7 +17,12 @@
                 <li class="nav-item">
                   <a class="nav-link" id="PreciosYPases-tab" data-toggle="tab" href="#PreciosYPases"    role="tab" aria-controls="PreciosYPases" aria-selected="false">Precios y Pases</a>
                 </li>  
-                <span id='alerta'class=""> </span>             
+                <span id='alerta'class=""> </span>  
+                <div class="loading d-none" id="loading">
+                  <div class="dot d1"></div>
+                  <div class="dot d2"></div>
+                  <div class="dot d3"></div>
+                </div>           
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
@@ -127,7 +132,7 @@
                                         </tr>
                                       </thead>
                                       <tbody id="bodyTable">
-                                      
+                                    
                                    
                                       </tbody>
                                     </table>
