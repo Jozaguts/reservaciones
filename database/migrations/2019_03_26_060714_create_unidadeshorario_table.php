@@ -28,8 +28,6 @@ class CreateUnidadeshorarioTable extends Migration
             $table->foreign('idusuario')->references('id')->on('usuarios');			
             $table->unsignedInteger('idtipounidad');
             $table->foreign('idtipounidad')->references('id')->on('tipounidades');
-
-			
             $table->timestamps();
         });
     }

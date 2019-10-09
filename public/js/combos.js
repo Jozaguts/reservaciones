@@ -1,156 +1,127 @@
 
 $(document).ready(function () {
+/* ATENTION
+* The main select is setter by Modals/combos.blade 
+*/
+document.addEventListener('submit',function(e){
+  e.preventDefault();
+})
 
-  // LISTENERS
-  // addEventListener para el boton  del +combo y mostrar el modal para agregar un combo
- $(document).on('click', '.show-btn', function () {
-  $(this).siblings('div').toggleClass('d-none')
+// ------------------------------------------------ functions list---------------------------
+/*
+* getInfoActivity()
+* printActivity()
+*/
+// ------------------------------------------------end functions list---------------------------
 
-  });
+/* ---------------------------getInfoActivity()----------------------
+* Params: id
+* type: string 
+* Details: return info of spesific activity and option or options (HTML) its depends on type activity (LIBRE or MULTIPLE)
+*/
+const getInfoActivity = id =>{  
+  // get info of specific activity
+  fetch(`/info-actividad/${id}`)
+  .then((response) => {
+    return response.json();
+  })
+  .then((responseJson)=>{
+    printActivity(responseJson)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+// ---------------------------end getInfoActivity()----------------------
 
+/* -------------------------- printActivity-----------------------------
+*params: info of activity
+*type: string
+*details: print in screen the information with a dinamic select
+*/
+// --------------------------end printActivity-----------------------------
+  let aggregateActivities =[];
+  function printActivity(infoActividad){
+    const actividad = infoActividad[0][0];
+    const selectOptions = infoActividad[1]; 
+    if(!aggregateActivities.includes(actividad.id)){
+      let currency =  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format
+  
+      $('#bodyTable').append(` <tr class="actividad-id">
+      <input type="hidden" name="Actividad${actividad.id}" value="Actividad${actividad.id}}">
+      <td scope="row">${actividad.clave}</td>
+      <td>${actividad.nombre}</td>
+      <td class="precioFix">${currency(actividad.precio)}</td>
+      <td class="balanceFix">${currency( actividad.balance)}</td>
+      <td colspan="5"><div class="form-group">
+      <select class="form-control select-info" name="comboselect";> 
+      ${selectOptions}
+      </select>
+      <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
+    `);
+    aggregateActivities.push(actividad.id);
+    }else{
+      swal("", "No Puedes Repetir Actividad", "info")
+    }
+  
+    
+  }
 
+  // call to function printActivity this need a second function getInfoActivity
   $(document).on('click','.btn-agregar', function(e){
-    let id = e.target.parentElement.children[1].value;
-    obtenerActividad(id)  
+    // params: ID == e.target.parentElement.children[1].value
+    getInfoActivity(e.target.parentElement.children[1].value);
   })
 
-  // FUNCIONES
-      // obtenerActividad() devuelve un array con la info de la activiad y la info de sus horarios
-  function obtenerActividad(id){
-    let infoactividad;
-  
-    fetch(`/info-actividad/${id}`)
-    .then((response) => {
-      return response.json();
-    }).then((responseJson)=>{
-      infoactividad = responseJson;
-      cargarActividad(infoactividad)
-    }).catch((err) => {
-      console.log(err);
+  $(document).on('click','.btn-eliminar', function(e){
+    let activityId = e.target.getAttribute('name')
+    
+    swal({
+      title: "¿Eliminar Actividad?",
+      text: "Esta Acción Removera La Actividad De La Lista De Activiades Seleccionadas",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-  return infoactividad;
-  }
-    // funcion convierte la hora de un input time en entero para poder sumar o restar y asi hacer los multiples options 
-    // del select en el mini crud
-    function timeStringToFloat(time) {
-      var hoursMinutes = time.split(/[.:]/);
-      var hours = parseInt(hoursMinutes[0], 10);
-      var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-      return parseInt( hours + minutes / 60);
-    }
+    .then((willDelete) => {
+      if (willDelete) {
+        let goRemoveId = aggregateActivities.indexOf(activityId)
 
-    //cargarActiviad() pinta en pantalla la activiad
-    let activiadesInsertadas =[];
-  function cargarActividad(actividad){
-      let horarios = actividad.infoactiviadhorario;
-          
-      if(!activiadesInsertadas.includes(actividad.infoactivad[0].clave)){
-          for(let i=0; i<actividad.infoactivad.length; i++) {
-              let idActividad = actividad.infoactivad[i].id;
-              let duracion = actividad.infoactivad[i].duracion;
-                  $('#bodyTable').append(`
-                <tr class="actividad-id">
-                <input type="hidden" name="idActividad${idActividad}" value="${idActividad}">
-                <td scope="row">${actividad.infoactivad[i].clave}</td>
-                <td>${actividad.infoactivad[i].nombre}</td>
-                <td class="precioFix">${actividad.infoactivad[i].precio}</td>
-                <td class="balanceFix">${actividad.infoactivad[i].balance}</td>
-                <td colspan="5"><div class="form-group">
-                    <label for=""></label>
-                    <select class="form-control select-info" name="select${actividad.infoactivad[i].id}" id="${actividad.infoactivad[i].id}">
-                  
-                    
-                    </select>
-                    <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${i}" name="">-</a>
-                  </div> 
-                </td>
-              </tr>
-                  `)
-                  // esta funcion recive como parametros el id del select y los horarios
-            
-                  insertaOPtions(horarios,idActividad, duracion);
-                  activiadesInsertadas.push(actividad.infoactivad[i].clave)
-                  cambiaAMoneda("balanceFix")
-                  cambiaAMoneda("precioFix")
-                  $('#alerta').html('')
-              }
-          }else{
-            $('#alerta').addClass('text-danger ml-5')
-            $('#alerta').text('Solo Puedes Agregar una Vez Cada Actividad')
-            let a = document.createElement('a');
-            a.innerText= 'X';
-            a.setAttribute('href','#')
-            a.classList.add('close','ml-3')
-            $('#alerta').append(a);     
-          }
-
-
-
- 
-    
-  }
-      
-  // funcion para insertear opciones en cada select
-  function insertaOPtions(infoactiviadeshorarios, idselect, duracion) {
-   
-    let select = document.querySelector(`select[name=select${idselect}]`)
-    for(let i = 0; i<infoactiviadeshorarios.length; i++) {
-        let resultado ,hiniHorario,hfinHorario;
-    
-        if(infoactiviadeshorarios[i].libre==1) {    
-            hiniHorario  = timeStringToFloat(infoactiviadeshorarios[i].hini)
-            hfinHorario =timeStringToFloat(infoactiviadeshorarios[i].hfin)
-            resultado = hfinHorario - hiniHorario;
-        }else if (infoactiviadeshorarios[i].libre==0){
-      
-          if(infoactiviadeshorarios[i].actividades_id == idselect) {
-            let option = document.createElement("option")
-            option.innerHTML =infoactiviadeshorarios[i].horario
-            select.appendChild(option)
-          select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
-          }
-        }
-          if(infoactiviadeshorarios[i].actividades_id == idselect) {    
-            for (let j = 0; j < resultado; j++) {
-              let hf = `${hiniHorario+j+ (duracion/60)}:00`;
-              let paste = hf.padStart(5,"0") +" | " + infoactiviadeshorarios[i].horario.substring(18, infoactiviadeshorarios[i].horario.length);
-              
-              let option = document.createElement("option")
-              let hi = `${hiniHorario+j}:00`.padStart(5,"0");
-              option.innerHTML =`${hi} | ${paste}`;
-              option.setAttribute('data-hora',hiniHorario+j)
-              select.appendChild(option)
-              select.nextElementSibling.setAttribute('data-horarioid', infoactiviadeshorarios[i].id)
-            }
+        aggregateActivities.splice(goRemoveId,1);
+        swal("Actividad Eliminada", {
+          icon: "success",
+        });
+        e.target.parentNode.parentNode.parentNode.remove();
+        console.log(aggregateActivities)
         
-        }else{ 
-          $('#myTab').text('no se puuede')
-        }
-    
-    }
-    
-   }
+      } else {
+        swal("Actividad No Eliminada");
+      }
+    });
+  })
+  
+  
+
+  
   
 
 // elimniar fila en el mini crud
 
-    document.addEventListener('submit',function(e){
-      e.preventDefault();
-    })
+
 
 document.addEventListener('click',function(e){
   
-  if(e.target.classList.contains('btn-eliminar')) {
-    let parent = e.target.parentNode.parentNode.parentNode;
-    let index = e.target.getAttribute('data-index');  
+  // if(e.target.classList.contains('btn-eliminar')) {
+  //   let parent = e.target.parentNode.parentNode.parentNode;
+  //   let index = e.target.getAttribute('data-index');  
 
-    if(confirm("Eliminiar Actividad") == true){
-      parent.remove();
-      delete activiadesInsertadas[index]
+  //   if(confirm("Eliminiar Actividad") == true){
+  //     parent.remove();
+  //     delete activiadesInsertadas[index]
     
-      activiadesInsertadas.length -= 1
-    }    
-  }
+  //     activiadesInsertadas.length -= 1
+  //   }    
+  // }
 
   if(e.target.classList.contains('btn-guardar')) {
     let arrayDataSet =[];
@@ -385,6 +356,8 @@ $(document).on('click','.btn-editar', function(e){
       </td>
     </tr>`
       )
+
+
       insertaOPtionsEdit(comboActividades,comboActividad.id,comboActividad.duracion)
  //  <div id ="selectContainer${comboActividad.id}"></div>
     })

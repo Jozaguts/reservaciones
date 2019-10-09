@@ -7,10 +7,13 @@ use App\Anticipos;
 use App\TipoActividades;
 use Validator;
 use App\Actividades;
+use App\ActividadesHorario;
 use App\Personas;
 use App\ComboDet;
 use App\ActividadPrecios;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Http\Requests\CreateCombosRequest;
 
 
 class CombosController extends Controller
@@ -232,45 +235,87 @@ class CombosController extends Controller
         //
     }
     public function infoactividad(Request $request, $id){
-       
-        $actividades = DB::table('actividades as ac')
-        ->select('ac.id', 'ac.clave', 'ac.nombre','ac.precio','ac.balance', 'ac.duracion')
-        ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.id','=',$id],['ac.combo','=','0']])
-        ->orderBy('ac.clave')
+
+        /* Obtento la informacion de la activiad */
+
+        $infoActividad = [];
+
+        $actividad = Actividades::find($id)
+        ->where('active', '1')
+        ->where('remove','0')
+        ->where('renta','0')
+        ->where('combo','0')
+        ->where('id', $id)
         ->get();
+
+        /* Obtengo los horarios de la actividad */
+        $actividadesHorarios = DB::table('actividadeshorarios')
+        ->where('active','1')
+        ->where('remove','0')
+        ->where('actividades_id',$id)
+        ->get();
+        // dd( $actividadesHorarios);
+        /* Se generan las options para el select de la actividad */
+        $options = [];
+       
+        foreach ($actividadesHorarios as $actividadesHorario ) {
+        /* Si el horario es LIBRE se generan multiples opciones que van desde la hora de 
+        ** Inicio  HINI hasta la hora
+        ** final HFIN
+        ** con intervalos de una hora 
+        */
+        if($actividadesHorario->libre == 1){
+        $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H');   
+        $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H');
+
+        $lenght = (int)$hfin - (int)$hini; /* Vueltas === cantidad de opciones en el select */
+
+        for ($i=0; $i < $lenght ; $i++) { 
+
+        $selecthini= Carbon::create(2012, 1, 31, $hini)->addHour($i)->format('H:m');
+        $selecthfin= Carbon::create(2012, 1, 31, $hini)->addHour($i+1)->format('H:m');
+
+        $l = $actividadesHorario->l ==1 ? "L": ""; 
+        $m = $actividadesHorario->m ==1 ? "M": ""; 
+        $x = $actividadesHorario->x ==1 ? "X": ""; 
+        $j = $actividadesHorario->j ==1 ? "J": ""; 
+        $v = $actividadesHorario->v ==1 ? "V": ""; 
+        $s = $actividadesHorario->s ==1 ? "S": ""; 
+        $d = $actividadesHorario->d ==1 ? "D": "";
+        
+        $options[] = "<option> $selecthini | $selecthfin | $l $m $x $j $v $s $d </option>"; 
+
+        } 
       
+        $infoActividad[] =$actividad;
+        $infoActividad[] =$options;
+     
+        return  $infoActividad;
+        // acomodar la hoar final en hoario libre 
+        }else if($actividadesHorario->libre ==0){
+   
+        $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H:m');   
+        $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H:m'); 
+        $l = $actividadesHorario->l ==1 ? "L": ""; 
+        $m = $actividadesHorario->m ==1 ? "M": ""; 
+        $x = $actividadesHorario->x ==1 ? "X": ""; 
+        $j = $actividadesHorario->j ==1 ? "J": ""; 
+        $v = $actividadesHorario->v ==1 ? "V": ""; 
+        $s = $actividadesHorario->s ==1 ? "S": ""; 
+        $d = $actividadesHorario->d ==1 ? "D": "";
 
-        $ach = DB::table('actividadeshorarios as ach')
-        ->select('ach.id','ach.actividades_id','ach.libre','ach.hini','ach.hfin', DB::raw('concat ( substring(ach.hini,1,5), " | ", substring(ach.hfin,1,5), " | ", IF(ach.l=1, "L", ""), IF(ach.l=m, " M", ""), IF(ach.x=1, " X", ""), IF(ach.j=1, " J", ""), IF(ach.v=1, " V", ""), IF(ach.s=1, " S", ""), IF(ach.d=1, " D", "")) as horario'))
-        ->where([['ach.active','=','1'],['ach.remove','=','0'], ['ach.actividades_id','=',$id]])
-        ->orderBy('ach.id')
-        ->get();   
-        
-         $arrHLibres =array();
-         $arrHMultiple = array();
-        //  array_push($arrHLibres, dato)
-        $length = $ach->count();
-        for ($i=0; $i < $length; $i++) { 
+        $options[] = "<option> $hini | $hfin | $l $m $x $j $v $s $d </option>"; 
 
-            if($ach[$i]->libre == 1) {
-
-                array_push($arrHLibres, $ach[$i]);
-
-            } else if($ach[$i]->libre == 0) {
-
-                array_push($arrHMultiple,$ach[$i]);
-
-            }
-        
-        }
-
-        if(count($arrHLibres) > 0){
-            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHLibres]);
-        }else{
-            return response()->json(['infoactivad' => $actividades, 'infoactiviadhorario'=> $arrHMultiple]);
         }
         
-      
+        $infoActividad[] =$actividad;
+        $infoActividad[] =$options;
+     
+        return  $infoActividad;
+        }
+        
+        
+        
     }
 
 

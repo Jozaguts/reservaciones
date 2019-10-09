@@ -11,7 +11,7 @@
                         <div class="row justify-content-end my-2">
                             {{-- <a href="#" class=""  id="btnShowAddEU">Actividad</a> --}}
                             <button type="button" class="btn btn-success btn-crear" data-toggle="modal" data-target="#combos">
-                                    <span class="font-weight-bolder btn-crear">+</span>  Combo</button>
+                                    <span class="font-weight-bolder btn-crear" >+</span>Combo</button>
                         </div>
                           {{-- alerts --}}
                           @include('components.ajax-alerts')

@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
         "spatie/laravel-permission": "^2.34",
-        "yajra/laravel-datatables-oracle": "^6.0"
+        "yajra/laravel-datatables-oracle": "^6.0",
+        "nesbot/carbon": "~1.39.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

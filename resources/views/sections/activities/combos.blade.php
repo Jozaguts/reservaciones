@@ -28,12 +28,10 @@
 @endsection
 
 @section('scripts')
-
-
 {{-- <script src="{{ asset('js/activities.js') }}" defer></script> --}}
-<script src="{{ asset('js/combos.js') }}" defer></script>
+<script src="{{ asset('js/combos.js') }}" ></script>
 
-<script src="{{ asset('js/hamburgerMenu.js') }}" defer></script>
+<script src="{{ asset('js/hamburgerMenu.js') }}" ></script>
 
 
 
