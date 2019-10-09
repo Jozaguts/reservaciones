@@ -52,13 +52,12 @@ const getInfoActivity = id =>{
       let currency =  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format
   
       $('#bodyTable').append(` <tr class="actividad-id">
-      <input type="hidden" name="Actividad${actividad.id}" value="Actividad${actividad.id}}">
       <td scope="row">${actividad.clave}</td>
       <td>${actividad.nombre}</td>
       <td class="precioFix">${currency(actividad.precio)}</td>
       <td class="balanceFix">${currency( actividad.balance)}</td>
       <td colspan="5"><div class="form-group">
-      <select class="form-control select-info" name="comboselect";> 
+      <select class="form-control select-info" name="select_actividad_id_${actividad.id}";> 
       ${selectOptions}
       </select>
       <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
@@ -131,119 +130,121 @@ document.addEventListener('click',function(e){
     let arrayDataSet =[];
     let mismodia = $('#mismodia').prop('checked')
     let dataform = $('#combosForm').serializeArray();
+    let preciosYPasesForm = $('#AddPreciosYPasesForm').serializeArray();
+    console.log(dataform,preciosYPasesForm)
     // let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
 
     // let datadataPreciosYpases={};
 
    
 
-    let data = {};
-    $(dataform).each(function(index, obj){
-      data[obj.name] = obj.value;
+//     let data = {};
+//     $(dataform).each(function(index, obj){
+//       data[obj.name] = obj.value;
      
-    });
-    data.mismodia = mismodia;
-    // trs fila que contiene info de actividad y horarios
-    let trs = document.querySelectorAll('.actividad-id');
+//     });
+//     data.mismodia = mismodia;
+//     // trs fila que contiene info de actividad y horarios
+//     let trs = document.querySelectorAll('.actividad-id');
 
-    trs.forEach(function(tr,index){
+//     trs.forEach(function(tr,index){
   
-      let dataSet={
-        hini: "",
-        hfin: "",
-        actividades_id: "",
-        horario_id: "",
-        usuarios_id: $('#idUsuario').val(),
-        active: 1,
-        remove: 0};
-      let fd = $(tr).find('select').val()
-      let  hini =fd.substring(0, 5)
-      let  hfin =fd.substring(8, 13)
-      let idAct = $(tr)[0].children[0].value;
-      dataSet.hini = hini
-      dataSet.hfin = hfin
-      let horarioId = $(tr).find('a').data('horarioid')
-      dataSet.horario_id =horarioId
-      dataSet.actividades_id = idAct; 
-      arrayDataSet.push(dataSet)
-    })
-    data.dataSet=arrayDataSet;
-//  INICIO PESTAÑA 2 ############################################################################################
-let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
-let datos2 = new FormData(AddPreciosYPasesForm)
-let balance = datos2.get('balanceg')
-let precio = datos2.get('preciog')
+//       let dataSet={
+//         hini: "",
+//         hfin: "",
+//         actividades_id: "",
+//         horario_id: "",
+//         usuarios_id: $('#idUsuario').val(),
+//         active: 1,
+//         remove: 0};
+//       let fd = $(tr).find('select').val()
+//       let  hini =fd.substring(0, 5)
+//       let  hfin =fd.substring(8, 13)
+//       let idAct = $(tr)[0].children[0].value;
+//       dataSet.hini = hini
+//       dataSet.hfin = hfin
+//       let horarioId = $(tr).find('a').data('horarioid')
+//       dataSet.horario_id =horarioId
+//       dataSet.actividades_id = idAct; 
+//       arrayDataSet.push(dataSet)
+//     })
+//     data.dataSet=arrayDataSet;
+// //  INICIO PESTAÑA 2 ############################################################################################
+// let AddPreciosYPasesForm = document.getElementById('AddPreciosYPasesForm')
+// let datos2 = new FormData(AddPreciosYPasesForm)
+// let balance = datos2.get('balanceg')
+// let precio = datos2.get('preciog')
 
-//datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
-const personas = document.querySelectorAll('[id^=persona]')
-let datosPersonas = [];
+// //datos del segundo form PRECIOS ACTIVIDAD-PRECIOS
+// const personas = document.querySelectorAll('[id^=persona]')
+// let datosPersonas = [];
 
-personas.forEach(function(persona){ 
-persona={
-  precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
-  precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
-  precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
-  doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
-  doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
-  triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
-  triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
-  promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
-  restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
-  acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
-  remove: 0,
-  active: 1,
-  persona_id: persona.getAttribute('data-id')
-}
-datosPersonas.push(persona)
-})
+// personas.forEach(function(persona){ 
+// persona={
+//   precio1: `${datos2.get('p1PersonaId'+persona.getAttribute('data-id'))}`,
+//   precio2:`${datos2.get('p2PersonaId'+persona.getAttribute('data-id'))}`,
+//   precio3:`${datos2.get('p3PersonaId'+persona.getAttribute('data-id'))}`,
+//   doble:`${datos2.get('doblePersonaId'+persona.getAttribute('data-id'))}`,
+//   doblebalanc: `${datos2.get('balanceDoblePersonaId'+persona.getAttribute('data-id'))} `,
+//   triple:`${datos2.get('triplePersonaId'+persona.getAttribute('data-id'))} `,
+//   triplebalanc: `${datos2.get('balanceTriplePersonaId'+persona.getAttribute('data-id'))} `,
+//   promocion: `${datos2.get('promoPersonaId'+persona.getAttribute('data-id'))} `,
+//   restriccion: `${datos2.get('restriccionPersonaId'+persona.getAttribute('data-id'))} `,
+//   acompanante: `${datos2.get('acompanantePersonaId'+persona.getAttribute('data-id'))} `,
+//   remove: 0,
+//   active: 1,
+//   persona_id: persona.getAttribute('data-id')
+// }
+// datosPersonas.push(persona)
+// })
 
-  //  FIN PESTAÑA 2 ############################################################################################    
+//   //  FIN PESTAÑA 2 ############################################################################################    
        
-    // $(dataPreciosYpases ).each(function(index, obj){
-    //   datadataPreciosYpases[obj.name] = obj.value;
-    // });
+//     // $(dataPreciosYpases ).each(function(index, obj){
+//     //   datadataPreciosYpases[obj.name] = obj.value;
+//     // });
   
-    // data.preciosYpases =datadataPreciosYpases
-    data.datosPersonas =datosPersonas
-    data.precio = precio;
-    data.balance =balance;
+//     // data.preciosYpases =datadataPreciosYpases
+//     data.datosPersonas =datosPersonas
+//     data.precio = precio;
+//     data.balance =balance;
   
    
-    let horarioId = $('.btn-eliminar').data('horarioid')
+//     let horarioId = $('.btn-eliminar').data('horarioid')
 
-// Comienza la el ajax para guardar combos
-    fetch('/combos',{
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(data), 
-      headers:{
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
-    })
-    .then(function(response){
-      return response.json();
-    })
-      .then(function(responseJson){
-        if(responseJson['message'] != 'Combo Guardado'){
-          // data.errors.forEach(()=>{})
+// // Comienza la el ajax para guardar combos
+//     fetch('/combos',{
+//       method: 'POST', // or 'PUT'
+//       body: JSON.stringify(data), 
+//       headers:{
+//         'Content-Type': 'application/json',
+//         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//       }
+//     })
+//     .then(function(response){
+//       return response.json();
+//     })
+//       .then(function(responseJson){
+//         if(responseJson['message'] != 'Combo Guardado'){
+//           // data.errors.forEach(()=>{})
           
-          $('#errorsIntoModal').html(responseJson.errors[0]);
-            $('#message-errorIntoModal').fadeIn();
-            setTimeout(() => {
-              $('#message-errorIntoModal').fadeOut();
-            }, 3000);
-            // setTimeout("location.reload(true);",3000)
+//           $('#errorsIntoModal').html(responseJson.errors[0]);
+//             $('#message-errorIntoModal').fadeIn();
+//             setTimeout(() => {
+//               $('#message-errorIntoModal').fadeOut();
+//             }, 3000);
+//             // setTimeout("location.reload(true);",3000)
             
-        }else{
-          $('#successIntoModal').html(responseJson['message']);
-            $('#message-successIntoModal').fadeIn();
-            setTimeout(() => {
-              $('#message-successIntoModal').fadeOut();
-            }, 3000);
-            // setTimeout("location.reload(true);",3000)
-        }
+//         }else{
+//           $('#successIntoModal').html(responseJson['message']);
+//             $('#message-successIntoModal').fadeIn();
+//             setTimeout(() => {
+//               $('#message-successIntoModal').fadeOut();
+//             }, 3000);
+//             // setTimeout("location.reload(true);",3000)
+//         }
      
-      })
+//       })
   } /* termina boton guardar */
     
 

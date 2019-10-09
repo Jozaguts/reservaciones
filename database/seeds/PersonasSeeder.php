@@ -19,15 +19,15 @@ class PersonasSeeder extends Seeder
             'active'=> 1,
             'remove'=>0
             ]);
-            $persona::create([
-                'nombre' => 'Niño',
-                'active'=> 1,
-                'remove'=>0
-                ]);
-                $persona::create([
-                    'nombre' => 'Estudiante',
-                    'active'=> 1,
-                    'remove'=>0
-                    ]);
+        $persona::create([
+            'nombre' => 'Niño',
+            'active'=> 1,
+            'remove'=>0
+            ]);
+        $persona::create([
+            'nombre' => 'Estudiante',
+            'active'=> 1,
+            'remove'=>0
+            ]);
     }
 }

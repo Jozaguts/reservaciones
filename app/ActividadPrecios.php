@@ -23,9 +23,9 @@ class ActividadPrecios extends Model
     'acompanante',
     'remove',
     'persona_id',
-    'usuarios_id',
+    'usuario_id',
     'pases_id',
-    'actividades_id'
+    'actividad_id'
 ];
  
 

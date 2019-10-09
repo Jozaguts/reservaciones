@@ -29,12 +29,12 @@ class CreateActividadpreciosTable extends Migration
             $table->boolean('remove');
             $table->timestamps();
 
-            $table->unsignedInteger('usuarios_id');
-            $table->foreign('usuarios_id')->references('id')->on('usuarios');	
+            $table->unsignedInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');	
             $table->unsignedInteger('persona_id'); //se agrego campo FK
             $table->foreign('persona_id')->references('id')->on('personas');
-            $table->unsignedInteger('actividades_id');
-            $table->foreign('actividades_id')->references('id')->on('actividades');	
+            $table->unsignedInteger('actividad_id');
+            $table->foreign('actividad_id')->references('id')->on('actividades');	
         
         });
     }
