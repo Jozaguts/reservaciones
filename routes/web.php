@@ -46,6 +46,7 @@ Route::resource('test', 'testController');
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
 Route::resource('combos', 'CombosController')->middleware(['auth']);
 
+
 //tipo de actividades
 Route::resource('tipoactividades', 'TipoActividadesController')->middleware(['auth']);
 

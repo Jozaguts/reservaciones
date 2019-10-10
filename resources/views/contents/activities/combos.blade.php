@@ -15,7 +15,9 @@
                         </div>
                           {{-- alerts --}}
                           @include('components.ajax-alerts')
-                         
+                          @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
                           {{-- btns container list--}}
                         <div class="container main-grid">
                                 @foreach ($tipoactividades as $tipoactividad )

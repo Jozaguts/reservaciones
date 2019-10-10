@@ -14,6 +14,7 @@ use App\ActividadPrecios;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Requests\CreateCombosRequest;
+use Illuminate\Support\MessageBag;
 
 
 class CombosController extends Controller
@@ -53,105 +54,170 @@ class CombosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCombosRequest $request) 
     {
+        // revisar tunidad y tipo_actividad IDS
+
+        $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
+        
+        $combo = Actividades::create([
+
+            'clave' =>  $request->clave,
+            'nombre' =>  $request->nombre,
+            'maxcortesias' =>  $request->maxcortesias,
+            'maxcupones' =>  $request->maxcupones,
+            'mismo_dia' =>  $request->mismo_dia==null? 0:1,
+            'precio' => $request->precio,
+            'balance' => $request->balance,
+            'anticipo_id' =>  $request->anticipo_id,
+            'tipoactividades_id' =>  $request->tipoactividades_id,
+            'tipounidades_id'=>  $tipoactividades->tipounidad_id,
+            'idusuario' =>  $request->idusuario,
+            'remove' =>  '0',
+            'active' =>  '1',
+            'combo' => '1',
+            'fijo' => '0',
+            'renta' => '0',
+            'promocion' => '0',
+            'riesgo' => '0',
+
+        ]);
+
+        return response()->json([
+            'success' => 'Combo Guardado Con exito'
+        ]);
+     
+    
+   
+
+
+
+
+
+
+
+
+
+        // $validator = Validator::make($request->all(), [
+      
+        //     'idusuario' => 'required|unique:actividades',
+        //     'clave' => 'required',
+        //     'nombre' => 'required',
+        //     'tipoactividades_id' => 'required',
+        //     'maxcortesias' => 'required',
+        //     'maxcupones' => 'required',
+        //     'anticipo_id' => 'required',
+        //     'mismodia' => 'required',
+        //     'active' => 'required',
+        //     'remove' => 'required',
+        //     'combo' => 'required',
+        //     'select_actividad_id_5' => 'required'
+        // ]);
+        // $errors = $validator->errors();
+
+        // // $validated = $request->validated();
+        // // $combo = Actividades::create(['name' => 'Flight 10']);
+        // // $request->validated();
+        // dd($errors, $request);
+        
+
            //reglas de validacion
-           $rules =[
-            'clave' => ['required', 'string', 'min:5','unique:actividades'],
-            'nombre' => ['required', 'string', 'max:255'],
-            'tipoactividades_id'=> ['required', 'integer'],
-            'active'=> ['nullable', 'boolean'],
-            'remove' => ['nullable','boolean'],
-            'maxcortesias'=>['nullable','integer'],
-            'maxcupones'=>['nullable','integer'],
-            'anticipo_id'=>['required','integer'],
-            'idusuario'=> ['integer','required'],
-            'libre'=> ['boolean','nullable'],
-            'combo'=> ['boolean','nullable']
-        ];
+        //    $rules =[
+        //     'clave' => ['required', 'string', 'min:5','unique:actividades'],
+        //     'nombre' => ['required', 'string', 'max:255'],
+        //     'tipoactividades_id'=> ['required', 'integer'],
+        //     'active'=> ['nullable', 'boolean'],
+        //     'remove' => ['nullable','boolean'],
+        //     'maxcortesias'=>['nullable','integer'],
+        //     'maxcupones'=>['nullable','integer'],
+        //     'anticipo_id'=>['required','integer'],
+        //     'idusuario'=> ['integer','required'],
+        //     'libre'=> ['boolean','nullable'],
+        //     'combo'=> ['boolean','nullable']
+        // ];
        
-             //Se realiza la validación
-             $validator = Validator::make($request->all(), $rules);
-             if($validator->fails()){
-                return response()->json(['errors'=> $validator->errors()->all()]);
-             }else{
-                 $act = Actividades::create([
-                    'clave' => $request['clave'],
-                    'nombre' => $request['nombre'],
-                    'tipoactividades_id' =>$request['tipoactividades_id'],
-                    'active'=> '1',
-                    'remove' => '0',
-                    'maxcortesias'=>$request['maxcortesias'],
-                    'maxcupones'=>$request['maxcupones'],
-                    'anticipo_id'=>$request['anticipo_id'],
-                    'idusuario'=> $request['idusuario'],
-                    'libre'=> $request['libre'],
-                    'combo'=> '1',
-                    'precio' => $request->get('precio'),
-                    'balance' => $request->get('balance'),
-                    'fijo'=>0,
-                    'renta'=>0,
-                    'promocion' => 0,
-                    'riesgo'=>0,
-                    'tipounidades_id'=>1                     
-                     ]);
+            //  //Se realiza la validación
+            //  $validator = Validator::make($request->all(), $rules);
+            //  if($validator->fails()){
+            //     return response()->json(['errors'=> $validator->errors()->all()]);
+            //  }else{
+            //      $act = Actividades::create([
+            //         'clave' => $request['clave'],
+            //         'nombre' => $request['nombre'],
+            //         'tipoactividades_id' =>$request['tipoactividades_id'],
+            //         'active'=> '1',
+            //         'remove' => '0',
+            //         'maxcortesias'=>$request['maxcortesias'],
+            //         'maxcupones'=>$request['maxcupones'],
+            //         'anticipo_id'=>$request['anticipo_id'],
+            //         'idusuario'=> $request['idusuario'],
+            //         'libre'=> $request['libre'],
+            //         'combo'=> '1',
+            //         'precio' => $request->get('precio'),
+            //         'balance' => $request->get('balance'),
+            //         'fijo'=>0,
+            //         'renta'=>0,
+            //         'promocion' => 0,
+            //         'riesgo'=>0,
+            //         'tipounidades_id'=>1                     
+            //          ]);
                 
-                     if($act){
-                         for ($h=0; $h < count($request->get('dataSet')); $h++) { 
-                            $cDet = ComboDet::create([
-                                'hini' => $request->get('dataSet')[$h]['hini'],
-                                'hfin' =>$request->get('dataSet')[$h]['hfin'],
-                                'actividades_id'=>$request->get('dataSet')[$h]['actividades_id'],
-                                'horario_id' =>$request->get('dataSet')[$h]['horario_id'],
-                                'usuarios_id'=>$request['idusuario'],
-                                'actividades_id_combo'=>$act->id,
-                                'active'=>'1',
-                                'remove'=>'0'
-                            ]);
-                         }
+            //          if($act){
+            //              for ($h=0; $h < count($request->get('dataSet')); $h++) { 
+            //                 $cDet = ComboDet::create([
+            //                     'hini' => $request->get('dataSet')[$h]['hini'],
+            //                     'hfin' =>$request->get('dataSet')[$h]['hfin'],
+            //                     'actividades_id'=>$request->get('dataSet')[$h]['actividades_id'],
+            //                     'horario_id' =>$request->get('dataSet')[$h]['horario_id'],
+            //                     'usuarios_id'=>$request['idusuario'],
+            //                     'actividades_id_combo'=>$act->id,
+            //                     'active'=>'1',
+            //                     'remove'=>'0'
+            //                 ]);
+            //              }
                  
                       
                         
-                                // inserta precios
-                $datosPersonas = $request->datosPersonas;
-                foreach ($datosPersonas as $datoPersona ) {
-                    if($datoPersona['acompanante'] == 'null') {                  
-                        $datoPersona['acompanante'] = 0;
-                    }
-                    if($datoPersona['restriccion'] == 'null') {                  
-                        $datoPersona['restriccion'] = 0;
-                    }
-                    if($datoPersona['promocion'] == 'null') {                  
-                        $datoPersona['promocion'] = 0;
-                    }                 
-                    $actividadPrecio = ActividadPrecios::firstOrCreate(
-                        ['actividades_id' => $act->id, 'persona_id' => $datoPersona['persona_id']  ], 
-                        [
-                        'precio1' => $datoPersona['precio1'],
-                        'precio2'=> $datoPersona['precio2'],
-                        'precio3'=> $datoPersona['precio3'],
-                        'doble'=> $datoPersona['doble'],
-                        'doblebalanc'=> $datoPersona['doblebalanc'],
-                        'triple'=> $datoPersona['triple'],
-                        'triplebalanc'=> $datoPersona['triplebalanc'],
-                        'promocion'=> $datoPersona['promocion'],
-                        'restriccion'=> $datoPersona['restriccion'],
-                        'active'=> $datoPersona['active'],
-                        'acompanante'=> $datoPersona['acompanante'],
-                        'remove'=> $datoPersona['remove'],
-                        'usuarios_id'=> $request->get('idusuario'),
-                        ]
-                    );
-                    $actividadPrecio->save();
-                }  
+            //                     // inserta precios
+            //     $datosPersonas = $request->datosPersonas;
+            //     foreach ($datosPersonas as $datoPersona ) {
+            //         if($datoPersona['acompanante'] == 'null') {                  
+            //             $datoPersona['acompanante'] = 0;
+            //         }
+            //         if($datoPersona['restriccion'] == 'null') {                  
+            //             $datoPersona['restriccion'] = 0;
+            //         }
+            //         if($datoPersona['promocion'] == 'null') {                  
+            //             $datoPersona['promocion'] = 0;
+            //         }                 
+            //         $actividadPrecio = ActividadPrecios::firstOrCreate(
+            //             ['actividades_id' => $act->id, 'persona_id' => $datoPersona['persona_id']  ], 
+            //             [
+            //             'precio1' => $datoPersona['precio1'],
+            //             'precio2'=> $datoPersona['precio2'],
+            //             'precio3'=> $datoPersona['precio3'],
+            //             'doble'=> $datoPersona['doble'],
+            //             'doblebalanc'=> $datoPersona['doblebalanc'],
+            //             'triple'=> $datoPersona['triple'],
+            //             'triplebalanc'=> $datoPersona['triplebalanc'],
+            //             'promocion'=> $datoPersona['promocion'],
+            //             'restriccion'=> $datoPersona['restriccion'],
+            //             'active'=> $datoPersona['active'],
+            //             'acompanante'=> $datoPersona['acompanante'],
+            //             'remove'=> $datoPersona['remove'],
+            //             'usuarios_id'=> $request->get('idusuario'),
+            //             ]
+            //         );
+            //         $actividadPrecio->save();
+            //     }  
 
 
 
-                        return response()->json(['message' => 'Combo Guardado']);
-                     }else{
-                        return response()->json(['message'=>'Error Al Guardar']);
-                     }
-             }
+            //             return response()->json(['message' => 'Combo Guardado']);
+            //          }else{
+            //             return response()->json(['message'=>'Error Al Guardar']);
+            //          }
+            //  }
            
             
              

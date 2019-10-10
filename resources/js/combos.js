@@ -11,6 +11,7 @@ document.addEventListener('submit',function(e){
 /*
 * getInfoActivity()
 * printActivity()
+* changeValueCheck();
 */
 // ------------------------------------------------end functions list---------------------------
 
@@ -43,42 +44,57 @@ const getInfoActivity = id =>{
 *type: string
 *details: print in screen the information with a dinamic select
 */
-// --------------------------end printActivity-----------------------------
-  let aggregateActivities =[];
-  function printActivity(infoActividad){
-    const actividad = infoActividad[0][0];
-    const selectOptions = infoActividad[1]; 
-    if(!aggregateActivities.includes(actividad.id)){
-      let currency =  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format
-  
-      $('#bodyTable').append(` <tr class="actividad-id">
-      <td scope="row">${actividad.clave}</td>
-      <td>${actividad.nombre}</td>
-      <td class="precioFix">${currency(actividad.precio)}</td>
-      <td class="balanceFix">${currency( actividad.balance)}</td>
-      <td colspan="5"><div class="form-group">
-      <select class="form-control select-info" name="select_actividad_id_${actividad.id}";> 
-      ${selectOptions}
-      </select>
-      <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
-    `);
-    aggregateActivities.push(actividad.id);
-    }else{
-      swal("", "No Puedes Repetir Actividad", "info")
-    }
-  
-    
+let aggregateActivities =[];
+function printActivity(infoActividad){
+  const actividad = infoActividad[0][0];
+  const selectOptions = infoActividad[1]; 
+  if(!aggregateActivities.includes(actividad.id)){
+    let currency =  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format
+
+    $('#bodyTable').append(` <tr class="actividad-id">
+    <td scope="row">${actividad.clave}</td>
+    <td>${actividad.nombre}</td>    <input type="hidden" name="active" value="1">
+
+    <td class="precioFix">${currency(actividad.precio)}</td>
+    <td class="balanceFix">${currency( actividad.balance)}</td>
+    <td colspan="5"><div class="form-group">
+    <select class="form-control select-info" name="select_actividad_id_${actividad.id}";> 
+    ${selectOptions}
+    </select>
+    <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
+  `);
+  aggregateActivities.push(actividad.id);
+  }else{
+    swal("", "No Puedes Repetir Actividad", "info")
   }
 
-  // call to function printActivity this need a second function getInfoActivity
+  
+}
+// --------------------------end printActivity-----------------------------
+ 
+
+// --------------------------changeValueCheck-----------------------------
+
+$('#mismodia').on('change', function () {
+  $('#mismodia').prop('checked') == true ?  $('#mismodia').val('1'): $('#mismodia').val('0'); 
+});
+// --------------------------end changeValueCheck-----------------------------
+ 
+// --------------------------btn-agregar-----------------------------
+/*  add activity to the miniCrud
+* call to function printActivity this need a second function getInfoActivity 
+*/
   $(document).on('click','.btn-agregar', function(e){
     // params: ID == e.target.parentElement.children[1].value
     getInfoActivity(e.target.parentElement.children[1].value);
   })
+// --------------------------end btn-agregar-----------------------------
 
+// --------------------------btn-eliminar-----------------------------
+// delete activity to the miniCrud
   $(document).on('click','.btn-eliminar', function(e){
     let activityId = e.target.getAttribute('name')
-    
+  
     swal({
       title: "¿Eliminar Actividad?",
       text: "Esta Acción Removera La Actividad De La Lista De Activiades Seleccionadas",
@@ -103,35 +119,110 @@ const getInfoActivity = id =>{
     });
   })
   
-  
-
-  
-  
-
-// elimniar fila en el mini crud
+// -------------------------- end btn-eliminar-----------------------------
 
 
-
+// --------------------------btn-guardar-----------------------------
 document.addEventListener('click',function(e){
   
-  // if(e.target.classList.contains('btn-eliminar')) {
-  //   let parent = e.target.parentNode.parentNode.parentNode;
-  //   let index = e.target.getAttribute('data-index');  
-
-  //   if(confirm("Eliminiar Actividad") == true){
-  //     parent.remove();
-  //     delete activiadesInsertadas[index]
-    
-  //     activiadesInsertadas.length -= 1
-  //   }    
-  // }
-
   if(e.target.classList.contains('btn-guardar')) {
-    let arrayDataSet =[];
-    let mismodia = $('#mismodia').prop('checked')
+
+  
+
+    let data= {};
+
     let dataform = $('#combosForm').serializeArray();
     let preciosYPasesForm = $('#AddPreciosYPasesForm').serializeArray();
-    console.log(dataform,preciosYPasesForm)
+
+    for (let i = 0; i < dataform.length; i++) {
+   
+      data[dataform[i].name]=dataform[i].value
+  
+    }
+    for (let i = 0; i < preciosYPasesForm.length; i++) {
+   
+      data[preciosYPasesForm[i].name]=preciosYPasesForm[i].value
+  
+    }
+  
+   
+
+    fetch('/combos',{
+            method: 'POST', 
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-Token": $('input[name="_token"]').val()
+            }
+          })
+          .then((response)=>{
+            return response.json()
+          })
+          .then((jsonResponse)=>{
+            let  message ="";
+            if(jsonResponse.errors){
+              let errors = $.each(jsonResponse.errors, function (key, value) {
+                    
+                message += `${value}
+                `                     
+              });
+              swal({
+                title: "Error de Validación",
+                text: `${message}`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+            }else if(jsonResponse.success){
+              swal("Good job!", "You clicked the button!", "success");
+            }
+            $('#bodyTable').html(' ');
+            $('#combos').modal('hide');
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+ // --------------------------end btn-guardar-----------------------------        
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // console.log(dataform,preciosYPasesForm)
     // let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
 
     // let datadataPreciosYpases={};

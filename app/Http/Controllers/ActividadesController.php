@@ -138,7 +138,7 @@ class ActividadesController extends Controller
                         $datoPersona['promocion'] = 0;
                     }                 
                     $actividadPrecio = ActividadPrecios::firstOrCreate(
-                        ['actividades_id' => $actividad->id, 'persona_id' => $datoPersona['persona_id']  ], 
+                        ['actividad_id' => $actividad->id, 'persona_id' => $datoPersona['persona_id']  ], 
                         [
                         'precio1' => $datoPersona['precio1'],
                         'precio2'=> $datoPersona['precio2'],
@@ -152,7 +152,7 @@ class ActividadesController extends Controller
                         'active'=> $datoPersona['active'],
                         'acompanante'=> $datoPersona['acompanante'],
                         'remove'=> $datoPersona['remove'],
-                        'usuarios_id'=> $request->get('idusuario'),
+                        'usuario_id'=> $request->get('idusuario'),
                         ]
                     );
                     $actividadPrecio->save();
@@ -382,7 +382,7 @@ class ActividadesController extends Controller
            $actp = DB::table('actividadprecios as ap')
        ->join('personas as pe', 'ap.persona_id', '=', 'pe.id')
        ->select('ap.id', 'pe.id as peid', 'pe.nombre as penombre', 'ap.precio1', 'ap.precio2', 'ap.precio3', 'ap.doble', 'ap.doblebalanc', 'ap.triple', 'ap.triplebalanc', 'ap.promocion', 'ap.restriccion', 'ap.acompanante')
-       ->where([['ap.actividades_id', '=', $id],  ['ap.remove', '=', '0']])
+       ->where([['ap.actividad_id', '=', $id],  ['ap.remove', '=', '0']])
        ->orderBy('ap.id')
        ->get();
     //    actividades horario
@@ -545,7 +545,7 @@ class ActividadesController extends Controller
                 if($datoPersona['promocion'] == 'null') {                  
                     $datoPersona['promocion'] = 0;
                 }                 
-                $actividadPrecio = ActividadPrecios::where('actividades_id',$request->get('actividadid'))
+                $actividadPrecio = ActividadPrecios::where('actividad_id',$request->get('actividadid'))
                 ->where('persona_id', $datoPersona['persona_id'])
                 ->update([
                     'precio1' => $datoPersona['precio1'],
@@ -560,7 +560,7 @@ class ActividadesController extends Controller
                     'active'=> $datoPersona['active'],
                     'acompanante'=> $datoPersona['acompanante'],
                     'remove'=> $datoPersona['remove'],
-                    'usuarios_id'=> $request->get('idusuario'),
+                    'usuario_id'=> $request->get('idusuario'),
                     ]
                 );
                 // $actividadPrecio->save();

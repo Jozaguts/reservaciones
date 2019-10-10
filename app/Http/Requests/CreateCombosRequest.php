@@ -13,7 +13,7 @@ class CreateCombosRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+            return true;        
     }
 
     /**
@@ -24,7 +24,23 @@ class CreateCombosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+        'idusuario' => 'required',
+        'clave' => 'required|unique:actividades',
+        'nombre' => 'required',
+        'tipoactividades_id' => 'required',
+        'maxcortesias' => 'required',
+        'maxcupones' => 'required',
+        'anticipo_id' => 'required',
+        'mismo_dia' => 'nullable',
+            
+        ];
+    }
+    public function messages()
+    {
+        return [
+        'idusuario.required' => 'Id usuario es obligatorio',
+
         ];
     }
 }
+    

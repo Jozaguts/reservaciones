@@ -58,8 +58,9 @@
                                <select class="form-control " name="tipoactividades_id" id="tipoactividades_id" required>
                                  @foreach ($tipoactividades as $tipoactividad)
                                <option value="{{$tipoactividad->id}}" data-tipoUnidad="{{  $tipoactividad->TipoUnidad->id}}">{{$tipoactividad->nombre}}</option>
-                                 @endforeach
+                               @endforeach
                                </select>
+                           
                              </div>
                            </div>
                             </div>
@@ -107,7 +108,7 @@
                                 <div class="col-3 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
-                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismodia" id="mismodia" value="" >
+                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismo_dia" id="mismo_dia" value="1" >
                                   </div>
                                 </div>
                                 <div class="col-2 ">
@@ -167,13 +168,13 @@
                           <div class="col-3 offset-2">
                             <div class="form-group flex-column">
                               <label for="" >Balance general (MXN)</label>
-                              <input type="text" name="balanceg" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                              <input type="text" name="balance" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                           </div>
                           <div class="col-3 offset-2 mb-2">
                               <div class="form-group flex-column">
                                 <label for="">Precio General (MXN)</label>
-                                <input type="text" name="preciog" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" name="precio" id="precioG" class="form-control" placeholder="" aria-describedby="helpId" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                             </div>
                         </div>
