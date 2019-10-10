@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="col-2 ">
                                   <div class="form-group">
-                                  <button class="btn btn-success btn-guardar" >Guardar</button>
+                                  <button class="btn btn-success btn-guardar" disabled>Guardar</button>
                                 </div>
                               </div>
                                 

@@ -31,8 +31,7 @@ class CreateCombosRequest extends FormRequest
         'maxcortesias' => 'required',
         'maxcupones' => 'required',
         'anticipo_id' => 'required',
-        'mismo_dia' => 'nullable',
-            
+        'mismo_dia' => 'nullable', 
         ];
     }
     public function messages()

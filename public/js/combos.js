@@ -87,6 +87,13 @@ $('#mismodia').on('change', function () {
   $(document).on('click','.btn-agregar', function(e){
     // params: ID == e.target.parentElement.children[1].value
     getInfoActivity(e.target.parentElement.children[1].value);
+    console.log($('#bodyTable').children().length)
+    $('#bodyTable').children()? $('.btn-guardar').prop('disabled',false) : $('.btn-guardar').prop('disabled',true) 
+     
+    
+  })
+  $(document).on('click','.btn-crear', function(e){
+    console.log($('#bodyTable').children().length);
   })
 // --------------------------end btn-agregar-----------------------------
 
@@ -111,7 +118,8 @@ $('#mismodia').on('change', function () {
           icon: "success",
         });
         e.target.parentNode.parentNode.parentNode.remove();
-        console.log(aggregateActivities)
+      
+        if(aggregateActivities.length == 0) $('.btn-guardar').prop('disabled',true)  
         
       } else {
         swal("Actividad No Eliminada");
@@ -177,9 +185,10 @@ document.addEventListener('click',function(e){
               })
             }else if(jsonResponse.success){
               swal("Good job!", "You clicked the button!", "success");
+              $('#bodyTable').html(' ');
+              $('#combos').modal('hide');
             }
-            $('#bodyTable').html(' ');
-            $('#combos').modal('hide');
+           
           })
           .catch((err)=>{
             console.log(err)

@@ -58,30 +58,37 @@ class CombosController extends Controller
     {
         // revisar tunidad y tipo_actividad IDS
 
-        $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
+        // VALIDAR QUE NO ACEPTE COMBOS SIN ACTIVIDAD
+
         
-        $combo = Actividades::create([
+        DB::transaction(function() use ($request) {
 
-            'clave' =>  $request->clave,
-            'nombre' =>  $request->nombre,
-            'maxcortesias' =>  $request->maxcortesias,
-            'maxcupones' =>  $request->maxcupones,
-            'mismo_dia' =>  $request->mismo_dia==null? 0:1,
-            'precio' => $request->precio,
-            'balance' => $request->balance,
-            'anticipo_id' =>  $request->anticipo_id,
-            'tipoactividades_id' =>  $request->tipoactividades_id,
-            'tipounidades_id'=>  $tipoactividades->tipounidad_id,
-            'idusuario' =>  $request->idusuario,
-            'remove' =>  '0',
-            'active' =>  '1',
-            'combo' => '1',
-            'fijo' => '0',
-            'renta' => '0',
-            'promocion' => '0',
-            'riesgo' => '0',
+            $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
+            DB::table('actividades')->insert([
 
-        ]);
+                'clave' =>  $request->clave,
+                'nombre' =>  $request->nombre,
+                'maxcortesias' =>  $request->maxcortesias,
+                'maxcupones' =>  $request->maxcupones,
+                'mismo_dia' =>  $request->mismo_dia==null? 0:1,
+                'precio' => $request->precio,
+                'balance' => $request->balance,
+                'anticipo_id' =>  $request->anticipo_id,
+                'tipoactividades_id' =>  $request->tipoactividades_id,
+                'tipounidades_id'=>  $tipoactividades->tipounidad_id,
+                'idusuario' =>  $request->idusuario,
+                'remove' =>  '0',
+                'active' =>  '1',
+                'combo' => '1',
+                'fijo' => '0',
+                'renta' => '0',
+                'promocion' => '0',
+                'riesgo' => '0',
+    
+            ]);
+        
+           
+        }, 2);
 
         return response()->json([
             'success' => 'Combo Guardado Con exito'

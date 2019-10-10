@@ -51,6 +51,7 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
+    
             //reglas de validacion
              $rules =[
                 'clave' => ['required', 'string', 'min:5','unique:actividades'],
