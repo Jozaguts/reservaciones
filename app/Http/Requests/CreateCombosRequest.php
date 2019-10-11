@@ -25,13 +25,19 @@ class CreateCombosRequest extends FormRequest
     {
         return [
         'idusuario' => 'required',
-        'clave' => 'required|unique:actividades',
+        // 'clave' => 'required|unique:actividades',
         'nombre' => 'required',
         'tipoactividades_id' => 'required',
         'maxcortesias' => 'required',
         'maxcupones' => 'required',
         'anticipo_id' => 'required',
-        'mismo_dia' => 'nullable', 
+        'mismo_dia' => 'nullable',
+        'precios' => 'nullable'
+        // // actividad_id
+        // persona_id
+        // usuario_id
+        // remove 
+        // active
         ];
     }
     public function messages()

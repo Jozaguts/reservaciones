@@ -55,16 +55,11 @@ class CombosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateCombosRequest $request) 
-    {
-        // revisar tunidad y tipo_actividad IDS
-
-        // VALIDAR QUE NO ACEPTE COMBOS SIN ACTIVIDAD
-
-        
+    {        
         DB::transaction(function() use ($request) {
 
             $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
-            DB::table('actividades')->insert([
+             DB::table('actividades')->insert([
 
                 'clave' =>  $request->clave,
                 'nombre' =>  $request->nombre,
@@ -86,6 +81,30 @@ class CombosController extends Controller
                 'riesgo' => '0',
     
             ]);
+
+            $actividadId = DB::getPdo()->lastInsertId();
+              
+            for($i = 0; $i<count($request->precios); $i++){
+
+                $precios = DB::table('actividadprecios')->insert([
+                     'precio1' => $request->precios[$i]['precio1'],
+                     'precio2' => $request->precios[$i]['precio2'],
+                     'precio3' => $request->precios[$i]['precio3'],
+                     'doble' => $request->precios[$i]['doble'],
+                     'doblebalanc' => $request->precios[$i]['doblebalanc'],
+                     'triple' => $request->precios[$i]['triple'],
+                     'triplebalanc' => $request->precios[$i]['triplebalanc'],
+                     'restriccion' => $request->precios[$i]['restriccion'],
+                     'acompanante' => $request->precios[$i]['acompanante'],
+                     'promocion' => $request->precios[$i]['promocion'],
+                     'persona_id' => $request->precios[$i]['persona_id'],
+                     'usuario_id' => $request->idusuario,
+                     'actividad_id' => $actividadId,
+                     'active' => '1',
+                     'remove' => '0',
+                ]);
+
+            }
         
            
         }, 2);

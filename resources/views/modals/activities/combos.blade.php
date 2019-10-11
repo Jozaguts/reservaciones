@@ -239,69 +239,75 @@
                                                 </div>
                                               </div>
                           </div>
+                        </form>
 @foreach ($personas as $persona)
+<form id="formPerson{{$persona->id}}">
+    <div class="row mb-0" style="background-color: #FFFDCC" id="preciosContainer">
+    <div class="col-1 padding-col"style="background-color:white" >
+    <input type="hidden"name="persona_id" value="{{$persona->id}}">
 
-<div class="row mb-0" style="background-color: #FFFDCC" id="preciosContainer">
-<div class="col-1 padding-col"style="background-color:white" >
-  <div class="form-group ">
-    <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
-  </div>
-</div>
-<div class="col-1 padding-col" style="background-color: #CCFFFD">
-  <div class="form-group">
-    <input type="text" name="p1PersonaId{{$persona->id}}" id="p1PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col" style="background-color: #CCFFFD">
-  <div class="form-group">
-    <input type="text" name="p2PersonaId{{$persona->id}}" id="p2PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col" style="background-color: #CCFFFD">
-  <div class="form-group">
-    <input type="text" name="p3PersonaId{{$persona->id}}" id="p3PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
-  <div class="form-group">
-    <input type="text" name="doblePersonaId{{$persona->id}}" id="doblePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col" style="background-color: #CCFFCC">
-  <div class="form-group">
-    <input type="text" name="balanceDoblePersonaId{{$persona->id}}" id="balanceDoblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col "style="background-color: #CCFFCC" >
-  <div class="form-group">
-    <input type="text" name="triplePersonaId{{$persona->id}}" id="triplePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col  "style="background-color: #CCFFCC">
-  <div class="form-group">
-    <input type="text" name="balanceTriplePersonaId{{$persona->id}}" id="balanceTriplePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-  </div>
-</div>
-<div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
-  <div class="form-group">
-    <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promoPersonaId{{$persona->id}}" id="promoPersonaId{{$persona->id}}" value="1" >
-  </div>
-</div>
-<div class="col-1 padding-col " style="background-color: #FFFDCC">
-  <div class="form-group">                                                   
-    <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccionPersonaId{{$persona->id}}" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
-  </div>
-</div>
-<div class="col-1 padding-col " style="background-color: #FFFDCC">
-  <div class="form-group">
-    <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanantePersonaId{{$persona->id}}" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
-  </div>
+      
+      <div class="form-group ">
+        <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="precio1" id="p1PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="precio2" id="p2PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFFD">
+      <div class="form-group">
+        <input type="text" name="precio3" id="p3PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col pl-4" style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="doble" id="doblePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col" style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="doblebalanc" id="balanceDoblePersonaId{{$persona->id}}" class="form-control" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col "style="background-color: #CCFFCC" >
+      <div class="form-group">
+        <input type="text" name="triple" id="triplePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col  "style="background-color: #CCFFCC">
+      <div class="form-group">
+        <input type="text" name="triplebalanc" id="balanceTriplePersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+      </div>
+    </div>
+    <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
+      <div class="form-group">
+        <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promocion" id="promoPersonaId{{$persona->id}}" value="1" >
+      </div>
+    </div>
+    <div class="col-1 padding-col " style="background-color: #FFFDCC">
+      <div class="form-group">                                                   
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
+      </div>
+    </div>
+    <div class="col-1 padding-col " style="background-color: #FFFDCC">
+      <div class="form-group">
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanante" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
+    </div>
+</form>
+
 </div>                                              
 </div>
-                        @endforeach
-                      </div>
-                      </form>
-                </div>             
+      @endforeach
+    </div>
+ 
+</div>             
       
 
                 
@@ -317,8 +323,4 @@
         
        
     
-{{--         
-      </div>
-    </div>
-  </div>
-   --}}
+

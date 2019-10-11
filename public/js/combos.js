@@ -1,5 +1,12 @@
 
 $(document).ready(function () {
+
+// mostrar paneles contenedores de actividades
+  $(document).on('click', '.show-btn', function () {
+    $(this).siblings('div').toggleClass('d-none')
+  
+    });
+  
 /* ATENTION
 * The main select is setter by Modals/combos.blade 
 */
@@ -87,14 +94,14 @@ $('#mismodia').on('change', function () {
   $(document).on('click','.btn-agregar', function(e){
     // params: ID == e.target.parentElement.children[1].value
     getInfoActivity(e.target.parentElement.children[1].value);
-    console.log($('#bodyTable').children().length)
+    // console.log($('#bodyTable').children().length)
     $('#bodyTable').children()? $('.btn-guardar').prop('disabled',false) : $('.btn-guardar').prop('disabled',true) 
      
     
   })
-  $(document).on('click','.btn-crear', function(e){
-    console.log($('#bodyTable').children().length);
-  })
+  // $(document).on('click','.btn-crear', function(e){
+  //   console.log($('#bodyTable').children().length);
+  // })
 // --------------------------end btn-agregar-----------------------------
 
 // --------------------------btn-eliminar-----------------------------
@@ -135,10 +142,23 @@ document.addEventListener('click',function(e){
   
   if(e.target.classList.contains('btn-guardar')) {
 
-  
+    const formPerson = document.querySelectorAll('[id^=formPerson]');
+   
 
     let data= {};
+    let precio={}
+    let precios=[]
 
+    formPerson.forEach((form)=>{
+      for (let i = 0; i < form.length; i++) {
+   
+        precio[form[i].name]=form[i].value
+
+      }
+      precios.push(precio)
+    })
+    
+    data['precios'] = precios
     let dataform = $('#combosForm').serializeArray();
     let preciosYPasesForm = $('#AddPreciosYPasesForm').serializeArray();
 
@@ -152,7 +172,8 @@ document.addEventListener('click',function(e){
       data[preciosYPasesForm[i].name]=preciosYPasesForm[i].value
   
     }
-  
+    
+    console.log(data)
    
 
     fetch('/combos',{
@@ -184,7 +205,7 @@ document.addEventListener('click',function(e){
                 dangerMode: true,
               })
             }else if(jsonResponse.success){
-              swal("Good job!", "You clicked the button!", "success");
+              swal("Good job!", `${jsonResponse.success}!`, "success");
               $('#bodyTable').html(' ');
               $('#combos').modal('hide');
             }
