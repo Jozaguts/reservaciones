@@ -32,7 +32,8 @@ class CreateCombosRequest extends FormRequest
         'maxcupones' => 'required',
         'anticipo_id' => 'required',
         'mismo_dia' => 'nullable',
-        'precios' => 'nullable'
+        'precios' => 'nullable',
+        'actividades_combo'=> 'required',
         // // actividad_id
         // persona_id
         // usuario_id
@@ -44,6 +45,8 @@ class CreateCombosRequest extends FormRequest
     {
         return [
         'idusuario.required' => 'Id usuario es obligatorio',
+        'horario_id.required' => "Debes De Seleccionar Almenos Una Actividad"
+
 
         ];
     }

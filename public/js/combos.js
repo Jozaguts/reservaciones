@@ -58,17 +58,26 @@ function printActivity(infoActividad){
   if(!aggregateActivities.includes(actividad.id)){
     let currency =  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format
 
-    $('#bodyTable').append(` <tr class="actividad-id">
-    <td scope="row">${actividad.clave}</td>
-    <td>${actividad.nombre}</td>    <input type="hidden" name="active" value="1">
-
-    <td class="precioFix">${currency(actividad.precio)}</td>
-    <td class="balanceFix">${currency( actividad.balance)}</td>
-    <td colspan="5"><div class="form-group">
-    <select class="form-control select-info" name="select_actividad_id_${actividad.id}";> 
-    ${selectOptions}
-    </select>
-    <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
+    $('#bodyTable').append(` 
+     
+        <tr class="actividad-id">
+          <td scope="row">${actividad.clave}</td>
+          <td>${actividad.nombre}</td> 
+          <td class="precioFix">${currency(actividad.precio)}</td>
+          <td class="balanceFix">${currency( actividad.balance)}</td>
+          <td colspan="5">
+            <form class="form-actividad-combo" >
+              <div class="form-group">
+                <select class="form-control select-info" name="select";> 
+                  ${selectOptions}
+                </select>
+                  <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
+                  <input type="hidden" name="horario_id" value="${infoActividad.horario_id}">
+                  <input type="hidden" name="actividad_combo_id" value="${actividad.id}">
+              </div>
+            </form>
+        </tr>
+     
   `);
   aggregateActivities.push(actividad.id);
   }else{
@@ -94,13 +103,13 @@ $('#mismodia').on('change', function () {
   $(document).on('click','.btn-agregar', function(e){
     // params: ID == e.target.parentElement.children[1].value
     getInfoActivity(e.target.parentElement.children[1].value);
-    // console.log($('#bodyTable').children().length)
+    
     $('#bodyTable').children()? $('.btn-guardar').prop('disabled',false) : $('.btn-guardar').prop('disabled',true) 
      
     
   })
   // $(document).on('click','.btn-crear', function(e){
-  //   console.log($('#bodyTable').children().length);
+  //  
   // })
 // --------------------------end btn-agregar-----------------------------
 
@@ -144,10 +153,23 @@ document.addEventListener('click',function(e){
 
     const formPerson = document.querySelectorAll('[id^=formPerson]');
    
+    const formactiviadescombo = document.querySelectorAll('[class^=form-actividad-combo]');
 
-    let data= {};
-    let precio={}
-    let precios=[]
+    console.log(formactiviadescombo)
+    let data= {}, precio={}, precios=[];
+    const actividadesCombo = [], actividadCombo={};
+    
+
+    formactiviadescombo.forEach((form)=>{
+      for (let i = 0; i < form.length; i++) {
+   
+        actividadCombo[form[i].name]=form[i].value
+
+      }
+      actividadesCombo.push(actividadCombo)
+    })
+
+    data['actividades_combo'] = actividadesCombo
 
     formPerson.forEach((form)=>{
       for (let i = 0; i < form.length; i++) {
@@ -173,7 +195,7 @@ document.addEventListener('click',function(e){
   
     }
     
-    console.log(data)
+   
    
 
     fetch('/combos',{
@@ -208,6 +230,8 @@ document.addEventListener('click',function(e){
               swal("Good job!", `${jsonResponse.success}!`, "success");
               $('#bodyTable').html(' ');
               $('#combos').modal('hide');
+              aggregateActivities.length=0;
+              if(aggregateActivities.length == 0) $('.btn-guardar').prop('disabled',true)
             }
            
           })
@@ -252,7 +276,7 @@ document.addEventListener('click',function(e){
 
 
 
-    // console.log(dataform,preciosYPasesForm)
+  
     // let dataPreciosYpases =$('#AddPreciosYPasesForm').serializeArray();
 
     // let datadataPreciosYpases={};
@@ -493,7 +517,7 @@ $(document).on('click','.btn-editar', function(e){
     let select = document.querySelector(`select[name=selectEdit${IdSelectArrellenar}]`)
    
     for(let i = 0; i<infoDeHorariosDeUnaActividadCombo.length; i++) {
-      console.log(infoDeHorariosDeUnaActividadCombo.length)
+     
         let resultado ,hiniHorario,hfinHorario;
   
         if(infoDeHorariosDeUnaActividadCombo[i].libre==1) {    
@@ -577,7 +601,7 @@ $(document).on('click','.btn-editar', function(e){
     
     //    }
     //    } else if(horariosCombos[i].libre == 0){
-    //     console.log('entro');
+    
     //      // hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
     //      // hfin.replace('0',""); 
          

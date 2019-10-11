@@ -108,7 +108,7 @@
                                 <div class="col-3 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
-                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismo_dia" id="mismo_dia" value="1" >
+                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismo_dia" id="mismo_dia" value="1" checked>
                                   </div>
                                 </div>
                                 <div class="col-2 ">
