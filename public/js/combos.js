@@ -53,7 +53,7 @@ const getInfoActivity = id =>{
 */
 let aggregateActivities =[];
 function printActivity(infoActividad){
-  console.log(infoActividad);
+
   const actividad = infoActividad[0][0];
   const selectOptions = infoActividad[1]; 
   if(!aggregateActivities.includes(actividad.id)){
@@ -73,7 +73,6 @@ function printActivity(infoActividad){
                   ${selectOptions}
                 </select>
                   <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
-                 
                   <input type="hidden" name="actividad_combo_id" value="${actividad.id}">
               </div>
             </form>
@@ -158,30 +157,36 @@ document.addEventListener('click',function(e){
 
    
     let data= {}, precio={}, precios=[];
-    const actividadesCombo = [], actividadCombo={};
+    const actividadesCombo = [];
     
-    console.log(formactiviadescombo)
+    
     formactiviadescombo.forEach((form)=>{
-
+      let actividadCombo = {};
       for (let i = 0; i < form.length; i++) {
-   
-        actividadCombo[form[i].name]=form[i].value
-        console.log(actividadCombo)
+       
+       actividadCombo['select']=form.children[0].children[0].options[form.children[0].children[0].selectedIndex].text
+       actividadCombo['horario_id'] = form.children[0].children[0].options[form.children[0].children[0].selectedIndex].value
+       actividadCombo['actividad_combo_id'] =form.children[0].children[2].value
+    
+       
       }
+
       actividadesCombo.push(actividadCombo)
+    //  console.log(actividadesCombo)
     })
 
     data['actividades_combo'] = actividadesCombo
-
+    // console.log(data)
     formPerson.forEach((form)=>{
       for (let i = 0; i < form.length; i++) {
    
         precio[form[i].name]=form[i].value
 
       }
+      
       precios.push(precio)
     })
-    
+   
     data['precios'] = precios
     let dataform = $('#combosForm').serializeArray();
     let preciosYPasesForm = $('#AddPreciosYPasesForm').serializeArray();

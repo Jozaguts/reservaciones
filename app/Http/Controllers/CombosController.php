@@ -108,12 +108,12 @@ class CombosController extends Controller
                 ]);
 
             }
-         
+        //  dd(substr($request->actividades_combo[0]['select'], -0,5).':00');
             for ($i=0; $i < count($request->actividades_combo); $i++) { 
 
                 $combo_det = DB::table('combo_det')->insert([
-                    'hini' => substr($request->actividades_combo[$i]['select'], -0,5),
-                    'hfin'=> substr($request->actividades_combo[$i]['select'], 8, 5),
+                    'hini' => substr($request->actividades_combo[$i]['select'], -0,5).':00',
+                    'hfin'=> substr($request->actividades_combo[$i]['select'], 8, 5).':00',
                     'actividades_id_combo'=> $actividadId, //el ID actividad que acaba de ser creada (el combo)
                     'actividades_id' =>$request->actividades_combo[$i]['actividad_combo_id'], // el ID  de la actividad que compone al combo
                     'horario_id' => $request->actividades_combo[$i]['horario_id'],
