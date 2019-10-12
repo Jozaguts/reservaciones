@@ -24,10 +24,12 @@ class Actividades extends Model
         return $this->belongsTo(TipoActividades::class,'tipoactividades_id');
     }
 
-    public function horario() {
+    public function horarios() {
         
-        return $this->hasOne(ActividadesHorario::class, 'actividades_id');   
+        // return $this->hasMany(ActividadesHorario::class, 'actividades_id');   
+        return $this->hasMany(ActividadesHorario::class,'actividades_id','id');
     }
+    
   
   
 }

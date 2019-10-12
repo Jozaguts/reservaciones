@@ -53,6 +53,7 @@ const getInfoActivity = id =>{
 */
 let aggregateActivities =[];
 function printActivity(infoActividad){
+  console.log(infoActividad);
   const actividad = infoActividad[0][0];
   const selectOptions = infoActividad[1]; 
   if(!aggregateActivities.includes(actividad.id)){
@@ -72,7 +73,7 @@ function printActivity(infoActividad){
                   ${selectOptions}
                 </select>
                   <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${actividad.id}" id="btn-eliminar">-</a>
-                  <input type="hidden" name="horario_id" value="${infoActividad.horario_id}">
+                 
                   <input type="hidden" name="actividad_combo_id" value="${actividad.id}">
               </div>
             </form>
@@ -155,16 +156,17 @@ document.addEventListener('click',function(e){
    
     const formactiviadescombo = document.querySelectorAll('[class^=form-actividad-combo]');
 
-    console.log(formactiviadescombo)
+   
     let data= {}, precio={}, precios=[];
     const actividadesCombo = [], actividadCombo={};
     
-
+    console.log(formactiviadescombo)
     formactiviadescombo.forEach((form)=>{
+
       for (let i = 0; i < form.length; i++) {
    
         actividadCombo[form[i].name]=form[i].value
-
+        console.log(actividadCombo)
       }
       actividadesCombo.push(actividadCombo)
     })
@@ -414,208 +416,208 @@ $(document).on('click','.btn-editar', function(e){
     return response.json();
   }).then((responseJson)=>{
 
-    // empieazo a rellenar el modal 
-    info = responseJson;
+//     // empieazo a rellenar el modal 
+//     info = responseJson;
     
 
-    $('#clave').val(info.infoCombo[0].clave);
-    $('#nombre').val(info.infoCombo[0].nombre);
-    $('#tipoactividades_id').val(info.infoCombo[0].tipoactividades_id);
-    $('#maxCortesias').val( info.infoCombo[0].maxcortesias)
-    $('#maxCupones').val(info.infoCombo[0].maxcupones)
-    $('#anticipoId').val(info.infoCombo[0].anticipo_id)
-    info.infoCombo[0].mismo_dia == '1'? $('#mismodia').attr('checked', true):$('#mismodia').attr('checked', false);
+//     $('#clave').val(info.infoCombo[0].clave);
+//     $('#nombre').val(info.infoCombo[0].nombre);
+//     $('#tipoactividades_id').val(info.infoCombo[0].tipoactividades_id);
+//     $('#maxCortesias').val( info.infoCombo[0].maxcortesias)
+//     $('#maxCupones').val(info.infoCombo[0].maxcupones)
+//     $('#anticipoId').val(info.infoCombo[0].anticipo_id)
+//     info.infoCombo[0].mismo_dia == '1'? $('#mismodia').attr('checked', true):$('#mismodia').attr('checked', false);
 
-    // pestaña 2 
-    $('#balanceG').val(info.infoCombo[0].balance);
-    $('#precioG').val(info.infoCombo[0].precio);
+//     // pestaña 2 
+//     $('#balanceG').val(info.infoCombo[0].balance);
+//     $('#precioG').val(info.infoCombo[0].precio);
 
-     let precios = info.activiadadPrecios
+//      let precios = info.activiadadPrecios
      
-    // personas
-    let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
-    let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value = `${precios[0].precio1}`;
-    let precio2P1 = document.getElementById(`p2PersonaId${precios[0].peid}`).value =`${precios[0].precio2}`;
-    let precio3P1 = document.getElementById(`p3PersonaId${precios[0].peid}`).value =`${precios[0].precio3}`;
-    let dobleP1 = document.getElementById(`doblePersonaId${precios[0].peid}`).value =`${precios[0].doble}`;
-    let balanceDobleP1 = document.getElementById(`balanceDoblePersonaId${precios[0].peid}`).value =`${precios[0].doblebalanc}`;
-    let tripleP1 = document.getElementById(`triplePersonaId${precios[0].peid}`).value =`${precios[0].triple}`;
-    let balanceTripleP1 =document.getElementById(`balanceTriplePersonaId${precios[0].peid}`).value =`${precios[0].triplebalanc}`;
-    let promoP1 =document.getElementById(`promoPersonaId${precios[0].peid}`);
-    `${precios[0].promocion}`==1?promoP1.setAttribute('checked','true'):promoP1.setAttribute('unchecked','true')
-    let restriccionP1 =document.getElementById(`restriccionPersonaId${precios[0].peid}`);
-    `${precios[0].restriccion}`==1?restriccionP1.setAttribute('checked','true'):restriccionP1.setAttribute('unchecked','true')
-    let acompananteP1 =document.getElementById(`acompanantePersonaId${precios[0].peid}`);
-    `${precios[0].acompanante}`==1?acompananteP1.setAttribute('checked','true'):acompananteP1.setAttribute('unchecked','true')
-    // PERSONA 2
+//     // personas
+//     let personaPrecio1Id = document.getElementById(`persona${precios[0].peid}`).innerHTML =`${precios[0].penombre}`;
+//     let precio1P1 = document.getElementById(`p1PersonaId${precios[0].peid}`).value = `${precios[0].precio1}`;
+//     let precio2P1 = document.getElementById(`p2PersonaId${precios[0].peid}`).value =`${precios[0].precio2}`;
+//     let precio3P1 = document.getElementById(`p3PersonaId${precios[0].peid}`).value =`${precios[0].precio3}`;
+//     let dobleP1 = document.getElementById(`doblePersonaId${precios[0].peid}`).value =`${precios[0].doble}`;
+//     let balanceDobleP1 = document.getElementById(`balanceDoblePersonaId${precios[0].peid}`).value =`${precios[0].doblebalanc}`;
+//     let tripleP1 = document.getElementById(`triplePersonaId${precios[0].peid}`).value =`${precios[0].triple}`;
+//     let balanceTripleP1 =document.getElementById(`balanceTriplePersonaId${precios[0].peid}`).value =`${precios[0].triplebalanc}`;
+//     let promoP1 =document.getElementById(`promoPersonaId${precios[0].peid}`);
+//     `${precios[0].promocion}`==1?promoP1.setAttribute('checked','true'):promoP1.setAttribute('unchecked','true')
+//     let restriccionP1 =document.getElementById(`restriccionPersonaId${precios[0].peid}`);
+//     `${precios[0].restriccion}`==1?restriccionP1.setAttribute('checked','true'):restriccionP1.setAttribute('unchecked','true')
+//     let acompananteP1 =document.getElementById(`acompanantePersonaId${precios[0].peid}`);
+//     `${precios[0].acompanante}`==1?acompananteP1.setAttribute('checked','true'):acompananteP1.setAttribute('unchecked','true')
+//     // PERSONA 2
  
 
-    let personaPrecio2Id = document.getElementById(`persona${precios[1].peid}`).innerHTML =`${precios[1].penombre}`;
-    let precio1P2 = document.getElementById(`p1PersonaId${precios[1].peid}`).value =`${precios[1].precio1}`;
-    let precio2P2 = document.getElementById(`p2PersonaId${precios[1].peid}`).value =`${precios[1].precio2}`;
-    let precio3P2 = document.getElementById(`p3PersonaId${precios[1].peid}`).value =`${precios[1].precio3}`;
-    let dobleP2 = document.getElementById(`doblePersonaId${precios[1].peid}`).value =`${precios[1].doble}`;
-    let balanceDobleP2 = document.getElementById(`balanceDoblePersonaId${precios[1].peid}`).value =`${precios[1].doblebalanc}`;
-    let tripleP2 = document.getElementById(`triplePersonaId${precios[1].peid}`).value =`${precios[1].triple}`;
-    let balanceTripleP2 =document.getElementById(`balanceTriplePersonaId${precios[1].peid}`).value =`${precios[1].triplebalanc}`;
-    let promoP2 =document.getElementById(`promoPersonaId${precios[1].peid}`);
-    `${precios[1].promocion}`==1?promoP2.setAttribute('checked','true'):promoP2.setAttribute('unchecked','true')
-    let restriccionP2 =document.getElementById(`restriccionPersonaId${precios[1].peid}`);
-    `${precios[1].restriccion}`==1?restriccionP2.setAttribute('checked','true'):restriccionP2.setAttribute('unchecked','true')
-    let acompananteP2 =document.getElementById(`acompanantePersonaId${precios[1].peid}`);
-    `${precios[1].acompanante}`==1?acompananteP2.setAttribute('checked','true'):acompananteP2.setAttribute('unchecked','true')
-     // PERSONA 3
-     let personaPrecio3Id = document.getElementById(`persona${precios[2].peid}`).innerHTML =`${precios[2].penombre}`;
-     let precio1P3 = document.getElementById(`p1PersonaId${precios[2].peid}`).value =`${precios[2].precio1}`;
-     let precio2P3 = document.getElementById(`p2PersonaId${precios[2].peid}`).value =`${precios[2].precio2}`;
-     let precio3P3 = document.getElementById(`p3PersonaId${precios[2].peid}`).value =`${precios[2].precio3}`;
-     let dobleP3 = document.getElementById(`doblePersonaId${precios[2].peid}`).value =`${precios[2].doble}`;
-     let balanceDobleP3 = document.getElementById(`balanceDoblePersonaId${precios[2].peid}`).value =`${precios[2].doblebalanc}`;
-     let tripleP3 = document.getElementById(`triplePersonaId${precios[2].peid}`).value =`${precios[2].triple}`;
-     let balanceTripleP3 =document.getElementById(`balanceTriplePersonaId${precios[2].peid}`).value =`${precios[2].triplebalanc}`;
-     let promoP3 =document.getElementById(`promoPersonaId${precios[2].peid}`);
-     `${precios[2].promocion}`==1?promoP3.setAttribute('checked','true'):promoP3.setAttribute('unchecked','true')
-     let restriccionP3 =document.getElementById(`restriccionPersonaId${precios[2].peid}`);
-     `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
-     let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
-     `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
+//     let personaPrecio2Id = document.getElementById(`persona${precios[1].peid}`).innerHTML =`${precios[1].penombre}`;
+//     let precio1P2 = document.getElementById(`p1PersonaId${precios[1].peid}`).value =`${precios[1].precio1}`;
+//     let precio2P2 = document.getElementById(`p2PersonaId${precios[1].peid}`).value =`${precios[1].precio2}`;
+//     let precio3P2 = document.getElementById(`p3PersonaId${precios[1].peid}`).value =`${precios[1].precio3}`;
+//     let dobleP2 = document.getElementById(`doblePersonaId${precios[1].peid}`).value =`${precios[1].doble}`;
+//     let balanceDobleP2 = document.getElementById(`balanceDoblePersonaId${precios[1].peid}`).value =`${precios[1].doblebalanc}`;
+//     let tripleP2 = document.getElementById(`triplePersonaId${precios[1].peid}`).value =`${precios[1].triple}`;
+//     let balanceTripleP2 =document.getElementById(`balanceTriplePersonaId${precios[1].peid}`).value =`${precios[1].triplebalanc}`;
+//     let promoP2 =document.getElementById(`promoPersonaId${precios[1].peid}`);
+//     `${precios[1].promocion}`==1?promoP2.setAttribute('checked','true'):promoP2.setAttribute('unchecked','true')
+//     let restriccionP2 =document.getElementById(`restriccionPersonaId${precios[1].peid}`);
+//     `${precios[1].restriccion}`==1?restriccionP2.setAttribute('checked','true'):restriccionP2.setAttribute('unchecked','true')
+//     let acompananteP2 =document.getElementById(`acompanantePersonaId${precios[1].peid}`);
+//     `${precios[1].acompanante}`==1?acompananteP2.setAttribute('checked','true'):acompananteP2.setAttribute('unchecked','true')
+//      // PERSONA 3
+//      let personaPrecio3Id = document.getElementById(`persona${precios[2].peid}`).innerHTML =`${precios[2].penombre}`;
+//      let precio1P3 = document.getElementById(`p1PersonaId${precios[2].peid}`).value =`${precios[2].precio1}`;
+//      let precio2P3 = document.getElementById(`p2PersonaId${precios[2].peid}`).value =`${precios[2].precio2}`;
+//      let precio3P3 = document.getElementById(`p3PersonaId${precios[2].peid}`).value =`${precios[2].precio3}`;
+//      let dobleP3 = document.getElementById(`doblePersonaId${precios[2].peid}`).value =`${precios[2].doble}`;
+//      let balanceDobleP3 = document.getElementById(`balanceDoblePersonaId${precios[2].peid}`).value =`${precios[2].doblebalanc}`;
+//      let tripleP3 = document.getElementById(`triplePersonaId${precios[2].peid}`).value =`${precios[2].triple}`;
+//      let balanceTripleP3 =document.getElementById(`balanceTriplePersonaId${precios[2].peid}`).value =`${precios[2].triplebalanc}`;
+//      let promoP3 =document.getElementById(`promoPersonaId${precios[2].peid}`);
+//      `${precios[2].promocion}`==1?promoP3.setAttribute('checked','true'):promoP3.setAttribute('unchecked','true')
+//      let restriccionP3 =document.getElementById(`restriccionPersonaId${precios[2].peid}`);
+//      `${precios[2].restriccion}`==1?restriccionP3.setAttribute('checked','true'):restriccionP3.setAttribute('unchecked','true')
+//      let acompananteP3 =document.getElementById(`acompanantePersonaId${precios[2].peid}`);
+//      `${precios[2].acompanante}`==1?acompananteP3.setAttribute('checked','true'):acompananteP3.setAttribute('unchecked','true')
 
 
 
-    //  minicrud empieza
-     let comboActividades = info.horarios;
+//     //  minicrud empieza
+//      let comboActividades = info.horarios;
       
-     comboActividades.forEach(function(comboActividad, index){
+//      comboActividades.forEach(function(comboActividad, index){
       
-      $('#bodyTable').append(`
-      <tr class="actividad-id">
-      <input type="hidden" name="idActividad${comboActividad.id}" value="${comboActividad.id}">
-      <td scope="row">${comboActividad.clave}</td>
-      <td>${comboActividad.nombre}</td>
-      <td class="precioFix">${comboActividad.precio}</td>
-      <td class="balanceFix">${comboActividad.balance}</td>
-      <td colspan="5"><div class="form-group">
-          <label for=""></label>
+//       $('#bodyTable').append(`
+//       <tr class="actividad-id">
+//       <input type="hidden" name="idActividad${comboActividad.id}" value="${comboActividad.id}">
+//       <td scope="row">${comboActividad.clave}</td>
+//       <td>${comboActividad.nombre}</td>
+//       <td class="precioFix">${comboActividad.precio}</td>
+//       <td class="balanceFix">${comboActividad.balance}</td>
+//       <td colspan="5"><div class="form-group">
+//           <label for=""></label>
        
-           <select class="form-control select-info" name="selectEdit${comboActividad.id}" id="${comboActividad.id}">
+//            <select class="form-control select-info" name="selectEdit${comboActividad.id}" id="${comboActividad.id}">
                   
                     
-          </select>
-          <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${index}" name="">-</a>
-        </div> 
-      </td>
-    </tr>`
-      )
+//           </select>
+//           <a href="#!" class="btn btn-danger ml-3 btn-eliminar" data-index="${index}" name="">-</a>
+//         </div> 
+//       </td>
+//     </tr>`
+//       )
 
 
-      insertaOPtionsEdit(comboActividades,comboActividad.id,comboActividad.duracion)
- //  <div id ="selectContainer${comboActividad.id}"></div>
-    })
+//       insertaOPtionsEdit(comboActividades,comboActividad.id,comboActividad.duracion)
+//  //  <div id ="selectContainer${comboActividad.id}"></div>
+//     })
    
-  function insertaOPtionsEdit(infoDeHorariosDeUnaActividadCombo, IdSelectArrellenar, duracionActividad) {
+//   function insertaOPtionsEdit(infoDeHorariosDeUnaActividadCombo, IdSelectArrellenar, duracionActividad) {
    
-    let select = document.querySelector(`select[name=selectEdit${IdSelectArrellenar}]`)
+//     let select = document.querySelector(`select[name=selectEdit${IdSelectArrellenar}]`)
    
-    for(let i = 0; i<infoDeHorariosDeUnaActividadCombo.length; i++) {
+//     for(let i = 0; i<infoDeHorariosDeUnaActividadCombo.length; i++) {
      
-        let resultado ,hiniHorario,hfinHorario;
+//         let resultado ,hiniHorario,hfinHorario;
   
-        if(infoDeHorariosDeUnaActividadCombo[i].libre==1) {    
+//         if(infoDeHorariosDeUnaActividadCombo[i].libre==1) {    
        
-            hiniHorario  = timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hini)
-            hfinHorario =timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hfin)
-            resultado = hfinHorario - hiniHorario;
+//             hiniHorario  = timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hini)
+//             hfinHorario =timeStringToFloat(infoDeHorariosDeUnaActividadCombo[i].hfin)
+//             resultado = hfinHorario - hiniHorario;
          
-        }else if (infoDeHorariosDeUnaActividadCombo[i].libre==0){
+//         }else if (infoDeHorariosDeUnaActividadCombo[i].libre==0){
         
-          if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {
-            let option = document.createElement("option")
-            option.innerHTML =infoDeHorariosDeUnaActividadCombo[i].horario
+//           if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {
+//             let option = document.createElement("option")
+//             option.innerHTML =infoDeHorariosDeUnaActividadCombo[i].horario
             
-            select.appendChild(option)
+//             select.appendChild(option)
            
-          select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
-          }
-        }
-          if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {    
-            for (let j = 0; j < resultado; j++) {
-              let hf = `${hiniHorario+j+ (duracionActividad/60)}:00`;
-              let paste = hf.padStart(5,"0") +" | " + infoDeHorariosDeUnaActividadCombo[i].horario.substring(18, infoDeHorariosDeUnaActividadCombo[i].horario.length);
+//           select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
+//           }
+//         }
+//           if(infoDeHorariosDeUnaActividadCombo[i].id == IdSelectArrellenar) {    
+//             for (let j = 0; j < resultado; j++) {
+//               let hf = `${hiniHorario+j+ (duracionActividad/60)}:00`;
+//               let paste = hf.padStart(5,"0") +" | " + infoDeHorariosDeUnaActividadCombo[i].horario.substring(18, infoDeHorariosDeUnaActividadCombo[i].horario.length);
               
-              let option = document.createElement("option")
-              let hi = `${hiniHorario+j}:00`.padStart(5,"0");
-              option.innerHTML =`${hi} | ${paste}`;
-              option.setAttribute('data-hora',hiniHorario+j)
-              select.appendChild(option)
-              select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
-            }
+//               let option = document.createElement("option")
+//               let hi = `${hiniHorario+j}:00`.padStart(5,"0");
+//               option.innerHTML =`${hi} | ${paste}`;
+//               option.setAttribute('data-hora',hiniHorario+j)
+//               select.appendChild(option)
+//               select.nextElementSibling.setAttribute('data-horarioid', infoDeHorariosDeUnaActividadCombo[i].id)
+//             }
         
-        }else{ 
-          $('#myTab').text('no se puuede')
-        }
+//         }else{ 
+//           $('#myTab').text('no se puuede')
+//         }
     
-    }
+//     }
     
-   }
+//    }
 
-    // let horariosCombos = info.horarios;
+//     // let horariosCombos = info.horarios;
    
-    // let lenghtHorarios = horariosCombos.length; /* Cantidad de horarios == cuantas actividades tiene el combo */
-    //  for (let i = 0; i < lenghtHorarios; i++) {
-    //    let selectHorarios =document.createElement('select');
-    //    selectHorarios.classList.add('form-control');
-    //    if(horariosCombos[i].libre==1){
-    //     let hini=horariosCombos[i].hini.slice(0,2,), hfin = horariosCombos[i].hfin.slice(0,2); 
-    //     hini == "00"? hini="12":hini
-    //     hfin == "00"? hfin="12":hfin
-    //     let length = hfin - hini; /* longitud de iteraciones para las opciones de los selects "Horas en los selects"    */
+//     // let lenghtHorarios = horariosCombos.length; /* Cantidad de horarios == cuantas actividades tiene el combo */
+//     //  for (let i = 0; i < lenghtHorarios; i++) {
+//     //    let selectHorarios =document.createElement('select');
+//     //    selectHorarios.classList.add('form-control');
+//     //    if(horariosCombos[i].libre==1){
+//     //     let hini=horariosCombos[i].hini.slice(0,2,), hfin = horariosCombos[i].hfin.slice(0,2); 
+//     //     hini == "00"? hini="12":hini
+//     //     hfin == "00"? hfin="12":hfin
+//     //     let length = hfin - hini; /* longitud de iteraciones para las opciones de los selects "Horas en los selects"    */
 
         
-    //    // esta zona es solo para crear las opciones de los selects, los selects de cada horario
-    //    for (let j = 0; j <=length; j++) {
+//     //    // esta zona es solo para crear las opciones de los selects, los selects de cada horario
+//     //    for (let j = 0; j <=length; j++) {
   
-    //     // if(horariosCombos[i].libre == 1){ /* si no es horario libre se procede una una manera */
+//     //     // if(horariosCombos[i].libre == 1){ /* si no es horario libre se procede una una manera */
        
-    //         hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
-    //         hfin.replace('0',""); 
+//     //         hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+//     //         hfin.replace('0',""); 
             
-    //         let numerodelahoraHini = Number(hini)+j; /* hora inicial */
+//     //         let numerodelahoraHini = Number(hini)+j; /* hora inicial */
             
-    //         let horaInicial ="";
-    //         numerodelahoraHini < 10 ?horaInicial = String("0"+numerodelahoraHini):horaInicial=String(numerodelahoraHini)
+//     //         let horaInicial ="";
+//     //         numerodelahoraHini < 10 ?horaInicial = String("0"+numerodelahoraHini):horaInicial=String(numerodelahoraHini)
             
-    //         let minutosHini = horariosCombos[i].horario.substring(3,5); /* despues de la hora obtengo los minutos y la linea separadora */
-    //         let numerodelahoraHfin = Number(hini)+j+1; /* obtengo la hora inicial y le sumo 1 hora  */
-    //         let horaFinal="";
-    //         numerodelahoraHfin <10 ? horaFinal= String("0"+ numerodelahoraHfin): horaFinal = String( numerodelahoraHfin);
+//     //         let minutosHini = horariosCombos[i].horario.substring(3,5); /* despues de la hora obtengo los minutos y la linea separadora */
+//     //         let numerodelahoraHfin = Number(hini)+j+1; /* obtengo la hora inicial y le sumo 1 hora  */
+//     //         let horaFinal="";
+//     //         numerodelahoraHfin <10 ? horaFinal= String("0"+ numerodelahoraHfin): horaFinal = String( numerodelahoraHfin);
              
-    //         let diasActividad = horariosCombos[i].horario.substring(16,horariosCombos[i].horario.length)
+//     //         let diasActividad = horariosCombos[i].horario.substring(16,horariosCombos[i].horario.length)
             
-    //         let option = document.createElement('option');
-    //         option.innerText = `${horaInicial}:${minutosHini} | ${horaFinal}:${minutosHini} | ${diasActividad}`;
+//     //         let option = document.createElement('option');
+//     //         option.innerText = `${horaInicial}:${minutosHini} | ${horaFinal}:${minutosHini} | ${diasActividad}`;
 
           
-    //       selectHorarios.appendChild(option)
-    //       // 
-    //     // } 
+//     //       selectHorarios.appendChild(option)
+//     //       // 
+//     //     // } 
     
-    //    }
-    //    } else if(horariosCombos[i].libre == 0){
+//     //    }
+//     //    } else if(horariosCombos[i].libre == 0){
     
-    //      // hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
-    //      // hfin.replace('0',""); 
+//     //      // hini.replace('0',"");  /* obtengo la hora de inicio y le retiro el 0 para hacer la suma de horas */
+//     //      // hfin.replace('0',""); 
          
-    //      // let numerodelahoraHini = Number(hini)+j; /* hora inicial */
+//     //      // let numerodelahoraHini = Number(hini)+j; /* hora inicial */
    
-    //      // let horaInicial ="";
+//     //      // let horaInicial ="";
        
-    //   }
+//     //   }
      
        
  
-    //     document.getElementById('selectContainer').appendChild(selectHorarios)
+//     //     document.getElementById('selectContainer').appendChild(selectHorarios)
  
-    //  }
+//     //  }
   }).catch((err) => {
     console.log(err);
   })
