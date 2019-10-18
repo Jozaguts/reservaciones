@@ -36,7 +36,7 @@ class CreateComboDetTable extends Migration
             $table->boolean('active');
             $table->boolean('remove');	
 
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

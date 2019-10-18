@@ -25,9 +25,12 @@ class Actividades extends Model
     }
 
     public function horarios() {
-        
-        // return $this->hasMany(ActividadesHorario::class, 'actividades_id');   
+
         return $this->hasMany(ActividadesHorario::class,'actividades_id','id');
+    }
+
+    public function precios(){
+        return $this->hasMany(ActividadPrecios::class,'actividad_id','id');
     }
     
   

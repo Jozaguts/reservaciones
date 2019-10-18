@@ -49,7 +49,7 @@
                                 <div class="col-4 offset-1">
                                  <div class="form-group">
                                    <label for="" >Nombre</label>
-                                   <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40">                           
+                                   <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40" >                           
                                  </div>
                              </div>
                              <div class="col-4 ">
@@ -168,7 +168,7 @@
                           <div class="col-3 offset-2">
                             <div class="form-group flex-column">
                               <label for="" >Balance general (MXN)</label>
-                              <input type="text" name="balance" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                              <input type="text" name="balance" id="balanceG" class="form-control" placeholder="" aria-describedby="helpId" required  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                             </div>
                           </div>
                           <div class="col-3 offset-2 mb-2">
@@ -244,7 +244,7 @@
 <form id="formPerson{{$persona->id}}">
     <div class="row mb-0" style="background-color: #FFFDCC" id="preciosContainer">
     <div class="col-1 padding-col"style="background-color:white" >
-    <input type="hidden"name="persona_id" value="{{$persona->id}}">
+    <input type="hidden"name="persona_id" id="persona_id" value="{{$persona->id}}">
 
       
       <div class="form-group ">
@@ -253,7 +253,7 @@
     </div>
     <div class="col-1 padding-col" style="background-color: #CCFFFD">
       <div class="form-group">
-        <input type="text" name="precio1" id="p1PersonaId{{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+        <input type="text" name="precio1" id="  {{$persona->id}}" class="form-control input-precios" placeholder="" aria-describedby="helpId" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
       </div>
     </div>
     <div class="col-1 padding-col" style="background-color: #CCFFFD">
@@ -288,17 +288,17 @@
     </div>
     <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
       <div class="form-group">
-        <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promocion" id="promoPersonaId{{$persona->id}}" value="1" >
+        <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promocion" id="promoPersonaId{{$persona->id}}"  >
       </div>
     </div>
     <div class="col-1 padding-col " style="background-color: #FFFDCC">
       <div class="form-group">                                                   
-        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}" value="1" onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}"  onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
       </div>
     </div>
     <div class="col-1 padding-col " style="background-color: #FFFDCC">
       <div class="form-group">
-        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanante" id="acompanantePersonaId{{$persona->id}}" value="1" disabled>
+        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanante" id="acompanantePersonaId{{$persona->id}}"  disabled>
     </div>
 </form>
 

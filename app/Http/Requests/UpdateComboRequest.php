@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCombosRequest extends FormRequest
+class UpdateComboRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CreateCombosRequest extends FormRequest
      */
     public function authorize()
     {
-            return true;        
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class CreateCombosRequest extends FormRequest
     {
         return [
         'idusuario' => 'required',
-        'clave' => 'required|unique:actividades',
+        'clave' => 'nullable|unique:actividades',
         'nombre' => 'required',
         'tipoactividades_id' => 'required',
         'maxcortesias' => 'required',
@@ -34,15 +34,6 @@ class CreateCombosRequest extends FormRequest
         'mismo_dia' => 'nullable',
         'precios' => 'nullable',
         'actividades_combo'=> 'required',
-      
-        ];
-    }
-    public function messages()
-    {
-        return [
-        'idusuario.required' => 'Id usuario es obligatorio',
-        'horario_id.required' => "Debes De Seleccionar Almenos Una Actividad"
         ];
     }
 }
-    
