@@ -288,17 +288,17 @@
     </div>
     <div class="col-1 padding-col ml-4 " style="background-color: #FFFDCC">
       <div class="form-group">
-        <input type="checkbox" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promocion" id="promoPersonaId{{$persona->id}}"  >
+        <input type="checkbox" value="" class="form-control pases-precios-check ml-3 check-clean input-precios" name="promocion" id="promoPersonaId{{$persona->id}}"  >
       </div>
     </div>
     <div class="col-1 padding-col " style="background-color: #FFFDCC">
       <div class="form-group">                                                   
-        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}"  onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
+        <input type="checkbox" value="" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}"  onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
       </div>
     </div>
     <div class="col-1 padding-col " style="background-color: #FFFDCC">
       <div class="form-group">
-        <input type="checkbox" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanante" id="acompanantePersonaId{{$persona->id}}"  disabled>
+        <input type="checkbox"  value="" class="form-control ml-3 pases-precios-check check-clean input-precios" name="acompanante" id="acompanantePersonaId{{$persona->id}}" disabled>
     </div>
 </form>
 

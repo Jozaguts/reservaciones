@@ -233,24 +233,38 @@ document.addEventListener('click',function(e){
    
   
       for (let i = 0; i < formPerson1.length; i++) {
-   
+      
         precio1[formPerson1[i].name]=formPerson1[i].value
+      
 
       }
+      formPerson1[8].checked == true ? precio1.promocion = 1:precio1.promocion = 0;  
+      formPerson1[9].checked == true ? precio1.restriccion = 1:precio1.restriccion = 0;  
+      formPerson1[10].checked == true ? precio1.acompanante = 1:precio1.acompanante = 0;  
+      
+
       for (let i = 0; i < formPerson2.length; i++) {
    
         precio2[formPerson2[i].name]=formPerson2[i].value
 
       }
+      formPerson2[8].checked == true ? precio2.promocion = 1:precio2.promocion = 0;  
+      formPerson2[9].checked == true ? precio2.restriccion = 1:precio2.restriccion = 0;  
+      formPerson2[10].checked == true ? precio2.acompanante = 1:precio2.acompanante = 0;  
+      
       for (let i = 0; i < formPerson3.length; i++) {
    
         precio3[formPerson3[i].name]=formPerson3[i].value
 
       }
+      formPerson3[8].checked == true ? precio3.promocion = 1:precio3.promocion = 0;  
+      formPerson3[9].checked == true ? precio3.restriccion = 1:precio3.restriccion = 0;  
+      formPerson3[10].checked == true ? precio3.acompanante = 1:precio3.acompanante = 0;  
+      
       
       precios.push(precio1,precio2,precio3,)
  
-   console.log(precios)
+
     data['precios'] = precios
     let dataform = $('#combosForm').serializeArray();
     let preciosYPasesForm = $('#AddPreciosYPasesForm').serializeArray();
@@ -339,8 +353,8 @@ $(document).on('click','.btn-editar', function(e){
     .then((response) => {
       return response.json();
     }).then((responseJson)=>{
-    
-        printInfoCombo(responseJson.combo,responseJson.precios);
+      console.log(responseJson.precios)
+        printInfoCombo(responseJson.combo, responseJson.precios);
         responseJson.actividades.forEach((infoactividad)=>{
           printActivity(infoactividad);
       });
