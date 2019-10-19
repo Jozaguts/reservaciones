@@ -776,11 +776,11 @@ class ActividadesController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
+  
         if($request->ajax()){
            
 
-            
+          
             if( $actividad = Actividades::find($id)->delete()){
               
                 return response()->json(['status'=>200,'response' => 'Actividad Eliminada Correctamente']);

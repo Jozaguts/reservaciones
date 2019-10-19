@@ -44,7 +44,7 @@ Route::resource('test', 'testController');
 
 // tipo unidaddes controller 
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
-Route::resource('combos', 'CombosController')->middleware(['auth']);
+
 
 
 //tipo de actividades
@@ -59,13 +59,13 @@ Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
 Route::get('salidasllegadas','ActividadesController@salidasllegadas')->middleware(['auth']);
 Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->middleware(['auth']);
 
-Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
 
-// Route::get('asignaciones',function(){
-//     return view('sections.activities.asignaciones');
-// });
-// Route::get('asignaciones' , 'AsignacionesController@index')->middleware(['auth']);
-// Route::get('asignaciones-get' , 'AsignacionesController@getAsignaciones');
+
 Route::resource('asignaciones' , 'AsignacionesController')->middleware(['auth']);
 
 Route::get('asignaciones-get','AsignacionesController@getAsignaciones');
+
+    
+Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
+Route::put('desactivarcombo/{id}', 'CombosController@desactivarcombo')->middleware(['auth']);
+Route::resource('combos', 'CombosController')->middleware(['auth']);

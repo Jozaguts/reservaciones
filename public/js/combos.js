@@ -1,4 +1,5 @@
 
+
 $(document).ready(function () {
 
 // mostrar paneles contenedores de actividades
@@ -169,7 +170,8 @@ function printInfoCombo(infoCombo, infoPrecios) {
 // delete activity to the miniCrud
   $(document).on('click','.btn-eliminar', function(e){
     let activityId = e.target.getAttribute('name')
-  
+    let comboID = $('#comboId').val()
+ 
     swal({
       title: "¿Eliminar Actividad?",
       text: "Esta Acción Removera La Actividad De La Lista De Activiades Seleccionadas",
@@ -182,12 +184,32 @@ function printInfoCombo(infoCombo, infoPrecios) {
         let goRemoveId = aggregateActivities.indexOf(activityId)
 
         aggregateActivities.splice(goRemoveId,1);
-        swal("Actividad Eliminada", {
-          icon: "success",
-        });
-        e.target.parentNode.parentNode.parentNode.remove();
       
+        e.target.parentElement.parentNode.parentNode.parentNode.remove();
         if(aggregateActivities.length == 0) $('.btn-guardar').prop('disabled',true)  
+
+        fetch(`combos/${comboID}`,{
+          method: 'DELETE',
+          body: JSON.stringify({activityId:activityId}),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-Token": $('input[name="_token"]').val()
+          }
+         
+        })
+        .then((response)=>{
+          return response.json();
+        })
+        .then((jsonResponse)=>{
+          swal("Actividad Eliminada Con exito", {
+            icon: "success",
+          });
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
         
       } else {
         swal("Actividad No Eliminada");
@@ -474,12 +496,71 @@ $('.form-group').on('click', '.btn-update', function (event) {
         console.log(err)
       })
   
+  
+   
     
     
   });
   
   
-  
+  document.addEventListener('click',function(e){
+    e.preventDefault()
+// alert(e.target)
+if(e.target.id =='btnDesactivar'){
+   //--------------------------------desactivarActividad(this)-----
+    
+          let id= e.target.getAttribute('data-id');
+     
+          fetch(`/desactivarcombo/${id}`,{
+            method: 'PUT', 
+            // body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-Token": $('input[name="_token"]').val()
+            }
+        })
+          .then((response)=>{
+            return response.json()
+          })
+          .then((responseJson)=>{
+            swal("Good job!", `${responseJson.success}!`, "success");
+          })
+          .catch((err)=>{
+            console.log(err);
+          });
+        
+        
+}
+if(e.target.id =='btnDelete'){
+  //--------------------------------Delete Combo(this)-----
+   
+         let id= e.target.getAttribute('data-id');
+    
+         fetch(`/actividades/${id}`,{
+           method: 'DELETE', 
+           headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+             "X-Requested-With": "XMLHttpRequest",
+             "X-CSRF-Token": $('input[name="_token"]').val()
+           }
+       })
+         .then((response)=>{
+           return response.json()
+         })
+         .then((responseJson)=>{
+           swal("Good job!", `Combo eliminado Correctamente`, "success");
+         })
+         .catch((err)=>{
+           console.log(err);
+         });
+       
+       
+}
+
+  })
 
 
 
@@ -554,3 +635,5 @@ $('.form-group').on('click', '.btn-update', function (event) {
         checkAcompanante.disabled = true;
         }
         }
+
+       

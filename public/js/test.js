@@ -2337,26 +2337,26 @@ $('.addHorarioContanier').click(function (e) {
 
 
 
-// function activarActividad(){
-//   let id = $('#libre').data('actividadid');
-//     $.ajax({
-//       type: "PUT",
-//       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-//       url: `deshabilitar-actividad/${id}`,
-//       data: id,
-//       dataType: "json",
-//       success: function (response) {
-//         if( response.message =='Activada Correctamente'){
-//         
-//           $('#libre').attr('checked',true);
-//           $('#libre').css('box-shadow', '0px 0px 0px 3px green');
-//         }else{
-//           $('#libre').attr('checked',false);
-//         
-//           $('#libre').css('box-shadow', '0px 0px 0px 0px green');
-//         }
-//   
-//       }
-//     });
+function activarActividad(){
+  let id = $('#libre').data('actividadid');
+    $.ajax({
+      type: "PUT",
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: `deshabilitar-actividad/${id}`,
+      data: id,
+      dataType: "json",
+      success: function (response) {
+        if( response.message =='Activada Correctamente'){
+        
+          $('#libre').attr('checked',true);
+          $('#libre').css('box-shadow', '0px 0px 0px 3px green');
+        }else{
+          $('#libre').attr('checked',false);
+        
+          $('#libre').css('box-shadow', '0px 0px 0px 0px green');
+        }
+  
+      }
+    });
  
-// }
+}

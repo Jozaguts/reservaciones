@@ -54,15 +54,19 @@
                                             </td>
                                             <td class="table-head  text-capitalize precioFix"> {{$actividad->precio}}                                             </td>
                                             <td class="table-head  text-capitalize balanceFix"> {{$actividad->balance}}                                                 </td>
+                                            <form action="">
+                                                <input type="hidden" name="_method" value="PUT">
+                                         
                                             <td class="table-head table-head__actions"> 
                                             <button type="button" class="table-head table-head__btn btn-edit  btn btn-primary btn-editar"   data-id="{{$actividad->id}}">
                                            
                                             </button>
                                             <input type="hidden" name="idactividad"    value="{{$actividad->id}}" id="idActividad">
-                                             <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary" onclick="desactivarActividad(this)"  data-id="{{$actividad->id}}"  data-desactivar="{{$actividad->active}}"   data-btn-status="{{$actividad->active}}"  ></a>
-
-                                                <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger" onclick="eliminarActividad(this)" data-id="{{$actividad->id}}" data-eliminar="true"></a>
+                                             <a href="#!" class="table-head table-head__btn btn btn-disabled btn-secondary"   data-id="{{$actividad->id}}"  data-desactivar="{{$actividad->active}}"   data-btn-status="{{$actividad->active}}"  id="btnDesactivar"></a>
+                                            
+                                                <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"  data-id="{{$actividad->id}}" data-eliminar="true" id="btnDelete"></a>
                                             </td>
+                                        </form>
                                         </tr>
                                                 
                                             @endif

@@ -35,7 +35,7 @@ class CombosController extends Controller
         $tipoactividades = TipoActividades::all();
          $actividades = DB::table('actividades as ac')
                ->select('ac.id', 'ac.clave', 'ac.nombre','ac.tipoactividades_id','ac.active', 'ac.combo','ac.precio', 'ac.balance')
-               ->where([['ac.active', '=','1'], ['ac.remove','=','0'], ['ac.renta','=','0']])
+               ->where([ ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.deleted_at','=',NULL]])
                ->orderBy('ac.clave')
                ->get();
             
@@ -162,6 +162,7 @@ class CombosController extends Controller
         $actividades = DB::table('combo_det')
         ->select('actividades_id')
         ->where('actividades_id_combo',$id)
+        ->where('deleted_at',null)
         ->get(); 
 
        
@@ -267,7 +268,9 @@ class CombosController extends Controller
                
     
         });
-        return response()->json(['status' => 200]);
+        return response()->json([
+            'success' => 'Combo Actualizado Con exito'
+            ]);
 
         
       
@@ -279,9 +282,43 @@ class CombosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $actividad = ComboDet::where('actividades_id_combo', $id)
+        ->where('actividades_id',$request->activityId);
+        
+        if($actividad->delete()) {
+            return response()->json([
+                'success' => 'Actividad Eliminada Con exito'
+                ]);
+        }else{
+            return response()->json([
+                'success' => 'No se pudo eliminar la actividad por favor intenelo nuevamente'
+                ]);
+        }
+       
+
+    }
+    
+    public function desactivarcombo($id){
+
+      
+
+      $combo = Actividades::find($id);
+
+     if( $combo->active == 1 ){
+        $combo = DB::update('update actividades set active = 0 where id = ?', [$id]);
+        return response()->json([
+            'success' => 'Combo Desactivado Correctamente'
+            ]);
+     }else{
+        $combo = DB::update('update actividades set active = 1 where id = ?', [$id]);
+        return response()->json([
+            'success' => 'Combo Activado Correctamente'
+            ]);
+     }
+
+       
     }
     public function infoactividad($id){
 
@@ -382,6 +419,7 @@ class CombosController extends Controller
         
         
     }
+
 
 
    
