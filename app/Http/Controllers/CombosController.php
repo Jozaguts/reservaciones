@@ -156,29 +156,27 @@ class CombosController extends Controller
         $infoHorarios = [];
         $ifoPrecios=[];
         
-
+       
         $combo =  Actividades::find($id); 
-
+       
         $actividades = DB::table('combo_det')
-        ->select('actividades_id')
         ->where('actividades_id_combo',$id)
         ->where('deleted_at',null)
         ->get(); 
 
-       
+  
 
         foreach($actividades as $actividad){
-      
+          
             $infoHorarios[] = $this->infoactividad($actividad->actividades_id);
             
         
        }
-
+    
         $info['combo']=$combo; 
         $info['actividades']= $infoHorarios;
         $info['precios']= $combo->precios;
-
-
+    
     return $info;
     }
 
@@ -327,7 +325,7 @@ class CombosController extends Controller
         $infoActividad = [];
 
         $actividad = Actividades::find($id)
-        ->where('active', '1')
+        // ->where('active', '1')
         ->where('remove','0')
         ->where('renta','0')
         ->where('combo','0')

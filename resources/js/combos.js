@@ -126,14 +126,14 @@ function printInfoCombo(infoCombo, infoPrecios) {
    $(`#formPerson${infoPrecio.persona_id}`)[0][7].value =infoPrecio.triplebalanc;
 
   infoPrecio.promocion == 1 ?
-    $(`#formPerson${infoPrecio.persona_id}`)[0][8].setAttribute('checked',true):
-    $(`#formPerson${infoPrecio.persona_id}`)[0][8].setAttribute('checked',false)
-  infoPrecio.promocion == 1 ?
-    $(`#formPerson${infoPrecio.persona_id}`)[0][9].setAttribute('checked',true):
-    $(`#formPerson${infoPrecio.persona_id}`)[0][9].setAttribute('checked',false)
-  infoPrecio.promocion == 1 ?
-    $(`#formPerson${infoPrecio.persona_id}`)[0][10].setAttribute('checked',true):
-    $(`#formPerson${infoPrecio.persona_id}`)[0][10].setAttribute('checked',false)
+   $(`#formPerson${infoPrecio.persona_id}`)[0][8].setAttribute('checked','true'):
+   $(`#formPerson${infoPrecio.persona_id}`)[0][8].setAttribute('unchecked','true')
+ infoPrecio.restriccion == 1 ?
+   $(`#formPerson${infoPrecio.persona_id}`)[0][9].setAttribute('checked','true'):
+   $(`#formPerson${infoPrecio.persona_id}`)[0][9].setAttribute('unchecked','true')
+ infoPrecio.acompanante == 1 ?
+   $(`#formPerson${infoPrecio.persona_id}`)[0][10].setAttribute('checked','true'):
+   $(`#formPerson${infoPrecio.persona_id}`)[0][10].setAttribute('unchecked','true')
 
    
 
@@ -361,6 +361,7 @@ $(document).on('click','.btn-editar', function(e){
 
 
   const ID = e.target.getAttribute('data-id');
+  console.log(ID)
   var token = $("input[name='_token']").val();
   $('#combosForm').append(`<input type="hidden" value ="${ID}" id="comboId">`)
   let info;
@@ -375,7 +376,7 @@ $(document).on('click','.btn-editar', function(e){
     .then((response) => {
       return response.json();
     }).then((responseJson)=>{
-      console.log(responseJson.precios)
+    
         printInfoCombo(responseJson.combo, responseJson.precios);
         responseJson.actividades.forEach((infoactividad)=>{
           printActivity(infoactividad);
