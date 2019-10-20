@@ -81,6 +81,34 @@ function printActivity(infoActividad){
         </tr>
      
   `);
+ 
+  let optionSelecionado = document.querySelector('option[data-horariotext]')
+  let textoption = optionSelecionado.getAttribute('data-horariotext') /* text de DB */
+  if(optionSelecionado){
+    
+    
+    let select = document.querySelectorAll('.select-info') 
+    for (let i = 0; i < select.length; i++) {
+     
+      for(let j=0; j<select[i].options.length; j++){
+        let text = select[i].options[j].innerText /* text del option */
+        if(text.startsWith(`${textoption}`)){
+          select[i].options[j].selected = true;
+          // console.log(select[i].options[j], text /* select[i].value = select[i].options[j] */)
+          // select[i].options[select[i].options.selectedIndex] =select[i].options[j]
+        }
+        
+        
+        // if(select[i].options[j].innerText.splice() == optionSelecionado ){
+          
+        // }
+      }
+      
+    }
+    
+  }
+
+  
   aggregateActivities.push(actividad.id);
 
   }else{
@@ -138,6 +166,8 @@ function printInfoCombo(infoCombo, infoPrecios) {
    
 
   })
+
+  
 
 
 
@@ -361,7 +391,7 @@ $(document).on('click','.btn-editar', function(e){
 
 
   const ID = e.target.getAttribute('data-id');
-  console.log(ID)
+  
   var token = $("input[name='_token']").val();
   $('#combosForm').append(`<input type="hidden" value ="${ID}" id="comboId">`)
   let info;
