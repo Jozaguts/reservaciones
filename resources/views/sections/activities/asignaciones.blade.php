@@ -45,12 +45,12 @@
         ajax: '{!! url('asignaciones-get') !!}',
         columns: [
             { data: 'clave', name: 'clave' },
-            { data: 'Unidad', name: 'Unidad' },
-            { data: 'tipo_unidad', name: 'tipo_unidad' },
+            { data: 'unidad', name: 'unidad' },
+            { data: 'nombre', name: 'tipo_unidad' },
             { data: 'capacidad', name: 'capacidad' },
             { data: 'status', name: 'status' },
             { data: null,  render: function ( data, type, row ) {
-                return "<a href='{{ url('asignaciones.show') }}/"+ data.id +"' class='btn btn-xs btn-primary'data-unidadid="+ data.id +" onclick='asignacionesInfo(this);'  data-toggle='modal' data-target='.modal'>Asignaciones </button>" }  
+                return "<a href='{{ url('asignaciones.show') }}/"+ data.id +"' class='btn btn-xs btn-primary'id="+ data.id +" onclick='asignacionesInfo(this);'  data-toggle='modal' data-target='.modal'>Asignar </button>" }  
             }
 
         ]

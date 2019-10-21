@@ -11,34 +11,34 @@
           <form action="asignaciones">
             <div class="container">
               <div class="row">
-                  <div class="col-1">
+                  <div class="col-2">
                       <div class="form-group">
                         <label for="clave">Clave</label>
-                        <input type="text" name="clave" id="clave" class="form-control" placeholder="CAM01" aria-describedby="helpId" disabled>
+                        <input type="text" name="clave" id="clave" class="form-control" placeholder="" aria-describedby="helpId" disabled>
                       </div>
                   </div>
-                  <div class="col-5">
+                  <div class="col-3">
                       <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="CAMIÓN KODIAK 01" aria-describedby="helpId" disabled>
+                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="" aria-describedby="helpId" disabled>
                       </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                       <div class="form-group">
                         <label for="tipo-de-unidad">Tipo de unidad</label>
-                        <input type="text" name="tipo-de-unidad" id="tipo-de-unidad" class="form-control" placeholder="CAMION" aria-describedby="helpId" disabled>
+                        <input type="text" name="tipo_unidad" id="tipo_unidad" class="form-control" placeholder="" aria-describedby="helpId" disabled>
                       </div>
                   </div>
-                  <div class="col-1">
+                  <div class="col-2">
                       <div class="form-group">
                         <label for="capacida">Capacidad</label>
-                        <input type="text" name="capacidad" id="capacidad" class="form-control" placeholder="10" aria-describedby="helpId" disabled>
+                        <input type="text" name="capacidad" id="capacidad" class="form-control" placeholder="" aria-describedby="helpId" disabled>
                       </div>
                   </div>
-                  <div class="col-1">
+                  <div class="col-2">
                       <div class="form-group">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="placa" class="form-control" placeholder="JFH22331" aria-describedby="helpId" disabled>
+                        <input type="text" name="placa" id="placa" class="form-control" placeholder="" aria-describedby="helpId" disabled>
                       </div>
                   </div>
                   
@@ -46,11 +46,10 @@
               <div class="row">
                 <div class="col-4">
                   <div class="form-group">
-                    <label for="actividad">Actividad</label>
-                    <select class="form-control" name="actividad" id="actividad">
-                      <option>MOTO 01 | PASEO EN MOTOS EL EDEN</option>
-                      <option>PRE01 | PREDATOR</option>
-                      <option>CAN01 | CANOPY EL EDEN</option>
+                    <label for="actividades">Actividad</label>
+                    <select class="form-control" name="actividades" id="actividades">
+                      <option disabled>Seleccione una actividad</option>
+                      
                     </select>
                   </div>
                 </div>
@@ -58,10 +57,8 @@
                   <div class="form-group">
                     <label for="horario">Horario</label>
                     <select class="form-control" name="horario" id="horario">
-                      <option>8:00AM | 12:00PM | L,M,X,J,V,S,D</option>
-                      <option>9:00AM | 1:00PM | S,D</option>
-                      <option>2:00AM | 5:00PM | L,M,X,S,D</option>
-                      <option>3:00AM | 6:00PM | L,M,X,J,V</option>
+                      
+                  
                     </select>
                   </div>
                 </div>

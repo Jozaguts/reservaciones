@@ -59,11 +59,14 @@ Route::resource('actividades', 'ActividadesController')->middleware(['auth']);
 Route::get('salidasllegadas','ActividadesController@salidasllegadas')->middleware(['auth']);
 Route::get('horario-multiple/{id}','ActividadesController@horarioMultiple')->middleware(['auth']);
 
+Route::get('asignaciones/info-actividad-horario/{id}','AsignacionesController@actividadHorarioInfo')->middleware(['auth']);
 
+Route::get('asignaciones-get','AsignacionesController@getAsignaciones');
+Route::get('asignaciones/salidas-llegadas/{id}','AsignacionesController@salidasLlegadas');
 
 Route::resource('asignaciones' , 'AsignacionesController')->middleware(['auth']);
 
-Route::get('asignaciones-get','AsignacionesController@getAsignaciones');
+
 
     
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);

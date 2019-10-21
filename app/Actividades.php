@@ -32,6 +32,7 @@ class Actividades extends Model
     public function precios(){
         return $this->hasMany(ActividadPrecios::class,'actividad_id','id');
     }
+   
     
   
   
