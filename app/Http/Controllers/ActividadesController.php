@@ -197,7 +197,7 @@ class ActividadesController extends Controller
                     $SalidasLlegadasHorarioSALIDA = SalidasLlegadasHorario::firstOrCreate(
                         ['actividadeshorario_id' => $ActividadesHorario->id,'salidallegadas_id' => $request->salidas, 'salida' =>1  ], 
                         ['hora' =>null,
-                        // 'salida' =>1,
+                     
                             'active' =>1,
                             'remove' =>0,                        
                             'usuarios_id' => $request->get('idusuario'),

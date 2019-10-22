@@ -8,6 +8,8 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
 use App\Traits\Infoactividad;
 use App\Actividades;
+use App\ActividadesHorario;
+use Carbon\Carbon;
 
 
 
@@ -60,7 +62,15 @@ class AsignacionesController extends Controller
    }  
 
    public function salidasLlegadas($id){
-      dd($id);
+
+      $horario = DB::table('actividadeshorarios as ah')
+      ->join('salida_llegadahorarios as slh', 'ah.id', '=', 'slh.actividadeshorario_id')
+      ->join('salidallegadas as sl', 'slh.salidallegadas_id', '=', 'sl.id')
+      ->select('ah.id as horario_id', 'slh.id as sal_lleg_hor_id', 'slh.hora', DB::raw('IF(slh.salida=1, "S", "Ll") as tipo'), 'sl.id as sal_lleg_id', 'sl.nombre as punto')
+      ->where([['ah.id','=','1']])
+      ->get();
+      return response()->json(['info'=> $horario]);
+    
    }
   
 

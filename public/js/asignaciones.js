@@ -48,35 +48,61 @@ fetch(`asignaciones/${e.id}`,{
     $('#actividades').change(function (e) { 
         e.preventDefault();
         let idActividad = e.target.options[e.target.selectedIndex].value
-   
-        fetch(`asignaciones/info-actividad-horario/${idActividad}`,{
-            method: 'GET',
-        })
-        .then((response)=>{
-            return response.json();
-        })
-        .then((responseJson)=>{
-            let options = responseJson.optionsHorario;
-            $('#horario').html('')
-            $('#horario').append('<option disabled selected="true">Seleccione un Horario</option>');
-            options.forEach(option => {
-                $('#horario').append(option)
-            });
-            
-        })
+        if(idActividad != 'false'){
+            fetch(`asignaciones/info-actividad-horario/${idActividad}`,{
+                method: 'GET',
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((responseJson)=>{
+                let options = responseJson.optionsHorario;
+                $('#horario').html('')
+                $('#horario').append('<option value="false" selected="true">Seleccione un Horario</option>');
+                options.forEach(option => {
+                    $('#horario').append(option)
+                });
+                
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+        
         
     });
     $('#horario').change(function (e) { 
         e.preventDefault();
         let idHorario = e.target.options[e.target.selectedIndex].value
-        fetch(`asignaciones/salidas-llegadas/${idHorario}`,{
-            method: 'GET',
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((responseJson) => {
-            console.log(responseJson)
-        })
+        if(idHorario != 'false'){
+
+            fetch(`asignaciones/salidas-llegadas/${idHorario}`,{
+                method: 'GET',
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                console.log(responseJson.info)
+                let info, hora, tipo, punto;
+                info = responseJson.info
+                info.forEach((salida)=>{
+                    hora = salida.hora;
+                    tipo= salida.tipo;
+                    punto= salida.punto;
+                    id=salida.sal_lleg_hor_id;
+                $('#slu').html('')
+                $('#slu').append('<option value="false" selected="true">Seleccione un Horario</option>');
+                $('#slu').append(`<option value="${id}" > ${hora} | ${tipo} | ${punto}</option>`);
+
+                })
+               
+
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+       
     });
 }

@@ -48,7 +48,7 @@
                   <div class="form-group">
                     <label for="actividades">Actividad</label>
                     <select class="form-control" name="actividades" id="actividades">
-                      <option disabled>Seleccione una actividad</option>
+                      <option selected="true" value="false">Seleccione una actividad</option>
                       
                     </select>
                   </div>
@@ -69,9 +69,7 @@
                         <div class="form-group">
                           <label for="slu">Salida | Llegada | Ubicación</label>
                           <select class="form-control" name="slu" id="slu">
-                            <option>14:00:00 | S | Jarretaderas</option>
-                            <option>19:00:00 | Ll | Jarretaderas</option>
-                            <option>09:00:00 | S | Oxxo Las Juntas</option>
+                           
                           </select>
                         </div>
                       </div>

@@ -23,8 +23,10 @@ class CreateSalidaLlegadahorariosTable extends Migration
 
             $table->unsignedInteger('salidallegadas_id');
             $table->foreign('salidallegadas_id')->references('id')->on('salidallegadas');
+
             $table->unsignedInteger('actividadeshorario_id');
-            $table->foreign('actividadeshorario_id')->references('id')->on('actividadeshorarios');			        
+            $table->foreign('actividadeshorario_id')->references('id')->on('actividadeshorarios');	
+            		        
             $table->unsignedInteger('usuarios_id');
             $table->foreign('usuarios_id')->references('id')->on('usuarios');
        		        
