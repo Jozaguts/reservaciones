@@ -11,6 +11,7 @@
           <form action="asignaciones">
             <div class="container">
               <div class="row">
+                <input type="hidden" value="" id="unidad_id">
                   <div class="col-2">
                       <div class="form-group">
                         <label for="clave">Clave</label>
@@ -96,8 +97,8 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
+                  <tbody id="tbody">
+                    {{-- <tr>
                       <td scope="row">CAN01</td>
                       <td>CANOPY EL EDEN</td>
                       <td>08:00:00</td>
@@ -112,7 +113,7 @@
                         <td>Ll</td>
                         <td>Jarretaderas</td>
                         <td><span class="btn btn-danger">-</span></td>
-                      </tr>
+                      </tr> --}}
                   
                   </tbody>
                 </table>

@@ -25,6 +25,10 @@ class CreateAsignacionesTable extends Migration
             $table->unsignedInteger('unidad_id');
             $table->foreign('unidad_id')->references('id')->on('unidades');
 
+            
+            $table->unsignedInteger('salida_llegada_id');
+            $table->foreign('salida_llegada_id')->references('id')->on('salida_llegadahorarios');
+
             $table->boolean('salida');
 
 
