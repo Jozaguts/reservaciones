@@ -24,7 +24,7 @@ class ActividadesController extends Controller
      */
     public function index()
     {
-        
+        $tipounidades = TipoUnidad::all();
         $personas = Personas::all();
         $salidasLlegadas = SalidasLlegadas::all();
         $anticipos = Anticipos::all();

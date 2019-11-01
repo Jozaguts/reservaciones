@@ -7,6 +7,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
         <div class="modal-body">
           <form action="asignaciones">
             <div class="container">
@@ -123,7 +124,7 @@
         </div>
         <div class="modal-footer">
           
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-primary" id="guardarAsignacion">Guardar</button>
         </div>
       </div>
     </div>
