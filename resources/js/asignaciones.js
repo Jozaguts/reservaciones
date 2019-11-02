@@ -122,7 +122,7 @@ function asignacionesInfo(e) {
             ); /* SALIDA  S o Ll === unidad_id*/
 
                 let salidaBool =Boolean;
-                salida==='S'?salidaBool=true:salidaBool=false;
+                salida==='S'?salidaBool="1":salidaBool="0";
 
             let ubicacion = $("#slu>option:selected").data(
                 "punto"
@@ -146,6 +146,7 @@ function asignacionesInfo(e) {
                 <input name ="actividad_horario_id" type="hidden" value ="${ $("#horario").val()}">
                 <input name ="salida" type="hidden" value ="${salidaBool}">
                 <input name ="unidad_id" type="hidden" value ="${$("#unidad_id").val()}">
+                <input name ="salida_llegada_id" type="hidden" value ="${$("#slu").val()}">
             </tr>
         </form>
         `;
@@ -179,41 +180,37 @@ $(".modal").on("hidden.bs.modal", function() {
     actividad_horario_id @INT
     unidad_id @INT
     salida @BOOLEAN
-    unidad_id @INT
+    salida_llegada_id INT
+  
 */
-$('#guardarAsignacion').on('click', function() {
-    let dataContainer = [] ,formsData = document.querySelectorAll('tr[name="dataAsignacion"]');
-    
-    formsData.forEach((form)=>{
+$("#guardarAsignacion").on("click", function() {
+    let dataContainer = [],
+        formsData = document.querySelectorAll('tr[name="dataAsignacion"]');
 
-        let  i=0, length = $(form).children('input').length;
+    formsData.forEach(form => {
+        let i = 0,
+            length = $(form).children("input").length;
         let objetcDAta = {};
-        for (i = 0;  i< length; i++) {
-
+        for (i = 0; i < length; i++) {
             objetcDAta[form.children[i].name] = form.children[i].value;
-            
         }
         dataContainer.push(objetcDAta);
+    });
+
+    fetch("/asignaciones", {
+        method: "POST",
+        body: JSON.stringify(dataContainer),
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        }
     })
-  
-
-fetch('/asignaciones',{
-    method: "POST",
-    data: JSON.stringify(dataContainer),
-    headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-        "X-CSRF-Token": $('input[id="_token"]').val()
-    }
-})
-.then((r)=>{
-    return r.json()
-})
-.then((re)=>{
-    console.log(re)
-})
-
-
-  
-})
+        .then(response => {
+            return response.json();
+        })
+        .then(responseJson => {
+            console.log(responseJson);
+        });
+});

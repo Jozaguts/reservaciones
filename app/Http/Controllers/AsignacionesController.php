@@ -10,6 +10,8 @@ use App\Traits\Infoactividad;
 use App\Actividades;
 use App\ActividadesHorario;
 use Carbon\Carbon;
+use App\Http\Requests\StoreAsiginaciones;
+use App\Asignaciones;
 
 
 
@@ -34,15 +36,19 @@ class AsignacionesController extends Controller
      return response()->json(['unidadInfo'=> $unidad, 'actividades'=> $actividades]);
    }
 
-  /*       CLAVE: ->unidades(clave) 
-      UNIDAD: ->unidades(descripcion)
-      UNIDAD TIPO: ->tipounidades(nombre)
-      CAPACIDAD: ->unidades(capacidad)
-      STATUS: ->unidades(|active=1 ACTIVO | active =0 DESACTIVADO|)
-      botones de accion.      
-    */ 
 
-   public function getAsignaciones(Request $request){
+    public function store(StoreAsiginaciones $request) {
+
+      $asingaciones = $request->all();
+      
+      foreach ($asingaciones as $asingacion) {
+         DB::table('asignaciones')->insert($asingacion);
+      }
+      
+
+    }
+
+   public function getAsignaciones(){
     
       $unidades = DB::table('unidades as u')
       ->join('tipounidades as tu', 'u.idtipounidad', '=', 'tu.id')
