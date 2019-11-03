@@ -205,6 +205,7 @@ class ActividadesController extends Controller
                     );
                     // llegadas
                     $SalidasLlegadasHorarioSALIDA->save();
+                    
                     $SalidasLlegadasHorarioLLEGADA = SalidasLlegadasHorario::firstOrCreate(
                         ['actividadeshorario_id' => $ActividadesHorario->id,'salidallegadas_id' => $request->llegadas, 'salida'=>0  ], 
                         ['hora' =>null,

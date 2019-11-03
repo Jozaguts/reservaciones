@@ -3,6 +3,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Asignaciones</h5>
+          <div class="loading d-none" id="loading">
+            <div class="dot d1"></div>
+            <div class="dot d2"></div>
+            <div class="dot d3"></div>
+          </div>      
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

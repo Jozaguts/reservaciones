@@ -26,16 +26,17 @@ class AsignacionesController extends Controller
    }
 
    public function show($id){
+
       $unidad = DB::table('unidades as u')
       ->join('tipounidades as tu', 'u.idtipounidad', '=', 'tu.id')
       ->select('u.id','u.clave','u.descripcion as nombre','u.capacidad','u.active as status','u.placa', 'tu.nombre as tipo_unidad')
       ->where('u.id','=',$id)
       ->first();
+
       $actividades = Actividades::all()
       ->where('combo','0');
      return response()->json(['unidadInfo'=> $unidad, 'actividades'=> $actividades]);
    }
-
 
     public function store(StoreAsiginaciones $request) {
 
@@ -45,6 +46,7 @@ class AsignacionesController extends Controller
          DB::table('asignaciones')->insert($asingacion);
       }
       
+      return response()->json(['success'=> 'Asignacion Guardada Correctamente']);
 
     }
 

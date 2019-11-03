@@ -37217,17 +37217,17 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/users.scss */"./resources/sass/users.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/hamburger-menu.scss */"./resources/sass/hamburger-menu.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/login-resposive.scss */"./resources/sass/login-resposive.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/tipoequipounidad.scss */"./resources/sass/tipoequipounidad.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/equiposyunidades.scss */"./resources/sass/equiposyunidades.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/tipoactividades.scss */"./resources/sass/tipoactividades.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/activities.scss */"./resources/sass/activities.scss");
-__webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/combos.scss */"./resources/sass/combos.scss");
-module.exports = __webpack_require__(/*! /home/jz/Desktop/Projects/reservaciones/resources/sass/asignaciones.scss */"./resources/sass/asignaciones.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\users.scss */"./resources/sass/users.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\hamburger-menu.scss */"./resources/sass/hamburger-menu.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\login-resposive.scss */"./resources/sass/login-resposive.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\tipoequipounidad.scss */"./resources/sass/tipoequipounidad.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\equiposyunidades.scss */"./resources/sass/equiposyunidades.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\tipoactividades.scss */"./resources/sass/tipoactividades.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\activities.scss */"./resources/sass/activities.scss");
+__webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\combos.scss */"./resources/sass/combos.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\reservaciones\resources\sass\asignaciones.scss */"./resources/sass/asignaciones.scss");
 
 
 /***/ })

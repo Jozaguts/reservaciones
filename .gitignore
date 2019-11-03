@@ -13,3 +13,5 @@ yarn-error.log
 .idea/php.xml
 .idea/reservaciones.iml
 .vscode/
+.idea
+.idea/
