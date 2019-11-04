@@ -6,31 +6,68 @@ function asignacionesInfo(e) {
 			return response.json();
 		})
 		.then(responseJson => {
-			// info unidad
+		
+			$('#tbody').html('');
+			if(responseJson.forms){
+				let i=0, 
+				length =responseJson.forms.length;
+				let tbody = document.getElementById('tbody');
+				for (i; i < length; i++) {
+					tbody.innerHTML +=responseJson.forms[i];
+				}
+				let salida_llegada_id = document.querySelectorAll('[name=salida_llegada_id]')
+				salida_llegada_id.forEach((salida)=>{
+					ubucaciones.push(salida.value)
+				
+				})
 			
-			const UNIDAD_INFO = responseJson.unidadInfo;
-			$("#unidad_id").val("");
-			$("#unidad_id").val(e.id);
-			$("#clave").val(UNIDAD_INFO.clave);
-			$("#nombre").val(UNIDAD_INFO.nombre);
-			$("#capacidad").val(UNIDAD_INFO.capacidad);
-			$("#placa").val(UNIDAD_INFO.placa);
-			$("#tipo_unidad").val(UNIDAD_INFO.tipo_unidad);
-			// info select actividades
-			const ACTIVIDADES = responseJson.actividades;
-			$("#actividades").html("");
-					$("#actividades").append(
-						'<option value="undefined" selected="true">Seleccione una Actividad</option>'
-					);
-			for (let i = 0; i < ACTIVIDADES.length; i++) {
-				let option = document.createElement("option");
-				option.innerText = ACTIVIDADES[i].nombre;
-				option.setAttribute("value", ACTIVIDADES[i].id);
-				option.setAttribute("data-clave", ACTIVIDADES[i].clave);
-
-				$("#actividades").append(option);
+				
+				const UNIDAD_INFO = responseJson.unidadInfo;
+				$("#unidad_id").val("");
+				$("#unidad_id").val(e.id);
+				$("#clave").val(UNIDAD_INFO.clave);
+				$("#nombre").val(UNIDAD_INFO.nombre);
+				$("#capacidad").val(UNIDAD_INFO.capacidad);
+				$("#placa").val(UNIDAD_INFO.placa);
+				$("#tipo_unidad").val(UNIDAD_INFO.tipo_unidad);
+				// info select actividades
+				const ACTIVIDADES = responseJson.actividades;
+				$("#actividades").html("");
+				$("#actividades").append(
+					'<option value="undefined" selected="true">Seleccione una Actividad</option>'
+				);
+					for (let i = 0; i < ACTIVIDADES.length; i++) {
+						let option = document.createElement("option");
+						option.innerText = ACTIVIDADES[i].nombre;
+						option.setAttribute("value", ACTIVIDADES[i].id);
+						option.setAttribute("data-clave", ACTIVIDADES[i].clave);
+		
+						$("#actividades").append(option);
+					}
+			}else{
+				const UNIDAD_INFO = responseJson.unidadInfo;
+				$("#unidad_id").val("");
+				$("#unidad_id").val(e.id);
+				$("#clave").val(UNIDAD_INFO.clave);
+				$("#nombre").val(UNIDAD_INFO.nombre);
+				$("#capacidad").val(UNIDAD_INFO.capacidad);
+				$("#placa").val(UNIDAD_INFO.placa);
+				$("#tipo_unidad").val(UNIDAD_INFO.tipo_unidad);
+				// info select actividades
+				const ACTIVIDADES = responseJson.actividades;
+				$("#actividades").html("");
+				$("#actividades").append(
+					'<option value="undefined" selected="true">Seleccione una Actividad</option>'
+				);
+					for (let i = 0; i < ACTIVIDADES.length; i++) {
+						let option = document.createElement("option");
+						option.innerText = ACTIVIDADES[i].nombre;
+						option.setAttribute("value", ACTIVIDADES[i].id);
+						option.setAttribute("data-clave", ACTIVIDADES[i].clave);
+		
+						$("#actividades").append(option);
+					}
 			}
-			
 		})
 		.catch(err => {
 			console.log(err);
@@ -38,7 +75,7 @@ function asignacionesInfo(e) {
 	// REVISAR LOS OPCIONES DE EL SELECT HOARIOS
 	// select horarioT
 	$("#actividades").change(function(e) {
-			$('#loading').removeClass('d-none')
+		$("#loading").removeClass("d-none");
 		e.preventDefault();
 		let idActividad = e.target.options[e.target.selectedIndex].value;
 		if (idActividad != "false") {
@@ -57,7 +94,7 @@ function asignacionesInfo(e) {
 					options.forEach(option => {
 						$("#horario").append(option);
 					});
-					$('#loading').addClass('d-none')
+					$("#loading").addClass("d-none");
 				})
 				.catch(err => {
 					console.log(err);
@@ -65,8 +102,7 @@ function asignacionesInfo(e) {
 		}
 	});
 	$("#horario").change(function(e) {
-		
-		$('#loading').removeClass('d-none')
+		$("#loading").removeClass("d-none");
 		e.preventDefault();
 		let idHorario = e.target.options[e.target.selectedIndex].value;
 		if (idHorario != "false") {
@@ -94,7 +130,7 @@ function asignacionesInfo(e) {
 							}  | ${tipo} | ${punto}</option>`
 						);
 					});
-					$('#loading').addClass('d-none')
+					$("#loading").addClass("d-none");
 				})
 				.catch(err => {
 					console.log(err);
@@ -104,7 +140,10 @@ function asignacionesInfo(e) {
 
 	let ubucaciones = [];
 	$("#seleccionar").on("click", function() {
-		$('#loading').removeClass('d-none')
+
+		evaluarSelectsSinOpcionSeleccionada();
+
+		$("#loading").removeClass("d-none");
 		let idUbucacion = $("#slu").val();
 
 		if (
@@ -166,9 +205,9 @@ function asignacionesInfo(e) {
         </form>
         `;
 			ubucaciones.push(idUbucacion);
-			$("#slu>option:selected").prop('disabled',true); 
+			$("#slu>option:selected").prop("disabled", true);
 		}
-		$('#loading').addClass('d-none')
+		$("#loading").addClass("d-none");
 	});
 
 	/* delete */
@@ -178,10 +217,8 @@ function asignacionesInfo(e) {
 				e.target.parentElement.parentElement.children[6].value
 			);
 			ubucaciones.splice(indx, 1);
-			e.target.parentNode.parentElement.nextElementSibling.remove()
-			e.target.parentElement.parentElement.remove()
-		
-
+			e.target.parentNode.parentElement.nextElementSibling.remove();
+			e.target.parentElement.parentElement.remove();
 		}
 	});
 }
@@ -189,6 +226,7 @@ $(".modal").on("hidden.bs.modal", function() {
 	$(this)
 		.find("form")
 		.trigger("reset");
+	find("input").trigger("reset");
 });
 
 /* 
@@ -203,36 +241,79 @@ $("#guardarAsignacion").on("click", function() {
 	let dataContainer = [],
 		formsData = document.querySelectorAll('tr[name="dataAsignacion"]');
 
-	formsData.forEach(form => {
-		let i = 0,
-			length = $(form).children("input").length;
-		let objetcDAta = {};
-		for (i = 0; i < length; i++) {
-			objetcDAta[form.children[i].name] = form.children[i].value;
-		}
-		dataContainer.push(objetcDAta);
-	});
-
-	fetch("/asignaciones", {
-		method: "POST",
-		body: JSON.stringify(dataContainer),
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-			"X-Requested-With": "XMLHttpRequest",
-			"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-		}
-	})
-		.then(response => {
-			return response.json();
-		})
-		.then(jsonResponse => {
-			if(jsonResponse.success){
-				swal("Good job!", `${jsonResponse.success}!`, "success");
-				$('#tbody').html(' ');
-				$('.modal').modal('hide');
-
-			  }
-
+	if (formsData.length > 0) {
+		formsData.forEach(form => {
+			let i = 0,
+				length = $(form).children("input").length;
+			let objetcDAta = {};
+			for (i = 0; i < length; i++) {
+				objetcDAta[form.children[i].name] = form.children[i].value;
+			}
+			dataContainer.push(objetcDAta);
 		});
+
+		fetch("/asignaciones", {
+			method: "POST",
+			body: JSON.stringify(dataContainer),
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+			}
+		})
+			.then(response => {
+				return response.json();
+			})
+			.then(jsonResponse => {
+				if (jsonResponse.success) {
+					swal("Good job!", `${jsonResponse.success}!`, "success");
+					$("#tbody").html(" ");
+					$(".modal").modal("hide");
+				} else if (jsonResponse.errors) {
+					let i = 0,
+						length = Object.values(jsonResponse.errors).length,
+						errors = Object.values(jsonResponse.errors);
+
+					let ul = document.createElement("ul");
+					for (i; i < length; i++) {
+						let li = document.createElement("li");
+						li.innerText = errors[i];
+						ul.appendChild(li);
+					}
+					swal({
+						title: "Error!",
+						icon: "error",
+						content: ul,
+						closeOnClickOutside: true,
+						dangerMode: true
+					});
+				}
+			});
+	} else {
+		swal({
+			title: "Error!",
+			icon: "error",
+			text: "No Hay elementos Asignados",
+			closeOnClickOutside: true,
+			dangerMode: true
+		});
+	}
 });
+
+
+const evaluarSelectsSinOpcionSeleccionada =()=>{
+	let selectActividad = document.querySelector('#actividades');
+		selectActividad.value == 'undefined' ?
+		selectActividad.parentElement.children[0].innerHTML = 'Actividades <span class="text-danger">Seleccione una actividad</span>':
+		selectActividad.parentElement.children[0].innerHTML = "Actividades";
+	let selectHorario = document.querySelector('#horario');
+		selectHorario.value == '' || selectHorario.value == 'undefined' ?
+		selectHorario.parentElement.children[0].innerHTML = 'Horario <span class="text-danger">Seleccione un Horario</span>':
+		selectHorario.parentElement.children[0].innerHTML = "Horario";
+	let slu = document.querySelector('#slu');
+		slu.value == '' || slu.value == 'undefined' ?
+		slu.parentElement.children[0].innerHTML = '<span class="text-danger" style="font-size: 12px;" >Seleccione una Salida | Llegada | Ubicación </span>':
+		slu.parentElement.children[0].innerHTML = "Salida | Llegada | Ubicación";
+		
+}

@@ -12,12 +12,16 @@ class EquiposYUnidades extends Model
     
     protected $dates = ['deleted_at'];
    
-    protected $fillable = ['clave','placa','capacidad','descripcion','remove','active','color','idusuario','idtipounidad','asignacion_id']; 
+    protected $fillable = ['clave','placa','capacidad','descripcion','remove','active','color','idusuario','idtipounidad']; 
 
-public function tipounidad()
-{
-    return $this->belongsTo('App\TipoUnidad','idtipounidad','id');
-}
+    
+    public function tipounidad() {
+        return $this->belongsTo('App\TipoUnidad','idtipounidad','id');
+    }
+
+    public function asignaciones() {
+        return $this->hasMany('App\Asignaciones','unidad_id');
+    }
 
 
 } 
