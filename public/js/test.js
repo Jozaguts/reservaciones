@@ -1394,19 +1394,19 @@ if(salidasHMultiple != 0){
                 </div>
               <div class="col-3 offset-2 pt-3">
                 <label class="form-check-label font-weight-bolder">L</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL} disabled> 
+                <input class="   sizecheck horario-multiple__dia" type="checkbox" name="dial${contador}" id="dial${contador}" value="${horario.l}" ${bolcheckL} disabled> 
                 <label class="form-check-label font-weight-bolder">M</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM} disabled> 
+                <input class=" sizecheck horario-multiple__dia" type="checkbox" name="diam${contador}" id="diam${contador}" value="1"  data-horarioid="${contador}" ${bolcheckM} disabled> 
                 <label class="form-check-label font-weight-bolder  ">X</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX} disabled> 
+                <input class="   sizecheck horario-multiple__dia" type="checkbox" name="diax${contador}" id="diax${contador}" value="1"  data-horarioid="${contador}" ${bolcheckX} disabled> 
                 <label class="form-check-label font-weight-bolder  ">J</label>
-                <input class="diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ} disabled> 
+                <input class=" sizecheck horario-multiple__dia" type="checkbox" name="diaj${contador}" id="diaj${contador}" value="1"  data-horarioid="${contador}" ${bolcheckJ} disabled> 
                 <label class="form-check-label font-weight-bolder">V</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV} disabled> 
+                <input class="   sizecheck horario-multiple__dia" type="checkbox" name="diav${contador}" id="diav${contador}" value="1" data-horarioid="${contador}" ${bolcheckV} disabled> 
                 <label class="form-check-label font-weight-bolder  ">S</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS} disabled> 
+                <input class="   sizecheck horario-multiple__dia" type="checkbox" name="dias${contador}" id="dias${contador}" value="1"  data-horarioid="${contador}" ${bolcheckS} disabled> 
                 <label class="form-check-label font-weight-bolder  ">D</label>
-                <input class="  diarioEntrega${contador} sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD} disabled> 
+                <input class="   sizecheck horario-multiple__dia" type="checkbox" name="diad${contador}" id="diad${contador}" value="1"  data-horarioid="${contador}" ${bolcheckD} disabled> 
               </div>
               <div class="col-2 pt-3"> 
                 <button type="button" class="table-head table-head__btn btn-edit btn btn-primary"  onclick="MostrarHMultiple(this);" data-id=${horario.id}> <span class="font-weight-bolder">
