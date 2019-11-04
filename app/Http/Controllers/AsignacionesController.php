@@ -48,7 +48,7 @@ class AsignacionesController extends Controller
                $horario = 'Libre' :
                $horario = $salidaLlegadahorarios->hora;
             $ubicacion = DB::table('salidallegadas')->select('nombre','id')->where('id', $salidaLlegadahorarios->salidallegadas_id)->first();
-            $salida = $unidades[$i]['salida'] ==1 ? 'Ll': 'S';
+            $salida = $unidades[$i]['salida'] ==1 ? 'S': 'Ll';
     
             $form ='
             <form>
@@ -67,6 +67,7 @@ class AsignacionesController extends Controller
                   <input name ="salida" type="hidden" value ="'.$unidades[$i]['salida'].'">
                   <input name ="unidad_id" type="hidden" value ="'.$unidades[$i]['unidad_id'].'">
                   <input name ="salida_llegada_id" type="hidden" value ="'.$unidades[$i]['salida_llegada_id'].'">
+                  <input name ="asignacion_id" type="hidden" value ="'.$unidades[$i]['id'].'">
                </tr>
             </form>';
            
@@ -100,12 +101,16 @@ class AsignacionesController extends Controller
 
     public function store(StoreAsiginaciones $request) {
 
-      $asingaciones = $request->all();
+      $asingaciones = $request->except(['asignacion_id']);
       
       foreach ($asingaciones as $asingacion) {
-
+         unset($asingacion['asignacion_id']);
          try {
-            DB::table('asignaciones')->insert($asingacion);
+            DB::transaction(function() use ($asingacion) {
+               $asingaciones = Asignaciones::updateOrCreate($asingacion);
+               // DB::table('asignaciones')->insert($asingacion);
+            });
+           
          } catch (Exeptions $e) {
             return response()->json($e->getMessage(), 503);
          }
@@ -144,6 +149,16 @@ class AsignacionesController extends Controller
       ->get();
       return response()->json(['info'=> $horario]);
     
+   }
+
+   public function destroy($id){
+      if( $asignacion = Asignaciones::find($id)->delete()){
+              
+         return response()->json(['status'=>200,'response' => 'Actividad Eliminada Correctamente']);
+     }else{
+         
+         return response()->json(['status'=>200,'response' => 'No se Pudo Eliminar la Actividad']);
+     }
    }
   
 

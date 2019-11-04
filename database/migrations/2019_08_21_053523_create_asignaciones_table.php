@@ -31,7 +31,8 @@ class CreateAsignacionesTable extends Migration
 
             $table->boolean('salida');
 
-
+            $table->softDeletes();
+          
             // $table->unsignedInteger('salida_llegada_id');
             // $table->foreign('salida_llegada_id')->references('id')->on('unidades'); 
 

@@ -1,3 +1,4 @@
+
 function asignacionesInfo(e) {
 	fetch(`asignaciones/${e.id}`, {
 		method: "GET"
@@ -17,11 +18,11 @@ function asignacionesInfo(e) {
 				}
 				let salida_llegada_id = document.querySelectorAll('[name=salida_llegada_id]')
 				salida_llegada_id.forEach((salida)=>{
-					ubucaciones.push(salida.value)
+					ubicaciones.push(salida.value)
 				
 				})
 			
-				
+					console.log(ubicaciones);
 				const UNIDAD_INFO = responseJson.unidadInfo;
 				$("#unidad_id").val("");
 				$("#unidad_id").val(e.id);
@@ -138,19 +139,26 @@ function asignacionesInfo(e) {
 		}
 	});
 
-	let ubucaciones = [];
+	let ubicaciones = [];
 	$("#seleccionar").on("click", function() {
-
+		$("#loading").removeClass("d-none");
 		evaluarSelectsSinOpcionSeleccionada();
 
-		$("#loading").removeClass("d-none");
+	
 		let idUbucacion = $("#slu").val();
-
+		console.log(idUbucacion);
 		if (
-			!ubucaciones.includes(idUbucacion) &&
+			
+			!ubicaciones.includes(idUbucacion) &&
 			$("#slu>option:selected").val() != undefined &&
-			$("#slu>option:selected").val() != "undefined"
+			$("#slu>option:selected").val() != "undefined" &&
+			$("#slu>option:selected").val() != "null" &&
+			$("#slu>option:selected").val() != null &&
+			idUbucacion != null &&
+			idUbucacion != 'null'
+
 		) {
+	
 			$("#actividades").val(); /*actividad_id */
 			$("#horario").val(); /*actividad_horario_id */
 			$("#unidad_id").val(); /* actividad_horario_id */
@@ -203,9 +211,16 @@ function asignacionesInfo(e) {
 								).val()}">
             </tr>
         </form>
-        `;
-			ubucaciones.push(idUbucacion);
+		`;
+		if(idUbucacion!=null &&idUbucacion!= 'null'){
+			ubicaciones.push(idUbucacion);
+			console.log(ubicaciones);
+			
+		}
+			
 			$("#slu>option:selected").prop("disabled", true);
+		}else{
+
 		}
 		$("#loading").addClass("d-none");
 	});
@@ -213,12 +228,48 @@ function asignacionesInfo(e) {
 	/* delete */
 	document.addEventListener("click", function(e) {
 		if (e.target.classList.contains("btn-danger")) {
-			let indx = ubucaciones.indexOf(
-				e.target.parentElement.parentElement.children[6].value
-			);
-			ubucaciones.splice(indx, 1);
-			e.target.parentNode.parentElement.nextElementSibling.remove();
-			e.target.parentElement.parentElement.remove();
+			swal({
+				title: "Eliminar Asignación",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+			.then((willlDelete)=>{
+				if(willlDelete){
+					let indx = ubicaciones.indexOf(
+						e.target.parentElement.parentElement.children[6].value
+					);
+					ubicaciones.splice(indx, 1);
+					const  IdAsignacion = e.target.parentNode.parentElement.nextElementSibling.children[5].value;
+					e.target.parentNode.parentElement.nextElementSibling.remove();
+					e.target.parentElement.parentElement.remove();
+					
+						
+					fetch(`/asignaciones/${IdAsignacion}`,{
+						method: 'DELETE', 
+						headers: {
+						  "Content-Type": "application/json",
+						  "Accept": "application/json",
+						  "X-Requested-With": "XMLHttpRequest",
+						  "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+						}
+					})
+					.then((response)=>{
+						return response.json()
+					})
+					.then((jsonResponse)=>{
+						swal("Asignación Eliminada");
+					})
+				}else{
+					swal("Asignación No Eliminada");
+				}
+			})
+		
+
+				
+	
+
+			
 		}
 	});
 }
