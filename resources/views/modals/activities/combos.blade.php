@@ -31,13 +31,14 @@
                        
                     </div> --}}
                 <form action="#!" method="post" id="combosForm">
+                    @csrf
                   <div class="row">
                     <div class="col-sm-6 offset-md-2">
                         @include('components.alertsintomodals')                                    
                     </div>
                 </div>
                   <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
-                  <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
+                  
                         <div class="container mt-2">
                                <div class="row">
                                 <div class="col-3">
@@ -162,7 +163,8 @@
                         </div>
                     </div>
                     <form action="#!" method="post" id="AddPreciosYPasesForm">
-                     <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
+                        {{ csrf_field() }}
+                     {{-- <meta name="csrf-token" content="{{ csrf_token() }}" id="_token"> --}}
                       <div class="container">
                         <div class="row ">
                           <div class="col-3 offset-2">
@@ -242,6 +244,7 @@
                         </form>
 @foreach ($personas as $persona)
 <form id="formPerson{{$persona->id}}">
+    @csrf
     <div class="row mb-0" style="background-color: #FFFDCC" id="preciosContainer">
     <div class="col-1 padding-col"style="background-color:white" >
     <input type="hidden"name="persona_id" id="persona_id" value="{{$persona->id}}">

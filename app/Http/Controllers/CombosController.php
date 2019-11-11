@@ -405,7 +405,10 @@ class CombosController extends Controller
             foreach ($actividadesHorarios as $actividadesHorario ) {
 
                 $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H:m');   
+      
                 $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H:m'); 
+                // $hini = Carbon::parse($actividadesHorario->hini); 
+                // dd($hini);
                 $l = $actividadesHorario->l ==1 ? "L": ""; 
                 $m = $actividadesHorario->m ==1 ? "M": ""; 
                 $x = $actividadesHorario->x ==1 ? "X": ""; 
