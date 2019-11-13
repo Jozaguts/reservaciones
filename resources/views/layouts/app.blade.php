@@ -20,8 +20,7 @@
         </div>
         @auth
         <div class="user-name-contanier">
-            <h4 class="user-name-contanier__user-name" id="btnUserName" >{{Auth::user()->first_name}} <span class="arrow-down"></span> 
-            </h4>
+            <h4 class="user-name-contanier__user-name" id="btnUserName" >{{Auth::user()->first_name}} <span class="arrow-down"></span> </h4>
         </div>
         @endauth
     </header>
@@ -32,7 +31,6 @@
         @yield('content')
         @yield('footer')
     </main>
-    </div>
     <!-- Scripts -->
    
     <script src="{{ asset('js/app.js') }}" ></script>

@@ -34,7 +34,9 @@ mix.js('resources/js/app.js', 'public/js')
       mix.scripts([
       'resources/js/admin.js'],
       'public/js/admin.js');
-      mix.scripts([
+
+      // vue components
+      mix.js([
       'resources/js/reservations.js'],
       'public/js/reservations.js');
       mix.scripts([
@@ -77,3 +79,4 @@ mix.js('resources/js/app.js', 'public/js')
 mix.styles([
    'resources/sass/dataTables.bootstrap4.min.css'
 ], 'public/css/dataTables.bootstrap4.min.css');
+mix.disableNotifications();

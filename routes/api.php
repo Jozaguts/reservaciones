@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 */
 
 
- Route::get('asignaciones',function(){
-    return datatables()
-    ->eloquent(App\EquiposYUnidades::query())
-    >toJson();
-});
+//  Route::get('asignaciones',function(){
+//     return datatables()
+//     ->eloquent(App\EquiposYUnidades::query())
+//     >toJson();
+// });
+

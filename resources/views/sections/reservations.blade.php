@@ -8,13 +8,14 @@
 @endsection
 
 {{-- Contenido --}}
-
 @section('content')
-@include('components.hamburger-menu')   
+<div class="container-fluid grid-contanier">
+@include('components.hamburger-menu')
+@include('contents.reservation.home')
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/reservations.js') }}" defer></script>
-
+<script src="{{ asset('js/reservations.js') }} "></script>
+<script src="{{asset('js/hamburgerMenu.js')}}" ></script>
 @endsection
 

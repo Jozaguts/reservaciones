@@ -82,5 +82,3 @@
                 </div>
             </div>
         </div>
-{{-- {!! Form::open(['route' => ['actividades.destroy', ':UNIDAD_ID'],'method'=>'DELETE','id'=>'form-delete'])!!}
-{!!Form::close() !!} --}}

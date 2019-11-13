@@ -17,9 +17,11 @@ Route::get('/demo',['middleware' => 'throttle:60,5', function () {
     return view('auth.login');
 }]);
 
-Route::get('/reservaciones', function () {
-    return view('sections.reservations');
+Route::group(['prefix' => 'reservaciones'], function () {
+    Route::get('/','ReservacionesController@index')->middleware(['auth']);
+    Route::get('/dashboard','ReservacionesController@dashboard')->middleware(['auth']);
 });
+
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -65,9 +67,6 @@ Route::get('asignaciones-get','AsignacionesController@getAsignaciones');
 Route::get('asignaciones/salidas-llegadas/{id}','AsignacionesController@salidasLlegadas');
 
 Route::resource('asignaciones' , 'AsignacionesController')->middleware(['auth']);
-
-
-
     
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
 Route::put('desactivarcombo/{id}', 'CombosController@desactivarcombo')->middleware(['auth']);

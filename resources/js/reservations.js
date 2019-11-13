@@ -1,3 +1,4 @@
+
 window.addEventListener('click', function(e){   
     if (document.getElementById('btnUserName').contains(e.target)){
   
@@ -23,3 +24,11 @@ window.addEventListener('click', function(e){
       } 
     }
   });
+
+  Vue.component('dasboard', require('./components/DashboardComponent.vue').default);
+
+
+const vm = new Vue({
+  el: "#dashboard"
+
+})
