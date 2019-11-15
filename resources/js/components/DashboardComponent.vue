@@ -1,104 +1,230 @@
 <template>
-  <div class="table-responsive">
-     <table class="table">
-       <thead class="thead-dark">
-        <tr>
-           <!-- Encabezado y Boton Agregar reserva  -->
-          <th class="text-center">
-            +Reserva
-          </th>
-            <!-- END Encabezado y Boton Agregar reserva  -->
+<v-app>
 
-            <!-- encabezados de Tipo de activiades  -->
-          <th 
-            v-for="(info_tipo_actividad, index) in info_tipo_actividades"
-            :style=" info_tipo_actividad.color == info_tipo_actividad.color ?
-            `background-color: ${info_tipo_actividad.color}` :
-            false " 
-            :key="index"
-            :name="info_tipo_actividad.nombre"
+  <v-row class="fill-height">
+    <v-col>
+      <v-sheet height="64">
+        <v-toolbar flat color="white">
+          <v-btn outlined class="mr-4" @click="setToday">
+            Today
+          </v-btn>
+          <v-btn fab text small @click="prev">
+            <v-icon small>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn fab text small @click="next">
+            <v-icon small>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu bottom right>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outlined
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>Day</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Week</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Month</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 days</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+      </v-sheet>
+      <v-sheet height="600">
+        <v-calendar
+          ref="calendar"
+          v-model="focus"
+          color="primary"
+          :events="events"
+          :event-color="getEventColor"
+          :event-margin-bottom="3"
+          :now="today"
+          :type="type"
+          @click:event="showEvent"
+          @click:more="viewDay"
+          @click:date="viewDay"
+          @change="updateRange"
+        ></v-calendar>
+        <v-menu
+          v-model="selectedOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          offset-x
+        >
+          <v-card
+            color="grey lighten-4"
+            min-width="350px"
+            flat
           >
-              {{info_tipo_actividad.nombre}}  
-          </th> 
-          <!-- END Encabezado de tipo de activiades -->
-        </tr>
-       </thead>
-       <tbody>
-         <!-- +Reserva  info  columna horas (horas de trabajo en el dia)-->
-         <tr v-for='(hora, index) in total_horas' 
-            :key='index'> 
-            <td class="text-center" >
-              {{printHour(index)}}
-            </td>
-              <td v-for="(tipo_actividad ) in info_tipo_actividades"
-              :velue="tipo_actividad.color">
-                 {{printHour(index,false)}} {{tipo_actividad.id}}
-              </td>
-         </tr>
-         <!-- END +Reserva info  columna horas-->
-       
-         <!-- Casillas por tipo de actividad 
-              pintar por cada tipo de actividad la misma cantidad de filas que tiene las horas "+Reserva" -->
-       <tr>
-
-       </tr>
-          <!-- END Casillas por tipo de actividad -->
-       </tbody>
-     </table>
-  </div>
+            <v-toolbar
+              :color="selectedEvent.color"
+              dark
+            >
+              <v-btn icon>
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-card-text>
+              <span v-html="selectedEvent.details"></span>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                text
+                color="secondary"
+                @click="selectedOpen = false"
+              >
+                Cancel
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </v-sheet>
+    </v-col>
+  </v-row>
+    
+</v-app>
 </template>
-
-
 <script>
+  export default {
+    data: () =>({
+      today: new Date().toISOString().substring(0,10),
+      focus: new Date().toISOString().substring(0,10),
+      type:"month",
+      typeToLabel:{
+        month: "Mes",
+        Week: "Semana",
+        day: "Día",
+        "4day": "4 Días"
+      },
+      name: null,
+      details: null,
+      start:null,
+      color: "#197602",
+      currentlyEditing:null,
+      selectedEvent:{},
+      selectedElement: null,
+      selectedOpen:false,
+      events:[],
+      dialog:false
+    }),
+    // computed: {
+    //   title () {
+    //     const { start, end } = this
+    //     if (!start || !end) {
+    //       return ''
+    //     }
 
-export default {
-  beforeCreate(){
-    axios.get('reservaciones/dashboard ')
-    .then(res=>{
-        this.total_horas = res.data.total_horas
-        this.hini = res.data.hini;
-        this.hfin = res.data.hfin;
-        this.info_tipo_actividades = res.data.tipo_actividades
-        this.actividades = res.data.actividades[0]
-        console.log(this.actividades);
-      })
-  },
+    //     const startMonth = this.monthFormatter(start)
+    //     const endMonth = this.monthFormatter(end)
+    //     const suffixMonth = startMonth === endMonth ? '' : endMonth
 
+    //     const startYear = start.year
+    //     const endYear = end.year
+    //     const suffixYear = startYear === endYear ? '' : endYear
+
+    //     const startDay = start.day + this.nth(start.day)
+    //     const endDay = end.day + this.nth(end.day)
+
+    //     switch (this.type) {
+    //       case 'month':
+    //         return `${startMonth} ${startYear}`
+    //       case 'week':
+    //       case '4day':
+    //         return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
+    //       case 'day':
+    //         return `${startMonth} ${startDay} ${startYear}`
+    //     }
+    //     return ''
+    //   },
+    //   monthFormatter () {
+    //     return this.$refs.calendar.getFormatter({
+    //       timeZone: 'UTC', month: 'long',
+    //     })
+    //   },
+    // },
     mounted(){
-      this.printActivity();
+      this.getEvents();
+      //  this.$refs.calendar.checkChange() 
     },
+    methods:{
+      async getEvents(){
+        try {
+          const REQUEST = await axios.get('reservaciones/dashboard');
+          let actividades = REQUEST.data.actividades;
+          let events = [];
+          actividades.forEach(actividad=>{
+          events.push(actividad)
+        })
+        this.events = events
+        
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      viewDay ({ date }) {
+        this.focus = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
+      setToday () {
+        this.focus = this.today
+      },
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+      showEvent ({ nativeEvent, event }) {
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          setTimeout(() => this.selectedOpen = true, 10)
+        }
 
-data(){
-    return{
-      total_horas: '',
-      hini:'',
-      hfin:'',
-      info_tipo_actividades: '',
-      actividades:''
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          setTimeout(open, 10)
+        } else {
+          open()
+        }
 
+        nativeEvent.stopPropagation()
+      },
+      updateRange ({ start, end }) {
+        // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+        this.start = start
+        this.end = end
+      },
+      nth (d) {
+        return d > 3 && d < 21
+          ? 'th'
+          : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
+      },
+     
     }
-  },
-  methods:{
-    printHour: function(hora, format){
-      if(hora != undefined && format != false){
-        return  moment(`1970-01-01 ${this.hini}`).add(hora, 'h').format("HH:mm a")
-      }else if(format == false && hora != undefined){
-        return  moment(`1970-01-01 ${this.hini}`).add(hora, 'h').format("HH:mm")
-      }
-      
-    },
-    printActivity: function(){
-     let colum = document.getElementsByName('06:00 AM')
-   
-    }
-  },
-}
+  };
 </script>
-
-<style>
-
-th{
-  min-width: 120px;
-  font-size: 14px;
-}
-</style> 

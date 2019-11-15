@@ -56,19 +56,19 @@ mix.js('resources/js/app.js', 'public/js')
       'public/js/activities.js');
       mix.scripts([
       'resources/js/test.js'],
-         'public/js/test.js');
+      'public/js/test.js');
       mix.scripts([
-         'resources/js/combos.js'],
-         'public/js/combos.js');
-         mix.scripts([
-         'resources/js/datatables.js'],
-         'public/js/datatables.js');
-         mix.scripts([
-         'resources/js/dataTables.bootstrap4.min.js'],
-         'public/js/dataTables.bootstrap4.min.js');
-         mix.scripts([
-            'resources/js/asignaciones.js'],
-            'public/js/asignaciones.js');
+      'resources/js/combos.js'],
+      'public/js/combos.js');
+      mix.scripts([
+      'resources/js/datatables.js'],
+      'public/js/datatables.js');
+      mix.scripts([
+      'resources/js/dataTables.bootstrap4.min.js'],
+      'public/js/dataTables.bootstrap4.min.js');
+      mix.scripts([
+      'resources/js/asignaciones.js'],
+      'public/js/asignaciones.js');
 
          // Css simplecss/
          mix.styles([

@@ -24,11 +24,17 @@ window.addEventListener('click', function(e){
       } 
     }
   });
-
+  import Vue from 'vue';
+  window.Vue = require('vue');
+  import Vuetify from 'vuetify';
+  Vue.use(Vuetify);
+  
   Vue.component('dasboard', require('./components/DashboardComponent.vue').default);
 
 
-const vm = new Vue({
-  el: "#dashboard"
+  Vue.use(Vuetify);
+ new Vue({
+  el: "#dashboard",
+  vuetify: new Vuetify()
 
 })
