@@ -222,17 +222,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       today: new Date().toISOString().substring(0, 10),
       focus: new Date().toISOString().substring(0, 10),
-      type: "month",
+      type: "day",
       typeToLabel: {
-        month: "Mes",
+        // month: "Mes",
         Week: "Semana",
-        day: "Día",
-        "4day": "4 Días"
+        day: "Día" // "4day": "4 Días"
+
       },
       name: null,
       details: null,
@@ -243,40 +256,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedElement: null,
       selectedOpen: false,
       events: [],
-      dialog: false
+      dialog: false,
+      showCalendar: false
     };
   },
-  // computed: {
-  //   title () {
-  //     const { start, end } = this
-  //     if (!start || !end) {
-  //       return ''
-  //     }
-  //     const startMonth = this.monthFormatter(start)
-  //     const endMonth = this.monthFormatter(end)
-  //     const suffixMonth = startMonth === endMonth ? '' : endMonth
-  //     const startYear = start.year
-  //     const endYear = end.year
-  //     const suffixYear = startYear === endYear ? '' : endYear
-  //     const startDay = start.day + this.nth(start.day)
-  //     const endDay = end.day + this.nth(end.day)
-  //     switch (this.type) {
-  //       case 'month':
-  //         return `${startMonth} ${startYear}`
-  //       case 'week':
-  //       case '4day':
-  //         return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
-  //       case 'day':
-  //         return `${startMonth} ${startDay} ${startYear}`
-  //     }
-  //     return ''
-  //   },
-  //   monthFormatter () {
-  //     return this.$refs.calendar.getFormatter({
-  //       timeZone: 'UTC', month: 'long',
-  //     })
-  //   },
-  // },
+  computed: {
+    title: function title() {
+      var start = this.start,
+          end = this.end;
+
+      if (!start || !end) {
+        return '';
+      }
+
+      var startMonth = this.monthFormatter(start);
+      var endMonth = this.monthFormatter(end);
+      var suffixMonth = startMonth === endMonth ? '' : endMonth;
+      var startYear = start.year;
+      var endYear = end.year;
+      var suffixYear = startYear === endYear ? '' : endYear;
+      var startDay = start.day + this.nth(start.day);
+      var endDay = end.day + this.nth(end.day);
+
+      switch (this.type) {
+        case 'month':
+          return "".concat(startMonth, " ").concat(startYear);
+
+        case 'week':
+        case '4day':
+          return "".concat(startMonth, " ").concat(startDay, " ").concat(startYear, " - ").concat(suffixMonth, " ").concat(endDay, " ").concat(suffixYear);
+
+        case 'day':
+          return "".concat(startMonth, " ").concat(startDay, " ").concat(startYear);
+      }
+
+      return '';
+    },
+    monthFormatter: function monthFormatter() {
+      return this.$refs.calendar.getFormatter({
+        timeZone: 'UTC',
+        month: 'long'
+      });
+    }
+  },
   mounted: function mounted() {
     this.getEvents(); //  this.$refs.calendar.checkChange() 
   },
@@ -296,26 +318,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 REQUEST = _context.sent;
-                actividades = REQUEST.data.actividades;
+                actividades = REQUEST.data.horario;
+                console.log(REQUEST.data.horario);
                 events = [];
                 actividades.forEach(function (actividad) {
                   events.push(actividad);
                 });
                 this.events = events;
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 10]]);
+        }, _callee, this, [[0, 11]]);
       }));
 
       function getEvents() {
@@ -1647,8 +1670,29 @@ var render = function() {
     [
       _c(
         "v-row",
-        { staticClass: "fill-height" },
+        { staticClass: "fill-height pr-5" },
         [
+          _vm.showCalendar
+            ? _c(
+                "v-col",
+                { staticClass: "justify-center", attrs: { cols: "4" } },
+                [
+                  _c("v-date-picker", {
+                    staticClass: "mt-4",
+                    attrs: { "click:date": "showCalendar =", width: "290" },
+                    model: {
+                      value: _vm.focus,
+                      callback: function($$v) {
+                        _vm.focus = $$v
+                      },
+                      expression: "focus"
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "v-col",
             [
@@ -1727,6 +1771,19 @@ var render = function() {
                                       ])
                                     ],
                                     1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      attrs: { large: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showCalendar = !_vm.showCalendar
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("mdi-calendar-month")]
                                   )
                                 ]
                               }
@@ -1761,32 +1818,6 @@ var render = function() {
                                   }
                                 },
                                 [_c("v-list-item-title", [_vm._v("Week")])],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.type = "month"
-                                    }
-                                  }
-                                },
-                                [_c("v-list-item-title", [_vm._v("Month")])],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.type = "4day"
-                                    }
-                                  }
-                                },
-                                [_c("v-list-item-title", [_vm._v("4 days")])],
                                 1
                               )
                             ],
@@ -51567,7 +51598,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('dasboard', __webpack_requi
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#dashboard",
-  vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a()
+  vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a({
+    icons: {
+      iconfont: 'mdi' // default - only for display purposes
+
+    }
+  })
 });
 
 /***/ }),

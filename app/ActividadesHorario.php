@@ -15,6 +15,11 @@ class ActividadesHorario extends Model
         return $this->hasMany(SalidasLlegadasHorario::class,'actividadeshorario_id','id');
     }
 
+
+    public function actividad(){
+        return $this->belongsTo(actividades::class, 'actividades_id');
+    }
+
 }
 
 

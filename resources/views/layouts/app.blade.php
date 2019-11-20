@@ -8,7 +8,7 @@
     <title>@yield('title') {{ config('app.name', 'Demo') }}</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     @yield('css')
 
 </head>

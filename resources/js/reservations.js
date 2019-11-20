@@ -35,6 +35,11 @@ window.addEventListener('click', function(e){
   Vue.use(Vuetify);
  new Vue({
   el: "#dashboard",
-  vuetify: new Vuetify()
+  vuetify: new Vuetify({
+    icons: {
+      iconfont: 'mdi', // default - only for display purposes
+    },
+  })
+  
 
 })

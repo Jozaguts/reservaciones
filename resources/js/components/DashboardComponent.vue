@@ -1,8 +1,17 @@
 <template>
 <v-app>
 
-  <v-row class="fill-height">
-    <v-col>
+  <v-row class="fill-height pr-5">
+    
+    <v-col cols="4" class="justify-center"  v-if="showCalendar">
+       <v-date-picker
+      v-model="focus"
+      click:date= "showCalendar ="
+      width="290"
+      class="mt-4"
+    ></v-date-picker>
+    </v-col>
+    <v-col >
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-btn outlined class="mr-4" @click="setToday">
@@ -25,7 +34,11 @@
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon right>mdi-menu-down</v-icon>
               </v-btn>
+              <v-icon large 
+                @click="showCalendar = !showCalendar"
+              >mdi-calendar-month</v-icon>
             </template>
+           
             <v-list>
               <v-list-item @click="type = 'day'">
                 <v-list-item-title>Day</v-list-item-title>
@@ -33,12 +46,12 @@
               <v-list-item @click="type = 'week'">
                 <v-list-item-title>Week</v-list-item-title>
               </v-list-item>
-              <v-list-item @click="type = 'month'">
+              <!-- <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
+              </v-list-item> -->
+              <!-- <v-list-item @click="type = '4day'">
                 <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
+              </v-list-item> -->
             </v-list>
           </v-menu>
         </v-toolbar>
@@ -110,12 +123,12 @@
     data: () =>({
       today: new Date().toISOString().substring(0,10),
       focus: new Date().toISOString().substring(0,10),
-      type:"month",
+      type:"day",
       typeToLabel:{
-        month: "Mes",
+        // month: "Mes",
         Week: "Semana",
         day: "Día",
-        "4day": "4 Días"
+        // "4day": "4 Días"
       },
       name: null,
       details: null,
@@ -126,43 +139,44 @@
       selectedElement: null,
       selectedOpen:false,
       events:[],
-      dialog:false
+      dialog:false,
+      showCalendar:false
     }),
-    // computed: {
-    //   title () {
-    //     const { start, end } = this
-    //     if (!start || !end) {
-    //       return ''
-    //     }
+    computed: {
+      title () {
+        const { start, end } = this
+        if (!start || !end) {
+          return ''
+        }
 
-    //     const startMonth = this.monthFormatter(start)
-    //     const endMonth = this.monthFormatter(end)
-    //     const suffixMonth = startMonth === endMonth ? '' : endMonth
+        const startMonth = this.monthFormatter(start)
+        const endMonth = this.monthFormatter(end)
+        const suffixMonth = startMonth === endMonth ? '' : endMonth
 
-    //     const startYear = start.year
-    //     const endYear = end.year
-    //     const suffixYear = startYear === endYear ? '' : endYear
+        const startYear = start.year
+        const endYear = end.year
+        const suffixYear = startYear === endYear ? '' : endYear
 
-    //     const startDay = start.day + this.nth(start.day)
-    //     const endDay = end.day + this.nth(end.day)
+        const startDay = start.day + this.nth(start.day)
+        const endDay = end.day + this.nth(end.day)
 
-    //     switch (this.type) {
-    //       case 'month':
-    //         return `${startMonth} ${startYear}`
-    //       case 'week':
-    //       case '4day':
-    //         return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
-    //       case 'day':
-    //         return `${startMonth} ${startDay} ${startYear}`
-    //     }
-    //     return ''
-    //   },
-    //   monthFormatter () {
-    //     return this.$refs.calendar.getFormatter({
-    //       timeZone: 'UTC', month: 'long',
-    //     })
-    //   },
-    // },
+        switch (this.type) {
+          case 'month':
+            return `${startMonth} ${startYear}`
+          case 'week':
+          case '4day':
+            return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
+          case 'day':
+            return `${startMonth} ${startDay} ${startYear}`
+        }
+        return ''
+      },
+      monthFormatter () {
+        return this.$refs.calendar.getFormatter({
+          timeZone: 'UTC', month: 'long',
+        })
+      },
+    },
     mounted(){
       this.getEvents();
       //  this.$refs.calendar.checkChange() 
@@ -171,7 +185,8 @@
       async getEvents(){
         try {
           const REQUEST = await axios.get('reservaciones/dashboard');
-          let actividades = REQUEST.data.actividades;
+          let actividades = REQUEST.data.horario;
+          console.log(REQUEST.data.horario);
           let events = [];
           actividades.forEach(actividad=>{
           events.push(actividad)
@@ -182,6 +197,7 @@
           console.log(error)
         }
       },
+      
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
