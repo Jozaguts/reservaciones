@@ -67,8 +67,20 @@ class ReservacionesController extends Controller
     // '1111-11-11'
 
     $day =$request->params['day'];
+    // $carbaoDay = $dt2 = Carbon::createFromDate($day);
 
-    $horario= DB::table('actividades as ac')
+    $carbaoDay = Carbon::createFromFormat('Y-m-d', $day);
+    $lunes = $carbaoDay->startOfWeek()->format('Y-m-d');
+
+        $week = array();
+        for ($i=0; $i <7 ; $i++) {
+            $week[] = $carbaoDay->startOfWeek()->addDay($i)->format('Y-m-d');
+        }
+        // dd($week);
+
+        $horarios = array();
+    foreach ($week as $day ) {
+        $horario= DB::table('actividades as ac')
     ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
     ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
     ->select(
@@ -81,9 +93,26 @@ class ReservacionesController extends Controller
     )
     ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
     ->get();
+    $horarios[]=$horario;
+
+    }
+    // dd('stop');
+    // $horario= DB::table('actividades as ac')
+    // ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
+    // ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
+    // ->select(
+    //     'ac.id as actividadid',
+    //     DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
+    //     DB::raw('concat(ac.clave, " | ", ac.nombre)  as details'),
+    //     DB::raw('concat("'.$day.'" , " ", SUBSTRING(ah.hini,1,5)) as start'),
+    //     DB::raw('concat("'.$day.'") as end'),
+    //     'ta.color'
+    // )
+    // ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
+    // ->get();
 
 
-    return response()->json(['horario' =>$horario ,'day' =>$day/* 'tipo_actividades'=>$tipo_actividades */]);
+    return response()->json(['horario' =>array_flatten($horarios)]);
 
 
    }

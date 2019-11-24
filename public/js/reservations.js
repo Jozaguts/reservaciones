@@ -383,6 +383,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -405,7 +406,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedOpen: false,
       events: [],
       dialog: false,
-      showCalendar: false
+      showCalendar: false,
+      weekdays: [1, 2, 3, 4, 5, 6, 0]
     };
   },
   computed: {
@@ -442,14 +444,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     monthFormatter: function monthFormatter() {
       return this.$refs.calendar.getFormatter({
-        timeZone: 'UTC',
+        timeZone: 'America/Mexico_City',
         month: 'long'
       });
     }
   },
   mounted: function mounted() {
-    var day = new Date().toISOString().substring(0, 10);
-    this.getEvents(day);
+    this.getEvents(this.today);
   },
   methods: {
     getEvents: function () {
@@ -462,15 +463,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                console.log(day);
-                _context.next = 4;
+                _context.next = 3;
                 return axios.post("reservaciones/dashboard", {
                   params: {
                     day: day
                   }
                 });
 
-              case 4:
+              case 3:
                 REQUEST = _context.sent;
                 actividades = REQUEST.data.horario;
                 REQUEST.data.horario;
@@ -479,20 +479,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   events.push(actividad);
                 });
                 this.events = events;
-                _context.next = 15;
+                _context.next = 14;
                 break;
 
-              case 12:
-                _context.prev = 12;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 12]]);
+        }, _callee, this, [[0, 11]]);
       }));
 
       function getEvents(_x) {
@@ -503,6 +503,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
+      console.log(date);
       this.focus = date;
       this.type = 'day';
     },
@@ -2606,7 +2607,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\r\n            Today\r\n          ")]
+                        [_vm._v("\n            Hoy\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -2699,7 +2700,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_c("v-list-item-title", [_vm._v("Day")])],
+                                [_c("v-list-item-title", [_vm._v("Día")])],
                                 1
                               ),
                               _vm._v(" "),
@@ -2712,7 +2713,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_c("v-list-item-title", [_vm._v("Week")])],
+                                [_c("v-list-item-title", [_vm._v("Semana")])],
                                 1
                               )
                             ],
@@ -2740,7 +2741,8 @@ var render = function() {
                       "event-color": _vm.getEventColor,
                       "event-margin-bottom": 3,
                       now: _vm.today,
-                      type: _vm.type
+                      type: _vm.type,
+                      weekdays: _vm.weekdays
                     },
                     on: {
                       "click:event": _vm.showEvent,
@@ -2848,7 +2850,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                Cancel\r\n              "
+                                    "\n                Cancel\n              "
                                   )
                                 ]
                               )

@@ -15,7 +15,7 @@
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-btn outlined class="mr-4" @click="setToday">
-            Today
+            Hoy
           </v-btn>
           <v-btn fab text small @click="prev">
             <v-icon small>mdi-chevron-left</v-icon>
@@ -41,10 +41,10 @@
 
             <v-list>
               <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
+                <v-list-item-title>Día</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
+                <v-list-item-title>Semana</v-list-item-title>
               </v-list-item>
               <!-- <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
@@ -66,6 +66,7 @@
           :event-margin-bottom="3"
           :now="today"
           :type="type"
+          :weekdays="weekdays"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
@@ -121,8 +122,7 @@
 <script>
   export default {
     data: () =>({
-
-      today: new Date( ).toISOString().substring(0,10),
+      today: new Date().toISOString().substring(0,10),
       focus: new Date().toISOString().substring(0,10),
       type:"day",
       typeToLabel:{
@@ -141,7 +141,8 @@
       selectedOpen:false,
       events:[],
       dialog:false,
-      showCalendar:false
+      showCalendar:false,
+      weekdays:[1, 2, 3, 4, 5, 6, 0]
     }),
     computed: {
       title () {
@@ -174,18 +175,16 @@
       },
       monthFormatter () {
         return this.$refs.calendar.getFormatter({
-          timeZone: 'UTC', month: 'long',
+          timeZone: 'America/Mexico_City', month: 'long',
         })
       },
     },
     mounted(){
-         let day =  new Date( ).toISOString().substring(0,10)
-      this.getEvents(day);
+         this.getEvents(this.today);
     },
     methods:{
       async getEvents(day){
         try {
-            console.log(day);
           const REQUEST = await axios.post(`reservaciones/dashboard`, {
             params: {
             day: day
@@ -207,6 +206,7 @@
       },
 
       viewDay ({ date }) {
+          console.log(date);
         this.focus = date
         this.type = 'day'
       },
