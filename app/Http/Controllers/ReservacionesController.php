@@ -16,10 +16,10 @@ class ReservacionesController extends Controller
         return view('sections.reservations');
     }
 
-   public function dashboard(){
-    $actividades = actividades::with('TipoActividad','horarios')
-    ->get();
-    $tipoActividades = TipoActividades::all('id','clave','nombre','color');
+   public function dashboard(Request $request){
+    // $actividades = actividades::with('TipoActividad','horarios')
+    // ->get();
+    // $tipoActividades = TipoActividades::all('id','clave','nombre','color');
 
 
     // $hinimin = DB::table('actividadeshorarios')->min('hini');
@@ -64,22 +64,26 @@ class ReservacionesController extends Controller
 
 
     // return response()->json(['info'=>$tipoAInfoActInfoHor,'tipo_actividades' => $tipoActividades]);
+    // '1111-11-11'
+
+    $day =$request->params['day'];
+
     $horario= DB::table('actividades as ac')
     ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
     ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
     ->select(
         'ac.id as actividadid',
-        'ac.nombre as name',
+        DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
         DB::raw('concat(ac.clave, " | ", ac.nombre)  as details'),
-        DB::raw('concat(curdate(), " ", SUBSTRING(ah.hini,1,5)) as start'),
-        DB::raw('concat(curdate()) as end'),
-        'ta.color',
-        DB::raw('curdate()')
+        DB::raw('concat("'.$day.'" , " ", SUBSTRING(ah.hini,1,5)) as start'),
+        DB::raw('concat("'.$day.'") as end'),
+        'ta.color'
     )
-    ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY(curdate()) + 1, l, m, x, j, v, s, d)'), '=', '1']])
+    ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
     ->get();
 
-    return response()->json(['horario' =>$horario,/* 'tipo_actividades'=>$tipo_actividades */]);
+
+    return response()->json(['horario' =>$horario ,'day' =>$day/* 'tipo_actividades'=>$tipo_actividades */]);
 
 
    }

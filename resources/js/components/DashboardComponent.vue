@@ -2,7 +2,7 @@
 <v-app>
 
   <v-row class="fill-height pr-5">
-    
+
     <v-col cols="4" class="justify-center"  v-if="showCalendar">
        <v-date-picker
       v-model="focus"
@@ -34,11 +34,11 @@
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon right>mdi-menu-down</v-icon>
               </v-btn>
-              <v-icon large 
+              <v-icon large
                 @click="showCalendar = !showCalendar"
               >mdi-calendar-month</v-icon>
             </template>
-           
+
             <v-list>
               <v-list-item @click="type = 'day'">
                 <v-list-item-title>Day</v-list-item-title>
@@ -115,13 +115,14 @@
       </v-sheet>
     </v-col>
   </v-row>
-    
+
 </v-app>
 </template>
 <script>
   export default {
     data: () =>({
-      today: new Date().toISOString().substring(0,10),
+
+      today: new Date( ).toISOString().substring(0,10),
       focus: new Date().toISOString().substring(0,10),
       type:"day",
       typeToLabel:{
@@ -178,26 +179,33 @@
       },
     },
     mounted(){
-      this.getEvents();
-      //  this.$refs.calendar.checkChange() 
+         let day =  new Date( ).toISOString().substring(0,10)
+      this.getEvents(day);
     },
     methods:{
-      async getEvents(){
+      async getEvents(day){
         try {
-          const REQUEST = await axios.get('reservaciones/dashboard');
+            console.log(day);
+          const REQUEST = await axios.post(`reservaciones/dashboard`, {
+            params: {
+            day: day
+            }
+        })
           let actividades = REQUEST.data.horario;
-          console.log(REQUEST.data.horario);
+          REQUEST.data.horario
+
+
           let events = [];
           actividades.forEach(actividad=>{
           events.push(actividad)
         })
         this.events = events
-        
+
         } catch (error) {
           console.log(error)
         }
       },
-      
+
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
@@ -240,7 +248,7 @@
           ? 'th'
           : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
       },
-     
+
     }
   };
 </script>

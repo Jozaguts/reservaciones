@@ -19,7 +19,7 @@ Route::get('/demo',['middleware' => 'throttle:60,5', function () {
 
 Route::group(['prefix' => 'reservaciones'], function () {
     Route::get('/','ReservacionesController@index')->middleware(['auth']);
-    Route::get('/dashboard','ReservacionesController@dashboard')->middleware(['auth']);
+    Route::post('/dashboard','ReservacionesController@dashboard')->middleware(['auth']);
 });
 
 
@@ -44,7 +44,7 @@ Route::get('unidades', function(){
 //test
 Route::resource('test', 'testController');
 
-// tipo unidaddes controller 
+// tipo unidaddes controller
 Route::resource('unidades', 'EquiposYUnidadesController')->middleware(['auth']);
 
 
@@ -67,7 +67,7 @@ Route::get('asignaciones-get','AsignacionesController@getAsignaciones');
 Route::get('asignaciones/salidas-llegadas/{id}','AsignacionesController@salidasLlegadas');
 
 Route::resource('asignaciones' , 'AsignacionesController')->middleware(['auth']);
-    
+
 Route::get('info-actividad/{id}', 'CombosController@infoactividad')->middleware(['auth']);
 Route::put('desactivarcombo/{id}', 'CombosController@desactivarcombo')->middleware(['auth']);
 Route::resource('combos', 'CombosController')->middleware(['auth']);

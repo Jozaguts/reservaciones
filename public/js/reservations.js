@@ -448,48 +448,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.getEvents(); //  this.$refs.calendar.checkChange() 
+    var day = new Date().toISOString().substring(0, 10);
+    this.getEvents(day);
   },
   methods: {
     getEvents: function () {
       var _getEvents = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(day) {
         var REQUEST, actividades, events;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
-                return axios.get('reservaciones/dashboard');
+                console.log(day);
+                _context.next = 4;
+                return axios.post("reservaciones/dashboard", {
+                  params: {
+                    day: day
+                  }
+                });
 
-              case 3:
+              case 4:
                 REQUEST = _context.sent;
                 actividades = REQUEST.data.horario;
-                console.log(REQUEST.data.horario);
+                REQUEST.data.horario;
                 events = [];
                 actividades.forEach(function (actividad) {
                   events.push(actividad);
                 });
                 this.events = events;
-                _context.next = 14;
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 11]]);
+        }, _callee, this, [[0, 12]]);
       }));
 
-      function getEvents() {
+      function getEvents(_x) {
         return _getEvents.apply(this, arguments);
       }
 
@@ -562,7 +568,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hour-container{\n    min-height: 40px;\n    font-size: .7rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n}\n.btn-reserva{\n    background-color: black;\n    color:white;\n    font-weight: 700;\n    cursor: pointer;\n}\n.event-row{\n    min-height: 40px;\n    font-size: 1rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\n    max-height: 40px !important;\n}\n.title-event-layout{\n    font-size: 12px !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.hour-container{\r\n    min-height: 40px;\r\n    font-size: .7rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\n}\n.btn-reserva{\r\n    background-color: black;\r\n    color:white;\r\n    font-weight: 700;\r\n    cursor: pointer;\n}\n.event-row{\r\n    min-height: 40px;\r\n    font-size: 1rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\r\n    max-height: 40px !important;\n}\n.title-event-layout{\r\n    font-size: 12px !important;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -2465,7 +2471,7 @@ var render = function() {
         "v-row",
         [
           _c("v-col", { staticClass: "btn-reserva", attrs: { cols: "1" } }, [
-            _vm._v("\n            +Reserva\n        ")
+            _vm._v("\r\n            +Reserva\r\n        ")
           ]),
           _vm._v(" "),
           _vm._l(_vm.tipoActividades, function(tipoActividad) {
@@ -2477,7 +2483,9 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n            " + _vm._s(tipoActividad.nombre) + "\n        "
+                  "\r\n            " +
+                    _vm._s(tipoActividad.nombre) +
+                    "\r\n        "
                 )
               ]
             )
@@ -2498,9 +2506,9 @@ var render = function() {
                 { key: "hour-job" + index, staticClass: "hour-container" },
                 [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.printHour(hora)) +
-                      "\n            "
+                      "\r\n            "
                   )
                 ]
               )
@@ -2598,7 +2606,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\r\n            Today\r\n          ")]
+                        [_vm._v("\n            Today\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -2840,7 +2848,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                Cancel\r\n              "
+                                    "\n                Cancel\n              "
                                   )
                                 ]
                               )
