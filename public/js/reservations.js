@@ -2607,7 +2607,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\n            Hoy\n          ")]
+                        [_vm._v("\r\n            Hoy\r\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -2850,7 +2850,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                Cancel\n              "
+                                    "\r\n                Cancel\r\n              "
                                   )
                                 ]
                               )
