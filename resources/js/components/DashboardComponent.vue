@@ -7,6 +7,7 @@
        <v-date-picker
       v-model="focus"
       width="290"
+      @click:date="clickDate"
       class="mt-4"
     ></v-date-picker>
     </v-col>
@@ -247,7 +248,10 @@
           ? 'th'
           : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
       },
-
+    clickDate(){
+        this.getEvents(this.focus)
     }
+    }
+
   };
 </script>

@@ -383,6 +383,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -549,6 +550,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     nth: function nth(d) {
       return d > 3 && d < 21 ? 'th' : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
+    },
+    clickDate: function clickDate() {
+      this.getEvents(this.focus);
     }
   }
 });
@@ -2574,6 +2578,7 @@ var render = function() {
                   _c("v-date-picker", {
                     staticClass: "mt-4",
                     attrs: { width: "290" },
+                    on: { "click:date": _vm.clickDate },
                     model: {
                       value: _vm.focus,
                       callback: function($$v) {
