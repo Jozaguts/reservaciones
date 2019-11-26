@@ -6,8 +6,8 @@
     <v-col cols="4" class="justify-center"  v-if="showCalendar">
        <v-date-picker
       v-model="focus"
-      click:date= "showCalendar ="
       width="290"
+      @click:date="clickDate"
       class="mt-4"
     ></v-date-picker>
     </v-col>
@@ -120,10 +120,11 @@
 </v-app>
 </template>
 <script>
+
   export default {
     data: () =>({
-      today: new Date().toISOString().substring(0,10),
-      focus: new Date().toISOString().substring(0,10),
+      today: moment().format('Y-M-D'),
+      focus: moment().format('Y-M-D'),
       type:"day",
       typeToLabel:{
         // month: "Mes",
@@ -175,7 +176,7 @@
       },
       monthFormatter () {
         return this.$refs.calendar.getFormatter({
-          timeZone: 'America/Mexico_City', month: 'long',
+          timeZone: 'UTC', month: 'long',
         })
       },
     },
@@ -206,7 +207,6 @@
       },
 
       viewDay ({ date }) {
-          console.log(date);
         this.focus = date
         this.type = 'day'
       },
@@ -240,15 +240,28 @@
       },
       updateRange ({ start, end }) {
         // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+        let no_coincidencias = 0;
+           this.events.forEach(event =>{
+
+            event.start.substring(0,10) == start.date ? true : no_coincidencias++;
+        })
+        console.log(no_coincidencias, this.events.length);
+        if(no_coincidencias == this.events.length){
+            this.getEvents(start.date)
+        }
         this.start = start
         this.end = end
+
       },
       nth (d) {
         return d > 3 && d < 21
           ? 'th'
           : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
       },
-
+    clickDate(){
+        this.getEvents(this.focus)
     }
+    }
+
   };
 </script>

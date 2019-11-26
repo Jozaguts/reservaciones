@@ -387,8 +387,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      today: new Date().toISOString().substring(0, 10),
-      focus: new Date().toISOString().substring(0, 10),
+      today: moment().format('Y-M-D'),
+      focus: moment().format('Y-M-D'),
       type: "day",
       typeToLabel: {
         // month: "Mes",
@@ -444,7 +444,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     monthFormatter: function monthFormatter() {
       return this.$refs.calendar.getFormatter({
-        timeZone: 'America/Mexico_City',
+        timeZone: 'UTC',
         month: 'long'
       });
     }
@@ -503,7 +503,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
-      console.log(date);
       this.focus = date;
       this.type = 'day';
     },
@@ -546,11 +545,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var start = _ref3.start,
           end = _ref3.end;
       // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+      var no_coincidencias = 0;
+      this.events.forEach(function (event) {
+        event.start.substring(0, 10) == start.date ? true : no_coincidencias++;
+      });
+      console.log(no_coincidencias, this.events.length);
+
+      if (no_coincidencias == this.events.length) {
+        this.getEvents(start.date);
+      }
+
       this.start = start;
       this.end = end;
     },
     nth: function nth(d) {
       return d > 3 && d < 21 ? 'th' : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
+    },
+    clickDate: function clickDate() {
+      this.getEvents(this.focus);
     }
   }
 });
@@ -2575,7 +2587,8 @@ var render = function() {
                 [
                   _c("v-date-picker", {
                     staticClass: "mt-4",
-                    attrs: { "click:date": "showCalendar =", width: "290" },
+                    attrs: { width: "290" },
+                    on: { "click:date": _vm.clickDate },
                     model: {
                       value: _vm.focus,
                       callback: function($$v) {
