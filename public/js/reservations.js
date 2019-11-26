@@ -383,12 +383,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      today: new Date().toISOString().substring(0, 10),
-      focus: new Date().toISOString().substring(0, 10),
+      today: moment().format('Y-M-D'),
+      focus: moment().format('Y-M-D'),
       type: "day",
       typeToLabel: {
         // month: "Mes",
@@ -444,7 +443,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     monthFormatter: function monthFormatter() {
       return this.$refs.calendar.getFormatter({
-        timeZone: 'America/Mexico_City',
+        timeZone: 'UTC',
         month: 'long'
       });
     }
@@ -503,7 +502,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     viewDay: function viewDay(_ref) {
       var date = _ref.date;
-      console.log(date);
       this.focus = date;
       this.type = 'day';
     },
@@ -2575,7 +2573,7 @@ var render = function() {
                 [
                   _c("v-date-picker", {
                     staticClass: "mt-4",
-                    attrs: { "click:date": "showCalendar =", width: "290" },
+                    attrs: { width: "290" },
                     model: {
                       value: _vm.focus,
                       callback: function($$v) {
@@ -2607,7 +2605,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\r\n            Hoy\r\n          ")]
+                        [_vm._v("\n            Hoy\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -2850,7 +2848,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n                Cancel\r\n              "
+                                    "\n                Cancel\n              "
                                   )
                                 ]
                               )

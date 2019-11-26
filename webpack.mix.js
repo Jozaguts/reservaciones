@@ -27,7 +27,7 @@ mix.js('resources/js/app.js', 'public/js')
    mix.browserSync({
       proxy:'reservaciones-dev.com'
    });
-   
+
       mix.scripts([
       'resources/js/main.js'],
       'public/js/all.js');
@@ -48,9 +48,11 @@ mix.js('resources/js/app.js', 'public/js')
       mix.scripts([
       'resources/js/equiposyunidades.js'],
       'public/js/equiposyunidades.js');
-      mix.scripts([
+    //   component color-picker vuetify
+      mix.js([
       'resources/js/tipoactividades.js'],
       'public/js/tipoactividades.js');
+
       mix.scripts([
       'resources/js/activities.js'],
       'public/js/activities.js');

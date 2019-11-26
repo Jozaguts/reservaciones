@@ -25,20 +25,20 @@
         position: absolute;
         z-index: 1000;
         top: 1.8rem;
-        right: -7rem;  
-        }   
+        right: -7rem;
+        }
         .header-modal-container{
             display: flex;
             justify-content: space-between;
             background-color: rgba(0, 0, 0, 0.03);
             border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
-        .modal-content{
-            min-width:  90vw !important;
-            border:none;
-            background-color: transparent;    
-            padding: 1rem;                  
-        }
+        // .modal-content{
+        //     min-width:  90vw !important;
+        //     border:none;
+        //     background-color: transparent;
+        //     padding: 1rem;
+        // }
         .showModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
             // width: 100vw !important;
@@ -52,7 +52,7 @@
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
             display: block;
-            
+
         }
         .showEditModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
@@ -66,8 +66,8 @@
             animation-name: show;
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
-            
-            
+
+
         }
         .close-modal-edit{
             display: flex;
@@ -126,7 +126,7 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
 }
-  //ipad pro 
+  //ipad pro
   @media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
     .close-modal{
         display: flex;
@@ -170,7 +170,7 @@
     }
     @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
         .close-modal{
-          
+
             display: flex;
             padding: 1rem 1.25rem;
             background-image: url(/svg/cancel.svg);
@@ -181,7 +181,7 @@
             z-index: 1000;
             top: 2rem;
             right: -3.5rem;
-           
+
         }
         .header-modal-container{
             display: flex;
@@ -189,12 +189,12 @@
             background-color: rgba(0, 0, 0, 0.03);
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
-        .modal-content{
-            min-width:  80vw !important;
-            border:none;
-            background-color: transparent;    
-            padding: 1rem;              
-        }
+        // .modal-content{
+        //     min-width:  80vw !important;
+        //     border:none;
+        //     background-color: transparent;
+        //     padding: 1rem;
+        // }
         .showModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
             // width: 100vw !important;
@@ -207,7 +207,7 @@
             animation-name: show;
             animation-duration: .5s;
             padding: .2rem 1rem 1rem 1rem;
-            
+
         }
         .showEditModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
@@ -221,7 +221,7 @@
             animation-name: show;
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
-            
+
         }
         .close-modal-edit{
             display: flex;
@@ -263,7 +263,7 @@
             z-index: 1000;
             top:2rem;
             right: -9rem;
-           
+
         }
         .header-modal-container{
             display: flex;
@@ -271,12 +271,12 @@
             background-color: rgba(0, 0, 0, 0.03);
             border-bottom: 1px solid rgba(0, 0, 0, 0.125);
         }
-        .modal-content{
-            min-width:  80vw !important;
-            border:none;
-            background-color: transparent;    
-            padding: 1rem;                     
-        }
+        // .modal-content{
+        //     min-width:  80vw !important;
+        //     border:none;
+        //     background-color: transparent;
+        //     padding: 1rem;
+        // }
         .showModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
             // width: 100vw !important;
@@ -289,7 +289,7 @@
             animation-name: show;
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
-            
+
         }
         .showEditModal{
             background-color:rgba(0, 0, 0, 0.438) !important;
@@ -303,7 +303,7 @@
             animation-name: show;
             animation-duration: 1s;
             padding: .2rem 1rem 1rem 1rem;
-            
+
         }
         .close-modal-edit{
             display: block;
@@ -319,10 +319,10 @@
             margin: 1rem;
             width: 2rem;
             height: 2rem;
-            
+
         }
-      
-        
+
+
     }
 
 

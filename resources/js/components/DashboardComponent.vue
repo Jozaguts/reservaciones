@@ -6,7 +6,6 @@
     <v-col cols="4" class="justify-center"  v-if="showCalendar">
        <v-date-picker
       v-model="focus"
-      click:date= "showCalendar ="
       width="290"
       class="mt-4"
     ></v-date-picker>
@@ -120,10 +119,11 @@
 </v-app>
 </template>
 <script>
+
   export default {
     data: () =>({
-      today: new Date().toISOString().substring(0,10),
-      focus: new Date().toISOString().substring(0,10),
+      today: moment().format('Y-M-D'),
+      focus: moment().format('Y-M-D'),
       type:"day",
       typeToLabel:{
         // month: "Mes",
@@ -175,7 +175,7 @@
       },
       monthFormatter () {
         return this.$refs.calendar.getFormatter({
-          timeZone: 'America/Mexico_City', month: 'long',
+          timeZone: 'UTC', month: 'long',
         })
       },
     },
@@ -206,7 +206,6 @@
       },
 
       viewDay ({ date }) {
-          console.log(date);
         this.focus = date
         this.type = 'day'
       },
