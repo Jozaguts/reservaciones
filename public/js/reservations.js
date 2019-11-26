@@ -545,6 +545,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var start = _ref3.start,
           end = _ref3.end;
       // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+      var no_coincidencias = 0;
+      this.events.forEach(function (event) {
+        event.start.substring(0, 10) == start.date ? true : no_coincidencias++;
+      });
+      console.log(no_coincidencias, this.events.length);
+
+      if (no_coincidencias == this.events.length) {
+        this.getEvents(start.date);
+      }
+
       this.start = start;
       this.end = end;
     },

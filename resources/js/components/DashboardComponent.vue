@@ -240,8 +240,18 @@
       },
       updateRange ({ start, end }) {
         // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+        let no_coincidencias = 0;
+           this.events.forEach(event =>{
+
+            event.start.substring(0,10) == start.date ? true : no_coincidencias++;
+        })
+        console.log(no_coincidencias, this.events.length);
+        if(no_coincidencias == this.events.length){
+            this.getEvents(start.date)
+        }
         this.start = start
         this.end = end
+
       },
       nth (d) {
         return d > 3 && d < 21
