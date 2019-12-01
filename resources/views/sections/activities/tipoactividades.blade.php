@@ -26,7 +26,10 @@
 
 @include('modals.activities.edittipoactividades')
 @include('modals.activities.addtipoactividades')
+<div id="tipo-actividad-container">
 
+</div>
+<tipo-actividades></tipo-actividades>
 {{-- finaliza el contenido --}}
 @endsection
 

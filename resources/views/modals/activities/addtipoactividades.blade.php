@@ -11,7 +11,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form-tipo-actividad/>
+                {{-- <form id="formTipoActividad">
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Clave</label>
@@ -27,7 +28,7 @@
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Tipo Unidad</label>
-                            <select id="tipo_unidad_id" class="form-control" name="tipo_unidad_id">
+                            <select id="tipo_actividad_id" class="form-control" name="tipo_actividad_id">
                                 @foreach ($tipounidades as $tipo_unidad)
                                     <option value="{{$tipo_unidad->id}}">{{$tipo_unidad->nombre}}</option>
                                 @endforeach
@@ -37,25 +38,26 @@
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Text</label>
-                        {{-- color picker --}}
-                        <color-picker/>
+                        
+                         <color-picker/>
                     </div>
                 </div>
-            </div>
+            
             <div class="col-6 offset-3">
                 <div class="btn-group" role="group" aria-label="Button group">
-                <button type="submit" class="btn btn-success btn-block">
+                <button type="submit" class="btn btn-success btn-block" id="btn_guardar_tipo_actividad">
                     Guardar
                 </button>
                 </div>
             </div>
-        </form>
+        </form> --}}
             <div class="modal-footer">
-               {{ config('app.name', 'Demo')}}
+               {{ config('app.name', 'Canopy')}}
             </div>
         </div>
     </div>
 </div>
+</div> 
 
 
 

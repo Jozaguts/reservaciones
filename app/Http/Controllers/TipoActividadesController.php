@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\TipoActividades;
 use App\TipoUnidad;
 use Validator;
+use App\Http\Requests\TipoUnidadStore;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 
 class TipoActividadesController extends Controller
@@ -16,10 +18,15 @@ class TipoActividadesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tipoactividades = TipoActividades::all();
-        $tipounidades = TipoUnidad::all();   
+        $tipounidades = TipoUnidad::all();
+
+        if($request->ajax()){
+           return  $tipounidades;
+        }
+
        return view('sections.activities.tipoactividades',compact(['tipoactividades','tipounidades' ]));
     }
 
@@ -39,38 +46,18 @@ class TipoActividadesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TipoUnidadStore $request)
     {
-        //reglas de validacion
-        $rules =[
-            'clave' => ['required', 'string', 'max:5','unique:tipoactividades'],
-            'nombre' => ['required', 'string', 'max:255'],
-            'color'=> ['required', 'string'],
-            'usuarios_id'=> ['required', 'integer'],
-            'removed' => ['nullable','boolean'],
-            'active' => ['nullable','boolean'],
-            'tipounidad_id'=>['required','integer']
-        ];
-        
-        
-   
 
-        if($request->ajax())
-        {
-             //Se realiza la validación
-            $validator = Validator::make($request->all(), $rules);
-            // $result = TipoActividades::create($request->all());
-            if ($validator->fails()) 
-            {
-                return response()->json(['error'=> 'true','errors'=>$validator->errors()->all()]); 
-            }
-            else
-             {
-                $result = TipoActividades::create($request->all());
-                return response()->json([ 'ok' => 'Actividad Agregada Correctamente', 200]);
-                
-            }
-        }
+        $tipo_actividad = $request->all();
+
+        $tipo_actividad['usuarios_id'] = Auth::user()->id;
+
+        TipoActividades::create($tipo_actividad);
+
+        return response()->json([ 'message' => 'Tipo Actividad Agregada Correctamente']);
+
+
     }
 
     /**
@@ -92,8 +79,8 @@ class TipoActividadesController extends Controller
      */
     public function edit($id)
     {
-        $tipoactividades = TipoActividades::find($id); 
-     
+        $tipoactividades = TipoActividades::find($id);
+
         return response()->json($tipoactividades);
     }
 
@@ -108,7 +95,7 @@ class TipoActividadesController extends Controller
     {
         $tipoactividad = TipoActividades::find($id);
         //reglas de validacion
-        
+
          $rules =[
             'clave' =>['string','min:5'],
             'nombre' => [ 'string', 'max:255'],
@@ -118,33 +105,33 @@ class TipoActividadesController extends Controller
             'active' => ['nullable','boolean'],
             'tipounidad_id'=>['integer'],
         ];
-    
-       
+
+
         if(  $tipoactividad->clave == $request['clave'] ){
-           
+
             $tipoactividad->clave =  $tipoactividad->clave;
-            
+
         }
         else{
-         
+
             $tipoactividad->clave = $request['clave'];
-               
+
             }
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) 
+        if ($validator->fails())
         {
-            return response()->json(['error'=> 'true','errors'=>$validator->errors()->all()]); 
+            return response()->json(['error'=> 'true','errors'=>$validator->errors()->all()]);
         }
         else{
-           
+
             $tipoactividad->fill($request->all()
             );
             $tipoactividad->save();
             return response()->json([ 'ok' => 'Actividad Actualizada Correctamente', 200]);
         }
-           
-  
+
+
     }
 
     /**
@@ -158,7 +145,7 @@ class TipoActividadesController extends Controller
         $actividad = TipoActividades::find($id)->delete();
 
         if($actividad == null){
-            return response()->json(['error'=>'true','errors'=>'Error no se Puedo Eliminar la Actividad']); 
+            return response()->json(['error'=>'true','errors'=>'Error no se Puedo Eliminar la Actividad']);
         }else{
             return response()->json(['ok' => 'Unidad Eliminada Correctamente', 200]);
         }
