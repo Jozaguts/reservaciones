@@ -93,9 +93,20 @@ class ReservacionesController extends Controller
     )
     ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
     ->get();
+
     $horarios[]=$horario;
 
     }
+    // $horariosFlaten = array_flatten($horarios);
+
+    // foreach($horariosFlaten as $horario){
+    //     ($horario->details = $horario->details . "<br> dasasasasdasds <br> assasasasasas");
+    // }
+
+
+
+
+
     // dd('stop');
     // $horario= DB::table('actividades as ac')
     // ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')

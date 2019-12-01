@@ -45,17 +45,17 @@ methods: {
             const REQUEST = await axios.get('reservaciones/dashboard');
             let data = REQUEST.data.info;
             let tipoActividades = REQUEST.data.tipo_actividades;
-            let events =[]; 
+            let events =[];
             tipoActividades.forEach(tipoActividad => {
                 this.tipoActividades.push(tipoActividad)
             });
-        
+            console.log(data)
             data.forEach(actividad => {
 
                 let horarios = actividad.horarios;
-                
+
                 horarios.forEach(function (horario,index){
-                        
+
                       let event = {
                         tipo_actividad_id: actividad.tipo_actividad_id,
                         tipo_actividad_color: actividad.tipo_actividad_color,
@@ -66,13 +66,13 @@ methods: {
                         actividad_id :actividad.actividad_id
                     }
                     events.push(event)
-                   
+
                 });
 
             });
              this.events = events;
              return false;
-             
+
 
         } catch (error) {
           console.log(error)
@@ -85,7 +85,7 @@ methods: {
          return moment(`1945-01-01 ${num}:00`).format('LT');
       },
       printEvent(events) {
-          
+
         events.forEach(event => {
             let hora = event.hini.substring(0,2);
                 if(hora <= 9 ){
@@ -100,20 +100,20 @@ methods: {
                         <header><h1 class="title-event-layout">${event.actividad_clave} |${event.actividad_nombre} </h1></header>
                     </div>
                 </div>
-            </div> 
+            </div>
             `;
 
-            
+
                                 console.log(this.$refs[ref][0].innerHTML=eventLayout);
             // this.$refs[ref][0] (eventLayout);
         });
-        
+
     }
 },
 
     mounted(){
         this.getEvents();
-        
+
     },
     updated(){
         this.printEvent(this.events);

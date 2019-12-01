@@ -1,4 +1,4 @@
-<div class="content" id="listContent">
+<div class="content" id="vista_tipo_actividad" >
     <div class="col-md-12">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -7,7 +7,8 @@
                         <div class="card-body">
                             <div class="row justify-content-end my-2">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tipo_actividad_modal"><span class="font-weight-bolder">+</span> Tipo Actividad</button>
-                                    {{-- <a href="#" class="btn btn-success" id="btnAddTipoActividad"><span class="font-weight-bolder">+</span> Tipo Actividad</a> --}}
+
+
                             </div>
                               {{-- alerts --}}
 
@@ -34,7 +35,8 @@
                                                             <span style="display:block; width:5rem; height: 1.5rem; background-color: {{$tipoactividad->color}};" ></span>
                                                         </td>
                                                         <td class="table-head table-head__actions">
-                                                            <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" onclick="showEditModal({{$tipoactividad->id}});" data-id="{{$tipoactividad->id}}">
+                                                            
+                                                            <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" data-id="{{$tipoactividad->id}}" data-toggle="modal" data-target="#tipo_actividad_modal">
                                                             </a>
                                                             <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
                                                         </td>

@@ -9,9 +9,9 @@ $(document).ready(function () {
     // /* ATENTION
     // * The main select is setter by Modals/combos.blade
     // */
-    // // document.addEventListener('submit',function(e){
-    // //   e.preventDefault();
-    // // })
+    document.addEventListener('submit',function(e){
+      e.preventDefault();
+    })
 
     // // ------------------------------------------------ functions list---------------------------
     // /*
@@ -61,17 +61,17 @@ $(document).ready(function () {
                 currency: "USD"
             }).format;
 
-            $("#bodyTable").append(` 
-     
+            $("#bodyTable").append(`
+
         <tr class="actividad-id">
           <td scope="row">${actividad.clave}</td>
-          <td>${actividad.nombre}</td> 
+          <td>${actividad.nombre}</td>
           <td class="precioFix">${currency(actividad.precio)}</td>
           <td class="balanceFix">${currency(actividad.balance)}</td>
           <td colspan="5">
             <form class="form-actividad-combo" >
               <div class="form-group">
-                <select class="form-control select-info" name="select";> 
+                <select class="form-control select-info" name="select";>
                   ${selectOptions}
                 </select>
                   <a href="#!" class="btn btn-danger ml-3 btn-eliminar" name="${
@@ -83,7 +83,7 @@ $(document).ready(function () {
               </div>
             </form>
         </tr>
-     
+
   `);
 
             let optionSelecionado = document.querySelector(
@@ -142,16 +142,14 @@ $(document).ready(function () {
             $("#mismo_dia").prop("checked", false);
 
         infoPrecios.forEach(infoPrecio => {
-            $(`#formPerson${infoPrecio.persona_id}`)[0][1].value = Math.round(Number(infoPrecio.precio1));
+            // console.log($(`#formPerson${infoPrecio.persona_id}`)[0][1].value);
+            // $(`#formPerson${infoPrecio.persona_id}`)[0][1].value = Math.round(Number(infoPrecio.precio1));
             $(`#formPerson${infoPrecio.persona_id}`)[0][2].value = Math.round(Number(infoPrecio.precio2));
             $(`#formPerson${infoPrecio.persona_id}`)[0][3].value = Math.round(Number(infoPrecio.precio3));
             $(`#formPerson${infoPrecio.persona_id}`)[0][4].value = Math.round(Number(infoPrecio.doble));
-            $(`#formPerson${infoPrecio.persona_id}`)[0][5].value =
-                Math.round(Number(infoPrecio.doblebalanc));
+            $(`#formPerson${infoPrecio.persona_id}`)[0][5].value =Math.round(Number(infoPrecio.doblebalanc));
             $(`#formPerson${infoPrecio.persona_id}`)[0][6].value = Math.round(Number(infoPrecio.triple));
-            $(`#formPerson${infoPrecio.persona_id}`)[0][7].value =
-                Math.round(Number(infoPrecio.triplebalanc));
-
+            $(`#formPerson${infoPrecio.persona_id}`)[0][7].value =Math.round(Number(infoPrecio.triplebalanc));
             infoPrecio.promocion == 1 ?
                 $(`#formPerson${infoPrecio.persona_id}`)[0][8].setAttribute(
                     "checked",
@@ -367,7 +365,7 @@ $(document).ready(function () {
               .catch((err)=>{
                 console.log(err)
               })
-   
+
       } /* termina boton guardar */
     })
     //  // --------------------------end btn-guardar-----------------------------
@@ -407,7 +405,7 @@ $(document).ready(function () {
         });
 
       $('#combos').modal('show')
- 
+
 
     })
     // // --------------------------btn-editar----------------------------- -----
@@ -471,6 +469,7 @@ $(document).ready(function () {
             data[preciosYPasesForm[i].name]=preciosYPasesForm[i].value
 
           }
+        //   axios.put(`/combos/${comboId}`,data)
           fetch(`/combos/${comboId}`,{
             method: 'PUT',
             body: JSON.stringify(data),
@@ -521,7 +520,7 @@ $(document).ready(function () {
 
       document.addEventListener('click',function(e){
     if(e.target.id =='btnDesactivar'){
-      
+
               let id= e.target.getAttribute('data-id');
 
               fetch(`/desactivarcombo/${id}`,{

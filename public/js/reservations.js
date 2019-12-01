@@ -177,6 +177,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 tipoActividades.forEach(function (tipoActividad) {
                   _this.tipoActividades.push(tipoActividad);
                 });
+                console.log(data);
                 data.forEach(function (actividad) {
                   var horarios = actividad.horarios;
                   horarios.forEach(function (horario, index) {
@@ -195,17 +196,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.events = events;
                 return _context.abrupt("return", false);
 
-              case 13:
-                _context.prev = 13;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 16:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 13]]);
+        }, _callee, this, [[0, 14]]);
       }));
 
       function getEvents() {
@@ -231,7 +232,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         var ref = "taid".concat(event.tipo_actividad_id, "hora").concat(hora);
-        var eventLayout = "\n            <div class=\"container event-layout\">\n                <div class=\"row\">\n                    <div class=\"col-12\" style=\"background-color:".concat(event.tipo_actividad_color, "\">\n                        <header><h1 class=\"title-event-layout\">").concat(event.actividad_clave, " |").concat(event.actividad_nombre, " </h1></header>\n                    </div>\n                </div>\n            </div> \n            ");
+        var eventLayout = "\n            <div class=\"container event-layout\">\n                <div class=\"row\">\n                    <div class=\"col-12\" style=\"background-color:".concat(event.tipo_actividad_color, "\">\n                        <header><h1 class=\"title-event-layout\">").concat(event.actividad_clave, " |").concat(event.actividad_nombre, " </h1></header>\n                    </div>\n                </div>\n            </div>\n            ");
         console.log(_this2.$refs[ref][0].innerHTML = eventLayout); // this.$refs[ref][0] (eventLayout);
       });
     }
@@ -479,20 +480,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   events.push(actividad);
                 });
                 this.events = events;
-                _context.next = 14;
+                console.log(this.events);
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 11]]);
+        }, _callee, this, [[0, 12]]);
       }));
 
       function getEvents(_x) {
@@ -581,7 +583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hour-container{\r\n    min-height: 40px;\r\n    font-size: .7rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\n}\n.btn-reserva{\r\n    background-color: black;\r\n    color:white;\r\n    font-weight: 700;\r\n    cursor: pointer;\n}\n.event-row{\r\n    min-height: 40px;\r\n    font-size: 1rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\r\n    max-height: 40px !important;\n}\n.title-event-layout{\r\n    font-size: 12px !important;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.hour-container{\n    min-height: 40px;\n    font-size: .7rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n}\n.btn-reserva{\n    background-color: black;\n    color:white;\n    font-weight: 700;\n    cursor: pointer;\n}\n.event-row{\n    min-height: 40px;\n    font-size: 1rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\n    max-height: 40px !important;\n}\n.title-event-layout{\n    font-size: 12px !important;\n}\n\n", ""]);
 
 // exports
 
@@ -2484,7 +2486,7 @@ var render = function() {
         "v-row",
         [
           _c("v-col", { staticClass: "btn-reserva", attrs: { cols: "1" } }, [
-            _vm._v("\r\n            +Reserva\r\n        ")
+            _vm._v("\n            +Reserva\n        ")
           ]),
           _vm._v(" "),
           _vm._l(_vm.tipoActividades, function(tipoActividad) {
@@ -2496,9 +2498,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n            " +
-                    _vm._s(tipoActividad.nombre) +
-                    "\r\n        "
+                  "\n            " + _vm._s(tipoActividad.nombre) + "\n        "
                 )
               ]
             )
@@ -2519,9 +2519,9 @@ var render = function() {
                 { key: "hour-job" + index, staticClass: "hour-container" },
                 [
                   _vm._v(
-                    "\r\n                " +
+                    "\n                " +
                       _vm._s(_vm.printHour(hora)) +
-                      "\r\n            "
+                      "\n            "
                   )
                 ]
               )
