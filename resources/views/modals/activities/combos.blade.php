@@ -7,7 +7,7 @@
           <h4 class="modal-title">Combos</h4>
           <button type="button" class="close" onclick="checkEmpty();">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -16,29 +16,29 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="PreciosYPases-tab" data-toggle="tab" href="#PreciosYPases"    role="tab" aria-controls="PreciosYPases" aria-selected="false">Precios y Pases</a>
-                </li>  
-                <span id='alerta'class=""> </span>  
+                </li>
+                <span id='alerta'class=""> </span>
                 <div class="loading d-none" id="loading">
                   <div class="dot d1"></div>
                   <div class="dot d2"></div>
                   <div class="dot d3"></div>
-                </div>           
+                </div>
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show " id="general" role="tabpanel" aria-labelledby="home-tab">
 
                     {{-- <div class="container mt-3">
-                       
+
                     </div> --}}
                 <form action="#!" method="post" id="combosForm">
                     @csrf
                   <div class="row">
                     <div class="col-sm-6 offset-md-2">
-                        @include('components.alertsintomodals')                                    
+                        @include('components.alertsintomodals')
                     </div>
                 </div>
                   <input type="hidden" name="idusuario" id="idUsuario"  value="{{Auth::user()->id}}">
-                  
+
                         <div class="container mt-2">
                                <div class="row">
                                 <div class="col-3">
@@ -50,7 +50,7 @@
                                 <div class="col-4 offset-1">
                                  <div class="form-group">
                                    <label for="" >Nombre</label>
-                                   <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40" >                           
+                                   <input type="text" name="nombre" id="nombre" class="form-control general input-nombre" placeholder="" aria-describedby="helpId" required maxlength="40" >
                                  </div>
                              </div>
                              <div class="col-4 ">
@@ -61,7 +61,7 @@
                                <option value="{{$tipoactividad->id}}" data-tipoUnidad="{{  $tipoactividad->TipoUnidad->id}}">{{$tipoactividad->nombre}}</option>
                                @endforeach
                                </select>
-                           
+
                              </div>
                            </div>
                             </div>
@@ -71,7 +71,7 @@
                                         <label for="">Max Cortesias</label>
                                         <input type="number" class="form-control general input-cortesias" name="maxcortesias" id="maxCortesias" aria-describedby="helpId" placeholder="">
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-4 offset-1">
                                     <div class="form-group  ">
                                         <label for="">Max Cupones</label>
@@ -88,7 +88,7 @@
                                         </select>
                                     </div>
                                 </div>
-      
+
                             </div>
                             <div class="row">
                                 <div class="col-6">
@@ -100,7 +100,7 @@
                                               <option value="{{$actividad->id}}">{{$actividad->clave}} | {{$actividad->nombre}}</option>
                                             }
                                             @endif
-                                               
+
                                             @endforeach
                                         </select>
                                         <a href="#!" class="btn btn-success ml-3 btn-agregar" >+</a>
@@ -109,7 +109,7 @@
                                 <div class="col-3 offset-1">
                                     <div class="form-group">
                                     <label for=""> Aplicar Mismo Día </label>
-                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismo_dia" id="mismo_dia"  checked>                                   
+                                    <input type="checkbox" class="form-control d-inline-block checkbox" name="mismo_dia" id="mismo_dia"  checked>
                                   </div>
                                 </div>
                                 <div class="col-2 ">
@@ -117,7 +117,7 @@
                                   <button class="btn btn-success btn-guardar" disabled>Guardar</button>
                                 </div>
                               </div>
-                                
+
                             </div>
                             <div class="row table-container">
                               <div class="col-12">
@@ -130,12 +130,12 @@
                                           <th class="th-precio">Precio</th>
                                           <th class="th-balance">Balance</th>
                                           <th>Horario <span class="ml-5">Fín</span> <span class="ml-5">Días</span></th>
-                                        
+
                                         </tr>
                                       </thead>
                                       <tbody id="bodyTable">
-                                    
-                                   
+
+
                                       </tbody>
                                     </table>
                                   </div>
@@ -148,9 +148,9 @@
                             </div>
                             <div class="row mt-3">
                               <div class="col-12 lead text-center">(No pueden ser agregadas actividades de Renta)</div>
-                              
+
                              </div>
-                            
+
                             </div>
                      </form>
                 </div>
@@ -158,7 +158,7 @@
                     <div class="container mt-3">
                         <div class="row">
                             <div class="col-sm-6 offset-md-2">
-                                @include('components.alertsintomodals')                                    
+                                @include('components.alertsintomodals')
                             </div>
                         </div>
                     </div>
@@ -247,9 +247,10 @@
     @csrf
     <div class="row mb-0" style="background-color: #FFFDCC" id="preciosContainer">
     <div class="col-1 padding-col"style="background-color:white" >
-    <input type="hidden"name="persona_id" id="persona_id" value="{{$persona->id}}">
 
-      
+    <input type="hidden" name="persona_id" id="persona_id" value= "{{$persona->id}}">
+
+
       <div class="form-group ">
         <label for="" class=" font-weight-bold" data-id="{{$persona->id}}" value="persona{{$persona->id}}" id="persona{{$persona->id}}" >{{$persona->nombre}}</label>
       </div>
@@ -295,7 +296,7 @@
       </div>
     </div>
     <div class="col-1 padding-col " style="background-color: #FFFDCC">
-      <div class="form-group">                                                   
+      <div class="form-group">
         <input type="checkbox" value="" class="form-control ml-3 pases-precios-check check-clean input-precios" name="restriccion" id="restriccionPersonaId{{$persona->id}}"  onchange="habilitarAcompnante(this);" data-id="{{$persona->id}}">
       </div>
     </div>
@@ -305,25 +306,25 @@
     </div>
 </form>
 
-</div>                                              
+</div>
 </div>
       @endforeach
     </div>
- 
-</div>             
-      
 
-                
+</div>
+
+
+
                   </div>
-                </div>  
+                </div>
                 </div>
               </div>
-             
-         
-        </div> 
-        
-     
-        
-       
-    
+
+
+        </div>
+
+
+
+
+
 

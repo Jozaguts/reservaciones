@@ -28,7 +28,7 @@ class CombosController extends Controller
     public function index()
     {
 
-        
+
 
         $personas = Personas::all();
         $anticipos = Anticipos::all();
@@ -38,7 +38,7 @@ class CombosController extends Controller
                ->where([ ['ac.remove','=','0'], ['ac.renta','=','0'], ['ac.deleted_at','=',NULL]])
                ->orderBy('ac.clave')
                ->get();
-            
+
         return view('sections.activities.combos',compact('anticipos','tipoactividades','actividades','personas'));
     }
 
@@ -54,12 +54,12 @@ class CombosController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCombosRequest $request) 
-    {        
+    public function store(CreateCombosRequest $request)
+    {
         DB::transaction(function() use ($request) {
             // esta consulta es para obtener el ID tipoUnidad
             $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
@@ -83,11 +83,11 @@ class CombosController extends Controller
                 'renta' => '0',
                 'promocion' => '0',
                 'riesgo' => '0',
-    
+
             ]);
 
             $actividadId = DB::getPdo()->lastInsertId();
-              
+
             for($i = 0; $i<count($request->precios); $i++){
 
                 $precios = DB::table('actividadprecios')->insert([
@@ -109,8 +109,8 @@ class CombosController extends Controller
                 ]);
 
             }
-  
-            for ($i=0; $i < count($request->actividades_combo); $i++) { 
+
+            for ($i=0; $i < count($request->actividades_combo); $i++) {
 
                 $combo_det = DB::table('combo_det')->insert([
                     'hini' => substr($request->actividades_combo[$i]['select'], -0,5).':00',
@@ -130,7 +130,7 @@ class CombosController extends Controller
         return response()->json([
             'success' => 'Combo Guardado Con exito'
         ]);
-     
+
     }
 
     /**
@@ -151,32 +151,32 @@ class CombosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $info=[];
         $infoHorarios = [];
         $ifoPrecios=[];
-        
-       
-        $combo =  Actividades::find($id); 
-       
+
+
+        $combo =  Actividades::find($id);
+
         $actividades = DB::table('combo_det')
         ->where('actividades_id_combo',$id)
         ->where('deleted_at',null)
-        ->get(); 
+        ->get();
 
-  
+
 
         foreach($actividades as $actividad){
-          
+
             $infoHorarios[] = $this->infoactividad($actividad->actividades_id,$actividad->id);
-            
-        
+
+
        }
-    
-        $info['combo']=$combo; 
+
+        $info['combo']=$combo;
         $info['actividades']= $infoHorarios;
         $info['precios']= $combo->precios;
-    
+
     return $info;
     }
 
@@ -189,13 +189,14 @@ class CombosController extends Controller
      */
     public function update(UpdateComboRequest $request, $id)
     {
+
         DB::transaction(function() use ($request, $id) {
 
              // esta consulta es para obtener el ID tipoUnidad
            $tipoactividades = DB::table('tipoactividades')->where('id', $request->tipoactividades_id)->first();
            Actividades::updateOrCreate(
                ['id'=>$id],
-               [  
+               [
                 'nombre' =>  $request->nombre,
                 'maxcortesias' =>  $request->maxcortesias,
                 'maxcupones' =>  $request->maxcupones,
@@ -242,8 +243,8 @@ class CombosController extends Controller
             );
 
            }
-       
-           for ($i=0; $i < count($request->actividades_combo); $i++) { 
+
+           for ($i=0; $i < count($request->actividades_combo); $i++) {
             ComboDet::updateOrCreate(
                 [
                 'actividades_id' => $request->actividades_combo[$i]['actividades_id'],
@@ -258,20 +259,20 @@ class CombosController extends Controller
                 'remove'=> '0'
                 ]
             );
-          
+
 
         }
-       
 
-               
-    
+
+
+
         });
         return response()->json([
             'success' => 'Combo Actualizado Con exito'
             ]);
 
-        
-      
+
+
     }
 
     /**
@@ -284,7 +285,7 @@ class CombosController extends Controller
     {
         $actividad = ComboDet::where('actividades_id_combo', $id)
         ->where('actividades_id',$request->activityId);
-        
+
         if($actividad->delete()) {
             return response()->json([
                 'success' => 'Actividad Eliminada Con exito'
@@ -294,13 +295,12 @@ class CombosController extends Controller
                 'success' => 'No se pudo eliminar la actividad por favor intenelo nuevamente'
                 ]);
         }
-       
+
 
     }
-    
+
     public function desactivarcombo($id){
 
-      
 
       $combo = Actividades::find($id);
 
@@ -316,7 +316,7 @@ class CombosController extends Controller
             ]);
      }
 
-       
+
     }
     public function infoactividad($id,$id_combo_det=null ){
 
@@ -331,9 +331,9 @@ class CombosController extends Controller
         ->where('combo','0')
         ->where('id', $id)
         ->get();
-       
+
         // /* Se generan las options para el select de la actividad */
-        if($actividad[0]->libre == 1){  
+        if($actividad[0]->libre == 1){
             $actividadesHorarios= Actividades::find($id)
             ->horarios
             ->where('libre', '1');
@@ -342,38 +342,38 @@ class CombosController extends Controller
             $actividadesHorarios= Actividades::find($id)
             ->horarios
             ->where('libre', '0');
-            
-        }
-       
-         
 
-      
+        }
+
+
+
+
         $options = [];
-       
+
         // foreach ($actividadesHorarios as $actividadesHorario ) {
-        /* Si el horario es LIBRE se generan multiples opciones que van desde la hora de 
+        /* Si el horario es LIBRE se generan multiples opciones que van desde la hora de
         ** Inicio  HINI hasta la hora
         ** final HFIN
-        ** con intervalos de una hora 
+        ** con intervalos de una hora
         */
         if($actividad[0]->libre == 1){
          foreach ($actividadesHorarios as $actividadesHorario ) {
-            $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H');   
+            $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H');
             $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H');
 
             $lenght = (int)$hfin - (int)$hini; /* Vueltas === cantidad de opciones en el select */
 
-        for ($i=0; $i < $lenght ; $i++) { 
+        for ($i=0; $i < $lenght ; $i++) {
 
-            $selecthini= Carbon::create(2012, 1, 31, $hini)->addHour($i)->format('H:m');
-            $selecthfin= Carbon::create(2012, 1, 31, $hini)->addHour($i+1)->format('H:m');
+            $selecthini= Carbon::create(2012, 1, 31, $hini)->addHour($i)->format('h:s');
+            $selecthfin= Carbon::create(2012, 1, 31, $hini)->addHour($i+1)->format('h:s');
 
-            $l = $actividadesHorario->l ==1 ? "L": ""; 
-            $m = $actividadesHorario->m ==1 ? "M": ""; 
-            $x = $actividadesHorario->x ==1 ? "X": ""; 
-            $j = $actividadesHorario->j ==1 ? "J": ""; 
-            $v = $actividadesHorario->v ==1 ? "V": ""; 
-            $s = $actividadesHorario->s ==1 ? "S": ""; 
+            $l = $actividadesHorario->l ==1 ? "L": "";
+            $m = $actividadesHorario->m ==1 ? "M": "";
+            $x = $actividadesHorario->x ==1 ? "X": "";
+            $j = $actividadesHorario->j ==1 ? "J": "";
+            $v = $actividadesHorario->v ==1 ? "V": "";
+            $s = $actividadesHorario->s ==1 ? "S": "";
             $d = $actividadesHorario->d ==1 ? "D": "";
             $horario='';
             if($id_combo_det!=null){
@@ -383,38 +383,38 @@ class CombosController extends Controller
                 $hiniOpt = $combo_det['hini'];
                 $hfinOpt = $combo_det['hfin'];
                 $horario = " $hiniOpt | $hfinOpt ";
-                
-            }
-  
-            
-            $options[] = "<option name='horario_id' value='$actividadesHorario->id' data-horariotext='$horario'> $selecthini | $selecthfin | $l $m $x $j $v $s $d </option>"; 
 
-        } 
-        
+            }
+
+
+            $options[] = "<option name='horario_id' value='$actividadesHorario->id' data-horariotext='$horario'> $selecthini | $selecthfin | $l $m $x $j $v $s $d </option>";
+
+        }
+
         $infoActividad[] =$actividad;
         $infoActividad[] =$options;
-      
+
         return  $infoActividad;
         }
-        // acomodar la hoar final en hoario libre 
+        // acomodar la hoar final en hoario libre
         }
-        
-        
+
+
         else if($actividad[0]->libre == 0){
 
             foreach ($actividadesHorarios as $actividadesHorario ) {
 
-                $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H:m');   
-      
-                $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H:m'); 
-                // $hini = Carbon::parse($actividadesHorario->hini); 
+                $hini = Carbon::createFromFormat('H:m:s', $actividadesHorario->hini)->format('H:m');
+
+                $hfin = Carbon::createFromFormat('H:m:s', $actividadesHorario->hfin)->format('H:m');
+                // $hini = Carbon::parse($actividadesHorario->hini);
                 // dd($hini);
-                $l = $actividadesHorario->l ==1 ? "L": ""; 
-                $m = $actividadesHorario->m ==1 ? "M": ""; 
-                $x = $actividadesHorario->x ==1 ? "X": ""; 
-                $j = $actividadesHorario->j ==1 ? "J": ""; 
-                $v = $actividadesHorario->v ==1 ? "V": ""; 
-                $s = $actividadesHorario->s ==1 ? "S": ""; 
+                $l = $actividadesHorario->l ==1 ? "L": "";
+                $m = $actividadesHorario->m ==1 ? "M": "";
+                $x = $actividadesHorario->x ==1 ? "X": "";
+                $j = $actividadesHorario->j ==1 ? "J": "";
+                $v = $actividadesHorario->v ==1 ? "V": "";
+                $s = $actividadesHorario->s ==1 ? "S": "";
                 $d = $actividadesHorario->d ==1 ? "D": "";
 
                 $horario='';
@@ -422,31 +422,31 @@ class CombosController extends Controller
                     $combo_det = ComboDet::where('horario_id', $actividadesHorario->id)
                     ->where('id',$id_combo_det)
                     ->first();
-                    
-                    $hiniOpt = Carbon::createFromFormat('H:m:s',  $combo_det['hini'])->format('H:m'); 
-                    $hfinOpt = Carbon::createFromFormat('H:m:s',  $combo_det['hfin'])->format('H:m'); 
-                   
+
+                    $hiniOpt = Carbon::createFromFormat('H:m:s',  $combo_det['hini'])->format('H:m');
+                    $hfinOpt = Carbon::createFromFormat('H:m:s',  $combo_det['hfin'])->format('H:m');
+
                     $horario = " $hiniOpt | $hfinOpt ";
-                    
+
                 }
 
-                $options[] = "<option name='horario_id' value='$actividadesHorario->id' data-horariotext='$horario'> $hini | $hfin | $l $m $x $j $v $s $d </option>"; 
+                $options[] = "<option name='horario_id' value='$actividadesHorario->id' data-horariotext='$horario'> $hini | $hfin | $l $m $x $j $v $s $d </option>";
             }
         }
-        
+
         $infoActividad[] =$actividad;
         $infoActividad[] =$options;
-   
+
 
         return  $infoActividad;
         // }
-        
-        
-        
+
+
+
     }
 
 
 
-   
-  
+
+
 }

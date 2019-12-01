@@ -44,6 +44,7 @@
 </template>
 
 <script>
+//##########################FALTA PASAR EL ID DEL TIPO ACTIVIDAD HACIA EL COMPOENNTE PARA OBTENER SU INFO##########################################################
 let idTipoActividad
 document.addEventListener('click', function(e){
 
@@ -105,39 +106,6 @@ export default {
                     }
             }
             }
-
-
-
-            // console.log(errors[0]['tipounidad_id'])
-
-
-            // let flatErros =errors.flat(Infinity)
-
-            // for(let i=0; i<flatErros.length; i++ ){
-            //     console.log(flatErros[i])
-            // }
-
-
-
-
-            // this.errors.forEach(error => {
-
-            //     for (const ref in this.$refs) {
-
-            //         for (const key in error) {
-
-            //             if(ref==key ){
-
-            //             this.$refs[ref].innerText = error[key][0]
-            //             }else {
-            //             this.$refs[ref].innerText = "";
-
-            //             }
-            //         }
-            //     }
-            // })
-            //  this.errors.length = 0;
-            //  console.log(this.errors ,this.$refs)
         },
         async obtenerTipoActividades (){
              this.tipo_unidades = await axios.get('tipoactividades')
@@ -149,6 +117,7 @@ export default {
     },
     mounted() {
         this.obtenerTipoActividades();
+
     }
 }
 </script>

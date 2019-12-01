@@ -190,6 +190,7 @@
             params: {
             day: day
             }
+
         })
           let actividades = REQUEST.data.horario;
           REQUEST.data.horario
@@ -199,8 +200,9 @@
           actividades.forEach(actividad=>{
           events.push(actividad)
         })
-        this.events = events
 
+        this.events = events
+        console.log(this.events);
         } catch (error) {
           console.log(error)
         }
@@ -262,6 +264,7 @@
         this.getEvents(this.focus)
     }
     }
+
 
   };
 </script>

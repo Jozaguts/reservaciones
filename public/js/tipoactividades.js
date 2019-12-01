@@ -205,6 +205,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//##########################FALTA PASAR EL ID DEL TIPO ACTIVIDAD HACIA EL COMPOENNTE PARA OBTENER SU INFO##########################################################
 var idTipoActividad;
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('btn-edit')) {
@@ -269,25 +270,7 @@ document.addEventListener('click', function (e) {
         for (var ref in this.$refs) {
           _loop(ref);
         }
-      } // console.log(errors[0]['tipounidad_id'])
-      // let flatErros =errors.flat(Infinity)
-      // for(let i=0; i<flatErros.length; i++ ){
-      //     console.log(flatErros[i])
-      // }
-      // this.errors.forEach(error => {
-      //     for (const ref in this.$refs) {
-      //         for (const key in error) {
-      //             if(ref==key ){
-      //             this.$refs[ref].innerText = error[key][0]
-      //             }else {
-      //             this.$refs[ref].innerText = "";
-      //             }
-      //         }
-      //     }
-      // })
-      //  this.errors.length = 0;
-      //  console.log(this.errors ,this.$refs)
-
+      }
     },
     obtenerTipoActividades: function () {
       var _obtenerTipoActividades = _asyncToGenerator(
