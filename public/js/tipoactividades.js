@@ -344,7 +344,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.modal-mask[data-v-455d99df] {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-455d99df] {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container[data-v-455d99df] {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-455d99df] {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body[data-v-455d99df] {\n  margin: 20px 0;\n}\n.modal-default-button[data-v-455d99df] {\n  float: right;\n}\n", ""]);
+exports.push([module.i, "\n.modal-mask[data-v-455d99df] {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, .5);\r\n  display: table;\r\n  transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-455d99df] {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container[data-v-455d99df] {\r\n  width: 300px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\r\n  transition: all .3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-455d99df] {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body[data-v-455d99df] {\r\n  margin: 20px 0;\n}\n.modal-default-button[data-v-455d99df] {\r\n  float: right;\n}\r\n", ""]);
 
 // exports
 
@@ -2489,7 +2489,7 @@ var render = function() {
                   staticClass: "btn btn-success btn-block",
                   attrs: { type: "submit", id: "btn_guardar_tipo_actividad" }
                 },
-                [_vm._v("\n                    Guardar\n                ")]
+                [_vm._v("\r\n                    Guardar\r\n                ")]
               )
             ]
           )

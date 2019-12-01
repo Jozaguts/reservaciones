@@ -583,7 +583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hour-container{\n    min-height: 40px;\n    font-size: .7rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n}\n.btn-reserva{\n    background-color: black;\n    color:white;\n    font-weight: 700;\n    cursor: pointer;\n}\n.event-row{\n    min-height: 40px;\n    font-size: 1rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\n    max-height: 40px !important;\n}\n.title-event-layout{\n    font-size: 12px !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.hour-container{\r\n    min-height: 40px;\r\n    font-size: .7rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\n}\n.btn-reserva{\r\n    background-color: black;\r\n    color:white;\r\n    font-weight: 700;\r\n    cursor: pointer;\n}\n.event-row{\r\n    min-height: 40px;\r\n    font-size: 1rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\r\n    max-height: 40px !important;\n}\n.title-event-layout{\r\n    font-size: 12px !important;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -2486,7 +2486,7 @@ var render = function() {
         "v-row",
         [
           _c("v-col", { staticClass: "btn-reserva", attrs: { cols: "1" } }, [
-            _vm._v("\n            +Reserva\n        ")
+            _vm._v("\r\n            +Reserva\r\n        ")
           ]),
           _vm._v(" "),
           _vm._l(_vm.tipoActividades, function(tipoActividad) {
@@ -2498,7 +2498,9 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n            " + _vm._s(tipoActividad.nombre) + "\n        "
+                  "\r\n            " +
+                    _vm._s(tipoActividad.nombre) +
+                    "\r\n        "
                 )
               ]
             )
@@ -2519,9 +2521,9 @@ var render = function() {
                 { key: "hour-job" + index, staticClass: "hour-container" },
                 [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.printHour(hora)) +
-                      "\n            "
+                      "\r\n            "
                   )
                 ]
               )
