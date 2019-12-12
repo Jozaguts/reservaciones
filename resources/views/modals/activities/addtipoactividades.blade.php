@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form-tipo-actividad/>
+                {{-- <form-tipo-actividad> </form-tipo-actividad> --}}
                 {{-- <form id="formTipoActividad">
                 <div class="col-6 offset-3">
                     <div class="form-group">
@@ -38,11 +38,11 @@
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Text</label>
-                        
+
                          <color-picker/>
                     </div>
                 </div>
-            
+
             <div class="col-6 offset-3">
                 <div class="btn-group" role="group" aria-label="Button group">
                 <button type="submit" class="btn btn-success btn-block" id="btn_guardar_tipo_actividad">
@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-</div> 
+</div>
 
 
 

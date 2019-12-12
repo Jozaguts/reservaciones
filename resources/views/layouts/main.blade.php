@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')Reservaciones</title>
-    
+
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="{{asset('css/login-resposive.css')}}">
@@ -15,7 +15,7 @@
     <header>
             <main>
                     <div class="grid-container">
-                        <div class="grid-item"> 
+                        <div class="grid-item">
                             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Reservaciones</a>
                         </div>
                         <div class="grid-item" >
@@ -26,18 +26,18 @@
                                             <li class="list__item li-actividadaes">Pases y Precios</li>
                                             <li class="list__item li-actividadaes">Horarios</li>
                                         </ul>
-                            </a>  
-                          
+                            </a>
+
                         </div>
-                       
+
                         <div class="grid-item">
                             <a class="nav-link text-dark font-weight-bold custom-link" href="#" id="btnCom">Comisionistas
                                 <ul class="ul-content" id="ulCom">
                                     <li class="list__item li-comisionistas ">Pago a Comisionistas</li>
-                                    <li class="list__item li-comisionistas">Catálogo de Comisionistas</li>  
+                                    <li class="list__item li-comisionistas">Catálogo de Comisionistas</li>
                                 </ul>
                             </a>
-                            
+
                         </div>
                         <div class="grid-item">
                             <a class="nav-link text-dark font-weight-bold custom-link" href="#">Cortes</a>
@@ -51,7 +51,7 @@
                                     <li class="list__item li-cupones">Inventario de Cupones</li>
                                     <li class="list__item li-cupones">Autorización de Cupones</li>
                                     <li class="list__item li-cupones">Generacón Manual</li>
-                                   
+
                                 </ul>
                             </a>
                         </div>
@@ -63,12 +63,12 @@
                                 <ul class="ul-content" id="ulAdm">
                                     <li class="list__item li-administracion">Usuarios</li>
                                     <li class="list__item li-administracion">Formas de Pago y Tipos de Cambio</li>
-                                </ul>      
+                                </ul>
                             </a>
                         </div>
                     </div>
                 </main>
     </header>
-    
+
 </body>
 </html>

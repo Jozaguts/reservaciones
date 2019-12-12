@@ -26,17 +26,17 @@
     </header>
     <form  action="{{ route('logout') }}" method="POST" class="d-none" id="btnLogOut">
         <button type="submit" class="btn main-navbar btn-log-out">Cerrar sesion</button> @csrf
-    </form>      
-    <main class=" main-container">
+    </form>
+    <main class=" main-container" id="app">
         @yield('content')
         @yield('footer')
     </main>
     <!-- Scripts -->
-   
-    <script src="{{ asset('js/app.js') }}" ></script>
+
+    <script src="{{ asset('js/app.js') }}"  ></script>
     @yield('scripts')
-    
-  
+
+
     @yield('javascript')
 </body>
 </html>

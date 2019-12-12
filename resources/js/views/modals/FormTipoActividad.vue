@@ -1,6 +1,17 @@
 <template>
-<v-sheet>
-      <form id="formTipoActividad" @submit.prevent="crearActividad">
+  <div id="tipo_actividad_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true"  >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Tipo Actividad</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form id="formTipoActividad" @submit.prevent="crearActividad" >
+
+          <input type="hidden" name="id_tipo_actividad"  >
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Clave</label>
@@ -27,32 +38,34 @@
                 <div class="col-6 offset-3">
                     <div class="form-group">
                         <label for="my-input">Text</label>
-                     <!-- color picker   -->
+                  color picker
                          <color-picker @colorSeleccioado="color = $event"/>
                     </div>
                 </div>
 
             <div class="col-6 offset-3">
                 <div class="btn-group" role="group" aria-label="Button group">
-                <button type="submit" class="btn btn-success btn-block" id="btn_guardar_tipo_actividad">
+                <button type="submit" class="btn btn-success btn-block" id="btn_guardar_tipo_actividad"  @getIdTipoActividad="tipo_actividad_id = $event">
                     Guardar
                 </button>
                 </div>
             </div>
         </form>
-</v-sheet>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </template>
 
 <script>
-//##########################FALTA PASAR EL ID DEL TIPO ACTIVIDAD HACIA EL COMPOENNTE PARA OBTENER SU INFO##########################################################
-let idTipoActividad
-document.addEventListener('click', function(e){
 
-    if(e.target.classList.contains('btn-edit')){
-       idTipoActividad = e.target.getAttribute('data-id')
-    }
 
-})
+import EventBus from '../../EventBus';
+
 export default {
     data: () => {
         return{
@@ -62,35 +75,59 @@ export default {
             color:'',
             tipo_unidades:'',
             errors: [],
+            tipoActividadId:null
         }
-    },
+    }/* ,
+    props:{
+        tipoActividadId:null
+    } */,
     methods: {
         crearActividad(){
-                console.log(this.idTipoActividad)
-            axios.post('tipoactividades', {
-                clave: this.clave,
-                nombre: this.nombre,
-                tipounidad_id: this.tipounidad_id,
-                color: this.color
-            })
-            .then(res =>{
-
-            swal({
-                icon: "success",
-                text: res.data.message
+            if(this.tipoActividadId == null){
+                console.log(this.tipoActividadId);
+                axios.post('tipoactividades', {
+                    clave: this.clave,
+                    nombre: this.nombre,
+                    tipounidad_id: this.tipounidad_id,
+                    color: this.color
                 })
-            })
-            .catch(err => {
-                let errors = err.response.data.errors;
-                let error ={}, errorsArray=[];
+                .then(res =>{
+    
+                swal({
+                    icon: "success",
+                    text: res.data.message
+                    })
+                })
+                .catch(err => {
+                    let errors = err.response.data.errors;
+                    let error ={}, errorsArray=[];
+    
+                    for (const key in errors) {
+                        error[key] = errors[key][0]
+                        errorsArray.push(error)
+                    }
+                this.pintarErrores(errorsArray);
+                })
+            }else{
+                axios.put(`tipoactividades/${this.tipoActividadId}`, {
+                    id:this.tipoActividadId,
+                    clave: this.clave,
+                    nombre: this.nombre,
+                    tipounidad_id: this.tipounidad_id,
+                    color: this.color
+                })
+                .then(res => {
+                      swal({
+                    icon: "success",
+                    text: res.data.message
+                    })
+                    window.reload();
+                })
+                .catch(error => console.log(error))
 
-                for (const key in errors) {
-                    error[key] = errors[key][0]
-                    errorsArray.push(error)
-                }
-            this.pintarErrores(errorsArray);
-            })
+            }
         },
+
         pintarErrores(errors){
             // por cada error
             for(let i=0; i<errors.length; i++ ){
@@ -108,20 +145,35 @@ export default {
             }
         },
         async obtenerTipoActividades (){
-             this.tipo_unidades = await axios.get('tipoactividades')
+             this.tipo_unidades = await axios.get('tipounidades')
                     .then(response => response.data)
                     .catch(error => console.log(error.response));
             return false;
 
+        },
+        onSendTipoActividadId (){
+            console.log('id');
         }
     },
     mounted() {
         this.obtenerTipoActividades();
-
+    },
+    updated(){
+        EventBus.$on('sendTipoActividadId', data=> {
+            this.tipoActividadId = data
+            axios.get(`tipoactividades/${data}`)
+            .then(res => {
+                this.clave = res.data.clave
+                this.nombre = res.data.nombre
+                this.tipounidad_id = res.data.tipounidad_id
+                this.color = res.data.color
+            })
+            .catch(error => console.log(error))
+           
+        })
     }
 }
 </script>
-
 <style scoped>
 .modal-mask {
   position: fixed;

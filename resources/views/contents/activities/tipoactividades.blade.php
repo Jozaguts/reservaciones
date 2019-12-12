@@ -35,10 +35,11 @@
                                                             <span style="display:block; width:5rem; height: 1.5rem; background-color: {{$tipoactividad->color}};" ></span>
                                                         </td>
                                                         <td class="table-head table-head__actions">
-                                                            
-                                                            <a href="#!" class="table-head table-head__btn btn-edit btn btn-primary" data-id="{{$tipoactividad->id}}" data-toggle="modal" data-target="#tipo_actividad_modal">
-                                                            </a>
-                                                            <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+
+                                                            <btn-update :tipoActividadId="{{$tipoactividad->id }}"></btn-update>
+                                                            <btn-delete/>
+                                                     
+
                                                         </td>
                                                     </tr>
                                                 @endif

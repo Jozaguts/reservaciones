@@ -4,19 +4,27 @@ import Vuetify from 'vuetify';
 Vue.use(Vuetify);
 
 Vue.component('color-picker', require('./components/ColorPickerComponent.vue').default);
-Vue.component('form-tipo-actividad',require('./views/modals/TipoActividad').default);
+Vue.component('view-tipo-actividad',require('./views/TipoActividad').default);
+Vue.component('form-tipo-actividad',require('./views/modals/FormTipoActividad').default);
+Vue.component('btn-update',require('./components/BtnUpdateComponent.vue').default);
+Vue.component('btn-delete',require('./components/BtnDeleteComponent.vue').default);
 
 Vue.use(Vuetify);
 
-let colorPicker = new Vue({
-    el: "#tipo_actividad_modal",
+let vistaTipoActividad = new Vue({
+    el: "#tipo-actividad-container",
     vuetify: new Vuetify({
         icons: {
             iconfont: 'mdi', // default - only for display purposes
         },
-    })
-});
+    }),
 
+});
+$('.modal').on('hidden.bs.modal', function (e) {
+   $('#clave').val('');
+   $('#nombre').val('');
+   $('#tipounidad_id').val('');
+  })
 window.addEventListener('click', function (e) {
     if (document.getElementById('btnUserName').contains(e.target)) {
 
@@ -213,7 +221,7 @@ window.addEventListener('click', function (e) {
 // });
 
 //cambiar a color a inactivos
-let elements = document.querySelectorAll('[data-active="0"]');
-elements.forEach(element => {
-    element.classList.add('tr-bg');
-});
+// let elements = document.querySelectorAll('[data-active="0"]');
+// elements.forEach(element => {
+//     element.classList.add('tr-bg');
+// });
