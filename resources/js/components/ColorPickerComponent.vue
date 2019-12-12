@@ -31,7 +31,7 @@ export default {
             return this.$emit('colorSeleccioado',  this.color);
         }
     }
- 
+
 
 }
 </script>
