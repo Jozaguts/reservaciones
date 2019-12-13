@@ -69,6 +69,7 @@ class ReservacionesController extends Controller
     $day =$request->params['day'];
     // $carbaoDay = $dt2 = Carbon::createFromDate($day);
 
+
     $carbaoDay = Carbon::createFromFormat('Y-m-d', $day);
     $lunes = $carbaoDay->startOfWeek()->format('Y-m-d');
 
@@ -80,23 +81,48 @@ class ReservacionesController extends Controller
 
         $horarios = array();
     foreach ($week as $day ) {
+
         $horario= DB::table('actividades as ac')
-    ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
-    ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
-    ->select(
-        'ac.id as actividadid',
-        DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
-        DB::raw('concat(ac.clave, " | ", ac.nombre)  as details'),
-        DB::raw('concat("'.$day.'" , " ", SUBSTRING(ah.hini,1,5)) as start'),
-        DB::raw('concat("'.$day.'") as end'),
-        'ta.color'
-    )
-    ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
-    ->get();
+        ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
+        ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
+        // ->leftJoin('disponibilidad as dis', 'ah.id', '=', 'dis.horario_id')
+        ->leftJoin('asignaciones as asi', function($join){
+                    $join->on('ah.id', '=', 'asi.actividad_horario_id');
+                    })
+        ->leftJoin('unidades as uni', 'asi.unidad_id', '=', 'uni.id')
+        ->leftJoin('disponibilidad as dis', function($join){
+            $join->on('ah.id', '=', 'dis.horario_id');
+            $join->on('uni.id', '=', 'dis.unidad_id');
+            })
+        ->leftJoin('disponibilidaddet as disd', 'dis.id', '=', 'disd.disponibilidad_id')
+        ->leftJoin('reservacionesdet as resd', 'disd.reservacionesdet_id', '=', 'resd.id')
+        ->select(
+            'ac.id as actividadid',
+            DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
+            DB::raw('concat(ac.clave, " | ", ac.nombre, " | Ocupación ",  SUM(IFNULL(dis.ocupacion,0)), " | Capacidad ", SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)))  as details'),
+            DB::raw('concat("'.$day.'", " ", SUBSTRING(ah.hini,1,5)) as start'),
+            DB::raw('concat("'.$day.'") as end'),
+            'ta.color'
+            , DB::raw('SUM(CASE WHEN IFNULL(resd.show,2)=1 THEN 1 ELSE 0 END)')
+            , DB::raw('SUM(CASE WHEN IFNULL(resd.show,2)=0 THEN 1 ELSE 0 END)')
+        )
+        ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
+        ->groupBy('ac.id',
+                    DB::raw('concat(ac.clave, " | ", ac.nombre)'),
+                    DB::raw('concat(ac.clave, " | ", ac.nombre)'),
+                    DB::raw('concat("'.$day.'", " ", SUBSTRING(ah.hini,1,5))'),
+                    DB::raw('concat("'.$day.'")'),
+                    'ta.color'
+                    )
+        // , " | ", (IFNULL(dis.ocupacion, 0))
+        // , " | ", (IFNULL(dis.capacidad, 0))-sum(IFNULL(dis.ocupacion, 0))
+        ->get();
+    // dd($horario);
 
     $horarios[]=$horario;
 
     }
+
     // $horariosFlaten = array_flatten($horarios);
 
     // foreach($horariosFlaten as $horario){
