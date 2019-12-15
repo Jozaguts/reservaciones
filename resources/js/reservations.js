@@ -1,11 +1,11 @@
 
-window.addEventListener('click', function(e){   
+window.addEventListener('click', function(e){
     if (document.getElementById('btnUserName').contains(e.target)){
-  
+
       let toggleStatus = 1;
       function toggleMenu (){
         if(toggleStatus==1){
-      
+
           btnLogOut.classList.remove("d-none");
           btnLogOut.classList.add("show");
           toggleStatus = 0;
@@ -21,19 +21,19 @@ window.addEventListener('click', function(e){
       if( btnLogOut.classList.contains("show")){
         btnLogOut.classList.remove("show");
         btnLogOut.classList.toggle("d-none");
-      } 
+      }
     }
   });
   import Vue from 'vue';
+  import Vuex from 'vuex';
   window.Vue = require('vue');
   import Vuetify from 'vuetify';
+  Vue.use(Vuex);
   Vue.use(Vuetify);
-  
+
+
   Vue.component('dasboard', require('./components/DashboardComponent.vue').default);
   Vue.component('calendar', require('./components/CalendarComponent.vue').default);
-
-
-  Vue.use(Vuetify);
 
  new Vue({
   el: "#dashboard",
@@ -42,6 +42,6 @@ window.addEventListener('click', function(e){
       iconfont: 'mdi', // default - only for display purposes
     },
   })
-  
+
 
 })

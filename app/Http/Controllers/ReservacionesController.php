@@ -80,6 +80,10 @@ class ReservacionesController extends Controller
         // dd($week);
 
         $horarios = array();
+        $libre_icon ="<i class='libre_icon'></i>";
+        $ocupacion_icon ="<i class='ocupacion_icon'></i>";
+        $show_icon ="<i class='show_icon'></i>";
+        $noshow_icon ="<i class='noshow_icon'></i>";
     foreach ($week as $day ) {
 
         $horario= DB::table('actividades as ac')
@@ -98,8 +102,8 @@ class ReservacionesController extends Controller
         ->leftJoin('reservacionesdet as resd', 'disd.reservacionesdet_id', '=', 'resd.id')
         ->select(
             'ac.id as actividadid',
-            DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
-            DB::raw('concat(ac.clave, " | ", ac.nombre, " | Ocupación ",  SUM(IFNULL(dis.ocupacion,0)), " | Capacidad ", SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)))  as details'),
+            DB::raw('concat(ac.clave, "| ", ac.nombre)  as name'),
+            DB::raw('concat("'.$ocupacion_icon.'",  SUM(IFNULL(dis.ocupacion,0)),"'.$libre_icon.'",SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)),"'.$show_icon.'0","'.$noshow_icon.'0")  as details'),
             DB::raw('concat("'.$day.'", " ", SUBSTRING(ah.hini,1,5)) as start'),
             DB::raw('concat("'.$day.'") as end'),
             'ta.color'

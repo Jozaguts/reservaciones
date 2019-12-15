@@ -1,4 +1,7 @@
+
+
 <template>
+<!-- ESTE NO ESTA EN FUNCIONAMIENTO -->
 <v-container>
     <v-row>
         <v-col cols="1" class="btn-reserva">
@@ -10,6 +13,7 @@
     </v-row>
     <v-row>
         <!-- horas de trabajo -->
+
         <v-col cols="1">
             <v-row v-for="(hora, index) in horas" :key="'hour-job' + index" class="hour-container">
                 {{printHour(hora)}}
@@ -28,7 +32,7 @@
 </template>
 
 <script>
-
+/* <!-- ESTE NO ESTA EN FUNCIONAMIENTO --> */
 export default {
 
 data(){

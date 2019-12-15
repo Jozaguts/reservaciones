@@ -14,6 +14,9 @@
     <v-col >
       <v-sheet height="64">
         <v-toolbar flat color="white">
+          <v-btn outlined class="mr-4">
+             <v-icon class="display-1 reserva-add" >mdi-calendar-plus</v-icon>
+          </v-btn>
           <v-btn outlined class="mr-4" @click="setToday">
             Hoy
           </v-btn>
@@ -88,16 +91,43 @@
               dark
             >
               <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
+                <v-icon class="display-1">mdi-calendar-plus</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+                <v-icon>mdi-account-multiple-check</v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
+                <v-icon>mdi-printer</v-icon>
               </v-btn>
+              <!-- <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn> -->
+              <v-menu offset-y>
+                <template v-slot:activator="{ on }">
+                <v-btn
+                    icon
+                    v-on="on"
+                >
+                   <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item>
+                         <v-icon>mdi-cash-plus</v-icon>
+                    </v-list-item>
+                    <v-list-item>
+                         <v-icon>mdi-pencil</v-icon>
+                    </v-list-item>
+                <!-- <v-list-item
+                    v-for="(item, index) in items"
+                    :key="index"
+                    @click="">
+                    <v-list-item-title>{{ item.title }}</v-list-item-title> -->
+                <!-- </v-list-item> -->
+                </v-list>
+            </v-menu>
             </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
@@ -269,3 +299,56 @@
 
   };
 </script>
+<style >
+.libre_icon{
+    display: inline-block;
+    background-image: url(/svg/libre.svg);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 25px;
+    height: 25px;
+    margin: 0 .5rem;
+    line-height: .2rem;
+    text-align: center;
+}
+.ocupacion_icon{
+    display: inline-block;
+    background-image: url(/svg/ocupado.svg);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 25px;
+    height: 25px;
+    margin: 0 .5rem;
+    line-height: .2rem;
+    text-align: center;
+}
+.show_icon{
+    display: inline-block;
+    background-image: url(/svg/show.svg);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 25px;
+    height: 25px;
+    margin: 0 .5rem;
+    line-height: .2rem;
+    text-align: center;
+}
+.noshow_icon{
+    display: inline-block;
+    background-image: url(/svg/noshow.svg);
+    background-size: contain;
+    background-position: 50% 50%;
+    width: 25px;
+    height: 25px;
+    margin: 0 .5rem;
+    line-height: .2rem;
+    text-align: center;
+}
+.v-card__text{
+    font-size: 35px !important;
+    font-weight: bold !important;
+}
+.reserva-add{
+    color:rgba(0,0,0,.54) !important;
+}
+</style>
