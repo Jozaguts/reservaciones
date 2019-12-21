@@ -619,7 +619,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hour-container{\n    min-height: 40px;\n    font-size: .7rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n}\n.btn-reserva{\n    background-color: black;\n    color:white;\n    font-weight: 700;\n    cursor: pointer;\n}\n.event-row{\n    min-height: 40px;\n    font-size: 1rem;\n    color:black;\n    justify-content: center;\n    align-items: flex-start;\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\n    max-height: 40px !important;\n}\n.title-event-layout{\n    font-size: 12px !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.hour-container{\r\n    min-height: 40px;\r\n    font-size: .7rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\n}\n.btn-reserva{\r\n    background-color: black;\r\n    color:white;\r\n    font-weight: 700;\r\n    cursor: pointer;\n}\n.event-row{\r\n    min-height: 40px;\r\n    font-size: 1rem;\r\n    color:black;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    border:#e0e0e0 1px solid;\n}\n.event-layout{\r\n    max-height: 40px !important;\n}\n.title-event-layout{\r\n    font-size: 12px !important;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -638,7 +638,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.libre_icon{\n    display: inline-block;\n    background-image: url(/svg/libre.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.ocupacion_icon{\n    display: inline-block;\n    background-image: url(/svg/ocupado.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.show_icon{\n    display: inline-block;\n    background-image: url(/svg/show.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.noshow_icon{\n    display: inline-block;\n    background-image: url(/svg/noshow.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.v-card__text{\n    font-size: 35px !important;\n    font-weight: bold !important;\n}\n.reserva-add{\n    color:rgba(0,0,0,.54) !important;\n}\n", ""]);
+exports.push([module.i, "\n.libre_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/libre.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.ocupacion_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/ocupado.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.show_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/show.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.noshow_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/noshow.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.v-card__text{\r\n    font-size: 35px !important;\r\n    font-weight: bold !important;\n}\n.reserva-add{\r\n    color:rgba(0,0,0,.54) !important;\n}\r\n", ""]);
 
 // exports
 
@@ -2571,7 +2571,7 @@ var render = function() {
         "v-row",
         [
           _c("v-col", { staticClass: "btn-reserva", attrs: { cols: "1" } }, [
-            _vm._v("\n            +Reserva\n        ")
+            _vm._v("\r\n            +Reserva\r\n        ")
           ]),
           _vm._v(" "),
           _vm._l(_vm.tipoActividades, function(tipoActividad) {
@@ -2583,7 +2583,9 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n            " + _vm._s(tipoActividad.nombre) + "\n        "
+                  "\r\n            " +
+                    _vm._s(tipoActividad.nombre) +
+                    "\r\n        "
                 )
               ]
             )
@@ -2604,9 +2606,9 @@ var render = function() {
                 { key: "hour-job" + index, staticClass: "hour-container" },
                 [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.printHour(hora)) +
-                      "\n            "
+                      "\r\n            "
                   )
                 ]
               )
@@ -2718,7 +2720,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\n            Hoy\n          ")]
+                        [_vm._v("\r\n            Hoy\r\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -3021,7 +3023,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                Cancel\n              "
+                                    "\r\n                Cancel\r\n              "
                                   )
                                 ]
                               )
@@ -53627,15 +53629,14 @@ module.exports = g;
 /*!*******************************************************!*\
   !*** ./resources/js/components/CalendarComponent.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CalendarComponent_vue_vue_type_template_id_56bbe5f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarComponent.vue?vue&type=template&id=56bbe5f8& */ "./resources/js/components/CalendarComponent.vue?vue&type=template&id=56bbe5f8&");
 /* harmony import */ var _CalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CalendarComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _CalendarComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CalendarComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CalendarComponent.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CalendarComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CalendarComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CalendarComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -53667,7 +53668,7 @@ component.options.__file = "resources/js/components/CalendarComponent.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/components/CalendarComponent.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
