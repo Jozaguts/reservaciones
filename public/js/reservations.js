@@ -850,7 +850,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.libre_icon{\n    display: inline-block;\n    background-image: url(/svg/libre.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.ocupacion_icon{\n    display: inline-block;\n    background-image: url(/svg/ocupado.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.show_icon{\n    display: inline-block;\n    background-image: url(/svg/show.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.noshow_icon{\n    display: inline-block;\n    background-image: url(/svg/noshow.svg);\n    background-size: contain;\n    background-position: 50% 50%;\n    width: 25px;\n    height: 25px;\n    margin: 0 .5rem;\n    line-height: .2rem;\n    text-align: center;\n}\n.v-card__text{\n    font-size: 35px !important;\n    font-weight: bold !important;\n}\n.reserva-add{\n    color:rgba(0,0,0,.54) !important;\n}\n", ""]);
+exports.push([module.i, "\n.libre_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/libre.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.ocupacion_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/ocupado.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.show_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/show.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.noshow_icon{\r\n    display: inline-block;\r\n    background-image: url(/svg/noshow.svg);\r\n    background-size: contain;\r\n    background-position: 50% 50%;\r\n    width: 25px;\r\n    height: 25px;\r\n    margin: 0 .5rem;\r\n    line-height: .2rem;\r\n    text-align: center;\n}\n.v-card__text{\r\n    font-size: 35px !important;\r\n    font-weight: bold !important;\n}\n.reserva-add{\r\n    color:rgba(0,0,0,.54) !important;\n}\r\n", ""]);
 
 // exports
 
@@ -2942,7 +2942,7 @@ var render = function() {
                           attrs: { outlined: "" },
                           on: { click: _vm.setToday }
                         },
-                        [_vm._v("\n            Hoy\n          ")]
+                        [_vm._v("\r\n            Hoy\r\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -3245,7 +3245,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                Cancel\n              "
+                                    "\r\n                Cancel\r\n              "
                                   )
                                 ]
                               )
