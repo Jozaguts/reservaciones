@@ -2,7 +2,7 @@
 <v-app>
 
   <v-row class="fill-height pr-5">
-
+    <create-reservaciones > </create-reservaciones>
     <v-col cols="4" class="justify-center"  v-if="showCalendar">
        <v-date-picker
       v-model="focus"
@@ -14,7 +14,7 @@
     <v-col >
       <v-sheet height="64">
         <v-toolbar flat color="white">
-          <v-btn outlined class="mr-4">
+          <v-btn outlined class="mr-4" type="button" data-toggle="modal" data-target="#create-reservation-modal">
              <v-icon class="display-1 reserva-add" >mdi-calendar-plus</v-icon>
           </v-btn>
           <v-btn outlined class="mr-4" @click="setToday">
@@ -150,8 +150,12 @@
 </v-app>
 </template>
 <script>
-
+    import CreateReservaciones from './Reservaciones/Create.vue';
+    import store from '../store/index.js';
   export default {
+      components:{
+          'create-reservaciones':CreateReservaciones
+      },
     data: () =>({
       today: moment().format('Y-M-D'),
       focus: moment().format('Y-M-D'),
@@ -209,6 +213,7 @@
           timeZone: 'UTC', month: 'long',
         })
       },
+
     },
     mounted(){
          this.getEvents(this.today);
@@ -232,7 +237,7 @@
         })
 
         this.events = events
-        console.log(this.events);
+
         } catch (error) {
           console.log(error)
         }
@@ -277,7 +282,6 @@
 
             event.start.substring(0,10) == start.date ? true : no_coincidencias++;
         })
-        console.log(no_coincidencias, this.events.length);
         if(no_coincidencias == this.events.length){
             this.getEvents(start.date)
         }
@@ -292,7 +296,11 @@
       },
     clickDate(){
         this.getEvents(this.focus)
-    }
+    },
+     showCreateReservationModal() {
+        //   return store.state.showCreateReservationModal = !store.state.showCreateReservationModal;
+        console.log(store.state.showCreateReservationModal = !store.state.showCreateReservationModal);
+      }
     }
 
 

@@ -1,0 +1,135 @@
+<template  id="bs-modal">
+    <div id="create-reservation-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title">Crear Reservación</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="my-input">Actividad</label>
+                                    <select name="actividad" id="actividad" class="form-control" v-model="actividad_id">
+                                        <option value="" disabled >Seleccione una actividad</option>
+                                        <option v-for="actividad in actividades" :value="actividad.id" v-text="actividad.nombre" :key="actividad.id"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <div class="container p-0">
+                                    <div class="row p-0">
+                                        <div class="col-sx-12 col-md-12 p-0">
+                                            <label for="fecha" class="ml-5 pl-3">Fecha</label>
+                                                <input type="text" class="form-control" v-model="date" readonly @click="picker = !picker">
+                                                <template class="fade">
+                                                    <v-date-picker 
+                                                    v-model="date" 
+                                                    :full-width="true" 
+                                                    v-if="picker"
+                                                    @click:date="clickDate"
+                                                    locale="es"
+                                                    >
+                                                    </v-date-picker>     
+                                                </template>
+                                        </div>         
+                                    </div>  
+                                </div>
+                            </div>
+                            <!-- horarios -->
+                            <div class="col-xs-4 col-md-4"> 
+                                <label for="fecha" class="ml-5 pl-3">Horarios</label>
+                                <select name="horarios" id="horarios" class="form-control">
+                                    <option v-for="horario in horarios" :key="horario.id" v-text="horario.hini+' | '+horario.hfin"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+
+    data(){
+        return{
+            actividad_id:'',
+            actividades:[],
+            horarios:[],
+            focus: moment().format('Y-M-D'),
+            date: new Date().toISOString().substr(0, 10),
+            picker:false
+           
+        }
+    },
+    methods:{
+       async getActividades(){
+            await axios.get('/reservaciones/getActividades')
+            .then(res => this.actividades = res.data.actividades )
+            .catch(error => console.log(error))
+
+         },
+         clickDate(){
+            this.picker = !this.picker
+             if(this.date != "" && this.actividad_id !=""){
+                 let dia = moment(this.date).get('day');
+                switch (dia) {
+                    case 0:
+                        dia='d'
+                        break;
+                    case 1:
+                        dia='l'
+                        break;
+                    case 2:
+                        dia='m'
+                        break;
+                    case 3:
+                        dia='x'
+                        break;
+                    case 4:
+                        dia='j'
+                        break;
+                    case 5:
+                        dia='v'
+                        break;
+                    case 6:
+                        dia='s'
+                        break;
+                    default:
+                        break;
+                }
+                this.getHorarios(this.actividad_id,dia)
+                 
+             }
+         },
+         async getHorarios(idactividad, dia){
+             
+             await axios.post('/reservaciones/gethorarios', {
+                 params:{
+                     idactividad:idactividad,
+                     dia:dia
+                 }
+             })
+             .then(res => {
+                this.horarios = res.data.horarios;
+                 console.log(this.horarios)
+             })
+             .catch(error =>console.log(error))
+         }
+    },
+    created(){
+        this.getActividades()
+    }
+
+}
+</script>
+
+<style>
+
+</style>

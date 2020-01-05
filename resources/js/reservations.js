@@ -34,7 +34,6 @@ window.addEventListener('click', function(e){
 
   Vue.component('dasboard', require('./components/DashboardComponent.vue').default);
   Vue.component('calendar', require('./components/CalendarComponent.vue').default);
-
  new Vue({
   el: "#dashboard",
   vuetify: new Vuetify({
