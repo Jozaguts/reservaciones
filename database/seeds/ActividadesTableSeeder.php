@@ -43,16 +43,16 @@ class ActividadesTableSeeder extends Seeder
         'puntos' => '10',
         'libre' => '1',
         ]);
-        
-        
+
+
 
         $ActividadPrecios = new ActividadPrecios;
 
-        for ($i=1; $i <=3; $i++) { 
-        
+        for ($i=1; $i <=3; $i++) {
+
             $ActividadPrecios->create([
                 'actividad_id' => 1,
-                'persona_id' => $i, 
+                'persona_id' => $i,
                 'precio1' => '100',
                 'precio2'=> '200',
                 'precio3'=> '300',
@@ -68,14 +68,14 @@ class ActividadesTableSeeder extends Seeder
                 'usuario_id'=> '3',
             ]);
 
-           
-        
+
+
         }
 
         $ActividadesHorario = new ActividadesHorario;
         $ActividadesHorario->create(
             [
-                'actividades_id' => 1,                        
+                'actividades_id' => 1,
                 'hini' => '08:00:00',
                 'hfin' => '15:00:00',
                 'l'=> '1',
@@ -88,34 +88,36 @@ class ActividadesTableSeeder extends Seeder
                 'active'=> 1,
                 'remove'=> 0,
                 'usuarios_id'=> '3',
-                'libre'=> '1'                         
+                'libre'=> '1'
             ]
-           
+
         );
-       
+
         $SalidasLlegadasHorario = new SalidasLlegadasHorario;
         $SalidasLlegadasHorario->create(
             [
                 'actividadeshorario_id' => 1,
                 'salidallegadas_id' => 1,
-                'salida' =>1 , 
-                'hora' =>null,
+                'salida' =>1 ,
+                // 'hora' => rand(0,1) ?'08:00:00': '12:00:00' ,
+                'hora'=> null,
                 'active' =>1,
-                'remove' =>0,                        
+                'remove' =>0,
                 'usuarios_id' =>3,
             ]);
-            
+
             $SalidasLlegadasHorarioLLEGADA = new SalidasLlegadasHorario;
             $SalidasLlegadasHorarioLLEGADA->create(
             [
                 'actividadeshorario_id' => 1,
                 'salidallegadas_id' => 1,
-                'salida'=>0 , 
-                'hora' =>null,
+                'salida'=>0 ,
+                'hora'=> null,
+                // 'hora' => rand(0,1) ?'13:00:00': '17:00:00' ,
                 'active' =>1,
-                'remove' =>0,                        
+                'remove' =>0,
                 'usuarios_id' => '3',
-            ]);  
+            ]);
 
     }
 }

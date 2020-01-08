@@ -61,19 +61,55 @@ class ReservacionesController extends Controller
        }
    }
    public function getHorarios(Request $request){
-   
-    $dia = $request->params['dia'];
-    $idactividad = $request->params['idactividad'];
-    
+
+    $dia = $request->dia;
+    $idactividad = $request->idactividad;
+
+
     $ho = DB::table('actividadeshorarios as ah')
-                ->select('ah.id','ah.hini', 'ah.hfin') 
+                ->select('ah.id','ah.hini', 'ah.hfin')
                 ->where([['ah.active', '=', '1'], ['ah.actividades_id', '=', $idactividad], ['ah.'.$dia, '=','1']])
                 ->get();
                 foreach ($ho as $horario ) {
                      $horario->hini = Carbon::createFromTimeString($horario->hini)->format('g:i a');
                      $horario->hfin = Carbon::createFromTimeString($horario->hfin)->format('g:i a');
-                }   
+                }
                 return response()->json(['horarios' => $ho]);
 
    }
+   public function getSalidas($horarioId)
+   {
+
+        $sa = DB::table('salida_llegadahorarios as sh')
+                    ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
+                    ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), " | ", sal.nombre) as salida'))
+                    ->where([['sal.active','=', '1'], ['sh.actividadeshorario_id', '=',  $horarioId], ['sh.salida', '=', '1']])
+                    ->get();
+        
+        
+        return $sa;
+
+   }
+
+   public function getLlegadas($horarioId)
+   {
+      
+        $ll = DB::table('salida_llegadahorarios as sh')
+        ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
+        ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(sh.hora, " | ", sal.nombre) as llegada'))
+        ->where([['sal.active','=', '1'], ['sh.actividadeshorario_id', '=', $horarioId], ['sh.salida', '=', '0']])
+        ->get();
+
+        return $ll;
+   }
+
+   public function getSalidasLlegadas(Request $request){
+
+        $salidas = $this->getSalidas($request->horarioId);
+        $llegadas = $this->getLlegadas($request->horarioId);
+
+        return response(['llegadas'=> $llegadas, 'salidas' => $salidas]);
+
+   }
+
 }
