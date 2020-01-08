@@ -689,12 +689,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       actividad_id: '',
+      horario_id: '',
       actividades: [],
       horarios: [],
+      salidas: [],
+      llegadas: [],
+      ocupacion: '',
       focus: moment().format('Y-M-D'),
       date: new Date().toISOString().substr(0, 10),
       picker: false
@@ -785,14 +825,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.post('/reservaciones/gethorarios', {
+                return axios.get('/reservaciones/gethorarios', {
                   params: {
                     idactividad: idactividad,
                     dia: dia
                   }
                 }).then(function (res) {
                   _this2.horarios = res.data.horarios;
-                  console.log(_this2.horarios);
                 }).catch(function (error) {
                   return console.log(error);
                 });
@@ -810,7 +849,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getHorarios;
-    }()
+    }(),
+    getSalidasLlegadas: function getSalidasLlegadas() {
+      var _this3 = this;
+
+      axios.get('/reservaciones/getsalidas-llegadas', {
+        params: {
+          horarioId: this.horario_id
+        }
+      }).then(function (res) {
+        _this3.salidas = res.data.salidas;
+        _this3.llegadas = res.data.llegadas;
+      }).catch(function (error) {
+        return console.log(error);
+      });
+    }
   },
   created: function created() {
     this.getActividades();
@@ -3378,14 +3431,9 @@ var render = function() {
                           "div",
                           { staticClass: "col-sx-12 col-md-12 p-0" },
                           [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "ml-5 pl-3",
-                                attrs: { for: "fecha" }
-                              },
-                              [_vm._v("Fecha")]
-                            ),
+                            _c("label", { attrs: { for: "fecha" } }, [
+                              _vm._v("Fecha")
+                            ]),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -3435,25 +3483,140 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-xs-4 col-md-4" }, [
+                    _c("label", { attrs: { for: "fecha" } }, [
+                      _vm._v("Horarios")
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "label",
-                      { staticClass: "ml-5 pl-3", attrs: { for: "fecha" } },
-                      [_vm._v("Horarios")]
-                    ),
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.horario_id,
+                            expression: "horario_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "horarios", id: "horarios" },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.horario_id = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function($event) {
+                              return _vm.getSalidasLlegadas()
+                            }
+                          ]
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { value: "false", disabled: "" } },
+                          [_vm._v(" Seleccione un Horario")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.horarios, function(horario) {
+                          return _c("option", {
+                            key: horario.id,
+                            domProps: {
+                              value: horario.id,
+                              textContent: _vm._s(
+                                horario.hini + " | " + horario.hfin
+                              )
+                            }
+                          })
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-xs-4 col-md-4" }, [
+                    _c("label", { attrs: { for: "salidas" } }, [
+                      _vm._v("Salida | Ubicación")
+                    ]),
                     _vm._v(" "),
                     _c(
                       "select",
                       {
                         staticClass: "form-control",
-                        attrs: { name: "horarios", id: "horarios" }
+                        attrs: { name: "salidas", id: "salidas" }
                       },
-                      _vm._l(_vm.horarios, function(horario) {
+                      _vm._l(_vm.salidas, function(salida) {
                         return _c("option", {
-                          key: horario.id,
+                          key: salida.id,
                           domProps: {
-                            textContent: _vm._s(
-                              horario.hini + " | " + horario.hfin
-                            )
+                            value: salida.id,
+                            textContent: _vm._s(salida.salida)
+                          }
+                        })
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 col-xs-12" }, [
+                    _c("label", { attrs: { for: "Ocupación" } }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.ocupacion,
+                          expression: "ocupacion"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        name: "ocupacion",
+                        id: "ocupacion",
+                        readonly: ""
+                      },
+                      domProps: { value: _vm.ocupacion },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.ocupacion = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-4 col-md-4" }, [
+                    _c("label", { attrs: { for: "llegada" } }, [
+                      _vm._v("Llegada | Ubicación")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "llegada", id: "llegada" }
+                      },
+                      _vm._l(_vm.llegadas, function(llegada) {
+                        return _c("option", {
+                          key: llegada.id,
+                          domProps: {
+                            value: llegada.id,
+                            textContent: _vm._s(llegada.llegada)
                           }
                         })
                       }),
