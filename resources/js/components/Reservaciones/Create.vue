@@ -24,30 +24,66 @@
                                 <div class="container p-0">
                                     <div class="row p-0">
                                         <div class="col-sx-12 col-md-12 p-0">
-                                            <label for="fecha" class="ml-5 pl-3">Fecha</label>
+                                            <label for="fecha">Fecha</label>
                                                 <input type="text" class="form-control" v-model="date" readonly @click="picker = !picker">
                                                 <template class="fade">
-                                                    <v-date-picker 
-                                                    v-model="date" 
-                                                    :full-width="true" 
+                                                    <v-date-picker
+                                                    v-model="date"
+                                                    :full-width="true"
                                                     v-if="picker"
                                                     @click:date="clickDate"
                                                     locale="es"
                                                     >
-                                                    </v-date-picker>     
+                                                    </v-date-picker>
                                                 </template>
-                                        </div>         
-                                    </div>  
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- horarios -->
-                            <div class="col-xs-4 col-md-4"> 
-                                <label for="fecha" class="ml-5 pl-3">Horarios</label>
-                                <select name="horarios" id="horarios" class="form-control">
-                                    <option v-for="horario in horarios" :key="horario.id" v-text="horario.hini+' | '+horario.hfin"></option>
+                            <div class="col-xs-4 col-md-4">
+                                <label for="fecha" >Horarios</label>
+                                <select name="horarios" id="horarios" class="form-control" v-model="horario_id" @change="getSalidasLlegadas()">
+                                    <option value="false" disabled selected> Seleccione un Horario</option>
+                                    <option v-for="horario in horarios" :key="horario.id" v-text="horario.hini+' | '+horario.hfin" :value="horario.id"></option>
                                 </select>
                             </div>
                         </div>
+                           <!-- segunda fila -->
+
+                            <div class="row">
+                                 <!-- salida ubicación  -->
+                                <div class="col-xs-4 col-md-4">
+                                <label for="salidas" >Salida | Ubicación</label>
+                                <select name="salidas" id="salidas" class="form-control">
+                                    <option
+                                        :value="salida.id"
+                                        v-for="salida in salidas"
+                                        :key="salida.id"
+                                        v-text="salida.salida">
+                                    </option>
+                                </select>
+                            </div>
+                                <!-- ucupación -->
+                                <div class="col-md-4 col-xs-12">
+                                    <label for="Ocupación"></label>
+                                    <input type="text" name="ocupacion" id="ocupacion" readonly v-model="ocupacion">
+                                </div>
+                                  <!-- Llegadas ubicación  -->
+                                <div class="col-xs-4 col-md-4">
+                                <label for="llegada" >Llegada | Ubicación</label>
+                                <select name="llegada" id="llegada" class="form-control">
+                                    <option
+                                        :value="llegada.id"
+                                        v-for="llegada in llegadas"
+                                        :key="llegada.id"
+                                        v-text="llegada.llegada">
+                                    </option>
+                                </select>
+                            </div>
+
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -60,12 +96,15 @@ export default {
     data(){
         return{
             actividad_id:'',
+            horario_id:'',
             actividades:[],
             horarios:[],
+            salidas:[],
+            llegadas:[],
+            ocupacion:'',
             focus: moment().format('Y-M-D'),
             date: new Date().toISOString().substr(0, 10),
             picker:false
-           
         }
     },
     methods:{
@@ -105,12 +144,12 @@ export default {
                         break;
                 }
                 this.getHorarios(this.actividad_id,dia)
-                 
+
              }
          },
          async getHorarios(idactividad, dia){
-             
-             await axios.post('/reservaciones/gethorarios', {
+
+             await axios.get('/reservaciones/gethorarios', {
                  params:{
                      idactividad:idactividad,
                      dia:dia
@@ -118,10 +157,22 @@ export default {
              })
              .then(res => {
                 this.horarios = res.data.horarios;
-                 console.log(this.horarios)
              })
              .catch(error =>console.log(error))
-         }
+         },
+         getSalidasLlegadas(){
+             axios.get('/reservaciones/getsalidas-llegadas',{
+                 params:{
+                     horarioId:this.horario_id
+                 }
+             })
+             .then(res =>  {
+                this.salidas = res.data.salidas
+                this.llegadas = res.data.llegadas
+             })
+             .catch(error => console.log(error))
+
+        }
     },
     created(){
         this.getActividades()

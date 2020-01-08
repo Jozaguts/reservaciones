@@ -19,9 +19,10 @@ Route::get('/demo',['middleware' => 'throttle:60,5', function () {
 
 Route::group(['prefix' => 'reservaciones'], function () {
     Route::get('/','ReservacionesController@index')->middleware(['auth']);
-    Route::post('/dashboard','ReservacionesController@dashboard')->middleware(['auth']);
+    Route::get('/dashboard','ReservacionesController@dashboard')->middleware(['auth']);
     Route::get('getActividades', 'ReservacionesController@getActividades')->middleware(['auth']);
-    Route::post('/gethorarios', 'ReservacionesController@getHorarios')->middleware(['auth']);
+    Route::get('/gethorarios', 'ReservacionesController@getHorarios')->middleware(['auth']);
+    Route::get('/getsalidas-llegadas', 'ReservacionesController@getSalidasLlegadas')->middleware(['auth']);
 });
 
 
