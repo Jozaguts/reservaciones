@@ -221,7 +221,7 @@
     methods:{
       async getEvents(day){
         try {
-          const REQUEST = await axios.post(`reservaciones/dashboard`, {
+          const REQUEST = await axios.get(`/reservaciones/dashboard`, {
             params: {
             day: day
             }

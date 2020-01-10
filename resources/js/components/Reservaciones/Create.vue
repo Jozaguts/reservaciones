@@ -44,19 +44,18 @@
                             <div class="col-xs-4 col-md-4">
                                 <label for="fecha" >Horarios</label>
                                 <select name="horarios" id="horarios" class="form-control" v-model="horario_id" @change="getSalidasLlegadas()">
-                                    <option value="false" disabled> Seleccione un Horario</option>
+                                    <option value="false" disabled selected> Seleccione un Horario</option>
                                     <option v-for="horario in horarios" :key="horario.id" v-text="horario.hini+' | '+horario.hfin" :value="horario.id"></option>
                                 </select>
                             </div>
                         </div>
                            <!-- segunda fila -->
-                           
                             <div class="row">
                                  <!-- salida ubicación  -->
                                 <div class="col-xs-4 col-md-4">
                                 <label for="salidas" >Salida | Ubicación</label>
                                 <select name="salidas" id="salidas" class="form-control">
-                                    <option 
+                                    <option
                                         :value="salida.id"
                                         v-for="salida in salidas"
                                         :key="salida.id"
@@ -73,7 +72,7 @@
                                 <div class="col-xs-4 col-md-4">
                                 <label for="llegada" >Llegada | Ubicación</label>
                                 <select name="llegada" id="llegada" class="form-control">
-                                    <option 
+                                    <option
                                         :value="llegada.id"
                                         v-for="llegada in llegadas"
                                         :key="llegada.id"
@@ -168,7 +167,7 @@ export default {
              })
              .then(res =>  {
                 this.salidas = res.data.salidas
-                this.llegadas = res.data.llegadas          
+                this.llegadas = res.data.llegadas
              })
              .catch(error => console.log(error))
 
