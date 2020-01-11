@@ -221,23 +221,19 @@
     methods:{
       async getEvents(day){
         try {
-          const REQUEST = await axios.get(`/reservaciones/dashboard`, {
+           await axios.get('/reservaciones/dashboard', {
             params: {
             day: day
             }
+        }).then(res => {
+            res.data.horarios.length > 0
+            ? this.events = res.data.horarios
+            : swal({
+                title: "¡No hay asignaciones registradas!",
+                icon:"info"
+            })
 
         })
-          let actividades = REQUEST.data.horario;
-          REQUEST.data.horario
-
-
-          let events = [];
-          actividades.forEach(actividad=>{
-          events.push(actividad)
-        })
-
-        this.events = events
-
         } catch (error) {
           console.log(error)
         }

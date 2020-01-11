@@ -17,8 +17,8 @@ class ReservacionesController extends Controller
         return view('sections.reservations');
     }
 
-   public function dashboard(Request $request){
-
+   public function dashboard(Request $request)
+   {
     $carbaoDay = Carbon::createFromFormat('Y-m-d', $request->day);
     $lunes = $carbaoDay->startOfWeek()->format('Y-m-d');
     $week = array();
@@ -32,6 +32,7 @@ class ReservacionesController extends Controller
     $show_icon ="<i class='show_icon'></i>";
     $noshow_icon ="<i class='noshow_icon'></i>";
         foreach ($week as $day ) {
+
             $horario = DB::table('actividades as ac')
                     ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
                     ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
@@ -43,16 +44,18 @@ class ReservacionesController extends Controller
                     })
                     ->select('ac.id as actividadid',
                         DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
-                        DB::raw('concat("'.$ocupacion_icon.'",  SUM(IFNULL(dis.ocupacion,0)),"'.$libre_icon.'",SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)),"'.$show_icon.'0","'.$noshow_icon.'0")  as details'),
+                        DB::raw('concat("'.$ocupacion_icon.'",  SUM(IFNULL(dis.ocupacion,0)),
+                        "'.$libre_icon.'",SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)),
+                        "'.$show_icon.'0","'.$noshow_icon.'0")  as details'),
                         DB::raw('concat("'.$day.'", " ", SUBSTRING(ah.hini,1,5)) as start'),
                         DB::raw('concat("'.$day.'") as end'),'ta.color')
                         ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=','1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
                         ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color')
                         ->get();
-
             $horarios[]=$horario;
         }
-    return response()->json(['horario' =>array_flatten($horarios)]);
+    return response()->json(['horarios' =>array_flatten($horarios)]);
+
    }
 
    public function getActividades(Request $request)
