@@ -73,15 +73,45 @@ class ReservacionesController extends Controller
         $dia = $request->dia;
         $idactividad = $request->idactividad;
 
-
         $ho = DB::table('actividadeshorarios as ah')
-                    ->select('ah.id','ah.hini', 'ah.hfin')
-                    ->where([['ah.active', '=', '1'], ['ah.actividades_id', '=', $idactividad], ['ah.'.$dia, '=','1']])
-                    ->get();
-                    foreach ($ho as $horario ) {
-                        $horario->hini = Carbon::createFromTimeString($horario->hini)->format('g:i a');
-                        $horario->hfin = Carbon::createFromTimeString($horario->hfin)->format('g:i a');
+        ->join('actividades as ac', function($join){
+            $join->on('ah.actividades_id', '=', 'ac.id');
+            $join->on('ah.libre', '=', 'ac.libre');
+        })
+        ->select('ah.id','ah.hini', 'ah.hfin','ah.libre','ac.duracion' )
+        ->where([['ah.active', '=', '1'], ['ah.actividades_id', '=', $idactividad], ['ah.'.$dia, '=','1']])
+        ->get();
+        $horarios=[];
+        $horarioLibres=[];
+        foreach ($ho as $horario ) {
+
+            if($horario->libre) {
+                $duracion = ($horario->duracion) /60;
+
+                    $hini = new Carbon("2014-03-30 $horario->hini", 'Europe/London');
+                    $hfin = new Carbon("2014-03-30 $horario->hfin", 'Europe/London');
+                    $diff =  $hini->diffInHours($hfin);
+                    for ($i=0; $i <= $diff; $i++) {
+
+                        $horarios['id'] = $horario->id;
+                        $horarios['hini'] = Carbon::createFromTimeString($horario->hini)->addHour($i)->format('g:i a');
+                        $horarios['hfin'] = Carbon::createFromTimeString($horario->hini)->addHour($i+$duracion)->format('g:i a');
+                        $horarios['libre'] = $horario->libre;
+                        // dd($horarios);
+                        array_push($horarioLibres, $horarios);
                     }
+                    // dd($horarioLibres);
+                    // $horario->intervalos = $intervalos;
+                    return response()->json(['horarios' => $horarioLibres]);
+
+                }else{
+                    $horario->hini = Carbon::createFromTimeString($horario->hini)->format('g:i a');
+                    $horario->hfin = Carbon::createFromTimeString($horario->hfin)->format('g:i a');
+                }
+
+
+            }
+
                     return response()->json(['horarios' => $ho]);
 
    }
@@ -91,11 +121,9 @@ class ReservacionesController extends Controller
 
         $sa = DB::table('salida_llegadahorarios as sh')
                     ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
-                    ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), " | ", sal.nombre) as salida'))
+                    ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), IF(LENGTH(sh.hora)>0, " | ", ""), sal.nombre) as salida'))
                     ->where([['sal.active','=', '1'], ['sh.actividadeshorario_id', '=',  $horarioId], ['sh.salida', '=', '1']])
                     ->get();
-
-
         return $sa;
 
    }
@@ -105,7 +133,7 @@ class ReservacionesController extends Controller
 
         $ll = DB::table('salida_llegadahorarios as sh')
         ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
-        ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora,""), " | ", sal.nombre) as llegada'))
+        ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), IF(LENGTH(sh.hora)>0, " | ", ""), sal.nombre) as llegada'))
         ->where([['sal.active','=', '1'], ['sh.actividadeshorario_id', '=', $horarioId], ['sh.salida', '=', '0']])
         ->get();
 
@@ -114,11 +142,24 @@ class ReservacionesController extends Controller
 
    public function getSalidasLlegadas(Request $request)
    {
-
         $salidas = $this->getSalidas($request->horarioId);
         $llegadas = $this->getLlegadas($request->horarioId);
+        $ocupacion = $this->getOcupacion($request->horarioId);
+        return response(['llegadas'=> $llegadas, 'salidas' => $salidas, 'ocupacion' => $ocupacion]);
+   }
 
-        return response(['llegadas'=> $llegadas, 'salidas' => $salidas]);
+   public function getOcupacion($horarioId)
+   {
+
+    $od = DB::table('disponibilidad as dis')
+    ->join('unidades as uni', 'dis.unidad_id', '=', 'uni.id')
+    ->select(DB::raw('IFNULL(sum(dis.ocupacion),0) as ocupacion, IFNULL(sum(uni.capacidad),0) as disponibilidad'))
+    ->where([['uni.active', '=', '1'], ['dis.horario_id', '=', $horarioId]])
+    ->first();
+
+    return $od;
+
+
    }
 
 }
