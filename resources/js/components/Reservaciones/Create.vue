@@ -41,12 +41,19 @@
                                 </div>
                             </div>
                             <!-- horarios -->
-                            <div class="col-xs-4 col-md-4">
+                            <div class="col-xs-4 col-md-4" >
                                 <label for="fecha" >Horarios</label>
-                                <select name="horarios" id="horarios" class="form-control" v-model="horario_id" @change="getSalidasLlegadas()">
+                                <select name="horarios" id="horarios" class="form-control" v-model="horario_id" @change="getSalidasLlegadas()" >
                                     <option value="false" disabled selected> Seleccione un Horario</option>
-                                    <option v-for="horario in horarios" :key="horario.id" v-text="horario.hini+' | '+horario.hfin" :value="horario.id"></option>
+                                    <option  v-for="(horario, index) in horarios"
+                                             :key="index"
+                                             v-text=" horario.hini+' | ' +horario.hfin"
+                                             :value="horario.id"
+                                            >
+
+                                    </option>
                                 </select>
+
                             </div>
                         </div>
                            <!-- segunda fila -->
@@ -64,9 +71,12 @@
                                 </select>
                             </div>
                                 <!-- ucupación -->
-                                <div class="col-md-4 col-xs-12">
-                                    <label for="Ocupación"></label>
-                                    <input type="text" name="ocupacion" id="ocupacion" readonly v-model="ocupacion">
+                                <div class="col-md-4 col-xs-12 text-center">
+                                    <label for="Ocupación">Ocupación</label>
+                                    <p name="ocupacion" id="ocupacion" v-if="ocupacion">
+                                        <span v-text="ocupacion.ocupacion +' O /'" class="ocupacion_span"></span>
+                                        <span v-text="ocupacion.disponibilidad +' D'" class=disponibilidad_span></span>
+                                    </p>
                                 </div>
                                   <!-- Llegadas ubicación  -->
                                 <div class="col-xs-4 col-md-4">
@@ -100,6 +110,8 @@ export default {
             horarios:[],
             salidas:[],
             llegadas:[],
+            intervalos:[],
+
             ocupacion:'',
             focus: moment().format('Y-M-D'),
             date: new Date().toISOString().substr(0, 10),
@@ -147,7 +159,6 @@ export default {
              }
          },
          async getHorarios(idactividad, dia){
-
              await axios.get('/reservaciones/gethorarios', {
                  params:{
                      idactividad:idactividad,
@@ -156,6 +167,9 @@ export default {
              })
              .then(res => {
                 this.horarios = res.data.horarios;
+                 if(res.data.horarios[0].libre){
+                     this.intervalos = res.data.horarios[0].intervalos
+                 }
              })
              .catch(error =>console.log(error))
          },
@@ -168,9 +182,9 @@ export default {
              .then(res =>  {
                 this.salidas = res.data.salidas
                 this.llegadas = res.data.llegadas
+                this.ocupacion = res.data.ocupacion
              })
              .catch(error => console.log(error))
-
         }
     },
     created(){
@@ -181,5 +195,10 @@ export default {
 </script>
 
 <style>
-
+.ocupacion_span {
+    color: #3490dc;
+}
+.disponibilidad_span{
+   color: #38c172;
+}
 </style>
