@@ -7,10 +7,10 @@ function asignacionesInfo(e) {
 			return response.json();
 		})
 		.then(responseJson => {
-		
+
 			$('#tbody').html('');
 			if(responseJson.forms){
-				let i=0, 
+				let i=0,
 				length =responseJson.forms.length;
 				let tbody = document.getElementById('tbody');
 				for (i; i < length; i++) {
@@ -19,10 +19,10 @@ function asignacionesInfo(e) {
 				let salida_llegada_id = document.querySelectorAll('[name=salida_llegada_id]')
 				salida_llegada_id.forEach((salida)=>{
 					ubicaciones.push(salida.value)
-				
+
 				})
-			
-					console.log(ubicaciones);
+
+					
 				const UNIDAD_INFO = responseJson.unidadInfo;
 				$("#unidad_id").val("");
 				$("#unidad_id").val(e.id);
@@ -42,7 +42,7 @@ function asignacionesInfo(e) {
 						option.innerText = ACTIVIDADES[i].nombre;
 						option.setAttribute("value", ACTIVIDADES[i].id);
 						option.setAttribute("data-clave", ACTIVIDADES[i].clave);
-		
+
 						$("#actividades").append(option);
 					}
 			}else{
@@ -65,7 +65,7 @@ function asignacionesInfo(e) {
 						option.innerText = ACTIVIDADES[i].nombre;
 						option.setAttribute("value", ACTIVIDADES[i].id);
 						option.setAttribute("data-clave", ACTIVIDADES[i].clave);
-		
+
 						$("#actividades").append(option);
 					}
 			}
@@ -144,11 +144,11 @@ function asignacionesInfo(e) {
 		$("#loading").removeClass("d-none");
 		evaluarSelectsSinOpcionSeleccionada();
 
-	
+
 		let idUbucacion = $("#slu").val();
 		console.log(idUbucacion);
 		if (
-			
+
 			!ubicaciones.includes(idUbucacion) &&
 			$("#slu>option:selected").val() != undefined &&
 			$("#slu>option:selected").val() != "undefined" &&
@@ -158,7 +158,7 @@ function asignacionesInfo(e) {
 			idUbucacion != 'null'
 
 		) {
-	
+
 			$("#actividades").val(); /*actividad_id */
 			$("#horario").val(); /*actividad_horario_id */
 			$("#unidad_id").val(); /* actividad_horario_id */
@@ -194,7 +194,7 @@ function asignacionesInfo(e) {
                 <td><span class="btn btn-danger">-</span></td>
                 <input type="hidden" value="${idUbucacion}">
             </tr>
-               
+
             <tr name="dataAsignacion">
                 <input name ="actividad_id" type="hidden" value ="${$(
 									"#actividades"
@@ -215,9 +215,9 @@ function asignacionesInfo(e) {
 		if(idUbucacion!=null &&idUbucacion!= 'null'){
 			ubicaciones.push(idUbucacion);
 			console.log(ubicaciones);
-			
+
 		}
-			
+
 			$("#slu>option:selected").prop("disabled", true);
 		}else{
 
@@ -243,10 +243,10 @@ function asignacionesInfo(e) {
 					const  IdAsignacion = e.target.parentNode.parentElement.nextElementSibling.children[5].value;
 					e.target.parentNode.parentElement.nextElementSibling.remove();
 					e.target.parentElement.parentElement.remove();
-					
-						
+
+
 					fetch(`/asignaciones/${IdAsignacion}`,{
-						method: 'DELETE', 
+						method: 'DELETE',
 						headers: {
 						  "Content-Type": "application/json",
 						  "Accept": "application/json",
@@ -264,12 +264,12 @@ function asignacionesInfo(e) {
 					swal("Asignación No Eliminada");
 				}
 			})
-		
 
-				
-	
 
-			
+
+
+
+
 		}
 	});
 }
@@ -280,13 +280,13 @@ $(".modal").on("hidden.bs.modal", function() {
 	find("input").trigger("reset");
 });
 
-/* 
+/*
     actividad_id @INT
     actividad_horario_id @INT
     unidad_id @INT
     salida @BOOLEAN
     salida_llegada_id INT
-  
+
 */
 $("#guardarAsignacion").on("click", function() {
 	let dataContainer = [],
@@ -366,5 +366,5 @@ const evaluarSelectsSinOpcionSeleccionada =()=>{
 		slu.value == '' || slu.value == 'undefined' ?
 		slu.parentElement.children[0].innerHTML = '<span class="text-danger" style="font-size: 12px;" >Seleccione una Salida | Llegada | Ubicación </span>':
 		slu.parentElement.children[0].innerHTML = "Salida | Llegada | Ubicación";
-		
+
 }

@@ -24,6 +24,9 @@ Route::group(['prefix' => 'reservaciones'], function () {
     Route::get('/gethorarios', 'ReservacionesController@getHorarios')->middleware(['auth']);
     Route::get('/getsalidas-llegadas', 'ReservacionesController@getSalidasLlegadas')->middleware(['auth']);
     Route::get('/getocupacion', 'ReservacionesController@getOcupacion')->middleware(['auth']);
+    Route::get('/getpersonas', 'ReservacionesController@getPersonas')->middleware('auth');
+    Route::get('/fillOcupacionSelect', 'ReservacionesController@fillOcupacionSelect')->middleware('auth');
+    Route::get('/getbalanceprecio', 'ReservacionesController@getBalancePrecio')->middleware('auth');
 });
 
 

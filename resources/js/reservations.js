@@ -26,6 +26,8 @@ window.addEventListener('click', function(e){
   });
   import Vue from 'vue';
   import Vuex from 'vuex';
+
+
   window.Vue = require('vue');
   import Vuetify from 'vuetify';
   Vue.use(Vuex);

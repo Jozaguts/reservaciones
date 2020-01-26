@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\ActividadesHorario;
 use App\Actividades;
 use App\TipoActividades;
+use App\Personas;
 use Carbon\Carbon;
 
 
@@ -52,6 +53,7 @@ class ReservacionesController extends Controller
                         ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=','1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
                         ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color')
                         ->get();
+
             $horarios[]=$horario;
         }
     return response()->json(['horarios' =>array_flatten($horarios)]);
@@ -97,11 +99,10 @@ class ReservacionesController extends Controller
                         $horarios['hini'] = Carbon::createFromTimeString($horario->hini)->addHour($i)->format('g:i a');
                         $horarios['hfin'] = Carbon::createFromTimeString($horario->hini)->addHour($i+$duracion)->format('g:i a');
                         $horarios['libre'] = $horario->libre;
-                        // dd($horarios);
+
                         array_push($horarioLibres, $horarios);
                     }
-                    // dd($horarioLibres);
-                    // $horario->intervalos = $intervalos;
+
                     return response()->json(['horarios' => $horarioLibres]);
 
                 }else{
@@ -159,7 +160,50 @@ class ReservacionesController extends Controller
 
     return $od;
 
+   }
+   public function getPersonas(Request $request)
+   {
+       if($request->ajax()) {
+            $personas = Personas::all();
+            return response(['personas' => $personas]);
+        }else{
+            return response(['response'=> 'petición no valida']);
+        }
+   }
 
+   public function fillOcupacionSelect(Request $request)
+   {
+
+       $bap=DB::table('actividades as ac')
+       ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
+       ->select('acp.id', DB::raw('IF(ac.balance, "Sencillo", "") as Sencillo'), DB::raw('IF(acp.doblebalanc, "Doble", "") as doble'),  DB::raw('IF(acp.triplebalanc, "Triple", "") as triple'))
+       ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
+       ->first();
+        unset($bap->id);
+        if(empty($bap->Sencillo)){
+            unset($bap->Sencillo);
+        }else if(empty($bap->doble)){
+            unset($bap->doble);
+        }else if(empty($bap->triple)){
+            unset($bap->triple);
+        }
+
+        return response(['ocupacion'=> $bap]);
+
+   }
+
+   public function getBalancePrecio(Request $request)
+   {
+
+
+       $ba=DB::table('actividades as ac')
+       ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
+       ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
+       ->where([['ac.id', '=', $request->actividadId], ['acp.id', '=', $request->personaId]])
+       ->first();
+
+
+       return response(['balance' => $ba->balance, 'precio'=> $ba->precio]);
    }
 
 }
