@@ -670,12 +670,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['actividad_id'],
+  props: ['actividad_id', 'personas'],
   data: function data() {
     return {
       cantidad: 0,
       persona_id: '',
-      personas: [],
       inputBalance: '',
       inputPrecio: '',
       selectOcupacion: '',
@@ -685,17 +684,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPersonas: function getPersonas() {
-      var _this = this;
-
-      axios.get('/reservaciones/getpersonas').then(function (res) {
-        return _this.personas = res.data.personas;
-      }).catch(function (error) {
-        return console.log(error);
-      });
-    },
     fillOcupacionSelect: function fillOcupacionSelect(actividadId, personaId) {
-      var _this2 = this;
+      var _this = this;
 
       if (actividadId != "" && personaId != "") {
         try {
@@ -710,7 +700,7 @@ __webpack_require__.r(__webpack_exports__);
             personaId: personaId
           }
         }).then(function (res) {
-          _this2.ocupaciones = res.data.ocupacion;
+          _this.ocupaciones = res.data.ocupacion;
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
@@ -726,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBalancePrecio: function getBalancePrecio(actividadId, personaId, ocupacion) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (actividadId != "" && personaId != "" && ocupacion != "") {
         try {
@@ -742,8 +732,8 @@ __webpack_require__.r(__webpack_exports__);
             ocupacion: ocupacion
           }
         }).then(function (res) {
-          _this3.inputBalance = _this3.currency(res.data.balance);
-          _this3.inputPrecio = _this3.currency(res.data.precio);
+          _this2.inputBalance = _this2.currency(res.data.balance);
+          _this2.inputPrecio = _this2.currency(res.data.precio);
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
@@ -762,9 +752,6 @@ __webpack_require__.r(__webpack_exports__);
         minimumFractionDigits: 2
       }).format(value);
     }
-  },
-  created: function created() {
-    this.getPersonas();
   }
 });
 
@@ -974,7 +961,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       horarios: [],
       salidas: [],
       llegadas: [],
-      // intervalos:[],
+      personas: [],
       ocupacion: '',
       focus: moment().format('Y-M-D'),
       date: new Date().toISOString().substr(0, 10),
@@ -1145,10 +1132,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).catch(function (error) {
         return console.log(error);
       });
+    },
+    getPersonas: function getPersonas() {
+      var _this4 = this;
+
+      axios.get('/reservaciones/getpersonas').then(function (res) {
+        return _this4.personas = res.data.personas;
+      }).catch(function (error) {
+        return console.log(error);
+      });
     }
   },
   created: function created() {
     this.getActividades();
+    this.getPersonas();
   }
 });
 
@@ -1223,7 +1220,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.loading{\n    position: absolute;\n    width: 70px;\n    height: 20px;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    top:0;\n    bottom: 0;\n    left:0;\n    right: 0;\n    margin: 10px auto;\n}\n.dot{\n    display: inline-block;\n    width: 20px;\n    height: 20px;\n    border-radius: 10px;\n    background: skyblue;\n    -webkit-animation-name: scale;\n            animation-name: scale;\n    -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n    -webkit-animation-iteration-count: infinite;\n            animation-iteration-count: infinite;\n    -webkit-animation-timing-function: linear;\n            animation-timing-function: linear;\n}\n@-webkit-keyframes scale{\n0%{\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n50%{\n        -webkit-transform: scale(0.6);\n                transform: scale(0.6);\n}\n100%{\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n}\n@keyframes scale{\n0%{\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n50%{\n        -webkit-transform: scale(0.6);\n                transform: scale(0.6);\n}\n100%{\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n}\n.d1{\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.d2{\n    -webkit-animation-delay: .33s;\n            animation-delay: .33s;\n}\n.d3{\n    -webkit-animation-delay: .66s;\n            animation-delay: .66s;\n}\n\n", ""]);
+exports.push([module.i, "\n.loading{\r\n    position: absolute;\r\n    width: 70px;\r\n    height: 20px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    top:0;\r\n    bottom: 0;\r\n    left:0;\r\n    right: 0;\r\n    margin: 10px auto;\n}\n.dot{\r\n    display: inline-block;\r\n    width: 20px;\r\n    height: 20px;\r\n    border-radius: 10px;\r\n    background: skyblue;\r\n    -webkit-animation-name: scale;\r\n            animation-name: scale;\r\n    -webkit-animation-duration: 1s;\r\n            animation-duration: 1s;\r\n    -webkit-animation-iteration-count: infinite;\r\n            animation-iteration-count: infinite;\r\n    -webkit-animation-timing-function: linear;\r\n            animation-timing-function: linear;\n}\n@-webkit-keyframes scale{\n0%{\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\n}\n50%{\r\n        -webkit-transform: scale(0.6);\r\n                transform: scale(0.6);\n}\n100%{\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\n}\n}\n@keyframes scale{\n0%{\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\n}\n50%{\r\n        -webkit-transform: scale(0.6);\r\n                transform: scale(0.6);\n}\n100%{\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\n}\n}\n.d1{\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.d2{\r\n    -webkit-animation-delay: .33s;\r\n            animation-delay: .33s;\n}\n.d3{\r\n    -webkit-animation-delay: .66s;\r\n            animation-delay: .66s;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -4385,23 +4382,38 @@ var render = function() {
                       "tbody",
                       [
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         })
                       ],
                       1

@@ -45,12 +45,11 @@
 <script>
 import store from '../store'
 export default {
-    props:['actividad_id'],
+    props:['actividad_id','personas'],
 data(){
     return{
         cantidad: 0,
         persona_id:'',
-        personas:[],
         inputBalance:'',
         inputPrecio:'',
         selectOcupacion:'',
@@ -60,10 +59,6 @@ data(){
     }
 },
 methods:{
-     getPersonas(){
-            axios.get('/reservaciones/getpersonas')
-            .then((res => this.personas = res.data.personas)).catch(error => console.log(error))
-        },
         fillOcupacionSelect(actividadId,personaId){
             if(actividadId !="" && personaId != ""){
                  try {
@@ -126,9 +121,7 @@ methods:{
                 }).format(value)
         },
 },
-created(){
-     this.getPersonas()
-}
+
 }
 </script>
 
