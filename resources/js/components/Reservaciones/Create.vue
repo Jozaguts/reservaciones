@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Crear Reservación</h5>
+                    <h5 class="modal-title" id="my-modal-title">Crear Reservación</h5> <Loader :status="loaderStatus"/>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,6 +93,43 @@
 
                             </div>
 
+                            <!-- 3er row -->
+
+                            <div class="row">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Cantidad
+                                            </th>
+                                            <th>
+                                                personas
+                                            </th>
+                                            <th>
+                                                ocupación
+                                            </th>
+                                            <th>
+                                                balance
+                                            </th>
+                                            <th>
+                                                precio
+                                            </th>
+                                            <th>
+                                                totales
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <DetallerReservacion :actividad_id="actividad_id"/>
+                                        <DetallerReservacion :actividad_id="actividad_id"/>
+                                        <DetallerReservacion :actividad_id="actividad_id"/>
+                                        <DetallerReservacion :actividad_id="actividad_id"/>
+                                        <DetallerReservacion :actividad_id="actividad_id"/>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -100,8 +137,20 @@
     </div>
 </template>
 <script>
+import DetallerReservacion from "../DetalleReservacionComponent.vue";
+import Loader from '../LoaderComponent.vue'
+import store from '../../store/index.js'
 export default {
 
+    components:{
+        DetallerReservacion,
+        Loader
+    },
+      computed:{
+       loaderStatus(){
+           return store.state.showLoader
+       }
+    },
     data(){
         return{
             actividad_id:'',
@@ -110,18 +159,29 @@ export default {
             horarios:[],
             salidas:[],
             llegadas:[],
-            intervalos:[],
-
+            // intervalos:[],
             ocupacion:'',
             focus: moment().format('Y-M-D'),
             date: new Date().toISOString().substr(0, 10),
-            picker:false
+            picker:false,
         }
     },
     methods:{
        async getActividades(){
+            try {
+                 store.commit('showLoader')
+             } catch (error) {
+                 console.log(error)
+             }
             await axios.get('/reservaciones/getActividades')
-            .then(res => this.actividades = res.data.actividades )
+            .then(res => {
+                this.actividades = res.data.actividades
+                 try {
+                 store.commit('showLoader')
+             } catch (error) {
+                 console.log(error)
+             }
+            })
             .catch(error => console.log(error))
 
          },
@@ -159,6 +219,11 @@ export default {
              }
          },
          async getHorarios(idactividad, dia){
+             try {
+                 store.commit('showLoader')
+             } catch (error) {
+                 console.log(error)
+             }
              await axios.get('/reservaciones/gethorarios', {
                  params:{
                      idactividad:idactividad,
@@ -166,14 +231,27 @@ export default {
                  }
              })
              .then(res => {
-                this.horarios = res.data.horarios;
-                 if(res.data.horarios[0].libre){
-                     this.intervalos = res.data.horarios[0].intervalos
-                 }
+                 this.horarios = res.data.horarios;
+                 try {
+                         store.commit('showLoader')
+                     } catch (error) {
+                         console.log(error);
+                     }
+                //  if(res.data.horarios[0].libre){ //activdades libres
+                //     //  this.intervalos = res.data.horarios[0].intervalos
+
+                //  }else if(!res.data.horarios[0].libre){ /* actividades mutiples */
+
+                //  }
              })
              .catch(error =>console.log(error))
          },
          getSalidasLlegadas(){
+                try {
+                    store.commit('showLoader')
+                } catch (error) {
+                    console.log(error);
+                }
              axios.get('/reservaciones/getsalidas-llegadas',{
                  params:{
                      horarioId:this.horario_id
@@ -183,15 +261,23 @@ export default {
                 this.salidas = res.data.salidas
                 this.llegadas = res.data.llegadas
                 this.ocupacion = res.data.ocupacion
+                 try {
+                    store.commit('showLoader')
+                } catch (error) {
+                    console.log(error);
+                }
+
              })
              .catch(error => console.log(error))
+        },
+        },
+        created(){
+            this.getActividades()
+
         }
-    },
-    created(){
-        this.getActividades()
-    }
 
 }
+
 </script>
 
 <style>
@@ -200,5 +286,11 @@ export default {
 }
 .disponibilidad_span{
    color: #38c172;
+}
+th{
+    text-transform: capitalize;
+}
+.input-cantidad{
+    max-width: 60px;
 }
 </style>
