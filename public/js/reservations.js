@@ -670,12 +670,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['actividad_id'],
+  props: ['actividad_id', 'personas'],
   data: function data() {
     return {
       cantidad: 0,
       persona_id: '',
-      personas: [],
       inputBalance: '',
       inputPrecio: '',
       selectOcupacion: '',
@@ -685,17 +684,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPersonas: function getPersonas() {
-      var _this = this;
-
-      axios.get('/reservaciones/getpersonas').then(function (res) {
-        return _this.personas = res.data.personas;
-      }).catch(function (error) {
-        return console.log(error);
-      });
-    },
     fillOcupacionSelect: function fillOcupacionSelect(actividadId, personaId) {
-      var _this2 = this;
+      var _this = this;
 
       if (actividadId != "" && personaId != "") {
         try {
@@ -710,7 +700,7 @@ __webpack_require__.r(__webpack_exports__);
             personaId: personaId
           }
         }).then(function (res) {
-          _this2.ocupaciones = res.data.ocupacion;
+          _this.ocupaciones = res.data.ocupacion;
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
@@ -726,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBalancePrecio: function getBalancePrecio(actividadId, personaId, ocupacion) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (actividadId != "" && personaId != "" && ocupacion != "") {
         try {
@@ -742,8 +732,8 @@ __webpack_require__.r(__webpack_exports__);
             ocupacion: ocupacion
           }
         }).then(function (res) {
-          _this3.inputBalance = _this3.currency(res.data.balance);
-          _this3.inputPrecio = _this3.currency(res.data.precio);
+          _this2.inputBalance = _this2.currency(res.data.balance);
+          _this2.inputPrecio = _this2.currency(res.data.precio);
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
@@ -762,9 +752,6 @@ __webpack_require__.r(__webpack_exports__);
         minimumFractionDigits: 2
       }).format(value);
     }
-  },
-  created: function created() {
-    this.getPersonas();
   }
 });
 
@@ -974,7 +961,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       horarios: [],
       salidas: [],
       llegadas: [],
-      // intervalos:[],
+      personas: [],
       ocupacion: '',
       focus: moment().format('Y-M-D'),
       date: new Date().toISOString().substr(0, 10),
@@ -1145,10 +1132,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).catch(function (error) {
         return console.log(error);
       });
+    },
+    getPersonas: function getPersonas() {
+      var _this4 = this;
+
+      axios.get('/reservaciones/getpersonas').then(function (res) {
+        return _this4.personas = res.data.personas;
+      }).catch(function (error) {
+        return console.log(error);
+      });
     }
   },
   created: function created() {
     this.getActividades();
+    this.getPersonas();
   }
 });
 
@@ -4385,23 +4382,38 @@ var render = function() {
                       "tbody",
                       [
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         }),
                         _vm._v(" "),
                         _c("DetallerReservacion", {
-                          attrs: { actividad_id: _vm.actividad_id }
+                          attrs: {
+                            actividad_id: _vm.actividad_id,
+                            personas: _vm.personas
+                          }
                         })
                       ],
                       1

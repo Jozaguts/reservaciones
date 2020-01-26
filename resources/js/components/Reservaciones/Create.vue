@@ -120,11 +120,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <DetallerReservacion :actividad_id="actividad_id"/>
-                                        <DetallerReservacion :actividad_id="actividad_id"/>
-                                        <DetallerReservacion :actividad_id="actividad_id"/>
-                                        <DetallerReservacion :actividad_id="actividad_id"/>
-                                        <DetallerReservacion :actividad_id="actividad_id"/>
+                                        <DetallerReservacion :actividad_id="actividad_id" :personas="personas"/>
+                                        <DetallerReservacion :actividad_id="actividad_id" :personas="personas"/>
+                                        <DetallerReservacion :actividad_id="actividad_id" :personas="personas"/>
+                                        <DetallerReservacion :actividad_id="actividad_id" :personas="personas"/>
+                                        <DetallerReservacion :actividad_id="actividad_id" :personas="personas"/>
 
                                     </tbody>
                                 </table>
@@ -159,7 +159,7 @@ export default {
             horarios:[],
             salidas:[],
             llegadas:[],
-            // intervalos:[],
+            personas:[],
             ocupacion:'',
             focus: moment().format('Y-M-D'),
             date: new Date().toISOString().substr(0, 10),
@@ -270,10 +270,14 @@ export default {
              })
              .catch(error => console.log(error))
         },
+        getPersonas(){
+            axios.get('/reservaciones/getpersonas')
+            .then((res => this.personas = res.data.personas)).catch(error => console.log(error))
+        },
         },
         created(){
             this.getActividades()
-
+             this.getPersonas()
         }
 
 }
