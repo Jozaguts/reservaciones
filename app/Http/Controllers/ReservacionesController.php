@@ -146,19 +146,26 @@ class ReservacionesController extends Controller
         $salidas = $this->getSalidas($request->horarioId);
         $llegadas = $this->getLlegadas($request->horarioId);
         $ocupacion = $this->getOcupacion($request->horarioId);
+
         return response(['llegadas'=> $llegadas, 'salidas' => $salidas, 'ocupacion' => $ocupacion]);
    }
 
    public function getOcupacion($horarioId)
    {
 
-    $od = DB::table('disponibilidad as dis')
-    ->join('unidades as uni', 'dis.unidad_id', '=', 'uni.id')
-    ->select(DB::raw('IFNULL(sum(dis.ocupacion),0) as ocupacion, IFNULL(sum(uni.capacidad),0) as disponibilidad'))
-    ->where([['uni.active', '=', '1'], ['dis.horario_id', '=', $horarioId]])
-    ->first();
+    $od = DB::table('actividadeshorarios as ah')
+                ->leftJoin('asignaciones as asi', 'ah.id', '=', 'asi.actividad_horario_id')
+                ->leftJoin('unidades as uni', 'asi.unidad_id', '=', 'uni.id')
+                ->leftJoin('disponibilidad as dis', function($join){
+                        $join->on('ah.id', '=', 'dis.horario_id');
+                        $join->on('uni.id', '=', 'dis.unidad_id');
+                    })
+                ->select('ah.id',DB::raw('IFNULL(sum(dis.ocupacion),0) as ocupacion, IFNULL(sum(uni.capacidad),0) as disponibilidad'))
+                ->where([['ah.id', '=', $horarioId]])
+                ->groupBy('ah.id')
+                ->first();
 
-    return $od;
+     return $od;
 
    }
    public function getPersonas(Request $request)
@@ -194,16 +201,12 @@ class ReservacionesController extends Controller
 
    public function getBalancePrecio(Request $request)
    {
-
-
        $ba=DB::table('actividades as ac')
        ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
        ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
-       ->where([['ac.id', '=', $request->actividadId], ['acp.id', '=', $request->personaId]])
+       ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
        ->first();
-
-
-       return response(['balance' => $ba->balance, 'precio'=> $ba->precio]);
+       return response(['balance' => $ba->balance, 'precio'=>$ba->precio]);
    }
 
 }

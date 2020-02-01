@@ -1239,7 +1239,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span{\r\n   color: #38c172;\n}\nth{\r\n    text-transform: capitalize;\n}\n.input-cantidad{\r\n    max-width: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span{\n   color: #38c172;\n}\nth{\n    text-transform: capitalize;\n}\n.input-cantidad{\n    max-width: 60px;\n}\n", ""]);
 
 // exports
 
