@@ -670,7 +670,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['actividad_id', 'personas'],
+  props: ['actividad_id', 'personas', 'detalleId'],
   data: function data() {
     return {
       cantidad: 0,
@@ -679,8 +679,10 @@ __webpack_require__.r(__webpack_exports__);
       inputPrecio: '',
       selectOcupacion: '',
       ocupaciones: [],
-      totalBalance: 0,
-      totalPrecio: 0
+      balanceBase: 0,
+      precioBase: 0,
+      draftPrecio: 0,
+      draftBalance: 0
     };
   },
   methods: {
@@ -734,6 +736,8 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (res) {
           _this2.inputBalance = _this2.currency(res.data.balance);
           _this2.inputPrecio = _this2.currency(res.data.precio);
+          _this2.balanceBase = parseInt(res.data.balance);
+          _this2.precioBase = parseInt(res.data.precio);
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
@@ -751,6 +755,68 @@ __webpack_require__.r(__webpack_exports__);
         currency: 'USD',
         minimumFractionDigits: 2
       }).format(value);
+    },
+    sumaPrecio: function sumaPrecio(cantidad, detalleId) {
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+        type: "sumarPrecio",
+        data: {
+          cantidad: cantidad,
+          detalleId: detalleId
+        }
+      });
+    }
+  },
+  watch: {
+    cantidad: function cantidad() {
+      if (this.cantidad > 0) {
+        /* si no modificó el precio, utilizo precioBase */
+        if (this.inputPrecio.includes("$")) {
+          this.draftPrecio = this.cantidad * this.precioBase;
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+            type: "sumarPrecio",
+            data: {
+              cantidad: this.cantidad * this.precioBase,
+              detalleId: this.detalleId
+            }
+          });
+        } else {
+          /* si modifo el inputPrecio tomo su valor */
+          this.draftPrecio = this.cantidad * this.inputPrecio;
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+            type: "sumarPrecio",
+            data: {
+              cantidad: this.cantidad * this.inputPrecio,
+              detalleId: this.detalleId
+            }
+          });
+        }
+
+        this.draftBalance = this.cantidad * this.balanceBase;
+        _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+          type: "sumarBalance",
+          data: {
+            cantidad: this.cantidad * this.balanceBase,
+            detalleId: this.detalleId
+          }
+        });
+      } else if (this.cantidad === 0) {
+        this.draftPrecio = 0;
+        this.draftBalance = 0;
+        _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+          type: "sumarPrecio",
+          data: {
+            cantidad: this.cantidad * this.precioBase,
+            detalleId: this.detalleId
+          }
+        });
+        _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit({
+          type: "sumarBalance",
+          data: {
+            cantidad: this.cantidad * this.balanceBase,
+            detalleId: this.detalleId
+          }
+        });
+      }
     }
   }
 });
@@ -940,17 +1006,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    DetallerReservacion: _DetalleReservacionComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    DetalleReservacion: _DetalleReservacionComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Loader: _LoaderComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: {
     loaderStatus: function loaderStatus() {
       return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].state.showLoader;
+    },
+    getTotalPrecio: function getTotalPrecio() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalPrecio;
+    },
+    getTotalBalance: function getTotalBalance() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalBalance;
     }
   },
   data: function data() {
@@ -965,7 +1040,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ocupacion: '',
       focus: moment().format('Y-M-D'),
       date: new Date().toISOString().substr(0, 10),
-      picker: false
+      picker: false,
+      totalPrecio: 0,
+      totalBalance: 0
     };
   },
   methods: {
@@ -1083,11 +1160,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
                   } catch (error) {
                     console.log(error);
-                  } //  if(res.data.horarios[0].libre){ //activdades libres
-                  //     //  this.intervalos = res.data.horarios[0].intervalos
-                  //  }else if(!res.data.horarios[0].libre){ /* actividades mutiples */
-                  //  }
-
+                  }
                 }).catch(function (error) {
                   return console.log(error);
                 });
@@ -1201,7 +1274,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,.input-precio, .totales{\r\n    text-align: center;\r\n    max-width: 80px;\n}\r\n", ""]);
+exports.push([module.i, "\n.input-balance,.input-precio, .totales{\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
 
 // exports
 
@@ -1239,7 +1312,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span{\n   color: #38c172;\n}\nth{\n    text-transform: capitalize;\n}\n.input-cantidad{\n    max-width: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span{\n   color: #38c172;\n}\nth{\n    text-transform: capitalize;\n}\n.input-cantidad{\n    max-width: 60px;\n}\n.totalBold, .totalBold::-webkit-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold:-ms-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold::-ms-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold::placeholder{\n    font-weight:900;\n}\n", ""]);
 
 // exports
 
@@ -3974,19 +4047,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.totalBalance,
-            expression: "totalBalance"
+            value: _vm.draftBalance,
+            expression: "draftBalance"
           }
         ],
         staticClass: "form-control totales mx-1",
         attrs: { type: "text", readonly: "" },
-        domProps: { value: _vm.totalBalance },
+        domProps: { value: _vm.draftBalance },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.totalBalance = $event.target.value
+            _vm.draftBalance = $event.target.value
           }
         }
       }),
@@ -3996,19 +4069,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.totalPrecio,
-            expression: "totalPrecio"
+            value: _vm.draftPrecio,
+            expression: "draftPrecio"
           }
         ],
         staticClass: "form-control totales mx-1",
         attrs: { type: "text", readonly: "" },
-        domProps: { value: _vm.totalPrecio },
+        domProps: { value: _vm.draftPrecio },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.totalPrecio = $event.target.value
+            _vm.draftPrecio = $event.target.value
           }
         }
       })
@@ -4381,42 +4454,84 @@ var render = function() {
                     _c(
                       "tbody",
                       [
-                        _c("DetallerReservacion", {
-                          attrs: {
-                            actividad_id: _vm.actividad_id,
-                            personas: _vm.personas
-                          }
+                        _vm._l(5, function(i) {
+                          return _c("DetalleReservacion", {
+                            key: i,
+                            attrs: {
+                              actividad_id: _vm.actividad_id,
+                              personas: _vm.personas,
+                              detalleId: i
+                            }
+                          })
                         }),
                         _vm._v(" "),
-                        _c("DetallerReservacion", {
-                          attrs: {
-                            actividad_id: _vm.actividad_id,
-                            personas: _vm.personas
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("DetallerReservacion", {
-                          attrs: {
-                            actividad_id: _vm.actividad_id,
-                            personas: _vm.personas
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("DetallerReservacion", {
-                          attrs: {
-                            actividad_id: _vm.actividad_id,
-                            personas: _vm.personas
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("DetallerReservacion", {
-                          attrs: {
-                            actividad_id: _vm.actividad_id,
-                            personas: _vm.personas
-                          }
-                        })
+                        _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "text-right",
+                              attrs: { colspan: "6" }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: (_vm.totalBalance =
+                                      _vm.getTotalBalance),
+                                    expression: "totalBalance= getTotalBalance"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-control totales mr-1 totalBold d-inline",
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: (_vm.totalBalance =
+                                    _vm.getTotalBalance)
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.totalBalance = _vm.getTotalBalance =
+                                      $event.target.value
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: (_vm.totalPrecio =
+                                      _vm.getTotalPrecio),
+                                    expression: "totalPrecio = getTotalPrecio"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-control totales totalBold d-inline",
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: (_vm.totalPrecio = _vm.getTotalPrecio)
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.totalPrecio = _vm.getTotalPrecio =
+                                      $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ])
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -55572,11 +55687,55 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     showCreateReservationModal: false,
-    showLoader: false
+    showLoader: false,
+    totalPrecio: 0,
+    totalBalance: 0,
+    totalDetalle1: 0,
+    totalDetalle2: 0,
+    totalDetalle3: 0,
+    totalDetalle4: 0,
+    totalDetalle5: 0,
+    totaBalanceDetalle1: 0,
+    totaBalanceDetalle2: 0,
+    totaBalanceDetalle3: 0,
+    totaBalanceDetalle4: 0,
+    totaBalanceDetalle5: 0
   },
   mutations: {
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
+    },
+    sumarPrecio: function sumarPrecio(state, data) {
+      var id = data.data['detalleId'];
+      state["totalDetalle".concat(id)] = +data.data['cantidad'];
+      this.dispatch('sumarToTalPrecio');
+    },
+    sumarBalance: function sumarBalance(state, data) {
+      var id = data.data['detalleId'];
+      state["totaBalanceDetalle".concat(id)] = +data.data['cantidad'];
+      this.dispatch('sumarTotalBalance');
+    },
+    sumarTotalPrecio: function sumarTotalPrecio(state) {
+      state.totalPrecio = state.totalDetalle1 + state.totalDetalle2 + state.totalDetalle3 + state.totalDetalle4 + state.totalDetalle5;
+    },
+    sumarTotalBalance: function sumarTotalBalance(state) {
+      state.totalBalance = state.totaBalanceDetalle1 + state.totaBalanceDetalle2 + state.totaBalanceDetalle3 + state.totaBalanceDetalle4 + state.totaBalanceDetalle5;
+    }
+  },
+  getters: {
+    getTotalPrecio: function getTotalPrecio(state) {
+      return state.totalPrecio;
+    },
+    getTotalBalance: function getTotalBalance(state) {
+      return state.totalBalance;
+    }
+  },
+  actions: {
+    sumarToTalPrecio: function sumarToTalPrecio(context) {
+      context.commit('sumarTotalPrecio');
+    },
+    sumarTotalBalance: function sumarTotalBalance(context) {
+      context.commit('sumarTotalBalance');
     }
   }
 });
