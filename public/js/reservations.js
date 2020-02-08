@@ -668,16 +668,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['actividad_id', 'personas', 'detalleId'],
+  props: ["actividad_id", "personas", "detalleId"],
   data: function data() {
     return {
       cantidad: 0,
-      persona_id: '',
-      inputBalance: '',
-      inputPrecio: '',
-      selectOcupacion: '',
+      persona_id: "",
+      inputBalance: "",
+      inputPrecio: "",
+      selectOcupacion: "",
       ocupaciones: [],
       balanceBase: 0,
       precioBase: 0,
@@ -691,12 +731,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (actividadId != "" && personaId != "") {
         try {
-          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
         } catch (error) {
           console.log(error);
         }
 
-        axios('/reservaciones/fillOcupacionSelect', {
+        axios("/reservaciones/fillOcupacionSelect", {
           params: {
             actividadId: actividadId,
             personaId: personaId
@@ -705,15 +745,15 @@ __webpack_require__.r(__webpack_exports__);
           _this.ocupaciones = res.data.ocupacion;
 
           try {
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
           } catch (error) {
             console.log(error);
           }
         });
       } else {
         swal({
-          icon: 'info',
-          title: 'Seleccione una actividad y/o tipo de ocupacion'
+          icon: "info",
+          title: "Seleccione una actividad y/o tipo de ocupacion"
         });
       }
     },
@@ -722,12 +762,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (actividadId != "" && personaId != "" && ocupacion != "") {
         try {
-          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
         } catch (error) {
           console.log(error);
         }
 
-        axios('/reservaciones/getbalanceprecio', {
+        axios("/reservaciones/getbalanceprecio", {
           params: {
             actividadId: actividadId,
             personaId: personaId,
@@ -740,7 +780,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.precioBase = parseInt(res.data.precio);
 
           try {
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('showLoader');
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
           } catch (error) {
             console.log(error);
           }
@@ -750,9 +790,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     currency: function currency(value) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
         minimumFractionDigits: 2
       }).format(value);
     },
@@ -1009,6 +1049,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1022,23 +1134,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].state.showLoader;
     },
     getTotalPrecio: function getTotalPrecio() {
-      return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalPrecio;
+      return this.totalPrecio = _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalPrecio;
     },
     getTotalBalance: function getTotalBalance() {
-      return _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalBalance;
+      return this.totalBalance = _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].getters.getTotalBalance;
     }
   },
   data: function data() {
     return {
-      actividad_id: '',
-      horario_id: '',
+      actividad_id: "",
+      horario_id: "",
       actividades: [],
       horarios: [],
       salidas: [],
       llegadas: [],
       personas: [],
-      ocupacion: '',
-      focus: moment().format('Y-M-D'),
+      ocupacion: "",
+      focus: moment().format("Y-M-D"),
       date: new Date().toISOString().substr(0, 10),
       picker: false,
       totalPrecio: 0,
@@ -1057,17 +1169,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 try {
-                  _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+                  _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
                 } catch (error) {
                   console.log(error);
                 }
 
                 _context.next = 3;
-                return axios.get('/reservaciones/getActividades').then(function (res) {
+                return axios.get("/reservaciones/getActividades").then(function (res) {
                   _this.actividades = res.data.actividades;
 
                   try {
-                    _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+                    _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
                   } catch (error) {
                     console.log(error);
                   }
@@ -1093,35 +1205,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.picker = !this.picker;
 
       if (this.date != "" && this.actividad_id != "") {
-        var dia = moment(this.date).get('day');
+        var dia = moment(this.date).get("day");
 
         switch (dia) {
           case 0:
-            dia = 'd';
+            dia = "d";
             break;
 
           case 1:
-            dia = 'l';
+            dia = "l";
             break;
 
           case 2:
-            dia = 'm';
+            dia = "m";
             break;
 
           case 3:
-            dia = 'x';
+            dia = "x";
             break;
 
           case 4:
-            dia = 'j';
+            dia = "j";
             break;
 
           case 5:
-            dia = 'v';
+            dia = "v";
             break;
 
           case 6:
-            dia = 's';
+            dia = "s";
             break;
 
           default:
@@ -1142,13 +1254,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 try {
-                  _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+                  _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
                 } catch (error) {
                   console.log(error);
                 }
 
                 _context2.next = 3;
-                return axios.get('/reservaciones/gethorarios', {
+                return axios.get("/reservaciones/gethorarios", {
                   params: {
                     idactividad: idactividad,
                     dia: dia
@@ -1157,7 +1269,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.horarios = res.data.horarios;
 
                   try {
-                    _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+                    _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
                   } catch (error) {
                     console.log(error);
                   }
@@ -1183,12 +1295,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       try {
-        _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+        _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
       } catch (error) {
         console.log(error);
       }
 
-      axios.get('/reservaciones/getsalidas-llegadas', {
+      axios.get("/reservaciones/getsalidas-llegadas", {
         params: {
           horarioId: this.horario_id
         }
@@ -1198,7 +1310,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.ocupacion = res.data.ocupacion;
 
         try {
-          _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit('showLoader');
+          _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("showLoader");
         } catch (error) {
           console.log(error);
         }
@@ -1209,7 +1321,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getPersonas: function getPersonas() {
       var _this4 = this;
 
-      axios.get('/reservaciones/getpersonas').then(function (res) {
+      axios.get("/reservaciones/getpersonas").then(function (res) {
         return _this4.personas = res.data.personas;
       }).catch(function (error) {
         return console.log(error);
@@ -1274,7 +1386,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,.input-precio, .totales{\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
+exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
 
 // exports
 
@@ -1312,7 +1424,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span{\n   color: #38c172;\n}\nth{\n    text-transform: capitalize;\n}\n.input-cantidad{\n    max-width: 60px;\n}\n.totalBold, .totalBold::-webkit-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold:-ms-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold::-ms-input-placeholder{\n    font-weight:900;\n}\n.totalBold, .totalBold::placeholder{\n    font-weight:900;\n}\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span {\n    color: #38c172;\n}\nth {\n    text-transform: capitalize;\n}\n.input-cantidad {\n    max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n    font-weight: 900;\n}\n", ""]);
 
 // exports
 
@@ -3857,7 +3969,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("-")]
+        [_vm._v("\n            -\n        ")]
       ),
       _vm._v(" "),
       _c("input", {
@@ -4170,7 +4282,11 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "my-modal-title" }
                   },
-                  [_vm._v("Crear Reservación")]
+                  [
+                    _vm._v(
+                      "\n                    Crear Reservación\n                "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c("Loader", { attrs: { status: _vm.loaderStatus } }),
@@ -4345,7 +4461,11 @@ var render = function() {
                               selected: ""
                             }
                           },
-                          [_vm._v(" Seleccione un Horario")]
+                          [
+                            _vm._v(
+                              "\n                                    Seleccione un Horario"
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _vm._l(_vm.horarios, function(horario, index) {
@@ -4478,25 +4598,20 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: (_vm.totalBalance =
-                                      _vm.getTotalBalance),
-                                    expression: "totalBalance= getTotalBalance"
+                                    value: _vm.getTotalBalance,
+                                    expression: "getTotalBalance"
                                   }
                                 ],
                                 staticClass:
                                   "form-control totales mr-1 totalBold d-inline",
                                 attrs: { type: "text", readonly: "" },
-                                domProps: {
-                                  value: (_vm.totalBalance =
-                                    _vm.getTotalBalance)
-                                },
+                                domProps: { value: _vm.getTotalBalance },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
-                                    _vm.totalBalance = _vm.getTotalBalance =
-                                      $event.target.value
+                                    _vm.getTotalBalance = $event.target.value
                                   }
                                 }
                               }),
@@ -4506,24 +4621,20 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: (_vm.totalPrecio =
-                                      _vm.getTotalPrecio),
-                                    expression: "totalPrecio = getTotalPrecio"
+                                    value: _vm.getTotalPrecio,
+                                    expression: "getTotalPrecio"
                                   }
                                 ],
                                 staticClass:
                                   "form-control totales totalBold d-inline",
                                 attrs: { type: "text", readonly: "" },
-                                domProps: {
-                                  value: (_vm.totalPrecio = _vm.getTotalPrecio)
-                                },
+                                domProps: { value: _vm.getTotalPrecio },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
-                                    _vm.totalPrecio = _vm.getTotalPrecio =
-                                      $event.target.value
+                                    _vm.getTotalPrecio = $event.target.value
                                   }
                                 }
                               })
@@ -4565,37 +4676,37 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [
           _vm._v(
-            "\n                                            Cantidad\n                                        "
+            "\n                                        Cantidad\n                                    "
           )
         ]),
         _vm._v(" "),
         _c("th", [
           _vm._v(
-            "\n                                            personas\n                                        "
+            "\n                                        personas\n                                    "
           )
         ]),
         _vm._v(" "),
         _c("th", [
           _vm._v(
-            "\n                                            ocupación\n                                        "
+            "\n                                        ocupación\n                                    "
           )
         ]),
         _vm._v(" "),
         _c("th", [
           _vm._v(
-            "\n                                            balance\n                                        "
+            "\n                                        balance\n                                    "
           )
         ]),
         _vm._v(" "),
         _c("th", [
           _vm._v(
-            "\n                                            precio\n                                        "
+            "\n                                        precio\n                                    "
           )
         ]),
         _vm._v(" "),
         _c("th", [
           _vm._v(
-            "\n                                            totales\n                                        "
+            "\n                                        totales\n                                    "
           )
         ])
       ])
@@ -55598,7 +55709,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Reservaciones/Create.vue?vue&type=template&id=321945ab& ***!
   \*****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
