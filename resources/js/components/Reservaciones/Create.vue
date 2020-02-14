@@ -7,7 +7,7 @@
         aria-labelledby="my-modal-title"
         aria-hidden="true"
     >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="my-modal-title">
@@ -23,189 +23,265 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-4 col-md-4">
-                                <div class="form-group">
-                                    <label for="my-input">Actividad</label>
-                                    <select
-                                        name="actividad"
-                                        id="actividad"
-                                        class="form-control"
-                                        v-model="actividad_id"
+                    <div class="container"> <!-- inicio del container del model -->
+                        <v-stepper v-model="e6" vertical>
+                            <!-- steper header -->
+                             <v-stepper-header>
+                                <template v-for="n in steps">
+                                    <v-stepper-step
+                                    :key="`${n}-step`"
+                                    :complete="e6 > n"
+                                    :step="n"
+                                    editable
                                     >
-                                        <option value="" disabled
-                                            >Seleccione una actividad</option
-                                        >
-                                        <option
-                                            v-for="actividad in actividades"
-                                            :value="actividad.id"
-                                            v-text="actividad.nombre"
-                                            :key="actividad.id"
-                                        ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-md-4">
-                                <div class="container p-0">
-                                    <div class="row p-0">
-                                        <div class="col-sx-12 col-md-12 p-0">
-                                            <label for="fecha">Fecha</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="date"
-                                                readonly
-                                                @click="picker = !picker"
-                                            />
-                                            <template class="fade">
-                                                <v-date-picker
-                                                    v-model="date"
-                                                    :full-width="true"
-                                                    v-if="picker"
-                                                    @click:date="clickDate"
-                                                    locale="es"
+                                    Paso {{ n }}
+                                    </v-stepper-step>
+
+                                    <v-divider
+                                    v-if="n !== steps"
+                                    :key="n"
+                                    ></v-divider>
+                                </template>
+                                </v-stepper-header>
+                            <!-- steper header -->
+                                <v-stepper-content step="1">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-md-4">
+                                            <div class="form-group">
+                                                <label for="my-input">Actividad</label>
+                                                <select
+                                                    name="actividad"
+                                                    id="actividad"
+                                                    class="form-control"
+                                                    v-model="actividad_id"
                                                 >
-                                                </v-date-picker>
-                                            </template>
+                                                    <option value="" disabled
+                                                        >Seleccione una actividad</option
+                                                    >
+                                                    <option
+                                                        v-for="actividad in actividades"
+                                                        :value="actividad.id"
+                                                        v-text="actividad.nombre"
+                                                        :key="actividad.id"
+                                                    ></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 col-md-4">
+                                            <div class="container p-0">
+                                                <div class="row p-0">
+                                                    <div class="col-sx-12 col-md-12 p-0">
+                                                        <label for="fecha">Fecha</label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            v-model="date"
+                                                            readonly
+                                                            @click="picker = !picker"
+                                                        />
+                                                        <template class="fade">
+                                                            <v-date-picker
+                                                                v-model="date"
+                                                                :full-width="true"
+                                                                v-if="picker"
+                                                                @click:date="clickDate"
+                                                                locale="es"
+                                                            >
+                                                            </v-date-picker>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- horarios -->
+                                        <div class="col-xs-4 col-md-4">
+                                            <label for="fecha">Horarios</label>
+                                            <select
+                                                name="horarios"
+                                                id="horarios"
+                                                class="form-control"
+                                                v-model="horario_id"
+                                                @change="getSalidasLlegadas()"
+                                            >
+                                                <option value="false" disabled selected
+                                                    >Seleccione un Horario</option
+                                                >
+                                                <option
+                                                    v-for="(horario, index) in horarios"
+                                                    :key="index"
+                                                    v-text="
+                                                        horario.hini + ' | ' + horario.hfin
+                                                    "
+                                                    :value="horario.id"
+                                                >
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- horarios -->
-                            <div class="col-xs-4 col-md-4">
-                                <label for="fecha">Horarios</label>
-                                <select
-                                    name="horarios"
-                                    id="horarios"
-                                    class="form-control"
-                                    v-model="horario_id"
-                                    @change="getSalidasLlegadas()"
-                                >
-                                    <option value="false" disabled selected>
-                                        Seleccione un Horario</option
-                                    >
-                                    <option
-                                        v-for="(horario, index) in horarios"
-                                        :key="index"
-                                        v-text="
-                                            horario.hini + ' | ' + horario.hfin
-                                        "
-                                        :value="horario.id"
-                                    >
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- segunda fila -->
-                        <div class="row">
-                            <!-- salida ubicación  -->
-                            <div class="col-xs-4 col-md-4">
-                                <label for="salidas">Salida | Ubicación</label>
-                                <select
-                                    name="salidas"
-                                    id="salidas"
-                                    class="form-control"
-                                >
-                                    <option
-                                        :value="salida.id"
-                                        v-for="salida in salidas"
-                                        :key="salida.id"
-                                        v-text="salida.salida"
-                                    >
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- ucupación -->
-                            <div class="col-md-4 col-xs-12 text-center">
-                                <label for="Ocupación">Ocupación</label>
-                                <p
-                                    name="ocupacion"
-                                    id="ocupacion"
-                                    v-if="ocupacion"
-                                >
-                                    <span
-                                        v-text="ocupacion.ocupacion + ' O /'"
-                                        class="ocupacion_span"
-                                    ></span>
-                                    <span
-                                        v-text="ocupacion.disponibilidad + ' D'"
-                                        class="disponibilidad_span"
-                                    ></span>
-                                </p>
-                            </div>
-                            <!-- Llegadas ubicación  -->
-                            <div class="col-xs-4 col-md-4">
-                                <label for="llegada">Llegada | Ubicación</label>
-                                <select
-                                    name="llegada"
-                                    id="llegada"
-                                    class="form-control"
-                                >
-                                    <option
-                                        :value="llegada.id"
-                                        v-for="llegada in llegadas"
-                                        :key="llegada.id"
-                                        v-text="llegada.llegada"
-                                    >
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- 3er row -->
-                        <div class="row">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Cantidad
-                                        </th>
-                                        <th>
-                                            personas
-                                        </th>
-                                        <th>
-                                            ocupación
-                                        </th>
-                                        <th>
-                                            balance
-                                        </th>
-                                        <th>
-                                            precio
-                                        </th>
-                                        <th>
-                                            totales
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <DetalleReservacion
-                                        :actividad_id="actividad_id"
-                                        :personas="personas"
-                                        v-for="i in 5"
-                                        :detalleId="i"
-                                        :key="i"
-                                    >
-                                    </DetalleReservacion>
-                                    <tr>
-                                        <td colspan="6" class="text-right">
-                                            <input
-                                                type="text"
-                                                readonly
-                                                class="form-control totales mr-1 totalBold d-inline"
-                                                v-model="getTotalBalance"
-                                            />
-                                            <input
-                                                type="text"
-                                                readonly
-                                                class="form-control totales totalBold d-inline"
-                                                v-model="getTotalPrecio"
-                                            />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                    <div class="row">
+                                        <!-- segunda fila -->
+                                        <!-- salida ubicación  -->
+                                        <div class="col-xs-4 col-md-4">
+                                            <label for="salidas">Salida | Ubicación</label>
+                                            <select
+                                                name="salidas"
+                                                id="salidas"
+                                                class="form-control"
+                                            >
+                                                <option
+                                                    :value="salida.id"
+                                                    v-for="salida in salidas"
+                                                    :key="salida.id"
+                                                    v-text="salida.salida"
+                                                >
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <!-- ucupación -->
+                                        <div class="col-md-4 col-xs-12 text-center">
+                                            <label for="Ocupación">Ocupación</label>
+                                            <p
+                                                name="ocupacion"
+                                                id="ocupacion"
+                                                v-if="ocupacion"
+                                            >
+                                                <span
+                                                    v-text="ocupacion.ocupacion + ' O /'"
+                                                    class="ocupacion_span"
+                                                >
+                                                </span>
+                                                <span
+                                                    v-text="ocupacion.disponibilidad + ' D'"
+                                                    class="disponibilidad_span"
+                                                >
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <!-- Llegadas ubicación  -->
+                                        <div class="col-xs-4 col-md-4">
+                                            <label for="llegada">Llegada | Ubicación</label>
+                                            <select
+                                                name="llegada"
+                                                id="llegada"
+                                                class="form-control"
+                                            >
+                                                <option
+                                                    :value="llegada.id"
+                                                    v-for="llegada in llegadas"
+                                                    :key="llegada.id"
+                                                    v-text="llegada.llegada"
+                                                >
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- 3er row -->
+                                    <div class="row">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-custom">
+                                                        Cantidad
+                                                    </th>
+                                                    <th class="th-custom">
+                                                        personas
+                                                    </th>
+                                                    <th class="th-custom">
+                                                        ocupación
+                                                    </th>
+                                                    <th class="th-custom">
+                                                        balance
+                                                    </th>
+                                                    <th class="th-custom">
+                                                        precio
+                                                    </th>
+                                                    <th class="th-custom">
+                                                        totales
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <DetalleReservacion
+                                                    :actividad_id="actividad_id"
+                                                    :personas="personas"
+                                                    v-for="i in 5"
+                                                    :detalleId="i"
+                                                    :key="i"
+                                                >
+                                                </DetalleReservacion>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <div
+                                                            class="form-group d-flex align-items-baseline text-center"
+                                                        >
+                                                            <label
+                                                                for="nom-reserva"
+                                                                class="text "
+                                                                >Nombre de
+                                                                reservacion</label
+                                                            >
+                                                            <input
+                                                                type="text"
+                                                                id="nom-reserva"
+                                                                class="form-control col-8 ml-auto"
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2" class="d-flex">
+                                                        <input
+                                                            type="text"
+                                                            readonly
+                                                            class="form-control totales mr-1 totalBold d-inline"
+                                                            v-model="getTotalBalance"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            readonly
+                                                            class="form-control totales totalBold d-inline"
+                                                            v-model="getTotalPrecio"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <div
+                                                            class="form-group d-flex align-items-baseline text-center"
+                                                        >
+                                                            <label
+                                                                for="nom-comisionista"
+                                                                class="text "
+                                                                >Comisionista</label
+                                                            >
+                                                            <select
+                                                                name="nom-comisionista"
+                                                                id="nom-comisionista"
+                                                                class="form-control col-8 ml-auto"
+                                                            >
+                                                                <option>
+                                                                    Seleccione un
+                                                                    comisionista
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <button class="btn btn-success col"  @click="e6 = 2">
+                                                            Siguiente
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </v-stepper-content>
+                            
+                            <!-- <v-stepper-step :complete="e6 > 2" step="2">
+                                   <v-stepper-content step="2" class="m-0 p-0">
+                                       Paso 2
+                                    </v-stepper-content>
+                            </v-stepper-step> -->
+                        </v-stepper>
+                    </div> <!-- fin del container -->
                 </div>
             </div>
         </div>
@@ -233,6 +309,8 @@ export default {
     },
     data() {
         return {
+            steps:2,
+            e6: 1,
             actividad_id: "",
             horario_id: "",
             actividades: [],
@@ -376,5 +454,15 @@ th {
 .totalBold,
 .totalBold::placeholder {
     font-weight: 900;
+}
+.v-stepper--vertical .v-stepper__content {
+    padding: 0 !important;
+    margin:0 !important;
+}
+.th-custom{
+    text-align:center;
+}
+.text {
+    padding-left: 1rem;
 }
 </style>

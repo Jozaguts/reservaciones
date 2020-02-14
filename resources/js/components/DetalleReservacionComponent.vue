@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <th class="d-flex">
+        <th class="d-flex pr-0 justify-content-end ml-2">
             <button
                 class="btn btn-secondary"
                 v-on:click="cantidad == 0 ? (cantidad = 0) : cantidad--"
