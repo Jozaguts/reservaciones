@@ -25,25 +25,24 @@
                 <div class="modal-body">
                     <div class="container"> <!-- inicio del container del model -->
                         <v-stepper v-model="e6" vertical>
-                            <!-- steper header -->
                              <v-stepper-header>
                                 <template v-for="n in steps">
                                     <v-stepper-step
-                                    :key="`${n}-step`"
+                                    :key="`${n.value}-step`"
                                     :complete="e6 > n"
-                                    :step="n"
+                                    :step="n.value"
                                     editable
                                     >
-                                    Paso {{ n }}
+                                     {{ n.name }}
                                     </v-stepper-step>
 
                                     <v-divider
-                                    v-if="n !== steps"
-                                    :key="n"
+                                    v-if="n.value !== steps"
+                                    :key="n.value"
                                     ></v-divider>
                                 </template>
-                                </v-stepper-header>
-                            <!-- steper header -->
+                            </v-stepper-header>
+                             <v-stepper-items>
                                 <v-stepper-content step="1">
                                     <div class="row">
                                         <div class="col-xs-4 col-md-4">
@@ -274,12 +273,271 @@
                                         </table>
                                     </div>
                                 </v-stepper-content>
-                            
-                            <!-- <v-stepper-step :complete="e6 > 2" step="2">
-                                   <v-stepper-content step="2" class="m-0 p-0">
-                                       Paso 2
-                                    </v-stepper-content>
-                            </v-stepper-step> -->
+                                 <v-stepper-content step="2">
+                                    <v-container>
+                                        <v-row>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="total-balance">Total Balance</label>
+                                                    <input type="text" min="0" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="total-Precio">Total Precio</label>
+                                                    <input type="text" min="0" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group ">
+                                                    <label for="anticipo Minimo">Anticipo Minimo </label>
+                                                    <input type="text" min="0" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                        </v-row>
+                                        <v-row>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 1</label>
+                                                    <div class="col-6 py-0">
+                                                    <input type="text" min="0" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>                                           
+                                        </v-row>
+                                        <v-row>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 2</label>
+                                                    <div class="col-6 py-0">
+                                                    <input type="text" min="0" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>                                           
+                                        </v-row>
+                                        <v-row>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 3</label>
+                                                    <div class="col-6 py-0">
+                                                    <input type="text" min="0" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>                                           
+                                        </v-row>
+                                        <v-row>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 4</label>
+                                                    <div class="col-6 py-0">
+                                                    <input type="text" min="0" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group row align-items-baseline">
+                                                    <select
+                                                    name="select1-pago-1"
+                                                    id="select1-pago-1"
+                                                    class="form-control"
+                                                    >
+                                                    <option>
+                                                        opcion 1
+                                                    </option>
+                                                    <option>
+                                                        opcion 2
+                                                    </option>
+                                                    <option>
+                                                        opcion 3
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>                                           
+                                        </v-row>
+                                        <!-- fila de totales -->
+                                        <v-row>
+                                            <div class="col-4 mr-auto">
+                                                <div class="form-group row">
+                                                    <label class="col-6 row text-bold ml-3"> Totales</label>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control" readonly placeholder="$1,000.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </v-row>
+                                        <v-row>
+                                            <div class="col-5">
+                                                <div class="form-group text-center d-flex flex-column align-items-center">
+                                                    <label for="saldo-balance" class="display-1">Saldo Balance</label>
+                                                    <input type="text" class="form-control col-6" readonly placeholder="$300.00">
+                                                    <select class="form-control col-6">
+                                                        <option>
+                                                            CxC
+                                                        </option>
+                                                        <option>
+                                                            Onboard
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="form-group text-center d-flex flex-column align-items-center">
+                                                    <label for="saldo-doble" class="display-1 mt-1">Saldo Precio</label>
+                                                    <input type="text" class="form-control col-6 mt-1" readonly placeholder="$1,300.00">
+                                                    <select class="form-control col-6">
+                                                        <option>
+                                                            Descartar
+                                                        </option>
+                                                        <option>
+                                                            Onboard
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 d-flex align-items-end">
+                                                <div class="form-group">
+                                                    <button class="btn btn-success">
+                                                        Confirmar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </v-row>
+                                    </v-container> 
+                                </v-stepper-content>
+                            </v-stepper-items>
                         </v-stepper>
                     </div> <!-- fin del container -->
                 </div>
@@ -309,7 +567,16 @@ export default {
     },
     data() {
         return {
-            steps:2,
+            steps:[
+                {
+                    value: 1,
+                    name: "Reservaciones"
+                },
+                {
+                    value: 2,
+                    name: "Pagos"
+                }
+            ],
             e6: 1,
             actividad_id: "",
             horario_id: "",
