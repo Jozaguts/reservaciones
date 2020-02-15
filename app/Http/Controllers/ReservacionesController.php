@@ -15,6 +15,7 @@ class ReservacionesController extends Controller
 {
     public function index()
     {
+        
         return view('sections.reservations');
     }
 
@@ -51,15 +52,47 @@ class ReservacionesController extends Controller
                         "' . $show_icon . '0","' . $noshow_icon . '0")  as details'),
                     DB::raw('concat("' . $day . '", " ", SUBSTRING(ah.hini,1,5)) as start'),
                     DB::raw('concat("' . $day . '") as end'),
-                    'ta.color'
+                    'ta.color','ac.libre','ah.hfin'
                 )
                 ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=', '1'], [DB::raw('ELT(WEEKDAY("' . $day . '") + 1, l, m, x, j, v, s, d)'), '=', '1']])
-                ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color')
+                ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color', 'ah.hfin')
                 ->get();
+                $fec = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour(1)->format('Y-m-d H:i');
+                            $hini = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->format('H:i');
+                            $hfin = Carbon::createFromFormat('H:i:s', $horario[0]->hfin)->format('H:i');
+                            $dif= (int)$hfin - (int)$hini;
+                for($i=0; $i < count($horario); $i++ ){
+                    if ($horario[$i]->libre==1) {
+                        for ($j=0; $j < $dif; $j++) {
+                            $arrLibre = [
+                                'actividadid'=> $horario[$i]->actividadid,
+                                'name'=>$horario[$i]->name,
+                                'details'=> $horario[$i]->details,
+                                'start'=> Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour($j)->format('Y-m-d H:i'),
+                                'end'=> $horario[$i]->end,
+                                'color'=> $horario[$i]->color,
+                                'libre' => $horario[$i]->libre
+                            ];
+                             $horarios[]=$arrLibre;
+                        }
+                    }else{
+                        $arrLibre = [
+                            'actividadid'=> $horario[$i]->actividadid,
+                            'name'=>$horario[$i]->name,
+                            'details'=> $horario[$i]->details,
+                            'start'=> $horario[$i]->start,
+                            'end'=> $horario[$i]->end,
+                            'color'=> $horario[$i]->color,
+                            'libre' => 2
+                        ];
+                        $horarios[]=$arrLibre;
+                    }
+                }
 
-            $horarios[] = $horario;
         }
-        return response()->json(['horarios' => array_flatten($horarios)]);
+
+        return response()->json(['horarios' => $horarios]);
+        // return response()->json(['horarios' => array_flatten($horarios)]);
     }
 
     public function getActividades(Request $request)

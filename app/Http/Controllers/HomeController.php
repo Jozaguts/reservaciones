@@ -28,8 +28,6 @@ class HomeController extends Controller
 
         $rol = $user->roles->implode('name','');
 
-        // dd($rol);
-
         return view('home');
     }
 }
