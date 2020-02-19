@@ -17,12 +17,12 @@ class CreateTipocomisionistasTable extends Migration
             $table->increments('id');
             $table->string('clave');
             $table->string('nombre');
-            $table->boolean('active');
-            $table->boolean('remove');            
-            $table->softDeletes();           
+            $table->boolean('active')->default(true);
+            $table->boolean('remove')->dafault(false);
+            $table->softDeletes();
 
             $table->unsignedInteger('idusuario');
-            $table->foreign('idusuario')->references('id')->on('usuarios');	            
+            $table->foreign('idusuario')->references('id')->on('usuarios');
 
             $table->timestamps();
         });

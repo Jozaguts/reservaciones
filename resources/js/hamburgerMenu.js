@@ -3,7 +3,29 @@ const spanBtnMenu = document.getElementById('spanBtnMenu')
 const hmContanier = document.getElementById('hmContanier');
 
 window.addEventListener('click',(e)=>{
+    if (document.getElementById('btnUserName').contains(e.target)){
 
+        let toggleStatus = 1;
+        function toggleMenu (){
+          if(toggleStatus==1){
+
+            btnLogOut.classList.remove("d-none");
+            btnLogOut.classList.add("show");
+            toggleStatus = 0;
+          }else if(toggleStatus==0){
+            btnLogOut.classList.remove("show");
+            btnLogOut.classList.add("d-none");
+            toggleStatus=1;
+          }
+        }
+        toggleMenu();
+        // Clicked in box
+      } else{
+        if( btnLogOut.classList.contains("show")){
+          btnLogOut.classList.remove("show");
+          btnLogOut.classList.toggle("d-none");
+        }
+      }
 
   let toggleStatus =0; //cero es oculto
   if(toggleStatus ==0 && e.target == btnMenu || e.target == spanBtnMenu)
@@ -12,7 +34,7 @@ window.addEventListener('click',(e)=>{
     {
       hmContanier.classList.remove('d-none')
       hmContanier.classList.add('show')
-      
+
     }else
     toggleStatus = 1; //uno es mostrar
           if(toggleStatus==1)
@@ -52,8 +74,8 @@ actLink.addEventListener('click',(e)=>{
     {
       subUlAct.classList.remove('d-none')
       subUlAct.classList.add('show')
-      
- 
+
+
     }else{
       toggleStatus = 1;
       if(toggleStatus ==1 ){
@@ -66,9 +88,9 @@ actLink.addEventListener('click',(e)=>{
       }
 
     }
-   
+
   }
-  
+
 })
 //mostrar sub-menu comisionistas
 const comLink = document.getElementById('comLink')
@@ -84,8 +106,8 @@ comLink.addEventListener('click',(e)=>{
     {
       subUlCom.classList.remove('d-none')
       subUlCom.classList.add('show')
-      
- 
+
+
     }else{
       toggleStatus = 1;
       if(toggleStatus ==1 ){
@@ -98,9 +120,9 @@ comLink.addEventListener('click',(e)=>{
       }
 
     }
-   
+
   }
-  
+
 })
 
 //mostrar sub-menu cupones
@@ -117,8 +139,8 @@ cupLink.addEventListener('click',(e)=>{
     {
       subUlCup.classList.remove('d-none')
       subUlCup.classList.add('show')
-      
- 
+
+
     }else{
       toggleStatus = 1;
       if(toggleStatus ==1 ){
@@ -131,9 +153,9 @@ cupLink.addEventListener('click',(e)=>{
       }
 
     }
-   
+
   }
-  
+
 })
 
 //mostrar sub-menu administracion
@@ -150,8 +172,8 @@ admLink.addEventListener('click',(e)=>{
     {
       subUlAdm.classList.remove('d-none')
       subUlAdm.classList.add('show')
-      
- 
+
+
     }else{
       toggleStatus = 1;
       if(toggleStatus ==1 ){
@@ -164,8 +186,8 @@ admLink.addEventListener('click',(e)=>{
       }
 
     }
-   
+
   }
-  
+
 })
 

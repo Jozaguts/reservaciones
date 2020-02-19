@@ -7,8 +7,8 @@
             {{Session::get('flash_message')}}
         @endif
         @include('components.menu')
-       
-        
+
+
 @endsection
 @section('scripts')
 <script src="{{asset('js/all.js')}}"></script>
@@ -17,4 +17,4 @@
 
 
 
-    
+

@@ -63,6 +63,8 @@
                 type="text"
                 v-model="inputPrecio"
                 class="form-control input-precio"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                v-on:keyup="sumInputPrecio()"
             />
         </th>
         <th class="d-flex">
@@ -168,6 +170,27 @@ export default {
                 type: "sumarPrecio",
                 data: { cantidad, detalleId }
             });
+        },
+        sumInputPrecio() {
+            if(this.inputPrecio != "") {
+                this.draftPrecio = this.cantidad * this.inputPrecio;
+                    store.commit({
+                        type: "sumarPrecio",
+                        data: {
+                            cantidad: this.cantidad * this.inputPrecio,
+                            detalleId: this.detalleId
+                        }
+                    });
+                }else {
+                    this.draftPrecio = this.cantidad * this.inputPrecio;
+                    store.commit({
+                        type: "sumarPrecio",
+                        data: {
+                            cantidad: this.cantidad * this.inputPrecio,
+                            detalleId: this.detalleId
+                        }
+                    });
+                }
         }
     },
     watch: {

@@ -29,6 +29,13 @@ Route::group(['prefix' => 'reservaciones'], function () {
     Route::get('/getbalanceprecio', 'ReservacionesController@getBalancePrecio')->middleware('auth');
 });
 
+Route::group(['prefix' => 'comisionista'], function () {
+
+    Route::post('/', 'ComisionistaController@crear')->middleware('auth');
+    Route::get('tipo','ComisionistaController@tipoComisionista')->middleware('auth');
+
+});
+
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

@@ -11,7 +11,7 @@ addUser.addEventListener('click',(e)=>{
         registerModal.classList.remove("d-none")
         registerModal.classList.toggle("showModal");
     }
-     
+
 })
 
 
@@ -26,15 +26,15 @@ function showEditModal(id){
     $('#editDepartment').val(data.user.department);
     $('#editPassword').val(data.user.password);
     $('#editRole').val(data.role);
-  
+
     $('#editActive').val(data.active);
-    
+
     $('#userId').val(data.id);
     if(data.active==1){
       $('#editActive').val(1);
     }else{
       $('#editActive').val(0);
-    } 
+    }
 
   });
     if(userEditModal.classList.contains("d-none")){
@@ -77,7 +77,7 @@ $('#btnEdit').click(function(){
           $('#message-success').fadeOut();
         }, 3000);
         setTimeout("location.reload(true);",3000)
-       
+
       }
     },
     error:function(data)
@@ -97,61 +97,61 @@ closeModal.addEventListener('click',(e)=>{
     closeModal.parentNode.classList.remove("showModal")
     closeModal.parentNode.classList.toggle("d-none");
   }
-     
+
 })
 //close modal edit user
 closeModalEdit.addEventListener('click',(e)=>{
-  
+
   if(userEditModal.classList.contains("showModal")){
     userEditModal.classList.remove("showModal")
     userEditModal.classList.add("d-none");
 }
 
-     
+
 })
 closeModal.addEventListener('click',(e)=>{
   if(userEditModal.classList.contains("userEditModal")){
       userEditModal.classList.remove("userEditModal")
       userEditModal.classList.add("d-none");
   }
-   
+
 })
 
 
 //btn-Logout
 
-window.addEventListener('click', function(e){   
-    if (document.getElementById('btnUserName').contains(e.target)){
-  
-      let toggleStatus = 1;
-      function toggleMenu (){
-        if(toggleStatus==1){
-      
-          btnLogOut.classList.remove("d-none");
-          btnLogOut.classList.add("show");
-          toggleStatus = 0;
-        }else if(toggleStatus==0){
-          btnLogOut.classList.remove("show");
-          btnLogOut.classList.add("d-none");
-          toggleStatus=1;
-        }
-      }
-      toggleMenu();
-      // Clicked in box
-    } else{
-      if( btnLogOut.classList.contains("show")){
-        btnLogOut.classList.remove("show");
-        btnLogOut.classList.toggle("d-none");
-      } 
-    }
-  });
+// window.addEventListener('click', function(e){
+//     if (document.getElementById('btnUserName').contains(e.target)){
+
+//       let toggleStatus = 1;
+//       function toggleMenu (){
+//         if(toggleStatus==1){
+
+//           btnLogOut.classList.remove("d-none");
+//           btnLogOut.classList.add("show");
+//           toggleStatus = 0;
+//         }else if(toggleStatus==0){
+//           btnLogOut.classList.remove("show");
+//           btnLogOut.classList.add("d-none");
+//           toggleStatus=1;
+//         }
+//       }
+//       toggleMenu();
+//       // Clicked in box
+//     } else{
+//       if( btnLogOut.classList.contains("show")){
+//         btnLogOut.classList.remove("show");
+//         btnLogOut.classList.toggle("d-none");
+//       }
+//     }
+//   });
 
   //delete user
   $(document).ready(function() {
-  
+
     $('.btn-delete').click(function(){
 
-      
+
        var row = $(this).parents('tr');
        var id = row.data('id');
        var form = $('#form-delete');
@@ -167,7 +167,7 @@ window.addEventListener('click', function(e){
 
           if(result.success == 'true')
           {
-           
+
           console.log(result.message)
             $('#success').html(result.message);
             $('#message-success').fadeIn();
@@ -175,12 +175,12 @@ window.addEventListener('click', function(e){
               $('#message-success').fadeOut();
             }, 3000);
             setTimeout("location.reload(true);",1000)
-          }  
+          }
         });
-    
+
        }
 
-       
+
     });
  });
 
@@ -198,7 +198,7 @@ addUserForm.addEventListener('submit',(e)=>{
 e.preventDefault();
 let datos = new FormData(addUserForm)
 // console.log(datos.get('email'))
-let email = datos.get('email')   
+let email = datos.get('email')
 let first_name = datos.get('first_name')
 let last_name = datos.get('last_name')
 let password = datos.get('password')
@@ -215,7 +215,7 @@ let active;
   }else{
     active = 1;
   }
-  
+
   // if($('#remove').is(':checked')){
   //   remove = 0;
   // }else{
@@ -240,19 +240,19 @@ $.ajax({
     $('#errorsIntoModal').html(error);
     $('#message-errorIntoModal').fadeIn();
    });
-    } 
+    }
     else{
       $('#successIntoModal').html('Usuario Agregado Correctamente');
       $('#message-successIntoModal').fadeIn();
       setTimeout(() => {
         $('#registerModal').fadeOut();
       }, 3000);
-    } 
- 
+    }
+
 },
- 
-    
-  
+
+
+
 
 
 })

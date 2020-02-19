@@ -239,6 +239,7 @@
                                                             class="form-control totales totalBold d-inline"
                                                             v-model="getTotalPrecio"
                                                         />
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -279,13 +280,13 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="total-balance">Total Balance</label>
-                                                    <input type="text" min="0" class="form-control" readonly>
+                                                    <input type="text" min="0" class="form-control" readonly :value="this.$options.filters.currency(getTotalBalance)" >
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="total-Precio">Total Precio</label>
-                                                    <input type="text" min="0" class="form-control" readonly>
+                                                    <input type="text" min="0" class="form-control" readonly :value="this.$options.filters.currency(getTotalPrecio)">
                                                 </div>
                                             </div>
                                             <div class="col-4">
@@ -295,198 +296,12 @@
                                                 </div>
                                             </div>
                                         </v-row>
-                                        <v-row>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 1</label>
-                                                    <div class="col-6 py-0">
-                                                    <input type="text" min="0" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>                                           
-                                        </v-row>
-                                        <v-row>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 2</label>
-                                                    <div class="col-6 py-0">
-                                                    <input type="text" min="0" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>                                           
-                                        </v-row>
-                                        <v-row>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 3</label>
-                                                    <div class="col-6 py-0">
-                                                    <input type="text" min="0" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>                                           
-                                        </v-row>
-                                        <v-row>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <label for="pago-1" class="col-6 col-form-label"> Pago 4</label>
-                                                    <div class="col-6 py-0">
-                                                    <input type="text" min="0" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group row align-items-baseline">
-                                                    <select
-                                                    name="select1-pago-1"
-                                                    id="select1-pago-1"
-                                                    class="form-control"
-                                                    >
-                                                    <option>
-                                                        opcion 1
-                                                    </option>
-                                                    <option>
-                                                        opcion 2
-                                                    </option>
-                                                    <option>
-                                                        opcion 3
-                                                    </option>
-                                                    </select>
-                                                </div>
-                                            </div>                                           
-                                        </v-row>
+                                  <!-- AQUI VA EL TIPO EL COMPONENTE TIPO DE PAGO -->
+                                  <FormaDePago 
+                                  v-for="pago in totalPagos" 
+                                  :pago="pago" 
+                                  :key="pago" >
+                                  </FormaDePago>
                                         <!-- fila de totales -->
                                         <v-row>
                                             <div class="col-4 mr-auto">
@@ -535,7 +350,7 @@
                                                 </div>
                                             </div>
                                         </v-row>
-                                    </v-container> 
+                                    </v-container>
                                 </v-stepper-content>
                             </v-stepper-items>
                         </v-stepper>
@@ -547,12 +362,15 @@
 </template>
 <script>
 import DetalleReservacion from "../DetalleReservacionComponent.vue";
+import FormaDePago from "./FormaDePago.vue";
 import Loader from "../LoaderComponent.vue";
 import store from "../../store/index.js";
+// import {mapState} from 'vuex'
 export default {
     components: {
         DetalleReservacion,
-        Loader
+        Loader,
+        FormaDePago
     },
     computed: {
         loaderStatus() {
@@ -563,7 +381,11 @@ export default {
         },
         getTotalBalance() {
             return (this.totalBalance = store.getters.getTotalBalance);
-        }
+        },
+        // ...mapState({
+        //     totalPrecio: state => state.totalPrecio
+        // })
+
     },
     data() {
         return {
@@ -580,6 +402,7 @@ export default {
             e6: 1,
             actividad_id: "",
             horario_id: "",
+            totalPagos: 5,
             actividades: [],
             horarios: [],
             salidas: [],

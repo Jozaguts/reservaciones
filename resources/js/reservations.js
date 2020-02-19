@@ -26,10 +26,41 @@ window.addEventListener('click', function(e){
   });
   import Vue from 'vue';
   import Vuex from 'vuex';
-
-
-  window.Vue = require('vue');
   import Vuetify from 'vuetify';
+  import VueCommonFilters from 'vue-common-filters'
+   
+  // THESE ARE ALL OPTIONS YOU CAN CUSTOMIZE
+  // YOU ARE NOT REQUIRED TO COPY ALL THESE OPTIONS
+  // YOU CAN PASS EMPTY OR NO OPTIONS AT ALL
+   
+  let config = {
+      "currency": {
+          "symbol": "$",
+          "decimalDigits": 2,
+          "symbolOnLeft": true,
+          "spaceBetweenAmountAndSymbol": true
+      },
+   
+      "text": {
+          "truncateClamp": "..."
+      },
+   
+      "numbers": {
+          "decimalDigits": 2
+      },
+   
+      "array": {
+          "implodeDelimiter": ", "
+      },
+   
+      "dates": {
+          "defaultFormat": "YYYY-MM-DD HH:mm:ss",
+          "filterConvertFormat": "DD MMMM YYYY"
+      }
+  }
+   
+  Vue.use(VueCommonFilters, config)
+  window.Vue = require('vue');
   Vue.use(Vuex);
   Vue.use(Vuetify);
 

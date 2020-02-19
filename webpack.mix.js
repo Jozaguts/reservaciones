@@ -39,6 +39,10 @@ mix.js('resources/js/app.js', 'public/js')
       mix.js([
       'resources/js/reservations.js'],
       'public/js/reservations.js');
+      mix.js([
+      'resources/js/comisionistas.js'],
+      'public/js/comisionistas.js');
+
       mix.scripts([
       'resources/js/hamburgerMenu.js'],
       'public/js/hamburgerMenu.js');
