@@ -1671,7 +1671,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
+exports.push([module.i, "\n.input-balance,\r\n.input-precio,\r\n.totales {\r\n    text-align: center;\r\n    max-width: 80px;\n}\r\n", ""]);
 
 // exports
 
@@ -1709,7 +1709,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span {\n    color: #38c172;\n}\nth {\n    text-transform: capitalize;\n}\n.input-cantidad {\n    max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n    padding: 0 !important;\n    margin:0 !important;\n}\n.th-custom{\n    text-align:center;\n}\n.text {\n    padding-left: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span {\r\n    color: #38c172;\n}\nth {\r\n    text-transform: capitalize;\n}\n.input-cantidad {\r\n    max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n    padding: 0 !important;\r\n    margin:0 !important;\n}\n.th-custom{\r\n    text-align:center;\n}\n.text {\r\n    padding-left: 1rem;\n}\r\n", ""]);
 
 // exports
 
