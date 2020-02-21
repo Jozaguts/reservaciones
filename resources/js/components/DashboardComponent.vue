@@ -226,7 +226,6 @@
             day: day
             }
         }).then(res => {
-            console.log(res)
             res.data.horarios.length > 0
             ? this.events = res.data.horarios
             : swal({

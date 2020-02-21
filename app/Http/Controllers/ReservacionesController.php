@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\ActividadesHorario;
 use App\Actividades;
-use App\TipoActividades;
 use App\Personas;
 use Carbon\Carbon;
-
 
 class ReservacionesController extends Controller
 {
     public function index()
     {
-        
         return view('sections.reservations');
     }
 
@@ -24,7 +20,7 @@ class ReservacionesController extends Controller
         $carbonDay = Carbon::createFromFormat('Y-m-d', $request->day);
         $lunes = $carbonDay->startOfWeek()->format('Y-m-d');
         $week = array();
-        for ($i = 0; $i < 7; $i++) {
+        for ($i = 0; $i < 7; ++$i) {
             $week[] = $carbonDay->startOfWeek()->addDay($i)->format('Y-m-d');
         }
 
@@ -34,7 +30,6 @@ class ReservacionesController extends Controller
         $show_icon = "<i class='show_icon'></i>";
         $noshow_icon = "<i class='noshow_icon'></i>";
         foreach ($week as $day) {
-
             $horario = DB::table('actividades as ac')
                 ->join('actividadeshorarios as ah', 'ac.id', '=', 'ah.actividades_id')
                 ->join('tipoactividades as ta', 'ta.id', '=', 'ac.tipoactividades_id')
@@ -47,48 +42,47 @@ class ReservacionesController extends Controller
                 ->select(
                     'ac.id as actividadid',
                     DB::raw('concat(ac.clave, " | ", ac.nombre)  as name'),
-                    DB::raw('concat("' . $ocupacion_icon . '",  SUM(IFNULL(dis.ocupacion,0)),
-                        "' . $libre_icon . '",SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)),
-                        "' . $show_icon . '0","' . $noshow_icon . '0")  as details'),
-                    DB::raw('concat("' . $day . '", " ", SUBSTRING(ah.hini,1,5)) as start'),
-                    DB::raw('concat("' . $day . '") as end'),
-                    'ta.color','ac.libre','ah.hfin'
+                    DB::raw('concat("'.$ocupacion_icon.'",  SUM(IFNULL(dis.ocupacion,0)),
+                        "'.$libre_icon.'",SUM(IFNULL(uni.capacidad,0)) -  SUM(IFNULL(dis.ocupacion,0)),
+                        "'.$show_icon.'0","'.$noshow_icon.'0")  as details'),
+                    DB::raw('concat("'.$day.'", " ", SUBSTRING(ah.hini,1,5)) as start'),
+                    DB::raw('concat("'.$day.'") as end'),
+                    'ta.color', 'ac.libre', 'ah.hfin'
                 )
-                ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=', '1'], [DB::raw('ELT(WEEKDAY("' . $day . '") + 1, l, m, x, j, v, s, d)'), '=', '1']])
+                ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
                 ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color', 'ah.hfin')
                 ->get();
-                $fec = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour(1)->format('Y-m-d H:i');
-                            $hini = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->format('H:i');
-                            $hfin = Carbon::createFromFormat('H:i:s', $horario[0]->hfin)->format('H:i');
-                            $dif= (int)$hfin - (int)$hini;
-                for($i=0; $i < count($horario); $i++ ){
-                    if ($horario[$i]->libre==1) {
-                        for ($j=0; $j < $dif; $j++) {
-                            $arrLibre = [
-                                'actividadid'=> $horario[$i]->actividadid,
-                                'name'=>$horario[$i]->name,
-                                'details'=> $horario[$i]->details,
-                                'start'=> Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour($j)->format('Y-m-d H:i'),
-                                'end'=> $horario[$i]->end,
-                                'color'=> $horario[$i]->color,
-                                'libre' => $horario[$i]->libre
-                            ];
-                             $horarios[]=$arrLibre;
-                        }
-                    }else{
+            $fec = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour(1)->format('Y-m-d H:i');
+            $hini = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->format('H:i');
+            $hfin = Carbon::createFromFormat('H:i:s', $horario[0]->hfin)->format('H:i');
+            $dif = (int) $hfin - (int) $hini;
+            for ($i = 0; $i < count($horario); ++$i) {
+                if ($horario[$i]->libre == 1) {
+                    for ($j = 0; $j < $dif; ++$j) {
                         $arrLibre = [
-                            'actividadid'=> $horario[$i]->actividadid,
-                            'name'=>$horario[$i]->name,
-                            'details'=> $horario[$i]->details,
-                            'start'=> $horario[$i]->start,
-                            'end'=> $horario[$i]->end,
-                            'color'=> $horario[$i]->color,
-                            'libre' => 2
-                        ];
-                        $horarios[]=$arrLibre;
+                                'actividadid' => $horario[$i]->actividadid,
+                                'name' => $horario[$i]->name,
+                                'details' => $horario[$i]->details,
+                                'start' => Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour($j)->format('Y-m-d H:i'),
+                                'end' => $horario[$i]->end,
+                                'color' => $horario[$i]->color,
+                                'libre' => $horario[$i]->libre,
+                            ];
+                        $horarios[] = $arrLibre;
                     }
+                } else {
+                    $arrLibre = [
+                            'actividadid' => $horario[$i]->actividadid,
+                            'name' => $horario[$i]->name,
+                            'details' => $horario[$i]->details,
+                            'start' => $horario[$i]->start,
+                            'end' => $horario[$i]->end,
+                            'color' => $horario[$i]->color,
+                            'libre' => 2,
+                        ];
+                    $horarios[] = $arrLibre;
                 }
-
+            }
         }
 
         return response()->json(['horarios' => $horarios]);
@@ -97,15 +91,15 @@ class ReservacionesController extends Controller
 
     public function getActividades(Request $request)
     {
-
         if ($request->ajax()) {
-            $actividades  = Actividades::all();
+            $actividades = Actividades::all();
+
             return response()->json(['actividades' => $actividades]);
         }
     }
+
     public function getHorarios(Request $request)
     {
-
         $dia = $request->dia;
         $idactividad = $request->idactividad;
 
@@ -115,20 +109,18 @@ class ReservacionesController extends Controller
                 $join->on('ah.libre', '=', 'ac.libre');
             })
             ->select('ah.id', 'ah.hini', 'ah.hfin', 'ah.libre', 'ac.duracion')
-            ->where([['ah.active', '=', '1'], ['ah.actividades_id', '=', $idactividad], ['ah.' . $dia, '=', '1']])
+            ->where([['ah.active', '=', '1'], ['ah.actividades_id', '=', $idactividad], ['ah.'.$dia, '=', '1']])
             ->get();
         $horarios = [];
         $horarioLibres = [];
         foreach ($ho as $horario) {
-
             if ($horario->libre) {
                 $duracion = ($horario->duracion) / 60;
 
                 $hini = new Carbon("2014-03-30 $horario->hini", 'Europe/London');
                 $hfin = new Carbon("2014-03-30 $horario->hfin", 'Europe/London');
-                $diff =  $hini->diffInHours($hfin);
-                for ($i = 0; $i <= $diff; $i++) {
-
+                $diff = $hini->diffInHours($hfin);
+                for ($i = 0; $i <= $diff; ++$i) {
                     $horarios['id'] = $horario->id;
                     $horarios['hini'] = Carbon::createFromTimeString($horario->hini)->addHour($i)->format('g:i a');
                     $horarios['hfin'] = Carbon::createFromTimeString($horario->hini)->addHour($i + $duracion)->format('g:i a');
@@ -149,18 +141,17 @@ class ReservacionesController extends Controller
 
     public function getSalidas($horarioId)
     {
-
         $sa = DB::table('salida_llegadahorarios as sh')
             ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
             ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), IF(LENGTH(sh.hora)>0, " | ", ""), sal.nombre) as salida'))
             ->where([['sal.active', '=', '1'], ['sh.actividadeshorario_id', '=',  $horarioId], ['sh.salida', '=', '1']])
             ->get();
+
         return $sa;
     }
 
     public function getLlegadas($horarioId)
     {
-
         $ll = DB::table('salida_llegadahorarios as sh')
             ->join('salidallegadas as sal', 'sh.salidallegadas_id', '=', 'sal.id')
             ->select('sh.id', 'sal.id as salid', DB::raw('CONCAT(IFNULL(sh.hora, ""), IF(LENGTH(sh.hora)>0, " | ", ""), sal.nombre) as llegada'))
@@ -181,7 +172,6 @@ class ReservacionesController extends Controller
 
     public function getOcupacion($horarioId)
     {
-
         $od = DB::table('actividadeshorarios as ah')
             ->leftJoin('asignaciones as asi', 'ah.id', '=', 'asi.actividad_horario_id')
             ->leftJoin('unidades as uni', 'asi.unidad_id', '=', 'uni.id')
@@ -196,10 +186,12 @@ class ReservacionesController extends Controller
 
         return $od;
     }
+
     public function getPersonas(Request $request)
     {
         if ($request->ajax()) {
             $personas = Personas::all();
+
             return response(['personas' => $personas]);
         } else {
             return response(['response' => 'petición no valida']);
@@ -208,18 +200,17 @@ class ReservacionesController extends Controller
 
     public function fillOcupacionSelect(Request $request)
     {
-
         $bap = DB::table('actividades as ac')
             ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-            ->select('acp.id', DB::raw('IF(ac.balance, "Sencillo", "") as Sencillo'), DB::raw('IF(acp.doblebalanc, "Doble", "") as doble'),  DB::raw('IF(acp.triplebalanc, "Triple", "") as triple'))
+            ->select('acp.id', DB::raw('IF(ac.balance, "Sencillo", "") as Sencillo'), DB::raw('IF(acp.doblebalanc, "Doble", "") as doble'), DB::raw('IF(acp.triplebalanc, "Triple", "") as triple'))
             ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
             ->first();
         unset($bap->id);
         if (empty($bap->Sencillo)) {
             unset($bap->Sencillo);
-        } else if (empty($bap->doble)) {
+        } elseif (empty($bap->doble)) {
             unset($bap->doble);
-        } else if (empty($bap->triple)) {
+        } elseif (empty($bap->triple)) {
             unset($bap->triple);
         }
 
@@ -228,11 +219,22 @@ class ReservacionesController extends Controller
 
     public function getBalancePrecio(Request $request)
     {
+        $porcentajeAnticipo = $this->getActicipoMninio($request->actividadId);
+
         $ba = DB::table('actividades as ac')
             ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.precio WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doble WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triple End as precio'))
+            ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
             ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
             ->first();
-        return response(['balance' => $ba->balance, 'precio' => $ba->precio]);
+
+        return response(['balance' => $ba->balance, 'precio' => $ba->precio, 'porcentajeAnticipo'=> $porcentajeAnticipo->porcentaje]);
+    }
+    public function getActicipoMninio($actividadId)
+    {
+        return  $anticipo = DB::table('anticipos')
+       ->join('actividades', 'actividades.anticipo_id', '=', 'anticipos.id')
+       ->select('anticipos.porcentaje')
+       ->where('actividades.id','=', $actividadId)
+       ->first();
     }
 }

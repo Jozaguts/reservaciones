@@ -514,7 +514,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     day: day
                   }
                 }).then(function (res) {
-                  console.log(res);
                   res.data.horarios.length > 0 ? _this.events = res.data.horarios : swal({
                     title: "¡No hay asignaciones registradas!",
                     icon: "info"
@@ -781,6 +780,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.inputPrecio = _this2.currency(res.data.precio);
           _this2.balanceBase = parseInt(res.data.balance);
           _this2.precioBase = parseInt(res.data.precio);
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo);
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
@@ -1295,10 +1295,133 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
- // import {mapState} from 'vuex'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1315,7 +1438,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getTotalBalance: function getTotalBalance() {
       return this.totalBalance = _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalBalance;
-    }
+    },
+    anticipoMinimo: function anticipoMinimo() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo;
+    } // ...mapState({
+    //     totalPrecio: state => state.totalPrecio
+    // })
+
   },
   data: function data() {
     return {
@@ -1582,12 +1711,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+// import {mapGetters} from 'vuex';
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pago'],
   data: function data() {
     return {
       selectTipoDepago: null,
       allOptions: [],
+      pagoAbonado: null,
       tiposDePago: [{
         id: "tipo01",
         nombre: "Efectivo",
@@ -1671,7 +1803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,\r\n.input-precio,\r\n.totales {\r\n    text-align: center;\r\n    max-width: 80px;\n}\r\n", ""]);
+exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
 
 // exports
 
@@ -1709,7 +1841,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span {\r\n    color: #38c172;\n}\nth {\r\n    text-transform: capitalize;\n}\n.input-cantidad {\r\n    max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n    padding: 0 !important;\r\n    margin:0 !important;\n}\n.th-custom{\r\n    text-align:center;\n}\n.text {\r\n    padding-left: 1rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span {\n    color: #38c172;\n}\nth {\n    text-transform: capitalize;\n}\n.input-cantidad {\n    max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n    padding: 0 !important;\n    margin: 0 !important;\n}\n.th-custom {\n    text-align: center;\n}\n.text {\n    padding-left: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -22533,7 +22665,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                 " +
+                                    "\n                                    " +
                                       _vm._s(n.name) +
                                       "\n                                "
                                   )
@@ -22603,7 +22735,11 @@ var render = function() {
                                       _c(
                                         "option",
                                         { attrs: { value: "", disabled: "" } },
-                                        [_vm._v("Seleccione una actividad")]
+                                        [
+                                          _vm._v(
+                                            "Seleccione una\n                                                    actividad"
+                                          )
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _vm._l(_vm.actividades, function(
@@ -22748,7 +22884,11 @@ var render = function() {
                                           selected: ""
                                         }
                                       },
-                                      [_vm._v("Seleccione un Horario")]
+                                      [
+                                        _vm._v(
+                                          "Seleccione un\n                                                Horario"
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _vm._l(_vm.horarios, function(
@@ -22968,7 +23108,8 @@ var render = function() {
                                                 name: "model",
                                                 rawName: "v-model",
                                                 value: _vm.getTotalBalance,
-                                                expression: "getTotalBalance"
+                                                expression:
+                                                  "\n                                                            getTotalBalance\n                                                        "
                                               }
                                             ],
                                             staticClass:
@@ -22997,7 +23138,8 @@ var render = function() {
                                                 name: "model",
                                                 rawName: "v-model",
                                                 value: _vm.getTotalPrecio,
-                                                expression: "getTotalPrecio"
+                                                expression:
+                                                  "\n                                                            getTotalPrecio\n                                                        "
                                               }
                                             ],
                                             staticClass:
@@ -23056,7 +23198,7 @@ var render = function() {
                                               [
                                                 _c("option", [
                                                   _vm._v(
-                                                    "\n                                                                Seleccione un\n                                                                comisionista\n                                                            "
+                                                    "\n                                                                Seleccione\n                                                                un\n                                                                comisionista\n                                                            "
                                                   )
                                                 ])
                                               ]
@@ -23157,7 +23299,11 @@ var render = function() {
                                             {
                                               attrs: { for: "anticipo Minimo" }
                                             },
-                                            [_vm._v("Anticipo Minimo ")]
+                                            [
+                                              _vm._v(
+                                                "Anticipo Minimo\n                                                "
+                                              )
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c("input", {
@@ -23166,6 +23312,11 @@ var render = function() {
                                               type: "text",
                                               min: "0",
                                               readonly: ""
+                                            },
+                                            domProps: {
+                                              value: this.$options.filters.currency(
+                                                _vm.anticipoMinimo
+                                              )
                                             }
                                           })
                                         ]
@@ -23195,7 +23346,11 @@ var render = function() {
                                                 staticClass:
                                                   "col-6 row text-bold ml-3"
                                               },
-                                              [_vm._v(" Totales")]
+                                              [
+                                                _vm._v(
+                                                  "\n                                                    Totales"
+                                                )
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -23414,11 +23569,28 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-6 py-0" }, [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.pagoAbonado,
+                expression: "pagoAbonado"
+              }
+            ],
             staticClass: "form-control",
             attrs: {
               type: "text",
               placeholder: "0.00 $",
               onkeyup: "this.value=this.value.replace(/[^\\d]/,'')"
+            },
+            domProps: { value: _vm.pagoAbonado },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.pagoAbonado = $event.target.value
+              }
             }
           })
         ])
@@ -23482,8 +23654,8 @@ var render = function() {
             staticClass: "form-control",
             attrs: { name: "select1-pago-1", id: "select1-pago-1" }
           },
-          _vm._l(_vm.allOptions, function(option) {
-            return _c("option", [
+          _vm._l(_vm.allOptions, function(option, index) {
+            return _c("option", { key: index }, [
               _vm._v(
                 "\n                    " + _vm._s(option) + "\n                "
               )
@@ -74722,27 +74894,37 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     totaBalanceDetalle2: 0,
     totaBalanceDetalle3: 0,
     totaBalanceDetalle4: 0,
-    totaBalanceDetalle5: 0
+    totaBalanceDetalle5: 0,
+    saldoBalance: 0,
+    saldoPrecio: 0,
+    porcentajeAnticipo: 0,
+    anticipoMinimo: 0
   },
   mutations: {
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
     },
     sumarPrecio: function sumarPrecio(state, data) {
-      var id = data.data['detalleId'];
-      state["totalDetalle".concat(id)] = +data.data['cantidad'];
-      this.dispatch('sumarToTalPrecio');
+      var id = data.data["detalleId"];
+      state["totalDetalle".concat(id)] = +data.data["cantidad"];
+      this.dispatch("sumarToTalPrecio");
     },
     sumarBalance: function sumarBalance(state, data) {
-      var id = data.data['detalleId'];
-      state["totaBalanceDetalle".concat(id)] = +data.data['cantidad'];
-      this.dispatch('sumarTotalBalance');
+      var id = data.data["detalleId"];
+      state["totaBalanceDetalle".concat(id)] = +data.data["cantidad"];
+      this.dispatch("sumarTotalBalance");
     },
     sumarTotalPrecio: function sumarTotalPrecio(state) {
       state.totalPrecio = state.totalDetalle1 + state.totalDetalle2 + state.totalDetalle3 + state.totalDetalle4 + state.totalDetalle5;
     },
     sumarTotalBalance: function sumarTotalBalance(state) {
       state.totalBalance = state.totaBalanceDetalle1 + state.totaBalanceDetalle2 + state.totaBalanceDetalle3 + state.totaBalanceDetalle4 + state.totaBalanceDetalle5;
+    },
+    porcentajeAnticipo: function porcentajeAnticipo(state, anticipo) {
+      state.porcentajeAnticipo = anticipo;
+    },
+    anticipoMinimo: function anticipoMinimo(state) {
+      state.anticipoMinimo = state.totalBalance * state.porcentajeAnticipo / 100;
     }
   },
   getters: {
@@ -74751,14 +74933,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     getTotalBalance: function getTotalBalance(state) {
       return state.totalBalance;
+    },
+    getAnticipoMinimo: function getAnticipoMinimo(state) {
+      return state.anticipoMinimo;
     }
   },
   actions: {
     sumarToTalPrecio: function sumarToTalPrecio(context) {
-      context.commit('sumarTotalPrecio');
+      context.commit("sumarTotalPrecio");
     },
     sumarTotalBalance: function sumarTotalBalance(context) {
-      context.commit('sumarTotalBalance');
+      context.commit("sumarTotalBalance");
+      context.commit('anticipoMinimo');
+    },
+    setPorcentajeAnticipo: function setPorcentajeAnticipo(context, anticipo) {
+      context.commit('porcentajeAnticipo', anticipo);
+    },
+    setAnticipoMinimo: function setAnticipoMinimo(context) {
+      context.commit('anticipoMinimo');
     }
   }
 });

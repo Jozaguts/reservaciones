@@ -9,6 +9,7 @@
                     <input
                         type="text"
                         class="form-control"
+                        v-model="pagoAbonado"
                         placeholder="0.00 $"
                         onkeyup="this.value=this.value.replace(/[^\d]/,'')"
                     />
@@ -40,7 +41,7 @@
                     id="select1-pago-1"
                     class="form-control"
                 >
-                    <option v-for="option in allOptions" >
+                    <option v-for="(option, index) in allOptions" :key="index">
                         {{option}}
                     </option>
                 </select>
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+// import {mapGetters} from 'vuex';
 export default {
     props:[
         'pago'
@@ -58,6 +60,7 @@ export default {
         return {
             selectTipoDepago: null,
             allOptions: [],
+            pagoAbonado: null,
             tiposDePago: [
             {
                 id: "tipo01",
@@ -99,13 +102,9 @@ export default {
     },
       watch: {
         selectTipoDepago() {
-           
-            let opciones = this.tiposDePago.filter(tipo => tipo.nombre == this.selectTipoDepago) 
+            let opciones = this.tiposDePago.filter(tipo => tipo.nombre == this.selectTipoDepago)
             this.allOptions = opciones[0].opciones
-                
-            }
-            
-        
+        }
     },
 };
 </script>

@@ -7,7 +7,7 @@
         aria-labelledby="my-modal-title"
         aria-hidden="true"
     >
-        <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="my-modal-title">
@@ -23,31 +23,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="container"> <!-- inicio del container del model -->
+                    <div class="container">
+                        <!-- inicio del container del model -->
                         <v-stepper v-model="e6" vertical>
-                             <v-stepper-header>
+                            <v-stepper-header>
                                 <template v-for="n in steps">
                                     <v-stepper-step
-                                    :key="`${n.value}-step`"
-                                    :complete="e6 > n"
-                                    :step="n.value"
-                                    editable
+                                        :key="`${n.value}-step`"
+                                        :complete="e6 > n"
+                                        :step="n.value"
+                                        editable
                                     >
-                                     {{ n.name }}
+                                        {{ n.name }}
                                     </v-stepper-step>
 
                                     <v-divider
-                                    v-if="n.value !== steps"
-                                    :key="n.value"
+                                        v-if="n.value !== steps"
+                                        :key="n.value"
                                     ></v-divider>
                                 </template>
                             </v-stepper-header>
-                             <v-stepper-items>
+                            <v-stepper-items>
                                 <v-stepper-content step="1">
                                     <div class="row">
                                         <div class="col-xs-4 col-md-4">
                                             <div class="form-group">
-                                                <label for="my-input">Actividad</label>
+                                                <label for="my-input"
+                                                    >Actividad</label
+                                                >
                                                 <select
                                                     name="actividad"
                                                     id="actividad"
@@ -55,12 +58,15 @@
                                                     v-model="actividad_id"
                                                 >
                                                     <option value="" disabled
-                                                        >Seleccione una actividad</option
+                                                        >Seleccione una
+                                                        actividad</option
                                                     >
                                                     <option
                                                         v-for="actividad in actividades"
                                                         :value="actividad.id"
-                                                        v-text="actividad.nombre"
+                                                        v-text="
+                                                            actividad.nombre
+                                                        "
                                                         :key="actividad.id"
                                                     ></option>
                                                 </select>
@@ -69,21 +75,31 @@
                                         <div class="col-xs-4 col-md-4">
                                             <div class="container p-0">
                                                 <div class="row p-0">
-                                                    <div class="col-sx-12 col-md-12 p-0">
-                                                        <label for="fecha">Fecha</label>
+                                                    <div
+                                                        class="col-sx-12 col-md-12 p-0"
+                                                    >
+                                                        <label for="fecha"
+                                                            >Fecha</label
+                                                        >
                                                         <input
                                                             type="text"
                                                             class="form-control"
                                                             v-model="date"
                                                             readonly
-                                                            @click="picker = !picker"
+                                                            @click="
+                                                                picker = !picker
+                                                            "
                                                         />
                                                         <template class="fade">
                                                             <v-date-picker
                                                                 v-model="date"
-                                                                :full-width="true"
+                                                                :full-width="
+                                                                    true
+                                                                "
                                                                 v-if="picker"
-                                                                @click:date="clickDate"
+                                                                @click:date="
+                                                                    clickDate
+                                                                "
                                                                 locale="es"
                                                             >
                                                             </v-date-picker>
@@ -102,14 +118,21 @@
                                                 v-model="horario_id"
                                                 @change="getSalidasLlegadas()"
                                             >
-                                                <option value="false" disabled selected
-                                                    >Seleccione un Horario</option
+                                                <option
+                                                    value="false"
+                                                    disabled
+                                                    selected
+                                                    >Seleccione un
+                                                    Horario</option
                                                 >
                                                 <option
-                                                    v-for="(horario, index) in horarios"
+                                                    v-for="(horario,
+                                                    index) in horarios"
                                                     :key="index"
                                                     v-text="
-                                                        horario.hini + ' | ' + horario.hfin
+                                                        horario.hini +
+                                                            ' | ' +
+                                                            horario.hfin
                                                     "
                                                     :value="horario.id"
                                                 >
@@ -121,7 +144,9 @@
                                         <!-- segunda fila -->
                                         <!-- salida ubicación  -->
                                         <div class="col-xs-4 col-md-4">
-                                            <label for="salidas">Salida | Ubicación</label>
+                                            <label for="salidas"
+                                                >Salida | Ubicación</label
+                                            >
                                             <select
                                                 name="salidas"
                                                 id="salidas"
@@ -137,20 +162,30 @@
                                             </select>
                                         </div>
                                         <!-- ucupación -->
-                                        <div class="col-md-4 col-xs-12 text-center">
-                                            <label for="Ocupación">Ocupación</label>
+                                        <div
+                                            class="col-md-4 col-xs-12 text-center"
+                                        >
+                                            <label for="Ocupación"
+                                                >Ocupación</label
+                                            >
                                             <p
                                                 name="ocupacion"
                                                 id="ocupacion"
                                                 v-if="ocupacion"
                                             >
                                                 <span
-                                                    v-text="ocupacion.ocupacion + ' O /'"
+                                                    v-text="
+                                                        ocupacion.ocupacion +
+                                                            ' O /'
+                                                    "
                                                     class="ocupacion_span"
                                                 >
                                                 </span>
                                                 <span
-                                                    v-text="ocupacion.disponibilidad + ' D'"
+                                                    v-text="
+                                                        ocupacion.disponibilidad +
+                                                            ' D'
+                                                    "
                                                     class="disponibilidad_span"
                                                 >
                                                 </span>
@@ -158,7 +193,9 @@
                                         </div>
                                         <!-- Llegadas ubicación  -->
                                         <div class="col-xs-4 col-md-4">
-                                            <label for="llegada">Llegada | Ubicación</label>
+                                            <label for="llegada"
+                                                >Llegada | Ubicación</label
+                                            >
                                             <select
                                                 name="llegada"
                                                 id="llegada"
@@ -226,20 +263,26 @@
                                                             />
                                                         </div>
                                                     </td>
-                                                    <td colspan="2" class="d-flex">
+                                                    <td
+                                                        colspan="2"
+                                                        class="d-flex"
+                                                    >
                                                         <input
                                                             type="text"
                                                             readonly
                                                             class="form-control totales mr-1 totalBold d-inline"
-                                                            v-model="getTotalBalance"
+                                                            v-model="
+                                                                getTotalBalance
+                                                            "
                                                         />
                                                         <input
                                                             type="text"
                                                             readonly
                                                             class="form-control totales totalBold d-inline"
-                                                            v-model="getTotalPrecio"
+                                                            v-model="
+                                                                getTotalPrecio
+                                                            "
                                                         />
-
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -258,14 +301,18 @@
                                                                 class="form-control col-8 ml-auto"
                                                             >
                                                                 <option>
-                                                                    Seleccione un
+                                                                    Seleccione
+                                                                    un
                                                                     comisionista
                                                                 </option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td colspan="2">
-                                                        <button class="btn btn-success col"  @click="e6 = 2">
+                                                        <button
+                                                            class="btn btn-success col"
+                                                            @click="e6 = 2"
+                                                        >
                                                             Siguiente
                                                         </button>
                                                     </td>
@@ -274,51 +321,110 @@
                                         </table>
                                     </div>
                                 </v-stepper-content>
-                                 <v-stepper-content step="2">
+                                <v-stepper-content step="2">
                                     <v-container>
                                         <v-row>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="total-balance">Total Balance</label>
-                                                    <input type="text" min="0" class="form-control" readonly :value="this.$options.filters.currency(getTotalBalance)" >
+                                                    <label for="total-balance"
+                                                        >Total Balance</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        min="0"
+                                                        class="form-control"
+                                                        readonly
+                                                        :value="
+                                                            this.$options.filters.currency(
+                                                                getTotalBalance
+                                                            )
+                                                        "
+                                                    />
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="total-Precio">Total Precio</label>
-                                                    <input type="text" min="0" class="form-control" readonly :value="this.$options.filters.currency(getTotalPrecio)">
+                                                    <label for="total-Precio"
+                                                        >Total Precio</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        min="0"
+                                                        class="form-control"
+                                                        readonly
+                                                        :value="
+                                                            this.$options.filters.currency(
+                                                                getTotalPrecio
+                                                            )
+                                                        "
+                                                    />
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group ">
-                                                    <label for="anticipo Minimo">Anticipo Minimo </label>
-                                                    <input type="text" min="0" class="form-control" readonly>
+                                                    <label for="anticipo Minimo"
+                                                        >Anticipo Minimo
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        min="0"
+                                                        class="form-control"
+                                                        readonly
+                                                        :value="
+                                                            this.$options.filters.currency(
+                                                                anticipoMinimo
+                                                            )
+                                                        "                                                       
+                                                    />
                                                 </div>
                                             </div>
                                         </v-row>
-                                  <!-- AQUI VA EL TIPO EL COMPONENTE TIPO DE PAGO -->
-                                  <FormaDePago 
-                                  v-for="pago in totalPagos" 
-                                  :pago="pago" 
-                                  :key="pago" >
-                                  </FormaDePago>
+                                        <!-- AQUI VA EL TIPO EL COMPONENTE TIPO DE PAGO -->
+                                        <FormaDePago
+                                            v-for="pago in totalPagos"
+                                            :pago="pago"
+                                            :key="pago"
+                                        >
+                                        </FormaDePago>
                                         <!-- fila de totales -->
                                         <v-row>
                                             <div class="col-4 mr-auto">
                                                 <div class="form-group row">
-                                                    <label class="col-6 row text-bold ml-3"> Totales</label>
+                                                    <label
+                                                        class="col-6 row text-bold ml-3"
+                                                    >
+                                                        Totales</label
+                                                    >
                                                     <div class="col-6">
-                                                        <input type="text" class="form-control" readonly placeholder="$1,000.00">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            readonly
+                                                            placeholder="$1,000.00"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                         </v-row>
                                         <v-row>
                                             <div class="col-5">
-                                                <div class="form-group text-center d-flex flex-column align-items-center">
-                                                    <label for="saldo-balance" class="display-1">Saldo Balance</label>
-                                                    <input type="text" class="form-control col-6" readonly placeholder="$300.00">
-                                                    <select class="form-control col-6">
+                                                <div
+                                                    class="form-group text-center d-flex flex-column align-items-center"
+                                                >
+                                                    <label
+                                                        for="saldo-balance"
+                                                        class="display-1"
+                                                        >Saldo Balance</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        class="form-control col-6"
+                                                        readonly
+                                                        placeholder="$300.00"
+                                                    />
+                                                    <select
+                                                        class="form-control col-6"
+                                                    >
                                                         <option>
                                                             CxC
                                                         </option>
@@ -329,10 +435,23 @@
                                                 </div>
                                             </div>
                                             <div class="col-5">
-                                                <div class="form-group text-center d-flex flex-column align-items-center">
-                                                    <label for="saldo-doble" class="display-1 mt-1">Saldo Precio</label>
-                                                    <input type="text" class="form-control col-6 mt-1" readonly placeholder="$1,300.00">
-                                                    <select class="form-control col-6">
+                                                <div
+                                                    class="form-group text-center d-flex flex-column align-items-center"
+                                                >
+                                                    <label
+                                                        for="saldo-doble"
+                                                        class="display-1 mt-1"
+                                                        >Saldo Precio</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        class="form-control col-6 mt-1"
+                                                        readonly
+                                                        placeholder="$1,300.00"
+                                                    />
+                                                    <select
+                                                        class="form-control col-6"
+                                                    >
                                                         <option>
                                                             Descartar
                                                         </option>
@@ -342,9 +461,13 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-2 d-flex align-items-end">
+                                            <div
+                                                class="col-2 d-flex align-items-end"
+                                            >
                                                 <div class="form-group">
-                                                    <button class="btn btn-success">
+                                                    <button
+                                                        class="btn btn-success"
+                                                    >
                                                         Confirmar
                                                     </button>
                                                 </div>
@@ -354,7 +477,8 @@
                                 </v-stepper-content>
                             </v-stepper-items>
                         </v-stepper>
-                    </div> <!-- fin del container -->
+                    </div>
+                    <!-- fin del container -->
                 </div>
             </div>
         </div>
@@ -365,7 +489,6 @@ import DetalleReservacion from "../DetalleReservacionComponent.vue";
 import FormaDePago from "./FormaDePago.vue";
 import Loader from "../LoaderComponent.vue";
 import store from "../../store/index.js";
-// import {mapState} from 'vuex'
 export default {
     components: {
         DetalleReservacion,
@@ -382,14 +505,16 @@ export default {
         getTotalBalance() {
             return (this.totalBalance = store.getters.getTotalBalance);
         },
+        anticipoMinimo() {
+            return store.getters.getAnticipoMinimo
+        }
         // ...mapState({
         //     totalPrecio: state => state.totalPrecio
         // })
-
     },
     data() {
         return {
-            steps:[
+            steps: [
                 {
                     value: 1,
                     name: "Reservaciones"
@@ -547,10 +672,10 @@ th {
 }
 .v-stepper--vertical .v-stepper__content {
     padding: 0 !important;
-    margin:0 !important;
+    margin: 0 !important;
 }
-.th-custom{
-    text-align:center;
+.th-custom {
+    text-align: center;
 }
 .text {
     padding-left: 1rem;

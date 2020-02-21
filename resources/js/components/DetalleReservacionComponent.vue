@@ -149,6 +149,7 @@ export default {
                         this.inputPrecio = this.currency(res.data.precio);
                         this.balanceBase = parseInt(res.data.balance);
                         this.precioBase = parseInt(res.data.precio);
+                        store.dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo)
                         try {
                             store.commit("showLoader");
                         } catch (error) {
