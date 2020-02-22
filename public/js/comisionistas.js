@@ -114,23 +114,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       clave: "",
-      nombre: ""
+      nombre: "",
+      messageError: []
     };
   },
   methods: {
     guardar: function guardar() {
-      axios.post('/comisionista', {
-        clave: this.clave,
-        nombre: this.nombre
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      var _this = this;
+
+      if (this.clave != "" && this.nombre != "") {
+        axios.post("/comisionista", {
+          clave: this.clave,
+          nombre: this.nombre
+        }).then(function (response) {
+          swal({
+            title: "¡Guardado!",
+            icon: "success",
+            text: response.data.response
+          });
+          console.log(response);
+        }).catch(function (error) {
+          var errros = error.response.data.errors;
+
+          for (var key in errros) {
+            if (errros.hasOwnProperty(key)) {
+              var messageError = errros[key];
+
+              _this.messageError.push("<strong class=\"text-capitalize\">".concat(key, "!</strong> ").concat(messageError, "."));
+            }
+          }
+
+          console.log(_this.messageError);
+        });
+      }
     }
   }
 });
@@ -631,6 +661,27 @@ var render = function() {
         }
       },
       [
+        _vm.messageError.length > 0
+          ? _c(
+              "div",
+              {
+                staticClass: "alert alert-danger alert-dismissible fade show",
+                attrs: { role: "alert" }
+              },
+              [
+                _vm._l(_vm.messageError, function(error) {
+                  return _c("p", {
+                    key: error,
+                    domProps: { innerHTML: _vm._s(error) }
+                  })
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ],
+              2
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group col-6 offset-3" }, [
           _c("label", { attrs: { for: "clave" } }, [_vm._v("Clave")]),
           _vm._v(" "),
@@ -697,7 +748,25 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
 render._withStripped = true
 
 

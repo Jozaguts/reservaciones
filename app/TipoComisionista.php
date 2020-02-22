@@ -3,10 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
+use Illuminate\Database\Eloquent\SoftDeletes; 
 
 class TipoComisionista extends Model
 {
-    protected $table="tipocomisionistas";
-    protected $fillable = ['idusuario', 'clave', 'nombre'];
+    use SoftDeletes; 
+    protected $dates = ['deleted_at'];
+    protected $attributes = [
+        'remove' => false,
+        'active'=>true
+    ]; 
+    protected $table = 'tipocomisionistas';
+    protected $fillable = ['idusuario', 'clave', 'nombre', 'active', 'remove'];
 }
