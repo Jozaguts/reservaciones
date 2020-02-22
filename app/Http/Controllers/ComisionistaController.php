@@ -8,8 +8,12 @@ use App\TipoComisionista;
 
 class ComisionistaController extends Controller
 {
-    public function tipoComisionista(Request $request)
+    public function index(Request $request)
     {
+        if($request->ajax()) {
+            $tipoComisionistas = TipoComisionista::where('deleted_at', null)->get();
+            return response()->json(['tipoComisionistas' => $tipoComisionistas]);
+        }
         return view('sections.commission-agents');
     }
 
@@ -24,7 +28,8 @@ class ComisionistaController extends Controller
                     'idusuario' => $request->user()->id,
                 ]);
                 if ($tipoComisionista->save()) {
-                    return response()->json(['response' => '¡Tipo de comisionista creado exitosamente!']);
+                    $tipoComisionistas = TipoComisionista::all();
+                    return response()->json(['response' => '¡Tipo de comisionista creado exitosamente!','tipoComisionistas' => $tipoComisionistas]);
                 } else {
                     return response()->json(['response' => '¡Error al crear nuevo tipo de comisionista!']);
                 }

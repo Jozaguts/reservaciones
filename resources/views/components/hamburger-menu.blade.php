@@ -37,7 +37,7 @@
         </a>
         <ul class="sub-ul d-none" id="subUlCom">
             <a href="#" class="sub-li__link"><li class="sub-ul__item sub-li-comisionistas">Catálogo de Comisionistas</li></a>
-        <a href="{{url('comisionista/tipo')}}" class="sub-li__link"><li class="sub-ul__item sub-li-comisionistas">Tipo de comisionistas</li></a>
+        <a href="{{url('comisionistas')}}" class="sub-li__link"><li class="sub-ul__item sub-li-comisionistas">Tipo de comisionistas</li></a>
             <a href="#" class="sub-li__link"><li class="sub-ul__item  sub-li-comisionistas ">Pago a Comisionistas</li></a>
         </ul>
         <a href="#" class="hm-list__link ">

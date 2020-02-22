@@ -24,7 +24,7 @@ class StoreTipoComisionista extends FormRequest
     public function rules()
     {
         return [
-            'clave' => 'required|min:8',
+            'clave' => 'required|min:8|unique:tipocomisionistas',
             'nombre' => 'required',
         ];
     }

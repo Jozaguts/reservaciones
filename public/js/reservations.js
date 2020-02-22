@@ -1803,7 +1803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n}\n", ""]);
+exports.push([module.i, "\n.input-balance,\r\n.input-precio,\r\n.totales {\r\n    text-align: center;\r\n    max-width: 80px;\n}\r\n", ""]);
 
 // exports
 
@@ -1841,7 +1841,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\n    color: #3490dc;\n}\n.disponibilidad_span {\n    color: #38c172;\n}\nth {\n    text-transform: capitalize;\n}\n.input-cantidad {\n    max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n    font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n    padding: 0 !important;\n    margin: 0 !important;\n}\n.th-custom {\n    text-align: center;\n}\n.text {\n    padding-left: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span {\r\n    color: #38c172;\n}\nth {\r\n    text-transform: capitalize;\n}\n.input-cantidad {\r\n    max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n    padding: 0 !important;\r\n    margin: 0 !important;\n}\n.th-custom {\r\n    text-align: center;\n}\n.text {\r\n    padding-left: 1rem;\n}\r\n", ""]);
 
 // exports
 
@@ -74898,7 +74898,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     saldoBalance: 0,
     saldoPrecio: 0,
     porcentajeAnticipo: 0,
-    anticipoMinimo: 0
+    anticipoMinimo: 0,
+    tipoComisionistas: []
   },
   mutations: {
     showLoader: function showLoader(state) {
@@ -74925,6 +74926,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     anticipoMinimo: function anticipoMinimo(state) {
       state.anticipoMinimo = state.totalBalance * state.porcentajeAnticipo / 100;
+    },
+    tipoComisionistas: function tipoComisionistas(state, comisionistas) {
+      state.tipoComisionistas = comisionistas;
     }
   },
   getters: {
@@ -74936,6 +74940,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     getAnticipoMinimo: function getAnticipoMinimo(state) {
       return state.anticipoMinimo;
+    },
+    getTipoComisionistas: function getTipoComisionistas(state) {
+      return state.tipoComisionistas;
     }
   },
   actions: {
@@ -74951,6 +74958,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     setAnticipoMinimo: function setAnticipoMinimo(context) {
       context.commit('anticipoMinimo');
+    },
+    setTipoComisionistas: function setTipoComisionistas(context, comisionistas) {
+      context.commit('tipoComisionistas', comisionistas);
     }
   }
 });

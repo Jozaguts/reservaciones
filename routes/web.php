@@ -29,10 +29,10 @@ Route::group(['prefix' => 'reservaciones'], function () {
     Route::get('/getbalanceprecio', 'ReservacionesController@getBalancePrecio')->middleware('auth');
 });
 
-Route::group(['prefix' => 'comisionista'], function () {
+Route::group(['prefix' => 'comisionistas'], function () {
 
+    Route::get('/','ComisionistaController@index')->middleware('auth');
     Route::post('/', 'ComisionistaController@crear')->middleware('auth');
-    Route::get('tipo','ComisionistaController@tipoComisionista')->middleware('auth');
 
 });
 

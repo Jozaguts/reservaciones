@@ -5,12 +5,15 @@ import Vuetify from "vuetify";
 Vue.use(Vuex);
 Vue.use(Vuetify);
 
-Vue.component('tipo-comisionistas', require('./views/modals/TipoComisionistas.vue').default);
+import comisionistas from './views/Comisionistas.vue'
 new Vue({
     el: "#comisionistas",
+    components: {
+        "comisionistas-component":comisionistas
+    },
     vuetify: new Vuetify({
         icons: {
-            iconfont: "mdi" // default - only for display purposes
+            iconfont: "mdi" 
         }
     })
 });

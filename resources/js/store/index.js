@@ -23,6 +23,7 @@ let store = new Vuex.Store({
         saldoPrecio: 0,
         porcentajeAnticipo: 0,
         anticipoMinimo: 0,
+        tipoComisionistas:[]
     },
     mutations: {
         showLoader(state) {
@@ -59,6 +60,9 @@ let store = new Vuex.Store({
         },
         anticipoMinimo(state) {
             state.anticipoMinimo = (state.totalBalance * state.porcentajeAnticipo) / 100;
+        },
+        tipoComisionistas(state, comisionistas) {
+            state.tipoComisionistas = comisionistas;
         }
     },
     getters: {
@@ -70,7 +74,10 @@ let store = new Vuex.Store({
         },
         getAnticipoMinimo(state) {
             return state.anticipoMinimo;
-        }
+        },
+        getTipoComisionistas(state) {
+            return state.tipoComisionistas
+        } 
     },
     actions: {
         sumarToTalPrecio(context) {
@@ -86,7 +93,11 @@ let store = new Vuex.Store({
         },
         setAnticipoMinimo(context) {
             context.commit('anticipoMinimo');
+        },
+        setTipoComisionistas(context,comisionistas) {
+            context.commit('tipoComisionistas',comisionistas);
         }
+
     }
 });
 

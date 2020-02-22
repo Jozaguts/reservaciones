@@ -86,15 +86,16 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/ */ "./resources/js/store/index.js");
 //
 //
 //
@@ -124,6 +125,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -137,16 +157,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.clave != "" && this.nombre != "") {
-        axios.post("/comisionista", {
+        axios.post("/comisionistas", {
           clave: this.clave,
           nombre: this.nombre
         }).then(function (response) {
+          _store___WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('setTipoComisionistas', response.data.tipoComisionistas);
           swal({
             title: "¡Guardado!",
             icon: "success",
             text: response.data.response
           });
-          console.log(response);
         }).catch(function (error) {
           var errros = error.response.data.errors;
 
@@ -162,6 +182,118 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store */ "./resources/js/store/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tipoComisionistas: []
+    };
+  },
+  // revisar la logica de computed properties y watchers
+  computed: {
+    countTipoComisionistas: function countTipoComisionistas() {
+      return this.tipoComisionistas = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.getTipoComisionistas;
+    }
+  },
+  watch: {
+    countTipoComisionistas: function countTipoComisionistas(oldValue, newValue) {
+      return newValue;
+    }
+  },
+  methods: {
+    getTipoComisionistas: function getTipoComisionistas() {
+      var _this = this;
+
+      axios.get('/comisionistas/').then(function (result) {
+        _this.tipoComisionistas = result.data.tipoComisionistas;
+      }).catch(function (err) {});
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getTipoComisionistas();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Comisionistas.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Comisionistas.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Comisionistas_ComisionistasForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Comisionistas/ComisionistasForm */ "./resources/js/components/Comisionistas/ComisionistasForm.vue");
+/* harmony import */ var _components_Comisionistas_ComisionistasTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Comisionistas/ComisionistasTable */ "./resources/js/components/Comisionistas/ComisionistasTable.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    "comisionistas-table": _components_Comisionistas_ComisionistasTable__WEBPACK_IMPORTED_MODULE_1__["default"],
+    "comisionistas-form": _components_Comisionistas_ComisionistasForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -635,10 +767,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -650,105 +782,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "modal-body" }, [
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-          }
-        }
-      },
-      [
-        _vm.messageError.length > 0
-          ? _c(
-              "div",
-              {
-                staticClass: "alert alert-danger alert-dismissible fade show",
-                attrs: { role: "alert" }
-              },
-              [
-                _vm._l(_vm.messageError, function(error) {
-                  return _c("p", {
-                    key: error,
-                    domProps: { innerHTML: _vm._s(error) }
-                  })
-                }),
-                _vm._v(" "),
-                _vm._m(0)
-              ],
-              2
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6 offset-3" }, [
-          _c("label", { attrs: { for: "clave" } }, [_vm._v("Clave")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.clave,
-                expression: "clave"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.clave },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.clave = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6 offset-3" }, [
-          _c("label", { attrs: { for: "nombre" } }, [_vm._v("Nombre")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.nombre,
-                expression: "nombre"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.nombre = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6 offset-3" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-block",
-              on: { click: _vm.guardar }
-            },
-            [_vm._v("Guardar")]
-          )
-        ])
-      ]
-    )
-  ])
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "comisionistas",
+        "aria-hidden": "true",
+        id: "comisionistasForm"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                    }
+                  }
+                },
+                [
+                  _vm.messageError.length > 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-danger alert-dismissible fade show",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._l(_vm.messageError, function(error) {
+                            return _c("p", {
+                              key: error,
+                              domProps: { innerHTML: _vm._s(error) }
+                            })
+                          }),
+                          _vm._v(" "),
+                          _vm._m(1)
+                        ],
+                        2
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6 offset-3" }, [
+                    _c("label", { attrs: { for: "clave" } }, [_vm._v("Clave")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.clave,
+                          expression: "clave"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.clave },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.clave = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6 offset-3" }, [
+                    _c("label", { attrs: { for: "nombre" } }, [
+                      _vm._v("Nombre")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.nombre,
+                          expression: "nombre"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.nombre },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.nombre = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6 offset-3" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-block",
+                        on: { click: _vm.guardar }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "tipoComisionistasLabel" } },
+        [_vm._v("Tipo comisionistas")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -765,6 +950,149 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("table", { staticClass: "table" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.tipoComisionistas, function(comisionista) {
+        return _c("tr", { key: comisionista.id, attrs: { id: "trBg" } }, [
+          _c("td", { staticClass: "table-head table-head__name" }, [
+            _vm._v(_vm._s(comisionista.clave))
+          ]),
+          _vm._v(" "),
+          _c("td", { staticClass: "table-head table-head__surname" }, [
+            _vm._v(_vm._s(comisionista.nombre))
+          ]),
+          _vm._v(" "),
+          _vm._m(1, true)
+        ])
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "table-head" }, [_vm._v("Clave")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "table-head" }, [_vm._v("Apellidos")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "table-head" }, [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "table-head table-head__actions" }, [
+      _c("a", {
+        staticClass: "table-head table-head__btn btn-edit btn btn-primary",
+        attrs: {
+          href: "#!",
+          "data-toggle": "modal",
+          "data-target": "#comisionistasForm"
+        }
+      }),
+      _vm._v(" "),
+      _c("a", {
+        staticClass: "table-head table-head__btn btn btn-delete btn-danger",
+        attrs: { href: "#!" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header text-dark font-weight-bold" }, [
+        _vm._v("Tipo de comisionistas")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          [_c("comisionistas-table"), _vm._v(" "), _c("comisionistas-form")],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-end my-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success",
+          attrs: {
+            href: "#!",
+            "data-toggle": "modal",
+            "data-target": "#comisionistasForm"
+          }
+        },
+        [
+          _c("span", { staticClass: "font-weight-bolder" }, [_vm._v("+")]),
+          _vm._v(" Tipo de comisionista")
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -51356,35 +51684,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _views_Comisionistas_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Comisionistas.vue */ "./resources/js/views/Comisionistas.vue");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_2___default.a);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('tipo-comisionistas', __webpack_require__(/*! ./views/modals/TipoComisionistas.vue */ "./resources/js/views/modals/TipoComisionistas.vue").default);
+
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#comisionistas",
+  components: {
+    "comisionistas-component": _views_Comisionistas_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_2___default.a({
     icons: {
-      iconfont: "mdi" // default - only for display purposes
-
+      iconfont: "mdi"
     }
   })
 });
 
 /***/ }),
 
-/***/ "./resources/js/views/modals/TipoComisionistas.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/views/modals/TipoComisionistas.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/components/Comisionistas/ComisionistasForm.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasForm.vue ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TipoComisionistas.vue?vue&type=template&id=3b55fb7e& */ "./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e&");
-/* harmony import */ var _TipoComisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TipoComisionistas.vue?vue&type=script&lang=js& */ "./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComisionistasForm.vue?vue&type=template&id=24295d50& */ "./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50&");
+/* harmony import */ var _ComisionistasForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComisionistasForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -51394,9 +51725,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TipoComisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ComisionistasForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -51406,38 +51737,280 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/modals/TipoComisionistas.vue"
+component.options.__file = "resources/js/components/Comisionistas/ComisionistasForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TipoComisionistas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/modals/TipoComisionistas.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ComisionistasForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50& ***!
+  \****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TipoComisionistas.vue?vue&type=template&id=3b55fb7e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/modals/TipoComisionistas.vue?vue&type=template&id=3b55fb7e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ComisionistasForm.vue?vue&type=template&id=24295d50& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasForm.vue?vue&type=template&id=24295d50&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TipoComisionistas_vue_vue_type_template_id_3b55fb7e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasForm_vue_vue_type_template_id_24295d50___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Comisionistas/ComisionistasTable.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasTable.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComisionistasTable.vue?vue&type=template&id=208b7a2c& */ "./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c&");
+/* harmony import */ var _ComisionistasTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComisionistasTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ComisionistasTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Comisionistas/ComisionistasTable.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ComisionistasTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ComisionistasTable.vue?vue&type=template&id=208b7a2c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comisionistas/ComisionistasTable.vue?vue&type=template&id=208b7a2c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComisionistasTable_vue_vue_type_template_id_208b7a2c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  state: {
+    showCreateReservationModal: false,
+    showLoader: false,
+    totalPrecio: 0,
+    totalBalance: 0,
+    totalDetalle1: 0,
+    totalDetalle2: 0,
+    totalDetalle3: 0,
+    totalDetalle4: 0,
+    totalDetalle5: 0,
+    totaBalanceDetalle1: 0,
+    totaBalanceDetalle2: 0,
+    totaBalanceDetalle3: 0,
+    totaBalanceDetalle4: 0,
+    totaBalanceDetalle5: 0,
+    saldoBalance: 0,
+    saldoPrecio: 0,
+    porcentajeAnticipo: 0,
+    anticipoMinimo: 0,
+    tipoComisionistas: []
+  },
+  mutations: {
+    showLoader: function showLoader(state) {
+      state.showLoader = !state.showLoader;
+    },
+    sumarPrecio: function sumarPrecio(state, data) {
+      var id = data.data["detalleId"];
+      state["totalDetalle".concat(id)] = +data.data["cantidad"];
+      this.dispatch("sumarToTalPrecio");
+    },
+    sumarBalance: function sumarBalance(state, data) {
+      var id = data.data["detalleId"];
+      state["totaBalanceDetalle".concat(id)] = +data.data["cantidad"];
+      this.dispatch("sumarTotalBalance");
+    },
+    sumarTotalPrecio: function sumarTotalPrecio(state) {
+      state.totalPrecio = state.totalDetalle1 + state.totalDetalle2 + state.totalDetalle3 + state.totalDetalle4 + state.totalDetalle5;
+    },
+    sumarTotalBalance: function sumarTotalBalance(state) {
+      state.totalBalance = state.totaBalanceDetalle1 + state.totaBalanceDetalle2 + state.totaBalanceDetalle3 + state.totaBalanceDetalle4 + state.totaBalanceDetalle5;
+    },
+    porcentajeAnticipo: function porcentajeAnticipo(state, anticipo) {
+      state.porcentajeAnticipo = anticipo;
+    },
+    anticipoMinimo: function anticipoMinimo(state) {
+      state.anticipoMinimo = state.totalBalance * state.porcentajeAnticipo / 100;
+    },
+    tipoComisionistas: function tipoComisionistas(state, comisionistas) {
+      state.tipoComisionistas = comisionistas;
+    }
+  },
+  getters: {
+    getTotalPrecio: function getTotalPrecio(state) {
+      return state.totalPrecio;
+    },
+    getTotalBalance: function getTotalBalance(state) {
+      return state.totalBalance;
+    },
+    getAnticipoMinimo: function getAnticipoMinimo(state) {
+      return state.anticipoMinimo;
+    },
+    getTipoComisionistas: function getTipoComisionistas(state) {
+      return state.tipoComisionistas;
+    }
+  },
+  actions: {
+    sumarToTalPrecio: function sumarToTalPrecio(context) {
+      context.commit("sumarTotalPrecio");
+    },
+    sumarTotalBalance: function sumarTotalBalance(context) {
+      context.commit("sumarTotalBalance");
+      context.commit('anticipoMinimo');
+    },
+    setPorcentajeAnticipo: function setPorcentajeAnticipo(context, anticipo) {
+      context.commit('porcentajeAnticipo', anticipo);
+    },
+    setAnticipoMinimo: function setAnticipoMinimo(context) {
+      context.commit('anticipoMinimo');
+    },
+    setTipoComisionistas: function setTipoComisionistas(context, comisionistas) {
+      context.commit('tipoComisionistas', comisionistas);
+    }
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "./resources/js/views/Comisionistas.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/views/Comisionistas.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comisionistas.vue?vue&type=template&id=3da14490& */ "./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490&");
+/* harmony import */ var _Comisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comisionistas.vue?vue&type=script&lang=js& */ "./resources/js/views/Comisionistas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Comisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/Comisionistas.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Comisionistas.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/views/Comisionistas.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Comisionistas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Comisionistas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comisionistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Comisionistas.vue?vue&type=template&id=3da14490& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Comisionistas.vue?vue&type=template&id=3da14490&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comisionistas_vue_vue_type_template_id_3da14490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
