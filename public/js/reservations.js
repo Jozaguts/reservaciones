@@ -746,6 +746,11 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (res) {
           _this.ocupaciones = res.data.ocupacion;
 
+          if (_this.draftPrecio > 0 || _this.draftBalance) {
+            console.log(_this.draftPrecio = _this.cantidad * _this.draftPrecio);
+            console.log(_this.draftBalance = _this.cantidad * _this.draftBalance);
+          }
+
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
           } catch (error) {
@@ -780,6 +785,8 @@ __webpack_require__.r(__webpack_exports__);
           _this2.inputPrecio = _this2.currency(res.data.precio);
           _this2.balanceBase = parseInt(res.data.balance);
           _this2.precioBase = parseInt(res.data.precio);
+          console.log(_this2.draftPrecio = _this2.cantidad * res.data.precio);
+          console.log(_this2.draftBalance = _this2.cantidad * res.data.balance);
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo);
 
           try {
@@ -828,11 +835,9 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
-    }
-  },
-  watch: {
-    cantidad: function cantidad() {
-      if (this.cantidad > 0) {
+    },
+    actualizarBalanceYPrecio: function actualizarBalanceYPrecio() {
+      if (this.cantidad >= 0) {
         /* si no modificó el precio, utilizo precioBase */
         if (this.inputPrecio.includes("$")) {
           this.draftPrecio = this.cantidad * this.precioBase;
@@ -881,6 +886,11 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
+    }
+  },
+  watch: {
+    cantidad: function cantidad() {
+      this.actualizarBalanceYPrecio();
     }
   }
 });
@@ -1286,139 +1296,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1456,6 +1333,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "Pagos"
       }],
       e6: 1,
+      horarioSelected: "",
       actividad_id: "",
       horario_id: "",
       totalPagos: 5,
@@ -1606,8 +1484,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getHorarios;
     }(),
-    getSalidasLlegadas: function getSalidasLlegadas() {
+    getSalidasLlegadas: function getSalidasLlegadas(event) {
       var _this3 = this;
+
+      this.horario_id = event.target.value.substring(0, event.target.value.indexOf("-"));
 
       try {
         _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].commit("showLoader");
@@ -1841,7 +1721,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span {\r\n    color: #38c172;\n}\nth {\r\n    text-transform: capitalize;\n}\n.input-cantidad {\r\n    max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n    padding: 0 !important;\r\n    margin: 0 !important;\n}\n.th-custom {\r\n    text-align: center;\n}\n.text {\r\n    padding-left: 1rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n  color: #3490dc;\n}\n.disponibilidad_span {\n  color: #38c172;\n}\nth {\n  text-transform: capitalize;\n}\n.input-cantidad {\n  max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n.th-custom {\n  text-align: center;\n}\n.text {\n  padding-left: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -22616,11 +22496,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "my-modal-title" }
                   },
-                  [
-                    _vm._v(
-                      "\n                    Crear Reservación\n                "
-                    )
-                  ]
+                  [_vm._v("Crear Reservación")]
                 ),
                 _vm._v(" "),
                 _c("Loader", { attrs: { status: _vm.loaderStatus } }),
@@ -22663,13 +22539,7 @@ var render = function() {
                                     editable: ""
                                   }
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(n.name) +
-                                      "\n                                "
-                                  )
-                                ]
+                                [_vm._v(_vm._s(n.name))]
                               ),
                               _vm._v(" "),
                               n.value !== _vm.steps
@@ -22737,7 +22607,7 @@ var render = function() {
                                         { attrs: { value: "", disabled: "" } },
                                         [
                                           _vm._v(
-                                            "Seleccione una\n                                                    actividad"
+                                            "\n                          Seleccione una\n                          actividad\n                        "
                                           )
                                         ]
                                       ),
@@ -22840,8 +22710,8 @@ var render = function() {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.horario_id,
-                                        expression: "horario_id"
+                                        value: _vm.horarioSelected,
+                                        expression: "horarioSelected"
                                       }
                                     ],
                                     staticClass: "form-control",
@@ -22863,13 +22733,13 @@ var render = function() {
                                                   : o.value
                                               return val
                                             })
-                                          _vm.horario_id = $event.target
+                                          _vm.horarioSelected = $event.target
                                             .multiple
                                             ? $$selectedVal
                                             : $$selectedVal[0]
                                         },
                                         function($event) {
-                                          return _vm.getSalidasLlegadas()
+                                          return _vm.getSalidasLlegadas($event)
                                         }
                                       ]
                                     }
@@ -22877,16 +22747,10 @@ var render = function() {
                                   [
                                     _c(
                                       "option",
-                                      {
-                                        attrs: {
-                                          value: "false",
-                                          disabled: "",
-                                          selected: ""
-                                        }
-                                      },
+                                      { attrs: { value: "", disabled: "" } },
                                       [
                                         _vm._v(
-                                          "Seleccione un\n                                                Horario"
+                                          "\n                        Seleccione un\n                        Horario\n                      "
                                         )
                                       ]
                                     ),
@@ -22898,7 +22762,12 @@ var render = function() {
                                       return _c("option", {
                                         key: index,
                                         domProps: {
-                                          value: horario.id,
+                                          value:
+                                            horario.id +
+                                            "-" +
+                                            horario.hini +
+                                            " | " +
+                                            horario.hfin,
                                           textContent: _vm._s(
                                             horario.hini + " | " + horario.hfin
                                           )
@@ -23010,39 +22879,27 @@ var render = function() {
                                 _c("thead", [
                                   _c("tr", [
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    Cantidad\n                                                "
-                                      )
+                                      _vm._v("Cantidad")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    personas\n                                                "
-                                      )
+                                      _vm._v("personas")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    ocupación\n                                                "
-                                      )
+                                      _vm._v("ocupación")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    balance\n                                                "
-                                      )
+                                      _vm._v("balance")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    precio\n                                                "
-                                      )
+                                      _vm._v("precio")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                    totales\n                                                "
-                                      )
+                                      _vm._v("totales")
                                     ])
                                   ])
                                 ]),
@@ -23073,12 +22930,12 @@ var render = function() {
                                             _c(
                                               "label",
                                               {
-                                                staticClass: "text ",
+                                                staticClass: "text",
                                                 attrs: { for: "nom-reserva" }
                                               },
                                               [
                                                 _vm._v(
-                                                  "Nombre de\n                                                            reservacion"
+                                                  "\n                              Nombre de\n                              reservacion\n                            "
                                                 )
                                               ]
                                             ),
@@ -23109,7 +22966,7 @@ var render = function() {
                                                 rawName: "v-model",
                                                 value: _vm.getTotalBalance,
                                                 expression:
-                                                  "\n                                                            getTotalBalance\n                                                        "
+                                                  "\n                                                              getTotalBalance\n                                                          "
                                               }
                                             ],
                                             staticClass:
@@ -23139,7 +22996,7 @@ var render = function() {
                                                 rawName: "v-model",
                                                 value: _vm.getTotalPrecio,
                                                 expression:
-                                                  "\n                                                            getTotalPrecio\n                                                        "
+                                                  "\n                                                              getTotalPrecio\n                                                          "
                                               }
                                             ],
                                             staticClass:
@@ -23177,7 +23034,7 @@ var render = function() {
                                             _c(
                                               "label",
                                               {
-                                                staticClass: "text ",
+                                                staticClass: "text",
                                                 attrs: {
                                                   for: "nom-comisionista"
                                                 }
@@ -23198,7 +23055,7 @@ var render = function() {
                                               [
                                                 _c("option", [
                                                   _vm._v(
-                                                    "\n                                                                Seleccione\n                                                                un\n                                                                comisionista\n                                                            "
+                                                    "\n                                Seleccione\n                                un\n                                comisionista\n                              "
                                                   )
                                                 ])
                                               ]
@@ -23218,11 +23075,7 @@ var render = function() {
                                               }
                                             }
                                           },
-                                          [
-                                            _vm._v(
-                                              "\n                                                        Siguiente\n                                                    "
-                                            )
-                                          ]
+                                          [_vm._v("Siguiente")]
                                         )
                                       ])
                                     ])
@@ -23290,37 +23143,27 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "col-4" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group " },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              attrs: { for: "anticipo Minimo" }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "Anticipo Minimo\n                                                "
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            staticClass: "form-control",
-                                            attrs: {
-                                              type: "text",
-                                              min: "0",
-                                              readonly: ""
-                                            },
-                                            domProps: {
-                                              value: this.$options.filters.currency(
-                                                _vm.anticipoMinimo
-                                              )
-                                            }
-                                          })
-                                        ]
-                                      )
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "anticipo Minimo" } },
+                                          [_vm._v("Anticipo Minimo")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            min: "0",
+                                            readonly: ""
+                                          },
+                                          domProps: {
+                                            value: this.$options.filters.currency(
+                                              _vm.anticipoMinimo
+                                            )
+                                          }
+                                        })
+                                      ])
                                     ])
                                   ]),
                                   _vm._v(" "),
@@ -23346,11 +23189,7 @@ var render = function() {
                                                 staticClass:
                                                   "col-6 row text-bold ml-3"
                                               },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    Totales"
-                                                )
-                                              ]
+                                              [_vm._v("Totales")]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -23406,17 +23245,9 @@ var render = function() {
                                               staticClass: "form-control col-6"
                                             },
                                             [
-                                              _c("option", [
-                                                _vm._v(
-                                                  "\n                                                        CxC\n                                                    "
-                                                )
-                                              ]),
+                                              _c("option", [_vm._v("CxC")]),
                                               _vm._v(" "),
-                                              _c("option", [
-                                                _vm._v(
-                                                  "\n                                                        Onboard\n                                                    "
-                                                )
-                                              ])
+                                              _c("option", [_vm._v("Onboard")])
                                             ]
                                           )
                                         ]
@@ -23457,16 +23288,10 @@ var render = function() {
                                             },
                                             [
                                               _c("option", [
-                                                _vm._v(
-                                                  "\n                                                        Descartar\n                                                    "
-                                                )
+                                                _vm._v("Descartar")
                                               ]),
                                               _vm._v(" "),
-                                              _c("option", [
-                                                _vm._v(
-                                                  "\n                                                        Onboard\n                                                    "
-                                                )
-                                              ])
+                                              _c("option", [_vm._v("Onboard")])
                                             ]
                                           )
                                         ]
@@ -23489,11 +23314,7 @@ var render = function() {
                                               {
                                                 staticClass: "btn btn-success"
                                               },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    Confirmar\n                                                "
-                                                )
-                                              ]
+                                              [_vm._v("Confirmar")]
                                             )
                                           ]
                                         )

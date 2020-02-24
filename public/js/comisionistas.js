@@ -152,6 +152,11 @@ __webpack_require__.r(__webpack_exports__);
       messageError: []
     };
   },
+  props: {
+    tipoComisionistaId: {
+      required: false
+    }
+  },
   methods: {
     guardar: function guardar() {
       var _this = this;
@@ -161,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
           clave: this.clave,
           nombre: this.nombre
         }).then(function (response) {
-          _store___WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('setTipoComisionistas', response.data.tipoComisionistas);
+          _store___WEBPACK_IMPORTED_MODULE_0__["default"].dispatch("setTipoComisionistas", response.data.tipoComisionistas);
           swal({
             title: "¡Guardado!",
             icon: "success",
@@ -197,6 +202,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store */ "./resources/js/store/index.js");
+//
+//
+//
 //
 //
 //
@@ -288,12 +296,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     "comisionistas-table": _components_Comisionistas_ComisionistasTable__WEBPACK_IMPORTED_MODULE_1__["default"],
     "comisionistas-form": _components_Comisionistas_ComisionistasForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      tipoComisionistaId: ''
+    };
+  },
+  methods: {
+    setTipoComisionista: function setTipoComisionista(comisionistaId) {
+      console.log(comisionistaId);
+    }
   }
 });
 
@@ -988,7 +1008,29 @@ var render = function() {
             _vm._v(_vm._s(comisionista.nombre))
           ]),
           _vm._v(" "),
-          _vm._m(1, true)
+          _c("td", { staticClass: "table-head table-head__actions" }, [
+            _c("a", {
+              staticClass:
+                "table-head table-head__btn btn-edit btn btn-primary",
+              attrs: {
+                href: "#!",
+                "data-toggle": "modal",
+                "data-target": "#comisionistasForm",
+                id: comisionista.id
+              },
+              on: {
+                click: function($event) {
+                  return this.$emit("showModal", 50)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("a", {
+              staticClass:
+                "table-head table-head__btn btn btn-delete btn-danger",
+              attrs: { href: "#!", id: comisionista.id }
+            })
+          ])
         ])
       }),
       0
@@ -1008,26 +1050,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "table-head" }, [_vm._v("Acciones")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "table-head table-head__actions" }, [
-      _c("a", {
-        staticClass: "table-head table-head__btn btn-edit btn btn-primary",
-        attrs: {
-          href: "#!",
-          "data-toggle": "modal",
-          "data-target": "#comisionistasForm"
-        }
-      }),
-      _vm._v(" "),
-      _c("a", {
-        staticClass: "table-head table-head__btn btn btn-delete btn-danger",
-        attrs: { href: "#!" }
-      })
     ])
   }
 ]
@@ -1064,7 +1086,17 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          [_c("comisionistas-table"), _vm._v(" "), _c("comisionistas-form")],
+          [
+            _c("comisionistas-table", {
+              on: {
+                showModal: function($event) {
+                  return _vm.setTipoComisionista()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("comisionistas-form")
+          ],
           1
         )
       ])
@@ -1089,7 +1121,7 @@ var staticRenderFns = [
         },
         [
           _c("span", { staticClass: "font-weight-bolder" }, [_vm._v("+")]),
-          _vm._v(" Tipo de comisionista")
+          _vm._v(" Tipo de comisionista\n        ")
         ]
       )
     ])

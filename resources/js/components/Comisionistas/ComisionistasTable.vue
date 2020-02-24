@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      
+
       <tr id="trBg" v-for="comisionista in tipoComisionistas" :key="comisionista.id">
         <td class="table-head table-head__name">{{comisionista.clave}}</td>
         <td class="table-head table-head__surname">{{comisionista.nombre}}</td>
@@ -18,8 +18,11 @@
             class="table-head table-head__btn btn-edit btn btn-primary"
             data-toggle="modal"
             data-target="#comisionistasForm"
+            :id="comisionista.id"
+            @click="this.$emit('showModal',50)"
           ></a>
-          <a href="#!" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+          <a href="#!" :id="comisionista.id" class="table-head table-head__btn btn btn-delete btn-danger"></a>
+            
         </td>
       </tr>
 
@@ -52,7 +55,7 @@ export default {
             .then((result) => {
                 this.tipoComisionistas = result.data.tipoComisionistas
             }).catch((err) => {
-                
+
             });
         }
     },

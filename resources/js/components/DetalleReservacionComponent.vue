@@ -117,6 +117,10 @@ export default {
                     }
                 }).then(res => {
                     this.ocupaciones = res.data.ocupacion;
+                    if(this.draftPrecio > 0 || this.draftBalance){
+                        console.log( this.draftPrecio = (this.cantidad * this.draftPrecio))
+                        console.log( this.draftBalance = (this.cantidad * this.draftBalance))
+                    }
                     try {
                         store.commit("showLoader");
                     } catch (error) {
@@ -149,7 +153,10 @@ export default {
                         this.inputPrecio = this.currency(res.data.precio);
                         this.balanceBase = parseInt(res.data.balance);
                         this.precioBase = parseInt(res.data.precio);
+                        console.log( this.draftPrecio = (this.cantidad * res.data.precio))
+                        console.log( this.draftBalance = (this.cantidad * res.data.balance))
                         store.dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo)
+                        
                         try {
                             store.commit("showLoader");
                         } catch (error) {
@@ -192,11 +199,9 @@ export default {
                         }
                     });
                 }
-        }
-    },
-    watch: {
-        cantidad() {
-            if (this.cantidad > 0) {
+        },
+        actualizarBalanceYPrecio() {
+            if (this.cantidad >= 0) {
                 /* si no modificó el precio, utilizo precioBase */
                 if (this.inputPrecio.includes("$")) {
                     this.draftPrecio = this.cantidad * this.precioBase;
@@ -244,6 +249,11 @@ export default {
                     }
                 });
             }
+        }
+    },
+    watch: {
+        cantidad() {
+            this.actualizarBalanceYPrecio();
         }
     }
 };

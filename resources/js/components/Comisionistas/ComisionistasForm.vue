@@ -16,7 +16,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form v-on:submit.prevent >
+          <form v-on:submit.prevent>
             <div
               class="alert alert-danger alert-dismissible fade show"
               role="alert"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import store from '../../store/'
+import store from "../../store/";
 export default {
   data() {
     return {
@@ -55,21 +55,29 @@ export default {
       messageError: []
     };
   },
+  props: {
+      tipoComisionistaId: {
+          required: false,
+      }
+  },
   methods: {
     guardar() {
       if (this.clave != "" && this.nombre != "") {
-        axios.post("/comisionistas", {
+        axios
+          .post("/comisionistas", {
             clave: this.clave,
             nombre: this.nombre
           })
           .then(response => {
-             store.dispatch('setTipoComisionistas', response.data.tipoComisionistas)
+            store.dispatch(
+              "setTipoComisionistas",
+              response.data.tipoComisionistas
+            );
             swal({
               title: "¡Guardado!",
               icon: "success",
               text: response.data.response
             });
-            
           })
           .catch(error => {
             let errros = error.response.data.errors;
