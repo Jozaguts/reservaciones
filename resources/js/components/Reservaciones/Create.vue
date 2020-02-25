@@ -194,17 +194,13 @@
                               type="text"
                               readonly
                               class="form-control totales mr-1 totalBold d-inline"
-                              v-model="
-                                                                getTotalBalance
-                                                            "
+                              :value="getTotalBalance | currency"
                             />
                             <input
                               type="text"
                               readonly
                               class="form-control totales totalBold d-inline"
-                              v-model="
-                                                                getTotalPrecio
-                                                            "
+                              :value="getTotalPrecio | currency"
                             />
                           </td>
                         </tr>
@@ -260,11 +256,7 @@
                             min="0"
                             class="form-control"
                             readonly
-                            :value="
-                                                            this.$options.filters.currency(
-                                                                getTotalPrecio
-                                                            )
-                                                        "
+                            :value="this.$options.filters.currency(getTotalPrecio)"
                           />
                         </div>
                       </div>
@@ -277,15 +269,12 @@
                             class="form-control"
                             readonly
                             :value="
-                                                            this.$options.filters.currency(
-                                                                anticipoMinimo
-                                                            )
-                                                        "
+                            this.$options.filters.currency(anticipoMinimo)"
                           />
                         </div>
                       </div>
                     </v-row>
-                    <!-- AQUI VA EL TIPO EL COMPONENTE TIPO DE PAGO -->
+                    <!-- AQUI VA  EL COMPONENTE TIPO DE PAGO -->
                     <FormaDePago v-for="pago in totalPagos" :pago="pago" :key="pago"></FormaDePago>
                     <!-- fila de totales -->
                     <v-row>
@@ -515,6 +504,15 @@ export default {
         .then(res => (this.personas = res.data.personas))
         .catch(error => console.log(error));
     }
+  },
+  filters:{
+      currency(value) {
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2
+        }).format(value);
+    },
   },
   created() {
     this.getActividades();

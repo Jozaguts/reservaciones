@@ -11,7 +11,7 @@
                 type="text"
                 v-model="cantidad"
                 onkeyup="this.value=this.value.replace(/[^\d]/,'')"
-                class="form-control mx-1 d-inline input-cantidad text-center"
+                class="form-control mx-1 d-inline input-cantidad text-center p-0"
             />
             <button class="btn btn-primary" v-on:click="cantidad++">+</button>
         </th>
@@ -19,10 +19,13 @@
             <select
                 name="persona"
                 id="persona"
-                class="form-control"
+                class="form-control text-capitalize"
                 v-model="persona_id"
                 v-on:change="fillOcupacionSelect(actividad_id, persona_id)"
             >
+            <option value="" disabled >
+                Seleccione una opción
+            </option>
                 <option
                     v-for="persona in personas"
                     :key="persona.id"
@@ -42,6 +45,9 @@
                     getBalancePrecio(actividad_id, persona_id, selectOcupacion)
                 "
             >
+            <option value="" disabled class="text-capitalize">
+                Seleccione una opción
+            </option>
                 <option
                     v-for="(ocupacion, index) in ocupaciones"
                     :key="index"
@@ -72,13 +78,13 @@
                 type="text"
                 readonly
                 class="form-control totales mx-1"
-                v-model="draftBalance"
+                :value="draftBalance | currency"
             />
             <input
                 type="text"
                 readonly
                 class="form-control totales mx-1"
-                v-model="draftPrecio"
+                :value="draftPrecio | currency"
             />
         </th>
     </tr>
@@ -104,6 +110,7 @@ export default {
     },
     methods: {
         fillOcupacionSelect(actividadId, personaId) {
+            this.selectOcupacion=""
             if (actividadId != "" && personaId != "") {
                 try {
                     store.commit("showLoader");
@@ -117,10 +124,6 @@ export default {
                     }
                 }).then(res => {
                     this.ocupaciones = res.data.ocupacion;
-                    if(this.draftPrecio > 0 || this.draftBalance){
-                        console.log( this.draftPrecio = (this.cantidad * this.draftPrecio))
-                        console.log( this.draftBalance = (this.cantidad * this.draftBalance))
-                    }
                     try {
                         store.commit("showLoader");
                     } catch (error) {
@@ -153,10 +156,11 @@ export default {
                         this.inputPrecio = this.currency(res.data.precio);
                         this.balanceBase = parseInt(res.data.balance);
                         this.precioBase = parseInt(res.data.precio);
-                        console.log( this.draftPrecio = (this.cantidad * res.data.precio))
-                        console.log( this.draftBalance = (this.cantidad * res.data.balance))
+                        this.draftPrecio = (this.cantidad * res.data.precio)
+                        this.draftBalance = (this.cantidad * res.data.balance)
+                        this.actualizarBalanceYPrecio();
                         store.dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo)
-                        
+
                         try {
                             store.commit("showLoader");
                         } catch (error) {
@@ -254,7 +258,16 @@ export default {
     watch: {
         cantidad() {
             this.actualizarBalanceYPrecio();
-        }
+        },
+    },
+    filters:{
+         currency(value) {
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2
+            }).format(value);
+        },
     }
 };
 </script>
@@ -265,5 +278,7 @@ export default {
 .totales {
     text-align: center;
     max-width: 80px;
+    padding-left:5px;
+    padding-right:5px;
 }
 </style>

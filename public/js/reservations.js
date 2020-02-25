@@ -710,6 +710,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["actividad_id", "personas", "detalleId"],
@@ -731,6 +737,8 @@ __webpack_require__.r(__webpack_exports__);
     fillOcupacionSelect: function fillOcupacionSelect(actividadId, personaId) {
       var _this = this;
 
+      this.selectOcupacion = "";
+
       if (actividadId != "" && personaId != "") {
         try {
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
@@ -745,11 +753,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (res) {
           _this.ocupaciones = res.data.ocupacion;
-
-          if (_this.draftPrecio > 0 || _this.draftBalance) {
-            console.log(_this.draftPrecio = _this.cantidad * _this.draftPrecio);
-            console.log(_this.draftBalance = _this.cantidad * _this.draftBalance);
-          }
 
           try {
             _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
@@ -785,8 +788,11 @@ __webpack_require__.r(__webpack_exports__);
           _this2.inputPrecio = _this2.currency(res.data.precio);
           _this2.balanceBase = parseInt(res.data.balance);
           _this2.precioBase = parseInt(res.data.precio);
-          console.log(_this2.draftPrecio = _this2.cantidad * res.data.precio);
-          console.log(_this2.draftBalance = _this2.cantidad * res.data.balance);
+          _this2.draftPrecio = _this2.cantidad * res.data.precio;
+          _this2.draftBalance = _this2.cantidad * res.data.balance;
+
+          _this2.actualizarBalanceYPrecio();
+
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('setPorcentajeAnticipo', res.data.porcentajeAnticipo);
 
           try {
@@ -892,6 +898,15 @@ __webpack_require__.r(__webpack_exports__);
     cantidad: function cantidad() {
       this.actualizarBalanceYPrecio();
     }
+  },
+  filters: {
+    currency: function currency(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      }).format(value);
+    }
   }
 });
 
@@ -943,17 +958,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1523,6 +1527,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     }
   },
+  filters: {
+    currency: function currency(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      }).format(value);
+    }
+  },
   created: function created() {
     this.getActividades();
     this.getPersonas();
@@ -1683,7 +1696,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,\r\n.input-precio,\r\n.totales {\r\n    text-align: center;\r\n    max-width: 80px;\n}\r\n", ""]);
+exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n    padding-left:5px;\n    padding-right:5px;\n}\n", ""]);
 
 // exports
 
@@ -22188,7 +22201,8 @@ var render = function() {
             expression: "cantidad"
           }
         ],
-        staticClass: "form-control mx-1 d-inline input-cantidad text-center",
+        staticClass:
+          "form-control mx-1 d-inline input-cantidad text-center p-0",
         attrs: {
           type: "text",
           onkeyup: "this.value=this.value.replace(/[^\\d]/,'')"
@@ -22230,7 +22244,7 @@ var render = function() {
               expression: "persona_id"
             }
           ],
-          staticClass: "form-control",
+          staticClass: "form-control text-capitalize",
           attrs: { name: "persona", id: "persona" },
           on: {
             change: [
@@ -22253,13 +22267,22 @@ var render = function() {
             ]
           }
         },
-        _vm._l(_vm.personas, function(persona) {
-          return _c("option", {
-            key: persona.id,
-            domProps: { value: persona.id, textContent: _vm._s(persona.nombre) }
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("\n            Seleccione una opción\n        ")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.personas, function(persona) {
+            return _c("option", {
+              key: persona.id,
+              domProps: {
+                value: persona.id,
+                textContent: _vm._s(persona.nombre)
+              }
+            })
           })
-        }),
-        0
+        ],
+        2
       )
     ]),
     _vm._v(" "),
@@ -22302,13 +22325,24 @@ var render = function() {
             ]
           }
         },
-        _vm._l(_vm.ocupaciones, function(ocupacion, index) {
-          return _c("option", {
-            key: index,
-            domProps: { textContent: _vm._s(ocupacion) }
+        [
+          _c(
+            "option",
+            {
+              staticClass: "text-capitalize",
+              attrs: { value: "", disabled: "" }
+            },
+            [_vm._v("\n            Seleccione una opción\n        ")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.ocupaciones, function(ocupacion, index) {
+            return _c("option", {
+              key: index,
+              domProps: { textContent: _vm._s(ocupacion) }
+            })
           })
-        }),
-        0
+        ],
+        2
       )
     ]),
     _vm._v(" "),
@@ -22369,47 +22403,15 @@ var render = function() {
     _vm._v(" "),
     _c("th", { staticClass: "d-flex" }, [
       _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.draftBalance,
-            expression: "draftBalance"
-          }
-        ],
         staticClass: "form-control totales mx-1",
         attrs: { type: "text", readonly: "" },
-        domProps: { value: _vm.draftBalance },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.draftBalance = $event.target.value
-          }
-        }
+        domProps: { value: _vm._f("currency")(_vm.draftBalance) }
       }),
       _vm._v(" "),
       _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.draftPrecio,
-            expression: "draftPrecio"
-          }
-        ],
         staticClass: "form-control totales mx-1",
         attrs: { type: "text", readonly: "" },
-        domProps: { value: _vm.draftPrecio },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.draftPrecio = $event.target.value
-          }
-        }
+        domProps: { value: _vm._f("currency")(_vm.draftPrecio) }
       })
     ])
   ])
@@ -22960,15 +22962,6 @@ var render = function() {
                                         },
                                         [
                                           _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.getTotalBalance,
-                                                expression:
-                                                  "\n                                                              getTotalBalance\n                                                          "
-                                              }
-                                            ],
                                             staticClass:
                                               "form-control totales mr-1 totalBold d-inline",
                                             attrs: {
@@ -22976,29 +22969,13 @@ var render = function() {
                                               readonly: ""
                                             },
                                             domProps: {
-                                              value: _vm.getTotalBalance
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.getTotalBalance =
-                                                  $event.target.value
-                                              }
+                                              value: _vm._f("currency")(
+                                                _vm.getTotalBalance
+                                              )
                                             }
                                           }),
                                           _vm._v(" "),
                                           _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.getTotalPrecio,
-                                                expression:
-                                                  "\n                                                              getTotalPrecio\n                                                          "
-                                              }
-                                            ],
                                             staticClass:
                                               "form-control totales totalBold d-inline",
                                             attrs: {
@@ -23006,16 +22983,9 @@ var render = function() {
                                               readonly: ""
                                             },
                                             domProps: {
-                                              value: _vm.getTotalPrecio
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.getTotalPrecio =
-                                                  $event.target.value
-                                              }
+                                              value: _vm._f("currency")(
+                                                _vm.getTotalPrecio
+                                              )
                                             }
                                           })
                                         ]
@@ -23401,7 +23371,7 @@ var render = function() {
             staticClass: "form-control",
             attrs: {
               type: "text",
-              placeholder: "0.00 $",
+              placeholder: "$0.00",
               onkeyup: "this.value=this.value.replace(/[^\\d]/,'')"
             },
             domProps: { value: _vm.pagoAbonado },
@@ -74650,7 +74620,7 @@ var config = {
   "currency": {
     "symbol": "$",
     "decimalDigits": 2,
-    "symbolOnLeft": true,
+    "symbolOnLeft": false,
     "spaceBetweenAmountAndSymbol": true
   },
   "text": {

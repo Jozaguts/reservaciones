@@ -10,7 +10,7 @@
                         type="text"
                         class="form-control"
                         v-model="pagoAbonado"
-                        placeholder="0.00 $"
+                        placeholder="$0.00"
                         onkeyup="this.value=this.value.replace(/[^\d]/,'')"
                     />
                 </div>

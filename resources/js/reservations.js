@@ -37,7 +37,7 @@ window.addEventListener('click', function(e){
       "currency": {
           "symbol": "$",
           "decimalDigits": 2,
-          "symbolOnLeft": true,
+          "symbolOnLeft": false,
           "spaceBetweenAmountAndSymbol": true
       },
    
