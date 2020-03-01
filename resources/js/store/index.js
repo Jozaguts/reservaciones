@@ -23,9 +23,28 @@ let store = new Vuex.Store({
         saldoPrecio: 0,
         porcentajeAnticipo: 0,
         anticipoMinimo: 0,
-        tipoComisionistas:[]
+        tipoComisionistas:[],
+        totalAbono1:0,
+        totalAbono2:0,
+        totalAbono3:0,
+        totalAbono4:0,
+        totalAbono5:0,
+        totalAbonos:0
+
     },
     mutations: {
+        totalAbonos(state) {
+           state.totalAbonos = state.totalAbono1 +
+               state.totalAbono2 +
+               state.totalAbono3 +
+               state.totalAbono4 +
+               state.totalAbono5;
+        },
+        sumarAbono(state, {nombreAbono, cantidad}) {
+            state[nombreAbono] = cantidad
+            this.dispatch('totalAbonos')
+
+        },
         showLoader(state) {
             state.showLoader = !state.showLoader;
         },
@@ -66,6 +85,9 @@ let store = new Vuex.Store({
         }
     },
     getters: {
+        getTotalAbonos(state) {
+            return state.totalAbonos;
+        },
         getTotalPrecio(state) {
             return state.totalPrecio;
         },
@@ -77,9 +99,12 @@ let store = new Vuex.Store({
         },
         getTipoComisionistas(state) {
             return state.tipoComisionistas
-        } 
+        }
     },
     actions: {
+        totalAbonos(context) {
+            context.commit('totalAbonos');
+        },
         sumarToTalPrecio(context) {
             context.commit("sumarTotalPrecio");
         },

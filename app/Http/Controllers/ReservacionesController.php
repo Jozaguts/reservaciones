@@ -229,6 +229,8 @@ class ReservacionesController extends Controller
 
         return response(['balance' => $ba->balance, 'precio' => $ba->precio, 'porcentajeAnticipo'=> $porcentajeAnticipo->porcentaje]);
     }
+
+
     public function getActicipoMninio($actividadId)
     {
         return  $anticipo = DB::table('anticipos')

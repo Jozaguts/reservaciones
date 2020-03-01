@@ -7,11 +7,13 @@
                 >
                 <div class="col-6 py-0">
                     <input
-                        type="text"
+                        type="number"
+                        min="0"
+                        step="any"
                         class="form-control"
-                        v-model="pagoAbonado"
+                        v-model.number="abono"
+                        @keyup="setAbono"
                         placeholder="$0.00"
-                        onkeyup="this.value=this.value.replace(/[^\d]/,'')"
                     />
                 </div>
             </div>
@@ -37,8 +39,8 @@
         <div class="col-4">
             <div class="form-group row align-items-baseline">
                 <select
-                    name="select1-pago-1"
-                    id="select1-pago-1"
+                    name="select1-pago-2"
+                    id="select1-pago-2"
                     class="form-control"
                 >
                     <option v-for="(option, index) in allOptions" :key="index">
@@ -51,16 +53,22 @@
 </template>
 
 <script>
-// import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
+import store from "../../store/";
 export default {
     props:[
         'pago'
     ],
+    computed: {
+        ...mapGetters([
+      'getTotalAbonos'
+        ])
+    },
     data() {
         return {
             selectTipoDepago: null,
             allOptions: [],
-            pagoAbonado: null,
+            abono: 0.00,
             tiposDePago: [
             {
                 id: "tipo01",
@@ -99,6 +107,22 @@ export default {
             }
         ],
         }
+    },
+    methods:{
+        setAbono() {
+            const nombreAbono = `totalAbono${this.pago}`;
+
+            const payload = {
+                nombreAbono,
+                "cantidad":parseFloat( this.abono)
+            }
+            if(this.abono > 0){
+                store.commit('sumarAbono',payload )
+            } else if(this.abono =="") {
+                payload.cantidad =0;
+                store.commit('sumarAbono',payload )
+            }
+      }
     },
       watch: {
         selectTipoDepago() {

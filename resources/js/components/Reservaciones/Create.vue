@@ -239,6 +239,7 @@
                             type="text"
                             min="0"
                             class="form-control"
+                            :class="classTotalBalance"
                             readonly
                             :value="
                                                             this.$options.filters.currency(
@@ -255,6 +256,7 @@
                             type="text"
                             min="0"
                             class="form-control"
+                            :class="classTotalPrecio"
                             readonly
                             :value="this.$options.filters.currency(getTotalPrecio)"
                           />
@@ -267,6 +269,7 @@
                             type="text"
                             min="0"
                             class="form-control"
+                            :class="classAnticipoMinimo"
                             readonly
                             :value="
                             this.$options.filters.currency(anticipoMinimo)"
@@ -286,7 +289,7 @@
                               type="text"
                               class="form-control"
                               readonly
-                              placeholder="$1,000.00"
+                              :value=" this.$options.filters.currency(getTotalAbonos)"
                             />
                           </div>
                         </div>
@@ -325,7 +328,8 @@
                       </div>
                       <div class="col-2 d-flex align-items-end">
                         <div class="form-group">
-                          <button class="btn btn-success">Confirmar</button>
+                          <button class="btn btn-success" >Confirmar</button>
+
                         </div>
                       </div>
                     </v-row>
@@ -355,6 +359,10 @@ export default {
     loaderStatus() {
       return store.state.showLoader;
     },
+    getTotalAbonos() {
+
+        return store.getters.getTotalAbonos
+    },
     getTotalPrecio() {
       return (this.totalPrecio = store.getters.getTotalPrecio);
     },
@@ -363,10 +371,28 @@ export default {
     },
     anticipoMinimo() {
       return store.getters.getAnticipoMinimo;
-    }
-    // ...mapState({
-    //     totalPrecio: state => state.totalPrecio
-    // })
+    },
+    classAnticipoMinimo(){
+            if(store.getters.getAnticipoMinimo  <=   store.getters.getTotalAbonos){
+                return "bg-success"
+            }else {
+                return "bg-danger"
+            }
+    },
+      classTotalPrecio (){
+          if(store.getters.getTotalPrecio  <=   (store.getters.getTotalAbonos - store.getters.getAnticipoMinimo)) {
+              return "bg-success"
+          }else {
+              return "bg-danger"
+          }
+      },
+      classTotalBalance (){
+          if(store.getters.getTotalPrecio  <=   (store.getters.getTotalAbonos - store.getters.getAnticipoMinimo - store.getters.getTotalBalance)) {
+              return "bg-success"
+          }else {
+              return "bg-danger"
+          }
+      }
   },
   data() {
     return {

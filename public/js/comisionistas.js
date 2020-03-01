@@ -51910,9 +51910,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     saldoPrecio: 0,
     porcentajeAnticipo: 0,
     anticipoMinimo: 0,
-    tipoComisionistas: []
+    tipoComisionistas: [],
+    totalAbono1: 0,
+    totalAbono2: 0,
+    totalAbono3: 0,
+    totalAbono4: 0,
+    totalAbono5: 0,
+    totalAbonos: 0
   },
   mutations: {
+    totalAbonos: function totalAbonos(state) {
+      state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
+    },
+    sumarAbono: function sumarAbono(state, _ref) {
+      var nombreAbono = _ref.nombreAbono,
+          cantidad = _ref.cantidad;
+      state[nombreAbono] = cantidad;
+      this.dispatch('totalAbonos');
+    },
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
     },
@@ -51943,6 +51958,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getTotalAbonos: function getTotalAbonos(state) {
+      return state.totalAbonos;
+    },
     getTotalPrecio: function getTotalPrecio(state) {
       return state.totalPrecio;
     },
@@ -51957,6 +51975,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
+    totalAbonos: function totalAbonos(context) {
+      context.commit('totalAbonos');
+    },
     sumarToTalPrecio: function sumarToTalPrecio(context) {
       context.commit("sumarTotalPrecio");
     },

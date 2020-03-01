@@ -1300,6 +1300,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1314,6 +1318,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loaderStatus: function loaderStatus() {
       return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].state.showLoader;
     },
+    getTotalAbonos: function getTotalAbonos() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos;
+    },
     getTotalPrecio: function getTotalPrecio() {
       return this.totalPrecio = _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio;
     },
@@ -1322,10 +1329,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     anticipoMinimo: function anticipoMinimo() {
       return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo;
-    } // ...mapState({
-    //     totalPrecio: state => state.totalPrecio
-    // })
-
+    },
+    classAnticipoMinimo: function classAnticipoMinimo() {
+      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos) {
+        return "bg-success";
+      } else {
+        return "bg-danger";
+      }
+    },
+    classTotalPrecio: function classTotalPrecio() {
+      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo) {
+        return "bg-success";
+      } else {
+        return "bg-danger";
+      }
+    },
+    classTotalBalance: function classTotalBalance() {
+      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalBalance) {
+        return "bg-success";
+      } else {
+        return "bg-danger";
+      }
+    }
   },
   data: function data() {
     return {
@@ -1553,6 +1578,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/ */ "./resources/js/store/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1605,14 +1636,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// import {mapGetters} from 'vuex';
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pago'],
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getTotalAbonos'])),
   data: function data() {
     return {
       selectTipoDepago: null,
       allOptions: [],
-      pagoAbonado: null,
+      abono: 0.00,
       tiposDePago: [{
         id: "tipo01",
         nombre: "Efectivo",
@@ -1631,6 +1666,22 @@ __webpack_require__.r(__webpack_exports__);
         opciones: ["Nombre comisionista", "Nombre operador", "Nombre de otro comisionista", "Oficina"]
       }]
     };
+  },
+  methods: {
+    setAbono: function setAbono() {
+      var nombreAbono = "totalAbono".concat(this.pago);
+      var payload = {
+        nombreAbono: nombreAbono,
+        "cantidad": parseFloat(this.abono)
+      };
+
+      if (this.abono > 0) {
+        _store___WEBPACK_IMPORTED_MODULE_1__["default"].commit('sumarAbono', payload);
+      } else if (this.abono == "") {
+        payload.cantidad = 0;
+        _store___WEBPACK_IMPORTED_MODULE_1__["default"].commit('sumarAbono', payload);
+      }
+    }
   },
   watch: {
     selectTipoDepago: function selectTipoDepago() {
@@ -1696,7 +1747,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.input-balance,\n.input-precio,\n.totales {\n    text-align: center;\n    max-width: 80px;\n    padding-left:5px;\n    padding-right:5px;\n}\n", ""]);
+exports.push([module.i, "\n.input-balance,\r\n.input-precio,\r\n.totales {\r\n    text-align: center;\r\n    max-width: 80px;\r\n    padding-left:5px;\r\n    padding-right:5px;\n}\r\n", ""]);
 
 // exports
 
@@ -23074,6 +23125,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("input", {
                                           staticClass: "form-control",
+                                          class: _vm.classTotalBalance,
                                           attrs: {
                                             type: "text",
                                             min: "0",
@@ -23098,6 +23150,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("input", {
                                           staticClass: "form-control",
+                                          class: _vm.classTotalPrecio,
                                           attrs: {
                                             type: "text",
                                             min: "0",
@@ -23122,6 +23175,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("input", {
                                           staticClass: "form-control",
+                                          class: _vm.classAnticipoMinimo,
                                           attrs: {
                                             type: "text",
                                             min: "0",
@@ -23170,8 +23224,12 @@ var render = function() {
                                                   staticClass: "form-control",
                                                   attrs: {
                                                     type: "text",
-                                                    readonly: "",
-                                                    placeholder: "$1,000.00"
+                                                    readonly: ""
+                                                  },
+                                                  domProps: {
+                                                    value: this.$options.filters.currency(
+                                                      _vm.getTotalAbonos
+                                                    )
                                                   }
                                                 })
                                               ]
@@ -23363,24 +23421,30 @@ var render = function() {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
-                value: _vm.pagoAbonado,
-                expression: "pagoAbonado"
+                rawName: "v-model.number",
+                value: _vm.abono,
+                expression: "abono",
+                modifiers: { number: true }
               }
             ],
             staticClass: "form-control",
             attrs: {
-              type: "text",
-              placeholder: "$0.00",
-              onkeyup: "this.value=this.value.replace(/[^\\d]/,'')"
+              type: "number",
+              min: "0",
+              step: "any",
+              placeholder: "$0.00"
             },
-            domProps: { value: _vm.pagoAbonado },
+            domProps: { value: _vm.abono },
             on: {
+              keyup: _vm.setAbono,
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.pagoAbonado = $event.target.value
+                _vm.abono = _vm._n($event.target.value)
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
               }
             }
           })
@@ -23443,7 +23507,7 @@ var render = function() {
           "select",
           {
             staticClass: "form-control",
-            attrs: { name: "select1-pago-1", id: "select1-pago-1" }
+            attrs: { name: "select1-pago-2", id: "select1-pago-2" }
           },
           _vm._l(_vm.allOptions, function(option, index) {
             return _c("option", { key: index }, [
@@ -74690,9 +74754,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     saldoPrecio: 0,
     porcentajeAnticipo: 0,
     anticipoMinimo: 0,
-    tipoComisionistas: []
+    tipoComisionistas: [],
+    totalAbono1: 0,
+    totalAbono2: 0,
+    totalAbono3: 0,
+    totalAbono4: 0,
+    totalAbono5: 0,
+    totalAbonos: 0
   },
   mutations: {
+    totalAbonos: function totalAbonos(state) {
+      state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
+    },
+    sumarAbono: function sumarAbono(state, _ref) {
+      var nombreAbono = _ref.nombreAbono,
+          cantidad = _ref.cantidad;
+      state[nombreAbono] = cantidad;
+      this.dispatch('totalAbonos');
+    },
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
     },
@@ -74723,6 +74802,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getTotalAbonos: function getTotalAbonos(state) {
+      return state.totalAbonos;
+    },
     getTotalPrecio: function getTotalPrecio(state) {
       return state.totalPrecio;
     },
@@ -74737,6 +74819,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
+    totalAbonos: function totalAbonos(context) {
+      context.commit('totalAbonos');
+    },
     sumarToTalPrecio: function sumarToTalPrecio(context) {
       context.commit("sumarTotalPrecio");
     },
