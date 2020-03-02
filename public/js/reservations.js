@@ -1338,14 +1338,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     classTotalPrecio: function classTotalPrecio() {
-      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo) {
+      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos) {
         return "bg-success";
       } else {
         return "bg-danger";
       }
     },
     classTotalBalance: function classTotalBalance() {
-      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalPrecio <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getAnticipoMinimo - _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalBalance) {
+      if (_store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalBalance <= _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getTotalAbonos) {
         return "bg-success";
       } else {
         return "bg-danger";
@@ -1376,7 +1376,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       date: new Date().toISOString().substr(0, 10),
       picker: false,
       totalPrecio: 0,
-      totalBalance: 0
+      totalBalance: 0,
+      saldoBalance: 0
     };
   },
   methods: {
@@ -1785,7 +1786,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\r\n  color: #3490dc;\n}\n.disponibilidad_span {\r\n  color: #38c172;\n}\nth {\r\n  text-transform: capitalize;\n}\n.input-cantidad {\r\n  max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n  padding: 0 !important;\r\n  margin: 0 !important;\n}\n.th-custom {\r\n  text-align: center;\n}\n.text {\r\n  padding-left: 1rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n  color: #3490dc;\n}\n.disponibilidad_span {\n  color: #38c172;\n}\nth {\n  text-transform: capitalize;\n}\n.input-cantidad {\n  max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n.th-custom {\n  text-align: center;\n}\n.text {\n  padding-left: 1rem;\n}\n", ""]);
 
 // exports
 

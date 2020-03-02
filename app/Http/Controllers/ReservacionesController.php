@@ -221,9 +221,16 @@ class ReservacionesController extends Controller
     {
         $porcentajeAnticipo = $this->getActicipoMninio($request->actividadId);
 
+//        $ba = DB::table('actividades as ac')
+//            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
+//            ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
+//            ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
+//            ->first();
+
         $ba = DB::table('actividades as ac')
             ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-            ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
+            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance')
+                , DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN CASE WHEN acp.precio1>0 THEN acp.precio1 ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Doble" THEN CASE WHEN acp.doble>0 THEN acp.doble ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Triple" THEN CASE WHEN acp.triple>0 THEN acp.triple ELSE ac.precio END End as precio'))
             ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
             ->first();
 

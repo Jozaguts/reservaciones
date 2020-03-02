@@ -380,14 +380,14 @@ export default {
             }
     },
       classTotalPrecio (){
-          if(store.getters.getTotalPrecio  <=   (store.getters.getTotalAbonos - store.getters.getAnticipoMinimo)) {
+          if(store.getters.getTotalPrecio  <=   store.getters.getTotalAbonos ) {
               return "bg-success"
           }else {
               return "bg-danger"
           }
       },
       classTotalBalance (){
-          if(store.getters.getTotalPrecio  <=   (store.getters.getTotalAbonos - store.getters.getAnticipoMinimo - store.getters.getTotalBalance)) {
+          if(store.getters.getTotalBalance  <=   store.getters.getTotalAbonos ) {
               return "bg-success"
           }else {
               return "bg-danger"
@@ -421,7 +421,9 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       picker: false,
       totalPrecio: 0,
-      totalBalance: 0
+      totalBalance: 0,
+      saldoBalance:0,
+
     };
   },
   methods: {

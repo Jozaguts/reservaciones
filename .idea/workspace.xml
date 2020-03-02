@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49e84163-57a6-4f9f-a2d6-33ff9d34cdde" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/public/js/comisionistas.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/comisionistas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/reservations.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/reservations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Reservaciones/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reservaciones/Create.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,9 +177,10 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="277" y="95" key="#Composer/0.0.1368.872@0.0.1368.872" timestamp="1583011442319" />
-    <state x="347" y="184" width="672" height="678" key="search.everywhere.popup" timestamp="1583011472348">
+    <state x="348" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1583172336764">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
+    <state x="348" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@0.0.1368.872" timestamp="1583172336764" />
     <state x="347" y="184" width="672" height="678" key="search.everywhere.popup/0.0.1368.872@0.0.1368.872" timestamp="1583011472348" />
   </component>
 </project>
