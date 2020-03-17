@@ -733,6 +733,11 @@ __webpack_require__.r(__webpack_exports__);
       draftBalance: 0
     };
   },
+  computed: {
+    getComisionistaId: function getComisionistaId() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.getComisionistaId;
+    }
+  },
   methods: {
     fillOcupacionSelect: function fillOcupacionSelect(actividadId, personaId) {
       var _this = this;
@@ -767,10 +772,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    getBalancePrecio: function getBalancePrecio(actividadId, personaId, ocupacion) {
+    getBalancePrecio: function getBalancePrecio(actividadId, personaId, ocupacion, comisionistaId) {
       var _this2 = this;
 
-      if (actividadId != "" && personaId != "" && ocupacion != "") {
+      if (actividadId != "" && personaId != "" && ocupacion != "" && comisionistaId != "") {
         try {
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("showLoader");
         } catch (error) {
@@ -781,7 +786,8 @@ __webpack_require__.r(__webpack_exports__);
           params: {
             actividadId: actividadId,
             personaId: personaId,
-            ocupacion: ocupacion
+            ocupacion: ocupacion,
+            comisionistaId: comisionistaId
           }
         }).then(function (res) {
           _this2.inputBalance = _this2.currency(res.data.balance);
@@ -1319,141 +1325,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1529,9 +1400,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       picker: false,
       totalPrecio: 0,
       totalBalance: 0,
-      saldoBalance: 0,
-      comisionistas: [],
-      comisionistaId: ""
+      saldoBalance: 0
     };
   },
   methods: {
@@ -1863,6 +1732,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_search_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-search-select */ "./node_modules/vue-search-select/dist/VueSearchSelect.common.js");
 /* harmony import */ var vue_search_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_search_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+//
+//
 //
 //
 //
@@ -1871,27 +1743,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SelectDinamico",
-  props: ['options'],
   data: function data() {
     return {
-      options: [{
-        value: '1',
-        text: 'COM01 Alfredo Rios'
-      }, {
-        value: '2',
-        text: 'COM02 Jose Gutíerrez'
-      }, {
-        value: '3',
-        text: 'COM03 David Hernandez'
-      }, {
-        value: '4',
-        text: 'COM04 Fernanda Suarez'
-      }, {
-        value: '5',
-        text: 'COM05 Ernesto Valle'
-      }],
+      options: [],
       item: {
         value: '',
         text: ''
@@ -1899,16 +1756,42 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    reset: function reset() {
-      this.item = {};
+    getComisionistas: function getComisionistas() {
+      var _this = this;
+
+      axios.get('comisionistas/all').then(function (response) {
+        response.data.comisionistas.map(function (comisionista) {
+          var data = {
+            value: comisionista.id,
+            text: comisionista.nombre
+          };
+
+          _this.options.push(data);
+        });
+      }).catch(function (erros) {
+        return console.error(erros);
+      });
     },
-    selectFromParentComponent1: function selectFromParentComponent1() {
-      // select option from parent component
-      this.item = this.options[0];
-    }
+    setComisionistaId: function setComisionistaId() {
+      if (this.item.value != '') {
+        _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('setComisionistaId', this.item);
+      } else {
+        console.log('seleccione un comisionista');
+      }
+    } // reset () {
+    //     this.item = {}
+    // },
+    // selectFromParentComponent1 () {
+    //     // select option from parent component
+    //     this.item = this.options[0]
+    // },
+
   },
   components: {
     ModelSelect: vue_search_select__WEBPACK_IMPORTED_MODULE_0__["ModelSelect"]
+  },
+  created: function created() {
+    this.getComisionistas();
   }
 });
 
@@ -2002,7 +1885,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\r\n    color: #3490dc;\n}\n.disponibilidad_span {\r\n    color: #38c172;\n}\nth {\r\n    text-transform: capitalize;\n}\n.input-cantidad {\r\n    max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n    font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n    font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n    padding: 0 !important;\r\n    margin: 0 !important;\n}\n.th-custom {\r\n    text-align: center;\n}\n.text {\r\n    padding-left: 1rem;\n}\n.button-next-container {\r\n    text-align: right\n}\r\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\n  color: #3490dc;\n}\n.disponibilidad_span {\n  color: #38c172;\n}\nth {\n  text-transform: capitalize;\n}\n.input-cantidad {\n  max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n.th-custom {\n  text-align: center;\n}\n.text {\n  padding-left: 1rem;\n}\n.button-next-container {\n  text-align: right;\n}\n", ""]);
 
 // exports
 
@@ -22587,7 +22470,8 @@ var render = function() {
                 return _vm.getBalancePrecio(
                   _vm.actividad_id,
                   _vm.persona_id,
-                  _vm.selectOcupacion
+                  _vm.selectOcupacion,
+                  _vm.getComisionistaId
                 )
               }
             ]
@@ -22766,11 +22650,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "my-modal-title" }
                   },
-                  [
-                    _vm._v(
-                      "\n                        Crear Reservación\n                    "
-                    )
-                  ]
+                  [_vm._v("Crear Reservación")]
                 ),
                 _vm._v(" "),
                 _c("Loader", { attrs: { status: _vm.loaderStatus } }),
@@ -22879,11 +22759,7 @@ var render = function() {
                                       _c(
                                         "option",
                                         { attrs: { value: "", disabled: "" } },
-                                        [
-                                          _vm._v(
-                                            "\n                                                        Seleccione una actividad\n                                                    "
-                                          )
-                                        ]
+                                        [_vm._v("Seleccione una actividad")]
                                       ),
                                       _vm._v(" "),
                                       _vm._l(_vm.actividades, function(
@@ -23022,11 +22898,7 @@ var render = function() {
                                     _c(
                                       "option",
                                       { attrs: { value: "", disabled: "" } },
-                                      [
-                                        _vm._v(
-                                          "\n                                                    Seleccione un Horario\n                                                "
-                                        )
-                                      ]
+                                      [_vm._v("Seleccione un Horario")]
                                     ),
                                     _vm._v(" "),
                                     _vm._l(_vm.horarios, function(
@@ -23153,11 +23025,7 @@ var render = function() {
                                 "div",
                                 { staticClass: "col-xs-4 col-md-4" },
                                 [
-                                  _c(
-                                    "label",
-                                    { attrs: { for: "comisionista" } },
-                                    [_vm._v("Comisionista")]
-                                  ),
+                                  _c("label", [_vm._v("Comisionista")]),
                                   _vm._v(" "),
                                   _c("select-comisionistas")
                                 ],
@@ -23170,39 +23038,27 @@ var render = function() {
                                 _c("thead", [
                                   _c("tr", [
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        Cantidad\n                                                    "
-                                      )
+                                      _vm._v("Cantidad")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        personas\n                                                    "
-                                      )
+                                      _vm._v("personas")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        ocupación\n                                                    "
-                                      )
+                                      _vm._v("ocupación")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        balance\n                                                    "
-                                      )
+                                      _vm._v("balance")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        precio\n                                                    "
-                                      )
+                                      _vm._v("precio")
                                     ]),
                                     _vm._v(" "),
                                     _c("th", { staticClass: "th-custom" }, [
-                                      _vm._v(
-                                        "\n                                                        totales\n                                                    "
-                                      )
+                                      _vm._v("totales")
                                     ])
                                   ])
                                 ]),
@@ -23238,7 +23094,7 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                                                                Nombre de\n                                                                reservacion\n                                                            "
+                                                  "\n                              Nombre de\n                              reservacion\n                            "
                                                 )
                                               ]
                                             ),
@@ -23312,11 +23168,7 @@ var render = function() {
                                                 }
                                               }
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                                                            Siguiente\n                                                        "
-                                              )
-                                            ]
+                                            [_vm._v("Siguiente")]
                                           )
                                         ]
                                       )
@@ -23563,11 +23415,7 @@ var render = function() {
                                               {
                                                 staticClass: "btn btn-success"
                                               },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                        Confirmar\n                                                    "
-                                                )
-                                              ]
+                                              [_vm._v("Confirmar")]
                                             )
                                           ]
                                         )
@@ -23770,7 +23618,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("model-select", {
-    attrs: { options: _vm.options, placeholder: "Seleccione un comisionista" },
+    attrs: {
+      options: _vm.options,
+      placeholder: "Seleccione un comisionista",
+      change: _vm.setComisionistaId()
+    },
     model: {
       value: _vm.item,
       callback: function($$v) {
@@ -80094,9 +79946,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     totalAbono3: 0,
     totalAbono4: 0,
     totalAbono5: 0,
-    totalAbonos: 0
+    totalAbonos: 0,
+    comisionistaId: ''
   },
   mutations: {
+    comisionistaId: function comisionistaId(state, _comisionistaId) {
+      state.comisionistaId = _comisionistaId;
+    },
     totalAbonos: function totalAbonos(state) {
       state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
     },
@@ -80136,6 +79992,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getComisionistaId: function getComisionistaId(state) {
+      return state.comisionistaId;
+    },
     getTotalAbonos: function getTotalAbonos(state) {
       return state.totalAbonos;
     },
@@ -80153,6 +80012,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
+    setComisionistaId: function setComisionistaId(_ref2, _ref3) {
+      var commit = _ref2.commit;
+      var value = _ref3.value;
+      commit('comisionistaId', value);
+    },
     totalAbonos: function totalAbonos(context) {
       context.commit('totalAbonos');
     },

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTipoComisionista;
 use Illuminate\Http\Request;
 use App\TipoComisionista;
+use Illuminate\Support\Facades\DB;
+
 
 class ComisionistaController extends Controller
 {
@@ -36,6 +38,19 @@ class ComisionistaController extends Controller
             } catch (Exception $e) {
                 return response()->json(['response' => $e->getMessage()]);
             }
+        }
+    }
+
+    public function getComisionistas(Request $request) {
+
+        if($request->ajax()){
+
+            $comisionistas = DB::table('comisionistas')
+                ->select('id','nombre')
+                ->where('active', '=', '1')
+                ->get();
+
+            return response()->json(['comisionistas'=> $comisionistas]);
         }
     }
 }

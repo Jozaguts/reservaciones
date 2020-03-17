@@ -52,14 +52,16 @@ class ReservacionesController extends Controller
                 ->where([['ac.active', '=', '1'], ['ah.active', '=', '1'], ['asi.salida', '=', '1'], [DB::raw('ELT(WEEKDAY("'.$day.'") + 1, l, m, x, j, v, s, d)'), '=', '1']])
                 ->groupBy('ac.id', 'ac.clave', 'ac.nombre', 'ah.hini', 'ta.color', 'ah.hfin')
                 ->get();
-            $fec = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour(1)->format('Y-m-d H:i');
-            $hini = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->format('H:i');
-            $hfin = Carbon::createFromFormat('H:i:s', $horario[0]->hfin)->format('H:i');
-            $dif = (int) $hfin - (int) $hini;
-            for ($i = 0; $i < count($horario); ++$i) {
-                if ($horario[$i]->libre == 1) {
-                    for ($j = 0; $j < $dif; ++$j) {
-                        $arrLibre = [
+            if(count($horario) > 0){
+
+                $fec = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->addHour(1)->format('Y-m-d H:i');
+                $hini = Carbon::createFromFormat('Y-m-d H:i', $horario[0]->start)->format('H:i');
+                $hfin = Carbon::createFromFormat('H:i:s', $horario[0]->hfin)->format('H:i');
+                $dif = (int) $hfin - (int) $hini;
+                for ($i = 0; $i < count($horario); ++$i) {
+                    if ($horario[$i]->libre == 1) {
+                        for ($j = 0; $j < $dif; ++$j) {
+                            $arrLibre = [
                                 'actividadid' => $horario[$i]->actividadid,
                                 'name' => $horario[$i]->name,
                                 'details' => $horario[$i]->details,
@@ -68,10 +70,10 @@ class ReservacionesController extends Controller
                                 'color' => $horario[$i]->color,
                                 'libre' => $horario[$i]->libre,
                             ];
-                        $horarios[] = $arrLibre;
-                    }
-                } else {
-                    $arrLibre = [
+                            $horarios[] = $arrLibre;
+                        }
+                    } else {
+                        $arrLibre = [
                             'actividadid' => $horario[$i]->actividadid,
                             'name' => $horario[$i]->name,
                             'details' => $horario[$i]->details,
@@ -80,7 +82,8 @@ class ReservacionesController extends Controller
                             'color' => $horario[$i]->color,
                             'libre' => 2,
                         ];
-                    $horarios[] = $arrLibre;
+                        $horarios[] = $arrLibre;
+                    }
                 }
             }
         }
@@ -220,11 +223,12 @@ class ReservacionesController extends Controller
     public function getBalancePrecio(Request $request)
     {
         $porcentajeAnticipo = $this->getActicipoMninio($request->actividadId);
-        dd($request);
-        $act=2;
-        $per=3;
-        $com=1;
-        $ocu= "Sencillo";
+        
+        $act= $request->actividadId;
+        $per=$request->personaId;
+        $com=$request->comisionistaId;
+        $ocu= $request->ocupacion;
+
         $ba = DB::table('actividades as ac')
             ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
             ->join('comisionistadet as cod', 'ac.id', '=', 'cod.idactividad')
@@ -235,7 +239,7 @@ class ReservacionesController extends Controller
                 , DB::raw('CASE WHEN com.facturable=1 THEN CASE WHEN cod.precio="2" THEN CASE WHEN acp.precio2=0 THEN "No se encontro balance facturable" ELSE "" END ELSE CASE WHEN acp.precio3=0 THEN "No se encontro precio facturable" ELSE "" END  END ELSE "" END as balance_fac'))
             ->where([['ac.id', '=', $act], ['acp.persona_id', '=', $per], ['com.id', '=', $com]])
             ->first();
-
+           
 //        $ba = DB::table('actividades as ac')
 //            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
 //            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance')

@@ -13,6 +13,7 @@ yarn-error.log
 .idea/php.xml
 .idea/reservaciones.iml
 .vscode/
-.idea
+.idea/
+.idea/*
 .idea/
 .idea/workspace.xml

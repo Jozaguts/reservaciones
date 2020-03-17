@@ -1,25 +1,21 @@
 <template>
     <model-select :options="options"
                   v-model="item"
-                  placeholder="Seleccione un comisionista">
+                  placeholder="Seleccione un comisionista"
+                  :change="setComisionistaId()"
+    >
     </model-select>
 </template>
 
 <script>
     import { ModelSelect } from 'vue-search-select';
+    import store from '../store';
 
     export default {
         name: "SelectDinamico",
-        props:['options',],
         data () {
             return {
-                options: [
-                    { value: '1', text: 'COM01 Alfredo Rios'},
-                    { value: '2', text: 'COM02 Jose Gutíerrez' },
-                    { value: '3', text: 'COM03 David Hernandez' },
-                    { value: '4', text: 'COM04 Fernanda Suarez' },
-                    { value: '5', text: 'COM05 Ernesto Valle' }
-                ],
+                options: [ ],
                 item: {
                     value: '',
                     text: ''
@@ -27,16 +23,43 @@
             }
         },
         methods: {
-            reset () {
-                this.item = {}
+            getComisionistas() {
+                axios.get('comisionistas/all')
+                    .then(response => {
+                        response.data.comisionistas.map(comisionista => {
+                            const data = {
+                                value: comisionista.id,
+                                text: comisionista.nombre
+                            }
+                            this.options.push(data)
+                        })
+                    })
+                    .catch(erros =>console.error(erros))
             },
-            selectFromParentComponent1 () {
-                // select option from parent component
-                this.item = this.options[0]
-            },
+            setComisionistaId() {
+                
+                if(this.item.value != ''){
+                    store.dispatch('setComisionistaId', this.item);
+                }else{
+                    console.log('seleccione un comisionista')
+                }
+                   
+                
+            }
+
+            // reset () {
+            //     this.item = {}
+            // },
+            // selectFromParentComponent1 () {
+            //     // select option from parent component
+            //     this.item = this.options[0]
+            // },
                  },
         components: {
             ModelSelect
+        },
+        created() {
+            this.getComisionistas();
         }
     }
 </script>

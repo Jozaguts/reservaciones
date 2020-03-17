@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
       $this->call(ActividadesTableSeeder::class);
       $this->call(tipoComisionistasSeeder::class);
       $this->call(ComisionistasSeeder::class);
+      $this->call(ComisionistasDetSeeder::class);
 
 
     }

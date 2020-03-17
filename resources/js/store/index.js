@@ -29,10 +29,14 @@ let store = new Vuex.Store({
         totalAbono3:0,
         totalAbono4:0,
         totalAbono5:0,
-        totalAbonos:0
+        totalAbonos:0,
+        comisionistaId:''
 
     },
     mutations: {
+        comisionistaId(state, comisionistaId) {
+          state.comisionistaId = comisionistaId
+        },
         totalAbonos(state) {
            state.totalAbonos = state.totalAbono1 +
                state.totalAbono2 +
@@ -85,6 +89,9 @@ let store = new Vuex.Store({
         }
     },
     getters: {
+        getComisionistaId(state) {
+          return state.comisionistaId;
+        },
         getTotalAbonos(state) {
             return state.totalAbonos;
         },
@@ -102,6 +109,9 @@ let store = new Vuex.Store({
         }
     },
     actions: {
+        setComisionistaId({commit}, {value}) {
+            commit('comisionistaId', value)
+        },
         totalAbonos(context) {
             context.commit('totalAbonos');
         },

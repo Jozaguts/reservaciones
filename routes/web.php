@@ -32,6 +32,7 @@ Route::group(['prefix' => 'reservaciones'], function () {
 Route::group(['prefix' => 'comisionistas'], function () {
 
     Route::get('/','ComisionistaController@index')->middleware('auth');
+    Route::get('/all', 'ComisionistaController@getComisionistas')->middleware('auth');
     Route::post('/', 'ComisionistaController@crear')->middleware('auth');
 
 });

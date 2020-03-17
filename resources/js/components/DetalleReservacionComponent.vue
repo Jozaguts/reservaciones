@@ -42,7 +42,7 @@
                 id="ocupacion"
                 v-model="selectOcupacion"
                 v-on:change="
-                    getBalancePrecio(actividad_id, persona_id, selectOcupacion)
+                    getBalancePrecio(actividad_id, persona_id, selectOcupacion, getComisionistaId)
                 "
             >
             <option value="" disabled class="text-capitalize">
@@ -92,6 +92,7 @@
 
 <script>
 import store from "../store";
+
 export default {
     props: ["actividad_id", "personas", "detalleId"],
     data() {
@@ -107,6 +108,11 @@ export default {
             draftPrecio: 0,
             draftBalance: 0
         };
+    },
+    computed: {
+        getComisionistaId() {
+            return store.getters.getComisionistaId;
+        }
     },
     methods: {
         fillOcupacionSelect(actividadId, personaId) {
@@ -137,8 +143,10 @@ export default {
                 });
             }
         },
-        getBalancePrecio(actividadId, personaId, ocupacion) {
-            if (actividadId != "" && personaId != "" && ocupacion != "") {
+        getBalancePrecio(actividadId, personaId, ocupacion, comisionistaId) {
+            
+            if (actividadId != "" && personaId != "" && ocupacion != "" && comisionistaId != "" ) {
+                
                 try {
                     store.commit("showLoader");
                 } catch (error) {
@@ -148,7 +156,8 @@ export default {
                     params: {
                         actividadId,
                         personaId,
-                        ocupacion
+                        ocupacion,
+                        comisionistaId
                     }
                 })
                     .then(res => {

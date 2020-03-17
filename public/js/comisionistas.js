@@ -51916,9 +51916,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     totalAbono3: 0,
     totalAbono4: 0,
     totalAbono5: 0,
-    totalAbonos: 0
+    totalAbonos: 0,
+    comisionistaId: ''
   },
   mutations: {
+    comisionistaId: function comisionistaId(state, _comisionistaId) {
+      state.comisionistaId = _comisionistaId;
+    },
     totalAbonos: function totalAbonos(state) {
       state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
     },
@@ -51958,6 +51962,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getComisionistaId: function getComisionistaId(state) {
+      return state.comisionistaId;
+    },
     getTotalAbonos: function getTotalAbonos(state) {
       return state.totalAbonos;
     },
@@ -51975,6 +51982,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
+    setComisionistaId: function setComisionistaId(_ref2, _ref3) {
+      var commit = _ref2.commit;
+      var value = _ref3.value;
+      commit('comisionistaId', value);
+    },
     totalAbonos: function totalAbonos(context) {
       context.commit('totalAbonos');
     },
