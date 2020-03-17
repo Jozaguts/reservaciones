@@ -19,14 +19,15 @@ class CreateComisionistadetTable extends Migration
             $table->decimal('importe');
             $table->integer('cupon');
             $table->integer('meta');
-            $table->softDeletes();           
+            $table->integer('precio');
+            $table->softDeletes();
 
             $table->unsignedInteger('idusuario');
-            $table->foreign('idusuario')->references('id')->on('usuarios');	                     
+            $table->foreign('idusuario')->references('id')->on('usuarios');
             $table->unsignedInteger('idcomisionista');
-            $table->foreign('idcomisionista')->references('id')->on('comisionistas');	                             
+            $table->foreign('idcomisionista')->references('id')->on('comisionistas');
             $table->unsignedInteger('idactividad');
-            $table->foreign('idactividad')->references('id')->on('actividades');	
+            $table->foreign('idactividad')->references('id')->on('actividades');
 
             $table->timestamps();
         });

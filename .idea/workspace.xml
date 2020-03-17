@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49e84163-57a6-4f9f-a2d6-33ff9d34cdde" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/ComisionistasSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/tipoComisionistasSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comisionsta.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comisionsta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReservacionesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReservacionesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_15_192741_create_comisionistas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_15_192741_create_comisionistas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_23_194941_create_comisionistadet_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_23_194941_create_comisionistadet_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/reservations.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/reservations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/tipoactividades.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/tipoactividades.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SelectDinamico.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SelectDinamico.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +36,27 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - reservaciones@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - reservaciones@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - reservaciones@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="reservaciones: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
     <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="reservaciones" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -275,9 +303,10 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="186" y="79" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@0.0.1368.872" timestamp="1583173090868" />
-    <state x="350" y="187" width="672" height="678" key="search.everywhere.popup" timestamp="1584225470054">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state x="349" y="156" width="672" height="567" key="search.everywhere.popup" timestamp="1584463230508">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="349" y="156" width="672" height="567" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584463230508" />
     <state x="348" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@0.0.1368.872" timestamp="1583172336764" />
     <state x="350" y="187" width="672" height="678" key="search.everywhere.popup/0.0.1368.872@0.0.1368.872" timestamp="1584225470054" />
   </component>

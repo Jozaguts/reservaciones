@@ -10,6 +10,7 @@
 
     export default {
         name: "SelectDinamico",
+        props:['options',],
         data () {
             return {
                 options: [
@@ -23,14 +24,6 @@
                     value: '',
                     text: ''
                 },
-                options2: [
-                    { value: '1', text: 'aa' + ' - ' + '1' },
-                    { value: '2', text: 'ab' + ' - ' + '2' },
-                    { value: '3', text: 'bc' + ' - ' + '3' },
-                    { value: '4', text: 'cd' + ' - ' + '4' },
-                    { value: '5', text: 'de' + ' - ' + '5' }
-                ],
-                item2: ''
             }
         },
         methods: {
@@ -41,14 +34,7 @@
                 // select option from parent component
                 this.item = this.options[0]
             },
-            reset2 () {
-                this.item2 = ''
-            },
-            selectFromParentComponent2 () {
-                // select option from parent component
-                this.item2 = this.options2[0].value
-            }
-        },
+                 },
         components: {
             ModelSelect
         }

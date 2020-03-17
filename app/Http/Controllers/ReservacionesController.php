@@ -220,19 +220,28 @@ class ReservacionesController extends Controller
     public function getBalancePrecio(Request $request)
     {
         $porcentajeAnticipo = $this->getActicipoMninio($request->actividadId);
+        dd($request);
+        $act=2;
+        $per=3;
+        $com=1;
+        $ocu= "Sencillo";
+        $ba = DB::table('actividades as ac')
+            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
+            ->join('comisionistadet as cod', 'ac.id', '=', 'cod.idactividad')
+            ->join('comisionistas as com', 'cod.idcomisionista', '=', 'com.id')
+            ->select('acp.id'
+                , DB::raw('CASE WHEN com.facturable=0 THEN CASE WHEN "' . $ocu . '"="Sencillo" THEN ac.balance WHEN "' . $ocu . '"="Doble" THEN acp.doblebalanc WHEN "' . $ocu . '"="Triple" THEN acp.triplebalanc End ELSE CASE WHEN "' . $ocu . '"="Sencillo" THEN CASE WHEN cod.precio="2" THEN CASE WHEN acp.precio2=0 THEN ac.balance else acp.precio2 END ELSE CASE WHEN acp.precio3=0 THEN ac.balance ELSE acp.precio3 end END WHEN "' . $ocu . '"="Doble" THEN acp.doblebalanc WHEN "' . $ocu . '"="Triple" THEN acp.triplebalanc End  END as balance')
+                , DB::raw('CASE WHEN "' . $ocu . '"="Sencillo" THEN CASE WHEN acp.precio1>0 THEN acp.precio1 ELSE ac.precio END WHEN "' . $ocu . '"="Doble" THEN CASE WHEN acp.doble>0 THEN acp.doble ELSE ac.precio END WHEN "' . $ocu . '"="Triple" THEN CASE WHEN acp.triple>0 THEN acp.triple ELSE ac.precio END End as precio')
+                , DB::raw('CASE WHEN com.facturable=1 THEN CASE WHEN cod.precio="2" THEN CASE WHEN acp.precio2=0 THEN "No se encontro balance facturable" ELSE "" END ELSE CASE WHEN acp.precio3=0 THEN "No se encontro precio facturable" ELSE "" END  END ELSE "" END as balance_fac'))
+            ->where([['ac.id', '=', $act], ['acp.persona_id', '=', $per], ['com.id', '=', $com]])
+            ->first();
 
 //        $ba = DB::table('actividades as ac')
 //            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-//            ->select('acp.id', DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.balance WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doblebalanc WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triplebalanc End as balance'), DB::raw('CASE WHEN "'.$request->ocupacion.'"="Sencillo" THEN ac.precio WHEN "'.$request->ocupacion.'"="Doble" THEN acp.doble WHEN "'.$request->ocupacion.'"="Triple" THEN acp.triple End as precio'))
+//            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance')
+//                , DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN CASE WHEN acp.precio1>0 THEN acp.precio1 ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Doble" THEN CASE WHEN acp.doble>0 THEN acp.doble ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Triple" THEN CASE WHEN acp.triple>0 THEN acp.triple ELSE ac.precio END End as precio'))
 //            ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
 //            ->first();
-
-        $ba = DB::table('actividades as ac')
-            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance')
-                , DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN CASE WHEN acp.precio1>0 THEN acp.precio1 ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Doble" THEN CASE WHEN acp.doble>0 THEN acp.doble ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Triple" THEN CASE WHEN acp.triple>0 THEN acp.triple ELSE ac.precio END End as precio'))
-            ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
-            ->first();
 
         return response(['balance' => $ba->balance, 'precio' => $ba->precio, 'porcentajeAnticipo'=> $porcentajeAnticipo->porcentaje]);
     }

@@ -1873,6 +1873,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SelectDinamico",
+  props: ['options'],
   data: function data() {
     return {
       options: [{
@@ -1894,24 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
       item: {
         value: '',
         text: ''
-      },
-      options2: [{
-        value: '1',
-        text: 'aa' + ' - ' + '1'
-      }, {
-        value: '2',
-        text: 'ab' + ' - ' + '2'
-      }, {
-        value: '3',
-        text: 'bc' + ' - ' + '3'
-      }, {
-        value: '4',
-        text: 'cd' + ' - ' + '4'
-      }, {
-        value: '5',
-        text: 'de' + ' - ' + '5'
-      }],
-      item2: ''
+      }
     };
   },
   methods: {
@@ -1921,13 +1905,6 @@ __webpack_require__.r(__webpack_exports__);
     selectFromParentComponent1: function selectFromParentComponent1() {
       // select option from parent component
       this.item = this.options[0];
-    },
-    reset2: function reset2() {
-      this.item2 = '';
-    },
-    selectFromParentComponent2: function selectFromParentComponent2() {
-      // select option from parent component
-      this.item2 = this.options2[0].value;
     }
   },
   components: {
@@ -21638,7 +21615,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /*! exports provided: currency, text, numbers, array, dates, default */
 /***/ (function(module) {
 
-module.exports = {"currency":{"symbol":"$","decimalDigits":2,"symbolOnLeft":true,"spaceBetweenAmountAndSymbol":true},"text":{"truncateClamp":"..."},"numbers":{"decimalDigits":2},"array":{"implodeDelimiter":", "},"dates":{"defaultFormat":"YYYY-MM-DD HH:mm:ss","filterConvertFormat":"DD MMMM YYYY"}};
+module.exports = JSON.parse("{\"currency\":{\"symbol\":\"$\",\"decimalDigits\":2,\"symbolOnLeft\":true,\"spaceBetweenAmountAndSymbol\":true},\"text\":{\"truncateClamp\":\"...\"},\"numbers\":{\"decimalDigits\":2},\"array\":{\"implodeDelimiter\":\", \"},\"dates\":{\"defaultFormat\":\"YYYY-MM-DD HH:mm:ss\",\"filterConvertFormat\":\"DD MMMM YYYY\"}}");
 
 /***/ }),
 

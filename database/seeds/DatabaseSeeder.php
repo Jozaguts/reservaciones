@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
       $this->call(SalidasYLlegadas::class);
       $this->call(UnidadesSeeder::class);
       $this->call(ActividadesTableSeeder::class);
-       
-         
+      $this->call(tipoComisionistasSeeder::class);
+      $this->call(ComisionistasSeeder::class);
+
+
     }
 }

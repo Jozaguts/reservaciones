@@ -18,17 +18,19 @@ class CreateComisionistasTable extends Migration
             $table->string('clave',5);
             $table->string('nombre', 45)->nullable(false);
             $table->boolean('empleado');
+            $table->boolean('facturable');
             $table->string('whats')->nullable(false);
             $table->string('movil')->nullable(false);
             $table->string('telefono')->nullable(false);
             $table->string('email')->nullable(false);
             $table->string('fecnac')->nullable(false);
+
             $table->boolean('active');
             $table->boolean('remove');
-            $table->softDeletes();           
+            $table->softDeletes();
 
             $table->unsignedInteger('idusuario');
-            $table->foreign('idusuario')->references('id')->on('usuarios');	            
+            $table->foreign('idusuario')->references('id')->on('usuarios');
             $table->unsignedInteger('idtipocomisionista');
             $table->foreign('idtipocomisionista')->references('id')->on('tipocomisionistas');
 
