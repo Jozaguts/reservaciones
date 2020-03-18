@@ -34,6 +34,33 @@ let store = new Vuex.Store({
 
     },
     mutations: {
+        saldoPrecio(state,saldo) {
+            state.saldoPrecio = 0;
+            
+            if((state.totalAbonos - state.totalPrecio) < 0){
+             state.saldoPrecio = (state.totalAbonos - state.totalPrecio);
+           }else if((state.totalAbonos - state.totalPrecio) >= 0) {
+             state.saldoPrecio = 0;
+           }
+        //   console.log(
+        //       `
+        //       totalBalance: ${state.totalBalance}
+        //       totalAbonos: ${state.totalAbonos}
+        //       saldoBalance: ${state.saldoBalance}
+        //       `
+        //   );
+        },
+        saldoBalance(state, saldo) {
+         
+           state.saldoBalance = 0;
+            
+           if((state.totalAbonos - state.totalBalance) < 0){
+            state.saldoBalance = (state.totalAbonos - state.totalBalance);
+          }else if((state.totalAbonos - state.totalBalance) >= 0) {
+            state.saldoBalance = 0;
+          }
+
+        },
         comisionistaId(state, comisionistaId) {
           state.comisionistaId = comisionistaId
         },
@@ -43,11 +70,19 @@ let store = new Vuex.Store({
                state.totalAbono3 +
                state.totalAbono4 +
                state.totalAbono5;
+
         },
         sumarAbono(state, {nombreAbono, cantidad}) {
             state[nombreAbono] = cantidad
             this.dispatch('totalAbonos')
-
+            .then(() =>{
+                this.dispatch('setSaldoBalance', cantidad)
+               
+            })
+            .then(() => {
+                this.dispatch('setSaldoPrecio', cantidad)
+            })
+            .catch(error => console.log(error))
         },
         showLoader(state) {
             state.showLoader = !state.showLoader;
@@ -89,6 +124,13 @@ let store = new Vuex.Store({
         }
     },
     getters: {
+        getSaldoPrecio(state) {
+            return state.saldoPrecio;
+        },
+        getSaldoBalance(state) {
+            return state.saldoBalance;
+        },
+        
         getComisionistaId(state) {
           return state.comisionistaId;
         },
@@ -109,6 +151,12 @@ let store = new Vuex.Store({
         }
     },
     actions: {
+        setSaldoPrecio({commit}, saldo) {
+            commit('saldoPrecio', saldo);
+        },
+        setSaldoBalance({commit}, saldo) {
+            commit('saldoBalance', saldo);
+        },
         setComisionistaId({commit}, {value}) {
             commit('comisionistaId', value)
         },

@@ -41,7 +41,7 @@
                 if(this.item.value != ''){
                     store.dispatch('setComisionistaId', this.item);
                 }else{
-                    console.log('seleccione un comisionista')
+                   
                 }
                    
                 

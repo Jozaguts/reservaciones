@@ -51920,6 +51920,31 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     comisionistaId: ''
   },
   mutations: {
+    saldoPrecio: function saldoPrecio(state, saldo) {
+      state.saldoPrecio = 0;
+
+      if (state.totalAbonos - state.totalPrecio < 0) {
+        state.saldoPrecio = state.totalAbonos - state.totalPrecio;
+      } else if (state.totalAbonos - state.totalPrecio >= 0) {
+        state.saldoPrecio = 0;
+      } //   console.log(
+      //       `
+      //       totalBalance: ${state.totalBalance}
+      //       totalAbonos: ${state.totalAbonos}
+      //       saldoBalance: ${state.saldoBalance}
+      //       `
+      //   );
+
+    },
+    saldoBalance: function saldoBalance(state, saldo) {
+      state.saldoBalance = 0;
+
+      if (state.totalAbonos - state.totalBalance < 0) {
+        state.saldoBalance = state.totalAbonos - state.totalBalance;
+      } else if (state.totalAbonos - state.totalBalance >= 0) {
+        state.saldoBalance = 0;
+      }
+    },
     comisionistaId: function comisionistaId(state, _comisionistaId) {
       state.comisionistaId = _comisionistaId;
     },
@@ -51927,10 +51952,18 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
     },
     sumarAbono: function sumarAbono(state, _ref) {
+      var _this = this;
+
       var nombreAbono = _ref.nombreAbono,
           cantidad = _ref.cantidad;
       state[nombreAbono] = cantidad;
-      this.dispatch('totalAbonos');
+      this.dispatch('totalAbonos').then(function () {
+        _this.dispatch('setSaldoBalance', cantidad);
+      }).then(function () {
+        _this.dispatch('setSaldoPrecio', cantidad);
+      }).catch(function (error) {
+        return console.log(error);
+      });
     },
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
@@ -51962,6 +51995,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getSaldoPrecio: function getSaldoPrecio(state) {
+      return state.saldoPrecio;
+    },
+    getSaldoBalance: function getSaldoBalance(state) {
+      return state.saldoBalance;
+    },
     getComisionistaId: function getComisionistaId(state) {
       return state.comisionistaId;
     },
@@ -51982,9 +52021,17 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
-    setComisionistaId: function setComisionistaId(_ref2, _ref3) {
+    setSaldoPrecio: function setSaldoPrecio(_ref2, saldo) {
       var commit = _ref2.commit;
-      var value = _ref3.value;
+      commit('saldoPrecio', saldo);
+    },
+    setSaldoBalance: function setSaldoBalance(_ref3, saldo) {
+      var commit = _ref3.commit;
+      commit('saldoBalance', saldo);
+    },
+    setComisionistaId: function setComisionistaId(_ref4, _ref5) {
+      var commit = _ref4.commit;
+      var value = _ref5.value;
       commit('comisionistaId', value);
     },
     totalAbonos: function totalAbonos(context) {

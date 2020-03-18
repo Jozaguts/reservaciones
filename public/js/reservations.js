@@ -1325,6 +1325,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -1338,6 +1340,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     selectComisionistas: _SelectDinamico__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   computed: {
+    getSaldoBalance: function getSaldoBalance() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getSaldoBalance;
+    },
+    classSaldoBalance: function classSaldoBalance() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getSaldoBalance != 0 ? 'bg-danger' : 'bg-success';
+    },
+    getSaldoPrecio: function getSaldoPrecio() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getSaldoPrecio;
+    },
+    classSaldoPrecio: function classSaldoPrecio() {
+      return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].getters.getSaldoPrecio != 0 ? 'bg-danger' : 'bg-success';
+    },
     loaderStatus: function loaderStatus() {
       return _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"].state.showLoader;
     },
@@ -1775,9 +1789,7 @@ __webpack_require__.r(__webpack_exports__);
     setComisionistaId: function setComisionistaId() {
       if (this.item.value != '') {
         _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('setComisionistaId', this.item);
-      } else {
-        console.log('seleccione un comisionista');
-      }
+      } else {}
     } // reset () {
     //     this.item = {}
     // },
@@ -1885,7 +1897,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ocupacion_span {\n  color: #3490dc;\n}\n.disponibilidad_span {\n  color: #38c172;\n}\nth {\n  text-transform: capitalize;\n}\n.input-cantidad {\n  max-width: 60px;\n}\n.totalBold,\n.totalBold::-webkit-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold:-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::-ms-input-placeholder {\n  font-weight: 900;\n}\n.totalBold,\n.totalBold::placeholder {\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n.th-custom {\n  text-align: center;\n}\n.text {\n  padding-left: 1rem;\n}\n.button-next-container {\n  text-align: right;\n}\n", ""]);
+exports.push([module.i, "\n.ocupacion_span {\r\n  color: #3490dc;\n}\n.disponibilidad_span {\r\n  color: #38c172;\n}\nth {\r\n  text-transform: capitalize;\n}\n.input-cantidad {\r\n  max-width: 60px;\n}\n.totalBold,\r\n.totalBold::-webkit-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold:-ms-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold::-ms-input-placeholder {\r\n  font-weight: 900;\n}\n.totalBold,\r\n.totalBold::placeholder {\r\n  font-weight: 900;\n}\n.v-stepper--vertical .v-stepper__content {\r\n  padding: 0 !important;\r\n  margin: 0 !important;\n}\n.th-custom {\r\n  text-align: center;\n}\n.text {\r\n  padding-left: 1rem;\n}\n.button-next-container {\r\n  text-align: right;\n}\r\n", ""]);
 
 // exports
 
@@ -23333,10 +23345,15 @@ var render = function() {
                                           _vm._v(" "),
                                           _c("input", {
                                             staticClass: "form-control col-6",
+                                            class: _vm.classSaldoBalance,
                                             attrs: {
                                               type: "text",
-                                              readonly: "",
-                                              placeholder: "$300.00"
+                                              readonly: ""
+                                            },
+                                            domProps: {
+                                              value: this.$options.filters.currency(
+                                                _vm.getSaldoBalance
+                                              )
                                             }
                                           }),
                                           _vm._v(" "),
@@ -23375,10 +23392,15 @@ var render = function() {
                                           _c("input", {
                                             staticClass:
                                               "form-control col-6 mt-1",
+                                            class: _vm.classSaldoPrecio,
                                             attrs: {
                                               type: "text",
-                                              readonly: "",
-                                              placeholder: "$1,300.00"
+                                              readonly: ""
+                                            },
+                                            domProps: {
+                                              value: this.$options.filters.currency(
+                                                _vm.getSaldoPrecio
+                                              )
                                             }
                                           }),
                                           _vm._v(" "),
@@ -79950,6 +79972,31 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     comisionistaId: ''
   },
   mutations: {
+    saldoPrecio: function saldoPrecio(state, saldo) {
+      state.saldoPrecio = 0;
+
+      if (state.totalAbonos - state.totalPrecio < 0) {
+        state.saldoPrecio = state.totalAbonos - state.totalPrecio;
+      } else if (state.totalAbonos - state.totalPrecio >= 0) {
+        state.saldoPrecio = 0;
+      } //   console.log(
+      //       `
+      //       totalBalance: ${state.totalBalance}
+      //       totalAbonos: ${state.totalAbonos}
+      //       saldoBalance: ${state.saldoBalance}
+      //       `
+      //   );
+
+    },
+    saldoBalance: function saldoBalance(state, saldo) {
+      state.saldoBalance = 0;
+
+      if (state.totalAbonos - state.totalBalance < 0) {
+        state.saldoBalance = state.totalAbonos - state.totalBalance;
+      } else if (state.totalAbonos - state.totalBalance >= 0) {
+        state.saldoBalance = 0;
+      }
+    },
     comisionistaId: function comisionistaId(state, _comisionistaId) {
       state.comisionistaId = _comisionistaId;
     },
@@ -79957,10 +80004,18 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
     },
     sumarAbono: function sumarAbono(state, _ref) {
+      var _this = this;
+
       var nombreAbono = _ref.nombreAbono,
           cantidad = _ref.cantidad;
       state[nombreAbono] = cantidad;
-      this.dispatch('totalAbonos');
+      this.dispatch('totalAbonos').then(function () {
+        _this.dispatch('setSaldoBalance', cantidad);
+      }).then(function () {
+        _this.dispatch('setSaldoPrecio', cantidad);
+      }).catch(function (error) {
+        return console.log(error);
+      });
     },
     showLoader: function showLoader(state) {
       state.showLoader = !state.showLoader;
@@ -79992,6 +80047,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   getters: {
+    getSaldoPrecio: function getSaldoPrecio(state) {
+      return state.saldoPrecio;
+    },
+    getSaldoBalance: function getSaldoBalance(state) {
+      return state.saldoBalance;
+    },
     getComisionistaId: function getComisionistaId(state) {
       return state.comisionistaId;
     },
@@ -80012,9 +80073,17 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
-    setComisionistaId: function setComisionistaId(_ref2, _ref3) {
+    setSaldoPrecio: function setSaldoPrecio(_ref2, saldo) {
       var commit = _ref2.commit;
-      var value = _ref3.value;
+      commit('saldoPrecio', saldo);
+    },
+    setSaldoBalance: function setSaldoBalance(_ref3, saldo) {
+      var commit = _ref3.commit;
+      commit('saldoBalance', saldo);
+    },
+    setComisionistaId: function setComisionistaId(_ref4, _ref5) {
+      var commit = _ref4.commit;
+      var value = _ref5.value;
       commit('comisionistaId', value);
     },
     totalAbonos: function totalAbonos(context) {

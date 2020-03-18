@@ -238,14 +238,13 @@
                             min="0"
                             class="form-control"
                             :class="
-                                                            classTotalBalance
-                                                        "
+                                classTotalBalance
+                            "
                             readonly
-                            :value="
-                                                            this.$options.filters.currency(
-                                                                getTotalBalance
-                                                            )
-                                                        "
+                            :value="this.$options.filters.currency(
+                                    getTotalBalance
+                                )
+                            "
                           />
                         </div>
                       </div>
@@ -301,10 +300,10 @@
                               class="form-control"
                               readonly
                               :value="
-                                                                this.$options.filters.currency(
-                                                                    getTotalAbonos
-                                                                )
-                                                            "
+                                this.$options.filters.currency(
+                                    getTotalAbonos
+                                )
+                            "
                             />
                           </div>
                         </div>
@@ -317,8 +316,9 @@
                           <input
                             type="text"
                             class="form-control col-6"
+                            :class="classSaldoBalance"
                             readonly
-                            placeholder="$300.00"
+                            :value="this.$options.filters.currency(getSaldoBalance)"
                           />
                           <select class="form-control col-6">
                             <option>CxC</option>
@@ -332,8 +332,10 @@
                           <input
                             type="text"
                             class="form-control col-6 mt-1"
+                            :class="classSaldoPrecio"
                             readonly
-                            placeholder="$1,300.00"
+                            :value="this.$options.filters.currency(getSaldoPrecio)"
+                            
                           />
                           <select class="form-control col-6">
                             <option>Descartar</option>
@@ -372,6 +374,22 @@ export default {
     selectComisionistas
   },
   computed: {
+    getSaldoBalance(){
+        return store.getters.getSaldoBalance;
+    },
+    classSaldoBalance() {
+        return store.getters.getSaldoBalance != 0 
+        ? 'bg-danger'
+        : 'bg-success';
+    },
+    getSaldoPrecio() {
+        return store.getters.getSaldoPrecio;
+    },
+    classSaldoPrecio() {
+        return store.getters.getSaldoPrecio != 0 
+        ? 'bg-danger'
+        : 'bg-success';
+    },
     loaderStatus() {
       return store.state.showLoader;
     },

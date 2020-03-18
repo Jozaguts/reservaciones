@@ -239,13 +239,7 @@ class ReservacionesController extends Controller
                 , DB::raw('CASE WHEN com.facturable=1 THEN CASE WHEN cod.precio="2" THEN CASE WHEN acp.precio2=0 THEN "No se encontro balance facturable" ELSE "" END ELSE CASE WHEN acp.precio3=0 THEN "No se encontro precio facturable" ELSE "" END  END ELSE "" END as balance_fac'))
             ->where([['ac.id', '=', $act], ['acp.persona_id', '=', $per], ['com.id', '=', $com]])
             ->first();
-           
-//        $ba = DB::table('actividades as ac')
-//            ->join('actividadprecios as acp', 'ac.id', '=', 'acp.actividad_id')
-//            ->select('acp.id', DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN ac.balance WHEN "' . $request->ocupacion . '"="Doble" THEN acp.doblebalanc WHEN "' . $request->ocupacion . '"="Triple" THEN acp.triplebalanc End as balance')
-//                , DB::raw('CASE WHEN "' . $request->ocupacion . '"="Sencillo" THEN CASE WHEN acp.precio1>0 THEN acp.precio1 ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Doble" THEN CASE WHEN acp.doble>0 THEN acp.doble ELSE ac.precio END WHEN "' . $request->ocupacion . '"="Triple" THEN CASE WHEN acp.triple>0 THEN acp.triple ELSE ac.precio END End as precio'))
-//            ->where([['ac.id', '=', $request->actividadId], ['acp.persona_id', '=', $request->personaId]])
-//            ->first();
+        
 
         return response(['balance' => $ba->balance, 'precio' => $ba->precio, 'porcentajeAnticipo'=> $porcentajeAnticipo->porcentaje]);
     }
