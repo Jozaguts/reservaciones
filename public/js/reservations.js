@@ -79969,7 +79969,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     totalAbono4: 0,
     totalAbono5: 0,
     totalAbonos: 0,
-    comisionistaId: ''
+    tipoComisionistaId: ''
   },
   mutations: {
     saldoPrecio: function saldoPrecio(state, saldo) {
@@ -79997,8 +79997,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         state.saldoBalance = 0;
       }
     },
-    comisionistaId: function comisionistaId(state, _comisionistaId) {
-      state.comisionistaId = _comisionistaId;
+    setTipoComisionistaId: function setTipoComisionistaId(state, id) {
+      state.tipoComisionistaId = id;
     },
     totalAbonos: function totalAbonos(state) {
       state.totalAbonos = state.totalAbono1 + state.totalAbono2 + state.totalAbono3 + state.totalAbono4 + state.totalAbono5;
@@ -80053,8 +80053,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     getSaldoBalance: function getSaldoBalance(state) {
       return state.saldoBalance;
     },
-    getComisionistaId: function getComisionistaId(state) {
-      return state.comisionistaId;
+    getTipoComisionistaId: function getTipoComisionistaId(state) {
+      return state.tipoComisionistaId;
     },
     getTotalAbonos: function getTotalAbonos(state) {
       return state.totalAbonos;

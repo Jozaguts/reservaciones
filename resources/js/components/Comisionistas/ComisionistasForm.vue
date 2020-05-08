@@ -11,11 +11,18 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="tipoComisionistasLabel">Tipo comisionistas</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            @click="toggleUpdate()"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <ValidationObserver v-slot="{ invalid }">
           <form v-on:submit.prevent>
             <div
               class="alert alert-danger alert-dismissible fade show"
@@ -29,16 +36,23 @@
             </div>
             <div class="form-group col-6 offset-3">
               <label for="clave">Clave</label>
-              <input type="text" class="form-control" v-model="clave" />
+              <validation-provider rules="required|min:8" v-slot="{ errors }">
+                <input type="text" class="form-control" v-model="clave" />
+                <span class="text-danger">{{ errors[0] }}</span>
+              </validation-provider>
             </div>
             <div class="form-group col-6 offset-3">
               <label for="nombre">Nombre</label>
+              <validation-provider rules="required" v-slot="{ errors }">
               <input type="text" class="form-control" v-model="nombre" />
+               <span class="text-danger">{{ errors[0] }}</span>
+              </validation-provider>
             </div>
             <div class="form-group col-6 offset-3">
-              <button class="btn btn-success btn-block" @click="guardar">Guardar</button>
+              <button class="btn btn-success btn-block" :disabled="invalid" @click="guardar">Guardar</button>
             </div>
           </form>
+          </ValidationObserver>
         </div>
       </div>
     </div>
@@ -47,20 +61,43 @@
 
 <script>
 import store from "../../store/";
+
 export default {
   data() {
     return {
       clave: "",
       nombre: "",
+      id: "",
+      update: false,
+      method: "",
       messageError: []
     };
   },
+  
   props: {
-      tipoComisionistaId: {
-          required: false,
+    tipoComisionista: {
+      type: Object,
+      required: false,
+      default: null
+    }
+  },
+  watch: {
+    tipoComisionista(newValue, oldValue) {
+      if (newValue != null) {
+        this.clave = newValue.clave;
+        this.nombre = newValue.nombre;
+        this.id = newValue.id;
+        this.update = true;
       }
+    }
   },
   methods: {
+    toggleUpdate() {
+      this.clave = "";
+      this.nombre = "";
+      this.id = "";
+      this.update = false;
+    },
     guardar() {
       if (this.clave != "" && this.nombre != "") {
         axios

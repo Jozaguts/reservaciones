@@ -32,6 +32,7 @@
         "datatables.net-dt": "^1.10.20",
         "moment": "^2.24.0",
         "sweetalert": "^2.1.2",
+        "vee-validate": "^3.3.0",
         "vue-common-filters": "^1.1.0",
         "vue-numeric-currency": "^2.4.3",
         "vue-search-select": "^2.9.3",

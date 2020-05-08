@@ -3,7 +3,7 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-let store = new Vuex.Store({
+const store = new Vuex.Store({
     state: {
         showCreateReservationModal: false,
         showLoader: false,
@@ -23,66 +23,66 @@ let store = new Vuex.Store({
         saldoPrecio: 0,
         porcentajeAnticipo: 0,
         anticipoMinimo: 0,
-        tipoComisionistas:[],
-        totalAbono1:0,
-        totalAbono2:0,
-        totalAbono3:0,
-        totalAbono4:0,
-        totalAbono5:0,
-        totalAbonos:0,
-        comisionistaId:''
+        tipoComisionistas: [],
+        totalAbono1: 0,
+        totalAbono2: 0,
+        totalAbono3: 0,
+        totalAbono4: 0,
+        totalAbono5: 0,
+        totalAbonos: 0,
+        tipoComisionistaId: ''
 
     },
     mutations: {
-        saldoPrecio(state,saldo) {
+        saldoPrecio(state, saldo) {
             state.saldoPrecio = 0;
-            
-            if((state.totalAbonos - state.totalPrecio) < 0){
-             state.saldoPrecio = (state.totalAbonos - state.totalPrecio);
-           }else if((state.totalAbonos - state.totalPrecio) >= 0) {
-             state.saldoPrecio = 0;
-           }
-        //   console.log(
-        //       `
-        //       totalBalance: ${state.totalBalance}
-        //       totalAbonos: ${state.totalAbonos}
-        //       saldoBalance: ${state.saldoBalance}
-        //       `
-        //   );
+
+            if ((state.totalAbonos - state.totalPrecio) < 0) {
+                state.saldoPrecio = (state.totalAbonos - state.totalPrecio);
+            } else if ((state.totalAbonos - state.totalPrecio) >= 0) {
+                state.saldoPrecio = 0;
+            }
+            //   console.log(
+            //       `
+            //       totalBalance: ${state.totalBalance}
+            //       totalAbonos: ${state.totalAbonos}
+            //       saldoBalance: ${state.saldoBalance}
+            //       `
+            //   );
         },
         saldoBalance(state, saldo) {
-         
-           state.saldoBalance = 0;
-            
-           if((state.totalAbonos - state.totalBalance) < 0){
-            state.saldoBalance = (state.totalAbonos - state.totalBalance);
-          }else if((state.totalAbonos - state.totalBalance) >= 0) {
+
             state.saldoBalance = 0;
-          }
+
+            if ((state.totalAbonos - state.totalBalance) < 0) {
+                state.saldoBalance = (state.totalAbonos - state.totalBalance);
+            } else if ((state.totalAbonos - state.totalBalance) >= 0) {
+                state.saldoBalance = 0;
+            }
 
         },
-        comisionistaId(state, comisionistaId) {
-          state.comisionistaId = comisionistaId
+        setTipoComisionistaId(state, id) {
+            state.tipoComisionistaId = id
         },
         totalAbonos(state) {
-           state.totalAbonos = state.totalAbono1 +
-               state.totalAbono2 +
-               state.totalAbono3 +
-               state.totalAbono4 +
-               state.totalAbono5;
+            state.totalAbonos = state.totalAbono1 +
+                state.totalAbono2 +
+                state.totalAbono3 +
+                state.totalAbono4 +
+                state.totalAbono5;
 
         },
-        sumarAbono(state, {nombreAbono, cantidad}) {
+        sumarAbono(state, { nombreAbono, cantidad }) {
             state[nombreAbono] = cantidad
             this.dispatch('totalAbonos')
-            .then(() =>{
-                this.dispatch('setSaldoBalance', cantidad)
-               
-            })
-            .then(() => {
-                this.dispatch('setSaldoPrecio', cantidad)
-            })
-            .catch(error => console.log(error))
+                .then(() => {
+                    this.dispatch('setSaldoBalance', cantidad)
+
+                })
+                .then(() => {
+                    this.dispatch('setSaldoPrecio', cantidad)
+                })
+                .catch(error => console.log(error))
         },
         showLoader(state) {
             state.showLoader = !state.showLoader;
@@ -130,9 +130,9 @@ let store = new Vuex.Store({
         getSaldoBalance(state) {
             return state.saldoBalance;
         },
-        
-        getComisionistaId(state) {
-          return state.comisionistaId;
+
+        getTipoComisionistaId(state) {
+            return state.tipoComisionistaId;
         },
         getTotalAbonos(state) {
             return state.totalAbonos;
@@ -151,13 +151,13 @@ let store = new Vuex.Store({
         }
     },
     actions: {
-        setSaldoPrecio({commit}, saldo) {
+        setSaldoPrecio({ commit }, saldo) {
             commit('saldoPrecio', saldo);
         },
-        setSaldoBalance({commit}, saldo) {
+        setSaldoBalance({ commit }, saldo) {
             commit('saldoBalance', saldo);
         },
-        setComisionistaId({commit}, {value}) {
+        setComisionistaId({ commit }, { value }) {
             commit('comisionistaId', value)
         },
         totalAbonos(context) {
@@ -171,17 +171,18 @@ let store = new Vuex.Store({
             context.commit('anticipoMinimo');
 
         },
-        setPorcentajeAnticipo(context,anticipo) {
-            context.commit('porcentajeAnticipo',anticipo);
+        setPorcentajeAnticipo(context, anticipo) {
+            context.commit('porcentajeAnticipo', anticipo);
         },
         setAnticipoMinimo(context) {
             context.commit('anticipoMinimo');
         },
-        setTipoComisionistas(context,comisionistas) {
-            context.commit('tipoComisionistas',comisionistas);
+        setTipoComisionistas(context, comisionistas) {
+            context.commit('tipoComisionistas', comisionistas);
         }
 
     }
 });
 
 export default store;
+

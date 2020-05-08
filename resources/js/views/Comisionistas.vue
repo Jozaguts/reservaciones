@@ -9,8 +9,8 @@
           </a>
         </div>
         <div class="row">
-          <comisionistas-table v-on:showModal="setTipoComisionista()"></comisionistas-table>
-          <comisionistas-form></comisionistas-form>
+          <comisionistas-table v-on:updatetipocomisionista="updateForm"></comisionistas-table>
+          <comisionistas-form :tipoComisionista="tipoComisionista"></comisionistas-form>
         </div>
       </div>
     </div>
@@ -18,26 +18,23 @@
 </template>
 
 <script>
-
-import FormComisionistas from '../components/Comisionistas/ComisionistasForm';
-import TableComisionistas from '../components/Comisionistas/ComisionistasTable';
+import FormComisionistas from "../components/Comisionistas/ComisionistasForm";
+import TableComisionistas from "../components/Comisionistas/ComisionistasTable";
 
 export default {
-
-    components: {
-        "comisionistas-table":TableComisionistas,
-        "comisionistas-form": FormComisionistas
-    },
-    data() {
-        return {
-            tipoComisionistaId:'',
-        }
-    },
-    methods: {
-        setTipoComisionista(comisionistaId) {
-            console.log(comisionistaId)
+  components: {
+    "comisionistas-table": TableComisionistas,
+    "comisionistas-form": FormComisionistas
+  },
+  data(){
+    return{
+      tipoComisionista: null,
     }
+  },
+  methods: {
+    updateForm(tipoComisionista) {
+      this.tipoComisionista = tipoComisionista
     }
-}
-
+  }
+};
 </script>
