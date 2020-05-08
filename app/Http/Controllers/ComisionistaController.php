@@ -12,7 +12,7 @@ class ComisionistaController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $tipoComisionistas = TipoComisionista::where('deleted_at', null)->get();
             return response()->json(['tipoComisionistas' => $tipoComisionistas]);
         }
@@ -31,7 +31,7 @@ class ComisionistaController extends Controller
                 ]);
                 if ($tipoComisionista->save()) {
                     $tipoComisionistas = TipoComisionista::all();
-                    return response()->json(['response' => '¡Tipo de comisionista creado exitosamente!','tipoComisionistas' => $tipoComisionistas]);
+                    return response()->json(['response' => '¡Tipo de comisionista creado exitosamente!', 'tipoComisionistas' => $tipoComisionistas]);
                 } else {
                     return response()->json(['response' => '¡Error al crear nuevo tipo de comisionista!']);
                 }
@@ -41,16 +41,32 @@ class ComisionistaController extends Controller
         }
     }
 
-    public function getComisionistas(Request $request) {
+    public function getComisionistas(Request $request)
+    {
 
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $comisionistas = DB::table('comisionistas')
-                ->select('id','nombre')
+                ->select('id', 'nombre')
                 ->where('active', '=', '1')
                 ->get();
 
-            return response()->json(['comisionistas'=> $comisionistas]);
+            return response()->json(['comisionistas' => $comisionistas]);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        try {
+            $data = $request->all()['tipoComisionistas'];
+            TipoComisionista::where('id', $id)
+                ->update($data);
+            $tipoComisionistas = TipoComisionista::all();
+            return response()->json(['success' => 'Tipo comisionista actualizado', 'tipoComisionista' => $tipoComisionistas], 200);
+        } catch (\Throwable $th) {
+
+            return response()->json(['error' => $th->getMessage()], 401);
         }
     }
 }

@@ -157,6 +157,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -196,17 +200,22 @@ __webpack_require__.r(__webpack_exports__);
     guardar: function guardar() {
       var _this = this;
 
-      if (this.clave != "" && this.nombre != "") {
+      if (this.clave != "" && this.nombre != "" && this.update === false) {
         axios.post("/comisionistas", {
           clave: this.clave,
           nombre: this.nombre
         }).then(function (response) {
+          console.log(response.data.tipoComisionistas);
           _store___WEBPACK_IMPORTED_MODULE_0__["default"].dispatch("setTipoComisionistas", response.data.tipoComisionistas);
           swal({
             title: "¡Guardado!",
             icon: "success",
             text: response.data.response
           });
+        }).then(function () {
+          $("#comisionistasForm").modal("hide");
+          _this.clave = "";
+          _this.nombre = "";
         }).catch(function (error) {
           var errros = error.response.data.errors;
 
@@ -218,8 +227,48 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
 
-          console.log(_this.messageError);
+          console.error(_this.messageError);
+          setTimeout(function () {
+            $(".close").alert("close");
+            _this.messageError = [];
+          }, 3000);
         });
+      } else {
+        if (this.update) {
+          axios.put("comisionistas/".concat(this.id), {
+            tipoComisionistas: {
+              clave: this.clave,
+              nombre: this.nombre
+            }
+          }).then(function (response) {
+            _store___WEBPACK_IMPORTED_MODULE_0__["default"].dispatch("setTipoComisionistas", response.data.tipoComisionista);
+            swal({
+              title: "¡Guardado!",
+              icon: "success",
+              text: response.data.success
+            });
+          }).then(function () {
+            $("#comisionistasForm").modal("hide");
+            _this.clave = "";
+            _this.nombre = "";
+          }).catch(function (error) {
+            var errros = error.response.data.errors;
+
+            for (var key in errros) {
+              if (errros.hasOwnProperty(key)) {
+                var messageError = errros[key];
+
+                _this.messageError.push("<strong class=\"text-capitalize\">".concat(key, "!</strong> ").concat(messageError, "."));
+              }
+            }
+
+            console.error(_this.messageError);
+            setTimeout(function () {
+              $(".close").alert("close");
+              _this.messageError = [];
+            }, 3000);
+          });
+        }
       }
     }
   }

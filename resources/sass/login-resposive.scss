@@ -1,6 +1,14 @@
 @import 'variables';
 
 
+.dropdown-menu {
+    border:none !important;
+    background: none !important;
+}
+.dropdown-menu > .dropdown-item {
+    padding:0.25rem 0 !important;
+}
+
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -153,6 +161,9 @@
         background-color: $actividades;
       }
       .li-comisionistas{
+        background-color: $comisionistas;
+      }
+      .li-comisionistas:hover, .li-comisionistas:focus{
         background-color: $comisionistas;
       }
       .li-cupones{
@@ -488,6 +499,9 @@
           .li-comisionistas{
             background-color: $comisionistas;
           }
+          .li-comisionistas:hover, .li-comisionistas:focus{
+        background-color: $comisionistas;
+      }
           .li-cupones{
             background-color: $cupones;
           }
@@ -746,6 +760,9 @@
           .li-comisionistas{
             background-color: $comisionistas;
           }
+          .li-comisionistas:hover, .li-comisionistas:focus{
+        background-color: $comisionistas;
+      }
           .li-cupones{
             background-color: $cupones;
           }

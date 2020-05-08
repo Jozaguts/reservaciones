@@ -1,3 +1,12 @@
+.dropdown-menu {
+  border: none !important;
+  background: none !important;
+}
+
+.dropdown-menu > .dropdown-item {
+  padding: 0.25rem 0 !important;
+}
+
 /* Smartphones (portrait and landscape) ----------- */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
@@ -172,6 +181,11 @@
   }
 
   .li-comisionistas {
+    background-color: #7030A0;
+  }
+
+  .li-comisionistas:hover,
+  .li-comisionistas:focus {
     background-color: #7030A0;
   }
 
@@ -575,6 +589,11 @@
     background-color: #7030A0;
   }
 
+  .li-comisionistas:hover,
+  .li-comisionistas:focus {
+    background-color: #7030A0;
+  }
+
   .li-cupones {
     background-color: #217C51;
   }
@@ -903,6 +922,11 @@
   }
 
   .li-comisionistas {
+    background-color: #7030A0;
+  }
+
+  .li-comisionistas:hover,
+  .li-comisionistas:focus {
     background-color: #7030A0;
   }
 
