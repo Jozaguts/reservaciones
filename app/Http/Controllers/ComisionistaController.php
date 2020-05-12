@@ -69,4 +69,16 @@ class ComisionistaController extends Controller
             return response()->json(['error' => $th->getMessage()], 401);
         }
     }
+    public function delete ($id) 
+    {
+        
+        try {
+            $tipoComisionista = TipoComisionista::find($id);
+            $tipoComisionista->delete();
+            return response()->json(['success' =>"Tipo comisionista Eliminado {$tipoComisionista->nombre}"],200); 
+        } catch (\Throwable $th) {
+            return response()->json(['Errors' => $th->getMessage(), 400]); 
+            
+        }
+    }
 }

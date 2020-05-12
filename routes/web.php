@@ -35,6 +35,7 @@ Route::group(['prefix' => 'comisionistas'], function () {
     Route::get('/all', 'ComisionistaController@getComisionistas')->middleware('auth');
     Route::post('/', 'ComisionistaController@crear')->middleware('auth');
     Route::put('/{comisionistaId}', 'ComisionistaController@update')->middleware('auth');
+    Route::delete('/{comisionistaId}', 'ComisionistaController@delete')->middleware('auth');
 
 });
 
